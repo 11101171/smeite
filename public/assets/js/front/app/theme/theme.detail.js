@@ -14,7 +14,7 @@
 define(function(require, exports) {
 	var $ = require("jquery");
 	require("module/jquery.colorpicker")($);
-  require("app/smeite.goods");
+   require("app/smeite.goods")
 var UserTheme = {
 	page : $("#J_Page"),
 	themeBanner : $("#J_ThemeBanner"),
@@ -543,13 +543,10 @@ var UserTheme = {
 UserTheme.init();
 
     /* 排列商品*/
-    $(function() {
-        //画报
+    //画报
     $.smeite.goods.conf.colArray = [0,0,0,$(".side").outerHeight()+13];
 	$.smeite.goods.conf.justFlow = true;
     $.smeite.goods.init();
-
-   });
     /*  分享 */
     $(".btn-share").shareBtn()
 });

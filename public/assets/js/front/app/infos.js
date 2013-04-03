@@ -13,6 +13,4 @@
  */
 define(function(require, exports) {
     var $ = jQuery = require("jquery");
-
-
 })

@@ -1,4 +1,4 @@
-define("module/scrollImg", [], function (require,exports) {
+define(function (require,exports) {
     return function (c) {
         function h(d, b) {
             var i = d.find(".items:eq(0)"), h = i.find(".item").length, e = 0, j = null, m = c(b.navis), n = function (a) {

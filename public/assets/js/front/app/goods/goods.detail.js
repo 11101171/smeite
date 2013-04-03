@@ -14,7 +14,7 @@
 
 define(function(require, exports){
     var $ = jQuery = require("jquery");
-    require("app/smeite.goods");
+
 
     /*scroll up*/
     function scrollTo(o) {

@@ -38,5 +38,4 @@ define(function(require, exports) {
   
   //全站都需要加载的通用模块
 
-  require.async(['app/smeite.common'], function(common){});
 });
