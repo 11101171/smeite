@@ -1,0 +1,1800 @@
+/**
+ * Created by zuosanshao.
+ * Date: 12-9-19
+ * Time: 上午10:02
+ * 维护人员:zuosanshao@qq.com
+ */
+html {
+    overflow: auto
+}
+
+.user-main {
+    float: left;
+    width: 730px
+}
+.ad-banner{
+    margin-bottom: 15px;
+    width: 730px;
+    overflow: hidden;
+}
+.user-side{
+    float: right;
+    width: 230px;
+}
+.nod {
+    padding: 20px 0;
+    text-align: center;
+}
+
+
+.nod p {
+    text-align: center;
+    font-size: 16px
+}
+
+.nod .bbl-btn {
+    float: none;
+    margin-top: 15px;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    overflow: hidden
+}
+
+/*user utils.global css style*/
+/*user nav start*/
+.u-nav {
+    margin-bottom: 12px
+}
+
+.u-nav ul {
+    height: 50px;
+    background: #fff;
+    border-top: 3px solid #dedede;
+    position: relative
+}
+
+.u-nav ul li {
+    float: left;
+    margin-top: -3px;
+    padding-top: 10px
+}
+
+.u-nav ul li a, .u-nav ul li b {
+    color: #555;
+    text-align: center;
+    height: 33px;
+    width: 54px;
+    padding: 0 20px;
+    line-height: 16px;
+    display: inline-block;
+    border-right: 1px dotted #dedede;
+    font-weight: bold
+}
+
+.u-nav ul li a:hover {
+    color: #5ad;
+    text-decoration: none
+}
+
+.u-nav ul li.last a, .u-nav ul li.last b {
+    border-right: 0;
+    padding: 0 10px;
+    width: 65px;
+}
+
+.u-nav ul li.user {
+    position: relative
+}
+
+.u-nav ul li.user a {
+    padding: 0 20px 0 55px;
+    width: 420px;
+    font-size: 20px;
+    color: #333;
+    line-height: 33px;
+    font-weight: normal;
+    text-align: left;
+    overflow: hidden
+}
+
+.u-nav ul li.user a img {
+    position: absolute;
+    top: 8px;
+    left: 5px;
+    width: 40px;
+    height: 40px
+}
+
+.u-nav ul li.cur {
+    background: url(images/on.png) repeat-x top
+}
+
+.u-nav ul i {
+    position: absolute;
+    z-index: 9;
+    left: 0;
+    top: -3px;
+    width: 100%;
+    height: 1px;
+    opacity: .1;
+    filter: alpha(opacity = 10);
+    background: #000;
+    _display: none
+}
+
+.u-nav ul li.trait a {
+    color: #e26;
+    background: url(images/trait.png) 60px 22px no-repeat
+}
+
+.u-nav ul li.trait a:hover {
+    color: #e26
+}
+/*user nav end*/
+.main{
+    background: #fff;
+    margin-bottom: 12px;
+    padding-bottom: 16px
+}
+
+ .main-title, .tp-title {
+    font-size: 12px;
+    height: 30px;
+    line-height: 30px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ececec
+}
+
+ .main-title h2 {
+    font-size: 12px;
+    float: left;
+    color: #666
+}
+
+ .main-title h2 span, .tp-title h2 span {
+    color: #666;
+    font-size: 12px;
+    font-weight: normal
+}
+
+ .main-title h2 a, .tp-title h2 a {
+    color: #0b718c;
+    font-size: 12px;
+    font-weight: normal
+}
+
+ .main-title .sbl-btn {
+    float: none;
+    display: inline-block
+}
+
+.baobei { margin-top: 15px;}
+.baobei li { position:relative;margin-right:10px;margin-bottom:20px;float:left;color:#999; overflow:hidden;}
+.last{margin-right:0px;}
+.baobei li .baobei-wrap{
+    border: 1px solid #f1f1f1;
+    width:210px;height:260px;
+    padding: 5px;;
+}
+.baobei li .baobei-title{padding-top:6px;height:20px;line-height:20px;color:#999;width:210px;}
+.baobei li .baobei-pic { background:#fff;width:210px;height:210px;overflow:hidden; }
+.baobei li .baobei-pic img {opacity:0.9;filter:alpha(opacity=90);}
+.baobei li .baobei-pic .pic-link{display: table-cell;vertical-align:middle;text-align:center;*display: block;*font-size:183px;*font-family:Arial;width:210px;height:210px;background:#fff url(images/bg-photo.gif) repeat-y;}
+.baobei li .baobei-pic .pic-link span{background-color:#ccc;}
+.baobei li .baobei-stat { color:#999;height:20px;line-height:20px;padding:0 0 3px 10px;background:url(images/grayHeart2.png) 0px 5px no-repeat;font-family:'Microsoft YaHei','黑体'; }
+
+
+
+/*鼠标悬停在商品上的样式*/
+.cur-baobei .baobei-pic img {opacity:1;filter:alpha(opacity=100);}
+.cur-baoebei .baobei-title{color:#333;}
+.cur-baobei .baobei-stat { color:#333; }
+/*baobei box end*/
+
+/*.main-bd {
+    background: #fff;
+    margin-bottom: 12px;
+    padding: 0 15px 16px;
+    overflow: hidden
+}
+
+.main-bd h2 {
+    padding: 15px 0 10px 0;
+    line-height: 16px;
+    height: 16px;
+    font-size: 14px
+}
+
+.main-bd .main-title h2 {
+    margin-bottom: 12px;
+    padding: 15px 0 10px 0;
+    line-height: 16px;
+    height: 16px;
+    font-size: 14px;
+    border-bottom: 1px solid #ececec
+}*/
+/*喜欢的主题 end*/
+/*topic list */
+.topic-list {
+    margin-top: 20px
+}
+
+.topic-list .topic-item {
+    float: left;
+    margin: 0 5px 20px 0;
+    width: 210px;
+    padding: 10px;
+    background: #fff;
+    position: relative
+}
+
+.topic-list .topic-item h3 {
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    font-family: "微软雅黑","宋体";
+    font-weight: normal
+}
+
+.topic-list .topic-item h3 a {
+    color: #666
+}
+
+.topic-list .topic-item h3 a:hover {
+    color: #666;
+    text-decoration: none
+}
+
+
+.topic-list .topic-item .topic-pic a {
+    display: block;
+    background: #FFF url(images/bg-photo.gif) repeat;
+    height: 100%
+}
+.topic-list .topic-item .pic .b-img {
+    width: 210px;
+    height: 210px;
+    background: #efefef;
+    float: left
+}
+
+.topic-list .topic-item .pic .s-img {
+    width: 50px;
+    height: 50px;
+    float: left;
+    margin: 1px;
+    opacity: .5;
+    filter: alpha(opacity = 50);
+    background: #ccc
+}
+.topic-list .topic-item .pic .hover {
+    opacity: 1;
+    filter: alpha(opacity = 100)
+}
+
+
+.topic-list .topic-item .go-btn {
+    display: block;
+    float: left;
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    background: #eee;
+    color: #999;
+    text-align: center
+}
+
+.topic-list .topic-item .topic-state {
+    height: 24px;
+    line-height: 24px
+}
+
+.topic-list .topic-item .topic-state span {
+    color: #999
+}
+
+.topic-list .last {
+    margin-right: 0
+}
+
+.topic-item .ilike-del {
+    top: 5px;
+    right: 5px;
+}
+/*topic end*/
+/*喜欢的乡味馆*/
+
+
+/*喜欢的乡味馆 end*/
+/*side start*/
+
+
+.user-side .title {
+    font-weight: bold;
+    padding: 15px 0 10px 0;
+    line-height: 16px;
+    height: 16px;
+    border-bottom: 1px dotted #ececec
+}
+
+.user-side .title .all-follows {
+    float: right;
+    font-weight: normal
+}
+
+.user-side .ss {
+    background: #fff;
+    margin-bottom: 12px
+}
+.user-side .rw {
+    line-height: inherit
+}
+/*profile box start*/
+.profile-box {
+    padding: 25px 25px 15px 25px
+}
+
+.u {
+    width: 180px;
+    overflow: hidden
+}
+
+.u .u-face {
+    width: 180px;
+    height: 180px;
+    overflow: hidden
+}
+
+.u .u-face a {
+    width: 180px;
+    height: 180px;
+    display: table-cell;
+    *display: block;
+    vertical-align: middle;
+    text-align: center;
+    *line-height: 1;
+    *font-size: 158px
+}
+
+.u .u-face img {
+    vertical-align: middle
+}
+
+.u .u-info h2 {
+    padding: 10px 0 5px 0;
+    font-size: 12px;
+    font-weight: normal;
+    color: #333
+}
+
+.u .u-info h2 em {
+    max-width: 160px
+}
+
+.u .u-info p {
+    line-height: 1.8;
+    word-wrap: break-word
+}
+
+.u .u-info .blog-row {
+    width: 180px;
+    white-space: nowrap;
+    word-wrap: normal;
+    word-break: normal;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    overflow: hidden
+}
+
+.u .u-info .blog-row a {
+    color: #666
+}
+
+.u .u-info .blog-row a:hover {
+    text-decoration: none
+}
+
+.u .u-info p span {
+    color: #999
+}
+
+.u .u-info h2 span {
+    width: 175px;
+    word-wrap: break-word;
+    word-break: break-all;
+    display: block
+}
+
+.u .u-info .intro-row {
+    padding-bottom: 10px
+}
+/*右侧的动态 关注等*/
+.news, .follows {
+    padding: 15px;
+    background: #fff;
+    margin-bottom: 12px;
+    overflow: hidden
+}
+
+.news h3, .follows h3 {
+    line-height: 1.2;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted #d1d1d1
+}
+
+.news li {
+    padding: 10px 0;
+    border-bottom: 1px dotted #d1d1d1;
+    overflow: hidden
+}
+
+.news li .news-pic {
+    float: left;
+    width: 80px;
+    height: 80px;
+    border: 1px solid #dedede;
+    overflow: hidden
+}
+
+.news li .news-pic a {
+    width: 80px;
+    height: 80px;
+    display: table-cell;
+    *display: block;
+    vertical-align: middle;
+    text-align: center;
+    *line-height: 1;
+    *font-size: 70px
+}
+
+.news li .news-pic a img {
+    vertical-align: middle
+}
+
+.news li .news-text {
+    float: right;
+    width: 110px;
+    overflow: hidden
+}
+
+.news li .news-text p {
+    color: #666;
+    line-height: 22px;
+    max-height: 63px;
+    overflow: hidden;
+    word-wrap: break-word
+}
+
+.news li .news-text .date {
+    display: block;
+    margin-top: 5px;
+    color: #999
+}
+
+.follows ul {
+    padding-top: 10px;
+    width: 205px
+}
+
+.follows ul li {
+    height: 30px;
+    width: 30px;
+    overflow: hidden;
+    position: relative;
+    float: left;
+    padding: 0 4px 4px 0
+}
+/*我关注的人，我最近的动态 end*/
+.no-friend {
+    margin: 10px 15px;
+    padding: 8px 15px 15px 15px;
+    border: 1px dashed #ececec
+}
+
+.no-friend li {
+    float: left;
+    width: 218px;
+    overflow: hidden
+}
+
+.no-friend-tip {
+    height: 20px;
+    line-height: 20px;
+    font-size: 14px;
+    color: #333
+}
+
+.friend-tags {
+    padding-bottom: 16px
+}
+
+.friend-tags ul {
+    display: block;
+    width: 200px
+}
+
+.friend-tags li {
+    float: left;
+    margin: 8px 8px 0 0;
+    white-space: nowrap;
+    width: auto
+}
+
+.friend-tags li a {
+    float: left;
+    display: block;
+    color: #666;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 3px;
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    max-width: 198px;
+    _width: expression(this.scrollWidth>180 ? "180px":(this.scrollWidth < 1? "1px":"auto"))
+}
+
+.friend-tags li.focus a {
+    background: #ffefd1;
+    color: #666;
+    border: 1px solid #e8e8e8
+}
+
+.friend-tags li.on a {
+    background: #5089b9;
+    color: #fff
+}
+
+.friend-tags li a:hover {
+    text-decoration: none;
+    border: 1px solid #ccc
+}
+
+.friend-tags li.focus a:hover {
+    border: 1px solid #ccc
+}
+/*标签印象 end*/
+/*user trend start*/
+.dongtai-title {
+    font-size: 12px;
+    height: 30px;
+    line-height: 30px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ececec;
+    font-weight: bold;
+    color: #666
+}
+
+.dongtai-title .bbl-btn {
+    float: right
+}
+.feeds-list {
+    padding: 0 15px;
+    background: #fff
+}
+
+.feeds-list .section {
+    padding: 15px 0;
+    border-bottom: 1px solid #ececec
+}
+
+.feeds-list .section .byUser-pic {
+    width: 60px;
+    position: relative;
+    float: left;
+    overflow: hidden;
+    z-index: 10
+}
+
+.feeds-list .section .byUser-pic img {
+    width: 60px;
+    height: 60px
+}
+
+.feeds-list .section .byUser-feeds {
+    position: relative
+}
+
+.feeds-list .section .byUser-feeds h3 {
+    width: 586px;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 18px;
+    height: 18px;
+    padding-bottom: 2px
+}
+
+.feeds-list .section .byUser-feeds h3 a:hover {
+    text-decoration: none
+}
+
+.feeds-list .section .byUser-feeds h3 span {
+    color: #666
+}
+
+.feeds-list .section .byUser-feeds p {
+    line-height: 25px;
+    font-size: 14px
+}
+
+.feeds-list .section .byUser-feeds .comment-time {
+    padding-top: 10px;
+    line-height: 20px;
+    height: 20px
+}
+
+.feeds-list .section .byUser-feeds .comment-time a {
+    cursor: pointer
+}
+
+.feeds-list .section .byUser-feeds .feeds-info {
+    padding-top: 10px
+}
+
+.feeds-list .section .baobei-feeds {
+    position: relative
+}
+
+.feeds-list .section .baobei-feeds .ilike {
+    margin: 0
+}
+
+.feeds-list .section .baobei-feeds .baobei-pic {
+    padding: 5px;
+    position: relative;
+    float: left;
+    overflow: hidden;
+    background: #fff url(images/bg-photo.gif) repeat-y
+}
+
+.feeds-list .section .baobei-feeds .baobei-pic a {
+    width: 120px;
+    height: 120px;
+    display: table-cell;
+    *display: block;
+    vertical-align: middle;
+    text-align: center;
+    *font-size: 120px;
+    *line-height: 1;
+    outline: 0
+}
+
+.feeds-list .section .baobei-feeds .baobei-pic img {
+    max-width: 120px;
+    vertical-align: middle
+}
+
+.feeds-list .section .baobei-feeds .baobei-pic span {
+    opacity: .5;
+    filter: alpha(opacity = 50);
+    padding: 0 5px;
+    font-weight: normal;
+    font-family: "微软雅黑";
+    line-height: 20px;
+    color: white;
+    position: absolute;
+    height: 20px;
+    bottom: 5px;
+    right: 5px;
+    background-color: #000
+}
+
+.feeds-list .section .baobei-feeds .baobei-text {
+    padding-left: 130px;
+    padding-right: 100px;
+    background: #FFF
+}
+
+.feeds-list .section .baobei-feeds .baobei-text h4 {
+    padding-bottom: 6px;
+    line-height: 18px;
+    font-size: 16px;
+    border-bottom: 1px dotted #d1d1d1;
+    color: #333
+}
+
+.feeds-list .section .baobei-feeds .baobei-text h4 a {
+    color: #333
+}
+
+.feeds-list .section .baobei-feeds .baobei-text h4 a:hover {
+    color: #5AD;
+    text-decoration: none
+}
+
+.feeds-list .section .baobei-feeds .baobei-text p {
+    color: #999;
+    line-height: 35px;
+    background: url(images/baobei-text-bg.gif);
+    font-size: 12px
+}
+
+.feeds-list .section .baobei-feeds .baobei-text p a {
+    color: #333;
+    text-decoration: none;
+    font-size: 12px;
+    margin-right: 5px
+}
+
+.feeds-list .section .baobei-feeds .baobei-text p a:hover {
+    color: #5AD;
+    text-decoration: none
+}
+
+.feeds-list .section .baobei-feeds .baobei-text .stat-box {
+    color: #999;
+    font-size: 12px;
+    line-height: 30px;
+    text-align: left
+}
+
+.feeds-list .section .baobei-feeds .baobei-text .stat-box span {
+    color: #dedede
+}
+
+.item-cmt {
+    border-top: 1px dotted #ececec;
+    margin-top: 5px
+}
+
+.item-cmt .cmt-form {
+    padding-bottom: 10px;
+    padding-top: 10px
+}
+
+.item-cmt .cmt-form .cmt-i textarea {
+    width: 660px;
+    height: 36px;
+    line-height: 18px
+}
+
+.item-cmt .cmt-form .cmt-s {
+    padding-top: 5px
+}
+
+.item-cmt .cmt-form .cmt-s a {
+    float: right
+}
+
+.item-cmt .cmt-list ul {
+    border-top: 1px dotted #ececec
+}
+
+.item-cmt .cmt-list li {
+    position: relative;
+    padding: 6px 0;
+    border-bottom: 1px dotted #ececec
+}
+
+.item-cmt .cmt-list li.last {
+    border-bottom: 0
+}
+
+.item-cmt .cmt-list .cmt-l-p {
+    position: absolute;
+    top: 6px;
+    left: 0
+}
+
+.item-cmt .cmt-list .cmt-l-t {
+    color: #999;
+    white-space: nowrap
+}
+
+.item-cmt .cmt-list .cmt-l-c {
+    padding: 0 40px 0 26px;
+    line-height: 20px;
+    color: #666
+}
+
+.item-cmt .cmt-list .cmt-l-b {
+    position: absolute;
+    top: 6px;
+    right: 0;
+    height: 20px;
+    line-height: 20px
+}
+
+.feeds-list .section blockquote {
+    background-color: #f7f7f7;
+    padding: 10px;
+    margin-top: 10px;
+    position: relative
+}
+
+.feeds-list .section blockquote .tipbox-up {
+    position: absolute;
+    left: 40px;
+    top: -6px;
+    color: #f7f7f7
+}
+
+.feeds-list .section blockquote .byUser-feeds {
+    padding-left: 0
+}
+
+.feeds-list .section blockquote .byUser-feeds h3 {
+    width: 586px;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 18px;
+    height: 18px
+}
+
+.feeds-list .section blockquote .byUser-feeds p {
+    line-height: 25px;
+    font-size: 12px;
+    padding-bottom: 10px
+}
+
+.feeds-list .section blockquote .baobei-feeds .baobei-pic {
+    padding: 5px
+}
+
+.feeds-list .section .byUser-feeds blockquote .item-cmt .cmt-form .cmt-i textarea {
+    width: 640px
+}
+
+.feeds-list .section .baobei-feeds-detail {
+    border: 1px solid #f3f3f3;
+    border-bottom: 3px solid #f3f3f3;
+    position: relative
+}
+
+.feeds-list .section .baobei-feeds-detail .baobei-pic {
+
+    width: 270px;
+    height: 270px;
+    position: relative;
+    float: left;
+    overflow: hidden;
+    background: url(images/bg-photo.gif) repeat-y
+}
+
+.feeds-list .section .baobei-feeds-detail .baobei-pic a {
+    width: 270px;
+    height: 270px;
+    display: table-cell;
+    *display: block;
+    vertical-align: middle;
+    text-align: center;
+    *font-size: 212px;
+    *line-height: 1;
+    outline: 0
+}
+
+.feeds-list .section .baobei-feeds-detail .baobei-pic img {
+
+    max-width: 270px;
+    vertical-align: middle
+}
+
+.feeds-list .section .baobei-feeds-detail .baobei-pic span {
+    opacity: .5;
+    padding: 0 5px;
+    font-weight: normal;
+    font-family: "微软雅黑";
+    line-height: 20px;
+    color: white;
+    position: absolute;
+    height: 20px;
+    bottom: 5px;
+    right: 5px;
+    background-color: #000
+}
+
+.feeds-list .section .baobei-feeds-detail .baobei-text {
+    padding: 0 20px 0 290px;
+    background: #FFF
+}
+
+.feeds-list .section .baobei-feeds-detail .baobei-text h4 {
+    padding-top: 6px;
+    line-height: 35px;
+    font-size: 16px;
+    border-bottom: 1px dotted #d1d1d1;
+    color: #333
+}
+
+.feeds-list .section .baobei-feeds-detail .baobei-text h4 a {
+    color: #333
+}
+
+.feeds-list .section .baobei-feeds-detail .baobei-text h4 a:hover {
+    color: #5AD;
+    text-decoration: none
+}
+
+.feeds-list .section .baobei-feeds-detail .baobei-text p {
+    line-height: 35px;
+    padding: 0;
+    background: url(images/baobei-text-bg.gif);
+    font-size: 12px;
+    font-weight: normal
+}
+
+.feeds-list .section .baobei-feeds-detail .baobei-text p a {
+    color: #333;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: normal;
+    margin-right: 5px
+}
+
+.feeds-list .section .baobei-feeds-detail .baobei-text p a:hover {
+    color: #5AD;
+    text-decoration: none
+}
+
+.feeds-list .section .baobei-feeds-detail .baobei-text p span {
+    font-size: 12px;
+    font-weight: normal;
+    margin-right: 5px
+}
+
+.feeds-list .section .baobei-feeds-detail .baobei-text .stat-box {
+    font-size: 12px;
+    margin-left: 86px;
+    line-height: 30px;
+    padding-left: 10px;
+    background: #f3f3f3;
+    text-align: left;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px
+}
+
+.feeds-list .section .baobei-feeds-detail .baobei-text .stat-box a {
+    color: #333;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: normal
+}
+
+.feeds-list .section .baobei-feeds-detail .baobei-text .stat-box a:hover {
+    color: #5AD;
+    text-decoration: none
+}
+
+.feeds-list .section .baobei-feeds-detail .baobei-text .stat-box span {
+    color: #999
+}
+
+.ilike-n {
+    float: left;
+    margin-right: 10px;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    width: 31px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px 0 35px;
+    color: #fff;
+    font-size: 12px;
+    overflow: hidden;
+    background-image: url(images/button.png);
+    background-position: 0 -510px
+}
+
+.ilike-n:hover {
+    background-position: -76px -510px;
+    text-decoration: none
+}
+
+.ilike-n:active {
+    background-position: -152px -510px;
+    text-decoration: none
+}
+
+.baobei-link {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    height: 14px;
+    width: 14px;
+    background: url(images/link-icon.gif) no-repeat
+}
+
+.ilike {
+    display: none;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    text-align: center;
+    width: 31px;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 10px 0 20px;
+    color: #fff;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    background-image: url(images/ilike2_png24.png);
+    _background-image: url(images/ilike2.png);
+    background-position: -270px 0;
+    background-repeat: no-repeat
+}
+
+.ilike:hover {
+    background-position: -270px -30px;
+    text-decoration: none
+}
+
+.ilike:active {
+    background-position: -270px -60px;
+    text-decoration: none
+}
+
+.feeds-list .section .topic-feeds {
+    position: relative
+}
+
+.feeds-list .section .topic-pic {
+    position: relative;
+    width: 160px;
+    height: 110px
+}
+
+.feeds-list .section .topic-pic .pic {
+    width: 150px;
+    height: 100px;
+    padding: 5px;
+    display: block;
+    overflow: hidden;
+    background: #fff url(images/bg-photo.gif) repeat-y
+}
+
+.feeds-list .section .topic-pic .b-img {
+    width: 100px;
+    height: 100px;
+    float: left;
+    overflow: hidden;
+    text-align: center
+}
+
+.feeds-list .section .topic-pic .b-img img {
+    max-width: 100px;
+    _width: 100px
+}
+
+.feeds-list .section .topic-pic .s-img {
+    width: 46px;
+    height: 48px;
+    float: left;
+    margin: 0 0 4px 4px;
+    overflow: hidden;
+    text-align: center
+}
+
+.feeds-list .section .topic-pic .s-img img {
+    max-width: 48px;
+    _width: 48px
+}
+
+.feeds-list .section .brand-feeds {
+    position: relative
+}
+
+.feeds-list .section .brand-pic {
+    position: relative;
+    width: 165px;
+    height: 110px
+}
+
+.feeds-list .section .brand-pic .pic {
+    width: 155px;
+    height: 100px;
+    padding: 5px;
+    display: block;
+    overflow: hidden;
+    background: #fff url(images/bg-photo.gif) repeat-y
+}
+
+.feeds-list .section .brand-pic .b-img {
+    position: relative;
+    width: 155px;
+    height: 50px;
+    margin-bottom: 2px;
+    float: left;
+    overflow: hidden;
+    text-align: center
+}
+
+.feeds-list .section .brand-pic .b-img img {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    max-width: 155px;
+    _width: 155px
+}
+
+.feeds-list .section .brand-pic .s-img {
+    width: 49px;
+    height: 48px;
+    float: left;
+    margin-right: 4px;
+    overflow: hidden;
+    text-align: center
+}
+
+.feeds-list .section .brand-pic .s-img img {
+    max-width: 46px;
+    _width: 46px
+}
+
+.feeds-list .section .brand-pic .s-img.last {
+    margin-right: 0
+}
+
+.feeds-list .section .brand-pic .s-img.btm {
+    margin-top: 4px
+}
+
+.feeds-list .section .scene-feeds {
+    position: relative
+}
+
+.feeds-list .section .scene-pic {
+    position: relative;
+    width: 160px;
+    height: 110px
+}
+
+.feeds-list .section .scene-pic .pic {
+    width: 150px;
+    height: 100px;
+    padding: 5px;
+    display: block;
+    overflow: hidden;
+    background: #fff url(images/bg-photo.gif) repeat-y
+}
+
+.feeds-list .section .scene-pic .pic img {
+    max-width: 150px;
+    _width: 150px
+}
+
+.feeds-list .section .post-feeds {
+    position: relative
+}
+
+.feeds-list .section .post-pic {
+    position: relative
+}
+
+.feeds-list .section .post-pic img {
+    max-width: 100px;
+    _width: 100px;
+    margin-left: 10px
+}
+
+/*user main 动态 end*/
+/*user trend side start*/
+.feeds {
+    padding-bottom: 16px
+}
+
+.feeds li {
+    border-bottom: 1px dotted #ececec;
+    padding: 10px 0
+}
+
+.feeds li .user-pic {
+    float: left;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #dedede;
+    overflow: hidden
+}
+
+.feeds li .user-pic a {
+    width: 50px;
+    height: 50px;
+    display: table-cell;
+    *display: block;
+    vertical-align: middle;
+    text-align: center;
+    *line-height: 1;
+    *font-size: 48px
+}
+
+.feeds li .user-news {
+    padding-left: 60px;
+    line-height: 20px;
+    color: #666;
+    margin-top: -3px
+}
+
+.feeds li .user-news span {
+    word-break: break-word
+}
+
+.feeds li .user-news .comment-time {
+    color: #999
+}
+
+.feeds li .user-news .news-list {
+    height: 20px;
+    position: relative
+}
+
+.feeds li .user-news .news-list .news-item {
+    width: 20px;
+    height: 20px;
+    float: left;
+    float: left;
+    margin-right: 5px
+}
+
+.feeds li .user-news .news-list .news-item .user-photo {
+    width: 20px;
+    height: 20px;
+    position: relative
+}
+
+.feeds li .user-news .news-list .news-item .user-photo a {
+    width: 20px;
+    height: 20px;
+    display: block;
+    overflow: hidden
+}
+
+.feeds li .user-news .news-list .news-item .user-photo img {
+    border: 1px #ebe9ec solid
+}
+
+.feeds li .user-news .news-list .news-item .user-comment-arrow {
+    display: none;
+    top: 20px;
+    left: 7px;
+    position: absolute;
+    width: 7px;
+    height: 4px;
+    background: url(images/arrow.png) no-repeat
+}
+
+.feeds li .user-news .news-list .news-item .user-comment {
+    display: none;
+    left: -60px;
+    top: 24px;
+    position: absolute;
+    width: 186px;
+    border: 1px solid #f7f2b8;
+    padding: 6px;
+    background: #ffffe5
+}
+
+.feeds li .user-news .news-list .on .user-comment-arrow {
+    display: block
+}
+
+.feeds li .user-news .news-list .on .user-comment {
+    display: block
+}
+ /*user trend side feeds end*/
+.friend-comment li {
+    position: relative;
+    padding: 8px 0;
+    height: 30px;
+    border-bottom: 1px dotted #ececec
+}
+
+.friend-comment li .comment-pic {
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 8px
+}
+
+.friend-comment li .comment-con {
+    padding-left: 40px
+}
+
+.friend-comment li .comment-con a {
+    cursor: pointer;
+    white-space: nowrap
+}
+
+.friend-comment li .comment-con p {
+    width: auto;
+    line-height: 15px
+}
+
+.friend-comment li .comment-con p.top {
+    margin-top: -3px;
+    word-break: break-word;
+}
+
+.friend-comment li .comment-con p.btm {
+    margin-top: 3px;
+    word-break: break-word;
+    color: #999
+}
+
+.friend-comment li .comment-con p.btm a {
+    color: #999
+}
+/*user trend side friend comment end*/
+
+.tj-topic {
+    background: #FFF;
+    padding: 15px 10px 10px;
+    overflow: hidden
+}
+
+.tj-topic h3 {
+    line-height: 1.2;
+    margin-bottom: 10px
+}
+
+.tj-topic ul li {
+    padding-top: 10px;
+    width: 210px;
+    border-top: 1px dotted #d1d1d1
+}
+
+.tj-topic ul li .img {
+    display: block;
+    width: 210px;
+    height:210px;
+    overflow: hidden
+}
+
+.tj-topic ul li .img img {
+    width: 210px;
+    height:210px
+}
+
+.tj-topic ul li .info {
+    padding: 10px 0 5px
+}
+
+.tj-topic ul li .info .name {
+    padding-bottom: 3px;
+    line-height: 1.2
+}
+
+.tj-topic ul li .info .name a {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333
+}
+
+.tj-topic ul li .info p span {
+    float: left;
+    display: inline;
+    width: 100px;
+    color: #999
+}
+
+.tj-topic ul li .info .editor-link {
+    color: #999
+}
+/*user theme side end*/
+.discus {
+    margin-bottom: 12px;
+    padding: 15px 10px;
+    width: 210px;
+    overflow: hidden;
+    background: #FFF;
+    box-shadow: 0 1px 3px rgba(34, 25, 25, 0.2);
+    -moz-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.2);
+    -webkit-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.2);
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px
+}
+
+.discus h3 {
+    line-height: 1.2;
+    margin-bottom: 10px
+}
+
+.discus ul li {
+    padding: 5px 0;
+    border-top: 1px dotted #d1d1d1
+}
+
+.discus .img {
+    float: left;
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    _margin-right: 2px
+}
+
+.discus .img img {
+    width: 40px;
+    height: 40px
+}
+
+.discus p {
+    width: 165px;
+    color: #999
+}
+/*user miss side 热门讨论*/
+.tj-brand {
+    background: #FFF;
+    padding: 0 10px 10px;
+    overflow: hidden
+}
+
+.tj-brand ul {
+    width: 220px;
+    margin-top: 10px
+}
+
+.tj-brand ul li {
+    float: left;
+    *display: inline;
+    margin: 0 10px 10px 0
+}
+
+.tj-brand ul li img {
+    max-width: 100px;
+    _width: 100px
+}/*user miss page side 你可能喜欢的乡味馆*/
+
+.fans-list {
+    padding: 0 15px;
+    background: #fff
+}
+
+.fans-search {
+    font-size: 12px;
+    height: 30px;
+    line-height: 30px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ececec;
+    color: #666;
+    font-weight: bold
+}
+
+.fans-list .section {
+    padding: 15px 0;
+    background: #fff;
+    cursor: default;
+    position: relative;
+    border-bottom: 1px dotted #ececec
+}
+
+.fans-list .section .user-pic {
+    width: 50px;
+    float: left
+}
+
+.fans-list .section .user-info {
+    margin-left: 60px;
+    padding-right: 110px;
+    height: 50px
+}
+
+.fans-list .section .user-intro {
+    line-height: 25px
+}
+
+.fans-list .section .user-intro a {
+    font-size: 14px
+}
+
+.fans-list .section .user-data  {
+    color: #999;
+    line-height: 25px;
+}
+
+.fans-list .section .follow {
+    width: 110px;
+    text-align: right;
+    position: absolute;
+    right: 0;
+    top: 15px
+}
+
+.fans-list .section .remove-fans {
+    display: none;
+    padding-top: 8px;
+    color: #666;
+    white-space: nowrap
+}
+
+.fans-list .section:hover .remove-fans {
+    display: inline-block
+}
+/*use fans page 左侧 list*/
+.interest {
+    padding-bottom: 10px
+}
+
+.interPer {
+    padding-top: 6px
+}
+
+.interPer li {
+    height: 50px;
+    padding: 6px 0
+}
+
+.interPer li .user-pic {
+    float: left
+}
+
+.interPer li .user-info {
+    padding-left: 60px
+}
+
+.interPer li .user-info p {
+    line-height: 16px;
+    color: #999
+}
+
+.interPer li .user-info .username {
+    line-height: 14px;
+    display: block
+}
+
+.interPer li .user-info .followed-btn {
+    float: left
+}
+/*use fans page side 你可能感兴趣的人*/
+.follow-list {
+    padding: 0 15px;
+    background: #fff
+}
+
+.follow-search {
+    font-size: 12px;
+    height: 30px;
+    line-height: 30px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ececec;
+    color: #666;
+    font-weight: bold
+}
+
+.follow-list .section {
+    padding: 15px 0;
+    cursor: default;
+    border-bottom: 1px dotted #ececec;
+    position: relative
+}
+
+.follow-list .section .user-pic {
+    width: 50px;
+    float: left
+}
+
+.follow-list .section .user-info {
+    margin-left: 60px;
+    padding-right: 100px;
+    height: 50px
+}
+
+.follow-list .section .user-intro {
+    line-height: 25px
+}
+
+.follow-list .section .user-intro a {
+    font-size: 14px
+}
+
+.follow-list .section .follow {
+    width: 110px;
+    position: absolute;
+    right: 0;
+    top: 15px;
+    text-align: right
+}
+
+.follow-list .section .remove-follow {
+    display: none;
+    padding-top: 5px;
+    color: #666
+}
+
+.follow-list .section:hover .remove-follow {
+    display: inline-block
+}
+/*user follow main list end*/
+
+
+
+/*create topic or baobei */
+.content {
+    min-height: 500px;
+    padding: 30px;
+    background: #fff;
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
+}
+
+.content h2 {
+    margin-bottom: 20px;
+    padding: 0 0 20px 0;
+    border-bottom: 1px dotted #d1d1d1;
+    font-size: 14px;
+    line-height: 1.2
+}
+
+.fm-item {
+    float: left
+}
+
+.fm-item p {
+    padding: 5px 0 0 0;
+    color: #999
+}
+
+.fm-item .b-input, .intro-txa {
+    width: 360px
+}
+
+.intro-txa {
+    height: 100px
+}
+
+.fm-item select {
+    width: 180px;
+    margin-right: 12px
+}
+
+/*user square discuss*/
+.discuss-con {
+   /* padding: 0 15px 15px;*/
+    background: #fff
+}
+
+.discuss-title {
+    padding: 10px 0;
+    border-bottom: 1px dotted #d1d1d1
+}
+
+.discuss-title .reply {
+    float: left;
+    width: 95px
+}
+
+.discuss-title .topic {
+    float: left;
+    width: 505px
+}
+
+.discuss-title .author {
+    float: left;
+    width: 100px
+}
+
+.discuss-list li {
+    border-bottom: 1px dotted #d1d1d1;
+    border-left:none;
+    border-right: none;
+    border-top: none;
+    padding: 10px 0;
+    line-height: 20px;
+
+}
+
+.discuss-list .col-left {
+    float: left;
+    width: 100px;
+    line-height: 1.4
+}
+
+.col-left .re-count {
+    font-size: 16px;
+    color: #666
+}
+
+.col-left .u-reply {
+    color: #666;
+    display: block
+}
+
+.col-left .u-reply span {
+    max-width: 65px;
+    _width: 65px
+}
+
+.discuss-list .col-right {
+    float: left;
+    width: 600px
+}
+
+.topic-row {
+    margin-bottom: 10px
+}
+
+.topic-row .col-title {
+    float: left;
+    width: 470px;
+    word-wrap: break-word;
+    word-break: break-word
+}
+
+.topic-row .col-title .topic-title {
+    font-size: 14px;
+    color: #eee
+}
+
+.topic-row .col-title .topic-title .i-forum {
+    *text-indent: 2px;
+    *font-size: 0;
+    *color: #fff
+}
+
+.topic-row .col-title p {
+    color: #999
+}
+
+.topic-row .col-author {
+    float: right;
+    width: 100px
+}
+
+.topic-row .col-author dt {
+    width: 50px;
+    height: 50px;
+    float: left;
+    margin: 0 10px 0 0;
+    _margin: 0 7px 0 0;
+    overflow: hidden
+}
+
+.topic-row .col-author dd {
+    overflow: hidden;
+    zoom: 1
+}
+
+.topic-row .col-author .name span {
+    line-height: 18px;
+    max-width: 80px;
+    _width: 80px;
+    color: #666
+}
+
+.topic-preview li {
+    height: 60px;
+    line-height: 60px;
+    margin-right: 10px;
+    padding: 0;
+    float: left;
+    display: inline;
+    border: 0;
+    overflow: hidden
+}
+
+.topic-preview img {
+    max-width: 130px;
+    max-height: 60px;
+    _width: 130px;
+    _height: 60px;
+
+}
+
+.topic-preview .video-play {
+    display: inline-block;
+    width: 76px;
+    height: 27px;
+    margin: 18px 0 0 -103px;
+    background: url(images/video-play.png) 0 0 no-repeat
+}
+
+.topic-preview .video-play:hover {
+    background-position: 0 -33px
+}
+
+.topic-image, .topic-video {
+    padding: 14px;
+    background: url(images/bg-photo.gif) repeat-y;
+    border: 1px solid #f3f3f3
+}
+
+
+/*topicedit 话题编辑  主题编辑*/
+.content{min-height:500px;padding:30px;background:#fff;-moz-box-shadow:0 1px 1px rgba(0,0,0,0.1);-webkit-box-shadow:0 1px 1px rgba(0,0,0,0.1);box-shadow:0 1px 1px rgba(0,0,0,0.1)}.content h2{margin-bottom:20px;padding:0 0 20px 0;border-bottom:1px dotted #d1d1d1;font-size:14px;line-height:1.2}.fm-item{float:left}.fm-item p{padding:5px 0 0 0;color:#999}.fm-item .b-input,.intro-txa{width:360px}.intro-txa{height:100px}.fm-item select{width:180px;margin-right:12px}

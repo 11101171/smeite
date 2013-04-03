@@ -1,0 +1,40 @@
+@(user:Option[models.user.User])
+@views.html.template(
+user
+)(css="/assets/css/template/user.setting.css") {
+             <div class="container" id="account">
+                 <div class="content clearfix">
+                 <div class="side-nav">
+                     <h2>帐号设置</h2>
+                     <ul>
+                         <li> <a  href="@controllers.users.routes.UsersAccount.base">基本信息</a> </li>
+                         <!--   <li> <a  href="@controllers.users.routes.UsersAccount.bind">帐号绑定</a>  </li>-->
+                         <li> <a  href="@controllers.users.routes.UsersAccount.passwd">修改密码</a>  </li>
+                         <!--  <li> <a  href="@controllers.users.routes.UsersAccount.invite">邀请好友</a>   </li>-->
+                         <li> <a class=" on "   href="@controllers.users.routes.UsersAccount.award">我的奖品</a>  </li>
+                         <li> <a href="@controllers.users.routes.UsersAccount.address">收货地址</a> </li>
+                     </ul>
+                 </div>
+                 <!--side nav end-->
+                 <div class="main-content">
+                     <div class="award">
+                         <div class="no-award">
+                             <p>sorry，食美特没有找到关于你的中奖信息！</p>
+
+                             <p>你可以先去完善下<a href="@controllers.users.routes.UsersAccount.address">收货地址</a>吧。有几个活动或许你感兴趣！</p>
+
+
+                         </div>
+                     </div>
+                 </div>
+                 <!-- end -->
+                 </div>
+             </div>
+
+        }{
+<script type="text/javascript">
+    seajs.use("app/init", function(init){
+        //  init.load("app/user.award");
+    });
+</script>
+}

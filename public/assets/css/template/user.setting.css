@@ -1,0 +1,781 @@
+/**
+ * Created by zuosanshao.
+ * Date: 12-9-21
+ * Time: 上午9:49
+ * 维护人员:zuosanshao@qq.com
+ */
+.content {
+    min-height: 500px;
+    padding: 50px;
+    background: #fff;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
+}
+
+.side-nav {
+    float: left;
+    width: 100px
+}
+
+.main-content {
+    float: left;
+    width: 779px;
+    min-height: 500px;
+    border-left: 1px dotted #d1d1d1
+}
+
+.side-nav h2 {
+    font-size: 16px;
+    line-height: 100%
+}
+
+.side-nav ul {
+    margin-top: 20px
+}
+
+.side-nav ul li {
+    margin-bottom: 15px
+}
+
+.side-nav ul li a {
+    color: #666;
+    font-size: 14px
+}
+
+.side-nav ul li a.on {
+    color: #f32a6b
+}
+
+.set-box {
+    width: 365px;
+    margin: 0 auto
+}
+
+.set-box .title-info {
+    padding: 40px 0 20px 0;
+    border-bottom: 1px dotted #cdcdcd
+}
+
+.set-box .title-info .face {
+    float: left;
+    width: 50px;
+    height: 50px;
+    overflow: hidden
+}
+
+.set-box .title-info .info {
+    float: right;
+    width: 300px
+}
+
+.set-box .title-info .info .name {
+    color: #333;
+    font-size: 14px;
+    font-weight: bold
+}
+
+.set-box .title-info .info p {
+    color: #333;
+    margin-top: 10px
+}
+
+.set-box .set-form {
+    margin-top: 25px
+}
+
+.theemail {
+    line-height: 32px;
+    font-size: 14px;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    overflow: hidden
+}
+
+.set-info {
+    float: left;
+    width: 430px
+}
+
+.set-pic {
+    float: right
+}
+
+#thePhoto {
+    width: 180px;
+    height: 180px
+}
+
+.set-password .set-form label, .set-info .set-form label {
+    width: 130px
+}
+
+.set-form .sex {
+    float: left;
+    padding: 7px 0
+}
+
+.set-form .sex input {
+    vertical-align: middle
+}
+
+.set-form .sex .radio-txt {
+    cursor: pointer
+}
+
+.set-form select {
+    margin: 6px 0 0 5px;
+    vertical-align: middle
+}
+
+.set-form .intro-txa {
+    width: 270px;
+    height: 80px
+}
+
+.set-password .set-form .error-row, .set-info .set-form .error-row {
+    margin: 0 0 20px 130px
+}
+
+.bind {
+    padding: 0 0 0 60px
+}
+
+.bind .upeng {
+    padding-bottom: 20px;
+    border-bottom: 1px dotted #cdcdcd
+}
+
+.bind .upeng li {
+    width: 320px
+}
+
+.bind .bind-list li {
+    float: left;
+    width: 320px;
+    height: 50px;
+    padding: 15px 0;
+    overflow: hidden
+}
+
+.bind .bind-icon {
+    float: left;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    background-image: url(images/bind-account.png)
+}
+
+.bind .bind-sina {
+    background-position: 0 -50px
+}
+
+.bind .bind-taobao {
+    background-position: 0 -100px
+}
+
+.bind .bind-tencent {
+    background-position: 0 -150px
+}
+
+.bind .bind-163 {
+    background-position: 0 -200px
+}
+
+.bind .bind-douban {
+    background-position: 0 -250px
+}
+
+.bind .bind-alipay {
+    background-position: 0 -300px
+}
+
+.bind .bind-renren {
+    background-position: 0 -350px
+}
+
+.bind .bind-qq {
+    background-position: 0 -400px
+}
+
+.bind .text {
+    float: right;
+    width: 260px
+}
+
+.bind .text .bname {
+    color: #333;
+    font-size: 12px;
+    font-weight: bold
+}
+
+.merge-content {
+    padding: 40px;
+    background: #fff;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
+}
+
+.merge-box h2 {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #dedede;
+    font-size: 16px;
+    line-height: 1.2
+}
+
+.merge-box h2 a {
+    font-size: 12px;
+    font-weight: normal;
+    margin-top: 5px
+}
+
+.merge-box {
+    width: 550px;
+    margin: 0 auto
+}
+
+.merge-box .form-row label {
+    width: 90px
+}
+
+.merge-box .title {
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px dotted #d1d1d1
+}
+
+.merge-box .itembox {
+    float: left;
+    width: 208px;
+    height: 30px;
+    line-height: 30px;
+    background: #fff;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    overflow: hidden
+}
+
+.merge-box .itembox.checked {
+    background: #fafff0 url(images/correct.png) 190px center no-repeat;
+    border: 1px solid #84b025
+}
+
+.merge-box .nickbox {
+    height: 50px;
+    line-height: 50px
+}
+
+.merge-box .infobox {
+    height: 90px;
+    line-height: 30px
+}
+
+.merge-box .infobox p {
+    line-height: 30px
+}
+
+.merge-box .itembox img.face {
+    float: left;
+    width: 50px;
+    height: 50px
+}
+
+.merge-box .itembox span, .merge-box .infobox p {
+    margin-left: 8px;
+    color: #333;
+    font-size: 14px
+}
+
+.merge-box .btnbox {
+    float: left;
+    padding-left: 95px
+}
+
+.merge-box .warning {
+    float: left;
+    font-size: 12px;
+    color: #b00
+}
+
+.merge-box h3 {
+    float: left;
+    width: 210px;
+    font-size: 14px;
+    line-height: 1.2
+}
+
+.imgareaselect-border1 {
+    background: url(images/border-v.gif) repeat-y left top
+}
+
+.imgareaselect-border2 {
+    background: url(images/border-h.gif) repeat-x left top
+}
+
+.imgareaselect-border3 {
+    background: url(images/border-v.gif) repeat-y right top
+}
+
+.imgareaselect-border4 {
+    background: url(images/border-h.gif) repeat-x left bottom
+}
+
+.imgareaselect-border1, .imgareaselect-border2, .imgareaselect-border3, .imgareaselect-border4 {
+    filter: alpha(opacity = 50);
+    opacity: .5
+}
+
+.imgareaselect-handle {
+    background-color: #fff;
+    border: solid 1px #000;
+    filter: alpha(opacity = 50);
+    opacity: .5
+}
+
+.imgareaselect-outer {
+    background-color: #000;
+    filter: alpha(opacity = 50);
+    opacity: .5
+}
+
+.photo-row {
+    margin: 0 auto;
+    width: 520px;
+    position: relative
+}
+
+.photo-row .upload-cover {
+    width: 92px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer
+}
+
+.photo-row .upload-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    filter: alpha(opacity = 0);
+    opacity: 0;
+    z-index: 698;
+    display: block;
+    width: 92px;
+    height: 28px;
+    cursor: pointer
+}
+
+.photo-box {
+    width: 300px;
+    height: 300px;
+    line-height: 300px;
+    text-align: center;
+    border: 1px solid #DDD;
+    overflow: hidden
+}
+
+.photo-box span {
+    _height: 100%;
+    _writing-mode: tb-rl;
+    _vertical-align: middle
+}
+
+.photo-box img {
+    vertical-align: middle;
+    cursor: pointer
+}
+
+.photo-dialog {
+    width: 450px
+}
+
+.photo-dialog form {
+    margin-left: 40px
+}
+
+.invite {
+    overflow: hidden;
+    zoom: 1;
+    padding-left: 50px
+}
+
+.invite .li {
+    display: block;
+    margin-bottom: 15px;
+    height: 32px;
+    line-height: 32px
+}
+
+.invite .li li {
+    height: 32px;
+    line-height: 32px;
+    margin: 0 20px 0 0;
+    width: auto;
+    float: left
+}
+
+.invite .invite_success {
+    width: 300px;
+    background: #fdf6ea;
+    padding: 0 0 0 20px;
+    display: block;
+    margin-bottom: 20px;
+    height: 32px;
+    line-height: 32px;
+    color: #333
+}
+
+.invite .invite_success span {
+    font-size: 14px;
+    padding: 0 5px;
+    color: #f32a6b;
+    font-weight: 700;
+    font-family: Georgia, "Times New Roman", Times, serif
+}
+
+.invite .invite_txa {
+    width: 370px;
+    height: 50px;
+    line-height: 23px;
+    margin-bottom: 20px;
+    color: #999
+}
+
+.invite .invite_txb {
+    width: 526px;
+    height: 92px;
+    line-height: 23px;
+    margin-bottom: 10px;
+    color: #999;
+    margin-top: 10px
+}
+
+.invite li {
+    line-height: 32px;
+    float: left;
+    padding: 0 20px 0 0
+}
+
+.invite li a {
+    color: #666;
+    padding-left: 20px;
+    display: block
+}
+
+.invite li a:hover {
+    color: #5ad;
+    text-decoration: underline
+}
+
+.invite .i-sina, .invite .i-qq, .invite .i-renren, .invite .i-douban, .invite .i-qzone {
+    background-image: url(images/icons-share.png);
+    background-repeat: no-repeat
+}
+
+.invite .i-sina {
+    background-position: 0 -410px
+}
+
+.invite .i-qq {
+    background-position: 0 -273px
+}
+
+.invite .i-renren {
+    background-position: 0 -73px
+}
+
+.invite .i-douban {
+    background-position: 0 -113px
+}
+
+.invite .i-qzone {
+    background-position: 0 -364px
+}
+
+.bbl-btn.hover {
+    color: #fff;
+    background-position: -5px -411px;
+    text-decoration: none;
+    border: 1px solid #1c82bf
+}
+
+.bbl-btn.active {
+    color: #fff;
+    background-position: -5px -461px;
+    text-decoration: none;
+    border: 1px solid #1c82bf
+}
+
+.weibo_invite {
+    overflow: hidden;
+    zoom: 1;
+    width: 550px
+}
+
+.weibo_invite li {
+    width: 80px;
+    height: 84px;
+    margin: 1px 15px 10px 15px;
+    float: left;
+    display: inline;
+    padding: 0
+}
+
+.weibo_invite li input {
+    float: left
+}
+
+.weibo_invite li img {
+    float: right;
+    padding: 1px;
+    border: 1px solid #f9f9f9
+}
+
+.weibo_invite p {
+    display: block;
+    line-height: 22px;
+    color: #5ad;
+    clear: both;
+    text-align: center;
+    cursor: pointer
+}
+
+.weibo_invite span {
+    height: 22px;
+    line-height: 22px;
+    color: #999;
+    margin-bottom: 12px;
+    margin-right: 14px
+}
+
+.weibo_invite font {
+    font-size: 14px;
+    padding: 0 2px;
+    color: #f32a6b;
+    font-weight: 700;
+    font-family: Georgia, "Times New Roman", Times, serif
+}
+
+.weibo_t {
+    border-bottom: 1px solid #dedede;
+    height: 30px;
+    width: 535px;
+    margin-bottom: 10px
+}
+
+.weibo_t .tab {
+    height: 29px;
+    line-height: 29px;
+    color: #666;
+    float: right;
+    width: 90px;
+    border-radius: 3px 3px 0 0
+}
+
+.weibo_t span {
+    height: 29px;
+    line-height: 29px;
+    float: left;
+    color: #666;
+    margin: 0
+}
+
+.weibo_t .tab a {
+    line-height: 29px;
+    display: block;
+    padding-left: 30px;
+    color: #999;
+    text-decoration: none
+}
+
+.weibo_t .on {
+    border-left: none;
+    background-color: #fff;
+    height: 29px;
+    border: 1px solid #dedede;
+    border-bottom: 1px solid #fff
+}
+
+.weibo_t .on a, .weibo_t .on a:hover {
+    color: #5AD;
+    text-decoration: none
+}
+
+.weibo_t .i-sina {
+    background-position: 10px -410px
+}
+
+.weibo_t .i-qq {
+    background-position: 10px -273px
+}
+
+.img-sina, .img-qq {
+    margin: 120px auto;
+    width: 120px;
+    display: block;
+    height: 49px;
+    line-height: 49px;
+    color: #666;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 0 0 0 60px
+}
+
+.img-sina {
+    background: url(images/weibo_invite.png) 0 0 no-repeat
+}
+
+.img-qq {
+    background: url(images/weibo_invite.png) 0 -49px no-repeat
+}
+
+.sns-scroller {
+    padding-top: 32px;
+    height: 285px;
+    position: relative;
+    overflow: hidden
+}
+
+.sns-scroller .items {
+    position: absolute;
+    width: 2000em
+}
+
+.sns-scroller .items ul {
+    float: left;
+    width: 550px;
+    height: 285px;
+    overflow: hidden
+}
+
+.sns-scroller .next {
+    position: absolute;
+    right: 15px;
+    top: 0
+}
+
+.address .form-row label {
+    width: 130px
+}
+
+.address .address-tip {
+    padding: 10px 20px 28px 55px;
+    color: #999
+}
+
+.address .set-form .intro-txa {
+    height: 50px
+}
+
+.award {
+    padding-left: 40px
+}
+
+.award h3 {
+    height: 20px;
+    line-height: 20px;
+    font-size: 14px;
+    padding-bottom: 10px
+}
+
+.award .award-list th {
+    background-color: #f2f2f2;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    font-weight: normal
+}
+
+.award .award-list td {
+    padding: 5px;
+    text-align: center;
+    line-height: 20px
+}
+
+.award .award-list td.tal {
+    text-align: left
+}
+
+.award .no-award {
+    background-color: #f9f9ef;
+    padding: 20px
+}
+
+.award .no-award p {
+    line-height: 30px;
+    text-align: center
+}
+
+.award .ml42 {
+    margin-left: 42px
+}
+
+.award .ml56 {
+    margin-left: 56px
+}
+
+#view_award_Dialog {
+    width: 400px
+}
+
+#view_award_Dialog p {
+    line-height: 24px
+}
+
+#get_award_Dialog {
+    width: 350px
+}
+
+#get_award_Dialog p {
+    line-height: 30px;
+    font-size: 14px
+}
+
+#get_award_Dialog .getbtn, #get_award_Dialog .closebtn {
+    margin-left: 128px
+}
+
+#confirm_award_Dialog .img-sina, #confirm_award_Dialog .img-qq {
+    margin: 0;
+    float: left;
+    margin-left: 20px;
+    margin-top: 20px
+}
+
+#confirm_award_Dialog {
+    width: 460px
+}
+
+#address_Dialog {
+    width: 366px
+}
+
+#address_Dialog .form-row label {
+    width: 80px
+}
+
+#address_Dialog .intro-txa {
+    height: 50px
+}
+
+#address_Dialog select {
+    margin: 6px 0 0 5px;
+    vertical-align: middle
+}
+
+#address_Dialog .tip {
+    float: right;
+    position: static
+}

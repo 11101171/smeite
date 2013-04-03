@@ -1,0 +1,32 @@
+/**
+ * Created by zuosanshao.
+ * Date: 12-9-17
+ * Time: 上午9:16
+ * 维护人员:zuosanshao@qq.com
+ */
+/* 回到顶部 */
+#returnTop {
+    _display: none;
+    position: fixed;
+    _position: absolute;
+    z-index: 999;
+    right: 15px;
+    bottom: -200px;
+    _bottom: auto;
+    width: 36px;
+    height: 65px;
+    text-indent: -999px;
+    overflow: hidden;
+    background-image: url(images/returntop.png);
+    _background-image: url(images/returntop-png8.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    transition: bottom 0.9s;
+    -webkit-transition: bottom 0.9s;
+    -moz-transition: bottom 0.9s;
+    -o-transition: bottom 0.9s;
+}
+
+#returnTop:hover {
+    background-position: 0 -65px;
+}

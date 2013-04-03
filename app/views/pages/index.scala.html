@@ -1,0 +1,491 @@
+@(user:Option[models.user.User],
+flashes:List[models.advert.Advert],
+hots:List[models.advert.Advert],
+meishi:List[models.advert.Advert],
+techan:List[models.advert.Advert],
+jujia:List[models.advert.Advert],
+haowanyi:List[models.advert.Advert],
+meishiTags:models.advert.Advert,
+techanTags:models.advert.Advert,
+jujiaTags:models.advert.Advert,
+haowanyiTags:models.advert.Advert,
+meishiBrands:List[models.advert.Advert],
+teseBrands:List[models.advert.Advert],
+bottom:models.advert.Advert
+
+)
+@views.html.template(
+user,
+nav="index"
+)(css="/assets/css/template/index.css"){
+<div class="container" id="index">
+<!--main box start-->
+<div class="main-box clearfix">
+
+    <div class="flash fl">
+        <div class="scrollable">
+
+            <div class="items">
+
+               @for(flash <- flashes) {
+               <div class="item">
+                    <a href="@flash.link" title="@flash.title" target="_blank">
+                        <img src="@flash.pic" alt="@flash.title" width="720" height="270">
+                    </a>
+                </div>
+                      }
+            </div>
+
+
+        </div>
+        <ul class="navi clearfix">
+            @for((flash,i)<-flashes.view.zipWithIndex){
+            <li @if(i==0){class="active"} @if(i==4){class="last"}>
+            <span></span>
+            <a href="@flash.link" title="@flash.link" target="_blank">
+                <div class="thumb">
+                    <img src="@flash.spic" alt="@flash.title" width="130" height="45">
+                </div>
+                <h3 class="topicTitle ofh">@flash.title</h3>
+            </a>
+            </li>
+            }
+
+        </ul>
+
+    </div>
+    <!--kissy switchable  slide end-->
+    <div class="bulletin fr clearfix">
+        <h3>最近热门的好玩意儿~</h3>
+        <ul>
+            @for(advert<-hots){
+            <li class="ofh">
+                <a href="@advert.link" target="_blank" title="@advert.title">
+                    <img src="@advert.pic" width="30" height="20" alt="@advert.title">
+                    <em>@advert.title</em>
+                </a>
+            </li>
+            }
+        </ul>
+        <div class="follow-us clearfix">
+            <div class="ad-pic">
+                <a class="a-weibo" href="http://weibo.com/smeite" target="_blank" title="新浪微博">新浪微博</a>
+                <div class="a-weixin" id="J_A-weixin">
+                    微信
+                    <div class="weixin" id="J_Weixin" ></div>
+                </div>
+            </div>
+            <div class="text ofh"><a href="">在这些地方关注我们</a></div>
+        </div>
+    </div>
+    <!--最近热门的好玩意儿 end-->
+
+</div>
+<!--main box end-->
+
+<!-- 美食 start-->
+
+<div class="category-main clearfix">
+    <div class="category">
+        <dl class="first">
+            <dt>
+            <div class="title-wrap clearfix">
+                <h2 class="title clearfix"><a href='@controllers.routes.Pages.find("美食","tag",1)' target="_blank">美食</a></h2>
+                <div class="title-desc"><a href='@controllers.routes.Pages.find("美食","tag",1)' target="_blank">&nbsp;•&nbsp;每日精选</a></div>
+            </div>
+            <div class="tag-wrap clearfix">
+                @Html(meishiTags.content.getOrElse(""))
+            </div>
+            </dt>
+            @for((advert,i)<-meishi.view.zipWithIndex){
+            @if(i==0){
+            <dd>
+                <a href="@advert.link" title="@advert.title" target="_blank">
+                    <img src="@advert.pic" width="240" height="150" alt="@advert.title">
+                </a>
+                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span> </a> </div>
+            </dd>
+            }
+            }
+        </dl>
+
+        <dl class="second">
+            @for((advert,i)<-meishi.view.zipWithIndex){
+            @if(i>0 && i<4){
+            <dd>
+                <a href="@advert.link" title="@advert.title" target="_blank">
+                    <img src="@advert.pic" width="150" height="150" alt="@advert.title">
+                </a>
+                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span> </a> </div>
+            </dd>
+            }
+            }
+        </dl>
+        <dl class="third">
+            @for((advert,i)<-meishi.view.zipWithIndex){
+            @if(i==4){
+            <dd>
+                <a href="@advert.link" title="@advert.title" target="_blank">
+                    <img src="@advert.pic" width="310" height="310" alt="@advert.title">
+                </a>
+                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span> </a> </div>
+            </dd>
+            }
+            @if(i>4 && i<7){
+            <dd @if(i==5){class="mr10"}>
+                <a href="@advert.link" title="@advert.title" target="_blank">
+                    <img src="@advert.pic" width="150" height="150" alt="@advert.title">
+                </a>
+                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span> </a> </div>
+            </dd>
+            }
+            }
+        </dl>
+
+        <dl class="fourth last">
+            @for((advert,i)<-meishi.view.zipWithIndex){
+            @if(i>=7){
+
+            <dd>
+                <a href="@advert.link" title="@advert.title" target="_blank">
+                    <img src="@advert.pic" width="220" height="150" alt="@advert.title">
+                </a>
+                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span></a></div>
+            </dd>
+
+            }
+            }
+
+        </dl>
+
+    </div>
+
+
+
+</div>
+<!-- 美食  end -->
+
+<!-- 特产 start-->
+
+<div class="category-main clearfix">
+    <div class="category">
+        <dl class="first">
+            <dt>
+            <div class="title-wrap clearfix">
+                <h2 class="title clearfix"><a href='@controllers.routes.Pages.find("特产","tag",1)' target="_blank">特产</a></h2>
+                <div class="title-desc"><a href='@controllers.routes.Pages.find("特产","tag",1)' target="_blank">&nbsp;•&nbsp;每日精选</a></div>
+            </div>
+            <div class="tag-wrap clearfix">
+                @Html(techanTags.content.getOrElse(""))
+            </div>
+            </dt>
+            @for((advert,i)<-techan.view.zipWithIndex){
+            @if(i==0){
+            <dd>
+                <a href="@advert.link" title="@advert.title" target="_blank">
+                    <img src="@advert.pic" width="240" height="150" alt="@advert.title">
+                </a>
+                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span> </a> </div>
+            </dd>
+            }
+            }
+        </dl>
+
+        <dl class="second">
+            @for((advert,i)<-techan.view.zipWithIndex){
+            @if(i>0 && i<4){
+            <dd>
+                <a href="@advert.link" title="@advert.title" target="_blank">
+                    <img src="@advert.pic" width="150" height="150" alt="@advert.title">
+                </a>
+                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span> </a> </div>
+            </dd>
+            }
+            }
+        </dl>
+        <dl class="third">
+            @for((advert,i)<-techan.view.zipWithIndex){
+            @if(i==4){
+            <dd>
+                <a href="@advert.link" title="@advert.title" target="_blank">
+                    <img src="@advert.pic" width="310" height="310" alt="@advert.title">
+                </a>
+                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span> </a> </div>
+            </dd>
+            }
+            @if(i>4 && i<7){
+            <dd @if(i==5){class="mr10"}>
+                <a href="@advert.link" title="@advert.title" target="_blank">
+                    <img src="@advert.pic" width="150" height="150" alt="@advert.title">
+                </a>
+                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span> </a> </div>
+            </dd>
+            }
+            }
+        </dl>
+
+        <dl class="fourth last">
+            @for((advert,i)<-techan.view.zipWithIndex){
+            @if(i>=7){
+
+            <dd>
+                <a href="@advert.link" title="@advert.title" target="_blank">
+                    <img src="@advert.pic" width="220" height="150" alt="@advert.title">
+                </a>
+                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span></a></div>
+            </dd>
+
+            }
+            }
+
+        </dl>
+
+    </div>
+
+
+
+</div>
+<!-- 特产  end -->
+
+<!-- 居家 start-->
+
+<div class="category-main clearfix">
+    <div class="category">
+        <dl class="first">
+            <dt>
+            <div class="title-wrap clearfix">
+                <h2 class="title clearfix"><a href='@controllers.routes.Pages.find("居家","tag",1)' target="_blank">居家</a></h2>
+                <div class="title-desc"><a href='@controllers.routes.Pages.find("居家","tag",1)' target="_blank">&nbsp;•&nbsp;每日精选</a></div>
+            </div>
+            <div class="tag-wrap clearfix">
+                @Html(jujiaTags.content.getOrElse(""))
+            </div>
+            </dt>
+            @for((advert,i)<-jujia.view.zipWithIndex){
+            @if(i==0){
+            <dd>
+                <a href="@advert.link" title="@advert.title" target="_blank">
+                    <img src="@advert.pic" width="240" height="150" alt="@advert.title">
+                </a>
+                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span> </a> </div>
+            </dd>
+            }
+            }
+        </dl>
+
+        <dl class="second">
+            @for((advert,i)<-jujia.view.zipWithIndex){
+            @if(i>0 && i<4){
+            <dd>
+                <a href="@advert.link" title="@advert.title" target="_blank">
+                    <img src="@advert.pic" width="150" height="150" alt="@advert.title">
+                </a>
+                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span> </a> </div>
+            </dd>
+            }
+            }
+        </dl>
+        <dl class="third">
+            @for((advert,i)<-jujia.view.zipWithIndex){
+            @if(i==4){
+            <dd>
+                <a href="@advert.link" title="@advert.title" target="_blank">
+                    <img src="@advert.pic" width="310" height="310" alt="@advert.title">
+                </a>
+                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span> </a> </div>
+            </dd>
+            }
+            @if(i>4 && i<7){
+            <dd @if(i==5){class="mr10"}>
+                <a href="@advert.link" title="@advert.title" target="_blank">
+                    <img src="@advert.pic" width="150" height="150" alt="@advert.title">
+                </a>
+                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span> </a> </div>
+            </dd>
+            }
+            }
+        </dl>
+
+        <dl class="fourth last">
+            @for((advert,i)<-jujia.view.zipWithIndex){
+            @if(i>=7){
+
+            <dd>
+                <a href="@advert.link" title="@advert.title" target="_blank">
+                    <img src="@advert.pic" width="220" height="150" alt="@advert.title">
+                </a>
+                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span></a></div>
+            </dd>
+
+            }
+            }
+
+        </dl>
+
+    </div>
+
+
+
+</div>
+<!-- 居家  end -->
+
+<!-- 好玩意 start-->
+
+<div class="category-main clearfix">
+    <div class="category">
+        <dl class="first">
+            <dt>
+            <div class="title-wrap clearfix">
+                <h2 class="title clearfix" style="font-size: 30px"><a href='@controllers.routes.Pages.find("好玩意","tag",1)' target="_blank">好玩意</a></h2>
+                <div class="title-desc"><a href='@controllers.routes.Pages.find("好玩意","tag",1)' target="_blank">&nbsp;•&nbsp;每日精选</a></div>
+            </div>
+            <div class="tag-wrap clearfix">
+                @Html(haowanyiTags.content.getOrElse(""))
+            </div>
+            </dt>
+            @for((advert,i)<-haowanyi.view.zipWithIndex){
+            @if(i==0){
+            <dd>
+                <a href="@advert.link" title="@advert.title" target="_blank">
+                    <img src="@advert.pic" width="240" height="150" alt="@advert.title">
+                </a>
+                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span> </a> </div>
+            </dd>
+            }
+            }
+        </dl>
+
+        <dl class="second">
+            @for((advert,i)<-haowanyi.view.zipWithIndex){
+            @if(i>0 && i<4){
+            <dd>
+                <a href="@advert.link" title="@advert.title" target="_blank">
+                    <img src="@advert.pic" width="150" height="150" alt="@advert.title">
+                </a>
+                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span> </a> </div>
+            </dd>
+            }
+            }
+        </dl>
+        <dl class="third">
+            @for((advert,i)<-haowanyi.view.zipWithIndex){
+            @if(i==4){
+            <dd>
+                <a href="@advert.link" title="@advert.title" target="_blank">
+                    <img src="@advert.pic" width="310" height="310" alt="@advert.title">
+                </a>
+                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span> </a> </div>
+            </dd>
+            }
+            @if(i>4 && i<7){
+            <dd @if(i==5){class="mr10"}>
+                <a href="@advert.link" title="@advert.title" target="_blank">
+                    <img src="@advert.pic" width="150" height="150" alt="@advert.title">
+                </a>
+                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span> </a> </div>
+            </dd>
+            }
+            }
+        </dl>
+
+        <dl class="fourth last">
+            @for((advert,i)<-haowanyi.view.zipWithIndex){
+            @if(i>=7){
+
+            <dd>
+                <a href="@advert.link" title="@advert.title" target="_blank">
+                    <img src="@advert.pic" width="220" height="150" alt="@advert.title">
+                </a>
+                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span></a></div>
+            </dd>
+
+            }
+            }
+
+        </dl>
+
+    </div>
+
+
+
+</div>
+<!-- 好玩意  end -->
+
+<!-- 底部广告-->
+<div class="adv">
+    <a href="@bottom.link"><img src="@bottom.pic" alt="@bottom.title"></a>
+</div>
+<!-- end -->
+<!--推荐品牌-->
+<!--
+<div class="brands">
+    <div class="tabs hd clearfix">
+        <h3> 美食大全  <span class="vline">|</span></h3>
+        <h3> 创意大全</h3>
+    </div>
+    <div class="panes">
+    <ul class="brand-list clearfix">
+        @for((advert,i)<- meishiBrands.view.zipWithIndex) {
+        @if(((i+1)%9==0)){
+        <li class="last-item">
+            <a  href="@advert.link" title="@advert.title" target="_blank"><img src="/assets/ui/blank.gif" data-original="@advert.pic" alt="@advert.title" width="100px" height="60px"></a>
+        </li>
+        }else {
+        <li>
+            <a  href="@advert.link" title="@advert.title" target="_blank"><img src="/assets/ui/blank.gif" data-original="@advert.pic" alt="@advert.title" width="100px" height="60px"></a>
+        </li>
+        }
+        }
+
+    </ul>
+    <ul class="brand-list clearfix">
+        @for((advert,i)<- teseBrands.view.zipWithIndex) {
+        @if(((i+1)%9==0)){
+        <li class="last-item">
+            <a  href="@advert.link" title="@advert.title" target="_blank"><img src="/assets/ui/blank.gif" data-original="@advert.pic" alt="@advert.title" width="100px" height="60px"></a>
+        </li>
+        }else {
+        <li>
+            <a  href="@advert.link" title="@advert.title" target="_blank"><img src="/assets/ui/blank.gif" data-original="@advert.pic" alt="@advert.title" width="100px" height="60px"></a>
+        </li>
+        }
+        }
+
+    </ul>
+    </div>
+</div>
+
+<!--推荐品牌 end-->
+
+<div class="justSmeite clearfix pos-r">
+    <fieldset>
+        <h3 id="J_legend">
+            现在加入我们，发现生活之美
+        </h3>
+
+        <div class="field-box" id="J_welcome" style="position: relative;">
+            <div class="clearfix thirdLogin" >
+                <a class="l-qq" href='@controllers.users.routes.UsersSnsLogin.snsLogin("qzone","syn")' target="_blank">QQ帐号登录</a>
+                <a class="l-sina" href='@controllers.users.routes.UsersSnsLogin.snsLogin("sina","syn")' target="_blank">新浪微博登录</a>
+                <a class="l-tao" href='@controllers.users.routes.UsersSnsLogin.snsLogin("taobao","syn")' target="_blank">淘宝帐号登录</a>
+            </div>
+            <div class="clearfix gc login">
+                <a id="J_login" href="/user/login">帐号登录</a>&nbsp;|&nbsp;<a href="/user/regist">免费注册</a>
+            </div>
+        </div>
+    </fieldset>
+</div>
+
+
+</div>
+
+
+}{
+<script type="text/javascript">
+    seajs.use('app/init', function (init) {
+        init.load('app/index');
+    });
+</script>
+}
+
+

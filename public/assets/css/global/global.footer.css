@@ -1,0 +1,114 @@
+/*
+ * 样式文件
+ * User: Administrator
+ * Date: 12-7-26  
+ * Time: 下午9:56
+ * 维护：zuosanshao@qq.com
+
+ ******************************************
+
+*/
+
+.smeiteLink {
+    position: absolute;
+    margin-left: -50px;
+    top: 25px;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+.footer {
+    height: 192px;
+    position: relative;
+    background: url(images/footer-bg.png) repeat-x;
+}
+
+#footer .footer-nav {
+
+    width: 960px;
+    height: 120px;
+    margin: 0 auto;
+    padding: 25px 0 0;
+    background: url(images/footer-logo.png) no-repeat center 25px;
+    overflow: hidden;
+}
+
+#footer .footer-nav dl {
+    float: left;
+    display: inline;
+    width: 150px;
+    margin-left: 50px;
+}
+
+#footer .footer-nav dt {
+    line-height: 1.2;
+    color: #666;
+    font-size: 14px;
+    font-weight: bolder;
+}
+
+#footer .footer-nav dd {
+    line-height: 1.2;
+    margin-top: 10px;
+}
+
+#footer .footer-nav a {
+    color: #666;
+}
+
+#footer .footer-nav a:hover {
+    color: #666;
+    text-decoration: underline;
+}
+
+#footer .footer-nav dl.followus a {
+    display: block;
+    height: 16px;
+    line-height: 16px;
+    padding-left: 20px;
+    background-image: url(images/footer-icons.png);
+    background-repeat: no-repeat;
+}
+
+#footer .footer-nav dl.service {
+    float: right;
+    width: 200px;
+    margin-left: 0;
+}
+
+#footer .footer-nav dl.service dd {
+    float: left;
+    width: 100px;
+    text-align: left;
+}
+
+#footer .footer-nav dl.how {
+    float: right;
+    width: 130px;
+}
+
+a.f-sina {
+    background-position: 0 0;
+}
+
+a.f-douban {
+    background-position: 0 -16px;
+}
+
+a.f-Qzone {
+    background-position: 0 -32px;
+}
+
+a.f-tencent {
+    background-position: 0 -48px;
+}
+
+
+
+#footer p.cp {
+    margin: 10px auto;
+    z-index: 9;
+    width: 100%;
+    text-align: center;
+}

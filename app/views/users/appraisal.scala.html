@@ -1,0 +1,98 @@
+@(user:Option[models.user.User],author:models.user.User,page:models.Page[models.goods.Goods],userLoveGoods:models.Page[models.goods.Goods])
+@views.html.template(
+user,
+title =  author.name+" 在食美特的个人主页，食美特，爱美食爱特色"
+)(css="/assets/css/template/user.css") {
+<div class="container clearfix">
+<div class="u-nav box-shadow">
+    <ul class="clearfix">
+        <li class=" user bigfs">
+            <a href="@controllers.users.routes.Users.home(author.id.get)">
+                <img src="@author.pic" alt="@author">@author.name
+            </a>
+        </li>
+        <!--<li class="cur"><a href="@controllers.users.routes.Users.trend(author.id.get)">@author.trendNum<br>动态</a></li>-->
+        <li><a href="@controllers.users.routes.Users.baobei(author.id.get)">@(author.postBaobeiNum+author.loveBaobeiNum)<br>宝贝</a></li>
+        <li><a href="@controllers.users.routes.Users.theme(author.id.get)">@(author.postThemeNum+author.loveThemeNum)<br>主题</a></li>
+        <li><a href="@controllers.users.routes.Users.square(author.id.get)">@(author.postTopicNum+author.loveTopicNum)<br>讨论</a></li>
+        <li ><a href="@controllers.users.routes.Users.fans(author.id.get)">@author.fansNum<br>粉丝</a></li>
+        <li class="last"><a href="@controllers.users.routes.Users.follow(author.id.get)">@(author.followNum)<br>我关注的</a></li>
+      <!--  <li class="cur last"><a href="@controllers.users.routes.Users.appraisal(author.id.get)">N+<br>求鉴定</a></li>-->
+    </ul>
+</div>
+    <!-- end -->
+    <div class="user-bd clearfix">
+        <div class="user-main">
+            <div class="ad-banner box-shadow">
+                <img src="/assets/ui/appraisal.jpg" alt="食美特">
+            </div>
+            <div class="main box-shadow plr15">
+                <div class="main-title clearfix">
+                    <h2>
+                        最新鉴定
+                    </h2>
+                    <span class="fl ml5 mr5">|</span>
+                    <a href="" class="fl">热门鉴定</a>
+                    <span class="fl ml5 mr5">|</span>
+                    <a href="" class="fl">我的求鉴定</a>
+                </div>
+                <ul class="clearfix">
+                    @for((goods,i)<-page.items.view.zipWithIndex){
+                    <li class="clearfix @if((i+1)%3==0){last}" >
+                        <div class="baobei-wrap">
+                            <div class="baobei-pic">
+                                <a class="pic-link" target="_blank" href="@controllers.routes.Goods.view(goods.id.get)">
+                                    <img src='@(goods.pic+"_210x210.jpg")' alt="@goods.name">
+                                </a>
+                            </div>
+                            <div class="baobei-title ofh inlineblock">
+                                @goods.name
+                            </div>
+                            <div class="baobei-stat">
+                                <span class="mr10">@goods.loveNum</span>
+                                <span>￥@goods.price</span>
+                            </div>
+                        </div>
+                    </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="user-side">
+
+            <div class="news box-shadow">
+            <h3 class="clearfix"><a href='@controllers.users.routes.Users.baobei(author.id.get,"love",1)' class="rw">全部&gt;</a>我喜欢的商品，求鉴定</h3>
+            <div class="news-box">
+                <ul>
+                    @for(goods<-userLoveGoods.items) {
+                    <li class="clearfix ">
+                        <div class="news-pic">
+                            <a href="@controllers.routes.Goods.view(goods.id.get)" target="_blank">
+                                <img src='@(goods.pic+"_80x80.jpg")' width="80" alt="@goods.name">
+                            </a>
+
+                        </div>
+                        <div class="news-text">
+                            <p> <a href="@controllers.routes.Goods.view(goods.id.get)" target="_blank">@goods.name</a></p>
+
+                            <a class="jd-btn sbl-btn J_InviteFellowJudge" href="javascript:;" data-proid="@goods.id">求鉴定</a>
+                        </div>
+                    </li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+            <!-- end -->
+
+        </div>
+    </div>
+</div>
+
+        }{
+<script type="text/javascript">
+    seajs.use('app/init', function(init) {
+        init.load('app/user/user.profile');
+    })
+</script>
+}

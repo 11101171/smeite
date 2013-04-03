@@ -1,0 +1,62 @@
+@(manager:models.admin.Manager,items:List[models.advert.Advert])
+@views.html.admin.template(manager,"channel") {
+
+    <div id="content-header">
+        <h1>频道管理</h1>
+    </div>
+    <div id="breadcrumb">
+        <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+        <a href="#" class="current">文字广告管理</a>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="well">
+
+                <table class="table table-bordered table-striped with-check">
+                    <thead>
+                        <tr>
+
+                    <th>ID</th>
+                    <th>位置名称</th>
+                    <th>位置代码</th>
+                    <th>广告名称</th>
+                    <th>链接地址</th>
+                    <th>备注</th>
+                    <th>浏览次数</th>
+                    <th>添加时间</th>
+                    <th style="width: 60px;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                @for( advert<- items){
+                <tr id="@advert.id.get">
+                    <td>@advert.id</td>
+                    <td>@advert.name</td>
+                    <td>@advert.positionCode</td>
+                    <td><a href="@advert.link">@advert.title</a></td>
+                    <td>@advert.link</td>
+                    <td>@advert.note</td>
+                    <td>@advert.clickNum</td>
+                    <td>@advert.addTime</td>
+                    <td>
+                        <a href="@controllers.admin.routes.Adverts.textEdit(advert.id.get)"><i class="icon-edit"></i></a>
+
+                    </td>
+                </tr>
+                }
+
+                </tbody>
+            </table>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+
+        }
+
+

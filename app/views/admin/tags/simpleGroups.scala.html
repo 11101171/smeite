@@ -1,0 +1,6 @@
+@(groups:List[(Long,String)])
+
+
+@for(group<- groups){
+<option value="@group._1">@group._2</option>
+}

@@ -1,0 +1,259 @@
+@(manager: models.admin.Manager, page: models.Page[models.user.User], form: Form[controllers.admin.UserFilterFormData])
+
+@views.html.admin.template(manager, "user") {
+
+    <div id="content-header">
+        <h1>用户管理</h1>
+    </div>
+    <div id="breadcrumb">
+        <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+        <a href="#" class="current">用户管理</a>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box clearfix">
+                    <div class="widget-title">
+                        <span class="icon">
+                            <i class="icon-pencil"></i>
+                        </span>
+                        <h5>标签组筛选</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <form class=" form-horizontal" id="J_filterForm" method="get" action="@controllers.admin.routes.Users.filterUsers">
+                            <input type="hidden" name="currentPage" id="J_currentPage" value="1">
+                            <div class="error-row">
+                                <p class="error"></p>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label" for="name">名称</label>
+                                <div class="controls">
+                                    <input type="text" id="name" name="name" value='@form("name").value'  placeholder="用户名称">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label" >用户状态</label>
+                                <div class="controls">
+                                    <div class="radio">
+                                        <input type="radio" name="status" value=""  @if(form("status").value.isEmpty){ checked="true" }> 所有
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio"  name="status" value="0"  @if(form("status").value.getOrElse("none")=="0"){ checked="true" }> 未通过
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="status" value="1" @if(form("status").value.getOrElse("none")=="1"){ checked="true" }> 正常状态
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="status" value="2" @if(form("status").value.getOrElse("none")=="2"){ checked="true" }> 活跃状态
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="status" value="3" @if(form("status").value.getOrElse("none")=="3"){ checked="true" }> 达人状态
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="status" value="4" @if(form("status").value.getOrElse("none")=="4"){ checked="true" }> 拉黑状态
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label" >达人称号</label>
+                                <div class="controls">
+                                    <div class="radio">
+                                        <input type="radio" name="daren" value="" @if(form("daren").value.isEmpty){ checked="true" }> 所有达人
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio"  name="daren" value="0" @if(form("daren").value.getOrElse("none")=="0"){ checked="true"}> 普通达人
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="daren" value="1" @if(form("daren").value.getOrElse("none")=="1"){ checked="true" }> 美食达人
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="daren" value="2" @if(form("daren").value.getOrElse("none")=="2"){ checked="true" }> 创意达人
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" >注册来源</label>
+                                <div class="controls">
+                                    <div class="radio">
+                                        <input type="radio" name="comeFrom" value=""  @if(form("comeFrom").value.isEmpty){ checked="true" }> 所有
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio"  name="comeFrom" value="0" @if(form("comeFrom").value.getOrElse("none")=="0"){ checked="true" }> 食美特
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="comeFrom" value="1" @if(form("comeFrom").value.getOrElse("none")=="1"){ checked="true" }> 腾讯QQ
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="comeFrom" value="2" @if(form("comeFrom").value.getOrElse("none")=="2"){ checked="true" }> 新浪微博
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="comeFrom" value="3" @if(form("comeFrom").value.getOrElse("none")=="3"){ checked="true" }> 淘宝
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="control-group">
+                                <label class="control-label" >根据积分排序</label>
+                                <div class="controls">
+
+                                    <div class="radio">
+                                        <input type="radio"  name="creditsOrder" value="desc" @if(form("creditsOrder").value.getOrElse("none")=="desc"){ checked="true" }>由高到低
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="creditsOrder" value="asc" @if(form("creditsOrder").value.getOrElse("none")=="asc"){ checked="true" }> 由低到高
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" >根据食豆排序</label>
+                                <div class="controls">
+
+                                    <div class="radio">
+                                        <input type="radio"  name="shiDouOrder" value="desc" @if(form("shiDouOrder").value.getOrElse("none")=="desc"){ checked="true" }>由高到低
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="shiDouOrder" value="asc" @if(form("shiDouOrder").value.getOrElse("none")=="asc"){ checked="true" }> 由低到高
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" >根据ID排序</label>
+                                <div class="controls">
+
+                                    <div class="radio">
+                                        <input type="radio"  name="idOrder" value="desc" @if(form("idOrder").value.getOrElse("none")=="desc"){ checked="true" }>由高到低
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="idOrder" value="asc" @if(form("idOrder").value.getOrElse("none")=="asc"){ checked="true" }> 由低到高
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="control-group">
+                                <div class="controls">
+                                <input type="submit" class="btn btn-info" value="筛选"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="well">
+                <form method="post" id="J_batchForm" action="@controllers.admin.routes.Users.batchUsers">
+                    <input type="hidden" id="J_url" name="url" value="">
+                    <div class="controls">
+                        <select id="J_select" name="action">
+                            <option value="-1">批量动作</option>
+                            <option value="4">批量拉黑</option>
+                            <option value="1">批量正常</option>
+
+                        </select>
+                        <button class="btn btn-info" id="J_batchAction" data-toggle="modal" data-target="#J_batchModal">
+                            批量处理
+                        </button>
+                    </div>
+                    <table class="table table-bordered table-striped with-check">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" name="title-table-checkbox"/></th>
+                                <th>ID</th>
+                                <th>名称</th>
+                                <th>积分</th>
+                                <th>食豆</th>
+                                <th>达人</th>
+                                <th>状态</th>
+                                <th>来源</th>
+                                <th style="width: 60px;">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @for((item,i) <- page.items.view.zipWithIndex) {
+                            <tr id="@item.id.get">
+                                <td><input type="checkbox" name="ids[@i]" value="@item.id.get"/></td>
+                                <td>@item.id</td>
+                                <td>@item.name</td>
+                                <td>@item.credits</td>
+                                <td>@item.shiDou</td>
+                                <td>@models.user.Daren(item.daren)</td>
+                                <td>@models.user.UserStatus(item.status)</td>
+                                <td>@models.user.ComeFrom(item.comeFrom)</td>
+                                <td>
+                                    <a href="@controllers.admin.routes.Users.view(item.id.get)"><i class="icon-eye-open"></i></a>
+                                    <a href="@controllers.admin.routes.Users.edit(item.id.get)"><i class="icon-edit"></i></a>
+                                    <a href="#J_lockModal" class="black" data-id="@item.id.get" role="button" data-toggle="modal"><i class="icon-lock"></i></a>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <div class="pagination">
+                <ul>
+
+                    @page.prev.map { page =>
+                        <li class="prev">
+                            <span  data-page="@page">Prev</span>
+                        </li>
+                    }
+                    @for(num <-page.nums){
+                        @if(num==page.currentPage){
+                            <li class="active"><span  data-page="@num">@num</span></li>
+                        }else {
+                            <li><span data-page="@num">@num</span></li>
+                        }
+                    }
+                    @page.next.map { page =>
+                        <li class="next">
+                            <span href="#" data-page="@page" >Next</span>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+
+
+
+
+    $(document).on("click",".black",function(){
+    var id=$(this).data('id');
+    $("#J_lockModal").modal('show');
+    $("#J_lock").click(function(){
+    $.ajax({
+    url:"/admin/users/black?uid="+id,
+    type:'get',
+    dataType:'json',
+    success:function(data){
+    if(data.code =='100'){
+    $("tr#"+id).find(".status").html("black")
+    $("#J_lockModal").modal("hide")
+    }else{
+    alert(data.message)
+    }
+    }
+    })
+    })
+    })
+</script>
+
+    }

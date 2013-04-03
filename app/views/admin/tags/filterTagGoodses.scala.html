@@ -1,0 +1,191 @@
+@(manager:models.admin.Manager,page:models.Page[(Long,Long,String,String,String,Int,Int,Int)],form: Form[controllers.admin.TagGoodsFilterFormData])
+@views.html.admin.template(manager,"tag") {
+
+    <div id="content-header">
+        <h1>标签宝贝管理</h1>
+
+    </div>
+    <div id="breadcrumb">
+        <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+        <a href="#" class="current">标签管理</a>
+        <a href="#" class="current">标签宝贝管理</a>
+    </div>
+
+<div class="container-fluid">
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box clearfix">
+                <div class="widget-title">
+                    <span class="icon">
+                        <i class="icon-pencil"></i>
+                    </span>
+                    <h5>标签产品筛选</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <form class=" form-horizontal" id="J_filterForm"  method="get" action="@controllers.admin.routes.Tags.filterTagGoodses">
+                        <input type="hidden" name="currentPage" id="J_currentPage" value='@form("currentPage").value'>
+                        <div class="error-row" >
+                            <p class="error"> </p>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="name">标签名称</label>
+                            <div class="controls">
+                                <input type="text" id="name" name="name" value='@form("name").value'  placeholder="标签组组名称" >
+                            </div>
+                        </div>
+    <div class="control-group">
+    <label class="control-label" >审核状态</label>
+    <div class="controls">
+    <div class="radio">
+        <input type="radio"   name="checkState" value=""  @if(form("checkState").value.isEmpty){ checked="true" }> 所有
+    </div>
+    <div class="radio">
+    <input type="radio"   name="checkState" value="0" @if(form("checkState").value.getOrElse("none")=="0"){ checked="true" } > 未审核
+</div>
+<div class="radio">
+    <input type="radio"   name="checkState" value="1"  @if(form("checkState").value.getOrElse("none")=="1"){ checked="true" }> 审核通过
+</div>
+<div class="radio">
+    <input type="radio"   name="checkState" value="2"  @if(form("checkState").value.getOrElse("none")=="2"){ checked="true" }>  审核不通过
+</div>
+
+</div>
+</div>
+                        <div class="control-group">
+                            <div class="controls">
+
+                            <input type="submit" class="btn btn-info" value="筛选"/>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="row-fluid">
+    <div class="well">
+
+        <form method="post" id="J_batchForm" action="@controllers.admin.routes.Tags.batchTagGoodses()">
+        <input type="hidden" id="J_url" name="url" value="">
+        <div class="controls">
+            <select id="J_select" name="action">
+                <option value="-1">批量动作</option>
+                <option value="0">批量删除</option>
+                <option value="1">批量审核通过</option>
+                <option value="2">批量审核不通过</option>
+                <option value="3">批量更新标签名</option>
+                <option value="4">批量更新排序</option>
+            </select>
+            <button  class="btn btn-info" id="J_batchAction" data-toggle="modal" data-target="#J_batchModal" >批量处理 </button>
+
+        </div>
+        <table class="table table-bordered table-striped with-check">
+            <thead>
+                <tr>
+                    <th><input type="checkbox"  name="title-table-checkbox" /></th>
+                    <th>ID</th>
+                    <th>标签名称</th>
+                    <th>图片</th>
+                    <th>宝贝名称</th>
+                    <th>添加次数</th>
+                    <th>审核状态</th>
+                    <th>排序</th>
+                    <th style="width: 60px;">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+            @for((item,i)<- page.items.view.zipWithIndex){
+                <tr id="@item._1">
+                    <td><input type="checkbox" name="ids[@i]" value="@item._1" /></td>
+                    <td> @item._1</td>
+                    <td><input type="text" name="tagNames[@i]" value="@item._5"></td>
+                    <td><img src='@(item._4+"_80x80.jpg")' width="80" height="80"></td>
+                    <td><a href="@controllers.routes.Goods.view(item._2)">@item._3</a></td>
+                    <td>@item._6</td>
+                    <td>@if(item._7==0){<span class="label label-warning">未审核</span>} @if(item._7 ==1){<span class="label label-success">审核通过</span>}@if(item._7 ==2){<span class="label ">审核不通过</span>}</td>
+                    <td><input type="text" name="sortNums[@i]" value="@item._8"></td>
+
+
+                    <td>
+
+                        <a href="#J_deleteModal"class="remove" data-id="@item._1" role="button" data-toggle="modal"><i class="icon-trash"></i></a>
+
+                    </td>
+                </tr>
+            }
+
+            </tbody>
+        </table>
+        <form>
+    </div>
+        <div class="pagination">
+            <ul>
+
+                @page.prev.map { page =>
+                    <li class="prev">
+                        <span  data-page="@page">Prev</span>
+                    </li>
+                }
+                @for(num <-page.nums){
+                    @if(num==page.currentPage){
+                        <li class="active"><span  data-page="@num">@num</span></li>
+                    }else {
+                        <li><span data-page="@num">@num</span></li>
+                    }
+                }
+                @page.next.map { page =>
+                    <li class="next">
+                        <span href="#" data-page="@page" >Next</span>
+                    </li>
+                }
+
+            </ul>
+        </div>
+
+
+
+
+
+    </div>
+</div>
+
+    <script type="text/javascript">
+
+
+
+    $(document).on("click",".remove",function(){
+    var id=$(this).data('id');
+    $("#J_deleteModal").modal('show');
+    $("#J_delete").click(function(){
+
+    $.ajax({
+    url:"/admin/tags/deleteTagGoods?id="+id,
+    type:'get',
+    dataType:'json',
+    success:function(data){
+    if(data.code =='100'){
+ //   alert(data.message)
+    $("tr#"+id).remove();
+    $("#J_deleteModal").modal("hide")
+    }else{
+    alert(data.message)
+    }
+    }
+    })
+
+    })
+    })
+
+
+
+</script>
+
+    }

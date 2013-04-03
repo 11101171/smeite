@@ -1,0 +1,51 @@
+@(user:Option[models.user.User],tags:Page[models.tag.Tag])
+@views.html.template(
+user,
+title = "网站地图_食美特，爱美食爱特色"
+)(css="/assets/css/template/sitemap.css") {
+
+<div class="container">
+    <div class="sitemap box-shadow">
+         <h2>网站地图</h2>
+        <div class="site-nav">
+            <h3>食美特</h3>
+            <a href="/find">发现</a>
+            <a href="/square">广场</a>
+            <a href="/forum">讨论吧</a>
+            <a href="/jie">美食街</a>
+            <a href="/miss">特色馆</a>
+        </div>
+        <div class="site-nav">
+            <h3>简约生活</h3>
+            <a href="/find/美食">美食</a>
+            <a href="/find/居家">居家</a>
+            <a href="/find/礼物">礼物</a>
+            <a href="/find/好玩意">好玩意</a>
+        </div>
+        <div class="site-nav">
+            <h3>主题</h3>
+            <a href="/jie?cid=0">健康美食主题</a>
+            <a href="/jie?cid=1">特产乡情主题</a>
+            <a href="/jie?cid=2">滋补保健主题</a>
+            <a href="/miss?cid=3">居家生活主题</a>
+            <a href="/miss?cid=4">礼物主题</a>
+            <a href="/miss?cid=5">好玩意主题</a>
+        </div>
+         <div class="tags-smeite clearfix">
+         <h3>所有标签</h3>
+         <ul>
+              @for(tag <- tags.items ){
+             <li><a class="ofh" href='@controllers.routes.Pages.find("tags",tag.name,1)'>@tag.name</a></li>
+             }
+         </ul>
+         </div>
+    </div>
+</div>
+
+        }{
+<script type="text/javascript">
+    seajs.use('app/init', function (init) {
+        init.load("app/infos")
+    });
+</script>
+}

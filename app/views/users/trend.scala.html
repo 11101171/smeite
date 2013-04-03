@@ -1,0 +1,182 @@
+@(user:Option[models.user.User],author:models.user.User)
+@views.html.template(
+user,
+title =  author.name+" 在食美特的个人主页，食美特，爱美食爱特色"
+)(css="/assets/css/template/user.css") {
+        <div class="container clearfix" id="home">
+            <div class="u-nav box-shadow">
+                <ul class="clearfix">
+                    <li class=" user bigfs">
+                        <a href="@controllers.users.routes.Users.home(author.id.get)">
+                            <img src="@author.pic" alt="@author">@author.name
+                        </a>
+                    </li>
+                    <!--<li class="cur"><a href="@controllers.users.routes.Users.trend(author.id.get)">@author.trendNum<br>动态</a></li>-->
+                    <li><a href="@controllers.users.routes.Users.baobei(author.id.get)">@(author.postBaobeiNum+author.loveBaobeiNum)<br>宝贝</a></li>
+                    <li><a href="@controllers.users.routes.Users.theme(author.id.get)">@(author.postThemeNum+author.loveThemeNum)<br>主题</a></li>
+                    <li><a href="@controllers.users.routes.Users.square(author.id.get)">@(author.postTopicNum+author.loveTopicNum)<br>讨论</a></li>
+                    <li ><a href="@controllers.users.routes.Users.fans(author.id.get)">@author.fansNum<br>粉丝</a></li>
+                    <li class="last" ><a href="@controllers.users.routes.Users.follow(author.id.get)">@(author.followNum)<br>我关注的</a></li>
+                   <!-- <li class="last"><a href="@controllers.users.routes.Users.appraisal(author.id.get)">N+<br>求鉴定</a></li>
+                </ul>-->
+            </div>
+            <!--nav  end -->
+            <div class="user-bd clearfix">
+                <div class="user-main">
+                <div class="feeds-list box-shadow">
+                <div class="dongtai-title">
+                    <b>我的最近动态</b>
+                    <a href="/f" class="bbl-btn" title="看看好友在逛什么">看看好友在逛什么</a>
+                </div>
+
+                <div class="clearfix pt20 pb20">
+                    <div class="pagin fr pagination" id="J_Pagination">
+                        <span class="current">1</span>
+                        <a href="">2</a>
+                        <a href="">3</a>
+                        <a href="">4</a>
+
+                        <a title="下一页" href="" class="next">下一页</a>
+                    </div>
+                </div>
+                </div>
+                </div>
+                <div class="user-side">
+                    <div class="feeds box-shadow plr15 ss">
+                        <div class="title"><a href="/f" class="all-follows" target="_blank">全部</a>我的好友动态</div>
+                        <ul>
+                            <li class="clearfix">
+                                <div class="user-pic" style="height:50px;">
+                                    <a href="" target="_blank">
+                                        <img src="/ui/front/user-5.jpg" width="50" alt="白水煮一切" title="白水煮一切">
+                                    </a>
+                                </div>
+                                <div class="user-news">
+                                    <span class="mr5">喜欢 <a href="" target="_blank">时尚简约个性布艺沙发</a></span>
+                                </div>
+                            </li>
+                            <li class="clearfix">
+                                <div class="user-pic" style="height:50px;">
+                                    <a href="" target="_blank">
+                                        <img src="/ui/front/user-5.jpg" width="50" alt="白水煮一切" title="白水煮一切">
+                                    </a>
+                                </div>
+                                <div class="user-news">
+                                    <span class="mr5">喜欢 <a href="" target="_blank">多功能折叠皮艺沙发</a></span>
+                                </div>
+                            </li>
+                            <li class="clearfix">
+                                <div class="user-pic" style="height:50px;">
+                                    <a href="" target="_blank">
+                                        <img src="/ui/front/user-5.jpg" width="50" alt="白水煮一切" title="白水煮一切">
+                                    </a>
+                                </div>
+                                <div class="user-news">
+                                    <span class="mr5">喜欢 <a href="" target="_blank">法式乡村风情家居摆饰 简洁小担架 三玻璃杯插花器</a></span>
+                                </div>
+                            </li>
+                            <li class="clearfix">
+                                <div class="user-pic" style="height:50px;">
+                                    <a href="" target="_blank">
+                                        <img src="/ui/front/user-5.jpg" width="50" alt="白水煮一切" title="白水煮一切">
+                                    </a>
+                                </div>
+                                <div class="user-news">
+                                    <span class="mr5">喜欢 <a href="" target="_blank">周家庄布艺单人旋转沙发椅</a></span>
+                                </div>
+                            </li>
+                            <li class="clearfix">
+                                <div class="user-pic" style="height:50px;">
+                                    <a href="" target="_blank">
+                                        <img src="/ui/front/user-5.jpg" width="50" alt="白水煮一切" title="白水煮一切">
+                                    </a>
+                                </div>
+                                <div class="user-news">
+                                    <span class="mr5">喜欢 <a href="" target="_blank">宜家简约全棉AB条纹床品四件套</a></span>
+                                </div>
+                            </li>
+                            <li class="clearfix">
+                                <div class="user-pic" style="height:50px;">
+                                    <a href="" target="_blank">
+                                        <img src="/ui/front/user-5.jpg" width="50" alt="白水煮一切" title="白水煮一切">
+                                    </a>
+                                </div>
+                                <div class="user-news">
+                                    <span class="mr5">喜欢 <a href="" target="_blank">简约田园藤编球型沙发</a></span>
+                                </div>
+                            </li>
+                            <li class="clearfix">
+                                <div class="user-pic" style="height:50px;">
+                                    <a href="" target="_blank">
+                                        <img src="/ui/front/user-5.jpg" width="50" alt="白水煮一切" title="白水煮一切">
+                                    </a>
+                                </div>
+                                <div class="user-news">
+                                    <span class="mr5">喜欢 <a href="" target="_blank">日式实木简约布艺沙发</a></span>
+                                </div>
+                            </li>
+                            <li class="clearfix">
+                                <div class="user-pic" style="height:50px;">
+                                    <a href="" target="_blank">
+                                        <img src="/ui/front/user-5.jpg" width="50" alt="白水煮一切" title="白水煮一切">
+                                    </a>
+                                </div>
+                                <div class="user-news">
+                                    <span class="mr5">喜欢 <a href="" target="_blank">宜家时尚简约书柜电脑桌</a></span>
+                                </div>
+                            </li>
+                            <li class="clearfix">
+                                <div class="user-pic" style="height:50px;">
+                                    <a href="" target="_blank">
+                                        <img src="/ui/front/user-5.jpg" width="50" alt="白水煮一切" title="白水煮一切">
+                                    </a>
+                                </div>
+                                <div class="user-news">
+                                    <span class="mr5">喜欢 <a href="" target="_blank">春色简约餐桌椅组合</a></span>
+                                </div>
+                            </li>
+                            <li class="clearfix">
+                                <div class="user-pic" style="height:50px;">
+                                    <a href="" target="_blank">
+                                        <img src="/ui/front/user-5.jpg" width="50" alt="白水煮一切" title="白水煮一切">
+                                    </a>
+                                </div>
+                                <div class="user-news">
+                                    <span class="mr5">喜欢 <a href="" target="_blank">小矮人家居装饰品摆件简约家居饰品装饰品工艺品新房摆件</a></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--user side feeds end-->
+                    <div class="friend-comment box-shadow plr15 ss">
+                        <div class="title">我的好友正在讨论...</div>
+                        <ul>
+                            <p class="gc pb10 pt10">还没有好友的讨论</p>
+                            <li>
+                                <div class="comment-pic">
+                                    <a href="" title="阿布大人" target="_blank">
+                                        <img src="/ui/front/user-7.jpg" width="30" height="30" alt="阿布大人" title="阿布大人">
+                                    </a>
+                                </div>
+                                <div class="comment-con">
+                                    <p class="top">
+                                        <a href="" target="_blank">【活动结束】“天使爱...</a>
+                                    </p>
+                                    <p class="btm">
+                                        <a href="" target="_blank">美容美体</a><span class="mr5 ml5">/</span><a href="" target="_blank">432条回复</a>
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }{
+<script>
+
+    seajs.use('app/init', function(init) {
+
+    })
+</script>
+}

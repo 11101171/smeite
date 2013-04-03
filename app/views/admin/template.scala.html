@@ -1,0 +1,209 @@
+@(manager:models.admin.Manager,nav:String = "home")(content: Html)
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>smeite.com Admin</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="/assets/admin/css/unicorn.main.css" />
+    <link rel="stylesheet" href="/assets/admin/css/unicorn.grey.css" class="skin-color" />
+    <link rel="stylesheet" type="text/css" href="/assets/admin/js/uploadify/uploadify.css" />
+    <script src="/assets/admin/js/jquery.min.js"></script>
+    <script src="/assets/admin/js/jquery.tools.min.js"></script>
+    <script src="/assets/admin/js/bootstrap.min.js"></script>
+    <script src="/assets/admin/js/jquery.admin.js"></script>
+    <script src="/assets/admin/js/uploadify/jquery.uploadify-3.1.js"></script>
+    <script src="/assets/admin/js/xheditor/xheditor-1.1.14-zh-cn.min.js"></script>
+    <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21136607"></script>
+
+    </head>
+    <body>
+
+
+        <div id="header">
+            <h1><a href="#">smeite Admin</a></h1>
+        </div>
+
+
+        <div id="user-nav" class="navbar navbar-inverse">
+            <ul class="nav btn-group">
+                <li class="btn btn-inverse" ><a title="" href="#"><i class="icon icon-user"></i> <span class="text">Profile</span></a></li>
+
+                <li class="btn btn-inverse"><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
+                <li class="btn btn-inverse"><a title="" href="@controllers.admin.Managers.logout"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+            </ul>
+        </div>
+
+        <div id="sidebar">
+            <a href="#" class="visible-phone"><i class="icon icon-home"></i>smeite.com</a>
+            <ul>
+                <li class="submenu @if(nav=="home"){active open} ">
+                    <a href="#"><i class="icon icon-home"></i> <span>控制面板</span></a>
+                    <ul>
+                        <li><a href="@controllers.admin.routes.Managers.index">后台首页</a></li>
+                        <li><a href="@controllers.admin.routes.Tasks.list(1)">任务管理</a></li>
+                        <li><a>缓存管理</a></li>
+                    </ul>
+                </li>
+                <li class="submenu @if(nav=="theme"){active open} ">
+                    <a href="#"><i class="icon icon-th-list"></i> <span>主题管理</span></a>
+                    <ul>
+                        <li><a href="@controllers.admin.routes.Themes.list(1)">主题管理</a></li>
+                        <li><a href="@controllers.admin.routes.Themes.discusses(1)">主题评论管理</a></li>
+                    </ul>
+                </li>
+                <li class="submenu @if(nav=="goods"){active open}">
+                    <a href="#"><i class="icon icon-th-list"></i> <span>宝贝管理</span></a>
+                    <ul>
+                        <li><a href="@controllers.admin.routes.Goods.list(1)">宝贝管理</a></li>
+                        <li><a href="@controllers.admin.routes.Goods.assess(1)">宝贝评价管理</a></li>
+                        <li><a href="@controllers.admin.routes.Goods.shops(1)">店铺管理</a></li>
+                    </ul>
+                </li>
+
+                <li class="submenu @if(nav=="tag"){active open}">
+                    <a href="#"><i class="icon icon-th-list"></i> <span>标签管理</span></a>
+                    <ul>
+                        <li><a href="@controllers.admin.routes.Tags.groupList(1)">标签组管理</a></li>
+                        <li><a href="@controllers.admin.routes.Tags.list(1)">标签管理</a></li>
+                        <li><a href="@controllers.admin.routes.Tags.tagGoodses(1)">标签宝贝管理</a></li>
+                    </ul>
+                </li>
+
+                <li class="submenu @if(nav=="user"){active open}">
+                    <a href="#"><i class="icon icon-th-list"></i> <span>用户管理</span></a>
+                    <ul>
+                        <li><a href="@controllers.admin.routes.Users.list(1)">用户管理</a></li>
+                        <li><a href="">邮件通知</a></li>
+                    </ul>
+                </li>
+
+                <li class="submenu @if(nav=="topic"){active open}">
+                <a href="#"><i class="icon icon-th-list"></i> <span>广场管理</span></a>
+                <ul>
+                    <li><a href="@controllers.admin.routes.Forums.list(1)">话题管理</a></li>
+                    <li><a href="@controllers.admin.routes.Forums.replies(1)">评论管理</a></li>
+                </ul>
+            </li>
+                <li class="submenu @if(nav=="channel"){active open}">
+                    <a href="#"><i class="icon icon-th-list"></i> <span>频道管理</span></a>
+                    <ul>
+                        <li><a href='@controllers.admin.routes.Adverts.channel("index")'>首页频道管理</a></li>
+                        <li><a href='@controllers.admin.routes.Adverts.channel("tejia")'>天天特价管理</a></li>
+                        <li><a href='@controllers.admin.routes.Adverts.channel("forum")'>讨论吧频道管理</a></li>
+                    </ul>
+                </li>
+
+
+            </ul>
+
+        </div>
+
+
+
+        <div id="content">
+           @content
+
+
+            <div class="row-fluid">
+
+                <div class="modal small hide fade" id="J_deleteModal" tabindex="-1" role="dialog" aria-labelledby="J_deleteModalLabel" aria-hidden="true">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 id="J_deleteModalLabel">删除确认</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p class="error-text"><i class="icon-warning-sign modal-icon"></i>您确定要删除吗?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+                        <button class="btn btn-danger" id="J_delete" data-dismiss="modal">确定</button>
+                    </div>
+                </div>
+
+               <div class="modal small hide fade" id="J_batchModal" tabindex="-1" role="dialog" aria-labelledby="J_batchModalLabel" aria-hidden="true">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 id="J_batchModalLabel">确认批量处理</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p class="error-text"><i class="icon-warning-sign modal-icon"></i>您确定要批量处理吗?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+                        <button class="btn btn-danger" id="J_batch" data-dismiss="modal">确定</button>
+                    </div>
+                </div>
+
+                <div class="modal small hide fade" id="J_lockModal" tabindex="-1" role="dialog" aria-labelledby="J_lockModalLabel" aria-hidden="true">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 id="J_lockModalLabel">拉黑确认</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p class="error-text"><i class="icon-warning-sign modal-icon"></i> 您确定要把此用户拉黑吗?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+                        <button class="btn btn-danger" id="J_lock" data-dismiss="modal">确定</button>
+                    </div>
+                </div>
+
+                <div class="modal small hide fade" id="J_updateModal" tabindex="-1" role="dialog" aria-labelledby="J_updateModalLabel" aria-hidden="true">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 id="J_updateModalLabel">确认更新</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p class="error-text"><i class="icon-warning-sign modal-icon"></i>您确定要更新吗?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+                        <button class="btn btn-danger" id="J_update" data-dismiss="modal">确定</button>
+                    </div>
+                </div>
+
+                <div class="modal small hide fade" id="J_collectModal" tabindex="-1" role="dialog" aria-labelledby="J_collectModalLabel" aria-hidden="true">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 id="J_collectModalLabel">采集确认</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p class="error-text"><i class="icon-warning-sign modal-icon"></i>你确定重新从淘宝采集吗</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+                        <button class="btn btn-danger" id="J_collect" data-dismiss="modal">确定</button>
+                    </div>
+                </div>
+
+                <div class="modal small hide fade" id="J_checkModal" tabindex="-1" role="dialog" aria-labelledby="J_checkModalLabel" aria-hidden="true">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 id="J_checkModalLabel">审核确认</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p class="error-text"><i class="icon-warning-sign modal-icon"></i>您确定审核通过吗?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+                        <button class="btn btn-danger" id="J_check" data-dismiss="modal">确定</button>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row-fluid">
+                <div id="footer" class="span12">
+                    © 2012 <a href="http://smeite.com">smeite.com</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Design by  <a href="http://zuosanshao.com">zuosanshao</a>
+                </div>
+            </div>
+        </div>
+
+
+
+    </body>
+</html>

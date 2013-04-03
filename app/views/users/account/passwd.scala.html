@@ -1,0 +1,66 @@
+@(user:Option[models.user.User],passwdForm:Form[(String,String,String)],msg:String ="")
+@import helper._
+@views.html.template(
+user
+)(css="/assets/css/template/user.setting.css") {
+<div class="container" id="account">
+                 <div class="content clearfix">
+                 <div class="side-nav">
+                     <h2>帐号设置</h2>
+                     <ul>
+                         <li> <a  href="@controllers.users.routes.UsersAccount.base">基本信息</a> </li>
+                         <!--   <li> <a  href="@controllers.users.routes.UsersAccount.bind">帐号绑定</a>  </li>-->
+                         <li> <a class="on" href="@controllers.users.routes.UsersAccount.passwd">修改密码</a>  </li>
+                         <!--  <li> <a  href="@controllers.users.routes.UsersAccount.invite">邀请好友</a>   </li>-->
+                         <li> <a  href="@controllers.users.routes.UsersAccount.award">我的奖品</a>  </li>
+                         <li> <a href="@controllers.users.routes.UsersAccount.address">收货地址</a> </li>
+                     </ul>
+                 </div>
+                 <!--side nav end-->
+                 <div class="main-content">
+                     @if(msg !=""){
+                     <div class="error-row" style="display:block"><p>@msg !</p></div>
+                     }
+
+                     <div class="set-password">
+                         <form id="J_ModifyPwd" method="post" class="set-form" action="@controllers.users.routes.UsersAccount.modifyPasswd">
+
+                             @passwdForm.errors.map { error =>
+                             <div class="error-row">
+                                 <p class="error"> @error.message</p>
+                             </div>
+                             }
+
+
+                             <div class="form-row">
+                                 <label>当前密码：</label>
+                                 <input type="password" class="base-input" name="oldPassword" id="oldPasswd" value="">
+                                 @if(!passwdForm.error("oldPassword").isEmpty){<span class="error">@passwdForm.error("oldPassword").get.message</span> }
+                             </div>
+                             <div class="form-row">
+                                 <label>新密码：</label>
+                                 <input type="password" class="base-input" name="password" id="password" value="">
+                                 @if(!passwdForm.error("password").isEmpty){<span class="error">@passwdForm.error("password").get.message</span> }
+                             </div>
+                             <div class="form-row">
+                                 <label>确认新密码：</label>
+                                 <input type="password" class="base-input" name="password2" id="password2" value="">
+                                @if(!passwdForm.error("password2").isEmpty){<span class="error">@passwdForm.error("password2").get.message</span> }
+                             </div>
+                             <div class="form-row">
+                                 <label>&nbsp;</label>
+                                 <input type="submit" class="bbl-btn submit" value="确定">
+
+                             </div>
+                         </form>
+                     </div>
+                 </div>
+                 </div>
+             </div>
+        }{
+<script type="text/javascript">
+    seajs.use("app/init", function(init){
+        init.load("app/user/user.modifypwd");
+    });
+</script>
+}

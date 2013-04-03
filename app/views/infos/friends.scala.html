@@ -1,0 +1,37 @@
+@(user:Option[models.user.User])
+@views.html.template(
+user,
+title = "友情链接_食美特，爱美食爱特色"
+)(css="/assets/css/template/user.regLogin.css") {
+
+<div class="container">
+<div class="friends">
+<h2>友情链接</h2>
+<div class="friends-list">
+<h3>合作伙伴</h3>
+<ul class="textlinks clearfix">
+
+</ul>
+
+</div>
+<div class="friendApply">
+    <h3>友情链接申请</h3>
+    <p>
+        1：凡申请友情链接请先在贵网站上做好我们的链接并通知我们即可。<br>
+        2：目前食美特仅接受文字链接，将会以文字的方式放在“友情链接”页面。<br>
+        链接文字：食美特<br>
+        链接地址：http://smeite.com<br>
+        联系方式：service@@smeite.com
+    </p>
+</div>
+</div>
+    </div>
+</div>
+
+        }{
+<script type="text/javascript">
+    seajs.use('app/init', function (init) {
+        init.load("app/infos")
+    });
+</script>
+}

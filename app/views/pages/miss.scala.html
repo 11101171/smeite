@@ -1,0 +1,95 @@
+@(user:Option[models.user.User],page:models.Page[((Long,String,String,Int),List[String])],cid:Int,sortBy:String)
+@views.html.template(
+user,
+nav="miss",
+title =  "特色馆_食美特，爱美食爱特色"
+)(css="/assets/css/template/themes.css") {
+
+<div class="container clearfix" id="themes">
+<div class="tag-book clearfix">
+    <div class="hd">
+        <h2><a href="/miss"> 特色馆，望你一眼……</a> </h2>
+        <span class="prev"><a href="/jie">&lt;美食街</a></span>
+    </div>
+    <div class="theme-main" style="width: 930px">
+        <div class="theme-nav">
+            <ul>
+                <li @if(sortBy=="hot"){class="on"}><a href='@controllers.routes.Pages.miss("hot",cid,1)' title="最热">最热</a></li>
+                <li>-</li>
+                <li @if(sortBy=="new"){class="on"}><a href='@controllers.routes.Pages.miss("new",cid,1)' title="最新">最新</a></li>
+
+                <li>-</li>
+                <li @if(cid == 3){class="cur"}><a href="@controllers.routes.Pages.miss(sortBy,3,1)" title="居家生活">居家生活</a></li>
+                <li>-</li>
+                <li @if(cid == 4){class="cur"}><a href="@controllers.routes.Pages.miss(sortBy,4,1)" title="礼物">礼物</a></li>
+                <li>-</li>
+                <li @if(cid == 5){class="cur"}><a href="@controllers.routes.Pages.miss(sortBy,5,1)" title="好玩意">好玩意</a></li>
+
+
+
+            </ul>
+        </div>
+
+        <div class="theme-list clearfix">
+            @for((((themeId,themeName,themeIntro,themeLoveNum),pics),i)<-page.items.view.zipWithIndex){
+            <div class="theme-item @if((i+1)%4==0){last-item} ">
+                <a href="@controllers.routes.Themes.view(themeId)" title="@themeName" class="pic" target="_blank">
+                    @for((pic,i)<-pics.view.zipWithIndex){
+                    @if(i==0){
+                    <img class="b-img" width="210" height="210" src='@(pic+"_210x210.jpg")' alt="@themeName">
+                    }else{
+                    <img class="s-img" width="50" height="50" src='@(pic+"_60x60.jpg")' alt="@themeName">
+                    }
+                    }
+
+                </a>
+                <h3 class="ofh">
+                    <a href="@controllers.routes.Themes.view(themeId)" target="_blank">@themeName</a>
+                </h3>
+
+                <div class="info" style="color: rgb(153, 153, 153); ">@themeIntro</div>
+                <a href="javascript:;" id="J_follow" class="follow-theme" data-themeid="@themeId">关注</a>
+					<span class="mete pl15">
+                    <a href="@controllers.routes.Themes.likes(themeId)" class="follow-likes" target="_blank">
+                        <em class="J_LikeCount">@themeLoveNum</em> 人关注
+                    </a>
+                    </span>
+            </div>
+            }
+
+
+        </div>
+        <!--theme main end-->
+
+        <div class="tac mt20">
+            <div class="pagin inlineblock clearfix" id="J_Pagination">
+                @if(page.nums.length>1){
+                @page.prev.map { page =>
+                <a class="prev" href="@controllers.routes.Pages.miss(sortBy,page)">上一页</a>
+                }
+                @for(num <-page.nums){
+                @if(num==page.currentPage){
+                <a class="current" href="#">@num</a>
+                }else {
+                <a href="@controllers.routes.Pages.miss(sortBy,num)">@num</a>
+                }
+                }
+                @page.next.map { page =>
+                <a class="next" href="@controllers.routes.Pages.miss(sortBy,page)">下一页</a>
+
+                }
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+        }{
+<script type="text/javascript">
+    seajs.use('app/init', function (init) {
+        init.load('app/jie,app/theme/theme.favor');
+    });
+</script>
+}

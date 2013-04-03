@@ -1,0 +1,57 @@
+@(manager:models.admin.Manager,task:models.admin.ManagerTask)
+@views.html.admin.template(manager,"home") {
+<div class="widget-content nopadding">
+
+
+        <div class="control-group">
+            <label class="control-label" >负责人</label>
+            <div class="controls">
+               @task.leader
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">任务级别</label>
+            <div class="controls">
+                @models.admin.TaskLevel(task.level)
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" >任务内容</label>
+            <div class="controls">
+                <div class="controls">
+                    @task.content
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" >任务时间</label>
+            <div class="controls">
+                开始时间：@task.startDate  结束时间： @task.endDate
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">任务状态</label>
+            <div class="controls">
+               @models.admin.TaskStatus(task.status)
+            </div>
+        </div>
+
+
+
+        <div class="control-group">
+            <label class="control-label" >备注</label>
+            <div class="controls">
+                @task.note
+            </div>
+        </div>
+
+
+
+
+</div>
+
+        }
+
+

@@ -1,0 +1,195 @@
+@(user:Option[models.user.User],author:models.user.User,goodses:models.Page[models.goods.Goods],page:Page[((Long, String, String,Int),List[Option[String]])],users:Page[models.user.User])
+@views.html.template(
+user,
+title =  author.name+" 在食美特的个人主页，食美特，爱美食爱特色"
+)(css="/assets/css/template/user.css") {
+<div class="container clearfix" id="home">
+<div class="u-nav box-shadow">
+    <ul class="clearfix">
+        <li class="cur user bigfs">
+            <a href="@controllers.users.routes.Users.home(author.id.get)">
+                <img src="@author.pic" alt="@author.name">@author.name
+
+            </a>
+        </li>
+       <!-- <li><a href="@controllers.users.routes.Users.trend(author.id.get)">@author.trendNum<br>动态</a></li>-->
+        <li><a href="@controllers.users.routes.Users.baobei(author.id.get)">@(author.postBaobeiNum+author.loveBaobeiNum)<br>宝贝</a></li>
+        <li><a href="@controllers.users.routes.Users.theme(author.id.get)">@(author.postThemeNum+author.loveThemeNum)<br>主题</a></li>
+        <li><a href="@controllers.users.routes.Users.square(author.id.get)">@(author.postTopicNum+author.loveTopicNum)<br>讨论</a></li>
+        <li ><a href="@controllers.users.routes.Users.fans(author.id.get)">@author.fansNum<br>粉丝</a></li>
+        <li class="last"><a href="@controllers.users.routes.Users.follow(author.id.get)">@(author.followNum)<br>我关注的</a></li>
+       <!--  <li class="last"><a href="@controllers.users.routes.Users.appraisal(author.id.get)">N+<br>求鉴定</a></li>-->
+    </ul>
+</div>
+<!--nav  end -->
+@if(author.status==4){
+<div class="user-bd clearfix">
+    <div class="user-main">
+        <div class="main box-shadow fs14 tac" style="padding-top:110px;padding-bottom:110px;background-color: #fff">
+            食美特城管大队：<span style="color:#E26">Ta正在小黑屋中写检查呢！
+			</span></div>
+    </div>
+    <div class="user-side">
+        <div class="profile-box box-shadow ss">
+            <div class="u">
+                <div class="u-face">
+                    <a href="#">
+                        <img src="@author.pic" alt="@author.name" width="180px" height="180px">
+                    </a>
+                </div>
+                <div class="u-info clearfix">
+                    <h2 class="ofh">
+
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+}else{
+<div class="user-bd clearfix">
+<div class="user-main">
+    <div class="main box-shadow plr15">
+        <div class="main-title clearfix">
+            <h2>
+                最近喜欢的宝贝
+            </h2>
+            <span class="fl ml5 mr5">|</span>
+            <a href='@controllers.users.routes.Users.baobei(author.id.get,"share",1)' class="fl">分享的宝贝(@author.postBaobeiNum)</a>
+            <a href='@controllers.users.routes.Users.baobei(author.id.get,"share",1)' class="fr">查看全部@(author.loveBaobeiNum+author.postBaobeiNum)件宝贝&gt;</a>
+        </div>
+        <ul class="baobei clearfix">
+            @for((goods,i)<-goodses.items.view.zipWithIndex){
+            <li class="clearfix @if((i+1)%3==0){last}" >
+                <div class="baobei-wrap">
+                    <div class="baobei-pic">
+                        <a class="pic-link" target="_blank" href="@controllers.routes.Goods.view(goods.id.get)">
+                            <img src='@(goods.pic+"_210x210.jpg")' alt="@goods.name">
+                        </a>
+                        <a class="ilike-del" href="javascript:;" data-type="4" data-proid="@goods.id.get" style="display: none; ">喜欢-1</a>
+                        <a class="ilike-m" href="javascript:;" data-prourl="@goods.detailUrl" data-proname="@goods.name" data-type="0" data-proid="@goods.id.get" style="display: none; ">
+                            <i></i>
+                            <span class="ilikeCount" data-val="@goods.loveNum">喜欢(@goods.loveNum)</span>
+                        </a>
+                    </div>
+                    <div class="baobei-title ofh inlineblock">
+                        @goods.name
+                    </div>
+                    <div class="baobei-stat">
+                        <span class="mr10">@goods.loveNum</span>
+                        <span>￥@goods.price</span>
+                    </div>
+                </div>
+
+
+            </li>
+            }
+
+        </ul>
+    </div>
+    <!--baobei box end-->
+    <div class="main box-shadow plr15">
+        <div class="main-title clearfix">
+            <h2>
+                最近喜欢的主题
+            </h2>
+            <span class="fl ml5 mr5">|</span>
+            <a href='@controllers.users.routes.Users.theme(author.id.get,"my",1)' class="fl">创作的主题(@author.postThemeNum)</a>
+            <a href='@controllers.users.routes.Users.theme(author.id.get,"love",1)' class="fr">查看全部@(author.postThemeNum+author.loveThemeNum)个主题</a>
+        </div>
+        <div class="topic-list clearfix">
+
+            @for((item,i)<-page.items.view.zipWithIndex){
+
+            <div class="topic-item @if(((i+1)%3)==0){last} ">
+                <div class="topic-pic clearfix">
+
+                    <a href="@controllers.routes.Themes.view(item._1._1)" class="pic" target="_blank">
+                        @for((img,i)<-item._2.view.zipWithIndex){
+                        @if(i==0){
+                        <img class="b-img" src='@(img.get+"_210x210.jpg")' width="210"height="210" >
+                        }else {
+                        <img class="s-img" src='@(img.get+"_60x60.jpg")' width="50" height="50">
+                        }
+                        }
+
+
+                    </a>
+                </div>
+                <h3><a href="@controllers.routes.Themes.view(item._1._1)" target="_blank">@item._1._2</a></h3>
+                <div class="topic-state">
+
+                    <span>@item._1._4 人关注</span>
+
+
+                </div>
+                <a class="ilike-del" href="javascript:;" data-type="5" data-proid="@item._1._1" style="display:none; ">删除</a>
+            </div>
+            }
+
+
+        </div>
+    </div>
+    <!--theme 喜欢的主题 end-->
+
+</div>
+<div class="user-side">
+
+<div class="follows box-shadow">
+    <h3 class="clearfix"><a href="@controllers.users.routes.Users.follow(author.id.get)" class="rw">全部&gt;</a> @if(!user.isEmpty && user.get.id==author.id){我}else{Ta}关注的人</h3>
+    <ul class="clearfix">
+         @for(user<-users.items){
+        <li>
+            <a href="@controllers.users.routes.Users.home(user.id.get)">
+                <img src="@user.pic" alt="@user.name"  width="30" height="30" title="@user.name">
+            </a>
+        </li>
+        }
+    </ul>
+</div>
+
+<div class="friend-tags box-shadow plr15 ss">
+    <div class="title">跟@if(!user.isEmpty && user.get.id==author.id){我}else{Ta}相关的标签</div>
+    <ul class="clearfix">
+
+        <li><a class="ofh" href='@controllers.routes.Pages.find("美食","进口食品",1)'>进口食品</a></li>
+        <li class="focus"><a class="ofh" href='@controllers.routes.Pages.find("特产","台湾特产",1)'>台湾特产</a></li>
+        <li><a class="ofh" href='@controllers.routes.Pages.find("特产","新建特产",1)'>新建特产</a></li>
+        <li><a class="ofh" href='@controllers.routes.Pages.find("美食","粗粮",1)'>粗粮</a></li>
+        <li><a class="ofh" href='@controllers.routes.Pages.find("美食","手工美食",1)'>手工美食</a></li>
+        <li><a class="ofh" href='@controllers.routes.Pages.find("居家","摆件",1)'>摆件</a></li>
+        <li class="focus"><a class="ofh" href='@controllers.routes.Pages.find("居家","zakka",1)'>zakka</a></li>
+        <li><a class="ofh" href='@controllers.routes.Pages.find("居家","马克杯",1)'>马克杯</a></li>
+        <li><a class="ofh" href='@controllers.routes.Pages.find("居家","绿植",1)'>绿植</a></li>
+        <li class="focus"><a class="ofh" href='@controllers.routes.Pages.find("居家","小夜灯",1)'>小夜灯</a></li>
+        <li><a class="ofh" href='@controllers.routes.Pages.find("居家","陶瓷",1)'>陶瓷</a></li>
+        <li><a class="ofh" href='@controllers.routes.Pages.find("居家","收纳",1)'>收纳</a></li>
+        <li><a class="ofh" href='@controllers.routes.Pages.find("居家","床上用品",1)'>床上用品</a></li>
+        <li class="focus"><a class="ofh" href='@controllers.routes.Pages.find("好玩意","萌物",1)'>萌物</a></li>
+        <li class="focus"><a class="ofh" href='@controllers.routes.Pages.find("好玩意","创意",1)'>创意</a></li>
+    </ul>
+</div>
+
+
+<!--
+-->
+
+
+</div>
+</div>
+}
+<!--正常状态 end-->
+
+
+</div>
+
+
+}{
+<script type="text/javascript">
+    seajs.use('app/init', function(init) {
+        init.load('app/user/user.profile');
+    })
+</script>
+}

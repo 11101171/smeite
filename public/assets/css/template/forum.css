@@ -1,0 +1,1175 @@
+/*
+ * 样式文件
+ * User: Administrator
+ * Date: 12-10-23  
+ * Time: 下午8:56
+ * 维护：zuosanshao@qq.com
+*/
+
+
+.forum {
+    width: 980px;
+    margin: 15px auto;
+    min-height: 400px
+}
+
+.forum-main {
+    float: left;
+    width: 735px
+}
+
+.forum-main .forum-title {
+    padding: 15px 15px 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px dotted #d1d1d1
+}
+
+.forum-main .forum-title h3 {
+    float: left;
+    font-size: 18px;
+    line-height: 24px
+}
+.forum-main .forum-title a.follow {
+       float: right;
+       width: 56px;
+       height: 24px;
+       background: #86B835;
+       _margin-right: 20px;
+       text-align: center;
+       color: white;
+       line-height: 24px;
+       font-weight: 400;
+       border-radius: 2px;
+       display: inline-block;
+   }
+.forum-main .forum-title a.edit {
+    float: right;
+    width: 56px;
+    height: 24px;
+    background: #5AD;
+    margin-left: 20px;
+    text-align: center;
+    color: white;
+    line-height: 24px;
+    font-weight: 400;
+    border-radius: 2px;
+    display: inline-block;
+}
+.forum-main .forum-title h3 span {
+    margin-left: 10px
+}
+ /* forum list search order*/
+.forum-oper {
+    background-color: #f3f3f3;
+    height: 35px
+}
+
+.forum-oper dl {
+    float: left;
+    margin: 0 15px 0 15px;
+    _margin: 0 8px;
+    padding: 10px 0 0 0
+}
+
+.forum-oper dl dt {
+    float: left;
+    padding: 0;
+    _padding-top: 2px;
++ padding-top : 2 px
+}
+
+.forum-oper dl dd {
+    float: left;
+    border-right: 1px solid #ddd
+}
+
+.forum-oper dl dd a {
+    margin: 0 5px
+}
+
+.forum-oper dl dd.current a {
+    cursor: default;
+    color: #666
+}
+
+.forum-oper dl dd.current a:hover {
+    text-decoration: none
+}
+
+.forum-oper dl dd.last {
+    border-right: 0
+}
+
+.forum-oper form {
+    float: right;
+    padding-top: 6px;
+    margin-right: 0;
+    width: 243px
+}
+
+.forum-oper form input.txt {
+    border: 1px solid #ddd;
+    height: 20px;
+    line-height: 20px;
+    width: 180px;
+    float: left;
+    font-size: 12px
+}
+
+.forum-oper form input.sbl-btn {
+    margin-left: 4px;
+    margin-top: 1px;
+    height: 20px;
+    font-size: 12px;
+    width: 50px
+}
+/*forum view page*/
+.forum-con table {
+    width: 100%;
+    color: #666;
+    font-weight: 400
+}
+
+.forum-con table tr {
+    height: 30px
+}
+
+.forum-con table td, .forum-con table th {
+    border-bottom: 1px dotted #ddd;
+    padding: 12px 16px 12px 0
+}
+
+.forum-con table th.icon, .forum-con table td.icon {
+    padding: 12px 0
+}
+
+.forum-con table th.topic, .forum-con table td.topic {
+    text-align: left;
+    width: 360px;
+    padding-left: 0
+}
+
+.forum-con table td.topic .ofh {
+    font-size: 14px
+}
+
+.forum-con table td.top-icon {
+    padding: 12px 10px 12px 15px
+}
+
+.forum-con table th.anthor {
+    text-align: left;
+    width: 15%
+}
+
+.forum-con table td.anthor a {
+    display: block;
+    width: 90px;
+    color: #333
+}
+
+.forum-con table td.anthor a:hover em {
+    text-decoration: underline
+}
+
+.forum-con table td.anthor a em.ofh {
+    max-width: 70px;
+    _width: 70px
+}
+
+.forum-con table th.top-icon {
+    text-align: left;
+    padding: 12px 10px;
+    width: 16px
+}
+
+.forum-con table th.statistics {
+    text-align: left;
+    width: 12%
+}
+
+.forum-con table th.latest {
+    text-align: right;
+    width: 13%
+}
+
+.forum-con table tr.last td {
+    border-bottom: 0
+}
+
+.forum-con table td.topic span {
+    position: relative;
+    top: 2px
+}
+
+.forum-con table td.topic span a {
+    color: #999;
+    padding: 1px 2px;
+    margin-left: 1px
+}
+
+.forum-con table td.topic span a:hover {
+    color: #5AD
+}
+/*forum view page*/
+.forum-sidebar {
+    float: right;
+    width: 230px;
+    _overflow: hidden
+}
+
+.forum-sidebar .create {
+    padding: 0 78px;
+    margin-bottom: 10px;
+    font-size: 14px
+}
+
+.forum-sidebar .box {
+    background-color: #fff;
+    margin-bottom: 10px;
+    clear: both
+}
+
+.forum-sidebar .box.daren-interview-box {
+    padding: 10px
+}
+
+.forum-sidebar .box .hd {
+    padding: 15px 0 8px 0;
+    margin: 0 10px;
+    border-bottom: 1px dotted #ddd
+}
+
+.forum-sidebar .box.daren-interview-box .hd {
+    line-height: 1.2;
+    padding: 0 0 6px 0;
+    margin: 0 0 5px;
+    border-bottom: 1px dotted #d1d1d1
+}
+
+.forum-sidebar .box .no-border {
+    border-bottom: 0;
+    padding-top: 10px
+}
+
+.forum-sidebar .box .hd a {
+    float: right;
+    margin-top: -15px
+}
+
+.forum-sidebar .box.daren-interview-box .hd a {
+    margin-top: 0
+}
+
+.forum-sidebar .box .bd {
+    padding: 0 0 15px 0;
+    margin: 0 10px;
+    overflow: hidden
+}
+
+.forum-sidebar .bd ul li {
+    line-height: 30px
+}
+
+.forum-sidebar .bd ul.word-list li {
+    line-height: 20px;
+    padding: 2px 0
+}
+
+.forum-sidebar .bd ul li.last {
+    border-bottom: 0
+}
+ /*右侧 推荐用户*/
+.user-member li {
+    line-height: 20px;
+    *zoom: 1;
+    display: block
+}
+
+.user-member li a.img {
+    margin-right: 10px;
+    float: left;
+    display: block;
+    width: 60px;
+    height: 60px
+}
+
+.user-member li p {
+    line-height: 19px;
+    color: #999
+}
+
+.user-member li p a {
+    color: #666
+}
+
+.user-member li .follow-btn {
+    height: 24px;
+    width: 53px;
+    border-radius: 2px;
+    text-align: center;
+    display: inline-block;
+    line-height: 24px;
+    color: #fff;
+    background-color: #f2f2f2;
+    border: 0;
+    color: #999
+}
+
+.user-member li .followed-btn {
+    cursor: default;
+    height: 24px;
+    float: left;
+    line-height: 24px;
+    color: #999;
+    background: #f2f2f2;
+    border-radius: 3px;
+    display: block;
+    padding: 0 6px;
+    border: 0
+}
+
+.user-member li .followed-btn a {
+    color: #666;
+    text-decoration: none
+}
+
+.user-member li:hover .follow-btn {
+    text-decoration: none;
+    background: #86b835;
+    color: #fff
+}
+
+.forum-sidebar .box .user-member li {
+    line-height: 20px
+}
+
+.discuss .user-member li {
+    padding: 5px 0;
+}
+
+.discuss .user-member li a {
+    color: #666
+}
+
+.discuss .user-member li a.img {
+    margin-right: 4px;
+    float: left;
+    width: 40px;
+    height: 40px
+}
+
+.discuss .user-member li span {
+    display: block;
+    color: #999
+}
+
+.forum-latest li a {
+    color: #5AD
+}
+  /*forum view page*/
+.forum-post {
+    padding: 0 15px 15px;
+    display: none
+}
+
+.forum-post li {
+    padding: 10px 0 5px 90px;
+    line-height: 24px;
+    position: relative;
+    border-bottom: 1px dotted #ddd;
+    border-top: 1px dotted #ddd;
+    *zoom: 1;
+    clear: both;
+    margin-top: -1px
+}
+
+.forum-post li.first {
+    border-top: 0
+}
+
+.forum-post li.del {
+    float: right;
+    padding: 5px 0 5px 5px;
+    color: #ccc;
+    clear: none;
+    border: 0
+}
+
+.forum-post p {
+    color: #333
+}
+
+.forum-post li .p .gray {
+    color: #999
+}
+
+.forum-post li .time {
+    color: #999
+}
+
+.forum-post li a.img {
+    float: left;
+    margin-left: -90px;
+    display: block;
+    _margin-left: -45px
+}
+
+.forum-post .info {
+    display: block;
+    color: #999;
+    margin-top: -4px;
+    margin-bottom: 2px
+}
+
+.forum-post .info .J_UserAddExperience {
+    color: #999
+}
+
+.forum-post .post-floor {
+    right: 0;
+    top: 6px;
+    color: #ccc;
+    position: absolute
+}
+
+.forum-post .oper {
+    text-align: right;
+    margin: 30px 0 0 0;
+    line-height: 20px
+}
+
+.forum-post .oper span {
+    display: none
+}
+
+.forum-post .oper span a {
+    color: #666
+}
+
+.forum-post .post-reply {
+    background-color: #fafafa;
+    padding: 10px;
+    position: relative;
+    margin-right: 100px;
+    margin-bottom: 8px
+}
+
+.forum-post li.first .post {
+    font-size: 14px
+}
+
+.forum-post .i-forum {
+    margin: -5px 2px 0 0
+}
+
+/*.forum-admin-oper dl dt {
+    display: none
+}*/
+  /* 创建帖子页面*/
+.forum-create, .forum-lover {
+    background-color: #fff
+}
+
+.forum-create ul, .forum-lover ul {
+    padding: 0 30px;
+    overflow: hidden
+}
+
+.forum-create h3, .forum-lover h3 {
+    font-size: 14px;
+    margin: 20px 30px 0 30px;
+    border-bottom: 1px dotted #ddd;
+    line-height: 50px
+}
+
+.forum-create .oper input {
+    margin-right: 20px
+}
+
+.forum-create li {
+  /*  clear: both;*/
+    margin-top: 15px
+}
+
+.forum-create li label {
+    float: left;
+    line-height: 32px;
+    width: 78px;
+    text-align: right
+}
+
+.forum-create li label.no-float {
+    float: none;
+    margin-right: 10px
+}
+
+.forum-create li label.no-float input {
+    margin-right: 4px
+}
+
+.forum-create li .b-input, .forum-create li .b-textarea {
+    width: 500px
+}
+
+.forum-create li .b-textarea {
+    height: 295px;
+    line-height: 23px
+}
+
+.forum-create li.oper {
+    padding-left: 78px;
+    width: 616px
+}
+
+.forum-create li .bbl-btn {
+    width: 90px
+}
+
+.forum-create .guang-editor-wrap {
+    width: 616px;
+    float: left
+}
+
+/**/
+.forum .last {
+    border-bottom: 0
+}
+
+
+.forum-no-data {
+    text-align: center;
+    line-height: 100px;
+    background-color: #fff;
+    font-size: 16px;
+    font-weight: bolder;
+    margin-top: 15px
+}
+
+.forum .pagin {
+    margin: 20px
+}
+
+/*forum create page*/
+.form-cmt {
+    padding: 20px
+}
+
+.form-cmt a {
+    color: #666
+}
+
+.form-cmt .post-reply {
+    margin-top: 8px
+}
+
+.form-cmt .post-reply blockquote {
+    padding: 8px 10px;
+    margin: 0 0 8px 0;
+    background-color: #fafafa;
+    margin-right: 180px;
+    position: relative;
+    line-height: 24px
+}
+
+.form-cmt .post-reply blockquote .close {
+    position: absolute;
+    right: 15px;
+    top: 10px
+}
+
+.form-cmt .post-reply .time {
+    color: #999
+}
+
+.form-cmt .bbl-btn {
+    padding-left: 30px;
+    padding-right: 30px
+}
+
+.form-cmt .b-textarea {
+    margin-bottom: 5px;
+    width: 600px;
+    height: 90px;
+    line-height: 23px
+}
+
+.form-cmt .error-row {
+    margin-left: 0
+}
+
+.form-cmt .error-row .error {
+    width: 600px
+}
+.post-edit-form{
+    margin-bottom: 15px;;
+}
+.post-edit-form .error-row {
+    margin-bottom: 0;
+    margin-top: 20px
+}
+
+.post-edit-form .error-row .error {
+    width: 605px
+}
+
+/*forum view page*/
+.forum .wordbreak {
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden
+}
+
+.forum-sidebar .wordbreak {
+    max-height: 30px;
+    height: 16px;
+    line-height: 16px;
+    display: block;
+    width: 160px;
+    *width: 155px
+}
+
+.forum-con table td .wordbreak {
+    max-height: 30px;
+    max-width: 310px;
+    *max-width: 290px
+}
+
+.forum-con table td .wordbreak {
+    display: -moz-inline-stack;
+    *display: inline;
+    zoom: 1;
+    margin-left: 3px;
+    vertical-align: middle;
+    _vertical-align: bottom;
+    float: left;
+    width: 300 px\9;
+    height: 16px;
+    line-height: 16px
+}
+
+
+.form-cmt .guang-editor .baobeiWrap .content .tipbox-up {
+    left: 160px
+}
+
+.form-cmt .guang-editor .imgWrap .tipbox-up {
+    left: 230px
+}
+
+.form-cmt .guang-editor .videoWrap .content .tipbox-up {
+    left: 285px
+}
+
+
+.forum-editor {
+    position: relative
+}
+
+.forum-editor .share-box {
+    position: absolute;
+    z-index: 99;
+    top: 42px;
+    left: 20px;
+    width: 695px;
+    overflow: hidden
+}
+
+.forum-editor .share-con {
+    padding: 19px;
+    height: 211px;
+    *height: 228px;
+    background: #f9f9ef;
+    border: 1px solid #dedede
+}
+
+.share-con .title {
+    margin-bottom: 22px;
+    padding-bottom: 15px;
+    height: 22px;
+    line-height: 16px;
+    border-bottom: 1px dotted #dedede;
+    overflow: hidden;
+    position: relative
+}
+
+.share-con .title h4 {
+    float: left;
+    margin-right: 10px;
+    font-size: 14px;
+    color: #333;
+    padding-left: 25px;
+    line-height: 16px;
+    background: url(images/correct.png) no-repeat center left
+}
+
+.share-con .title .close {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    width: 16px;
+    height: 16px;
+    background: url(images/close.png) no-repeat;
+    color: #999;
+    font: 11px "Comic Sans MS"
+}
+
+.share-con .title .close:hover {
+    color: #5ad;
+    text-decoration: none;
+    background-position: 0 -16px
+}
+
+.share-con .bind-sns {
+    width: 510px;
+    height: 20px;
+    line-height: 20px;
+    margin-bottom: 11px
+}
+
+.share-con .bind-sns label {
+    margin-right: 10px;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    overflow: hidden
+}
+
+.share-con .bind-sns .bind-opt label {
+    padding-left: 20px;
+    background-image: url(images/icons-share.png);
+    background-repeat: no-repeat;
+    cursor: pointer
+}
+
+.bind-sina {
+    background-position: 0 -200px
+}
+
+.bind-tencent {
+    background-position: 0 -278px
+}
+
+.bind-qzone {
+    background-position: 0 -369px
+}
+
+.share-con .bind-sns .chk-bind {
+    border: 0;
+    vertical-align: middle;
+    vertical-align: 3 px\9;
+    *vertical-align: -2px
+}
+
+.share-con .share-txa {
+    width: 484px;
+    height: 54px;
+    line-height: 25px;
+    padding: 6px 12px;
+    background: #fff;
+    border: 1px solid #ddd
+}
+
+.share-con .act {
+    padding-top: 15px
+}
+/*发布后分享设置*/
+.share-set {
+    float: right;
+    *width: 200px;
+    line-height: 16px;
+    padding-top: 3px;
+    *margin-top: -20px
+}
+
+.share-set #J_UserSns {
+    float: left;
+    height: 16px
+}
+
+.share-set #J_UserSns a {
+    float: left;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    margin-right: 5px;
+    display: block
+}
+
+.discuss .headlines {
+    margin-bottom: 20px;
+    padding: 15px 15px 10px;
+    background: #fff;
+    min-height: 178px;
+}
+
+.discuss .headlines .hot-ask {
+    float: left;
+    width: 345px;
+    margin-right: 25px
+}
+
+.discuss .headlines .hot-knowledge {
+    float: left;
+    width: 345px
+}
+
+.discuss .headlines .activities {
+    float: right;
+    width: 210px
+}
+
+.discuss .headlines h2 {
+    line-height: 16px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    padding-left: 20px;
+    background-image: url(images/icon-forum.png);
+    background-repeat: no-repeat
+}
+
+.discuss .headlines .hot-ask h2 {
+    background-position: 0 -80px
+}
+
+.discuss .headlines .hot-knowledge h2 {
+    background-position: 0 -40px
+}
+
+.discuss .headlines .activities h2 {
+    background-position: 0 -100px
+}
+
+.discuss .headlines .hot-list li {
+    padding: 5px 0 7px;
+    height: 25px;
+    line-height: 25px;
+    border-top: 1px dotted #d1d1d1;
+    text-align: right
+}
+
+.discuss .headlines .hot-list li img {
+    float: left;
+    margin-right: 5px;
+    width: 25px;
+    height: 25px
+}
+
+.discuss .headlines .hot-list li .text {
+    float: left;
+    width: 230px;
+    text-align: left
+}
+
+.discuss .headlines .hot-list li .text a {
+    color: #333
+}
+
+.discuss .forum-sidebar .ac-list {
+    margin-top: -1px
+}
+
+.discuss .ac-list li {
+    padding: 7px 0 10px;
+    height: 20px;
+    border-top: 1px dotted #d1d1d1
+}
+
+.discuss .ac-list li img {
+    float: left;
+    width: 30px;
+    height: 20px
+}
+
+.discuss .ac-list li a:hover {
+    color: #333
+}
+
+.discuss .ac-list li p {
+    width: 170px;
+    padding-left: 6px;
+    color: #333;
+    line-height: 20px
+}
+
+.discuss .ad-box {
+    width: 210px;
+    height: 70px
+}
+
+.discuss-main {
+    float: left;
+    width: 730px
+}
+
+.discuss-aside {
+    float: right;
+    width: 230px
+}
+
+.forum-oper {
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 10px;
+    padding: 0 10px;
+    background: #f6f6f6;
+    border-bottom: 1px solid #e7e7e7
+}
+
+.forum-oper dl {
+    margin: 0;
+    padding: 0
+}
+
+.forum-oper dl dd {
+    float: left;
+    border: 0
+}
+
+.forum-oper dl dd a {
+    color: #666
+}
+
+.forum-oper dl dd.current a {
+    color: #333
+}
+
+.forum-oper .search-forum {
+    padding-top: 9px
+}
+
+.discuss-con {
+    padding: 0 15px 15px;
+    background: #fff
+}
+
+.discuss-title {
+    padding: 10px 0;
+    border-bottom: 1px dotted #d1d1d1
+}
+
+.discuss-title .reply {
+    float: left;
+    width: 95px
+}
+
+.discuss-title .topic {
+    float: left;
+    width: 505px
+}
+
+.discuss-title .author {
+    float: left;
+    width: 100px
+}
+
+.discuss-list li {
+    border-bottom: 1px dotted #d1d1d1;
+    padding: 10px 0;
+    line-height: 20px
+}
+
+.discuss-list .col-left {
+    float: left;
+    width: 100px;
+    line-height: 1.4
+}
+
+.col-left .re-count {
+    font-size: 16px;
+    color: #666
+}
+
+.col-left .u-reply {
+    color: #666;
+    display: block
+}
+
+.col-left .u-reply span {
+    max-width: 65px;
+    _width: 65px
+}
+
+.discuss-list .col-right {
+    float: left;
+    width: 600px
+}
+
+.topic-row {
+    margin-bottom: 10px
+}
+
+.topic-row .col-title {
+    float: left;
+    width: 470px;
+    word-wrap: break-word;
+    word-break: break-word
+}
+
+.topic-row .col-title .topic-title {
+    font-size: 14px
+}
+
+.topic-row .col-title p {
+    color: #999
+}
+
+.topic-row .col-author {
+    float: right;
+    width: 100px
+}
+
+.topic-row .col-author dt {
+    width: 50px;
+    height: 50px;
+    float: left;
+    margin: 0 10px 0 0;
+    _margin: 0 7px 0 0;
+    overflow: hidden
+}
+
+.topic-row .col-author dd {
+    overflow: hidden;
+    zoom: 1
+}
+
+.topic-row .col-author .name span {
+    line-height: 18px;
+    max-width: 80px;
+    _width: 80px;
+    color: #666
+}
+
+.topic-preview li {
+    height: 60px;
+    line-height: 60px;
+    margin-right: 10px;
+    padding: 0;
+    float: left;
+    display: inline;
+    border: 0;
+    overflow: hidden
+}
+
+.topic-preview img {
+    max-width: 130px;
+    max-height: 60px;
+    _width: 130px;
+    _height: 60px;
+
+}
+
+
+
+
+.topic-image img {
+    max-width: 570px;
+    _width: 570px
+}
+
+.create-topic {
+    display: block;
+    width: 230px;
+    height: 40px;
+    margin-bottom: 10px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+    color: #fff;
+    background: #5ad;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px
+}
+
+.create-topic:hover {
+    color: #fff;
+    text-decoration: none
+}
+
+.discuss-aside .box {
+    background-color: #fff;
+    margin-bottom: 10px;
+    padding: 10px
+}
+
+.discuss-aside .box .hd {
+    line-height: 1.2;
+    padding: 0 0 6px 0;
+    margin: 0 0 5px;
+    border-bottom: 1px dotted #d1d1d1
+}
+
+#J_NoticeCon {
+    line-height: 22px
+}
+
+.discuss-aside .qq-qun h3 {
+    font-size: 12px;
+    color: #333
+}
+
+.discuss-aside .qq-qun ul li {
+    float: left;
+    width: 87px;
+    height: 16px;
+    color: #333;
+    font-size: 14px;
+    line-height: 16px;
+    margin: 12px 0 0;
+    padding-left: 15px;
+    background: url(images/icon-forum.png) 0 -151px no-repeat;
+    overflow: hidden
+}
+
+.discuss-aside .qq-qun ul li .status {
+    color: #e36;
+    font-size: 12px
+}
+
+.discuss-aside .qq-qun ul li.full {
+    color: #666;
+    background-position: 0 -171px
+}
+
+.discuss-aside .qq-qun ul li.full .status {
+    color: #666
+}
+
+.activist .g-daren em {
+    max-width: 125px;
+    _width: 125px
+}
+
+.random-topic h3 {
+    font-size: 12px;
+    color: #333;
+    line-height: 1.2;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #d4d4d4
+}
+
+.rdm-list .rdm-item {
+    float: left;
+    width: 305px;
+    margin: 10px 0 0;
+    line-height: 16px;
+    overflow: hidden
+}
+
+.rdm-item .i-forum {
+    margin: -2px 2px 0 0
+}
+
+.forum-con .share-link a {
+    float: left;
+    margin-right: 15px
+}
+
+.discuss .guang-editor-wrap {
+    width: 695px
+}
+
+.main-content {
+    background: #fff
+}

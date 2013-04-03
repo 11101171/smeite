@@ -1,0 +1,226 @@
+@(user:Option[models.user.User],page:Page[models.forum.Topic],wenTopics:List[(Long, String, String, Long, String, Int, Int, Int)],zhiTopics:List[(Long, String, String, Long, String, Int, Int, Int)],users:List[models.user.User],advert:models.advert.Advert)
+@views.html.template(
+user,
+nav="forum",
+title = "讨论吧_广场_食美特，爱美食爱特色"
+)(css="/assets/css/template/forum.css") {
+<div class="container discuss clearfix">
+<!-- 讨论吧 -->
+<div class="headlines clearfix">
+    <div class="hot-ask">
+        <h2>
+
+            热门问答
+        </h2>
+        <ul class="hot-list clearfix">
+            @for((uid,uname,upic,cid,ctitle,creplyNum,cloveNum,chotIndex)<-wenTopics ){
+            <li>
+                <a href="@controllers.users.routes.Users.home(uid)" target="_blank">
+                    <img src="@upic"  alt="@ctitle">
+                </a>
+
+                <div class="text ofh">
+                    <a href="@controllers.routes.Forums.view(cid)" target="_blank">ctitle</a>
+                </div>
+                <span class="reply-num gc">@creplyNum 条回复</span>
+            </li>
+            }
+
+        </ul>
+    </div>
+    <div class="hot-knowledge">
+        <h2>
+            精华知识
+        </h2>
+        <ul class="hot-list clearfix">
+
+            @for((uid,uname,upic,cid,ctitle,creplyNum,cloveNum,chotIndex)<-zhiTopics ){
+            <li>
+                <a href="@controllers.users.routes.Users.home(uid)" target="_blank">
+                    <img src="@upic"   alt="@ctitle">
+                </a>
+
+                <div class="text ofh">
+                    <a href="@controllers.routes.Forums.view(cid)" target="_blank">ctitle</a>
+                </div>
+                <span class="reply-num gc">@creplyNum 条回复</span>
+            </li>
+            }
+        </ul>
+    </div>
+    <div class="activities">
+        <h2>精彩活动</h2>
+        <!--<ul class="ac-list clearfix">
+                                              </ul>-->
+        <div class="ad-box">
+            <a href="@advert.link" title="@advert.title" target="_blank">
+                <img src="@advert.pic" width="210" height="150" alt="@advert.title" >
+            </a>
+        </div>
+    </div>
+</div>
+<div class="discuss-page clearfix">
+<div class="discuss-main">
+<!--<div class="forum-oper">
+    <dl>
+        <dt></dt>
+        <dd class="current"><a>全部</a>-</dd>
+        <dd><a href="">精华</a>-</dd>
+        <dd><a href="">知识</a>-</dd>
+        <dd class="last"><a href="">问答</a></dd>
+    </dl>
+    <dl>
+        <dt><span class="mlr10">/</span>排序：</dt>
+        <dd class="current"><a>最后回复</a>-</dd>
+        <dd><a href="">最新发表</a>-</dd>
+        <dd class="last"><a href="">最多回帖</a></dd>
+    </dl>
+    <form class="search-forum" action="/forum">
+        <input name="text" type="text" class="txt" value="">
+        <input type="submit" class="sbl-btn" value="搜索">
+    </form>
+</div>-->
+<div class="discuss-con">
+<div class="discuss-title clearfix">
+    <div class="reply">回复</div>
+    <div class="topic">话题</div>
+    <div class="author">楼主</div>
+</div>
+<ul class="discuss-list">
+    @for(item<-page.items){
+<li class="clearfix">
+    <div class="col-left">
+        <div class="re-count">@item.replyNum</div>
+        <!--<div class="re-count">30<span class="fs12 gc"> / 2045</span></div>-->
+        <a class="u-reply g-daren" href="@controllers.users.routes.Users.home(item.uid)" target="_blank">
+            <span class="inlineblock ofh">@item.uname</span>
+        </a>
+        <!--<span class="gc">@controllers.DateFormat(item.addTime.get)</span>-->
+    </div>
+    <div class="col-right">
+        <div class="topic-row clearfix">
+            <div class="col-title">
+                <div class="topic-title">
+                    @if(item.isTop){
+                    <div class="icon i-forum i-status-top" title="置顶帖"></div>
+                    }
+                    @if(item.isBest){
+                    <div class="icon i-forum i-status-best" title="精华"></div>
+                    }
+                    @if(item.typeId == 0){
+                    <div class="icon i-forum i-status-general" title="普通帖"></div>
+                    }
+                    @if(item.typeId == 1){
+                    <div class="icon i-forum i-status-ask" title="问答帖"></div>
+                    }
+                    @if(item.typeId == 2){
+                    <div class="icon i-forum i-status-knowlege" title="知识帖"></div>
+                    }
+                    <a href="@controllers.routes.Forums.view(item.id.get)" target="_blank">@item.title</a>
+                </div>
+              <p class="topic-text">@Html(item.intro)</p>
+            </div>
+            <div class="col-author">
+
+                <a class="name g-daren" href="@controllers.users.routes.Users.home(item.uid)" target="_blank">
+                    <span class="inlineblock ofh">@item.uname</span>
+                    <!--<i class="i-daren">达人</i>-->
+                </a>
+
+                <p><span class="gc">@controllers.DateFormat(item.addTime.get)</span></p>
+                <!--</dd>-->
+            </div>
+        </div>
+
+
+        <a href="@controllers.routes.Forums.view(item.id.get)" class="topic-preview">
+            <ul class="pic-list">
+
+                @for(src <- item.pics.get.split(",")){
+                @if(src.trim !=""){
+                <li ><img src="@src" alt="@item.title"></li>
+                }
+                }
+
+
+            </ul>
+        </a>
+    </div>
+</li>
+        }
+
+</ul>
+<div class="tar mt20">
+    <div class="pagin inlineblock clearfix" id="J_Pagination">
+           @if(page.nums.length>1){
+            @page.prev.map { page =>
+
+            <a class="prev" href="@controllers.routes.Forums.forum(page)">上一页</a>
+
+            }
+            @for(num <-page.nums){
+            @if(num==page.currentPage){
+            <a class="current" href="#">@num</a>
+            }else {
+
+            <a href="@controllers.routes.Forums.forum(num)">@num</a>
+            }
+
+            }
+
+            @page.next.map { page =>
+
+            <a class="next" href="@controllers.routes.Forums.forum(page)">下一页</a>
+
+            }
+
+           }
+    </div>
+</div>
+</div>
+</div>
+<div class="discuss-aside">
+    <a class="create-topic" href="@controllers.routes.Forums.edit(0)" title="+创建话题" rel="nofollow">＋创建话题</a>
+
+    <div class="box">
+        <div class="hd">
+            <h3>公告栏</h3>
+        </div>
+        <p class="bd" id="J_NoticeCon">
+            和谐社会，你我共建～
+        </p>
+
+    </div>
+    <div class="box">
+        <div class="hd">
+            <h3>活跃成员</h3>
+        </div>
+        <div class="bd user-member activist">
+            <ul>
+                @for(u<-users){
+                <li>
+                    <a class="img" href="@controllers.users.routes.Users.home(u.id.get)" target="_blank" title="@u.name">
+                        <img src="@u.pic"  width="40px" height="40px" alt="@u.name"></a>
+                    <a class="g-daren" href="@controllers.users.routes.Users.home(u.id.get)" target="_blank" title="@u.name"><em class="ofh">@u.name</em>
+                        @if(u.status==3){<i class="i-daren">达人</i>}
+                    </a>
+                    <span>发帖:@u.postTopicNum/ 关注:@u.loveTopicNum</span>
+                </li>
+                }
+
+            </ul>
+        </div>
+    </div>
+
+</div>
+</div>
+</div>
+
+
+}{
+<script type="text/javascript">
+    seajs.use('app/init', function (init) {
+        init.load('app/forum/forum')
+    });
+</script>
+}

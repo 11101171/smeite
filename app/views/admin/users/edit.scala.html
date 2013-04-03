@@ -1,0 +1,30 @@
+@(manager:models.admin.Manager)
+@views.html.admin.template(manager,"user") {
+<div class="header">
+
+    <h1 class="page-title">标签管理</h1>
+</div>
+
+<ul class="breadcrumb">
+    <li>标签管理 <span class="divider">/</span></li>
+    <li><a href="@controllers.admin.routes.Tags.list(1)">标签管理</a><span class="divider">/</span></li>
+    <li>创建新标签</li>
+</ul>
+
+
+
+       <script type="text/javascript">
+            $(function(){
+                $("#myForm").submit(function(){
+
+                  var name=  $("#groupId").find("option:selected").text();
+
+                    $("#groupName").val(name)
+
+                })
+            })
+       </script>
+
+        }
+
+

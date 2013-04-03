@@ -1,0 +1,62 @@
+@(manager:models.admin.Manager,items:List[models.advert.Advert])
+@views.html.admin.template(manager,"channel") {
+
+    <div id="content-header">
+        <h1>频道管理</h1>
+    </div>
+    <div id="breadcrumb">
+        <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+        <a href="#" class="current">图片管理管理</a>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="well">
+
+                <table class="table table-bordered table-striped with-check">
+                    <thead>
+                        <tr>
+
+                    <th>ID</th>
+                    <th>位置名称</th>
+                    <th>广告名称</th>
+                    <th>广告大图片</th>
+                    <th>广告小图片</th>
+                    <th>广告链接</th>
+                    <th>浏览次数</th>
+                    <th>添加时间</th>
+                    <th style="width: 60px;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                 @for( advert<- items){
+                 <tr id="@advert.id.get">
+
+                     <td>@advert.id</td>
+                     <td>@advert.name</td>
+                     <td>@advert.title</td>
+                     <td>@if(!advert.pic.isEmpty){<img src="@advert.pic.get">}else{无图片}</td>
+                     <td>@if(!advert.spic.isEmpty){<img src="@advert.spic.get">}else{无图片}</td>
+                     <td>@if(!advert.link.isEmpty){@advert.link.get}else{无链接}</td>
+                     <td>@advert.clickNum</td>
+                     <td>@advert.addTime</td>
+                     <td>
+                         <a href="@controllers.admin.routes.Adverts.edit(advert.id.get)"><i class="icon-edit"></i></a>
+                     </td>
+                 </tr>
+                 }
+
+                </tbody>
+            </table>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+
+        }
+
+

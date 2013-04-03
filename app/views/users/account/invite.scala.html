@@ -1,0 +1,124 @@
+@(user:Option[models.user.User])
+@views.html.template(
+user
+)(css="/assets/css/template/user.setting.css") {
+             <div class="container" id="account">
+                 <div class="content clearfix">
+                 <div class="side-nav">
+                     <h2>帐号设置</h2>
+                     <ul>
+                         <li> <a  href="@controllers.users.routes.UsersAccount.base">基本信息</a> </li>
+                         <!--   <li> <a  href="@controllers.users.routes.UsersAccount.bind">帐号绑定</a>  </li>-->
+                         <li> <a  href="@controllers.users.routes.UsersAccount.passwd">修改密码</a>  </li>
+                         <!--  <li> <a class="on"  href="@controllers.users.routes.UsersAccount.invite">邀请好友</a>   </li>-->
+                         <li> <a  href="@controllers.users.routes.UsersAccount.award">我的奖品</a>  </li>
+                         <li> <a href="@controllers.users.routes.UsersAccount.address">收货地址</a> </li>
+                     </ul>
+                 </div>
+                 <!--side nav end-->
+                 <div class="main-content">
+                     <div class="invite">
+                         <div class="li fs14" style="font-weight:700;">好友接受邀请注册，奖励100积分/人</div>
+                         <div class="invite_success" style="margin-bottom:10px">您已成功邀请<span>0</span>人，累计获得<span>0</span>积分</div>
+                         <div class="weibo_invite">
+                             <div class="weibo_t">
+                                 <span>方式一：邀请你的微博好友</span>
+                                 <div class="tab  "><a class="i-qq" id="J_TabSnsQQ" href="javascript:;">腾讯微博</a></div>
+                                 <div class="tab  on "><a class="i-sina" id="J_TabSnsSina" href="javascript:;">新浪微博</a></div>
+                             </div>
+                             <div class="sns-scroller" id="J_SnsSinaList">
+                                 <div class="items clearfix">
+                                     <ul>
+                                         <li>
+                                             <input type="checkbox" value="食美特-坚果百科">
+                                             <img alt="食美特-坚果百科" src="http://tp2.sinaimg.cn/2799227085/50/0/1" width="50" height="50">
+                                             <p class="ofh">食美特-坚果百科</p>
+                                         </li>
+                                         <li>
+                                             <input type="checkbox" value="方德谦">
+                                             <img alt="方德谦" src="http://tp2.sinaimg.cn/2122234517/50/0/1" width="50" height="50">
+                                             <p class="ofh">方德谦</p>
+                                         </li>
+                                         <li>
+                                             <input type="checkbox" value="天津-徐博">
+                                             <img alt="天津-徐博" src="http://tp3.sinaimg.cn/2047510314/50/5636268230/1" width="50" height="50">
+                                             <p class="ofh">天津-徐博</p>
+                                         </li>
+                                         <li>
+                                             <input type="checkbox" value="淘潪嗵">
+                                             <img alt="淘潪嗵" src="http://tp4.sinaimg.cn/1415295035/50/5608181977/1" width="50" height="50">
+                                             <p class="ofh">淘潪嗵</p>
+                                         </li>
+                                         <li>
+                                             <input type="checkbox" value="zuosanshao">
+                                             <img alt="zuosanshao" src="http://tp3.sinaimg.cn/2168434050/50/22817072529/1" width="50" height="50">
+                                             <p class="ofh">zuosanshao</p>
+                                         </li>
+                                         <li>
+                                             <input type="checkbox" value="L-even66">
+                                             <img alt="L-even66" src="http://tp4.sinaimg.cn/1803300763/50/5618028704/1" width="50" height="50">
+                                             <p class="ofh">L-even66</p>
+                                         </li>
+                                         <li>
+                                             <input type="checkbox" value="橙子玉玉">
+                                             <img alt="橙子玉玉" src="http://tp4.sinaimg.cn/2491039531/50/5631496070/0" width="50" height="50">
+                                             <p class="ofh">橙子玉玉</p>
+                                         </li>
+                                         <li>
+                                             <input type="checkbox" value="模范叼民">
+                                             <img alt="模范叼民" src="http://tp4.sinaimg.cn/1270610943/50/5632842919/1" width="50" height="50">
+                                             <p class="ofh">模范叼民</p>
+                                         </li>
+                                     </ul>
+                                 </div>
+                                 <a href="javascript:;" class="next">换一批</a>
+                             </div>
+                             <div class="sns-scroller" id="J_SnsQQList" style="display:none">
+                                 <div class="items clearfix">
+                                     <ul>
+
+
+                                         <a class="img-qq" href="/account/snsLogin?snsType=tec_weibo">邀请腾讯微博好友</a>
+                                     </ul>
+                                 </div>
+                             </div>
+                             <textarea id="sns-text" class="base-txa invite_txb">女人天生爱逛街，和我们一起来逛吧！~http://smeite.com/signup?reg=111</textarea>
+
+                             <span class="fr" id="J_SnsTextLimit">还可输入<font>105</font>个字</span>
+                             <div class="li">
+                                 <input type="button" class="bbl-btn submit" id="J_Publishweibo" value="发送邀请">
+                                 <span class="fl pl10 pt5">请不要修改自己的邀请链接，以免无法获得奖励</span>
+                             </div>
+
+                             <div class="li" style="color:#666;">方式二：这是您的专用邀请链接，请通过QQ或MSN发送给好友：</div>
+                             <textarea id="clip-text" class="base-txa invite_txa">女人天生爱逛街，和我们一起来逛吧！~http://smeite.com/signup?reg=1341353</textarea>
+                             <div class="li">
+                                 <input type="button" class="bbl-btn submit" id="J_Clip" value="复制">
+                             </div>
+                             <div class="li" style="color:#666; margin-bottom:10px;">方式三：通过SNS网站分享邀请好友：</div>
+                             <div class="li">
+                                 <ul>
+                                     <li><a class="i-sina" href="javascript:void((function(){var title=encodeURIComponent('女人天生爱逛街，和我们一起来逛吧！~');var link=encodeURIComponent('http://smeite.com/signup?reg=1341353');window.open('http://service.t.sina.com.cn/share/share.php?appkey=1207757825&title='+title+'&url='+link);})())">新浪微博</a></li>
+                                     <li><a class="i-qq" href="javascript:void((function(){var title=encodeURIComponent('女人天生爱逛街，和我们一起来逛吧！~');var link=encodeURIComponent('http://smeite.com/signup?reg=1341353');window.open('http://v.t.qq.com/share/share.php?appkey=801128565&url='+link+'&title='+title+'&site='+link);})())">腾讯微博</a></li>
+                                     <li><a class="i-renren" href="javascript:void((function(){var title=encodeURIComponent('女人天生爱逛街，和我们一起来逛吧！~');var link=encodeURIComponent('http://smeite.com/signup?reg=1341353');window.open('http://share.renren.com/share/buttonshare.do?link='+link+'&title='+title);})())">人人</a></li>
+                                     <li><a class="i-douban" href="javascript:void((function(){var title=encodeURIComponent('女人天生爱逛街，和我们一起来逛吧！~');var link=encodeURIComponent('http://smeite.com/signup?reg=1341353');window.open('http://www.douban.com/recommend/?url='+link+'&title='+title);})())">豆瓣</a></li>
+                                     <li><a class="i-qzone" href="javascript:void((function(){var title=encodeURIComponent('女人天生爱逛街，和我们一起来逛吧！~');var link=encodeURIComponent('http://smeite.com/signup?reg=1341353');window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+link+'&title='+title);})())">QQ空间</a></li>
+                                 </ul>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                 <!-- end -->
+                 </div>
+             </div>
+        }{
+<script type="text/javascript">
+    //sns好友邀请
+    var hasTencent = false;
+    var hasSina = true;
+    var sharetextUrl = "女人天生爱逛街，和我们一起来逛吧！~http://smeite.com/signup?reg=1341353";
+    seajs.use("app/init", function(init){
+        init.load("app/user/user.invitation");
+    });
+</script>
+}

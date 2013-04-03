@@ -1,0 +1,80 @@
+@(user:Option[models.user.User],month:Int,day:Int,list:List[models.goods.Goods] )
+@views.html.template(
+user,
+nav="index",
+title = "小编精挑细选、严格控制品质的宝贝_食美特，爱美食爱特色"
+)(css="/assets/css/template/choice.css") {
+
+<div class="container" class="clearfix">
+<div class="today-wrap">
+<div class="today-seller-apply">
+    <img src="/assets/ui/choice-top.jpg" alt="食美特，天天特价" width="980" height="210">
+    <div class="calendar">
+        <span class="month">@(month+1)月</span>
+        <span class="date">@day日</span>
+    </div>
+    <a href="/forum/view/36" id="saler_apply_btn" class="apply-btn">商家申请</a>
+</div>
+<!--商品列表 start-->
+<div class="today-goods-list">
+<!--单个商品 start-->
+    @for(goods<-list){
+<div class="today-goods-item clearfix">
+    <a href="@controllers.ugc.routes.API.convertProduct(goods.numIid)" target="_blank">
+        <img class="goods-item-img" src='@(goods.pic+"_310x310.jpg")' alt="@goods.name" width="300" height="300"></a>
+    <div class="goods-item-info">
+        <h2 class="goods-item-title">
+              @goods.name
+            </a>
+        </h2>
+        <div class="goods-item-desc">
+            <i class="quotation-marks"></i>
+            <a href="@controllers.ugc.routes.API.convertProduct(goods.numIid)" target="_blank" class="desc-txt">
+                @goods.intro
+            </a>
+
+        </div>
+        <div class="goods-item-buy clearfix">
+            <a href="@controllers.ugc.routes.API.convertProduct(goods.numIid)" class="goods-item-buy-btn clearfix" target="_blank">
+
+                @if(goods.promotionPrice.isEmpty){
+                <span class="current-price"> ¥@goods.price</span>
+                }else{
+                @if(goods.price!=goods.promotionPrice.get){
+                <span class="current-price"> ¥@goods.promotionPrice.get </span>
+                <span class="original-price"> ¥@goods.price </span>
+
+                }else{
+                <span class="current-price"> ¥@goods.price</span>
+                }
+                }
+
+                <span class="go-to-buy">去抢购 &gt;</span>
+
+            </a>
+            <div class="others-wrap">
+                <span class="want-to-buy">有<i>@goods.loveNum</i>人想买</span>
+                <a href="@controllers.ugc.routes.API.convertProduct(goods.numIid)" class="others-say" target="_blank">看看买过的人怎么说&gt;&gt;</a>
+            </div>
+        </div>
+    </div>
+</div>
+    }
+<!--单个商品 end-->
+
+</div>
+<div class="today-bottom-banner">
+    <img src="/assets/ui/choice-bottom.jpg" alt="天天特价" width="980" height="100">
+</div>
+
+</div>
+
+</div>
+        } {
+
+        <script>
+            seajs.use('app/init', function (init) {
+
+            });
+        </script>
+}

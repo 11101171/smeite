@@ -1,0 +1,75 @@
+@(form: Form[(String,String)])
+@views.html.template(
+title =  "食美特，爱美食爱特色——用户登陆"
+)(css="/assets/css/template/user.regLogin.css") {
+
+    <div class="container" id="regLogin">
+        <div class="content clearfix">
+            <h2></h2>
+            <div class="regBox">
+
+                <div class="box out-login">
+                    <legend>
+                       直接使用这些帐号登录：
+                    </legend>
+                    <div class="field-box">
+                        <div class="sns-login pt20 clearfix">
+                            <a class="l-qq" href="" target="_blank">QQ帐号登录</a>
+                            <a class="l-sina" href="" target="_blank">新浪微博登录</a>
+                            <a class="l-tao" href="" target="_blank">淘宝帐号登录</a>
+                        </div>
+
+                        <div class="smeite-login">
+                            <p class="ml30 mb10 mt10">没有账号？</p>
+                            <a  class="follow-btn-big  " href="@controllers.users.routes.UsersRegLogin.regist">免费注册</a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="reg">
+                    <legend>
+                        使用您的食美特帐号：
+                    </legend>
+
+
+                    <div class="field-box pt25 pl20">
+                        <form  id="regLoginForm"  method="post" action="@controllers.users.routes.UsersRegLogin.doEmailLogin">
+                            @form.globalErrors.map { error =>
+                            <div class="error-row" style="display:block">
+                                <p class="error"> @error.message</p>
+                            </div>
+                            }
+                            <div class="form-row">
+                                <label>Email：</label>
+                                <input type="email" class="base-input" name="email" id="email"  placeholder="" value="@form("email").value">
+                            </div>
+                            <div class="form-row">
+                                <label>密码：</label>
+                                <input type="password" class="base-input" name="passwd" id="passwd" value="">
+                            </div>
+                            <div class="form-row">
+                                <label>&nbsp;</label>
+                                <input type="checkbox" class="check" name="remember" value="1" checked="checked">
+                                <span>两周内自动登录</span>
+                            </div>
+                            <div class="form-row">
+                                <label>&nbsp;</label>
+                                <input type="submit" class="bbl-btn submit" value="登录">
+                                <a class="forgotlink" href="/user/resetPasswd">忘记密码？</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+        }{
+<script type="text/javascript">
+    seajs.use('app/init', function (init) {
+        init.load('app/user/user.regLogin');
+    });
+</script>
+}

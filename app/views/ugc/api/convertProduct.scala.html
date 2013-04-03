@@ -1,0 +1,71 @@
+@(goods:models.goods.Goods)
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>正在跳转 - @goods.name</title>
+    <link href="/assets/css/base.css" rel="stylesheet" type="text/css" />
+    <style>
+
+        #loading { position:absolute;z-index:999;width:310px;top:50%;left:50%;margin:-50px 0 0 -155px; }
+        .g-dialog { width:300px;border:5px solid #ccc;border:5px solid rgba(204, 204, 204, 0.8);-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px; }
+        .g-dialog .dialog-content { position:relative;min-height:120px;padding:1px;background:#fff;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px; }
+        .g-dialog .hd { height:20px;padding:10px 15px;overflow:hidden; }
+        .g-dialog .hd h3 { font-size:14px;text-align:center; }
+        .g-dialog .bd { padding:20px; }
+        .loading-bar { margin-bottom:10px;height:20px;background:url(/assets/ui/loading1.gif) center no-repeat;overflow:hidden; }
+    </style>
+    <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21136607"></script>
+
+</head>
+<body>
+<div id="loading" class="g-dialog">
+    <div class="dialog-content">
+        <div class="hd"><h3>正在跳转，请稍等...</h3></div>
+        <div class="bd clearfix">
+            <p class="loading-bar"></p>
+            <p align="center"><a name=manual href="@goods.detailUrl">请点这里</a> 直接跳转</p>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    var sellUrl="@goods.detailUrl";
+
+    TOP.api('rest','post',{
+        method:'taobao.taobaoke.widget.items.convert',
+        num_iids:'@goods.numIid',
+        outer_code:'',
+        fields:'click_url,coupon_price,promotion_price,coupon_start_time'
+    },function(resp){
+        if(resp.error_response){
+            alert('taobao.taobaoke.widget.items.convert接口获取商信息品失败!'+resp.error_response.msg);
+          return false;
+        } else {
+            var total=resp.total_results;
+            if (total > 0) {
+                var respItem=resp.taobaoke_items.taobaoke_item;
+                if (respItem.length > 0) {
+                 //   alert("promotion price "+respItem[0].promotion_price + " vs coupon_price "+respItem[0].coupon_price + " : "+respItem[0].coupon_start_time)
+                      sellUrl = respItem[0].click_url;
+                    document.getElementsByName('manual')[0].href=sellUrl;
+                }
+            }
+        }
+
+        count();
+    })
+    function count() {
+//alert(sellUrl)
+   window.location = sellUrl;
+    }
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+@(page:models.Page[models.goods.Goods])
+<div class="goods-container">
+@for(goods<-page.items){
+<div class="goods">
+    <div class="goods-pic"  style="height:210px" >
+        <a href="@controllers.routes.Goods.view(goods.id.get)" title="@goods.name" target="_blank">
+            <img src='@(goods.pic+"_210x210.jpg")' title="@goods.name" alt="@goods.name"   height="210px" />
+        </a>
+        <a  class="ilike-m" href="javascript:;" data-proimgsrc="@goods.pic" data-prourl="@controllers.routes.Goods.view(goods.id.get)" data-proname="@goods.name" data-type="0" data-proid="@goods.id">
+            <i></i>
+            <span class="ilikeCount" data-val="@goods.loveNum">喜欢(@goods.loveNum)</span>
+        </a>
+    </div>
+    <div class="comments-top">
+        <span class="like-num"><em class="like-count">@goods.loveNum</em></span>
+        <span class="like-price">￥@goods.price</span>
+    </div>
+    <div class="comments">
+        @goods.intro
+    </div>
+
+</div>
+
+    }
+
+
+</div>
+<!-- goods end -->

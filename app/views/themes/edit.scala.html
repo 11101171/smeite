@@ -1,0 +1,79 @@
+@(user:Option[models.user.User],form:Form[(Option[Long],String,Option[String],Option[Int],Option[String])])
+@views.html.template(
+user,
+title = "创建主题 _ 食美特，爱美食爱特色"
+
+)(css="/assets/css/template/user.css") {
+<div class="container clearfix" id="home">
+
+
+    <!--nav  end -->
+    <div class="user-bd clearfix">
+        <div class="content">
+            <h2>创作主题</h2>
+            <div class="topic-edit" >
+                <form id="J_TopicEditFm" class="edit-form" method="post" action="@controllers.routes.Themes.save">
+                    <input type="hidden" name="id" value='@form("id").value'>
+                    @form.globalError.map { error =>
+                    <div class="error-row" style="display:block">
+                        <p class="error"> @error.message</p>
+                    </div>
+                     }
+                    <div class="form-row clearfix">
+                        <label><span class="rc">*</span>标题：</label>
+                        <div class="fm-item">
+                            <input id="J_TopicTitle" name="name" class="b-input" type="text" value='@form("name").value' required="required">
+                            <p>还可以输入<em id="J_TitleNum"></em>字</p>
+                        </div>
+                    </div>
+                    <div class="form-row clearfix">
+                        <label>介绍：</label>
+                        <div class="fm-item">
+                            <textarea id="J_TopicIntro" class="b-textarea intro-txa" name="intro">@form("intro").value</textarea>
+                            <p>还可以输入<em id="J_IntroNum"></em>字</p>
+                        </div>
+                    </div>
+                    <div class="form-row clearfix">
+                        <label>分类：</label>
+                        <div class="fm-item">
+                            <select id="J_SelCag" name="cid">
+                                <option value="">选择分类</option>
+                                @for(c<-models.Cate.values){
+                                <option value="@c.id" @(if(form("cid").value.getOrElse("0") == c.id.toString) {"selected"})>@c</option>
+
+
+                                }
+
+                            </select>
+
+                            <p>选择相应的分类，让大家更容易找到你的主题</p>
+
+                        </div>
+                    </div>
+                    <div class="form-row clearfix">
+                        <label>标签：</label>
+                        <div class="fm-item">
+                            <input type="text" class="b-input" name="tags" id="J_TopicTags"  value='@form("tags").value'>
+                            <p>多个标签用逗号隔开</p>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label>&nbsp;</label>
+                        <input type="submit" class="bbl-btn submit" value="创建主题">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+}{
+<script type="text/javascript">
+    seajs.use("app/init",function(init){
+        init.load("app/theme/theme.edit");
+    });
+</script>
+}

@@ -1,0 +1,98 @@
+@(user:Option[models.user.User],baseForm:Form[(String,Int,String,String,String,String,String,String,String,String)],msg:String ="")
+@views.html.template(
+user
+)(css="/assets/css/template/user.setting.css") {
+<div class="container" id="account">
+    <div class="content clearfix">
+        <div class="side-nav">
+            <h2>帐号设置</h2>
+            <ul>
+                <li> <a  class="on" href="@controllers.users.routes.UsersAccount.base">基本信息</a> </li>
+                <!--   <li> <a  href="@controllers.users.routes.UsersAccount.bind">帐号绑定</a>  </li>-->
+                <li> <a  href="@controllers.users.routes.UsersAccount.passwd">修改密码</a>  </li>
+                <!--  <li> <a  href="@controllers.users.routes.UsersAccount.invite">邀请好友</a>   </li>-->
+                <li> <a   href="@controllers.users.routes.UsersAccount.award">我的奖品</a>  </li>
+                <li> <a href="@controllers.users.routes.UsersAccount.address">收货地址</a> </li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="set-info">
+                <form class="set-form" id="J_SetBasic" method="post" action="@controllers.users.routes.UsersAccount.saveBase">
+                    @if(msg !=""){
+                    <div class="error-row" style="display:block"><p class="ok">@msg !</p></div>
+                     }
+                    @baseForm.errors.map { error =>
+                    <div class="error-row">
+                        <p class="error"> @error.message</p>
+                    </div>
+                    }
+                    <div class="error-row"><p></p></div>
+                    <div class="form-row">
+                        <label><span class="rc">*</span>昵称：</label>
+                        <span class="theemail yc">@user.get.name</span>
+                        <input type="hidden" class="base-input" name="nickname" id="nickname" value="@user.get.name" >
+                    </div>
+                    <div class="form-row">
+                        <label>邮箱：</label>
+                        <span class="theemail yc">@user.get.email.getOrElse("")</span>
+                    </div>
+                    <div class="form-row clearfix">
+                        <label>性别：</label>
+
+                        <div class="sex">
+                            <input type="radio" class="ml5 mr5" name="sex" value="1" @if(baseForm("sex").value.get=="1"){ checked="checked" }><span class="radio-txt">男</span>
+                            <input type="radio" class="ml20 mr5" name="sex" value="0" @if(baseForm("sex").value.get=="0"){ checked="checked" }><span class="radio-txt">女</span>
+                            <input type="radio" class="ml20 mr5" name="sex" value="2" @if(baseForm("sex").value.get=="2"){ checked="checked" }><span  class="radio-txt">保密</span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label>生日：</label>
+                        <select id="J_Year" name="year"></select>
+                        <select id="J_Month" name="month"></select>
+                        <select id="J_Day" name="day"></select>
+                    </div>
+                    <div class="form-row">
+                        <label>所在地：</label>
+                        <select id="J_Province" name="province"></select>
+                        <select id="J_City" name="city"></select>
+                    </div>
+
+                    <div class="form-row">
+                        <label>个人博客：</label>
+                        <input type="text" class="base-input" name="blog" id="blog" value='@baseForm("blog").value' placeholder="http://">
+                    </div>
+                    <div class="form-row">
+                        <label>微信号：</label>
+                        <input type="text" class="base-input" name="weixin" id="weixin" value='@baseForm("weixin").value'
+                               placeholder="填写微信号，可能会有意外惊喜哦"><span class="ml10 gc">仅自己可见</span>
+                    </div>
+                    <div class="form-row">
+                        <label>自我介绍：</label>
+                        <textarea class="base-txa intro-txa" name="intro" placeholder="介绍一下自己吧~">@baseForm("intro").value</textarea>
+                    </div>
+                    <div class="form-row pt10">
+                        <label>&nbsp;</label>
+                        <input type="submit" class="bbl-btn submit" value="保存">
+                    </div>
+                </form>
+            </div>
+            <div class="set-pic">
+                <img id="thePhoto" src="@user.get.pic" alt="@user.get.name">
+
+                <div class="mt5">
+                    <a id="J_ModifyPhoto" href="javascript:;">修改头像</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+}{
+<script type="text/javascript">
+    var address = '@baseForm("province").value|@baseForm("city").value';
+    var brithday = '@baseForm("year").value';
+    seajs.use("app/init",function(init){
+        init.load("app/user/user.setting");
+    });
+</script>
+}

@@ -1,0 +1,36 @@
+@(user:Option[models.user.User])
+@views.html.template(
+user,
+title =  "食美特，爱美食爱特色——找回密码"
+)(css="/assets/css/template/user.regLogin.css") {
+
+    <div class="container" id="regLogin">
+        <div class="content clearfix">
+
+            <div class="set-box">
+                <h2>重置密码</h2>
+                <div class="set-password">
+
+                    <form action="/user/resetPasswd" id="J_PwdEmail" class="set-form" method="post">
+
+                        <div class="form-row clearfix">
+                            <label style="width:110px;">填写你的Email：</label>
+                            <input type="text" id="email" name="email" class="base-input" value=""><span class="tip error" style="left: 967px; top: 246px; display: inline; ">请填写Email</span>
+                        </div>
+                        <div class="form-row">
+                            <label style="width:110px;">&nbsp;</label>
+                            <input class="bbl-btn submit" type="submit" value="下一步">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+        }{
+<script type="text/javascript">
+    seajs.use('app/init', function (init) {
+        init.load('app/user/user.regLogin');
+    });
+</script>
+}

@@ -1,0 +1,69 @@
+@(user:Option[models.user.User],form:Form[(Option[Long],String,Int,Int,String)])
+@views.html.template(
+user,
+title = "发布主题_讨论吧_广场_食美特，爱美食爱特色"
+)(css="/assets/css/template/forum.css") {
+<div class="container clearfix">
+
+    <!--nav  end -->
+    <div class="forum clearfix forum-create box-shadow">
+        <h3>创建话题</h3>
+        <form action="@controllers.routes.Forums.save" method="post" class="post-edit-form" id="J_ForumPostEditForm">
+            <input type="hidden" name="groupId" value="0">
+            <input type="hidden" name="id" value='@form("id").value' id="J_topicId">
+            @form.globalError.map { error =>
+            <div class="error-row" style="display:block">
+                <p class="error"> @error.message</p>
+            </div>
+            }
+            <ul>
+                <li><label>话题标题：</label><input id="J_ForumPostTitle" name="title" class="b-input" type="text" value='@form("title").value' placeholder="请输入话题标题"/></li>
+
+               <!-- <li><label>讨论板块：</label>
+                    <label class="no-float"><input type="radio" name="groupId" checked="checked" value="0"/>讨论吧</label>
+                    <label class="no-float"><input type="radio" name="groupId" value="1"/>创意吧</label>
+                </li>-->
+                </li>
+
+                <li><label>话题类型：</label>
+                    <label class="no-float"><input type="radio" name="typeId" @(if(form("typeId").value.getOrElse("0") =="0") {"checked"}) value="0"/>普通</label>
+                    <label class="no-float"><input type="radio" name="typeId" @(if(form("typeId").value.getOrElse("0") == "1") {"checked"}) value="1"/>问答</label>
+                    <label class="no-float"><input type="radio" name="typeId" @(if(form("typeId").value.getOrElse("0") == "2") {"checked"}) value="2"/>知识</label>
+                    <label class="no-float"><input type="radio" name="typeId" @(if(form("typeId").value.getOrElse("0") == "3") {"checked"}) value="3"/>经验</label>
+                </li>
+                <li class="clearfix">
+                    <label>话题内容：</label>
+                    <textarea id="J_ForumPostCon" name="content" class="b-textarea" placeholder="请输入话题内容">
+                        @form("content").value
+                </textarea>
+                </li>
+                <li class="oper clearfix">
+                    <input id="J_ForumPostEditBtn" type="submit" class="bbl-btn" value="发表"/>
+                    <input type="button" class="bgr-btn" onclick="window.history.back(-1)"  value="取消并返回" />
+
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
+
+
+}{
+<script type="text/javascript">
+
+    seajs.use(["app/init", "redactor"], function(init){
+        var $ = jQuery;
+        if(SMEITER.userId ==""){
+            $.smeite.dialog.isLogin();
+        }
+        $("#J_ForumPostCon").redactor({
+            buttons:[ 'formatting', '|', 'bold', 'italic', 'deleted', '|', 'unorderedlist', 'orderedlist', 'outdent', 'indent', '|', 'image', 'link', '|', 'fontcolor', 'backcolor', '|', 'alignment', '|', 'horizontalrule'],
+            imageUpload: '/editor/uploadPic',
+            minHeight: 200
+        })
+
+        init.load("app/forum/forum");
+    });
+
+</script>
+}

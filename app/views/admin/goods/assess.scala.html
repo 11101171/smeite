@@ -1,0 +1,208 @@
+@(manager:models.admin.Manager,page:models.Page[models.goods.GoodsAssess])
+
+
+
+@views.html.admin.template(manager,"goods") {
+
+    <div id="content-header">
+        <h1>宝贝管理</h1>
+
+    </div>
+    <div id="breadcrumb">
+        <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+        <a href="#" class="current">宝贝管理</a>
+        <a href="#" class="current">宝贝评价管理</a>
+    </div>
+
+<div class="container-fluid">
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box clearfix">
+                <div class="widget-title">
+                    <span class="icon">
+                        <i class="icon-pencil"></i>
+                    </span>
+                    <h5>商品筛选</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <form class=" form-horizontal" id="J_filterForm" method="get" action="@controllers.admin.routes.Goods.filterAssesses">
+                        <input type="hidden" name="currentPage" id="J_currentPage" value="1">
+                        <div class="error-row">
+                            <p class="error"></p>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" >审核状态</label>
+                            <div class="controls">
+                                <div class="radio">
+                                    <input type="radio"   name="checkState" value=""  > 所有
+                                </div>
+                                <div class="radio">
+                                    <input type="radio"   name="checkState" value="0"> 未审核
+                                </div>
+                                <div class="radio">
+                                    <input type="radio"   name="checkState" value="1" > 审核通过
+                                </div>
+                                <div class="radio">
+                                    <input type="radio"   name="checkState" value="2" >  审核失败
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <input type="submit" class="btn btn-info" value="筛选"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row-fluid">
+
+    <div class="well">
+        <form method="post" id="J_batchForm" action="@controllers.admin.routes.Goods.batchAssesses">
+        <input type="hidden" id="J_url" name="url" value="">
+        <div class="controls">
+            <select id="J_select" name="action">
+                <option value="-1">批量动作</option>
+                <option value="0">批量审核不通过</option>
+                <option value="1">批量审核通过</option>
+                <option value="2">批量删除</option>
+            </select>
+            <button class="btn btn-info" id="J_batchAction" data-toggle="modal" data-target="#J_batchModal">
+                批量处理
+            </button>
+        </div>
+            <table class="table table-bordered table-striped with-check">
+                <thead>
+                <tr>
+                    <th><input type="checkbox"  name="title-table-checkbox" /></th>
+                    <th>ID</th>
+                    <th><a>numIid</a></th>
+                    <th>用户名称</th>
+                    <th>内容</th>
+                    <th>是否值得</th>
+                    <th>是否买过</th>
+                    <th>审核状态</th>
+                    <th>添加时间</th>
+                    <th style="width: 60px;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                @for((item,i)<- page.items.view.zipWithIndex){
+                <tr id="@item.id.get">
+                    <td><input type="checkbox" name="ids[@i]" value="@item.id.get" /></td>
+                    <td>@item.id</td>
+                    <td>@item.goodsId</td>
+                    <td><a href="@controllers.users.routes.Users.home(item.uid)">@item.uname</a></td>
+                    <td>@item.content</td>
+                    <td>@item.isWorth</td>
+                    <td>@item.isBought</td>
+                    <td class="checkState">@if(item.checkState==1){<span class="label label-success">通过</span>}else{<span class="label">不通过</span>}</t>
+                    <td>@item.addTime</td>
+
+                    <td>
+                        <a href="#J_checkModal" class="check" data-id="@item.id.get" role="button" data-toggle="modal"><i class="icon-refresh"></i></a>
+                        <a href="#J_deleteModal" class="remove" data-id="@item.id.get" role="button" data-toggle="modal"><i class="icon-trash"></i></a>
+
+                    </td>
+                </tr>
+                }
+
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination">
+            <ul>
+
+                @page.prev.map { page =>
+                <li class="prev">
+                    <a href="controllers.admin.routes.Goods.assess(page)">Prev</a>
+                </li>
+                }.getOrElse {
+                <li class="prev disabled">
+                    <a>Prev</a>
+                </li>
+                }
+                @for(num <-page.nums){
+                @if(num==page.currentPage){
+                <li class="active"><a href="@controllers.admin.routes.Goods.assess(num)">@num</a></li>
+                }else {
+
+                <li><a href="@controllers.admin.routes.Goods.assess(num)">@num</a></li>
+                }
+
+                }
+
+                @page.next.map { page =>
+                <li class="next">
+                    <a href="@controllers.admin.routes.Goods.list(page)">Next</a>
+                </li>
+                }.getOrElse {
+                <li class="next disabled">
+                    <a>Next</a>
+                </li>
+                }
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+
+
+    $(document).on("click",".remove",function(){
+        var id=$(this).data('id');
+        $("#J_deleteModal").modal('show');
+        $("#J_delete").click(function(){
+
+            $.ajax({
+                url:"/admin/goods/deleteAssess?id="+id,
+                type:'get',
+                dataType:'json',
+                success:function(data){
+                    if(data.code =='100'){
+                        $("#"+id).remove();
+                        $("#J_deleteModal").modal("hide")
+                    }else{
+                        alert(data.message)
+                    }
+                }
+            })
+
+        })
+    })  ;
+
+    $(document).on("click",".check",function(){
+        var id=$(this).data('id');
+        $("#J_checkModal").modal('show');
+        $("#J_check").click(function(){
+
+            $.ajax({
+                url:"/admin/goods/checkAssess?id="+id,
+                type:'get',
+                dataType:'json',
+                success:function(data){
+                    if(data.code =='100'){
+                        alert(data.message)
+                        $("#"+id).find(".checkState").html("<span class='label label-success'>通过</span>")
+                        $("#J_checkModal").modal("hide")
+                    }else{
+                        alert(data.message)
+                    }
+                }
+            })
+
+        })
+    })
+</script>
+
+}
+
+

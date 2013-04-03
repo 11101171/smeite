@@ -1,0 +1,19 @@
+/*
+ * 样式文件
+ * User: Administrator
+ * Date: 12-9-15  
+ * Time: 下午7:24
+ * 维护：zuosanshao@qq.com
+*/
+/* 全局 基本样式 */
+@import "global.base.new.css";
+/* 全局 头部样式*/
+@import "global.header.css";
+/*全局 导航样式*/
+@import "global.nav.css";
+/*全局 底部样式*/
+@import "global.footer.css";
+@import 'global.returnTop.css';
+
+
+

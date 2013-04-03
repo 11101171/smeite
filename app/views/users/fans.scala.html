@@ -1,0 +1,118 @@
+@(user:Option[models.user.User],author:models.user.User,page:Page[models.user.User],users:List[models.user.User])
+@views.html.template(
+user,
+title =  author.name+" 在食美特的个人主页，食美特，爱美食爱特色"
+)(css="/assets/css/template/user.css") {
+        <div class="container clearfix" id="home">
+            <div class="u-nav box-shadow">
+                <ul class="clearfix">
+                    <li class=" user bigfs">
+                        <a href="@controllers.users.routes.Users.home(author.id.get)">
+                            <img src="@author.pic" alt="@author">@author.name
+                        </a>
+                    </li>
+                    <!--<li><a href="@controllers.users.routes.Users.trend(author.id.get)">@author.trendNum<br>动态</a></li>-->
+                    <li><a href="@controllers.users.routes.Users.baobei(author.id.get)">@(author.postBaobeiNum+author.loveBaobeiNum)<br>宝贝</a></li>
+                    <li><a href="@controllers.users.routes.Users.theme(author.id.get)">@(author.postThemeNum+author.loveThemeNum)<br>主题</a></li>
+                    <li><a href="@controllers.users.routes.Users.square(author.id.get)">@(author.postTopicNum+author.loveTopicNum)<br>讨论</a></li>
+                    <li class="cur" ><a href="@controllers.users.routes.Users.fans(author.id.get)">@author.fansNum<br>粉丝</a></li>
+                    <li class="last"><a href="@controllers.users.routes.Users.follow(author.id.get)">@(author.followNum)<br>我关注的</a></li>
+                   <!-- <li class="last"><a href="@controllers.users.routes.Users.appraisal(author.id.get)">N+<br>求鉴定</a></li>-->
+                </ul>
+            </div>
+            <!--nav  end -->
+            <div class="user-bd clearfix">
+                <div class="user-main">
+                    <div class="fans-list box-shadow">
+                        <div class="fans-search">已有&nbsp;@author.fansNum &nbsp;人关注了你</div>
+                        @for(user<-page.items){
+                        <div class="section clearfix">
+                            <div class="user-pic">
+                                <a href="@controllers.users.routes.Users.home(user.id.get)" title="@user.name">
+                                    <img src="@user.pic" alt="@user.name" title="@user.name" width="50" height="50">
+                                </a>
+                            </div>
+                            <div class="user-info">
+                                <p class="user-intro">
+                                    <a href="@controllers.users.routes.Users.home(user.id.get)" class="g-daren">@user.name</a>&nbsp;&nbsp;来自@models.user.ComeFrom(user.comeFrom)
+                                </p>
+                                @if(user.status==4){
+                                <p class="user-data">
+                                    <span class="oc">该用户由于发广告，正在小黑屋中反省。</span>
+                                </p>
+                                }else {
+                                <p class="user-data">
+                                    关注 @user.followNum<span class="mr10">,</span>粉丝 @user.fansNum<span class="mr10">,</span>动态 @user.trendNum
+                                </p>
+                                 }
+                            </div>
+                            <div class="follow">
+                                <a rel="follow" href="javascript:;" class="follow-btn" data-followtype="1" data-userid="@user.id.get" data-usernick="@user.name">加关注</a><br>
+                                <a rel="removefans" href="javascript:;" class="remove-fans" data-userid="@user.id.get" data-usernick="@user.name">移除粉丝</a>
+                            </div>
+                        </div>
+
+                        }
+
+                        <!-- End foreach-->
+                        <div class="clearfix pt20 pb20">
+                            <div class="pagin fr pagination" id="J_Pagination">
+                                @if(page.nums.length>1){
+                                @page.prev.map { page =>
+
+                                <a class="prev" href="@controllers.users.routes.Users.fans(author.id.get,page)">&larr; 上一页</a>
+
+                                }
+                                @for(num <-page.nums){
+                                @if(num==page.currentPage){
+                                <a class="current" href="#">@num</a>
+                                }else {
+
+                                <a href="@controllers.users.routes.Users.fans(author.id.get,num)">@num</a>
+                                }
+
+                                }
+
+                                @page.next.map { page =>
+
+                                <a class="next" href="@controllers.users.routes.Users.fans(author.id.get,page)">下一页 &rarr;</a>
+
+                                }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end-->
+                </div>
+                <div class="user-side">
+                    <div class="interest box-shadow plr15 ss">
+                        <div class="title">你可能感兴趣的人
+                           <!-- <a href="javascript:;" rel="changeGroup" class="all-follows">换一组</a>-->
+                        </div>
+                        <ul class="interPer" id="J_InterPer" >
+                            @for(user<-users){
+                            <li>
+                                <div class="user-pic">
+                                    <a href="@controllers.users.routes.Users.home(user.id.get)" title="@user.name" target="_blank">
+                                        <img src="@user.pic" width="50" height="50" alt="@user.name" title="@user.name"></a>
+                                </div>
+                                <div class="user-info">
+                                    <a class="username g-daren" href="@controllers.users.routes.Users.home(user.id.get)" title="@user.name"><em class="ofh">@user.name</em> @if(user.status==3){ <i class="i-daren">达人</i>}</a>
+
+                                    <p>来自@models.user.ComeFrom(user.comeFrom)</p><a rel="follow" href="javascript:;" class="follow-btn"
+                                        data-usernick="@user.name"           data-followtype="5" data-userid="@user.id.get">加关注</a></div>
+                            </li>
+                                }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        }{
+<script type="text/javascript">
+    seajs.use('app/init', function(init) {
+        init.load('app/user/user.profile,app/user/user.follow');
+    })
+</script>
+}
