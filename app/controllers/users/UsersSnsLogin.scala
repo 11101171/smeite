@@ -50,10 +50,10 @@ object UsersSnsLogin extends Controller {
          val client =new DefaultHttpClient();
          val resp= client.execute(post)
          val entity=resp.getEntity;
-       println("ssssssssssssssssssssssssssss "+EntityUtils.getContentCharSet(entity))
+       //println("ssssssssssssssssssssssssssss "+EntityUtils.getContentCharSet(entity))
 
          val r=EntityUtils.toString(entity,"UTF-8")
-       println("ssdfdf         " +r);
+       //println("ssdfdf         " +r);
          val json=Json.parse(r)
          val nick=(json \ "taobao_user_nick").as[String];
          val openId = (json \ "taobao_user_id").as[String];
@@ -102,10 +102,10 @@ object UsersSnsLogin extends Controller {
        getInfo.addHeader("charset","UTF-8")
        val client2 =new DefaultHttpClient();
        val resp2= client2.execute(getInfo)
-       resp2.getAllHeaders.foreach(x=>println (x.getName  + " : " +x.getValue))
+   //    resp2.getAllHeaders.foreach(x=>println (x.getName  + " : " +x.getValue))
 
        val entity2=resp2.getEntity;
-       println("ssssssssssssssssssssssssssss"+EntityUtils.getContentCharSet(entity2))
+       //println("ssssssssssssssssssssssssssss"+EntityUtils.getContentCharSet(entity2))
        val info=EntityUtils.toString(entity2,"UTF-8")
 
        val json2 =Json.parse(info)
@@ -146,9 +146,9 @@ object UsersSnsLogin extends Controller {
        val client2 =new DefaultHttpClient();
        val resp2= client2.execute(getInfo)
        val entity2=resp2.getEntity;
-       println("ssssssssssssssssssssssssssss "+EntityUtils.getContentCharSet(entity2))
+       //println("ssssssssssssssssssssssssssss "+EntityUtils.getContentCharSet(entity2))
        val r2=EntityUtils.toString(entity2)
-       println(r2)
+       //println(r2)
        val json2 =Json.parse(r2)
        val nickName = (json2 \ "name").as[String]
        val pic = (json2 \ "profile_image_url").as[String]

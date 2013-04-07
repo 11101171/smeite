@@ -1619,9 +1619,9 @@ define(function(require, exports) {
                 case "qq": {
                     RefererGuide("qq", "qzone");
                 }break;
-                default : {
+                /*default : {
                     RefererGuide("qq", "qzone");
-                }
+                }*/
             }
         }else{
             $(window).bind("scroll",function(){

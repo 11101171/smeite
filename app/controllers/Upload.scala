@@ -35,7 +35,7 @@ object Upload extends Controller{
   def ajaxImage=Action(parse.multipartFormData) { request =>
     request.body.file("fileData").map { picture =>
       val filename = picture.filename
-      println(filename)
+      //println(filename)
       if(Utils.isImage(filename)){
         picture.ref.moveTo(new File("/opt/static/images/adv/"+filename),true)
         val src ="/images/adv/"+filename;

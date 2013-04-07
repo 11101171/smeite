@@ -41,13 +41,13 @@ object ManagerDao {
     val totalPages=((totalRows + pageSize - 1) / pageSize);
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for{ c<- ManagerTasks.sortBy(_.endDate desc) } yield(c)
-    println(" q sql "+q.selectStatement)
+    //println(" q sql "+q.selectStatement)
     val tasks:List[ManagerTask]=q.list()
     Page[ManagerTask](tasks,currentPage,totalPages);
   }
   def findTasks(status:Int,currentPage: Int, pageSize: Int):List[ManagerTask] = database.withSession {  implicit session:Session =>
     val q=  for{ c<- ManagerTasks.sortBy(_.endDate desc) if c.status === status  } yield(c)
-    println(" q sql "+q.selectStatement)
+    //println(" q sql "+q.selectStatement)
     q.list()
 
   }
@@ -75,7 +75,7 @@ object ManagerDao {
     if(!startDate.isEmpty) query = query.filter(_.endDate >  currentDate )
     if(!status.isEmpty) query = query.filter(_.status  === status.get)
     query = query.sortBy(_.addTime desc)
-    println("sql " +query.selectStatement)
+    //println("sql " +query.selectStatement)
     val totalRows=query.list().length
     val totalPages=((totalRows + pageSize - 1) / pageSize);
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }

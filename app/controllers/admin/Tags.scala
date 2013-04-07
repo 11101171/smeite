@@ -256,7 +256,7 @@ object  Tags extends Controller {
   }
   def getSimpleGroups(cid:Int)=Managers.AdminAction{manager => implicit request =>
       val groups=TagDao.findSimpleGroups(cid)
-        for(g<-groups){println(g._1 +" : " +g._2)}
+      //  for(g<-groups){println(g._1 +" : " +g._2)}
      Ok(views.html.admin.tags.simpleGroups(groups))
   }
   /*编辑标签 先判断标签是否存在*/

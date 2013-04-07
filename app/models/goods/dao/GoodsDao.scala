@@ -69,7 +69,7 @@ object GoodsDao {
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for(c<-Goodses.sortBy(_.id desc).drop(startRow).take(pageSize)  ) yield(c)
-    println(" q sql "+q.selectStatement)
+    //println(" q sql "+q.selectStatement)
     val goodses:List[Goods]=  q.list()
     Page[Goods](goodses,currentPage,totalPages);
   }
@@ -98,7 +98,7 @@ object GoodsDao {
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for(c<-GoodsAssesses.sortBy(_.addTime desc).drop(startRow).take(pageSize)  ) yield(c)
-    println(" q sql "+q.selectStatement)
+    //println(" q sql "+q.selectStatement)
     val assesses:List[GoodsAssess]=  q.list()
     Page[GoodsAssess](assesses,currentPage,totalPages);
   }
@@ -131,7 +131,7 @@ object GoodsDao {
       if(loveNumOrder.get=="desc") query = query.sortBy(_.loveNum desc) else query = query.sortBy(_.loveNum asc)
     }
 
-    println("sql " +query.selectStatement)
+    //println("sql " +query.selectStatement)
     val totalRows=query.list().length
     val totalPages=((totalRows + pageSize - 1) / pageSize);
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
@@ -146,7 +146,7 @@ object GoodsDao {
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
 
     val query =for(c<-Goodses if c.isMember === true)yield c
-    println("q select sql "+query.selectStatement)
+    //println("q select sql "+query.selectStatement)
     val list:List[Goods] = query.drop(startRow).take(pageSize).list()
     Page(list,currentPage,totalPages)
   }
@@ -163,7 +163,7 @@ object GoodsDao {
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for(c<-Goodses.filter(_.isMember===true).sortBy(_.collectTime desc).drop(startRow).take(pageSize)  ) yield(c)
-    println(" q sql "+q.selectStatement)
+    //println(" q sql "+q.selectStatement)
     val goodses:List[Goods]=  q.list()
     Page[Goods](goodses,currentPage,totalPages);
   }
@@ -174,7 +174,7 @@ object GoodsDao {
     var query = for (c<-GoodsAssesses)yield c
     if(!checkState.isEmpty) query =query.filter(_.checkState === checkState.get)
     query = query.sortBy(_.addTime desc)
-    println("sql " +query.selectStatement)
+    //println("sql " +query.selectStatement)
     val totalRows=query.list().length
     val totalPages=((totalRows + pageSize - 1) / pageSize);
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }

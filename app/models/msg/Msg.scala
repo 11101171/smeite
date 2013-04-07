@@ -55,7 +55,7 @@ object MsgDao {
 
   def testCount = database.withSession {  implicit session:Session =>
    val q =Query(Msgs.length)
-   println("the count sql : "+q.selectStatement)
+   //println("the count sql : "+q.selectStatement)
     q.first
   }
   def testCount2 = database.withSession {  implicit session:Session =>
