@@ -245,21 +245,10 @@ object Goods extends Controller {
   }
 
   /* ajax update collection 淘宝客 */
-  def collectGoods  = Managers.AdminAction{manager => implicit request =>
-    collectForm.bindFromRequest.fold(
-      formWithErrors =>Ok("something wrong"),
-      collects => {
-        val result = GoodsDao.updateTaobaoke(collects.numIid,collects.title,collects.volume,collects.price,collects.promotionPrice.getOrElse(""))
-        if (result >0) Ok(Json.obj( "code" -> "100", "message" -> ("up成功" )))
-        else Ok(Json.obj( "code" -> "104", "message" -> ("删除失败" )))
-      }
-    )
-  }
 
   def collectGoodses = Action(parse.json) {  implicit request =>
   val items =Json.fromJson[Array[TaobaokeItem]](request.body).get
   for(item <- items){
-
     GoodsDao.updateTaobaoke(item.numIid,item.title,item.volume,item.price,item.promotionPrice)
   }
      Ok(Json.obj("code"->"100","msg"->items.length))

@@ -12,7 +12,9 @@ import models.theme.dao.ThemeDao
 import models.goods.dao.GoodsDao
 import models.forum.dao.TopicDao
 import models.user.dao.UserDao
-
+import utils.TaobaoConfig
+import play.api.libs.json.Json
+import models.Page
 /**
  * Created by zuosanshao.
  * User: zuosanshao
@@ -63,8 +65,7 @@ object Managers extends Controller {
   }
 
   /* 用户退出  清除缓存*/
-  def logout = Action {
-    implicit request =>
+  def logout = Action {  implicit request =>
       if (!session.get("manager").isEmpty) {
         Cache.remove(session.get("manager").get)
       }
@@ -101,7 +102,16 @@ object Managers extends Controller {
   }
   /*更新商品管理*/
   def pullGoods = AdminAction{    manager => implicit request =>
-     Ok("定时更新商品信息 或者 定时从淘宝拉数据 todo")
+
+    val timestamp= String.valueOf(System.currentTimeMillis)
+    val sign=TaobaoConfig.getSign(timestamp)
+     Ok(views.html.admin.pullGoods(manager)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
+  }
+
+  def getNumIids(p:Int) =AdminAction{    manager => implicit request =>
+    val page:Page[Long] = GoodsDao.getNumiids(p,40);
+      Ok(Json.obj("code"->"100","totalPages"->page.totalPages,"nums"->page.items.mkString(",")))
+
   }
 
   /*推送消息、信息管理*/

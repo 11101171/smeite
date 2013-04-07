@@ -271,12 +271,6 @@
                 if (total > 0) {
                     var respItem=resp.taobaoke_items.taobaoke_item;
                     if (respItem.length > 0) {
-                     //   alert("length"+respItem.length)
-                    //    alert(" repsItem : " + JSON.stringify(respItem) )
-                      //  for(var i =0;i<respItem.length;i++){
-                     //       alert(respItem[i].volume +"   "+respItem[i].price+"promotion price "+respItem[i].promotion_price)
-                    //    }
-
                         $.ajax({
                             type:"POST",
                             url:"/admin/goods/collectGoodses",

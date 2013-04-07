@@ -180,6 +180,18 @@ object GoodsDao {
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val tags:List[GoodsAssess]= query.drop(startRow).take(pageSize).list()
     Page[GoodsAssess](tags,currentPage,totalPages);
+  }
+
+  /* 获取numiids*/
+  def getNumiids(currentPage:Int,pageSize:Int):Page[Long]= database.withSession {  implicit session:Session =>
+    val totalRows=Query(Goodses.length).first()
+    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    /*获取分页起始行*/
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val items:List[Long]= (for(c<-Goodses)yield c.numIid ).drop(startRow).take(pageSize).list()
+
+    Page[Long](items,currentPage,totalPages)
+
 
   }
 }

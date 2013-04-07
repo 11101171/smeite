@@ -1,0 +1,99 @@
+@(manager:models.admin.Manager)
+@views.html.admin.template(manager,"home") {
+
+    <div id="content-header">
+        <h1>控制面板</h1>
+
+    </div>
+    <div id="breadcrumb">
+        <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+        <a href="#" class="current">控制面板</a>
+    </div>
+    <div class="container-fluid">
+
+
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box widget-plain" >
+                    <div class="widget-content center" style="padding: 100px">
+                        <button class="btn btn-info" id="J_batchAction"  >批量更新数据</button>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+        <script>
+
+                $("#J_batchAction").click(function(){
+                    $('#J_batchAction').removeClass("btn-info").addClass("btn-warning").html("开始批量更新数据，请耐心等待**************")
+                    getNumIids(1)
+
+                })
+
+
+            function getNumIids(page){
+                $.ajax({
+                    url:"/admin/manager/getNumIids?p="+page,
+                    type:'get',
+                    dataType:'json',
+                    success:function(data){
+                        if(data.code =='100'){
+                           pullTaobaoke(data.nums)
+                          if(page <=data.totalPages){
+                              getNumIids(page+1)
+                          }else{
+                              $('#J_batchAction').removeClass("btn-warning").addClass("btn-info").html("批量更新完成")
+                          }
+
+                        }
+                    }
+                })
+            }
+
+            function pullTaobaoke(nums){
+                TOP.api('rest','post',{
+                    method:'taobao.taobaoke.widget.items.convert',
+                    num_iids:nums,
+                    outer_code:'smeite',
+                    fields:'title,num_iid,volume,price,promotion_price'
+                },function(resp){
+                    if(resp.error_response){
+                        alert('taobao.taobaoke.widget.items.convert接口获取商信息品失败!'+resp.error_response.msg);
+                        return false;
+                    } else {
+                        var total=resp.total_results;
+                        if (total > 0) {
+                            var respItem=resp.taobaoke_items.taobaoke_item;
+                            if (respItem.length > 0) {
+                                $.ajax({
+                                    type:"POST",
+                                    url:"/admin/goods/collectGoodses",
+                                    data:JSON.stringify(respItem),
+                                    contentType:"application/json; charset=utf-8",
+                                    dataType: "json",
+                                    success:function(data){
+                                        if(data.code=="100"){
+
+                                        }
+                                    }
+                                })
+
+
+
+                            }
+                        }
+                    }
+
+                })
+            }
+
+        </script>
+
+}
