@@ -67,7 +67,7 @@ object TagDao {
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for(c<-Tags.sortBy(_.isTop desc).drop(startRow).take(pageSize)  ) yield(c)
-    println(" q sql "+q.selectStatement)
+    //println(" q sql "+q.selectStatement)
     val tags:List[Tag]=  q.list()
     Page[Tag](tags,currentPage,totalPages);
 
@@ -212,7 +212,7 @@ def findRelativeTagGoodses(goodsId:Long) = database.withSession{ implicit  sessi
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for(c<-TagGroups.sortBy(_.sortNum asc).drop(startRow).take(pageSize)  ) yield(c)
-    println(" q sql "+q.selectStatement)
+    //println(" q sql "+q.selectStatement)
     val groups:List[TagGroup]=  q.list()
     Page[TagGroup](groups,currentPage,totalPages);
   }
@@ -223,7 +223,7 @@ def findRelativeTagGoodses(goodsId:Long) = database.withSession{ implicit  sessi
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for(c<-TagGroups.sortBy(_.sortNum asc).drop(startRow).take(pageSize)  ) yield(c)
-    println(" q sql "+q.selectStatement)
+    //println(" q sql "+q.selectStatement)
     val groups:List[TagGroup]=  q.list()
     Page[TagGroup](groups,currentPage,totalPages);
   }
@@ -235,7 +235,7 @@ def findRelativeTagGoodses(goodsId:Long) = database.withSession{ implicit  sessi
     if(!cid.isEmpty) query = query.filter(_.cid === cid.get)
     if(!isVisible.isEmpty) query = query.filter(_.isVisible === isVisible.get)
      query = query.sortBy(_.sortNum asc)
-    println("sql " +query.selectStatement)
+    //println("sql " +query.selectStatement)
 
     val totalRows=query.list().length
     val totalPages=((totalRows + pageSize - 1) / pageSize);
@@ -254,7 +254,7 @@ def findRelativeTagGoodses(goodsId:Long) = database.withSession{ implicit  sessi
      if(!isTop.isEmpty) query = query.filter(_.isTop === isTop.get)
      if(!isHighlight.isEmpty) query = query.filter(_.isHighlight === isHighlight.get)
      query = query.sortBy(_.isTop desc)
-     println("sql " +query.selectStatement)
+     //println("sql " +query.selectStatement)
      val totalRows=query.list().length
      val totalPages=((totalRows + pageSize - 1) / pageSize);
      val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
@@ -271,7 +271,7 @@ def findRelativeTagGoodses(goodsId:Long) = database.withSession{ implicit  sessi
     val totalPages=((totalRows + pageSize - 1) / pageSize);
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
-    println(" q sql "+query.selectStatement)
+    //println(" q sql "+query.selectStatement)
     val assesses:List[(Long,Long,String,String,String,Int,Int,Int)]=  query.drop(startRow).take(pageSize).list()
     Page[(Long,Long,String,String,String,Int,Int,Int)](assesses,currentPage,totalPages);
   }

@@ -92,7 +92,7 @@ object ThemeDao {
     val totalPages=((totalRows + pageSize - 1) / pageSize);
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for(c<-Themes.sortBy(_.modifyTime desc).drop(startRow).take(pageSize)  ) yield(c)
-    println(" q sql "+q.selectStatement)
+    //println(" q sql "+q.selectStatement)
     val themes:List[Theme]=  q.list()
     Page[Theme](themes,currentPage,totalPages);
   }
@@ -111,7 +111,7 @@ object ThemeDao {
     } yield(t.id,t.name,t.intro,t.loveNum,t.modifyTime,g.goodsPic))
     if(sortBy=="new") query =query.sortBy(_._5 desc)
     if(sortBy=="hot") query = query.sortBy(_._4 desc)
-    println("query id = "+query.selectStatement)
+    //println("query id = "+query.selectStatement)
     val themes:List[((Long,String,String,Int),List[String])] =query.list().groupBy(x=>(x._1,x._2,x._3,x._4)).map(x=>(x._1,x._2.take(5).map(y=>y._6))).toList
     Page[((Long,String,String,Int),List[String])](themes,currentPage,totalPages)
   }
@@ -128,7 +128,7 @@ object ThemeDao {
     } yield(t.id,t.name,t.intro,t.loveNum,t.modifyTime,g.goodsPic))
     if(sortBy=="new") query =query.sortBy(_._5 desc)
     if(sortBy=="hot") query = query.sortBy(_._4 desc)
-    println("query id = "+query.selectStatement)
+    //println("query id = "+query.selectStatement)
     val themes:List[((Long,String,String,Int),List[String])] =query.list().groupBy(x=>(x._1,x._2,x._3,x._4)).map(x=>(x._1,x._2.take(5).map(y=>y._6))).toList
     Page[((Long,String,String,Int),List[String])](themes,currentPage,totalPages)
   }
@@ -137,7 +137,7 @@ object ThemeDao {
   /* 随机推荐  1.s首选寻找最值得推荐的theme 前20个，然后在随机从中挑选数量nums */
   def recommendTheme(hotIndex:Int,nums:Int):List[Theme] = database.withSession {  implicit session:Session =>
     val q=for(c<-Themes if c.hotIndex > hotIndex )yield(c)
-    println("query sql "+q.selectStatement)
+    //println("query sql "+q.selectStatement)
     q.sortBy(_.hotIndex desc).take(nums).list()
   }
 
@@ -208,7 +208,7 @@ object ThemeDao {
     val totalPages=((totalRows + pageSize - 1) / pageSize);
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for{ c<-ThemeDiscusses.sortBy(_.addTime desc).drop(startRow).take(pageSize)} yield(c)
-    println(" q sql "+q.selectStatement)
+    //println(" q sql "+q.selectStatement)
     val discusses:List[ThemeDiscuss]=  q.list()
     Page[ThemeDiscuss](discusses,currentPage,totalPages);
   }
@@ -223,7 +223,7 @@ object ThemeDao {
       u<-Users
       if c.uid === u.id
     } yield(u,c)
-    println(" q sql "+q.selectStatement)
+    //println(" q sql "+q.selectStatement)
     val themes:List[(User,ThemeDiscuss)]=  q.list()
     Page[(User,ThemeDiscuss)](themes,currentPage,totalPages);
   }
@@ -235,7 +235,7 @@ object ThemeDao {
     if(!cid.isEmpty) query = query.filter(_.cid === cid.get)
     if(!isRecommend.isEmpty) query = query.filter(_.isRecommend === isRecommend.get)
     query = query.sortBy(_.id desc)
-    println("sql " +query.selectStatement)
+    //println("sql " +query.selectStatement)
 
     val totalRows=query.list().length
     val totalPages=((totalRows + pageSize - 1) / pageSize);
@@ -251,7 +251,7 @@ object ThemeDao {
     if(!name.isEmpty) query = query.filter(_.uname like "%"+name.get+"%")
     if(!checkState.isEmpty) query = query.filter(_.checkState === checkState.get)
     query = query.sortBy(_.id desc)
-    println("sql " +query.selectStatement)
+    //println("sql " +query.selectStatement)
 
     val totalRows=query.list().length
     val totalPages=((totalRows + pageSize - 1) / pageSize);

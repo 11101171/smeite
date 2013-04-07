@@ -58,7 +58,7 @@ object UserTrends extends Table[UserTrend]("user_trend") {
   }
   def list(uid:Long,start:Int,num:Int) (implicit session: Session):List[UserTrend] = {
   val query = Query(UserTrends).filter(_.uid === uid).sortBy(_.addTime desc).drop(start).take(num)
-    println(query.selectStatement)
+    //println(query.selectStatement)
     query.list
   }
   def list(uid:Long)(implicit  session:Session):List[UserTrend] ={

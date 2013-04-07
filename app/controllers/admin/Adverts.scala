@@ -93,7 +93,7 @@ object  Adverts  extends  Controller{
 
   /* 只需要添加商品 user theme 的id即可*/
   def  updateProductAdvert(id:Long,thirdId:Long) =   Managers.AdminAction{ manager => implicit request =>
-    println("id "+ id +"  third id "+thirdId)
+    //println("id "+ id +"  third id "+thirdId)
     val  result =AdvertDao.modifyAdvert(id,thirdId)
     if (result>0)Ok(Json.obj("code"->"100","message"->"success"))
     else Ok(Json.obj("code"->"104","message"->"更新失败"))

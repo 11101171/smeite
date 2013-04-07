@@ -66,7 +66,7 @@ object TopicDao {
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for(c<-Topics.drop(startRow).take(pageSize) if c.groupId===groupId  if c.checkState === 1 ) yield(c)
-    println(" q sql "+q.selectStatement)
+    //println(" q sql "+q.selectStatement)
     val topics:List[Topic]=  q.list()
     Page[Topic](topics,currentPage,totalPages);
   }
@@ -78,7 +78,7 @@ object TopicDao {
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for(c<-Topics.drop(startRow).take(pageSize) if c.uid===uid  ) yield(c)
-    println(" q sql "+q.selectStatement)
+    //println(" q sql "+q.selectStatement)
     val topics:List[Topic]=  q.list()
     Page[Topic](topics,currentPage,totalPages);
   }
@@ -91,7 +91,7 @@ object TopicDao {
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for(c<-Topics.drop(startRow).take(pageSize)  ) yield(c)
-    println(" q sql "+q.selectStatement)
+    //println(" q sql "+q.selectStatement)
     val topics:List[Topic]=  q.list()
     Page[Topic](topics,currentPage,totalPages);
   }
@@ -102,7 +102,7 @@ object TopicDao {
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for(c<-Topics.sortBy(c=>(c.isBest,c.addTime,c.replyNum.desc)).drop(startRow).take(pageSize) if c.groupId===groupId   if c.title.like("%"+text+"%") if c.checkState ===1   ) yield(c)
-    println(" q sql "+q.selectStatement)
+    //println(" q sql "+q.selectStatement)
     val topics:List[Topic]=  q.list()
     Page[Topic](topics,currentPage,totalPages);
 
@@ -131,7 +131,7 @@ object TopicDao {
       u<-Users
       if c.uid===u.id
  }yield(u.id~u.name~u.pic~c.id~c.title~c.replyNum~c.loveNum~c.hotIndex)
-    println(query.selectStatement)
+    //println(query.selectStatement)
     query.take(nums).list
   }
 
@@ -144,7 +144,7 @@ object TopicDao {
       if c.typeId===typeId
       if c.groupId===groupId
     }yield(u.id~u.name~u.pic~c.id~c.title~c.replyNum~c.loveNum~c.hotIndex)
-    println(query.selectStatement)
+    //println(query.selectStatement)
     query.take(nums).list
   }
 
@@ -171,11 +171,11 @@ object TopicDao {
   def findReplies(topicId:Long,currentPage: Int, pageSize: Int): Page[TopicReply] = database.withSession {  implicit session:Session =>
     val totalRows =Query(TopicReplies.filter(_.topicId === topicId).length).first
     val totalPages=((totalRows + pageSize - 1) / pageSize);
-    println("totalPages " +totalPages)
+    //println("totalPages " +totalPages)
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for(c<-TopicReplies.drop(startRow).take(pageSize) if c.topicId===topicId  ) yield(c)
-    println(" q sql "+q.selectStatement)
+    //println(" q sql "+q.selectStatement)
     val replies:List[TopicReply]=  q.list()
     Page[TopicReply](replies,currentPage,totalPages);
   }
@@ -183,7 +183,7 @@ object TopicDao {
   def findTopicReplies(topicId:Long,currentPage:Int,pageSize:Int):Page[(String,String,Long,Long,Option[String],String,Int,Timestamp)]  = database.withSession {  implicit session:Session =>
     val totalRows =Query(TopicReplies.filter(_.topicId === topicId).length).first
     val totalPages=((totalRows + pageSize - 1) / pageSize);
-    println("totalPages " +totalPages)
+    //println("totalPages " +totalPages)
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for{
@@ -200,11 +200,11 @@ object TopicDao {
   def findAllReplies(currentPage: Int, pageSize: Int): Page[TopicReply] = database.withSession {  implicit session:Session =>
     val totalRows =Query(TopicReplies.length).first
     val totalPages=((totalRows + pageSize - 1) / pageSize);
-    println("totalPages " +totalPages)
+    //println("totalPages " +totalPages)
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for(c<-TopicReplies.drop(startRow).take(pageSize)  ) yield(c)
-    println(" q sql "+q.selectStatement)
+    //println(" q sql "+q.selectStatement)
     val replies:List[TopicReply]=  q.list()
     Page[TopicReply](replies,currentPage,totalPages);
 
@@ -219,7 +219,7 @@ object TopicDao {
      if(!isTop.isEmpty) query = query.filter(_.isTop === isTop.get)
      if(!isBest.isEmpty) query = query.filter(_.isBest === isBest.get)
     query = query.sortBy(_.id desc)
-     println("sql " +query.selectStatement)
+     //println("sql " +query.selectStatement)
      val totalRows=query.list().length
      val totalPages=((totalRows + pageSize - 1) / pageSize);
      val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
@@ -233,7 +233,7 @@ object TopicDao {
        var query = for(c<-TopicReplies)yield c
        if(!checkState.isEmpty) query = query.filter(_.checkState === checkState.get)
        query = query.sortBy(_.id desc)
-       println("sql " +query.selectStatement)
+       //println("sql " +query.selectStatement)
        val totalRows=query.list().length
        val totalPages=((totalRows + pageSize - 1) / pageSize);
        val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }

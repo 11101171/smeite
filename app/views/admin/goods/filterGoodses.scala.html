@@ -168,7 +168,7 @@
                     <td>@item.volume</td>
                     <td>@item.price</td>
                     <td>@item.promotionPrice</td>
-                    <td><a href="@controllers.routes.Goods.view(item.id.get)"><img src='@(item.pic+"_80x80.jpg")' width="80" height="80"></a></td>
+                    <td><a href="@controllers.routes.Goods.view(item.id.get)" target="_blank"><img src='@(item.pic+"_80x80.jpg")' width="80" height="80"></a></td>
                     <td>@if(item.isMember){<span class="label label-success">YES</span>}else{<span class="label">NO</span>} </td>
                     <td>@if(item.status==1){<span class="label label-success">上架</span>}else{<span class="label">下架</span>}</td>
                     <td>@item.collectTime   </td>

@@ -237,7 +237,7 @@ object Themes extends Controller {
     if(user.isEmpty)Ok(Json.obj("code" -> "200", "message" ->"你还没有登录" ))
     else {
       val themeId = (request.body \ "themeId").as[Long]
-      println("add Follow theme id " +themeId)
+    //  println("add Follow theme id " +themeId)
      val loveTheme=UserDao.checkLoveTheme(user.get.id.get,themeId);
       if(!loveTheme.isEmpty) Ok(Json.obj("code" -> "103", "message" ->"你已经喜欢了"))
       else { UserDao.addLoveTheme(user.get.id.get,themeId);   Ok(Json.obj("code" -> "100", "message" ->"成功"))}
@@ -251,7 +251,7 @@ object Themes extends Controller {
     if(user.isEmpty)Ok(Json.obj("code" -> "200", "message" ->"你还没有登录"))
     else {
       val themeId = (request.body \ "themeId").as[Long]
-      println("add Follow theme id " +themeId)
+      //println("add Follow theme id " +themeId)
        UserDao.deleteLoveTheme(user.get.id.get,themeId);
       Ok(Json.obj("code" -> "100", "message" ->"成功"))
 

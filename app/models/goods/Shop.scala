@@ -69,7 +69,7 @@ object ShopDao {
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for(c<- Shops.drop(startRow).take(pageSize)  ) yield(c)
-    println(" q sql "+q.selectStatement)
+    //println(" q sql "+q.selectStatement)
     val shops:List[Shop]=  q.list()
     Page[Shop](shops,currentPage,totalPages);
   }

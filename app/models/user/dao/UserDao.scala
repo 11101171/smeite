@@ -41,7 +41,7 @@ object UserDao {
   /*find By id*/
   def findById(uid:Long):User = database.withSession{  implicit session:Session =>
     Cache.getOrElse[User]("user_"+uid) {
-      println("get it from db")
+      //println("get it from db")
       val user = Users.findById(uid)
       if(!user.isEmpty){
         Cache.set("user_"+uid,user.get)
@@ -124,7 +124,7 @@ object UserDao {
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     var q=  for(c<-Users.sortBy(_.id desc).drop(startRow).take(pageSize)) yield(c)
 
-    println(" q sql "+q.selectStatement)
+    //println(" q sql "+q.selectStatement)
     val users:List[User]=  q.list()
     Page[User](users,currentPage,totalPages);
   }
@@ -134,7 +134,7 @@ object UserDao {
    * */
   def  findInterestedUser(uid:Long,nums:Int):List[User] = database.withSession {  implicit session:Session =>
     val query =  for(c<-Users  if c.id notIn (for (f<-UserFollows if f.fansId === uid)yield f.uid ))yield c
-    println("query sql : "+query.selectStatement)
+    //println("query sql : "+query.selectStatement)
     query.sortBy(_.credits).take(nums).list()
   }
   /*
@@ -143,13 +143,13 @@ object UserDao {
  * */
   def changeFriends(uid:Long, ids:List[Long], nums:Int =5):List[User] = database.withSession {  implicit session:Session =>
     val query =  for(c<-Users  if c.id  notIn (for (f<-UserFollows if f.fansId === uid)yield f.uid ))yield c
-    println("query sql : "+query.selectStatement)
+    //println("query sql : "+query.selectStatement)
     query.sortBy(_.credits desc).take(nums).list
   }
   /* 推荐 用户*/
   def recommendUser(credits:Int,nums:Int):List[User] = database.withSession {  implicit session:Session =>
     val query =  for(c<-Users if c.credits > credits )yield c
-    println("query sql : "+query.selectStatement)
+    //println("query sql : "+query.selectStatement)
     query.sortBy(_.credits desc).take(nums).list()
   }
 
@@ -207,7 +207,7 @@ object UserDao {
       c<-Users
       if uf.fansId===c.id
     } yield(c)
-    println(" q sql "+q.selectStatement)
+    //println(" q sql "+q.selectStatement)
     val users:List[User]=q.list()
     Page[User](users,currentPage,totalPages);
   }
@@ -222,7 +222,7 @@ object UserDao {
       c<-Users
       if uf.uid===c.id
     } yield(c)
-    println(" q sql "+q.selectStatement)
+    //println(" q sql "+q.selectStatement)
     val users:List[User]=  q.list()
     Page[User](users,currentPage,totalPages);
   }
@@ -313,7 +313,7 @@ object UserDao {
 
    //   (t,tg)  <- Themes leftJoin  ThemeGoodses.filter(_.themeId in ( for( ut<-UserLoveThemes.filter(_.uid === uid).sortBy(_.addTime desc).drop(startRow).take(pageSize) )yield ut.themeId))    on(_.id === _.themeId)
      }yield(t.id,t.name,t.intro,t.loveNum,tg.goodsPic.?)
-    println(" love themes " +query.selectStatement )
+    //println(" love themes " +query.selectStatement )
     val themes:List[((Long,String,String,Int),List[Option[String]])] =query.list().groupBy(x=>(x._1,x._2,x._3,x._4)).map(x=>(x._1,x._2.take(5).map(y=>y._5))).toList
     Page[((Long,String,String,Int),List[Option[String]])](themes,currentPage,totalPages)
   }
@@ -365,7 +365,7 @@ object UserDao {
         t <- Topics
       if ult.topicId === t.id
     }yield(t)
-    println("query " +query.selectStatement)
+    //println("query " +query.selectStatement)
     val topics:List[Topic]= query.list()
     Page[Topic](topics,currentPage,totalPages)
   }
@@ -445,7 +445,7 @@ object UserDao {
     if(idOrder == "desc") query =query.sortBy(_.id desc ) else query =query.sortBy(_.id asc )
     if(creditsOrder=="desc") query =query.sortBy(_.credits desc ) else query =query.sortBy(_.credits asc )
     if(shiDouOrder=="desc") query =query.sortBy(_.shiDou desc ) else query =query.sortBy(_.shiDou asc )
-    println("sql " +query.selectStatement)
+    //println("sql " +query.selectStatement)
     val totalRows=query.list().length
     val totalPages=((totalRows + pageSize - 1) / pageSize);
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
