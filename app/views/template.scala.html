@@ -27,13 +27,7 @@
 
             </div>
             <div class="hd-right">
-            <div class="search" id="search">
-                <form action="/search" method="get">
-                  <input class="search-input-keyword" type="text" autocomplete="off" data-placeholder="懒得逛了，我搜～" name="keyword">
-                    <button class="header-search-button" type="submit">搜索</button>
-                </form>
 
-            </div>
               @if(user.isEmpty){
             <div class="gm-third-login">
                 <a href='@controllers.users.routes.UsersSnsLogin.snsLogin("sina","syn")' data-type="third" class="third-login gm-login-sina" target="_blank">微博登录</a>
@@ -41,6 +35,12 @@
                 <a href='@controllers.users.routes.UsersSnsLogin.snsLogin("taobao","syn")' data-type="third" class="third-login gm-login-taobao" target="_blank">淘宝登录</a>
             </div>
                  }
+                <div class="search" id="search">
+                    <form action="/search" method="get">
+                        <input class="search-input-keyword" type="text" autocomplete="off" data-placeholder="懒得逛了，我搜～" name="keyword">
+                        <button class="header-search-button" type="submit">搜索</button>
+                    </form>
+                </div>
             </div>
         </div>
 

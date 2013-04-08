@@ -2275,7 +2275,7 @@ body .redactor_toolbar li a.redactor_btn_alignment	 		{ background-position: -62
 
 .header  .search {
     position: relative;
-    float: left;
+    float:right;
     width: 298px;
     height: 24px;
     border: 1px solid #ccc;
@@ -2333,7 +2333,7 @@ body .redactor_toolbar li a.redactor_btn_alignment	 		{ background-position: -62
 
 .header  .gm-third-login a {
     display: block;
-    float: left;
+    float: right;
     width: 58px;
     height: 26px;
     padding-left: 32px;
