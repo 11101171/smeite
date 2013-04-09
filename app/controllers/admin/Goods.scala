@@ -29,7 +29,7 @@ case class TaobaokeItem(
  volume:Int,
  price:String,
  promotionPrice:String,
-commission:Int
+ commission:String
                          )
 
 object Goods extends Controller {
@@ -90,7 +90,7 @@ object Goods extends Controller {
         "volume" -> JsNumber(o.volume),
         "price" -> JsString(o.price),
         "promotionPrice" ->JsString(o.promotionPrice),
-        "commission" -> JsNumber(o.commission)
+        "commission" -> JsString(o.commission)
       )
     )
     def reads(json: JsValue): JsResult[TaobaokeItem] = JsSuccess(TaobaokeItem(
@@ -99,7 +99,7 @@ object Goods extends Controller {
       (json \ "volume").as[Int],
       (json \ "price").as[String],
       (json \ "promotion_price").as[String],
-      (json \ "commission").as[Int]
+      (json \ "commission").as[String]
     )
     )
   }
@@ -252,7 +252,7 @@ object Goods extends Controller {
   def collectGoodses = Action(parse.json) {  implicit request =>
   val items =Json.fromJson[Array[TaobaokeItem]](request.body).get
   for(item <- items){
-    GoodsDao.updateTaobaoke(item.numIid,item.title,item.volume,item.price,item.promotionPrice,item.commission)
+    GoodsDao.updateTaobaoke(item.numIid,item.title,item.volume,item.price,item.promotionPrice,(item.commission.toFloat*100).toInt)
   }
      Ok(Json.obj("code"->"100","msg"->items.length))
   }
