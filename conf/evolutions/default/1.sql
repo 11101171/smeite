@@ -1184,4 +1184,7 @@ alter  table theme change  add_time   add_time timestamp ;
 alter table theme_goods add sort_num smallint(10) not null default '0';
 alter table tag_goods add  sort_num  smallint(10) not null default '0';
 
+/*2013-4-9*/
+alter table goods change hot_index commission smallint(10) not null default '0';
+
 

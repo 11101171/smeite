@@ -36,7 +36,7 @@ case class Goods(
                   volume: Int,
                   status: Int,
                   isMember: Boolean,
-                  hotIndex: Int,
+                  commission: Option[Int],
                   collectTime:Option[Timestamp],
                   addTime:Option[Timestamp]
                   )
@@ -58,10 +58,10 @@ object Goodses extends Table[Goods]("goods") {
   def volume = column[Int]("volume")
   def status = column[Int]("status")
   def isMember = column[Boolean]("is_member")
-  def hotIndex = column[Int]("hot_index")
+  def commission = column[Int]("commission")
   def collectTime=column[Timestamp]("collect_time")
   def addTime=column[Timestamp]("add_time")
-  def * = id.? ~ numIid ~ trackIid.? ~ name ~ intro ~ desc.? ~ price ~ pic ~ itemPics ~ nick ~ promotionPrice.? ~ detailUrl ~ loveNum ~ volume ~ status ~ isMember ~ hotIndex ~ collectTime.? ~ addTime.? <>(Goods, Goods.unapply _)
+  def * = id.? ~ numIid ~ trackIid.? ~ name ~ intro ~ desc.? ~ price ~ pic ~ itemPics ~ nick ~ promotionPrice.? ~ detailUrl ~ loveNum ~ volume ~ status ~ isMember ~ commission.? ~ collectTime.? ~ addTime.? <>(Goods, Goods.unapply _)
   def autoInc = numIid  ~ name ~ intro ~ price ~ pic ~ itemPics ~ nick  ~ detailUrl  returning id
 
 
