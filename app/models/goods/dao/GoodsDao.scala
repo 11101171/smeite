@@ -38,6 +38,9 @@ object GoodsDao {
   def modifyStatus(goodsId:Long,status:Int) = database.withSession {  implicit session:Session =>
     (for (c<-Goodses if c.id === goodsId)yield c.status ).update(status)
   }
+  def modifyRate(goodsId:Long,rate:Int) = database.withSession {  implicit session:Session =>
+    (for (c<-Goodses if c.id === goodsId)yield c.rate ).update(rate)
+  }
  def modifyIsMember(goodsId:Long,isMember:Boolean) =  database.withSession {  implicit session:Session =>
    (for (c<-Goodses if c.id === goodsId)yield c.isMember ).update(isMember)
  }

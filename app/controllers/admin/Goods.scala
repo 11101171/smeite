@@ -19,7 +19,7 @@ import play.api.mvc.Cookie
 
 
 case class GoodsFormData(id:Long,isMember:Boolean,loveNum:Int,intro:String,promotionPrice:Option[String],name:String,pic:String)
-case class GoodsBatchFormData(action:Int,ids:Seq[Long],url:Option[String])
+case class GoodsBatchFormData(action:Int,ids:Seq[Long],rates:Seq[Int],url:Option[String])
 case  class GoodsFilterFormData(goodsId:Option[Long],status:Option[Int],isMember:Option[Boolean],idOrder:Option[String],collectTimeOrder:Option[String],loveNumOrder:Option[String],currentPage:Option[Int])
 case  class GoodsCollectFormData(title:String,numIid:Long,price:String,volume:Int,promotionPrice:Option[String])
 case  class AssessFilterFormData(checkState:Option[Int],currentPage:Option[Int])
@@ -50,6 +50,7 @@ object Goods extends Controller {
     mapping(
       "action"->number,
       "ids"->seq(longNumber),
+      "rates"->seq(number),
       "url"->optional(text)
     )(GoodsBatchFormData.apply)(GoodsBatchFormData.unapply)
   )
@@ -203,6 +204,10 @@ object Goods extends Controller {
             for(id<-batch.ids){
               GoodsDao.deleteGoods(id)
             }
+          } else if(batch.action ==5){
+            for((id,i)<-batch.ids.view.zipWithIndex){
+              GoodsDao.modifyRate(id,batch.rates(i))
+            }
           }
           Redirect(batch.url.getOrElse("/admin/goods/list"))
         }
@@ -252,7 +257,7 @@ object Goods extends Controller {
   def collectGoodses = Action(parse.json) {  implicit request =>
   val items =Json.fromJson[Array[TaobaokeItem]](request.body).get
   for(item <- items){
-    println(item.commissionRate.toFloat.toInt)
+   // println(item.commissionRate.toFloat.toInt)
     GoodsDao.updateTaobaoke(item.numIid,item.title,item.volume,item.price,item.promotionPrice,item.commissionRate.toFloat.toInt)
   }
      Ok(Json.obj("code"->"100","msg"->items.length))

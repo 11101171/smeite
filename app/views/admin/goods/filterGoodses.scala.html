@@ -137,6 +137,7 @@
                     <option value="2">批量推荐</option>
                     <option value="3">批量取消推荐</option>
                     <option value="4">批量删除</option>
+                    <option value="5">批量修改返积分比例</option>
                 </select>
                 <button class="btn btn-info" id="J_batchAction" data-toggle="modal" data-target="#J_batchModal">
                     批量处理
@@ -155,7 +156,7 @@
                     <th>佣金比例</th>
                     <th>返还比例</th>
                     <th>图片</th>
-                    <th>会员推荐</th>
+                    <th>是否推荐</th>
                     <th>状态</th>
                     <th>采集时间</th>
                     <th style="width: 60px;">操作</th>
@@ -171,7 +172,7 @@
                     <td>@item.price</td>
                     <td>@item.promotionPrice</td>
                     <td>@(item.commissionRate.getOrElse(0)*0.01)%</td>
-                    <td>@(item.rate*0.01)</td>
+                    <td><input type="number" name="rates[@i]" value="@item.rate"></td>
                     <td><a href="@controllers.routes.Goods.view(item.id.get)" target="_blank"><img src='@(item.pic+"_80x80.jpg")' width="80" height="80"></a></td>
                     <td>@if(item.isMember){<span class="label label-success">YES</span>}else{<span class="label">NO</span>} </td>
                     <td>@if(item.status==1){<span class="label label-success">上架</span>}else{<span class="label">下架</span>}</td>
