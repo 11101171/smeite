@@ -8,12 +8,12 @@ package utils
  * To change this template use File | Settings | File Templates.
  */
 object CreditsConfig {
-        /*注册送积分*/
-  val regCredits:Int = 10
+  /*注册送集分宝*/
+  val regCredits:Int = 1
   /*发布主题 10*/
-  val postThemeCredits:Int = 10
+  val postThemeCredits:Int = 1
   /*发布商品 10*/
-  val postBaobeiCredits:Int = 10
+  val postBaobeiCredits:Int = 2
   /*创建话题 10*/
-  val postTopicCredits:Int = 10
+  val postTopicCredits:Int = 1
 }

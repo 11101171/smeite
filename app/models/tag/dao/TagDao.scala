@@ -104,7 +104,7 @@ object TagDao {
    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
    val q = for{
      ((g,a),u)<- Goodses.sortBy(_.collectTime desc).filter(_.id in ( ids.drop(startRow).take(pageSize))) leftJoin  GoodsAssesses.filter(_.checkState===1)  on (_.id ===_.goodsId) leftJoin Users on (_._2.uid === _.id)
-   }yield(g.commission,g.id,g.name,g.pic,g.loveNum,g.price,g.promotionPrice.?,g.intro,u.id.?,u.name.?,u.pic.?,a.content.?)
+   }yield(g.commissionRate,g.id,g.name,g.pic,g.loveNum,g.price,g.promotionPrice.?,g.intro,u.id.?,u.name.?,u.pic.?,a.content.?)
    val list:List[((Int,Long,String,String,Int,String,Option[String],String),List[(Option[Long],Option[String],Option[String],Option[String])])] = q.list.groupBy(x=>(x._1,x._2,x._3,x._4,x._5,x._6,x._7,x._8)).map(x=>(x._1,x._2.map(y=>(y._9,y._10,y._11,y._12)))).toList
    Page(list,currentPage,totalPages)
   }

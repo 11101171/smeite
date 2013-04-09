@@ -34,7 +34,7 @@ title =  "发现喜欢_"+ cate +"_"+tag +"_食美特，爱美食爱特色"
   <div class="goods-wall s1024" id="J_GoodsWall">
     <div class="section">
 
-        @for((((commission,goodsId,goodsName,goodsPic,goodsLoveNum,goodsPrice,goodsPromotionPrice,goodsIntro),comments),i)<-page.items.view.zipWithIndex) {
+        @for((((commissionRate,goodsId,goodsName,goodsPic,goodsLoveNum,goodsPrice,goodsPromotionPrice,goodsIntro),comments),i)<-page.items.view.zipWithIndex) {
 
         <div class="goods small @if((i+1)%4==0){last} ">
             <div class="goods-pic">

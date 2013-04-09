@@ -113,11 +113,10 @@ object Users extends Controller {
   * @cate： 类型 主题 话题 人
   * */
   def follow(id:Long,p:Int) = UserAction{ user => implicit request =>
-    val credits=0;
     val num:Int =8;
     val  author=UserDao.findById(id)
     val page=UserDao.findFollows(id,p,10)
-    val users:List[User]= if(user.isEmpty)UserDao.recommendUser(credits,num)else UserDao.findInterestedUser(user.get.id.get,num);
+    val users:List[User]= if(user.isEmpty)UserDao.recommendUser(0,num)else UserDao.findInterestedUser(user.get.id.get,num);
     Ok(views.html.users.follow(user,author,page,users))
   }
 

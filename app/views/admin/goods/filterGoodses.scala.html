@@ -152,7 +152,8 @@
                     <th>月销售量</th>
                     <th>价格</th>
                     <th>促销价格</th>
-                    <th>佣金</th>
+                    <th>佣金比例</th>
+                    <th>返还比例</th>
                     <th>图片</th>
                     <th>会员推荐</th>
                     <th>状态</th>
@@ -169,7 +170,8 @@
                     <td>@item.volume</td>
                     <td>@item.price</td>
                     <td>@item.promotionPrice</td>
-                    <td>@item.commission</td>
+                    <td>@(item.commissionRate.getOrElse(0)*0.01)%</td>
+                    <td>@(item.rate*0.01)</td>
                     <td><a href="@controllers.routes.Goods.view(item.id.get)" target="_blank"><img src='@(item.pic+"_80x80.jpg")' width="80" height="80"></a></td>
                     <td>@if(item.isMember){<span class="label label-success">YES</span>}else{<span class="label">NO</span>} </td>
                     <td>@if(item.status==1){<span class="label label-success">上架</span>}else{<span class="label">下架</span>}</td>

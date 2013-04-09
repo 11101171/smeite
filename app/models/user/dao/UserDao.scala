@@ -74,14 +74,14 @@ object UserDao {
   def addSnsUser(name:String,comeFrom:Int,openId:String,pic:String) =database.withSession{ implicit  session:Session =>
     val id = Users.autoInc3.insert(name,comeFrom,openId,pic)
     /* 添加积分 */
-    UserSQLDao.updateCredits(id,CreditsConfig.regCredits)
+ //   UserSQLDao.updateCredits(id,CreditsConfig.regCredits)
     UserProfiles.autoInc.insert(id,new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis()),"sns")
   }
   /*用户通过网站注册 * */
   def addSmeiteUser(name:String, passwd:String, email:String,ip:String)=database.withSession{ implicit  session:Session =>
     val id = Users.autoInc2.insert(name,Codecs.sha1("smeite"+passwd),email)
     /* 添加积分 */
-    UserSQLDao.updateCredits(id,CreditsConfig.regCredits)
+  //  UserSQLDao.updateCredits(id,CreditsConfig.regCredits)
 
     UserProfiles.autoInc.insert(id,new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis()),ip)
   }
