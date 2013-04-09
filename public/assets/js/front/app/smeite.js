@@ -1598,7 +1598,7 @@ define(function(require, exports) {
             }
             var href = window.location.href;
             if(href.indexOf("/user/login")==-1 && href.indexOf("/user/doEmailLogin")==-1&& href.indexOf("/user/regist")==-1){
-                if("no" != $.cookie("refererGuide")){
+                if("no" != $.cookie("refererGuide") && referer !="smeite"){
                     posGuide();
                 }
             }

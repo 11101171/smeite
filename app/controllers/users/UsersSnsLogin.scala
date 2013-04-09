@@ -64,7 +64,7 @@ object UsersSnsLogin extends Controller {
          val user=UserDao.checkSnsUser(3,openId);
          var uid:Long = 0;
         if (user.isEmpty){
-             UserDao.addSnsUser( java.net.URLDecoder.decode(nick,"UTF-8"),3,openId,"/u/default.jpg");
+             UserDao.addSnsUser( java.net.URLDecoder.decode(nick,"UTF-8"),3,openId,"/images/user/default.jpg");
           val u=UserDao.checkSnsUser(3,openId);
               Cache.set(u.get.id.get.toString,u);
           uid = u.get.id.get
