@@ -2326,50 +2326,6 @@ body .redactor_toolbar li a.redactor_btn_alignment	 		{ background-position: -62
     background-position: 0 -88px
 }
 
-.header  .gm-third-login {
-    float: left;
-    margin-left: 10px
-}
-
-.header  .gm-third-login a {
-    display: block;
-    float: right;
-    width: 58px;
-    height: 26px;
-    padding-left: 32px;
-    color: #fff;
-    line-height: 26px
-}
-
-.header  .gm-login-sina {
-    background: #eb5055 url(images/bg_header.png) 10px -112px no-repeat
-}
-
-.header  .gm-login-sina:hover {
-    background-color: #d13f44;
-    background-position: 10px -138px
-}
-
-.header  .gm-login-qq {
-    background: #449bb5 url(images/bg_header.png) 10px -164px no-repeat
-}
-
-.header  .gm-login-qq:hover {
-    background-color: #2b7f99;
-    background-position: 10px -190px
-}
-
-.header  .gm-login-taobao {
-    background: #ff9900 url(images/bg_header.png) 10px -216px no-repeat
-}
-
-.header  .gm-login-taobao:hover {
-    background-color: #ff6600;
-    background-position: 10px -242px
-}
-
-
-
 /*全局 导航样式*/
 /*
  * 样式文件

@@ -1,9 +1,9 @@
 @(user:Option[models.user.User],author:models.user.User,theme:models.theme.Theme,style:models.theme.ThemeStyle,goodses:List[models.goods.Goods],themes:List[models.theme.Theme])
 @views.html.template(
 user,
-title = theme.name+"  _ 食美特，爱美食爱特色",
+title = theme.name+"  _ 食美特，爱美食爱生活",
 keywords =   theme.tags.getOrElse("食美特"),
-description =  theme.intro.getOrElse("食美特，爱美食爱特色")
+description =  theme.intro.getOrElse("食美特，爱美食爱生活")
 )(css="/assets/css/template/theme.detail.css") {
 <style>
     body{

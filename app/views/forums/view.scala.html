@@ -1,7 +1,7 @@
 @(user:Option[models.user.User],topic:(models.user.User,models.forum.Topic),page:models.Page[(String,String,Long,Long,Option[String],String,Int,java.sql.Timestamp)],topics:List[(Long, String, String, Long, String, Int, Int, Int)])
 @views.html.template(
 user,
-title = topic._2.title+"_讨论吧_广场_食美特，爱美食爱特色",
+title = topic._2.title+"_讨论吧_广场_食美特，爱美食爱生活",
 description =  topic._2.intro
 )(css="/assets/css/template/forum.css") {
 <div class="container discuss" id="forum">

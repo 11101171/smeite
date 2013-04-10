@@ -1527,7 +1527,7 @@ define(function(require, exports) {
         if(refererUrl.indexOf("weibo")>0) referer="weibo"
         function addToFav(o){
             var url = "http://smeite.com";
-            var title = "食美特，爱美食爱特色";
+            var title = "食美特，爱美食爱生活";
             if (window.sidebar) { // Mozilla Firefox Bookmark
                 window.sidebar.addPanel(title, url,"");
             } else if( window.external&&document.all) { // IE Favorite
@@ -1749,7 +1749,7 @@ define(function(require, exports) {
             var input=$(".search-input-keyword");
             var inputVal=input.val();
             inputVal=$.smeite.util.trim(inputVal);
-            if(inputVal=="懒得逛了，我搜～"){
+            if(inputVal=="请输入您想要搜索的淘宝商品网址或者关键词"){
                 input.val("");
                 input.focus();
                 return false;
@@ -1765,7 +1765,7 @@ define(function(require, exports) {
             $("#search").addClass("typing")
             var self=$(this);
             var inputVal=$.smeite.util.trim(self.val());
-            if(inputVal=="懒得逛了，我搜～"){
+            if(inputVal=="请输入您想要搜索的淘宝商品网址或者关键词"){
                 self.val("");
             }
         });
@@ -1791,7 +1791,7 @@ define(function(require, exports) {
             var self=$(this);
             var inputVal=$.smeite.util.trim(self.val());
             if(inputVal==""){
-                self.val("懒得逛了，我搜～");
+                self.val("请输入您想要搜索的淘宝商品网址或者关键词");
             }
         });
 

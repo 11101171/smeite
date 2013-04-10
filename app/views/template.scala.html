@@ -1,4 +1,4 @@
-@(user:Option[models.user.User]=None,nav:String = "",subNav:String = "",title: String = "食美特，爱美食爱特色",keywords:String = "食美特,美食,创意,特产,礼物,居家,导购,smeite,坚果,巧克力,zakka,简约",description:String = "Smeite.com致力于发现绿色安全、健康美味的食品，推荐美观实用、简约实惠的家居用品以及充满创意的好玩意。我们严格把控商品的品质，用心创造一个值得信赖的购物分享社区。我们所做的一切，就是通过我们的努力，为更多的消费者提供更有效、更有价值的购物决策建议")(css:String)(content: Html)(js:Html)
+@(user:Option[models.user.User]=None,nav:String = "",subNav:String = "",title: String = "食美特，爱美食爱生活",keywords:String = "食美特,美食,创意,特产,礼物,居家,导购,smeite,坚果,巧克力,zakka,简约",description:String = "Smeite.com致力于发现绿色安全、健康美味的食品，推荐美观实用、简约实惠的家居用品以及充满创意的好玩意。我们严格把控商品的品质，用心创造一个值得信赖的购物分享社区。我们所做的一切，就是通过我们的努力，为更多的消费者提供更有效、更有价值的购物决策建议")(css:String)(content: Html)(js:Html)
 <!doctype html>
 <html>
 <head>
@@ -22,22 +22,15 @@
             <div class="hd-left">
            <a href="/" class="logo">
            <span class="logo-img"> <img src="/assets/ui/logo.png" /></span>
-            <span class="logo-intro">&nbsp;•&nbsp;爱生活爱美食</span>
+            <span class="logo-intro">&nbsp;•&nbsp;爱美食爱生活</span>
            </a>
 
             </div>
             <div class="hd-right">
 
-              @if(user.isEmpty){
-            <div class="gm-third-login">
-                <a href='@controllers.users.routes.UsersSnsLogin.snsLogin("sina","syn")' data-type="third" class="third-login gm-login-sina" target="_blank">微博登录</a>
-                <a href='@controllers.users.routes.UsersSnsLogin.snsLogin("qzone","syn")' data-type="third" class="third-login gm-login-qq" target="_blank">QQ登录</a>
-                <a href='@controllers.users.routes.UsersSnsLogin.snsLogin("taobao","syn")' data-type="third" class="third-login gm-login-taobao" target="_blank">淘宝登录</a>
-            </div>
-                 }
                 <div class="search" id="search">
                     <form action="/search" method="get">
-                        <input class="search-input-keyword" type="text" autocomplete="off" data-placeholder="懒得逛了，我搜～" name="keyword">
+                        <input class="search-input-keyword" type="text" autocomplete="off" data-placeholder="请输入您想要搜索的淘宝商品网址或者关键词" name="keyword">
                         <button class="header-search-button" type="submit">搜索</button>
                     </form>
                 </div>
@@ -79,8 +72,8 @@
             </div>
             @if(user.isEmpty){
             <div  class="regLogin fr clearfix">
-                <a rel="loginD" href="javascript:;">登录</a><span class="vline5">|</span><a href="/user/regist">注册</a>
-                <span class="vline5">|</span>
+                <a rel="loginD" href="javascript:;">登录</a><span class="vline5">-</span><a href="/user/regist">注册</a>
+                <span class="vline5">-</span>
 
             </div>
             }else{
@@ -147,7 +140,7 @@
             <dl class="how">
                 <dt>爱上食美特</dt>
                 <dd><a href="/jie" target="_blank">爱美食</a></dd>
-                <dd><a href="/miss" target="_blank">爱特色</a></dd>
+                <dd><a href="/miss" target="_blank">爱生活</a></dd>
 
 
             </dl>
