@@ -174,8 +174,7 @@ object API extends Controller {
         /*处理 user share goods*/
         val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
         UserDao.addShareGoods(user.get.id.get,goodsId)
-        /* 用户分享一个商品 获得一个食豆 */
-        UserSQLDao.updateShiDou(user.get.id.get,1)
+
     Ok(Json.obj("code"->"100","productId"->goodsId ,"pic"->product.pic , "message"->"success"))
   }
 

@@ -17,7 +17,7 @@ import models.goods.dao.GoodsDao
 import models.goods.dao.GoodsSQLDao
 import models.theme.dao.ThemeDao
 import models.forum.dao.TopicDao
-import utils.CreditsConfig
+import utils.ShiDouConfig
 
 
 /*
@@ -74,14 +74,14 @@ object UserDao {
   def addSnsUser(name:String,comeFrom:Int,openId:String,pic:String) =database.withSession{ implicit  session:Session =>
     val id = Users.autoInc3.insert(name,comeFrom,openId,pic)
     /* 添加积分 */
- //   UserSQLDao.updateCredits(id,CreditsConfig.regCredits)
+ //   UserSQLDao.updateCredits(id,ShiDouConfig.regCredits)
     UserProfiles.autoInc.insert(id,new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis()),"sns")
   }
   /*用户通过网站注册 * */
   def addSmeiteUser(name:String, passwd:String, email:String,ip:String)=database.withSession{ implicit  session:Session =>
     val id = Users.autoInc2.insert(name,Codecs.sha1("smeite"+passwd),email)
     /* 添加积分 */
-  //  UserSQLDao.updateCredits(id,CreditsConfig.regCredits)
+  //  UserSQLDao.updateCredits(id,ShiDouConfig.regCredits)
 
     UserProfiles.autoInc.insert(id,new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis()),ip)
   }
@@ -381,8 +381,8 @@ object UserDao {
     val goods =GoodsDao.findById(goodsId)
     /*保存用户动作*/
     addTrend(UserTrend(None,uid,"发布了宝贝",goods.get.id.get,"/goods/"+goods.get.id.get,goods.get.name,None))
-    /* 添加积分 */
-    UserSQLDao.updateCredits(uid,CreditsConfig.postBaobeiCredits)
+    /* 用户分享一个商品 获得一个食豆 */
+    UserSQLDao.updateShiDou(uid,ShiDouConfig.postBaobeiShiDou)
     UserShareGoodses.autoInc.insert(uid,goodsId)
 
   }
