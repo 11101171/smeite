@@ -174,4 +174,10 @@ object Users extends Controller {
     Ok(views.html.users.appraisal(user,author,page,userLoveGoods))
   }
 
+  /*用户的积分 动态*/
+  def credits(id:Long) = UserAction{ user => implicit request =>
+    val  author=UserDao.findById(id)
+    Ok(views.html.users.credits(user,author))
+  }
+
 }

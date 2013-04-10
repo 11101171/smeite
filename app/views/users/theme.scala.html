@@ -11,7 +11,7 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱特
                             <img src="@author.pic" alt="@author">@author.name
                         </a>
                     </li>
-                    <!--<li><a href="@controllers.users.routes.Users.trend(author.id.get)">@author.trendNum<br>动态</a></li>-->
+                    <li><a href="@controllers.users.routes.Users.credits(author.id.get)">N+<br>集分宝</a></li>
                     <li><a href="@controllers.users.routes.Users.baobei(author.id.get)">@(author.postBaobeiNum+author.loveBaobeiNum)<br>宝贝</a></li>
                     <li class="cur"><a href="@controllers.users.routes.Users.theme(author.id.get)">@(author.postThemeNum+author.loveThemeNum)<br>主题</a></li>
                     <li><a href="@controllers.users.routes.Users.square(author.id.get)">@(author.postTopicNum+author.loveTopicNum)<br>讨论</a></li>

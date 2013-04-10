@@ -12,15 +12,33 @@ import models.user.dao.UserDao
  */
 object UsersCommission  extends Controller {
 
- def cashBack= Users.UserAction {user => implicit request =>
+/*我的返利*/
+ def myCredits= Users.UserAction {user => implicit request =>
     if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)
     else {
-      if(user.get.email.isEmpty){
-        Redirect(controllers.users.routes.UsersRegLogin.before())
-      }else {
-        Ok(views.html.users.commission.cashBack()
-      }
+        Ok(views.html.users.commission.myCredits(user))
     }
+  }
+  /*我的食豆*/
+  def myShiDou = Users.UserAction {user => implicit request =>
+    if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)
+    else {
+      Ok(views.html.users.commission.myShiDou(user) )
+    }
+  }
+  /* user account 用户账户 我的奖品 */
+  def myAward = Users.UserAction {    user => implicit request =>
+    if(user.isEmpty)  Redirect(controllers.users.routes.UsersRegLogin.login)
+    else  Ok(views.html.users.commission.myAward(user))
 
   }
+
+  /*邀请有奖*/
+  /* user account 用户账户 邀请好友 */
+  def invite = Users.UserAction {  user => implicit request =>
+    if(user.isEmpty)  Redirect(controllers.users.routes.UsersRegLogin.login)
+    else   Ok(views.html.users.commission.invite(user))
+  }
+
+
 }

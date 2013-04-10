@@ -779,3 +779,23 @@
     float: right;
     position: static
 }
+/*help*/
+.help .help-title {
+    font-weight: bold;
+    font-size: 14px;
+    height: 45px;
+    line-height: 45px
+}
+
+.help ul {
+    margin-left: 20px;
+    line-height: 30px
+}
+
+.help ul li {
+    list-style-type: disc
+}
+
+.help ul li a {
+    color: #666
+}

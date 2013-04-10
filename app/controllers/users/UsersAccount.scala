@@ -96,12 +96,7 @@ object UsersAccount  extends Controller {
     }
   }
 
-  /* user account 用户账户 账号绑定 */
-  def bind = Users.UserAction {  user => implicit request =>
-    if(user.isEmpty)  Redirect(controllers.users.routes.UsersRegLogin.login)
-    else  Ok(views.html.users.account.bind(user))
 
-  }
 
   /* user account 用户账户 修改密码 */
   def passwd = Users.UserAction { user => implicit request =>
@@ -127,16 +122,12 @@ object UsersAccount  extends Controller {
     }
   }
 
-  /* user account 用户账户 邀请好友 */
-  def invite = Users.UserAction {  user => implicit request =>
-    if(user.isEmpty)  Redirect(controllers.users.routes.UsersRegLogin.login)
-    else   Ok(views.html.users.account.invite(user))
-  }
 
-  /* user account 用户账户 我的奖品 */
-  def award = Users.UserAction {    user => implicit request =>
+
+  /* 设置支付宝 */
+  def payment = Users.UserAction {    user => implicit request =>
    if(user.isEmpty)  Redirect(controllers.users.routes.UsersRegLogin.login)
-   else  Ok(views.html.users.account.award(user))
+   else  Ok(views.html.users.account.payment(user))
 
   }
 

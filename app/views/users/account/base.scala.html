@@ -8,10 +8,8 @@ user
             <h2>帐号设置</h2>
             <ul>
                 <li> <a  class="on" href="@controllers.users.routes.UsersAccount.base">基本信息</a> </li>
-                <!--   <li> <a  href="@controllers.users.routes.UsersAccount.bind">帐号绑定</a>  </li>-->
                 <li> <a  href="@controllers.users.routes.UsersAccount.passwd">修改密码</a>  </li>
-                <!--  <li> <a  href="@controllers.users.routes.UsersAccount.invite">邀请好友</a>   </li>-->
-                <li> <a   href="@controllers.users.routes.UsersAccount.award">我的奖品</a>  </li>
+                <li> <a   href="@controllers.users.routes.UsersAccount.payment">设置支付宝</a>  </li>
                 <li> <a href="@controllers.users.routes.UsersAccount.address">收货地址</a> </li>
             </ul>
         </div>
@@ -91,6 +89,7 @@ user
 <script type="text/javascript">
     var address = '@baseForm("province").value|@baseForm("city").value';
     var brithday = '@baseForm("year").value';
+
     seajs.use("app/init",function(init){
         init.load("app/user/user.setting");
     });

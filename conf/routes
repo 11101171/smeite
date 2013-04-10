@@ -44,6 +44,7 @@ GET    /forum/removeFollow          controllers.Forums.removeFollow(topicId:Long
 
 GET    /user/$id<[0-9]+>                          controllers.users.Users.home(id:Long)
 GET    /user/$id<[0-9]+>/trend                    controllers.users.Users.trend(id:Long)
+GET    /user/$id<[0-9]+>/credits                    controllers.users.Users.credits(id:Long)
 GET    /user/$id<[0-9]+>/baobei                   controllers.users.Users.baobei(id:Long,t:String ?="share",p:Int ?=1)
 GET    /user/$id<[0-9]+>/theme                   controllers.users.Users.theme(id:Long,t:String ?="my",p:Int ?=1)
 GET    /user/$id<[0-9]+>/square                   controllers.users.Users.square(id:Long,t:String ?="my",p:Int ?=1)
@@ -62,14 +63,16 @@ GET    /user/getUserInterested              controllers.users.Users.getUserInter
 #user 用户设定页面
 GET   /user/account/base           controllers.users.UsersAccount.base
 POST  /user/account/saveBase       controllers.users.UsersAccount.saveBase
-GET   /user/account/bind           controllers.users.UsersAccount.bind
 GET   /user/account/passwd           controllers.users.UsersAccount.passwd
 POST  /user/account/modifyPasswd     controllers.users.UsersAccount.modifyPasswd
-GET   /user/account/invite           controllers.users.UsersAccount.invite
-GET   /user/account/award           controllers.users.UsersAccount.award
 GET   /user/account/address           controllers.users.UsersAccount.address
 POST  /user/account/saveAddr          controllers.users.UsersAccount.saveAddress
-
+GET   /user/account/payment            controllers.users.UsersAccount.payment
+#user 用户返利
+GET   /user/account/myCredits           controllers.users.UsersCommission.myCredits
+GET   /user/account/myShiDou          controllers.users.UsersCommission.myShiDou
+GET   /user/account/myAward           controllers.users.UsersCommission.myAward
+GET   /user/account/invite           controllers.users.UsersCommission.invite
 #user 用户登录注册
 GET   /user/login                    controllers.users.UsersRegLogin.login
 GET   /user/logout                   controllers.users.UsersRegLogin.logout

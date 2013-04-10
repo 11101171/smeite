@@ -1,0 +1,38 @@
+@(user:Option[models.user.User])
+@views.html.template(
+user
+)(css="/assets/css/template/user.setting.css") {
+             <div class="container" id="account">
+                 <div class="content clearfix">
+                 <div class="side-nav">
+                     <h2>我的返利</h2>
+                     <ul>
+                         <li> <a  href="@controllers.users.routes.UsersCommission.myCredits">我的集分宝</a> </li>
+                         <li> <a  href="@controllers.users.routes.UsersCommission.myShiDou">我的食豆</a>  </li>
+                         <li> <a class="on" href="@controllers.users.routes.UsersCommission.myAward">我的奖品</a>  </li>
+                         <li> <a href="@controllers.users.routes.UsersCommission.invite">邀请有奖</a> </li>
+                     </ul>
+                 </div>
+                 <!--side nav end-->
+                 <div class="main-content">
+                     <div class="award">
+                         <div class="no-award">
+                             <p>sorry，食美特没有找到关于你的中奖信息！</p>
+
+                             <p>你可以先去完善下<a href="@controllers.users.routes.UsersAccount.address">收货地址</a>吧。有几个活动或许你感兴趣！</p>
+
+
+                         </div>
+                     </div>
+                 </div>
+                 <!-- end -->
+                 </div>
+             </div>
+
+        }{
+<script type="text/javascript">
+    seajs.use("app/init", function(init){
+        //  init.load("app/user.award");
+    });
+</script>
+}
