@@ -25,7 +25,6 @@ case class Goods(
                   trackIid:Option[String],
                   name: String,
                   intro: String,
-                  desc: Option[String],
                   price:String,
                   pic: String,
                   itemPics: String,
@@ -48,7 +47,6 @@ object Goodses extends Table[Goods]("goods") {
   def trackIid = column[String]("track_iid")
   def name = column[String]("name")
   def intro = column[String]("intro")
-  def desc =column[String]("desc")
   def price =column[String]("price")
   def pic = column[String]("pic")
   def itemPics = column[String]("item_pics")
@@ -63,7 +61,7 @@ object Goodses extends Table[Goods]("goods") {
   def commissionRate = column[Int]("commission_rate")
   def collectTime=column[Timestamp]("collect_time")
   def addTime=column[Timestamp]("add_time")
-  def * = id.? ~ numIid ~ trackIid.? ~ name ~ intro ~ desc.? ~ price ~ pic ~ itemPics ~ nick ~ promotionPrice.? ~ detailUrl ~ loveNum ~ volume ~ status ~ isMember ~ rate ~ commissionRate.? ~ collectTime.? ~ addTime.? <>(Goods, Goods.unapply _)
+  def * = id.? ~ numIid ~ trackIid.? ~ name ~ intro ~ price ~ pic ~ itemPics ~ nick ~ promotionPrice.? ~ detailUrl ~ loveNum ~ volume ~ status ~ isMember ~ rate ~ commissionRate.? ~ collectTime.? ~ addTime.? <>(Goods, Goods.unapply _)
   def autoInc = numIid  ~ name ~ intro ~ price ~ pic ~ itemPics ~ nick  ~ detailUrl  returning id
 
 
