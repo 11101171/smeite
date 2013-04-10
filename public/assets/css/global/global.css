@@ -2222,23 +2222,15 @@ body .redactor_toolbar li a.redactor_btn_alignment	 		{ background-position: -62
 */
 
 .header {
+position:relative;
     height: 63px;
     background-color: #fff;
     /*background: url(images/header-bg.png) repeat-x;*/
 }
-.header .hd-left {
-    float: left;
-    display: inline-block;
-    width: 235px;
-    margin-top: 10px;
-}
-.header .hd-right{
-    float: right;
-    width: 600px;
-    display: inline-block;
-    margin-top:20px;
-}
+
 #header .logo{
+    margin-top: 10px;
+    float: left;
     display: block;
     height: 50px;
     cursor: pointer;
@@ -2263,68 +2255,58 @@ body .redactor_toolbar li a.redactor_btn_alignment	 		{ background-position: -62
     line-height: 50px;
 }
 
-
-
-#header .follow {
-    float: left;
-    width: 180px;
-    height: 35px;
-
-    overflow: hidden;
-}
-
 .header  .search {
-    position: relative;
-    float:right;
-    width: 298px;
-    height: 24px;
-    border: 1px solid #ccc;
-    background: #fff
+position:relative;
+    float: right;
+}
+.search-form{
+position:relative;
+float:left;
+ width: 405px;
+    margin-top:25px;
+    height:30px;
+    background:url(images/header-search.png) no-repeat 0 0 transparent;
+}
+.search-form  .search-input-keyword{
+position: absolute;
+top: 2px;
+left: 2px;
+width: 336px;
+height: 26px;
+border:0;
+color:#ddd;
+background-color: #f6f6f6;
+}
+.search-form .typing input{
+color:#333;
+background-color: #fff;
+}
+.search-form  .header-search-button{
+text-indent: -99px;
+position: absolute;
+top: 0;
+right: 0;
+display: block;
+width: 77px;
+height: 35px;
+border: 0;
+background: none;
+text-indent: -99px;
+cursor: pointer;
+overflow: hidden;
+}
+.search-intro{
+color: #fff;
+text-indent: -9999px;
+display:block;
+margin-top: 8px;
+margin-left: 40px;
+width:80px;
+height:45px;
+float:right;
+ background:url(images/search-intro.jpg) no-repeat 0 0 transparent;
 }
 
-.header  .search:hover {
-    border-color: #b3b3b3
-}
-
-.header  .search .emptyhint {
-    top: 0;
-    left: 7px;
-    color: #999
-}
-
-.header  .search button {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: block;
-    width: 23px;
-    height: 24px;
-    border: 0;
-    background: #ccc url(images/bg_header.png) 0 -65px no-repeat;
-    text-indent: -99px;
-    cursor: pointer;
-    overflow: hidden
-}
-
-.header  .search input {
-    display: block;
-    width: 265px;
-    padding: 5px 0 3px 10px;
-    height: 14px;
-    height: 13 px\9;
-    _height: 12px;
-    font-size: 12px;
-    border: 0
-}
-
-.header  .typing input {
-    background: #fffee0
-}
-
-.header  .typing button {
-    background-color: #669932;
-    background-position: 0 -88px
-}
 
 /*全局 导航样式*/
 /*
@@ -2334,13 +2316,12 @@ body .redactor_toolbar li a.redactor_btn_alignment	 		{ background-position: -62
  * Time: 下午10:26
  * 维护：zuosanshao@qq.com
 */
-
+#top{
+    width:100%;
+}
 #nav{
     height: 40px;
-    width:100%;
-    /*  background: url(images/nav-bg.png) repeat-x scroll 0 0 transparent;*/
     margin-bottom: 20px;
-    z-index: 999;
     background-color: #fff;
     border-bottom: 2px solid #666;
 }

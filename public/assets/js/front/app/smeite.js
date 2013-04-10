@@ -1815,10 +1815,13 @@ define(function(require, exports) {
                 var docScrollTop = $(document).scrollTop();
                 //IOS平台如iphone、ipad、ipod不执行导航滚动
                 if(!$.smeite.util.isIOS()){
-                    if(docScrollTop > 63){ $("#nav").addClass("fixed")
-                    }else{
-                        $("#nav").removeClass("fixed");
-                    };
+                   if(docScrollTop >0){
+                        $("#top").addClass("fixed")
+
+                   }else{
+                       $("#top").removeClass("fixed")
+
+                  };
                 }
             });
         }else{
