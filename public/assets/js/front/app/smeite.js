@@ -1770,13 +1770,13 @@ define(function(require, exports) {
                 input.focus();
                 return false;
             }
-        //    form.submit()
+
 
             form.submit(function(){
-                   /* if($.smeite.util.validSite(inputVal)){
+                    if($.smeite.util.validSite(inputVal)){
                         var numIid= $.smeite.util.getUrlParam(inputVal,'id');
                         $("#J_keyword").val(numIid)
-                    }*/
+                    }
                 });
         });
 
