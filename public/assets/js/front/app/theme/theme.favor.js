@@ -12,7 +12,6 @@
  */
 define(function(require, exports){
 	var $ = jQuery = require("jquery");
-	require("app/smeite.favor");
     /* 主题关注操作*/
     $(".follow-theme").live("click",function(){
         if(!$.smeite.dialog.isLogin()){

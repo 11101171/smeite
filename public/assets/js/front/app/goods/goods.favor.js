@@ -12,7 +12,6 @@
  */
 define(function(require, exports){
     var $ = jQuery = require("jquery");
-    require("app/smeite.favor");
 $(".ilike-m").live("click",function(){
     var $this = $(this);
     if($this.data("enable") == "disable"){

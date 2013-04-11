@@ -2222,15 +2222,23 @@ body .redactor_toolbar li a.redactor_btn_alignment	 		{ background-position: -62
 */
 
 .header {
-position:relative;
     height: 63px;
     background-color: #fff;
     /*background: url(images/header-bg.png) repeat-x;*/
 }
-
-#header .logo{
-    margin-top: 10px;
+.header .hd-left {
     float: left;
+    display: inline-block;
+    width: 235px;
+    margin-top: 10px;
+}
+.header .hd-right{
+    float: right;
+    width: 600px;
+    display: inline-block;
+    margin-top:20px;
+}
+#header .logo{
     display: block;
     height: 50px;
     cursor: pointer;
@@ -2255,56 +2263,78 @@ position:relative;
     line-height: 50px;
 }
 
+
+
 .header  .search {
-position:relative;
+    position: relative;
     float: right;
+    width:348px;
+    height: 24px;
+    border: 1px solid #ccc;
+    background: #fff
 }
-.search-form{
-position:relative;
-float:left;
- width: 405px;
-    margin-top:25px;
-    height:30px;
-    background:url(images/header-search.png) no-repeat 0 0 transparent;
+
+.header  .search:hover {
+    border-color: #b3b3b3
 }
-.search-form  .search-input-keyword{
-position: absolute;
-top: 2px;
-left: 2px;
-width: 336px;
-height: 26px;
-border:0;
-color:#ddd;
-background-color: #f6f6f6;
+
+.header  .search .emptyhint {
+    top: 0;
+    left: 7px;
+    color: #999
 }
-.search-form .typing input{
-color:#333;
-background-color: #fff;
+
+.header  .search button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 23px;
+    height: 24px;
+    border: 0;
+    background: #ccc url(images/search.png) 0px 0px no-repeat;
+    text-indent: -99px;
+    cursor: pointer;
+    overflow: hidden
 }
-.search-form  .header-search-button{
-text-indent: -99px;
-position: absolute;
-top: 0;
-right: 0;
-display: block;
-width: 77px;
-height: 35px;
-border: 0;
-background: none;
-text-indent: -99px;
-cursor: pointer;
-overflow: hidden;
+
+.header  .search input {
+    display: block;
+    width: 315px;
+    padding: 5px 0 3px 10px;
+    height: 14px;
+    height: 13 px\9;
+    _height: 12px;
+    font-size: 12px;
+    color: #999;
+    border: 0
 }
-.search-intro{
-color: #fff;
-text-indent: -9999px;
-display:block;
-margin-top: 8px;
-margin-left: 40px;
-width:80px;
-height:45px;
-float:right;
- background:url(images/search-intro.jpg) no-repeat 0 0 transparent;
+
+.header  .typing input {
+    background: #fffee0;
+    color: #333;
+}
+
+.header  .typing button {
+    background-color: #669932;
+    background-position: 0 -24px
+}
+
+.header  .gm-third-login {
+    float: right;
+    margin-left: 30px
+}
+
+.header  .gm-third-login a {
+    display: block;
+    float: right;
+    width: 120px;
+    height: 30px;
+    font-size: 14px;
+    font-weight: bolder;
+    line-height: 30px;
+    color: #E26;
+
 }
 
 

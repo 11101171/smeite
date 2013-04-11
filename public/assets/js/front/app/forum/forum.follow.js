@@ -12,9 +12,6 @@
  */
 define(function(require, exports) {
     var $ = jQuery = require("jquery");
-    require("app/smeite.favor");
-	
-
 
     /* 关注 topic*/
     $(".follow-topic").live("click",function(){

@@ -29,7 +29,7 @@ seajs.config({
     },
     //预加载基础文件
     preload: [
-       'jquery','smeite',
+       'smeite',
         this.JSON ? '' : 'json'
     ],
     debug : false,

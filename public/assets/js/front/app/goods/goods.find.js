@@ -27,26 +27,6 @@ define(function (require, exports) {
             }, 3E3) : b.attr("src", b.data("original"))
         });
         /*当鼠标移到goods上的效果*/
-       /* $(".goods").hover(function () {
-            var $this = $(this);
-            $this.addClass("cur-goods");
-            var goodsClone = $this.find(".goods-clone");
-            1 > goodsClone.length && (goodsClone = $this.html(), $this.append('<div class="goods-clone">' + goodsClone + "</div>"), goodsClone = $this.find(".goods-clone"));
-            goodsClone.fadeIn("fast");
-            goodsClone.slideDown("slow");
-         //   +"\v1" || $this.css({border: "1px #dedede solid"});
-            $this.find(".ilike-m")[0] && $this.find(".ilike-m").show();
-            $this.find(".ilike-del")[0] && $this.find(".ilike-del").show();
-            $this.find(".ilike-topic")[0] && $this.find(".ilike-topic").show()
-        }, function () {
-            var $this = $(this);
-            $this.removeClass("cur-goods");
-            var goodsClone = $this.find(".goods-clone");
-            1 == goodsClone.length && (goodsClone.fadeOut("fast"), goodsClone.slideUp("slow"), +"\v1" || goodsClone.css({border: "1px #fff solid"}));
-            $this.find(".ilike-m")[0] && $this.find(".ilike-m").hide();
-            $this.find(".ilike-del")[0] && $this.find(".ilike-del").hide();
-            $this.find(".ilike-topic")[0] && $this.find(".ilike-topic").hide()
-        });*/
         $(".goods").hover(function () {
             var a = $(this);
             a.addClass("cur-goods");
@@ -74,9 +54,9 @@ define(function (require, exports) {
             a.find(".ilike-del")[0] && a.find(".ilike-del").hide();
             a.find(".ilike-topic")[0] && a.find(".ilike-topic").hide()
         });
-        var c = window.location.href;
+       /* var c = window.location.href;
         -1 != c.indexOf("find") && 2 < c.split("find")[1].split("/").length && ($("#J_GoodsTitle").offset(), $("html, body").animate({scrollTop: 93}, 120));
-
+*/
         $(".pagin4faxian .current").hover(function () {
             var b = this;
             this.timeout && clearTimeout(this.timeout);
@@ -98,7 +78,7 @@ define(function (require, exports) {
                 $(".pagin4faxian ul").fadeOut()
             }, 200)
         });
-        c = $(".section:last");
+       var c = $(".section:last");
         5 >= c.find(".goods").length && c.height(660)
     });
 
