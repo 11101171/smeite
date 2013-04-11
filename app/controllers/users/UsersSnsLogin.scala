@@ -75,7 +75,11 @@ object UsersSnsLogin extends Controller {
        /*
        * 第三步 返回result
        * */
-       Redirect(controllers.users.routes.Users.home(uid)).withSession("user" -> uid.toString)
+       if (backType=="asyn"){
+         Ok(views.html.users.snsLogin.asynLogin("qzone")).withSession("user" -> uid.toString)
+       }else{
+         Redirect(controllers.users.routes.Users.home(uid)).withSession("user" -> uid.toString)
+       }
      }
       /*
       * qzone 登录 第一步获取token 第二步 获取用户的openId  第三步 获取用户信息  第四步 处理用户信息
