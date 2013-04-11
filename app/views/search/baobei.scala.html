@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],page:models.Page[((Int,Long,String,String,Int,String,Option[String],String),List[(Option[Long],Option[String],Option[String],Option[String])])],keyword:String,t:String )
+@(user:Option[models.user.User],page:models.Page[((Int,Long,String,String,Int,String,Option[String],String),List[(Option[Long],Option[String],Option[String],Option[String])])],keyword:String )
 @views.html.template(
 user,
 nav="find",
@@ -83,13 +83,13 @@ title = "宝贝搜索结果_食美特，爱美食爱生活"
                 @if(num==page.currentPage){
                 <li><span>第 @num 页</span></li>
                 }else {
-                <li><a href="@controllers.routes.Search.search(keyword,t,num)">第@num 页</a></li>
+                <li><a href="@controllers.routes.Search.search(keyword,num)">第@num 页</a></li>
                 }
                 }
             </ul>
 
             <span class="current">第 @page.currentPage 页</span>
-            <a title="翻翻下一页" href="@controllers.routes.Search.search(keyword,t,page.currentPage+1)" class="next">翻翻下一页&gt;</a>
+            <a title="翻翻下一页" href="@controllers.routes.Search.search(keyword,page.currentPage+1)" class="next">翻翻下一页&gt;</a>
         </div>
     </div>
     <!--翻页 end-->

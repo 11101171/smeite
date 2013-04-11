@@ -17,7 +17,7 @@ GET     /choice                            controllers.Pages.choice
 
 
 # Search
-GET    /search                            controllers.Search.search(keyword:String,t:String ?="b",p:Int ?=1)
+GET    /search                            controllers.Search.search(item:String,p:Int ?=1)
 
 # 广告管理
 POST     /advert/clickAdv           controllers.Adverts.click

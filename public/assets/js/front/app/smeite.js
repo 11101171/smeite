@@ -28,9 +28,12 @@ define(function(require, exports) {
         util: {
             //获取url参数名
             getUrlParam : function(paramName){
-                var reg = new RegExp("(^|&)"+ paramName +"=([^&]*)(&|$)");
-                var r = window.location.search.substr(1).match(reg);
-                if (r!=null) return unescape(r[2]); return null;
+                var reg = new RegExp("(^|\\?|&)"+ paramName +"=([^&]*)(\\s|&|$)", "i");
+                if (reg.test(location.href)) return unescape(RegExp.$2.replace(/\+/g, " ")); return "";
+            },
+            getUrlParam : function(url,paramName){
+                var reg = new RegExp("(^|\\?|&)"+ paramName +"=([^&]*)(\\s|&|$)", "i");
+                if (reg.test(url)) return unescape(RegExp.$2.replace(/\+/g, " ")); return "";
             },
             //判断是否ie6
             isIE6: function() {
@@ -110,6 +113,9 @@ define(function(require, exports) {
             isEmail: function(v) {
                 return /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(v);
             },
+            /*判断是否是url*/
+            isUrl:function(v){ return (new RegExp(/^[a-zA-z]+:\/\/([a-zA-Z0-9\-\.]+)([-\w .\/?%&=:]*)$/).test(v));
+            },
             //校验昵称是否合法
             isNick: function(v){
                 return /^[a-zA-Z\d\u4e00-\u9fa5_-]*$/.test(v);
@@ -184,7 +190,7 @@ define(function(require, exports) {
             validSite: function(url){
                 var domain = $.smeite.util.getDomain(url);
                 if(url.indexOf("smeite.com") != -1){
-                    return (domain == "smeite.com" && url.indexOf("baobei/") != -1) ? "smeite" : false;
+                    return (domain == "smeite.com" && url.indexOf("goods/") != -1) ? "smeite" : false;
                 }else if (url.indexOf("tmall.com") != -1) {
                     var curBool=true, bool1, bool2, bool3, boo4;
                     bool3 = (domain == "detail.tmall.com" || domain == "item.tmall.com") && (url.indexOf("item.htm?") != -1);
@@ -1367,7 +1373,6 @@ define(function(require, exports) {
                 success: function(data){
                     switch(data.code){
                         case "100" :
-
                             $.smeite.favor.loveBaobeiCallback(o);
                             break;
                         case "101":
@@ -1758,7 +1763,20 @@ define(function(require, exports) {
                 input.focus();
                 return false;
             }
-            form.submit();
+
+            if($.smeite.util.isUrl(inputVal) && !$.smeite.util.validSite(inputVal)){
+                $.smeite.tip.conf.tipClass = "tipmodal tipmodal-ok";
+                $.smeite.tip.show($this,"暂时还不支持这个网站呢~");
+                input.focus();
+                return false;
+            }
+              
+            form.submit(function(){
+                    if($.smeite.util.validSite(inputVal)){
+                        var numIid= $.smeite.util.getUrlParam(inputVal,'id');
+                        $("#J_keyword").val(numIid)
+                    }
+                });
         });
 
         $(".search-input-keyword").bind("click",function(){
@@ -1782,7 +1800,19 @@ define(function(require, exports) {
                     self.focus();
                     return false;
                 }
-                form.submit();
+                if($.smeite.util.isUrl(inputVal) && !$.smeite.util.validSite(inputVal)){
+                    $.smeite.tip.conf.tipClass = "tipmodal tipmodal-ok";
+                    $.smeite.tip.show($this,"暂时还不支持这个网站呢~");
+                    input.focus();
+                    return false;
+                }
+
+                form.submit(function(){
+                    if($.smeite.util.validSite(inputVal)){
+                        var numIid= $.smeite.util.getUrlParam(inputVal,'id');
+                        $("#J_keyword").val(numIid)
+                    }
+                });
             }
         });
 

@@ -472,3 +472,19 @@ span.tag-title {
 .pagin4faxian .next:hover {
     text-decoration: none
 }
+.n-s-no-result {
+height: 40px;
+line-height: 40px;
+background: #FEFBEA;
+border: 1px solid #E8E4CC;
+margin-top: 20px;
+}
+.n-s-no-result-des {
+margin-left: 10px;
+}
+.n-s-product-relative {
+font-size: 16px;
+font-weigh: bold;
+margin-right: 10px;
+font-family: 'Microsoft YaHei','黑体';
+}

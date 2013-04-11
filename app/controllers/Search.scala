@@ -4,6 +4,7 @@ import play.api.mvc.{Action, Controller}
 import models.tag.{ TagGoodses}
 import models.tag.dao.TagDao
 import users.Users
+import utils.Utils
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,14 +19,17 @@ object Search  extends Controller {
     * keywords 关键词
     * cate :分类：宝贝 、主题、人
     * */
-  def search(keyword:String,t:String,p:Int) =Users.UserAction {user => implicit request =>
-     if(t=="t"){
-      Ok(views.html.search.theme())
-     }else if (t =="u"){
-       Ok(views.html.search.user())
-     }else{
-         val page = TagDao.findTagGoodses(keyword,p,54)
-         Ok(views.html.search.baobei(user,page,keyword,t))
-     }
+  def search(keyword:String,p:Int) =Users.UserAction {user => implicit request =>
+
+        if(Utils.isValideUrl(keyword)){
+          val idStr =Utils.getURLParam(keyword,"id");
+          Ok("heee" +idStr)
+        }else{
+        val page = TagDao.findTagGoodses(keyword,p,54)
+        Ok(views.html.search.baobei(user,page,keyword))
+      }
+
+
+
   }
 }
