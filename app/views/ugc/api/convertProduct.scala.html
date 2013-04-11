@@ -1,9 +1,9 @@
-@(goods:models.goods.Goods,id:Long)
+@(numIid:Long,id:Long)
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>正在跳转 - @goods.name</title>
+    <title>正在跳转</title>
     <link href="/assets/css/base.css" rel="stylesheet" type="text/css" />
     <style>
 
@@ -24,7 +24,7 @@
         <div class="hd"><h3>正在跳转，请稍等...</h3></div>
         <div class="bd clearfix">
             <p class="loading-bar"></p>
-            <p align="center"><a name=manual href="@goods.detailUrl">请点这里</a> 直接跳转</p>
+            <p align="center"><a name=manual href="">请点这里</a> 直接跳转</p>
         </div>
     </div>
 </div>
@@ -32,11 +32,11 @@
 
 <script type="text/javascript">
 
-    var sellUrl="@goods.detailUrl";
+    var sellUrl="";
 
     TOP.api('rest','post',{
         method:'taobao.taobaoke.widget.items.convert',
-        num_iids:'@goods.numIid',
+        num_iids:'@numIid',
         outer_code:'@id',
         fields:'click_url,coupon_price,promotion_price,coupon_start_time'
     },function(resp){

@@ -32,10 +32,10 @@ object Utils {
     isMatch(regex,str);
   }
 
-  def isValideUrl(str:String):Boolean={
-    if(str.indexOf("tmall.com/item.htm?")!= -1 || str.indexOf("item.taobao.com/item.htm?") != -1) true
-    else  false
-  }
+ def isNumber(str:String):Boolean={
+   val regex:String="[0-9]*"
+   isMatch(regex,str)
+ }
    /*分析url的参数*/
   def analysisURL(url:String):Map[String, String]={
      val map=  Map[String, String]()

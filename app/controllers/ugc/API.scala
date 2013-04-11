@@ -201,18 +201,24 @@ object API extends Controller {
 
   /* 淘宝客 convert*/
   def convertProduct(numIid:Long) =Action{   implicit  request =>
-    val goods =GoodsDao.find(numIid)
+  //  val goods =GoodsDao.find(numIid)
     val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
     var id:Long =0;
      if(!user.isEmpty) id = user.get.id.get
-    if(goods.isEmpty) Ok(views.html.goods.nofound())
-    else{
+  //  if(goods.isEmpty) Ok(views.html.goods.nofound())
+  //  else{
       val timestamp= String.valueOf(System.currentTimeMillis)
       val sign=TaobaoConfig.getSign(timestamp)
-      Ok(views.html.ugc.api.convertProduct(goods.get,id)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
+      Ok(views.html.ugc.api.convertProduct(numIid,id)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
+  //  }
 
-    }
+  }
 
+  /* 淘宝客 go to taobao */
+  def gotoTaobao(numIid:Long) =Users.UserAction { user => implicit request =>
+      val timestamp= String.valueOf(System.currentTimeMillis)
+      val sign=TaobaoConfig.getSign(timestamp)
+      Ok(views.html.ugc.api.gotoTaobao(user,numIid)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
   }
   
   

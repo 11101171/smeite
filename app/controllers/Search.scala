@@ -21,9 +21,9 @@ object Search  extends Controller {
     * */
   def search(keyword:String,p:Int) =Users.UserAction {user => implicit request =>
 
-        if(Utils.isValideUrl(keyword)){
-          val idStr =Utils.getURLParam(keyword,"id");
-          Ok("heee" +idStr)
+        if(Utils.isNumber(keyword)){
+
+          Ok("heee" +keyword)
         }else{
         val page = TagDao.findTagGoodses(keyword,p,54)
         Ok(views.html.search.baobei(user,page,keyword))

@@ -149,6 +149,7 @@ GET   /bdsitemap.txt                                   controllers.Infos.baiduSi
 GET     /ugc/api/findProduct         controllers.ugc.API.findProduct(url:String)
 POST    /ugc/api/saveProduct         controllers.ugc.API.saveProduct
 GET     /ugc/api/convertProduct/$id<[0-9]+>        controllers.ugc.API.convertProduct(id:Long)
+GET     /ugc/api/gotoTaobao/$id<[0-9]+>        controllers.ugc.API.gotoTaobao(id:Long)
 POST    /ugc/api/updateProduct       controllers.ugc.API.updateProduct
 
 
