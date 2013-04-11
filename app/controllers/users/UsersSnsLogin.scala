@@ -133,6 +133,7 @@ object UsersSnsLogin extends Controller {
        if (backType=="asyn"){
          Ok(views.html.users.snsLogin.asynLogin("qzone")).withSession("user" -> uid.toString)
        }else{
+
          Redirect(controllers.users.routes.Users.home(uid)).withSession("user" -> uid.toString)
        }
      }
