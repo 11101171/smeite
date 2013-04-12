@@ -1211,3 +1211,15 @@ CREATE TABLE `user_static` (
 
 insert into user_static(uid,fans_num,follow_num,trend_num,love_baobei_num,love_theme_num,love_topic_num,post_baobei_num,post_theme_num,post_topic_num) select id,fans_num,follow_num,trend_num,love_baobei_num,love_theme_num,love_topic_num,post_baobei_num,post_theme_num,post_topic_num from user ;
 
+alter table user drop column fans_num;
+alter table user drop column follow_num;
+alter table user drop column trend_num;
+alter table user drop column love_baobei_num;
+alter table user drop column love_theme_num;
+alter table user drop column love_topic_num;
+alter table user drop column post_baobei_num;
+alter table user drop column post_theme_num;
+alter table user drop column post_topic_num;
+
+alter table user add  withdraw_credits  smallint(10) not null default '0';
+alter table user add  withdraw_shi_dou  smallint(10) not null default '0';
