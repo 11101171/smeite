@@ -3,22 +3,13 @@
 <html>
 <head>
     <title></title>
-    @if(snsType == "qzone"){
     <script>
         if(window.opener){
-            window.opener.followSmeite(100,"","qzone" ,"false",true);
+            window.opener.refresh(100,"","qzone" ,"false",true);
       }
         window.close();
     </script>
-    }else {
-    <script>
-        if(window.opener){
-            window.opener.followSmeite(100,"","sina" ,"false",true);
-        }
-        window.close();
-    </script>
 
-    }
 </head>
 <body>
 

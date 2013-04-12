@@ -135,8 +135,9 @@ GET   /agreement                                       controllers.Infos.agreeme
 GET   /aboutUs                                         controllers.Infos.aboutUs
 GET   /contactUs                                       controllers.Infos.contactUs
 GET   /sitemap                                         controllers.Infos.siteMap
-GET   /sitemap.xml                                         controllers.Infos.siteMap
 GET   /friends                                         controllers.Infos.friends
+GET   /jifenbao                                         controllers.Infos.jifenbao
+GET   /shiDou                                         controllers.Infos.shiDou
 GET   /jiucuo                                          controllers.Infos.jiucuo
 GET   /xtaoAuth.html                                   controllers.Infos.xtaoAuth
 GET   /wb_59dcb1f27fb8d6af.txt                         controllers.Infos.weiboAuth

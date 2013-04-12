@@ -1685,7 +1685,7 @@ define(function(require, exports) {
                 }
             });
         }
-        //授权登录后关注弹出层
+        //同步授权登录后关注弹出层
         window.followSmeite = function(code,msg,site,flag,refresh){
             if(code==444){
                 alert(msg);
@@ -1745,6 +1745,10 @@ define(function(require, exports) {
                     }
                 });
             }
+        }
+         /*异步授权登陆后*/
+        window.refresh=function(){
+            window.location.reload();
         }
 
         /* 搜索框效果 header 搜索框*/

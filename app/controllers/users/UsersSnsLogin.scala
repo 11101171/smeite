@@ -73,12 +73,12 @@ object UsersSnsLogin extends Controller {
           uid = user.get.id.get
         }
        /*
-       * 第三步 返回result
+       * 第三步 返回result   异步直接刷新，同步显示followSmeite
        * */
        if (backType=="asyn"){
          Ok(views.html.users.snsLogin.asynLogin("qzone")).withSession("user" -> uid.toString)
        }else{
-         Redirect(controllers.users.routes.Users.home(uid)).withSession("user" -> uid.toString)
+         Ok(views.html.users.snsLogin.synLogin("qzone")).withSession("user" -> uid.toString)
        }
      }
       /*
@@ -133,8 +133,7 @@ object UsersSnsLogin extends Controller {
        if (backType=="asyn"){
          Ok(views.html.users.snsLogin.asynLogin("qzone")).withSession("user" -> uid.toString)
        }else{
-
-         Redirect(controllers.users.routes.Users.home(uid)).withSession("user" -> uid.toString)
+         Ok(views.html.users.snsLogin.synLogin("qzone")).withSession("user" -> uid.toString)
        }
      }
      /* 新浪微博登陆 */
@@ -174,7 +173,7 @@ object UsersSnsLogin extends Controller {
        if (backType=="asyn"){
          Ok(views.html.users.snsLogin.asynLogin("sina")).withSession("user" -> uid.toString)
        }else{
-         Redirect(controllers.users.routes.Users.home(uid)).withSession("user" -> uid.toString)
+         Ok(views.html.users.snsLogin.synLogin("sina")).withSession("user" -> uid.toString)
        }
 
      } else{

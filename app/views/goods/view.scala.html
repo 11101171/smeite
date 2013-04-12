@@ -25,7 +25,6 @@ description = goods.intro
                     </a>
                 </div>
                 <div class="thumb clearfix" >
-                    <a rel="nofollow" class="thumb-nav-prev" href="javascript:;" title="上一组" ></a>
                     <div class="thumb-list scrollable">
                         <div class="items">
                             <ul class="clearfix">
@@ -39,7 +38,7 @@ description = goods.intro
                             </ul>
                         </div>
                     </div>
-                    <a rel="nofollow" class="thumb-nav-next" href="javascript:;" title="下一组" ></a>
+
                 </div>
             </div>
             <!--pic show end-->
@@ -49,44 +48,57 @@ description = goods.intro
         </div>
         <!-- aside begin -->
         <div class="side">
-
-
-
              <div class="buy-info">
-                 <div class="buy-box">
-                     <div class="clearfix" id="J_BuyBox">
-                         <h3 class="title"> @goods.name</h3>
-                         <div class="intro"><p>@goods.intro</p></div>
-
-
-                         <div class="buy-btn clearfix">
-                             <a class="op-btn clearfix" href="@controllers.ugc.routes.API.convertProduct(goods.numIid)" target="_blank" rel="nofollow">
-
-                                 @if(goods.promotionPrice.isEmpty){
-                                 <span class="current-price"> ¥@goods.price</span>
-                                 }else{
-                                 @if(goods.price!=goods.promotionPrice.get){
-                                 <span class="current-price"> ¥@goods.promotionPrice.get </span>
-                                 <span class="original-price"> ¥@goods.price </span>
-
-                                 }else{
-                                 <span class="current-price"> ¥@goods.price</span>
-                                 }
-                                 }
-                                 <span class="have-look">去看看 &gt;</span>
+                 <div class="intro">
+                     @if(goods.intro!=""){
+                     @goods.intro
+                     <span class="intro-quot"></span>
+                     }
+                 </div>
+                 <div class="first-share">
+                     <div class="user-info clearfix">
+                         <div class="pic fl">
+                             <a target="_blank" href="@controllers.users.routes.Users.home(firstShareUser.id.get)">
+                                 <img width="30" height="30" src="@firstShareUser.pic" alt="@firstShareUser.name" class="fl">
                              </a>
-                          </div>
-
-
-
+                         </div>
+                         <div class="info fl">
+                             <a target="_blank" href="@controllers.users.routes.Users.home(firstShareUser.id.get)" class="uname">@firstShareUser.name</a>
+                             <span>@firstShareUser.credits个<a href="/jifenbao">集分宝</a>，@firstShareUser.shiDou个<a href="/shiDou">食豆</a></span>&nbsp;&nbsp;&nbsp;<span class="come-from">来自 @models.user.ComeFrom(firstShareUser.comeFrom)</span>
+                         </div>
                      </div>
+                 </div>
+                 <div class="buy-box  clearfix">
+                     <dl class="buy-meta">
+                         <dt><h3 class="title"> @goods.name</h3></dt>
+                         <dd class="fl">价格：
+                             @if(goods.promotionPrice.isEmpty){
+                             <span class="price-normal"> ¥@goods.price</span>
+                             }else{
+
+                             <span class="price-promotion"> ¥@goods.promotionPrice.get </span>
+                             <span class="price-normal"> ¥@goods.price </span>
+                             }
+                           </dd>
+                         <dd class="fl">30天已售 @goods.volume</dd>
+                         <div class="clear"></div>
+                         @if(!goods.commissionRate.isEmpty && goods.commissionRate.get!=0){
+                         <dd>返利:<span>@if(goods.promotionPrice.isEmpty){ @(goods.price*goods.commissionRate.get*goods.rate) }else{ @(goods.promotionPrice.get*goods.commissionRate.get*goods.rate) } </span>&nbsp;<a href="/jifenbao">集分宝</a>，值<span>@if(goods.promotionPrice.isEmpty){ @(goods.price*goods.commissionRate.get*goods.rate) }else{ @(goods.promotionPrice.get*goods.commissionRate.get*goods.rate) }</span>元( 返利比例:<span>@(goods.commissionRate.get*goods.rate)</span>%,奖励<a href="/shiDou">食豆</a>：<span>1</span>个 )</dd>
+                         }
+                     </dl>
+                         @if(user.isEmpty){
+                         <a class="buy-btn" rel="loginD"  target="_blank" rel="nofollow">去看看 &gt; </a>
+                          }else{
+                          <a class="buy-btn"  href="@controllers.ugc.routes.API.convertProduct(goods.numIid)" target="_blank" rel="nofollow">去看看 &gt; </a>
+                     }
+                         <a class="buy-btn2" href="@controllers.ugc.routes.API.convertProduct(goods.numIid)">无须返利，直接购买&gt;&gt;</a>
 
                  </div>
                  <div class="operate">
                      <div class="clearfix">
                          <a rel="nofollow" class="info-wrong" href="javascript:;" id="J_JiuCuo" data-proid="488">信息有误？</a>
                          <div class="share fr">
-                             <span class="fl gc6">&nbsp;&nbsp;&nbsp;&nbsp;分享：</span>
+                             <span class="fl gc6">&nbsp;&nbsp;&nbsp;&nbsp;向好友推荐：</span>
                              <a  class="s-sina" href="javascript:void((function(){var title=encodeURIComponent('在食美特发现这个宝贝，很喜欢，分享给大家 : @goods.name ');var link='@controllers.routes.Goods.view(goods.id.get)';var pic='@goods.pic';window.open('http://service.t.sina.com.cn/share/share.php?appkey=1464940004&title='+title+'&pic='+pic+'&url='+link);})())" alt="分享到新浪微博" title="分享到新浪微博"></a>
                              <a  class="s-qzone" href="javascript:void((function(){var title=encodeURIComponent('在食美特发现这个宝贝，很喜欢，分享给大家 : @goods.name ');var link='@controllers.routes.Goods.view(goods.id.get)';window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+link);})())" alt="分享到QQ空间" title="分享到QQ空间"></a>
                              <a  class="s-tencent" href="javascript:void((function(){var title=encodeURIComponent('在食美特发现这个宝贝，很喜欢，分享给大家 : @goods.name ');var link='@controllers.routes.Goods.view(goods.id.get)';var pic='@goods.pic';window.open('http://v.t.qq.com/share/share.php?appkey=100344510&url='+link+'&title='+title+'&pic='+pic+'&site='+link);})())" alt="分享到腾讯微博" title="分享到腾讯微博"></a>
@@ -98,24 +110,7 @@ description = goods.intro
                  </div>
              </div>
 
-            <div class="first_share">
-                <h2 class="title">第一个分享的达人</h2>
-                <div class="share_user_info clearfix">
-                    <div class="pic fl">
-                        <a target="_blank" href="@controllers.users.routes.Users.home(firstShareUser.id.get)">
-                            <img width="80" height="80" src="@firstShareUser.pic" alt="@firstShareUser.name" class="icard avt fl r3">
-                        </a>
-                    </div>
-                    <div class="content">
-                        <a target="_blank" href="@controllers.users.routes.Users.home(firstShareUser.id.get)" class="icard avt uname">@firstShareUser.name</a>
 
-                        <span class="get_fav">拥有@firstShareUser.postBaobeiNum个宝贝，获得@firstShareUser.shiDou个食豆</span>
-
-                      <p class="share_content">TA很懒，还没有介绍自己哦</p>
-                        <p class="come_from">来自 @models.user.ComeFrom(firstShareUser.comeFrom)</p>
-                    </div>
-                </div>
-            </div>
             <!-- first share end  -->
 
 

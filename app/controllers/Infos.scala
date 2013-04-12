@@ -47,6 +47,15 @@ object Infos extends Controller {
     Ok(Json.obj("code"->"100","message"->"success"))
  }
 
+  /*集分宝介绍*/
+  def jifenbao = Users.UserAction { user => implicit request =>
+      Ok(views.html.infos.jifenbao(user))
+  }
+  /*食豆介绍*/
+  def shiDou = Users.UserAction { user => implicit request =>
+    Ok(views.html.infos.shiDou(user))
+  }
+
   // 淘宝客的验证
   def xtaoAuth =Action{
     Ok(views.html.infos.xtaoAuth())
