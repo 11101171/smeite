@@ -260,10 +260,16 @@ background: url(images/ico-quotation.png) no-repeat
 .side .buy-box  dd a{
     color: #5AD;
 }
-.side .buy-box   dd.fl{
-    width:200px;
+.side .buy-box dd.price,.side .buy-box dd.volume{
+    float: left;
     height: 35px;
     line-height: 35px;
+}
+.side .buy-box dd.price{
+    width: 250px;
+}
+.side .buy-box dd.volume{
+
 }
 .side .buy-box  dd span{
     color: #e26;

@@ -71,19 +71,22 @@ description = goods.intro
                  <div class="buy-box  clearfix">
                      <dl class="buy-meta">
                          <dt><h3 class="title"> @goods.name</h3></dt>
-                         <dd class="fl">价格：
+                         <dd class="price">价格：
                              @if(goods.promotionPrice.isEmpty){
                              <span class="price-normal"> ¥@goods.price</span>
                              }else{
-
                              <span class="price-promotion"> ¥@goods.promotionPrice.get </span>
                              <span class="price-normal"> ¥@goods.price </span>
                              }
                            </dd>
-                         <dd class="fl">30天已售 @goods.volume</dd>
+                         <dd class="volume">30天已售 @goods.volume</dd>
                          <div class="clear"></div>
                          @if(!goods.commissionRate.isEmpty && goods.commissionRate.get!=0){
-                         <dd>返利:<span>@if(goods.promotionPrice.isEmpty){ @(goods.price*goods.commissionRate.get*goods.rate) }else{ @(goods.promotionPrice.get*goods.commissionRate.get*goods.rate) } </span>&nbsp;<a href="/jifenbao">集分宝</a>，值<span>@if(goods.promotionPrice.isEmpty){ @(goods.price*goods.commissionRate.get*goods.rate) }else{ @(goods.promotionPrice.get*goods.commissionRate.get*goods.rate) }</span>元( 返利比例:<span>@(goods.commissionRate.get*goods.rate)</span>%,奖励<a href="/shiDou">食豆</a>：<span>1</span>个 )</dd>
+
+                         @defining( if(goods.promotionPrice.isEmpty){ ((goods.price.toDouble*goods.commissionRate.get*goods.rate*0.0001).toInt) }else{ ((goods.promotionPrice.get.toDouble*goods.commissionRate.get*goods.rate*0.0001).toInt) } ){ credits=>
+                         <dd>返利:&nbsp;<span> @credits</span>&nbsp;<a href="/jifenbao">集分宝</a>，值<span>@(credits/100.0)</span>元( 返利比例:<span>@(goods.commissionRate.get*goods.rate*0.01*0.01)</span>%,奖励<a href="/shiDou">食豆</a>：<span>1</span>个 )</dd>
+                        }
+
                          }
                      </dl>
                          @if(user.isEmpty){
