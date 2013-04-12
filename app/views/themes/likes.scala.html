@@ -132,7 +132,7 @@ description =theme.intro.get
                 <a class="ofh inlineblock" href="@controllers.users.routes.Users.home(u.id.get)">@u.name</a>
             </p>
 
-            <p class="baobeisum">@(u.loveBaobeiNum+u.postBaobeiNum)个关注的宝贝</p>
+            <p>集分宝(@(author.credits))&nbsp;/&nbsp;食豆(@(author.shiDou))</p>
             <a rel="follow" href="javascript:;" class="follow-btn" data-followtype="5" data-userid="@u.id" data-usernick="@u.name">加关注</a>
         </div>
     </li>
@@ -181,7 +181,7 @@ description =theme.intro.get
                 <div class="txt-title clearfix">
                     <a href="@controllers.users.routes.Users.home(author.id.get)" target="_blank"><em class="ofh inlineblock">@author.name</em></a> &nbsp;创建
                 </div>
-                <p>宝贝(@(author.loveBaobeiNum+author.postBaobeiNum))&nbsp;/&nbsp;主题(@(author.loveThemeNum+author.postThemeNum))</p>
+                <p>集分宝(@(author.credits))&nbsp;/&nbsp;食豆(@(author.shiDou))</p>
             </div>
         </div>
     </div>

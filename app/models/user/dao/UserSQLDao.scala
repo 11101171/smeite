@@ -21,33 +21,33 @@ object UserSQLDao {
 
   /* 添加 一个创建 theme num */
   def updatePostThemeNum(uid:Long,num:Int)=database.withSession {
-    sqlu"update user set post_theme_num =post_theme_num+$num where id =$uid".first
+    sqlu"update user_static set post_theme_num =post_theme_num+$num where id =$uid".first
   }
   def updateLoveThemeNum(uid:Long,num:Int)=database.withSession {
-    sqlu"update user set love_theme_num =love_theme_num+$num where id =$uid".first
+    sqlu"update user_static set love_theme_num =love_theme_num+$num where id =$uid".first
   }
   def updatePostBaobeiNum(uid:Long,num:Int)=database.withSession {
-    sqlu"update user set post_baobei_num =post_baobei_num+$num where id =$uid".first
+    sqlu"update user_static set post_baobei_num =post_baobei_num+$num where id =$uid".first
   }
   def updateLoveBaobeiNum(uid:Long,num:Int)=database.withSession {
-    sqlu"update user set love_baobei_num =love_baobei_num+$num where id =$uid".first
+    sqlu"update user_static set love_baobei_num =love_baobei_num+$num where id =$uid".first
   }
   def updatePostTopicNum(uid:Long,num:Int)=database.withSession {
-    sqlu"update user set post_topic_num =post_topic_num+$num where id =$uid".first
+    sqlu"update user_static set post_topic_num =post_topic_num+$num where id =$uid".first
   }
   def updateLoveTopicNum(uid:Long,num:Int)=database.withSession {
-    sqlu"update user set love_topic_num =love_topic_num+$num where id =$uid".first
+    sqlu"update user_static set love_topic_num =love_topic_num+$num where id =$uid".first
   }
 
   def updateFansNum(uid:Long,num:Int)=database.withSession {
-    sqlu"update user set fans_num = fans_num+$num where id =$uid".first
+    sqlu"update user_static set fans_num = fans_num+$num where id =$uid".first
   }
   def updateFollowNum(uid:Long,num:Int)=database.withSession {
-    sqlu"update user set follow_num =follow_num+$num where id =$uid".first
+    sqlu"update user_static set follow_num =follow_num+$num where id =$uid".first
   }
 
   def updateTrendNum(uid:Long,num:Int)=database.withSession {
-    sqlu"update user set trend_num = trend_num+$num where id =$uid".first
+    sqlu"update user_static set trend_num = trend_num+$num where id =$uid".first
   }
 
   def loginRecord(uid:Long,ip:String,num:Int)=database.withSession {

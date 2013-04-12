@@ -26,6 +26,8 @@
 
 
 
+
+
  #index advert
  insert into advert(position_code,name)values("index_flash","切换广告1");
  insert into advert(position_code,name)values("index_flash","切换广告2");

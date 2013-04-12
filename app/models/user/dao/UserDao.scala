@@ -49,6 +49,16 @@ object UserDao {
       user.get
     }
   }
+  def findStatic(uid:Long):UserStatic = database.withSession{  implicit session:Session =>
+    Cache.getOrElse[UserStatic]("user_static"+uid) {
+      //println("get it from db")
+      val userStatic = UserStatics.findByUid(uid)
+      if(!userStatic.isEmpty){
+        Cache.set("user_static"+uid,userStatic.get)
+      }
+      userStatic.get
+    }
+  }
   /* count user */
   def countUser:Int = database.withSession{  implicit session:Session =>
        Query(Users.length).first
@@ -75,6 +85,7 @@ object UserDao {
     val id = Users.autoInc3.insert(name,comeFrom,openId,pic)
     /* 添加积分 */
  //   UserSQLDao.updateCredits(id,ShiDouConfig.regCredits)
+    UserStatics.autoInc.insert(id)
     UserProfiles.autoInc.insert(id,new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis()),"sns")
   }
   /*用户通过网站注册 * */
@@ -82,7 +93,7 @@ object UserDao {
     val id = Users.autoInc2.insert(name,Codecs.sha1("smeite"+passwd),email)
     /* 添加积分 */
   //  UserSQLDao.updateCredits(id,ShiDouConfig.regCredits)
-
+    UserStatics.autoInc.insert(id)
     UserProfiles.autoInc.insert(id,new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis()),ip)
   }
   /*修改密码*/

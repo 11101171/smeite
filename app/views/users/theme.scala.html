@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],author:models.user.User,page:Page[((Long, String, String,Int),List[Option[String]])],t:String)
+@(user:Option[models.user.User],author:models.user.User,page:Page[((Long, String, String,Int),List[Option[String]])],t:String,authorStatic:models.user.UserStatic)
 @views.html.template(
 user,
 title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生活"
@@ -12,11 +12,11 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                         </a>
                     </li>
                     <li><a href="@controllers.users.routes.Users.credits(author.id.get)">N+<br>集分宝</a></li>
-                    <li><a href="@controllers.users.routes.Users.baobei(author.id.get)">@(author.postBaobeiNum+author.loveBaobeiNum)<br>宝贝</a></li>
-                    <li class="cur"><a href="@controllers.users.routes.Users.theme(author.id.get)">@(author.postThemeNum+author.loveThemeNum)<br>主题</a></li>
-                    <li><a href="@controllers.users.routes.Users.square(author.id.get)">@(author.postTopicNum+author.loveTopicNum)<br>讨论</a></li>
-                    <li ><a href="@controllers.users.routes.Users.fans(author.id.get)">@author.fansNum<br>粉丝</a></li>
-                    <li class="last" ><a href="@controllers.users.routes.Users.follow(author.id.get)">@(author.followNum)<br>我关注的</a></li>
+                    <li><a href="@controllers.users.routes.Users.baobei(author.id.get)">@(authorStatic.postBaobeiNum+authorStatic.loveBaobeiNum)<br>宝贝</a></li>
+                    <li class="cur"><a href="@controllers.users.routes.Users.theme(author.id.get)">@(authorStatic.postThemeNum+authorStatic.loveThemeNum)<br>主题</a></li>
+                    <li><a href="@controllers.users.routes.Users.square(author.id.get)">@(authorStatic.postTopicNum+authorStatic.loveTopicNum)<br>讨论</a></li>
+                    <li ><a href="@controllers.users.routes.Users.fans(author.id.get)">@authorStatic.fansNum<br>粉丝</a></li>
+                    <li class="last" ><a href="@controllers.users.routes.Users.follow(author.id.get)">@(authorStatic.followNum)<br>我关注的</a></li>
                   <!--  <li class="last"><a href="@controllers.users.routes.Users.appraisal(author.id.get)">N+<br>求鉴定</a></li>-->
                 </ul>
             </div>
@@ -27,9 +27,9 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                         <div class="main-title clearfix">
                             <h2>
 
-                                @if(t=="my"){ @if(!user.isEmpty && user.get.id==author.id){我}else{Ta}创建的(@author.postThemeNum)    } else {<a href='@controllers.users.routes.Users.theme(author.id.get,"my",1)'>  @if(!user.isEmpty && user.get.id==author.id){我}else{Ta}创建的(@author.postThemeNum)  </a> }
+                                @if(t=="my"){ @if(!user.isEmpty && user.get.id==author.id){我}else{Ta}创建的(@authorStatic.postThemeNum)    } else {<a href='@controllers.users.routes.Users.theme(author.id.get,"my",1)'>  @if(!user.isEmpty && user.get.id==author.id){我}else{Ta}创建的(@authorStatic.postThemeNum)  </a> }
                                 <span class="ml5 mr5">|</span>
-                                @if(t=="love"){ @if(!user.isEmpty && user.get.id==author.id){我}else{Ta}喜欢的(@author.loveTopicNum)    } else {<a href='@controllers.users.routes.Users.theme(author.id.get,"love",1)'>  @if(!user.isEmpty && user.get.id==author.id){我}else{Ta}喜欢的(@author.loveThemeNum)  </a> }
+                                @if(t=="love"){ @if(!user.isEmpty && user.get.id==author.id){我}else{Ta}喜欢的(@authorStatic.loveTopicNum)    } else {<a href='@controllers.users.routes.Users.theme(author.id.get,"love",1)'>  @if(!user.isEmpty && user.get.id==author.id){我}else{Ta}喜欢的(@authorStatic.loveThemeNum)  </a> }
                             </h2>
 										<span class="fr">
 					<a class="bbl-btn" href="@controllers.routes.Themes.edit(0)" rel="nofollow" target="_blank">+ 创作主题</a>

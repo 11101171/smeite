@@ -43,58 +43,62 @@ object Users extends Controller {
   /*user 首页*/
   def home(id:Long) =UserAction { user => implicit request =>
     val author=UserDao.findById(id)
+    val authorStatic=UserDao.findStatic(id);
     val goodses =UserDao.findShareGoodses(id,1,9);
     val  page =UserDao.findLoveThemes(author.id.get,1,9)
     val  users = UserDao.findFollows(id,1,24)
-    Ok(views.html.users.home(user,author,goodses,page,users) )
+    Ok(views.html.users.home(user,author,goodses,page,users,authorStatic) )
   }
 
   /*user trend 动态*/
   def trend(id:Long) = UserAction{ user => implicit request =>
     val  author=UserDao.findById(id)
-    Ok(views.html.users.trend(user,author))
+    val authorStatic=UserDao.findStatic(id);
+    Ok(views.html.users.trend(user,author,authorStatic))
   }
 
   /*user baobei  喜欢的宝贝*/
   def baobei(id:Long,t:String,p:Int) = UserAction{ user => implicit request =>
     val  author=UserDao.findById(id)
+    val authorStatic=UserDao.findStatic(id);
     if(t=="share"){
      val page =UserDao.findShareGoodses(id,p,9);
-      Ok(views.html.users.baobei(user,author,page,t))
+      Ok(views.html.users.baobei(user,author,page,t,authorStatic))
     }else{
       val page =UserDao.findLoveGoodses(id,p,9);
-      Ok(views.html.users.baobei(user,author,page,t))
+      Ok(views.html.users.baobei(user,author,page,t,authorStatic))
     }
 
 
   }
   /*user   square 广场 */
   def square(id:Long,t:String,p:Int) = UserAction{ user => implicit request =>
-    val hotIndex =0;   // 推荐指数
+
     val  author=UserDao.findById(id)
+    val authorStatic=UserDao.findStatic(id);
     val   topics:List[(Long, String, String, Long, String, Int, Int, Int)]=TopicDao.recommendTopics(8)
      if (t=="love"){
          val page =UserDao.findLoveTopics(id,p)
-       Ok(views.html.users.square(user,author,page,t,topics))
+       Ok(views.html.users.square(user,author,page,t,topics,authorStatic))
      }
     else{
       val page=TopicDao.findUserTopics(id,p)
-      Ok(views.html.users.square(user,author,page,t,topics))
+      Ok(views.html.users.square(user,author,page,t,topics,authorStatic))
     }
    
   }
 
   /*user theme 主题*/
   def theme(id:Long,t:String,p:Int) = UserAction{ user => implicit request =>
-    val hotIndex=0;
-    val  author=UserDao.findById(id)
 
+    val  author=UserDao.findById(id)
+    val authorStatic=UserDao.findStatic(id);
     if(t=="my"){
       val  page =UserDao.findPostThemes(author.id.get,p)
-      Ok(views.html.users.theme(user,author,page,t))
+      Ok(views.html.users.theme(user,author,page,t,authorStatic))
     } else {
       val  page =UserDao.findLoveThemes(author.id.get,p)
-      Ok(views.html.users.theme(user,author,page,t))
+      Ok(views.html.users.theme(user,author,page,t,authorStatic))
     }
 
   }
@@ -102,10 +106,11 @@ object Users extends Controller {
   def fans(id:Long,p:Int) = UserAction{ user => implicit request =>
     val num:Int=8;   //默认是查找大于0的推荐用户
     val credtis=0;
+    val authorStatic=UserDao.findStatic(id);
     val  author=UserDao.findById(id)
     val page=UserDao.findFans(id,p,10)
     val users:List[User]= if(user.isEmpty)UserDao.recommendUser(credtis,num)else UserDao.findInterestedUser(user.get.id.get,num);
-    Ok(views.html.users.fans(user,author,page,users))
+    Ok(views.html.users.fans(user,author,page,users,authorStatic))
   }
 
   /*user 我关注的
@@ -115,9 +120,10 @@ object Users extends Controller {
   def follow(id:Long,p:Int) = UserAction{ user => implicit request =>
     val num:Int =8;
     val  author=UserDao.findById(id)
+    val authorStatic=UserDao.findStatic(id);
     val page=UserDao.findFollows(id,p,10)
     val users:List[User]= if(user.isEmpty)UserDao.recommendUser(0,num)else UserDao.findInterestedUser(user.get.id.get,num);
-    Ok(views.html.users.follow(user,author,page,users))
+    Ok(views.html.users.follow(user,author,page,users,authorStatic))
   }
 
   /*添加 关注人
@@ -169,15 +175,17 @@ object Users extends Controller {
   /*我的求鉴定*/
   def appraisal(id:Long,p:Int) = UserAction{ user => implicit request =>
     val  author=UserDao.findById(id)
+    val authorStatic=UserDao.findStatic(id);
     val page =Page[Goods](Nil,p,1);
     val userLoveGoods =UserDao.findLoveGoodses(id,1,6)
-    Ok(views.html.users.appraisal(user,author,page,userLoveGoods))
+    Ok(views.html.users.appraisal(user,author,page,userLoveGoods,authorStatic))
   }
 
-  /*用户的积分 动态*/
+  /*用户的集分宝 动态*/
   def credits(id:Long) = UserAction{ user => implicit request =>
     val  author=UserDao.findById(id)
-    Ok(views.html.users.credits(user,author))
+    val authorStatic=UserDao.findStatic(id);
+    Ok(views.html.users.credits(user,author,authorStatic))
   }
 
 }

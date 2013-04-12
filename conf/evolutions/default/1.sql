@@ -1192,4 +1192,22 @@ alter table goods  add  rate  tinyint not null default '70';
 alter table goods drop column `desc ;
 alter table goods add come_from  tinyint not null default '0';
 
+/*2013-4-12*/
+DROP TABLE IF EXISTS `user_stats`;
+CREATE TABLE `user_static` (
+  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `uid`                 int(10) NOT NULL ,
+  `fans_num`                  smallint(11) DEFAULT '0',
+  `follow_num`                smallint(11) DEFAULT '0',
+  `trend_num`                 smallint(10) DEFAULT '0',
+  `love_baobei_num`           smallint(11) DEFAULT '0',
+  `love_theme_num`            smallint(11) DEFAULT '0',
+  `love_topic_num`           smallint(11) DEFAULT '0',
+  `post_baobei_num`          smallint(10) DEFAULT '0',
+  `post_theme_num`            smallint(10) DEFAULT '0',
+  `post_topic_num`           smallint(10) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+insert into user_static(uid,fans_num,follow_num,trend_num,love_baobei_num,love_theme_num,love_topic_num,post_baobei_num,post_theme_num,post_topic_num) select id,fans_num,follow_num,trend_num,love_baobei_num,love_theme_num,love_topic_num,post_baobei_num,post_theme_num,post_topic_num from user ;
 
