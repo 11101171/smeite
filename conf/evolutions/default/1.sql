@@ -1236,22 +1236,22 @@ CREATE TABLE `user_order` (
   `num_iid`             int(10) NOT NULL ,
   `nick`               varchar(32),
   `title`              varchar(128),
-  `item_location`           varchar(32),
-  `pic_url`                   varchar(128),
+  `location`           varchar(32),
+  `pic`                   varchar(128),
   `price`                     varchar(16),
-  `promotion_price`          varchar(16),
-  `commission_rate`          varchar(16),
+  `commission_rate`         tinyint,
   `credits`            smallint ,
   `status`          tinyint not null default '0',
-  add_time          timestamp,
-  PRIMARY KEY (`id`)
+  `pay_time`          timestamp,
+  `create_time`          timestamp,
+   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 /* 淘宝客报表记录*/
 DROP TABLE IF EXISTS `taobaoke_report`;
 CREATE TABLE `taobaoke_report` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
-  `outer_code`          int(10) ,
+  `outer_code`          varchar(32) ,
   `trade_id`           int(10) NOT NULL ,
   `real_pay_fee`       varchar(16) ,
   `commission_rate`    varchar(16),
@@ -1259,7 +1259,7 @@ CREATE TABLE `taobaoke_report` (
   `create_time`                   varchar(128),
   `pay_time`                     varchar(16),
   `num_iid`          int(10) ,
-  add_time          timestamp,
+  `add_time`          timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
@@ -1269,10 +1269,12 @@ CREATE TABLE `taobaoke_report` (
 DROP TABLE IF EXISTS `user_withdraw`;
 CREATE TABLE `user_withdraw` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
-  `uid`          int(10) ,
-  `withdraw_type`           tinyint  not null default '0',
+  `uid`                 int(10) ,
+  `withdraw_type`      tinyint  not null default '0',
   `withdraw_num`      smallint(10) ,
   `handle_result`    tinyint,
-  add_time          timestamp,
+  `note`    varchar(200) ,
+  `withdraw_time`          timestamp,
+  `handle_time`          timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
