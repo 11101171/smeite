@@ -223,12 +223,12 @@ background: url(images/ico-quotation.png) no-repeat
     height: 30px;
     line-height: 30px;
 }
-.side .user-info  .uname {
+.side .user-info  a {
     font-size: 14px;
-    color: #5AD;
-   /* color: #ff7f00;*/
-    font-weight: bold;
-    margin-right: 8px;
+}
+.side .user-info  a:hover{
+    color: #ff7f00;
+    text-decoration: underline;
 }
 
 .side .user-info  .come-from {
@@ -258,7 +258,11 @@ background: url(images/ico-quotation.png) no-repeat
     color: #000;
 }
 .side .buy-box  dd a{
-    color: #5AD;
+    /*color: #5AD;*/
+}
+.side .buy-box  dd  a:hover{
+    color: #ff7f00;
+    text-decoration: underline;
 }
 .side .buy-box dd.price,.side .buy-box dd.volume{
     float: left;
@@ -282,7 +286,7 @@ background: url(images/ico-quotation.png) no-repeat
 }
 
 .side .buy-box  .price-promotion {
-    font-size: 25px;
+    font-size: 20px;
     font-weight: bolder;
     color: #e26;
 }
@@ -378,7 +382,7 @@ background: url(images/ico-quotation.png) no-repeat
 
 .comment-publish .cmt-doc {
     float: right;
-    width: 310px;
+    width: 360px;
     overflow: hidden
 }
 
@@ -394,7 +398,7 @@ background: url(images/ico-quotation.png) no-repeat
 }
 
 .comment-publish .cmt-txa {
-    width: 300px;
+    width: 350px;
     height: 80px;
     line-height: 18px;
     padding: 0;

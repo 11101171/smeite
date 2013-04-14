@@ -64,7 +64,7 @@ description = goods.intro
                          </div>
                          <div class="info fl">
                              <a target="_blank" href="@controllers.users.routes.Users.home(firstShareUser.id.get)" class="uname">@firstShareUser.name</a>
-                             <span>@firstShareUser.credits个<a href="/jifenbao">集分宝</a>，@firstShareUser.shiDou个<a href="/shiDou">食豆</a></span>&nbsp;&nbsp;&nbsp;<span class="come-from">来自 @models.user.ComeFrom(firstShareUser.comeFrom)</span>
+                            &nbsp;&nbsp;&nbsp; <span>@firstShareUser.credits&nbsp;个<a href="/jifenbao">集分宝</a>，@firstShareUser.shiDou&nbsp;个<a href="/shiDou">食豆</a></span>&nbsp;&nbsp;&nbsp;<span class="come-from">来自 @models.user.ComeFrom(firstShareUser.comeFrom)</span>
                          </div>
                      </div>
                  </div>
@@ -84,7 +84,7 @@ description = goods.intro
                          @if(!goods.commissionRate.isEmpty && goods.commissionRate.get!=0){
 
                          @defining( if(goods.promotionPrice.isEmpty){ ((goods.price.toDouble*goods.commissionRate.get*goods.rate*0.0001).toInt) }else{ ((goods.promotionPrice.get.toDouble*goods.commissionRate.get*goods.rate*0.0001).toInt) } ){ credits=>
-                         <dd>返利:&nbsp;<span> @credits</span>&nbsp;<a href="/jifenbao">集分宝</a>，值<span>@(credits/100.0)</span>元( 返利比例:<span>@(goods.commissionRate.get*goods.rate*0.01*0.01)</span>%,奖励<a href="/shiDou">食豆</a>：<span>1</span>个 )</dd>
+                         <dd>返利:&nbsp;<span> @credits</span>&nbsp;<a href="/jifenbao">个集分宝</a>，值<span>@(credits/100.0)</span>元( 返利比例:<span>@(goods.commissionRate.get*goods.rate*0.01*0.01)</span>%,奖励<a href="/shiDou">食豆</a>：<span>1</span>个 )</dd>
                         }
 
                          }

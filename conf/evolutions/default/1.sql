@@ -73,7 +73,7 @@ CREATE TABLE `user` (
   `post_theme_num`            smallint(10) DEFAULT '0',
   `post_topic_num`           smallint(10) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 
   /*数据表  User  用户的基本信息和常用信息
@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `user_profile` (
   `login_ip`            varchar(32) DEFAULT '0',
   `regist_time`             timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 -- --------------------------------------------------------
@@ -152,7 +152,7 @@ CREATE TABLE `user_stats` (
   `post_theme_num`            smallint(10) DEFAULT '0',
   `post_topic_num`           smallint(10) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 /*
@@ -171,7 +171,7 @@ CREATE TABLE `user_follow` (
   `fans_id`           int(10) NOT NULL DEFAULT '0',
   `add_time`          timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 /*
@@ -193,7 +193,7 @@ CREATE TABLE `user_tag` (
   `match_index`  tinyint NOT NULL DEFAULT '1',
   `add_time`    timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;*/
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;*/
 
 
 
@@ -223,7 +223,7 @@ CREATE TABLE `user_trend` (
   `action_content`     varchar(128) NOT NULL DEFAULT 'smeite',
   `add_time`           timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 -- --------------------------------------------------------
@@ -245,7 +245,7 @@ CREATE TABLE `user_love_goods` (
   `uid` int(10) NOT NULL ,
   `goods_id` int(10) NOT NULL ,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 /*
@@ -267,7 +267,7 @@ CREATE TABLE `user_love_theme` (
   `theme_id` int(10) NOT NULL,
   `add_time` timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 /*
@@ -288,7 +288,7 @@ CREATE TABLE `user_love_topic` (
   `topic_id` int(10) NOT NULL ,
   `add_time` timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -310,7 +310,7 @@ CREATE TABLE `user_love_topic` (
    `uid` int(10) NOT NULL DEFAULT '0',
    `goods_id` int(20) NOT NULL DEFAULT '0',
    PRIMARY KEY (`id`)
- ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -363,7 +363,7 @@ CREATE TABLE IF NOT EXISTS `topic`(
   `check_state`          tinyint NOT NULL DEFAULT '0',
   `add_time`          timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
  -- --------------------------------------------------------
 /*
@@ -390,7 +390,7 @@ CREATE TABLE IF NOT EXISTS `topic_reply`(
    `check_state`          tinyint NOT NULL DEFAULT '0',
   `add_time`               timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 /************************************************************
@@ -434,7 +434,7 @@ CREATE TABLE IF NOT EXISTS `theme_category`(
   `modify_time`             timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;*/
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;*/
 
 
  -- --------------------------------------------------------
@@ -481,7 +481,7 @@ CREATE TABLE IF NOT EXISTS `theme`(
       `modify_time`             timestamp,
       `add_time`                timestamp ,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
  -- --------------------------------------------------------
 /*
@@ -507,7 +507,7 @@ CREATE TABLE IF NOT EXISTS `theme_discuss`(
       `check_state`          tinyint NOT NULL DEFAULT '0',
      `add_time`                      timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
  -- --------------------------------------------------------
 /*
@@ -528,7 +528,7 @@ CREATE TABLE IF NOT EXISTS `theme_goods`(
          `goods_id`                      int (10) NOT NULL ,
          `goods_pic`                     varchar(128),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 /*
@@ -574,7 +574,7 @@ CREATE TABLE IF NOT EXISTS `theme_style`(
   `banner_bg_position`                      varchar (32) NOT NULL  default 'scroll',
   `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`theme_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
  -- --------------------------------------------------------
 /*
@@ -597,7 +597,7 @@ CREATE TABLE IF NOT EXISTS `theme_tag`(
   `tag_name`                    varchar(128) not null default '',
   `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;*/
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;*/
 
 
 
@@ -669,7 +669,7 @@ CREATE TABLE IF NOT EXISTS `goods`(
   `collect_time`             timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   `add_time`                 timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
   -- --------------------------------------------------------
 /*
   -- 表的结构 `goods_profile `
@@ -725,7 +725,7 @@ CREATE TABLE IF NOT EXISTS `goods_profile`(
   `seo_keywords`                varchar(128) not null default '' ,
   `seo_desc`                    varchar(255) not null default '' ,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 */
 -- --------------------------------------------------------
@@ -749,7 +749,7 @@ CREATE TABLE IF NOT EXISTS `member_goods`(
   `gid`                       int(10) not null,
   `src`                        varchar(128) not null,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 */
    -- --------------------------------------------------------
 /*
@@ -769,7 +769,7 @@ CREATE TABLE IF NOT EXISTS `goods_shop`(
   `shop_id`                 int(10) not null,
       `nick`                       varchar (32) not null,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
     -- --------------------------------------------------------
 /*
@@ -803,7 +803,7 @@ CREATE TABLE IF NOT EXISTS `shop`(
       `note`               varchar (250),
   `collect_time`             timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
    -- --------------------------------------------------------
@@ -832,7 +832,7 @@ CREATE TABLE IF NOT EXISTS `goods_assess`(
   `check_state`             tinyint  not null default '0',
   `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
    -- --------------------------------------------------------
 /*
@@ -853,7 +853,7 @@ CREATE TABLE IF NOT EXISTS `goods_tag`(
       `tag_name`                varchar(32) not null default '',
       `tag_num`                smallint (10) not null default '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;*/
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;*/
 
 
 
@@ -910,7 +910,7 @@ CREATE TABLE IF NOT EXISTS `tag`(
   `modify_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
  -- --------------------------------------------------------
@@ -948,7 +948,7 @@ CREATE TABLE IF NOT EXISTS `tag_group`(
     `modify_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
     `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
  -- --------------------------------------------------------
 /*
   -- 表的结构 `tag_goods `
@@ -967,7 +967,7 @@ CREATE TABLE IF NOT EXISTS `tag_goods`(
   `add_num`                 int(10) not null default '1',
   `check_state`             tinyint  not null default '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -1000,7 +1000,7 @@ CREATE TABLE IF NOT EXISTS `msg`(
   `check_state`               tinyint not null default '1',
   `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
    -- --------------------------------------------------------
 /*
   -- 表的结构 `msg_receiver `
@@ -1024,7 +1024,7 @@ CREATE TABLE IF NOT EXISTS `msg_receiver`(
      `is_read`                    tinyint(1) not null default '0',
       `add_time`                     timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -1048,7 +1048,7 @@ CREATE TABLE IF NOT EXISTS `msg_receiver`(
       `role_id`        smallint  not null default '1',
       `role_name`      varchar(32) not null default '',
         PRIMARY KEY (`id`)
-    ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
     /*
      * 数据表  userRole   用户角色
     */
@@ -1059,7 +1059,7 @@ CREATE TABLE IF NOT EXISTS `msg_receiver`(
       note           varchar(128) not null default '',
       modify_time     timestamp  ,
       add_time       timestamp default '2012-5-12 14:18:00'
-    ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
     /*
      数据表permission  资源列表
      sid 自定义ID
@@ -1073,7 +1073,7 @@ CREATE TABLE IF NOT EXISTS `msg_receiver`(
       operator         varchar(32)   not null default 'smeite',
       modify_time     timestamp  ,
       add_date          timestamp default '2012-5-12 14:18:00'
-    ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `admin_role_permission`;
     create table admin_role_permission(
@@ -1082,7 +1082,7 @@ DROP TABLE IF EXISTS `admin_role_permission`;
       permission_id            int    ,
       permission_name          varchar (64)  not null,
       PRIMARY KEY (`userRole_id`,`permission_id`)
-    ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
  */
 
 /*
@@ -1109,7 +1109,7 @@ create table manager_task(
   note              text ,
   add_time          timestamp default '2012-5-12 14:18:00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -1123,7 +1123,7 @@ create table advert_position(
   advert_type       tinyint default 0,
   add_time          timestamp default '2012-5-12 14:18:00',
     PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*广告
 * name  位置名称
 * title 广告名称
@@ -1145,7 +1145,7 @@ create table advert(
   click_num       smallint(10) default '1',
   add_time          timestamp default '2012-5-12 14:18:00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -1207,7 +1207,7 @@ CREATE TABLE `user_static` (
   `post_theme_num`            smallint(10) DEFAULT '0',
   `post_topic_num`           smallint(10) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 insert into user_static(uid,fans_num,follow_num,trend_num,love_baobei_num,love_theme_num,love_topic_num,post_baobei_num,post_theme_num,post_topic_num) select id,fans_num,follow_num,trend_num,love_baobei_num,love_theme_num,love_topic_num,post_baobei_num,post_theme_num,post_topic_num from user ;
 
@@ -1223,3 +1223,56 @@ alter table user drop column post_topic_num;
 
 alter table user add  withdraw_credits  smallint(10) not null default '0';
 alter table user add  withdraw_shi_dou  smallint(10) not null default '0';
+
+/*2013-4-14*/
+/*
+* 用户购买记录
+*/
+DROP TABLE IF EXISTS `user_order`;
+CREATE TABLE `user_order` (
+  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `uid`                 int(10) NOT NULL ,
+  `goods_id`           int(10) NOT NULL ,
+  `num_iid`             int(10) NOT NULL ,
+  `nick`               varchar(32),
+  `title`              varchar(128),
+  `item_location`           varchar(32),
+  `pic_url`                   varchar(128),
+  `price`                     varchar(16),
+  `promotion_price`          varchar(16),
+  `commission_rate`          varchar(16),
+  `credits`            smallint ,
+  `status`          tinyint not null default '0',
+  add_time          timestamp,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+/* 淘宝客报表记录*/
+DROP TABLE IF EXISTS `taobaoke_report`;
+CREATE TABLE `taobaoke_report` (
+  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `outer_code`          int(10) ,
+  `trade_id`           int(10) NOT NULL ,
+  `real_pay_fee`       varchar(16) ,
+  `commission_rate`    varchar(16),
+  `commission`          varchar(16),
+  `create_time`                   varchar(128),
+  `pay_time`                     varchar(16),
+  `num_iid`          int(10) ,
+  add_time          timestamp,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+/* 用户提现表
+* withdraw_type 0 集分宝 1 食豆
+*/
+DROP TABLE IF EXISTS `user_withdraw`;
+CREATE TABLE `user_withdraw` (
+  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `uid`          int(10) ,
+  `withdraw_type`           tinyint  not null default '0',
+  `withdraw_num`      smallint(10) ,
+  `handle_result`    tinyint,
+  add_time          timestamp,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
