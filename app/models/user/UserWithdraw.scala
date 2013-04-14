@@ -14,13 +14,27 @@ import models.Page._
  * http://www.smeite.com/
  *
  */
-class UserWithdraw(
+case class UserWithdraw(
                     id: Option[Long],
                     uid: Long,
                     withdrawType:Int,
                      withdrawNum:Int,
                      handleResult:Int,
                      note:String,
-                     withdrawTime:Timestamp,
-                      handleTime:Timestamp
+                     withdrawTime:Option[Timestamp],
+                      handleTime:Option[Timestamp]
                     )
+
+object UserWithdraws extends Table[UserWithdraw]("user_withdraw") {
+  def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
+  def uid = column[Long]("uid")
+  def withdrawType = column[Int]("withdraw_type")
+  def withdrawNum = column[Int]("withdraw_num")
+  def handleResult = column[Int]("handle_result")
+  def note = column[String]("note")
+  def withdrawTime = column[Timestamp]("withdraw_time")
+  def handleTime = column[Timestamp]("handle_time")
+  def * = id.? ~ uid ~ withdrawType ~ withdrawNum ~ handleResult ~ note ~ withdrawTime.? ~  handleTime.? <> (UserWithdraw, UserWithdraw.unapply _)
+  def autoInc = id.? ~ uid ~ withdrawType ~ withdrawNum ~ handleResult ~ note ~ withdrawTime.? ~  handleTime.? <> (UserWithdraw, UserWithdraw.unapply _) returning id
+
+}

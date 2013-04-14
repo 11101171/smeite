@@ -16,7 +16,7 @@ import models.Page._
  * http://www.smeite.com/
  *
  */
-class UserOrder(
+case class UserOrder(
                  id: Option[Long],
                  uid: Long,
                  goodsId: Long,
@@ -26,9 +26,34 @@ class UserOrder(
                  location: String,
                  pic: String,
                  price: String,
-                 commissionRate: String,
+                 withdrawRate: Int,
                  credits: Int,
                  status: Int,
-                 payTime: Timestamp,
-                 createTime: Timestamp
+                 payTime: Option[Timestamp],
+                 createTime:Option[Timestamp]
                  )
+
+object UserOrders extends Table[UserOrder]("user_order") {
+  def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
+  def uid = column[Long]("uid")
+  def goodsId = column[Long]("goods_id")
+  def numIid = column[Long]("num_iid")
+  def nick = column[String]("nick")
+  def title = column[String]("title")
+  def location = column[String]("location")
+  def pic = column[String]("pic")
+  def price = column[String]("price")
+  def withdrawRate = column[Int]("withdraw_rate")
+  def credits = column[Int]("credits")
+  def status = column[Int]("status")
+  def payTime = column[Timestamp]("pay_time")
+  def createTime = column[Timestamp]("create_time")
+  def * = id.? ~ uid ~ goodsId ~ numIid ~ nick ~ title ~ location~ pic~ price~ withdrawRate~ credits~ status~ payTime.? ~ createTime.? <> (UserOrder, UserOrder.unapply _)
+  def autoInc = id.? ~ uid ~ goodsId ~ numIid ~ nick ~ title ~ location~ pic~ price~ withdrawRate~ credits~ status~ payTime.? ~ createTime.? <> (UserOrder, UserOrder.unapply _) returning id
+
+
+
+}
+
+
+

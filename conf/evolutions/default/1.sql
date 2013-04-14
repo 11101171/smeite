@@ -1239,28 +1239,13 @@ CREATE TABLE `user_order` (
   `location`           varchar(32),
   `pic`                   varchar(128),
   `price`                     varchar(16),
-  `commission_rate`         tinyint,
+  `promotionPrice`                     varchar(16),
+  `withdraw_rate`         smallint(10) ,
   `credits`            smallint ,
   `status`          tinyint not null default '0',
   `pay_time`          timestamp,
   `create_time`          timestamp,
    PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
-
-/* 淘宝客报表记录*/
-DROP TABLE IF EXISTS `taobaoke_report`;
-CREATE TABLE `taobaoke_report` (
-  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
-  `outer_code`          varchar(32) ,
-  `trade_id`           int(10) NOT NULL ,
-  `real_pay_fee`       varchar(16) ,
-  `commission_rate`    varchar(16),
-  `commission`          varchar(16),
-  `create_time`                   varchar(128),
-  `pay_time`                     varchar(16),
-  `num_iid`          int(10) ,
-  `add_time`          timestamp,
-  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 /* 用户提现表
@@ -1276,5 +1261,20 @@ CREATE TABLE `user_withdraw` (
   `note`    varchar(200) ,
   `withdraw_time`          timestamp,
   `handle_time`          timestamp,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+/* 淘宝客报表记录*/
+DROP TABLE IF EXISTS `taobaoke_income`;
+CREATE TABLE `taobaoke_income` (
+  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `num_iid`          int(10) ,
+  `outer_code`          varchar(32) ,
+  `trade_id`           int(10) NOT NULL ,
+  `real_pay_fee`       varchar(16) ,
+  `commission_rate`    smallint(10) ,
+  `commission`          smallint(10) ,
+  `create_time`               timestamp,
+  `pay_time`                   timestamp,
+  `add_time`          timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
