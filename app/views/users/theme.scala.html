@@ -35,12 +35,12 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
 					<a class="bbl-btn" href="@controllers.routes.Themes.edit(0)" rel="nofollow" target="_blank">+ 创作主题</a>
 					</span>
                         </div>
-                        <div class="topic-list clearfix">
+                        <div class="theme-list clearfix">
 
                             @for((item,i)<-page.items.view.zipWithIndex){
 
-                            <div class="topic-item @if(((i+1)%3)==0){last} ">
-                                <div class="topic-pic clearfix">
+                            <div class="theme-item @if(((i+1)%3)==0){last} ">
+                                <div class="theme-pic clearfix">
 
                                     <a href="@controllers.routes.Themes.view(item._1._1)" class="pic" target="_blank">
                                             @for((img,i)<-item._2.view.zipWithIndex){
@@ -55,7 +55,7 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                                     </a>
                                 </div>
                                 <h3><a href="@controllers.routes.Themes.view(item._1._1)" target="_blank">@item._1._2</a></h3>
-                                <div class="topic-state">
+                                <div class="theme-state">
                                    @if(t=="love"){
                                     <div style="float: left" href="#" class="followed-btn">已关注<span class="mr5 ml5">|</span>
                                         <a class="unfollow-theme" data-themeid="@item._1._1" data-id="@item._1._1">取消</a>

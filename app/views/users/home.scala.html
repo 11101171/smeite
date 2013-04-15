@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],author:models.user.User,goodses:models.Page[models.goods.Goods],page:Page[((Long, String, String,Int),List[Option[String]])],users:Page[models.user.User],authorStatic:models.user.UserStatic)
+@(user:Option[models.user.User],author:models.user.User,goodses:models.Page[models.goods.Goods],page:Page[((Long, String, String,Int),List[Option[String]])],authorStatic:models.user.UserStatic)
 @views.html.template(
 user,
 title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生活"
@@ -19,29 +19,13 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
 <!--nav  end -->
 @if(author.status==4){
 <div class="user-bd clearfix">
-    <div class="user-main">
+
         <div class="main box-shadow fs14 tac" style="padding-top:110px;padding-bottom:110px;background-color: #fff">
             食美特城管大队：<span style="color:#E26">Ta正在小黑屋中写检查呢！
-			</span></div>
-    </div>
-    <div class="user-side">
-        <div class="profile-box box-shadow ss">
-            <div class="u">
-                <div class="u-face">
-                    <a href="#">
-                        <img src="@author.pic" alt="@author.name" width="180px" height="180px">
-                    </a>
-                </div>
-                <div class="u-info clearfix">
-                    <h2 class="ofh">
-
-                    </h2>
-                </div>
-            </div>
-        </div>
-
+			</span>
 
     </div>
+
 </div>
 }else{
 <div class="user-bd clearfix">
@@ -94,12 +78,12 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
             <a href='@controllers.users.routes.Users.theme(author.id.get,"my",1)' class="fl">创作的主题(@authorStatic.postThemeNum)</a>
             <a href='@controllers.users.routes.Users.theme(author.id.get,"love",1)' class="fr">查看全部@(authorStatic.postThemeNum+authorStatic.loveThemeNum)个主题</a>
         </div>
-        <div class="topic-list clearfix">
+        <div class="theme-list clearfix">
 
             @for((item,i)<-page.items.view.zipWithIndex){
 
-            <div class="topic-item @if(((i+1)%3)==0){last} ">
-                <div class="topic-pic clearfix">
+            <div class="theme-item @if(((i+1)%3)==0){last} ">
+                <div class="theme-pic clearfix">
 
                     <a href="@controllers.routes.Themes.view(item._1._1)" class="pic" target="_blank">
                         @for((img,i)<-item._2.view.zipWithIndex){
@@ -114,7 +98,7 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                     </a>
                 </div>
                 <h3><a href="@controllers.routes.Themes.view(item._1._1)" target="_blank">@item._1._2</a></h3>
-                <div class="topic-state">
+                <div class="theme-state">
 
                     <span>@item._1._4 人关注</span>
 
@@ -132,20 +116,8 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
 </div>
 <div class="user-side">
 
-<div class="follows box-shadow">
-    <h3 class="clearfix"><a href="@controllers.users.routes.Users.follow(author.id.get)" class="rw">全部&gt;</a> @if(!user.isEmpty && user.get.id==author.id){我}else{Ta}关注的人</h3>
-    <ul class="clearfix">
-         @for(user<-users.items){
-        <li>
-            <a href="@controllers.users.routes.Users.home(user.id.get)">
-                <img src="@user.pic" alt="@user.name"  width="30" height="30" title="@user.name">
-            </a>
-        </li>
-        }
-    </ul>
-</div>
 
-<div class="friend-tags box-shadow plr15 ss">
+<div class="user-tags box-shadow plr15 ss">
     <div class="title">跟@if(!user.isEmpty && user.get.id==author.id){我}else{Ta}相关的标签</div>
     <ul class="clearfix">
 

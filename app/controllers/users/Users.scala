@@ -46,16 +46,9 @@ object Users extends Controller {
     val authorStatic=UserDao.findStatic(id);
     val goodses =UserDao.findShareGoodses(id,1,9);
     val  page =UserDao.findLoveThemes(author.id.get,1,9)
-    val  users = UserDao.findFollows(id,1,24)
-    Ok(views.html.users.home(user,author,goodses,page,users,authorStatic) )
+    Ok(views.html.users.home(user,author,goodses,page,authorStatic) )
   }
 
-  /*user trend 动态*/
-  def trend(id:Long) = UserAction{ user => implicit request =>
-    val  author=UserDao.findById(id)
-    val authorStatic=UserDao.findStatic(id);
-    Ok(views.html.users.trend(user,author,authorStatic))
-  }
 
   /*user baobei  喜欢的宝贝*/
   def baobei(id:Long,t:String,p:Int) = UserAction{ user => implicit request =>

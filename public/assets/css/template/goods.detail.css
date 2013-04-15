@@ -264,15 +264,15 @@ background: url(images/ico-quotation.png) no-repeat
     color: #ff7f00;
     text-decoration: underline;
 }
-.side .buy-box dd.price,.side .buy-box dd.volume{
+.side .buy-box .price,.side .buy-box .volume{
     float: left;
     height: 35px;
     line-height: 35px;
 }
-.side .buy-box dd.price{
+.side .buy-box .price{
     width: 250px;
 }
-.side .buy-box dd.volume{
+.side .buy-box .volume{
 
 }
 .side .buy-box  dd span{
