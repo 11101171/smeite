@@ -15,7 +15,7 @@ description = goods.intro
             <!-- pic show-->
             <div class="gallery">
                 <div class="pic-box">
-                    <a class="pic-link"  href="@controllers.ugc.routes.API.convertProduct(goods.numIid)" target="_blank"  rel="nofollow">
+                    <a class="pic-link"  href="@controllers.ugc.routes.API.gotoTaobao(goods.numIid,goods.id.get,goods.rate)" target="_blank"  rel="nofollow">
                         <img id="J_PicCover" src="@goods.pic" alt="@goods.name" />
                     </a>
 
@@ -92,9 +92,9 @@ description = goods.intro
                          @if(user.isEmpty){
                          <a class="buy-btn" rel="loginD"  target="_blank" rel="nofollow">去看看 &gt; </a>
                           }else{
-                          <a class="buy-btn"  href="@controllers.ugc.routes.API.convertProduct(goods.numIid)" target="_blank" rel="nofollow">去看看 &gt; </a>
+                          <a class="buy-btn"  href="@controllers.ugc.routes.API.gotoTaobao(goods.numIid,goods.id.get,goods.rate)" target="_blank" rel="nofollow">去看看 &gt; </a>
                      }
-                         <a class="buy-btn2" href="@controllers.ugc.routes.API.convertProduct(goods.numIid)">无须返利，直接购买&gt;&gt;</a>
+                         <a class="buy-btn2" href="@controllers.ugc.routes.API.gotoTaobao(goods.numIid,goods.id.get,goods.rate)">无须返利，直接购买&gt;&gt;</a>
 
                  </div>
                  <div class="operate">

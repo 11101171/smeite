@@ -19,7 +19,7 @@ import models.Page._
 case class UserOrder(
                  id: Option[Long],
                  uid: Long,
-                 goodsId: Long,
+                 goodsId:Option[Long],
                  numIid: Long,
                  nick: String,
                  title: String,
@@ -48,9 +48,10 @@ object UserOrders extends Table[UserOrder]("user_order") {
   def status = column[Int]("status")
   def payTime = column[Timestamp]("pay_time")
   def createTime = column[Timestamp]("create_time")
-  def * = id.? ~ uid ~ goodsId ~ numIid ~ nick ~ title ~ location~ pic~ price~ withdrawRate~ credits~ status~ payTime.? ~ createTime.? <> (UserOrder, UserOrder.unapply _)
-  def autoInc = id.? ~ uid ~ goodsId ~ numIid ~ nick ~ title ~ location~ pic~ price~ withdrawRate~ credits~ status~ payTime.? ~ createTime.? <> (UserOrder, UserOrder.unapply _) returning id
+  def * = id.? ~ uid ~ goodsId.? ~ numIid ~ nick ~ title ~ location~ pic~ price~ withdrawRate~ credits~ status~ payTime.? ~ createTime.? <> (UserOrder, UserOrder.unapply _)
+  def autoInc = id.? ~ uid ~ goodsId.? ~ numIid ~ nick ~ title ~ location~ pic~ price~ withdrawRate~ credits~ status~ payTime.? ~ createTime.? <> (UserOrder, UserOrder.unapply _) returning id
 
+  def autoInc2 = uid ~ goodsId.? ~ numIid ~ nick ~ title ~ location~ pic~ price~ withdrawRate~ credits~createTime returning id
 
 
 }

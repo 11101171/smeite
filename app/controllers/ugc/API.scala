@@ -53,6 +53,23 @@ case class Product(
                  tags:List[String]
                   )
 
+/*
+* 用户购买记录
+* */
+case class BuyRecord(
+                    uid:String,
+                    goodsId:String,
+                    rate:String,
+                    numIid:String,
+                    nick:String,
+                    title:String,
+                    location:String,
+                    pic:String,
+                    price:String,
+                    promotionPrice:String,
+                    commissionRate:String
+                      )
+
 
 object API extends Controller {
 
@@ -83,6 +100,39 @@ object API extends Controller {
       (json \ "itemPics").as[List[String]],
       (json \ "detailUrl").as[String],
       (json \ "tags").as[List[String]]
+    )
+    )
+  }
+
+  /*json */
+  implicit  object BuyRecordFormat extends Format[BuyRecord]{
+    def writes(o: BuyRecord): JsValue = JsObject(
+      List(
+        "uid"->JsString(o.uid),
+        "goodsId"->JsString(o.goodsId),
+        "rate"->JsString(o.rate),
+        "numIid"->JsString(o.numIid),
+        "nick" -> JsString(o.nick),
+        "title" -> JsString(o.title),
+        "location" -> JsString(o.location),
+        "pic" -> JsString(o.pic),
+        "price" -> JsString(o.price),
+        "promotionPrice" -> JsString(o.promotionPrice),
+        "commissionRate" -> JsString(o.commissionRate)
+      )
+    )
+    def reads(json: JsValue): JsResult[BuyRecord] = JsSuccess(BuyRecord(
+      (json \ "uid").as[String],
+      (json \ "goodsId").as[String],
+      (json \ "rate").as[String],
+      (json \ "numIid").as[String],
+      (json \ "nick").as[String],
+      (json \ "title").as[String],
+      (json \ "location").as[String],
+      (json \ "pic").as[String],
+      (json \ "price").as[String],
+      (json \ "promotionPrice").as[String],
+      (json \ "commissionRate").as[String]
     )
     )
   }
@@ -199,7 +249,7 @@ object API extends Controller {
     Ok(Json.obj("code"->"100","message"->"success"))
   }
 
-  /* 淘宝客 convert*/
+  /* 淘宝返利 convert*/
   def convertProduct(numIid:Long) =Action{   implicit  request =>
   //  val goods =GoodsDao.find(numIid)
     val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
@@ -215,12 +265,28 @@ object API extends Controller {
   }
 
   /* 淘宝客 go to taobao */
-  def gotoTaobao(numIid:Long) =Users.UserAction { user => implicit request =>
+  def gotoTaobao(numIid:Long,goodsId:Long,rate:Int) =Users.UserAction { user => implicit request =>
+      val uid:Long = if(!user.isEmpty){ user.get.id.get }else{ 0 }
       val timestamp= String.valueOf(System.currentTimeMillis)
       val sign=TaobaoConfig.getSign(timestamp)
-      Ok(views.html.ugc.api.gotoTaobao(user,numIid)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
+      Ok(views.html.ugc.api.gotoTaobao(numIid,uid,goodsId,rate)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
   }
-  
-  
+  /*
+  * uid:Long,goodsId:Long,numIid:Long, nick:String, title:String,location:String,pic:String,price:String,withdrawRate:Int,credits:Int
+  * */
+  def ajaxRecord = Action(parse.json) {  implicit request =>
+  val record =Json.fromJson[BuyRecord](request.body).get
 
+      val uid = record.uid.toLong
+      val numIid=record.numIid.toLong
+      val goodsId=record.goodsId.toLong
+      val rate =record.rate.toInt
+      val price =if(record.promotionPrice!="")record.promotionPrice else record.price
+      val withdrawRate= (rate*0.01*record.commissionRate.toFloat).toInt
+      val credits = (price.toFloat*withdrawRate*0.01).toInt
+  println( withdrawRate +"   "+ price +"  "+credits)
+      UserDao.addUserOrder(uid,goodsId,numIid,record.nick,record.title,record.location,record.pic,price,withdrawRate,credits)
+
+  Ok(Json.obj("code"->"100","message"->"success"))
+  }
 }

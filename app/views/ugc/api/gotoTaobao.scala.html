@@ -1,82 +1,103 @@
-@(user:Option[models.user.User],numIid:Long )
-@views.html.template(
-user,
-nav="index",
-title = "宝贝搜索结果_食美特，爱美食爱生活"
-)(css="/assets/css/template/go.css") {
-<div class="container" id="index">
-    <div class="intro"></div>
-    <div class="product-main clearfix">
+@(numIid:Long,uid:Long,goodsId:Long,rate:Int)
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>正在跳转</title>
+    <link href="/assets/css/base.css" rel="stylesheet" type="text/css" />
+    <style>
 
-        <div class="main">
-            <!-- pic show-->
-            <div class="gallery">
-                <div class="pic-box">
-                    <a class="pic-link" href="/ugc/api/convertProduct/16187799748" target="_blank" rel="nofollow">
-                        <img id="J_PicCover" src="http://img04.taobaocdn.com/bao/uploaded/i4/908167809/T2KS0nXX4OXXXXXXXX_!!908167809.jpg" alt="曼诺普 学生午睡枕趴睡枕趴趴枕 办公室午睡枕午休枕记忆枕头包邮">
-                    </a>
-                </div>
-
-            </div>
-            <!--pic show end-->
-
-
-
+        #loading { position:absolute;z-index:999;width:310px;top:50%;left:50%;margin:-50px 0 0 -155px; }
+        .g-dialog { width:300px;border:5px solid #ccc;border:5px solid rgba(204, 204, 204, 0.8);-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px; }
+        .g-dialog .dialog-content { position:relative;min-height:120px;padding:1px;background:#fff;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px; }
+        .g-dialog .hd { height:20px;padding:10px 15px;overflow:hidden; }
+        .g-dialog .hd h3 { font-size:14px;text-align:center; }
+        .g-dialog .bd { padding:20px; }
+        .loading-bar { margin-bottom:10px;height:20px;background:url(/assets/ui/loading1.gif) center no-repeat;overflow:hidden; }
+    </style>
+    <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21136607"></script>
+    <script src="/assets/js/front/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+<div id="loading" class="g-dialog">
+    <div class="dialog-content">
+        <div class="hd"><h3>正在跳转，请稍等...</h3></div>
+        <div class="bd clearfix">
+            <p class="loading-bar"></p>
+            <p align="center"><a name="J_clickUrl" href="">请点这里</a> 直接跳转</p>
         </div>
-        <!-- aside begin -->
-        <div class="side">
-
-
-
-            <div class="buy-info">
-                <div class="buy-box">
-                    <div class="clearfix" id="J_BuyBox">
-                        <h3 class="title"> 五一特价结婚庆用品回礼小礼品礼物盒包装创意迷你小香皂促销批发</h3>
-                        <div class="intro"><p>可爱迷你小香皂</p></div>
-
-
-                        <div class="buy-btn clearfix">
-                            <a class="op-btn clearfix" href="/ugc/api/convertProduct/15846376694" target="_blank" rel="nofollow">
-
-
-
-                                <span class="current-price"> ¥1.43 </span>
-                                <span class="original-price"> ¥1.50 </span>
-
-
-
-                                <span class="have-look">去看看 &gt;</span>
-                            </a>
-                        </div>
-
-
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-
-        </div>
-        <!-- aside end -->
-
     </div>
-    <div class="warning">
-
-    </div>
-
-
 </div>
 
 
-
-}{
 <script type="text/javascript">
-    seajs.use('app/init', function (init) {
-    //    init.load("app/infos")
-    });
+
+    var sellUrl="";
+    var ajaxData={
+        'uid':'@uid',
+        'goodsId':'@goodsId',
+        'rate':'@rate',
+        'numIid':'@numIid',
+        'nick':'',
+        'title':'',
+        'location':'',
+        'pic':'',
+        'price':'',
+        'promotionPrice':'',
+        'commissionRate':''
+    }
+    TOP.api('rest','post',{
+        method:'taobao.taobaoke.widget.items.convert',
+        num_iids:'@numIid',
+        outer_code:'@uid',
+        fields:'click_url,nick,title,item_location,pic_url,price,promotion_price,commission_rate'
+    },function(resp){
+        if(resp.error_response){
+            alert('taobao.taobaoke.widget.items.convert接口获取商信息品失败!'+resp.error_response.msg);
+            return false;
+        } else {
+            var total=resp.total_results;
+            if (total > 0) {
+                var respItem=resp.taobaoke_items.taobaoke_item;
+                if (respItem.length > 0) {
+                    sellUrl = respItem[0].click_url;
+                    ajaxData.nick=respItem[0].nick;
+                    ajaxData.title=respItem[0].title;
+                    ajaxData.location=respItem[0].item_location;
+                    ajaxData.pic=respItem[0].pic_url;
+                    ajaxData.price=respItem[0].price;
+                    ajaxData.promotionPrice=respItem[0].promotion_price;
+                    ajaxData.commissionRate=respItem[0].commission_rate;
+                    $("#J_clickUrl").attr("href",sellUrl)
+                  //  document.getElementsByName('manual')[0].href=sellUrl;
+                }
+            }
+        }
+
+        count();
+    })
+    function count() {
+        $.ajax({
+            url: "/ugc/api/ajaxRecord",
+            type : "post",
+            contentType:"application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(ajaxData),
+            success: function(data){
+               if(data=="100"){
+                   alert(sellUrl)
+               //    window.location = sellUrl;
+               }
+            }
+        });
+
+      //  window.location = sellUrl;
+    }
+
+
+
+
+
 </script>
-}
+</body>
+</html>

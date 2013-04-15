@@ -462,8 +462,15 @@ object UserDao {
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val groups:List[User]=  query.drop(startRow).take(pageSize).list()
     Page[User](groups,currentPage,totalPages);
-
    }
 
+
+
+  /*user order*/
+  def addUserOrder(uid:Long,goodsId:Long,numIid:Long, nick:String, title:String,location:String,pic:String,price:String,withdrawRate:Int,credits:Int)=  database.withSession {  implicit session:Session =>
+
+    UserOrders.autoInc2.insert(uid,Some(goodsId),numIid,nick,title,location,pic,price,withdrawRate,credits,new Timestamp(System.currentTimeMillis()))
+
+  }
 
 }
