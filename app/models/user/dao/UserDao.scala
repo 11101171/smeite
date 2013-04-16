@@ -485,4 +485,7 @@ object UserDao {
     Page[(String,List[(Timestamp,Long,Long,String,String,String,String,String,Int,Int,Int,String)])](list,currentPage,totalPages)
   }
 
+  def findUserOrders(num:Int):List[UserOrder]  =  database.withSession {  implicit session:Session =>
+    (for( c<-UserOrders.sortBy(_.createTime desc)) yield c).take(num).list()
+  }
 }

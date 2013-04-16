@@ -43,7 +43,7 @@ GET    /forum/removeFollow          controllers.Forums.removeFollow(topicId:Long
 #user 用户页面
 
 GET    /user/$id<[0-9]+>                          controllers.users.Users.home(id:Long)
-GET    /user/$id<[0-9]+>/credits                    controllers.users.Users.credits(id:Long,s:Int ?=1,p:Int ?=1)
+GET    /user/$id<[0-9]+>/credits                    controllers.users.Users.credits(id:Long,s:Int ?=-1,p:Int ?=1)
 GET    /user/$id<[0-9]+>/baobei                   controllers.users.Users.baobei(id:Long,t:String ?="share",p:Int ?=1)
 GET    /user/$id<[0-9]+>/theme                   controllers.users.Users.theme(id:Long,t:String ?="my",p:Int ?=1)
 GET    /user/$id<[0-9]+>/square                   controllers.users.Users.square(id:Long,t:String ?="my",p:Int ?=1)

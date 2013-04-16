@@ -91,7 +91,7 @@ description = goods.intro
                          }
                      </dl>
                          @if(user.isEmpty){
-                         <a class="buy-btn" rel="loginD"  target="_blank" rel="nofollow">去看看 &gt; </a>
+                         <a class="buy-btn" rel="loginD2" data-numiid="@goods.numIid" data-goodsid="@goods.id.get" data-rate="@goods.rate"  target="_blank" rel="nofollow">去看看 &gt; </a>
                           }else{
                           <a class="buy-btn"  href="@controllers.ugc.routes.API.gotoTaobao(goods.numIid,goods.id.get,goods.rate)" target="_blank" rel="nofollow">去看看 &gt; </a>
                      }
@@ -199,6 +199,7 @@ description = goods.intro
 
         }{
 <script type="text/javascript">
+
     seajs.use('app/init', function(init) {
         init.load('app/goods/goods.detail,app/goods/goods.favor');
     })

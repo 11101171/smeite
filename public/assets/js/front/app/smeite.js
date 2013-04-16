@@ -440,6 +440,15 @@ define(function(require, exports) {
             $.smeite.dialog.login();
         });
     }
+    if($("a[rel=loginD2]")[0]){
+        $("a[rel=loginD2]").click(function(event){
+            event.preventDefault();
+            var numIid =$(this).data("numiid")
+            var goodsId=$(this).data("goodsid")
+            var rate=$(this).data("rate")
+            $.smeite.dialog.login2(numIid,goodsId,rate);
+        });
+    }
     /* 登录框*/
     $.smeite.dialog = {
         isLogin: function(){
@@ -470,8 +479,7 @@ define(function(require, exports) {
                 html += '</div>';
                 html += '<div class="form-row act-row clearfix"><label>&nbsp;</label>';
                 html += '<input type="submit" class="bbl-btn login-submit" value="登录" />';
-                html += '<a class="ml10 l30" href="/resetpwd">忘记密码？</a></div>';
-                //html += '<div class="noaccount">还没有帐号？<a href="'+SMEITER.path+'/signup">免费注册一个</a></div>';
+                html += '<a class="ml10 l30" href="/user/resetPasswd">忘记密码？</a></div>';
                 html += '</form></div>';
                 html += '<div class="bd-r">';
                 html += '<p>你也可以使用这些帐号登录</p>';
@@ -482,6 +490,8 @@ define(function(require, exports) {
                 html += '</ul>';
                 html += '</div>';
                 html += '</div>';
+                html += '<div class="clear"></div>';
+                html += '<div class="noaccount">还没有帐号？<a href="/user/regist">免费注册一个</a></div>';
                 html += '</div>';
                 html += '<a class="close" href="javascript:;"></a>';
                 html += '</div>';
@@ -525,7 +535,86 @@ define(function(require, exports) {
             }else{
                 $("#loginDialog").data("overlay").load();
             }
+        },
+        login2: function(numIid,goodsId,rate){
+            if(!$("#loginDialog")[0]){
+                var html = "";
+                html += '<div id="loginDialog" class="g-dialog">';
+                html += '<div class="dialog-content">';
+                html += '<div class="hd"><h3>登录</h3></div>';
+                html += '<div class="bd clearfix"><div class="bd-l">';
+                html += '<form id="J_LoginDForm" action="/user/dialogEmailLogin" method="POST">';
+                html += '<div class="error-row"><p class="error"></p></div>';
+                html += '<div class="form-row"><label>Email：</label>';
+                html += '<input type="text" class="base-input" name="email" id="email" value="" placeholder="" />';
+                html += '</div>';
+                html += '<div class="form-row"><label>密码：</label>';
+                html += '<input type="password" class="base-input" name="passwd" id="password" value="" />';
+                html += '</div>';
+                html += '<div class="form-row"><label>&nbsp;</label>';
+                html += '<input type="checkbox" class="check" name="remember" value="1" checked="checked" />';
+                html += '<span>两周内自动登录</span>';
+                html += '</div>';
+                html += '<div class="form-row act-row clearfix"><label>&nbsp;</label>';
+                html += '<input type="submit" class="bbl-btn login-submit" value="登录" />';
+                html += '<a class="ml10 l30" href="/user/resetPasswd">忘记密码？</a></div>';
+                html += '</form></div>';
+                html += '<div class="bd-r">';
+                html += '<p>你也可以使用这些帐号登录</p>';
+                html += '<div class="snslogin mt15 clearfix"><ul class="fl mr20 outlogin-b">';
+                html += '<li><a class="l-qq" href="/user/snsLogin?snsType=qzone&backType=asyn">QQ帐号登录</a></li>';
+                html += '<li><a class="l-sina" href="/user/snsLogin?snsType=sina&backType=asyn">新浪微博登录</a></li>';
+                html += '<li><a class="l-tao" href="/user/snsLogin?snsType=taobao&backType=asyn">淘宝帐号登录</a></li>';
+                html += '</ul>';
+                html += '</div>';
+                html += '</div>';
+                html += '<div class="clear"></div>';
+                html += '<div class="nofanli">无须登录获得返利，<a href="/ugc/api/gotoTaobao/'+numIid+"?goodsId="+goodsId+"&rate="+rate +'">直接去购买&gt;&gt;</a></div>';
+                html += '</div>';
+                html += '<a class="close" href="javascript:;"></a>';
+                html += '</div>';
+                html += '</div>';
+                $("body").append(html);
+                $("#loginDialog").overlay({
+                    top: 'center',
+                    mask: {
+                        color: '#000',
+                        loadSpeed: 200,
+                        opacity: 0.3
+                    },
+                    closeOnClick: false,
+                    load: true
+                });
+                $("#J_LoginDForm").submit(function(){
+                    $this = $(this);
+                    $.post($this.attr("action"),$this.serializeArray(),function(data){
+                        if(data.code==100){
+                            $("#loginDialog").overlay().close();
+                            //SMEITER.userId = data.userId;
+                            window.location.reload();
+                        }else if(data.code==101){
+                            $("#loginDialog").find(".error-row").fadeIn();
+                            $("#loginDialog").find(".error").html(data.message);
+                            $("#loginDialog input[name=password]").val("");
+                        }
+                    });
+                    return false;
+                });
+                $(".snslogin a").unbind("click").click(function(){
+                    var snsurl = $(this).attr("href");
+                    $.smeite.util.openWin(snsurl);
+
+                    return false;
+                });
+                $("#loginDialog").overlay().getClosers().bind("click",function(){
+                    $("#J_LoginDForm")[0].reset();
+                    $("#loginDialog").find(".error-row").hide();
+                });
+            }else{
+                $("#loginDialog").data("overlay").load();
+            }
         }
+
 
     }
 

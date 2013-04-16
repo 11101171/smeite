@@ -68,7 +68,7 @@ case class BuyRecord(
                     price:String,
                     promotionPrice:String,
                     commissionRate:String,
-                    volume:String
+                    volume:Int
                       )
 
 
@@ -120,7 +120,7 @@ object API extends Controller {
         "price" -> JsString(o.price),
         "promotionPrice" -> JsString(o.promotionPrice),
         "commissionRate" -> JsString(o.commissionRate),
-        "volume" -> JsString(o.volume)
+        "volume" -> JsNumber(o.volume)
       )
     )
     def reads(json: JsValue): JsResult[BuyRecord] = JsSuccess(BuyRecord(
@@ -135,7 +135,7 @@ object API extends Controller {
       (json \ "price").as[String],
       (json \ "promotionPrice").as[String],
       (json \ "commissionRate").as[String],
-      (json \ "volume").as[String]
+      (json \ "volume").as[Int]
     )
     )
   }
@@ -275,11 +275,10 @@ object API extends Controller {
       Ok(views.html.ugc.api.gotoTaobao(numIid,uid,goodsId,rate)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
   }
   /*
-  * uid:Long,goodsId:Long,numIid:Long, nick:String, title:String,location:String,pic:String,price:String,withdrawRate:Int,credits:Int
+  * uid:Long,goodsId:Long,numIid:Long,nick:String,title:String,location:String,pic:String,price:String,withdrawRate:Int,credits:Int
   * */
   def ajaxRecord = Action(parse.json) {  implicit request =>
   val record =Json.fromJson[BuyRecord](request.body).get
-
       val uid = record.uid.toLong
       val numIid=record.numIid.toLong
       val goodsId=record.goodsId.toLong
@@ -288,7 +287,7 @@ object API extends Controller {
       val withdrawRate= (rate*0.01*record.commissionRate.toFloat).toInt
       val credits = (price.toFloat*withdrawRate*0.01).toInt
   println( withdrawRate +"   "+ price +"  "+credits)
-      UserDao.addUserOrder(uid,goodsId,numIid,record.nick,record.title,record.location,record.pic,price,withdrawRate,credits,record.volume)
+      UserDao.addUserOrder(uid,goodsId,numIid,record.nick,record.title,record.location,record.pic,price,withdrawRate,credits,record.volume.toString)
 
   Ok(Json.obj("code"->"100","message"->"success"))
   }
