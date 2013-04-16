@@ -175,10 +175,11 @@ object Users extends Controller {
   }
 
   /*用户的集分宝 动态*/
-  def credits(id:Long) = UserAction{ user => implicit request =>
+  def credits(id:Long,s:Int,p:Int) = UserAction{ user => implicit request =>
     val  author=UserDao.findById(id)
     val authorStatic=UserDao.findStatic(id);
-    Ok(views.html.users.credits(user,author,authorStatic))
+    val page = UserDao.findUserOrders(id,p,20,s)
+    Ok(views.html.users.credits(user,author,authorStatic,page))
   }
 
 }

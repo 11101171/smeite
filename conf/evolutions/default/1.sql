@@ -1242,6 +1242,7 @@ CREATE TABLE `user_order` (
   `withdraw_rate`         smallint(10) ,
   `credits`            smallint ,
   `status`          tinyint not null default '0',
+  `volume`          varchar(16) ,
   `pay_time`          timestamp,
   `create_time`          timestamp,
    PRIMARY KEY (`id`)

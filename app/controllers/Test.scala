@@ -57,11 +57,9 @@ object Test extends Controller {
   }
   def testJDBC  =Action {
    // val result =GoodsSQLDao.updateLoveNum(14)
-   val result =UserDao.findUserOrders(2,1,30);
+   val result =UserDao.findUserOrders(2,1,30,-1);
     println(result.toString)
-   for(item <- result){
-     println(item.toString)
-   }
+
     Ok(result.toString)
   }
 

@@ -29,6 +29,7 @@ case class UserOrder(
                  withdrawRate: Int,
                  credits: Int,
                  status: Int,
+                 volume: String,
                  payTime: Option[Timestamp],
                  createTime:Option[Timestamp]
                  )
@@ -46,12 +47,13 @@ object UserOrders extends Table[UserOrder]("user_order") {
   def withdrawRate = column[Int]("withdraw_rate")
   def credits = column[Int]("credits")
   def status = column[Int]("status")
+  def volume = column[String]("volume")
   def payTime = column[Timestamp]("pay_time")
   def createTime = column[Timestamp]("create_time")
-  def * = id.? ~ uid ~ goodsId.? ~ numIid ~ nick ~ title ~ location~ pic~ price~ withdrawRate~ credits~ status~ payTime.? ~ createTime.? <> (UserOrder, UserOrder.unapply _)
-  def autoInc = id.? ~ uid ~ goodsId.? ~ numIid ~ nick ~ title ~ location~ pic~ price~ withdrawRate~ credits~ status~ payTime.? ~ createTime.? <> (UserOrder, UserOrder.unapply _) returning id
+  def * = id.? ~ uid ~ goodsId.? ~ numIid ~ nick ~ title ~ location~ pic~ price~ withdrawRate~ credits~ status~ volume~ payTime.? ~ createTime.? <> (UserOrder, UserOrder.unapply _)
+  def autoInc = id.? ~ uid ~ goodsId.? ~ numIid ~ nick ~ title ~ location~ pic~ price~ withdrawRate~ credits~ status~ volume~  payTime.? ~ createTime.? <> (UserOrder, UserOrder.unapply _) returning id
 
-  def autoInc2 = uid ~ goodsId.? ~ numIid ~ nick ~ title ~ location~ pic~ price~ withdrawRate~ credits~createTime returning id
+  def autoInc2 = uid ~ goodsId.? ~ numIid ~ nick ~ title ~ location~ pic~ price~ withdrawRate~ credits~ volume ~createTime returning id
 
 
 }

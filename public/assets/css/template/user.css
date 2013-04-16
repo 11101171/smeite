@@ -799,7 +799,7 @@ html {
 .credits-item .credits-detail .con { padding:10px; }
 .credits-item .fd-media { margin-top:15px; }
 .credits-item .fd-media .pic { float:left;width:120px;overflow:hidden; }
-.credits-item .fd-media .info { float:left;padding-left:10px;width:420px; }
+.credits-item .fd-media .info { float:left;padding-left:10px;width:400px; }
 .credits-item .fd-media .info .title {
     font-size: 14px;
     font-weight: bolder;

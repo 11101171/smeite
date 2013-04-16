@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],author:models.user.User,authorStatic:models.user.UserStatic)
+@(user:Option[models.user.User],author:models.user.User,authorStatic:models.user.UserStatic,page:Page[(String,List[(java.sql.Timestamp,Long,Long,String,String,String,String,String,Int,Int,Int,String)])])
 @views.html.template(
 user,
 title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生活"
@@ -30,11 +30,13 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                             最近30天浏览的宝贝
 
                             <span class="ml5 mr5">|</span>
-                            <a href="/user/2/baobei?t=love">  返利成功的宝贝 </a>
+                            <a href="">  返利成功的宝贝 </a>
                         </h2>
                     </div>
-                    <div class="credits-time">2013-04-16</div>
+                    @for(items<-page.items){
+                    <div class="credits-time">@items._1</div>
                     <div class="credits-list">
+                        @for((createTime,uid,numIid,nick,title,location,pic,price,withdrawRate,credits,status,volume)<- items._2){
                     <div class="credits-item clearfix">
 
                                 <div class="credits-detail">
@@ -42,33 +44,32 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
 
                                         <div class="fd-baobei fd-media clearfix">
                                             <div class="pic">
-                                                <a href="/baobei/1968827" target="_blank" title="龙眼蜜 桂圆蜜 纯天然蜂蜜">
-                                                    <img src="http://s3.img.guang.com/p/1652797_1_8620359_210X210.jpg" alt="龙眼蜜 桂圆蜜 纯天然蜂蜜" width="120">
+                                                <a href="#" target="_blank" title="@title">
+                                                    <img src='@(pic+"_120x120.jpg")' alt="@title" width="120">
                                                 </a>
                                             </div>
                                             <dl class="info">
-                                                <dt><h3 class="title ofh"> 玻璃台灯创意 宜家北欧式透明布罩 卧室床头客厅简约书房装饰台灯</h3></dt>
+                                                <dt><h3 class="title ofh"> @title</h3></dt>
                                                 <dd class="clearfix">
                                                     <div class="price">
                                                         价格：
-                                                        <span class="price-promotion"> ¥200.00 </span>
-                                                        <span class="price-normal"> ¥200.00 </span>
-
+                                                        <span class="price-promotion"> ¥@price </span>
                                                     </div>
                                                     <div class="volume">
-                                                        30天已售 3
+                                                        30天已售 @volume
                                                     </div>
                                                 </dd>
 
-                                                <dd>返利:&nbsp;<span> 2100</span>&nbsp;<a href="/jifenbao">个集分宝</a>，值<span>21.0</span>元，返利比例:<span>10.5</span>%</dd>
+                                                <dd>返利:&nbsp;<span>@credits</span>&nbsp;<a href="/jifenbao">个集分宝</a>，值<span>@(credits/100.0)</span>元，返利比例:<span>@(withdrawRate/100.0)</span>%</dd>
 
 
 
                                             </dl>
                                             <div class="time">
-                                              <p>跟踪时间:2013-09-04</p>
-                                                <p>状态:已完成</p>
-                                                <p>返利:<span> 2100</span>个集分宝</p>
+                                              <p>@createTime</p>
+                                               @if(status==1){
+                                                <p>已返利:<span>@credits</span>个集分宝</p>
+                                                }
                                             </div>
 
                                         </div>
@@ -76,8 +77,12 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                                     </div>
                                 </div>
                             </div>
+                   }
                     </div>
-                        <div class="clearfix pt20 pb20">
+
+                    }
+
+                    <div class="clearfix pt20 pb20">
                             <div class="pagin fr pagination" id="J_Pagination">
                                 <span class="current">1</span>
                                 <a href="">2</a>

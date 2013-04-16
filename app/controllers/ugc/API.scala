@@ -67,7 +67,8 @@ case class BuyRecord(
                     pic:String,
                     price:String,
                     promotionPrice:String,
-                    commissionRate:String
+                    commissionRate:String,
+                    volume:String
                       )
 
 
@@ -118,7 +119,8 @@ object API extends Controller {
         "pic" -> JsString(o.pic),
         "price" -> JsString(o.price),
         "promotionPrice" -> JsString(o.promotionPrice),
-        "commissionRate" -> JsString(o.commissionRate)
+        "commissionRate" -> JsString(o.commissionRate),
+        "volume" -> JsString(o.volume)
       )
     )
     def reads(json: JsValue): JsResult[BuyRecord] = JsSuccess(BuyRecord(
@@ -132,7 +134,8 @@ object API extends Controller {
       (json \ "pic").as[String],
       (json \ "price").as[String],
       (json \ "promotionPrice").as[String],
-      (json \ "commissionRate").as[String]
+      (json \ "commissionRate").as[String],
+      (json \ "volume").as[String]
     )
     )
   }
