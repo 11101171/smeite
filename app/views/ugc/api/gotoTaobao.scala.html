@@ -24,7 +24,7 @@
         <div class="hd"><h3>正在跳转，请稍等...</h3></div>
         <div class="bd clearfix">
             <p class="loading-bar"></p>
-            <p align="center"><a name="J_clickUrl" href="">请点这里</a> 直接跳转</p>
+        <!--    <p align="center"><a name="J_clickUrl" href="">请点这里</a> 直接跳转</p>-->
         </div>
     </div>
 </div>
@@ -68,7 +68,7 @@
                     ajaxData.price=respItem[0].price;
                     ajaxData.promotionPrice=respItem[0].promotion_price;
                     ajaxData.commissionRate=respItem[0].commission_rate;
-                    $("#J_clickUrl").attr("href",sellUrl)
+                  /*  $("#J_clickUrl").attr("href",sellUrl)*/
                   //  document.getElementsByName('manual')[0].href=sellUrl;
                 }
             }
@@ -84,9 +84,9 @@
             dataType: "json",
             data: JSON.stringify(ajaxData),
             success: function(data){
-               if(data=="100"){
-                   alert(sellUrl)
-               //    window.location = sellUrl;
+               if(data.code=="100"){
+                //  alert(sellUrl)
+                   window.location = sellUrl;
                }
             }
         });

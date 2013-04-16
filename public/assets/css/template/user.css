@@ -436,6 +436,45 @@ html {
 .interPer li .user-info .followed-btn {
     float: left
 }
+
+/*浏览最多的宝贝*/
+.interGoods {
+    padding-top: 6px
+}
+
+.interGoods li {
+    height: 80px;
+    padding: 6px 0;
+
+}
+
+.interGoods li .goods-pic {
+    float: left;
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+    overflow: hidden;
+}
+
+.interGoods li .goods-info {
+   float: left;
+    width: 110px;
+    overflow: hidden;
+}
+
+.interGoods li .goods-info p {
+    line-height: 20px;
+
+}
+
+.interGoods li .goods-info .name {
+    line-height: 14px;
+    display: block
+}
+.interGoods li .goods-info p  span{
+    color: #e26;
+    font-weight: bold;
+}
 /*use follow page side 你可能感兴趣的人*/
 .follow-list {
     padding: 0 15px;
@@ -747,6 +786,14 @@ html {
 }
   /* user 讨论 end*/
 /*user 集分宝 start*/
+.credits-time{
+    color: #AAA;
+    margin: 0 10px;
+    height: 30px;
+    border-bottom: 1px solid #BBB;
+    font-size: 16px;
+    line-height: 30px;
+}
 .credits-list .credits-item { padding-bottom:15px;border-bottom: 1px dotted #555 }
 .credits-item .credits-detail { background:#fff; } /*660*/
 .credits-item .credits-detail .con { padding:10px; }
@@ -782,7 +829,7 @@ html {
 .credits-item .fd-media .info .volume{
 
 }
-.credits-item .fd-media .info  dd span{
+.credits-item  span{
     color: #e26;
     font-weight: bold;
 }
@@ -801,12 +848,14 @@ html {
     float:left;
     color:#999;
     overflow: hidden;
-    width: 100px;
     padding:5px;
     height: 120px;
     border-left: 1px dotted #999;
 }
-
+.credits-item  .time p{
+    height: 30px;
+    line-height: 30px;
+}
 /*topicedit 话题编辑  主题编辑*/
 .content {
     min-height: 500px;

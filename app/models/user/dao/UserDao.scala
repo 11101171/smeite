@@ -468,8 +468,15 @@ object UserDao {
 
   /*user order*/
   def addUserOrder(uid:Long,goodsId:Long,numIid:Long, nick:String, title:String,location:String,pic:String,price:String,withdrawRate:Int,credits:Int)=  database.withSession {  implicit session:Session =>
-
     UserOrders.autoInc2.insert(uid,Some(goodsId),numIid,nick,title,location,pic,price,withdrawRate,credits,new Timestamp(System.currentTimeMillis()))
+  }
+
+  def findUserOrders(uid:Long,currentPage:Int,pageSize:Int) =  database.withSession {  implicit session:Session =>
+    val totalRows=Query(UserOrders.filter(_.uid === uid).length).first()
+    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val query=for(c<- UserOrders if c.uid===uid)yield (c.createTime,c.uid,c.numIid,c.nick,c.title,c.location,c.pic,c.price,c.withdrawRate,c.credits,c.status)
+  query.drop(startRow).take(pageSize).list().map(x=>( utils.Utils.timestampFormat2(x._1),x._2,x._3,x._4,x._5,x._6,x._7,x._8,x._9,x._10,x._11)).groupBy(x=>x._1).map(x=>(x._1,x._2.map(y=>(y._2,y._3,y._4,y._5,y._6,y._7,y._8,y._9,y._10,y._11)))).toList
 
   }
 
