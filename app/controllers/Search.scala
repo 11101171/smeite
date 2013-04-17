@@ -23,7 +23,7 @@ object Search extends Controller {
   * */
   def search(keyword: String, p: Int) = Users.UserAction { user => implicit request =>
       if (Utils.isNumber(keyword)) {
-        Ok("heee" + keyword)
+        Redirect(controllers.routes.Search.convertProduct(keyword.toLong))
       } else {
         val page = TagDao.findTagGoodses(keyword, p, 54)
         Ok(views.html.search.baobei(user, page, keyword))
@@ -35,7 +35,12 @@ object Search extends Controller {
     val timestamp= String.valueOf(System.currentTimeMillis)
     val sign=TaobaoConfig.getSign(timestamp)
     Ok(views.html.search.convertProduct(user,numIid,id)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
-
-
   }
+
+  /* 调用淘宝客接口失败 */
+  def convertError(error:String)  = Users.UserAction { user => implicit request =>
+    Ok(views.html.search.convertError(user))
+  }
+
+
 }

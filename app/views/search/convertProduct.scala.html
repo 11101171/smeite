@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],numIid:Long,id:Long)
+@(user:Option[models.user.User],numIid:Long,uid:Long)
 @views.html.template(
 user,
 title ="食美特，爱美食爱生活"
@@ -14,12 +14,12 @@ title ="食美特，爱美食爱生活"
             <div class="gallery">
                 <div class="pic-box">
                     @if(user.isEmpty){
-                    <a class="buy-btn" rel="loginD2" data-numiid="" data-goodsid="" data-rate=""  target="_blank" rel="nofollow">
+                    <a id="J_noAccount" class="buy-btn" rel="loginD2" data-numiid="" data-goodsid="0" data-rate="70"  target="_blank" rel="nofollow">
                         <img id="J_PicCover" src="" alt="" />
                     </a>
 
                     }else{
-                    <a class="pic-link"  href="" target="_blank"  rel="nofollow">
+                    <a class="pic-link" id="J_gotoTaobao"  href="" target="_blank"  rel="nofollow">
                         <img id="J_PicCover" src="" alt="" />
                     </a>
                     }
@@ -44,24 +44,24 @@ title ="食美特，爱美食爱生活"
                                 价格：
 
 
-                                <span class="price-promotion"> ¥</span>
-                                <span class="price-normal"> ¥ </span>
+                                <span class="price-promotion" id="J_pricePromotion"></span>
+                                <span class="price-normal" id="J_priceNormal"></span>
 
                             </div>
-                            <div class="volume">30天已售 </div>
+                            <div class="volume" id="J_volume">30天已售 </div>
                         </dd>
 
-                       <dd>返利:&nbsp;<span></span>&nbsp;<a href="/jifenbao">个集分宝</a>，值<span></span>元( 返利比例:<span></span>%,奖励<a href="/shiDou">食豆</a>：<span>1</span>个 )</dd>
+                       <dd>返利:&nbsp;<span id="J_jifenbao"> </span>&nbsp;<a href="/jifenbao">个集分宝</a>，值<span id="J_value"></span>元( 返利比例:<span id="J_rate"></span>%,奖励<a href="/shiDou">食豆</a>：<span>1</span>个 )</dd>
 
 
 
                     </dl>
                     @if(user.isEmpty){
-                    <a class="buy-btn" rel="loginD2" data-numiid="" data-goodsid="" data-rate=""  target="_blank" rel="nofollow">去看看 &gt; </a>
+                    <a class="buy-btn" rel="loginD2" id="J_noAccount2" data-numiid="" data-goodsid="0" data-rate="70"  target="_blank" rel="nofollow">去看看 &gt; </a>
                     }else{
-                    <a class="buy-btn"  href="" target="_blank" rel="nofollow">去看看 &gt; </a>
+                    <a class="buy-btn" id="J_gotoTaobao2"  href="" target="_blank" rel="nofollow">去看看 &gt; </a>
                     }
-                    <a class="buy-btn2" href="">无须返利，直接购买&gt;&gt;</a>
+
 
                 </div>
 
@@ -87,6 +87,55 @@ title ="食美特，爱美食爱生活"
 <script type="text/javascript">
 
     seajs.use('app/init', function(init) {
+        var $ = jQuery;
+        var getRound = function(number, scale) {
+            var f = parseFloat(number);
+            if (isNaN(f)) {
+                return;
+            }
+            var t = Math.pow(10, scale);
+            f = Math.round(f * t) / t;
+            return f;
+        };
+        TOP.api('rest','post',{
+            method:'taobao.taobaoke.widget.items.convert',
+            num_iids:'@numIid',
+            outer_code:'@uid',
+            fields:'click_url,num_iid,nick,title,item_location,pic_url,price,promotion_price,commission_rate,volume'
+        },function(resp){
+            if(resp.error_response){
+                window.location.href ="/ugc/api/convertError?errorAPI=taobao.taobaoke.widget.items.convert接口获取商信息品失败!"+resp.error_response.msg;
+
+                return false;
+            } else {
+                var total=resp.total_results;
+                if (total > 0) {
+                    var respItem=resp.taobaoke_items.taobaoke_item;
+                    if (respItem.length > 0) {
+
+                        $("#J_PicCover").attr("src",respItem[0].pic_url)
+                        $("#J_noAccount").data("numiid",respItem[0].num_iid)
+                        $("#J_noAccount2").data("numiid",respItem[0].num_iid)
+                        $("#J_pricePromotion").html("￥"+respItem[0].promotion_price)
+                        $("#J_priceNormal").html("￥"+respItem[0].price)
+                        $("#J_volume").html("30天已售 "+respItem[0].volume)
+                        //返利比例
+                        $("#J_rate").html(getRound(Number(0.7)*Number(respItem[0].commission_rate)/100,2));
+                        //返利金额
+                        var fanli=getRound(Number(respItem[0].promotion_price)*Number(0.7)*Number(respItem[0].commission_rate)/10000,2);
+                        //返集分宝
+                        var point=Number(fanli)*100;
+                        $("#J_value").html(point)
+                        $("#J_jifenbao").html("").html(point);
+                        var clickUrl="/ugc/api/gotoTaobao/"+respItem[0].num_iid+"?goodsId=0&rate=70";
+                        $("#J_gotoTaobao").attr("href",clickUrl)
+                        $("#J_gotoTaobao2").attr("href",clickUrl)
+                    }
+                }
+            }
+
+            count();
+        })
 
     })
 </script>

@@ -146,12 +146,13 @@ GET   /bdsitemap.txt                                   controllers.Infos.baiduSi
 
 
 #用户生成的ugc
-GET     /ugc/api/findProduct         controllers.ugc.API.findProduct(url:String)
-POST    /ugc/api/saveProduct         controllers.ugc.API.saveProduct
+GET     /ugc/api/findProduct                       controllers.ugc.API.findProduct(url:String)
+POST    /ugc/api/saveProduct                       controllers.ugc.API.saveProduct
 GET     /ugc/api/convertProduct/$id<[0-9]+>        controllers.Search.convertProduct(id:Long)
+GET     /ugc/api/convertError                      controllers.Search.convertError(error:String)
 GET     /ugc/api/gotoTaobao/$numIid<[0-9]+>        controllers.ugc.API.gotoTaobao(numIid:Long,goodsId:Long ?=0,rate:Int ?=70)
-POST    /ugc/api/updateProduct       controllers.ugc.API.updateProduct
-POST    /ugc/api/ajaxRecord          controllers.ugc.API.ajaxRecord
+POST    /ugc/api/updateProduct                     controllers.ugc.API.updateProduct
+POST    /ugc/api/ajaxRecord                        controllers.ugc.API.ajaxRecord
 
 
 

@@ -592,7 +592,8 @@ define(function(require, exports) {
                         if(data.code==100){
                             $("#loginDialog").overlay().close();
                             //SMEITER.userId = data.userId;
-                            window.location.reload();
+                            var sellUrl="/ugc/api/gotoTaobao/"+numIid+"?goodsId="+goodsId+"&rate="+rate
+                            window.location=sellUrl;
                         }else if(data.code==101){
                             $("#loginDialog").find(".error-row").fadeIn();
                             $("#loginDialog").find(".error").html(data.message);
