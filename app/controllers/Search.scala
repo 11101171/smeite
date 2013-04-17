@@ -37,7 +37,7 @@ object Search extends Controller {
     Ok(views.html.search.convertProduct(user,numIid,id)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
   }
 
-  /* 调用淘宝客接口失败 */
+  /* 调用淘宝客接口失败*/
   def convertError(error:String)  = Users.UserAction { user => implicit request =>
     Ok(views.html.search.convertError(user))
   }

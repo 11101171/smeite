@@ -273,7 +273,6 @@ object API extends Controller {
       val price =if(record.promotionPrice!="")record.promotionPrice else record.price
       val withdrawRate= (rate*0.01*record.commissionRate.toFloat).toInt
       val credits = (price.toFloat*withdrawRate*0.01).toInt
-  println( withdrawRate +"   "+ price +"  "+credits)
       UserDao.addUserOrder(uid,goodsId,numIid,record.nick,record.title,record.location,record.pic,price,withdrawRate,credits,record.volume.toString)
 
   Ok(Json.obj("code"->"100","message"->"success"))
