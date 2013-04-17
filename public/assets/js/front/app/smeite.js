@@ -19,7 +19,7 @@
 define(function(require, exports) {
     var $ =jQuery= require("jquery");
     require("module/json");
-    require("module/jquery.tools.overlay")
+    require("module/jquery.tools.overlay")($);
     var Cookie = require("module/cookie")
     $.smeite = $.smeite || {
         version: "v1.0.0"

@@ -18,7 +18,7 @@ define(function (require,exports) {
     require("module/feedSlider")($);
     require("module/scrollImg")($);
     require("module/lazyload")($);
-  
+    require("module/jquery.tools.tabs")($)
     $(function () {
         /*顶部slide show*/
         (function (a) {
