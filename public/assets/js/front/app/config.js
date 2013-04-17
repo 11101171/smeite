@@ -16,10 +16,7 @@ seajs.config({
     plugins: ['shim'],
     // shim 配置项
     alias: {
-       'jquery' : {
-          src:'jquery.js',
-           exports:'jQuery'
-       },
+       'jquery' :'jquery.js',
         'redactor':{
            src: 'module/jquery.redactor.js',
            deps:['jquery']
@@ -29,7 +26,7 @@ seajs.config({
     },
     //预加载基础文件
     preload: [
-       'smeite',
+       'smeite','jquery',
         this.JSON ? '' : 'json'
     ],
     debug : false,

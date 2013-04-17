@@ -19,7 +19,8 @@
 define(function(require, exports) {
     var $ =jQuery= require("jquery");
     require("module/json");
-    require("module/jquery.cookie")
+    require("module/jquery.tools.overlay")
+    var Cookie = require("module/cookie")
     $.smeite = $.smeite || {
         version: "v1.0.0"
     };
@@ -1667,7 +1668,7 @@ define(function(require, exports) {
                     addToFav(this);
                 })
                 $("#J_CloseGuide").click(function(){
-                    $.cookie("refererGuide","no")    // 点击取消之后，不在出现
+                    Cookie.set("refererGuide","no")    // 点击取消之后，不在出现
                     $(".guide").hide();
                 })
             }
@@ -1692,7 +1693,7 @@ define(function(require, exports) {
             }
             var href = window.location.href;
             if(href.indexOf("/user/login")==-1 && href.indexOf("/user/doEmailLogin")==-1&& href.indexOf("/user/regist")==-1){
-                if("no" != $.cookie("refererGuide") && referer !="smeite"){
+                if("no" != Cookie.get("refererGuide") && referer !="smeite"){
                     posGuide();
                 }
             }
@@ -1746,7 +1747,7 @@ define(function(require, exports) {
                         })
                         $("#J_CloseGuide").click(function(){
                             // 用户取消后，cookie 记录，为了保证不在出现，扰民
-                            $.cookie("showGuide","no")
+                           Cookie.set("showGuide","no")
                             $(".guide").hide();
                         })
                     }
@@ -1769,7 +1770,7 @@ define(function(require, exports) {
                     }
                 }
                 /*如果用户没有点击取消 则显示 引导*/
-                if("no" != $.cookie("showGuide")){
+                if("no" != Cookie.get("showGuide")){
                     showguide();
                 }
             });
@@ -1827,7 +1828,7 @@ define(function(require, exports) {
                 });
                 $("#followDialog").overlay().getClosers().bind("click",function(){
                     if($("input[name=noMore]")[0].checked){
-                        jQuery.cookie("noMoreTip","n");
+                        Cookie.set("noMoreTip","n");
                     }
                     if(refresh){
                         window.location.reload();
