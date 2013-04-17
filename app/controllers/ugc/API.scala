@@ -142,7 +142,7 @@ object API extends Controller {
 
   private def url:String = Play.maybeApplication.flatMap(_.configuration.getString("application.taobao_url")).getOrElse("http://gw.api.taobao.com/router/rest")
   private def appkey = Play.maybeApplication.flatMap(_.configuration.getString("application.taobao_appkey")).getOrElse("21136607")
-  private def secret = Play.maybeApplication.flatMap(_.configuration.getString("application.taobao_secret")).getOrElse("c03472fbe94e9fa882c44948e8709320")
+  private def secret = Play.maybeApplication.flatMap(_.configuration.getString("application.taobao_secret")).getOrElse("b43392b7a08581a8916d2f9fa67003db")
 
 
 

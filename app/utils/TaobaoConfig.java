@@ -5,7 +5,7 @@ import utils.HMacMD5;
 
 public class TaobaoConfig {
     public static String appkey = "21136607";
-    public static String secret = "c03472fbe94e9fa882c44948e8709320";
+    public static String secret = "b43392b7a08581a8916d2f9fa67003db";
  //   public static String timestamp = String.valueOf(System.currentTimeMillis());
     /**
      * $secret.'app_key'.$app_key.'timestamp'.$timestamp.$secret;

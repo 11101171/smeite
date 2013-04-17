@@ -17,7 +17,7 @@ seajs.config({
     // shim 配置项
     alias: {
        'jquery' : {
-          src:'jquery/tools/1.2.7/jquery.tools.min.js',
+          src:'jquery.js',
            exports:'jQuery'
        },
         'redactor':{

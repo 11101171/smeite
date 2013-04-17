@@ -34,7 +34,7 @@ object Search extends Controller {
     val id= if(!user.isEmpty) user.get.id.get else 0
     val timestamp= String.valueOf(System.currentTimeMillis)
     val sign=TaobaoConfig.getSign(timestamp)
-    Ok(views.html.ugc.api.convertProduct(numIid,id)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
+    Ok(views.html.search.convertProduct(user,numIid,id)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
 
 
   }
