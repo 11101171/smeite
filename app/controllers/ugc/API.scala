@@ -252,20 +252,7 @@ object API extends Controller {
     Ok(Json.obj("code"->"100","message"->"success"))
   }
 
-  /* 淘宝返利 convert*/
-  def convertProduct(numIid:Long) =Action{   implicit  request =>
-  //  val goods =GoodsDao.find(numIid)
-    val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
-    var id:Long =0;
-     if(!user.isEmpty) id = user.get.id.get
-  //  if(goods.isEmpty) Ok(views.html.goods.nofound())
-  //  else{
-      val timestamp= String.valueOf(System.currentTimeMillis)
-      val sign=TaobaoConfig.getSign(timestamp)
-      Ok(views.html.ugc.api.convertProduct(numIid,id)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
-  //  }
 
-  }
 
   /* 淘宝客 go to taobao */
   def gotoTaobao(numIid:Long,goodsId:Long,rate:Int) =Users.UserAction { user => implicit request =>

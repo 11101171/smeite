@@ -1,0 +1,93 @@
+@(user:Option[models.user.User])
+@views.html.template(
+user,
+title ="食美特，爱美食爱生活"
+)(css="/assets/css/template/goods.detail.css") {
+
+<div class="container clearfix">
+
+    <!--main end-->
+    <div class="product-main clearfix">
+
+        <div class="main">
+            <!-- pic show-->
+            <div class="gallery">
+                <div class="pic-box">
+                    @if(user.isEmpty){
+                    <a class="buy-btn" rel="loginD2" data-numiid="" data-goodsid="" data-rate=""  target="_blank" rel="nofollow">
+                        <img id="J_PicCover" src="" alt="" />
+                    </a>
+
+                    }else{
+                    <a class="pic-link"  href="" target="_blank"  rel="nofollow">
+                        <img id="J_PicCover" src="" alt="" />
+                    </a>
+                    }
+
+
+                </div>
+
+            </div>
+            <!--pic show end-->
+
+
+
+        </div>
+        <!-- aside begin -->
+        <div class="side">
+            <div class="buy-info">
+                <div class="buy-box  clearfix">
+                    <dl class="buy-meta">
+                        <dt><h3 class="title"> </h3></dt>
+                        <dd class="clearfix">
+                            <div class="price">
+                                价格：
+
+
+                                <span class="price-promotion"> ¥</span>
+                                <span class="price-normal"> ¥ </span>
+
+                            </div>
+                            <div class="volume">30天已售 </div>
+                        </dd>
+
+                       <dd>返利:&nbsp;<span></span>&nbsp;<a href="/jifenbao">个集分宝</a>，值<span></span>元( 返利比例:<span></span>%,奖励<a href="/shiDou">食豆</a>：<span>1</span>个 )</dd>
+
+
+
+                    </dl>
+                    @if(user.isEmpty){
+                    <a class="buy-btn" rel="loginD2" data-numiid="" data-goodsid="" data-rate=""  target="_blank" rel="nofollow">去看看 &gt; </a>
+                    }else{
+                    <a class="buy-btn"  href="" target="_blank" rel="nofollow">去看看 &gt; </a>
+                    }
+                    <a class="buy-btn2" href="">无须返利，直接购买&gt;&gt;</a>
+
+                </div>
+
+            </div>
+
+
+            <!-- first share end  -->
+
+
+
+
+
+        </div>
+        <!-- aside end -->
+
+    </div>
+
+</div><!--container end-->
+
+
+
+}{
+<script type="text/javascript">
+
+    seajs.use('app/init', function(init) {
+
+    })
+</script>
+}

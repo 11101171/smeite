@@ -15,9 +15,18 @@ description = goods.intro
             <!-- pic show-->
             <div class="gallery">
                 <div class="pic-box">
+                    @if(user.isEmpty){
+                    <a class="buy-btn" rel="loginD2" data-numiid="@goods.numIid" data-goodsid="@goods.id.get" data-rate="@goods.rate"  target="_blank" rel="nofollow">
+                        <img id="J_PicCover" src="@goods.pic" alt="@goods.name" />
+                    </a>
+
+                    }else{
                     <a class="pic-link"  href="@controllers.ugc.routes.API.gotoTaobao(goods.numIid,goods.id.get,goods.rate)" target="_blank"  rel="nofollow">
                         <img id="J_PicCover" src="@goods.pic" alt="@goods.name" />
                     </a>
+                    }
+
+
 
                     <a rel="nofollow" class="ilike-m" href="javascript:;" data-type="0" data-proimgsrc="@goods.pic" data-proid="@goods.id" title="喜欢 +1">
                         <i></i>
