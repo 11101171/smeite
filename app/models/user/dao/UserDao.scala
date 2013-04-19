@@ -106,6 +106,11 @@ object UserDao {
     Cache.remove("user_"+uid)
     (for(c<-UserProfiles if c.uid === uid) yield c.receiver~c.province~c.city~c.street~c.postCode~c.phone~c.alipay).update((receiver,province,city,street,postCode,phone,alipay))
   }
+  /* 修改 支付宝账号 */
+  def modifyAlipay(uid:Long,alipay:String,phone:String)= database.withSession{  implicit session:Session =>
+    Cache.remove("user_"+uid)
+    (for(c<-UserProfiles if c.uid === uid) yield c.alipay ~c.phone).update(alipay,phone)
+  }
   /*修改user pic*/
   def modifyPic(uid:Long,pic:String)= database.withSession{  implicit session:Session =>
     Cache.remove("user_"+uid)

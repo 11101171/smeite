@@ -19,7 +19,7 @@ user
                          <p class="address-tip">如果你在活动中获得了奖品，我们将按照以下收货人信息发送奖品，所以请填写真实的收货信息。</p>
                          <form id="J_Address" method="post" class="set-form" action="@controllers.users.routes.UsersAccount.saveAddress">
                              @if(msg !=""){
-                             <div class="error-row" style="display:block"><p>@msg !</p></div>
+                             <div class="error-row" style="display:block"><p class="ok">@msg !</p></div>
                              }
                              @addrForm.errors.map { error =>
                              <div class="error-row">

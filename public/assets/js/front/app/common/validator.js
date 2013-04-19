@@ -119,17 +119,17 @@ define(function(require, exports) {
 		return v.length == 0 ? false : true;
 	});
 	vali.fn("textarea[name=addressDetail]", "请填写50个字以内的详细街道名，小区名等", "info");
-	vali.fn("input[name=cellphone]", "请输入正确的手机号码", "error", function(el, v) {
+	vali.fn("input[name=phone]", "请输入正确的手机号码", "error", function(el, v) {
 		return /^0?(13[0-9]|15[012356789]|18[0236789]|14[57])[0-9]{8}$/.test(v);
 	});
-	vali.fn("input[name=cellphone]", "手机号码不能为空", "require", function(el, v) {
+	vali.fn("input[name=phone]", "手机号码不能为空，否则返利成功后，无法提醒您", "require", function(el, v) {
 		return v.length == 0 ? false : true;
 	});
-	vali.fn("input[name=cellphone]", "请填写11位手机号码", "info");
+	vali.fn("input[name=phone]", "请填写11位手机号码", "info");
 	vali.fn("input[name=alipay]", "请输入正确的支付宝账号", "error", function(el, v) {
 		return $.smeite.util.isEmail(v)||/^(13[0-9]|15[012356789]|18[0236789]|14[57])[0-9]{8}$/.test(v);
 	});
-	vali.fn("input[name=alipay]", "支付宝账号不能为空", "require", function(el, v) {
+	vali.fn("input[name=alipay]", "支付宝账号不能为空，否则不能成功返利", "require", function(el, v) {
 		return v.length == 0 ? false : true;
 	});
 	

@@ -735,7 +735,7 @@ input:-moz-placeholder { font-size:12px; }
 .error-like .error{width:140px;}
 .tip { display:none;position:absolute;width:160px;line-height:16px;padding:8px 10px;color:#666;background:#f3f3f3;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px; }
 .errc { color:#bb0000; }
-.error { color:#bb0000;background:#ffe8e8; }
+.error { color:#bb0000;background:#ffe8e8;padding: 5px }
 .ajaxvali { background:#fff url(images/loading.gif) left center no-repeat;height:16px; }
 .correct { background:#fff url(images/correct.png) left center no-repeat;height:16px; }
 .empty { height:32px;line-height:32px;padding:0 10px; }

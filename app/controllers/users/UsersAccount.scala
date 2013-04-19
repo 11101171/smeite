@@ -32,7 +32,6 @@ object UsersAccount  extends Controller {
       "password" -> nonEmptyText,
       "password2" -> nonEmptyText
     ) verifying ("两次密码输入不一致……", fields => fields._2 == fields._3)
-
   )
   val addrForm =Form(
    tuple(
@@ -58,8 +57,16 @@ object UsersAccount  extends Controller {
    "blog"->text,
   "weixin"->text,
   "intro" ->text
-  
   )
+  )
+
+  val alipayForm = Form (
+  tuple(
+    "alipay" ->optional(text),
+    "phone" ->optional(text)
+
+  )
+
   )
 
 
@@ -127,8 +134,27 @@ object UsersAccount  extends Controller {
   /* 设置支付宝 */
   def payment = Users.UserAction {    user => implicit request =>
    if(user.isEmpty)  Redirect(controllers.users.routes.UsersRegLogin.login)
-   else  Ok(views.html.users.account.payment(user))
+   else {
+     val profile =UserDao.findProfile(user.get.id.get)
+     Ok(views.html.users.account.payment(user,alipayForm.fill((profile.alipay,profile.phone))))
+   }
+  }
+  /* 修改支付宝 */
+   def modifyPayment = Users.UserAction {    user => implicit request =>
+    if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)
+    else {
+      alipayForm.bindFromRequest.fold(
+        formWithErrors => {
+          val profile =UserDao.findProfile(user.get.id.get)
+          BadRequest(views.html.users.account.payment(user,formWithErrors.fill((profile.alipay,profile.phone))))
+        } ,
+        fields =>{
+          UserDao.modifyAlipay(user.get.id.get,fields._1.getOrElse(""),fields._2.getOrElse(""))
+          Ok(views.html.users.account.payment(user,alipayForm.fill(fields._1,fields._2),"支付宝账号保存成功"))
 
+        }
+      )
+    }
   }
 
   /* user account 用户账户 收货地址 */

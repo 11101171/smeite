@@ -21,13 +21,6 @@
     width: 100px
 }
 
-.main-content {
-    float: left;
-    width: 779px;
-    min-height: 500px;
-    border-left: 1px dotted #d1d1d1
-}
-
 .side-nav h2 {
     font-size: 16px;
     line-height: 100%
@@ -50,7 +43,21 @@
     color: #f32a6b
 }
 
-.set-box {
+.main-content {
+    float: left;
+    width: 779px;
+    min-height: 500px;
+    border-left: 1px dotted #d1d1d1
+}
+.main-content a{
+    color:#5Ad;
+}
+.main-content  a:hover{
+    color: #ff7f00;
+    text-decoration: underline;
+}
+
+/*.set-box {
     width: 365px;
     margin: 0 auto
 }
@@ -85,7 +92,7 @@
 
 .set-box .set-form {
     margin-top: 25px
-}
+}*/
 
 .theemail {
     line-height: 32px;
@@ -639,6 +646,9 @@
     position: static
 }*/
 /*help*/
+.help {
+    padding-left: 20px;
+}
 .help .help-title {
     font-weight: bold;
     font-size: 14px;

@@ -1,4 +1,4 @@
-@(user:Option[models.user.User])
+@(user:Option[models.user.User],alipayForm:Form[(Option[String],Option[String])],msg:String ="")
 @views.html.template(
 user
 )(css="/assets/css/template/user.setting.css") {
@@ -14,17 +14,47 @@ user
                      </ul>
                  </div>
                  <!--side nav end-->
-                 <div class="main-content">
-                     <div class="award">
-                         <div class="no-award">
-                             <p>sorry，食美特没有找到关于你的中奖信息！</p>
+                     <div class="main-content">
+                         @if(msg !=""){
+                         <div class="error-row" style="display:block"><p class="ok">@msg !</p></div>
+                         }
 
-                             <p>你可以先去完善下<a href="@controllers.users.routes.UsersAccount.address">收货地址</a>吧。有几个活动或许你感兴趣！</p>
+                         <div class="set-password clearfix">
+                             <form id="J_payment" method="post" class="set-form" action="@controllers.users.routes.UsersAccount.modifyPayment">
 
+                                 @alipayForm.errors.map { error =>
+                                 <div class="error-row">
+                                     <p class="error"> @error.message</p>
+                                 </div>
+                                 }
 
+                                 <div class="form-row">
+                                     <label>支付宝账号：</label>
+                                     <input type="text" class="base-input" name="alipay" id="alipay" value='@alipayForm("alipay").value'>
+                                   <!--  <span class="ml10 yc">请确保支付宝账号的正确性，否则无法成功返利</span>-->
+                                 </div>
+                                 <div class="form-row">
+                                     <label>手机号：</label>
+                                     <input type="text" class="base-input" name="phone" id="phone" value='@alipayForm("phone").value'>
+                                 <!--    <span class="ml10 yc">请确保手机号的正确性，否则返利成功后，无法提醒您</span>-->
+                                 </div>
+                                 <div class="form-row">
+                                     <label>&nbsp;</label>
+                                     <input type="submit" class="bbl-btn submit" value="确定">
+
+                                 </div>
+                             </form>
+                         </div>
+
+                         <div class="help">
+                             <div class="help-title">小提示</div>
+                             <ul>
+                                 <li>为了确保您能够获得返利，必须填写您的支付宝账号，并确保账号的正确性</li>
+                                 <li>请确保手机号的正确性，否则返利成功后，无法提醒您</li>
+
+                             </ul>
                          </div>
                      </div>
-                 </div>
                  <!-- end -->
                  </div>
              </div>
@@ -32,7 +62,7 @@ user
         }{
 <script type="text/javascript">
     seajs.use("app/init", function(init){
-        //  init.load("app/user.award");
+        init.load("app/user/user.modifyPayment");
     });
 </script>
 }
