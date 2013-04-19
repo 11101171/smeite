@@ -1,0 +1,186 @@
+/**
+ * Created by zuosanshao.
+ * Date: 12-9-7
+ * Time: 上午10:08
+ * 维护人员:zuosanshao@qq.com
+ */
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td {
+    margin: 0;
+    padding: 0
+}
+
+body, button, input, select, textarea {
+    font: 12px '微软雅黑', 'YaHei', '黑体', 'Hei', Tahoma, Helvetica, arial, sans-serif
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    color: #333
+}
+
+address, cite, dfn, em, var {
+    font-style: normal
+}
+code, kbd, pre, samp {
+    font-family: courier new, courier, monospace
+}
+small {
+    font-size: 12px
+}
+
+ul, ol, li {
+    list-style: none
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+fieldset, img {
+    border: 0
+}
+
+button, input, select, textarea {
+    font-size: 100%
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+img {
+    vertical-align: top;
+    display: inline-block;
+    background-color: #fff
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+    display: block;
+    margin: 0;
+    padding: 0
+}
+
+mark {
+    background: #ff0
+}
+
+object, embed {
+    outline: 0
+}
+
+p {
+    line-height: 1.6;
+    color: #666
+}
+
+.ofh {
+    white-space: nowrap;
+    word-wrap: normal;
+    word-break: normal;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    overflow: hidden
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+}
+
+.clearfix:after {
+    clear: both;
+}
+.clear{
+    clear: both;
+    display: block;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    overflow: hidden;
+}
+.r5 {
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px
+}
+.container {
+    margin: auto;
+    width: 980px;
+    *zoom: 1;
+}
+.container:before,
+.container:after {
+    display: table;
+    content: "";
+}
+.container:after {
+    clear: both;
+}
+#J_page{
+    background-color: #efefef;
+}
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.error{
+    width: 400px;
+    margin: 100px auto 0;
+}
+.title{
+    margin: 10px;
+    height: 30px;
+    line-height: 30px;
+}
+.title .logo{
+    background: #efefef url("/assets/ui/smeite.png") no-repeat 0 0;
+    height:30px;
+    width: 75px;
+    text-indent: -999px;
+}
+.title .intro{
+    padding-left: 10px;
+    font-size: 25px;
+    font-weight: bolder;
+    color: #999;
+}
+.content {
+    background-color: #fefefe;
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+}
+.content dt h3{
+   font-size: 16px;
+    font-weight: bolder;
+    padding-bottom: 15px;
+}
+.content dt p{
+    color: #999;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #888;
+}
+.content dd {
+    padding-top: 15px;
+}
+.content dd p {
+
+}
+.content dd a{
+   color:#5Ad;
+}
+.content dd a:hover{
+    color: #ff7f00;
+    text-decoration: underline;
+}
+
