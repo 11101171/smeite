@@ -64,7 +64,7 @@ object UserProfiles extends Table[UserProfile]("user_profile") {
   // Every table needs a * projection with the same type as the table's type parameter
   def * = id.? ~ uid ~ inviteId.? ~ inviteName.? ~ gender ~ intro.? ~ birth.? ~ weixin.? ~ alipay.? ~ receiver.? ~ province.? ~ city.? ~ town.? ~ street.? ~ postCode.? ~ phone.? ~ blog.? ~ loginTime.? ~ loginNum ~ loginIP.? ~ registTime.? <>(UserProfile, UserProfile.unapply _)
 
-  def autoInc = uid ~ loginTime  ~ registTime~ loginIP  returning id
+  def autoInc = uid ~ inviteId ~ loginTime  ~ registTime~ loginIP  returning id
 
 }
 

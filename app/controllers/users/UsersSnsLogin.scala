@@ -30,20 +30,21 @@ object UsersSnsLogin extends Controller {
   /*
   * 第三方登录 目前只开发qq weibo taobao
   * */
-  def snsLogin(snsType:String,backType:String)=Action{ implicit  request=>
+  def snsLogin(snsType:String,backType:String,id:Long)=Action{ implicit  request=>
     if(snsType=="taobao"){
-       Redirect("https://oauth.taobao.com/authorize?response_type=code&client_id=21136607&redirect_uri=http://smeite.com/user/taobao/registered/"+backType)
+       Redirect("https://oauth.taobao.com/authorize?response_type=code&client_id=21136607&redirect_uri=http://smeite.com/user/taobao/registered/"+backType+"?i="+id)
     }else if(snsType=="qzone"){
-      Redirect(" https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100344510&state=qq&redirect_uri=http://smeite.com/user/qzone/registered/"+backType)
+      Redirect(" https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100344510&state=qq&redirect_uri=http://smeite.com/user/qzone/registered/"+backType+"?i="+id)
     }else if (snsType=="sina"){
-      Redirect("https://api.weibo.com/oauth2/authorize?client_id=1464940004&response_type=code&redirect_uri=http://smeite.com/user/sina/registered/"+backType)
+      Redirect("https://api.weibo.com/oauth2/authorize?client_id=1464940004&response_type=code&redirect_uri=http://smeite.com/user/sina/registered/"+backType+"?i="+id)
     }
     else{
       Ok("亲，我们只支持淘宝帐号登录 qq帐号登录 和 新浪微博登陆哦…… ")
     }
 
   }
-  def  registered(snsType:String,code:String,backType:String)=Action{   implicit request =>
+  /* i  inviteId */
+  def  registered(snsType:String,code:String,backType:String,i:Long)=Action{   implicit request =>
      if(snsType=="taobao"){
        /*第一步 获取token,淘宝的第三方登录比较成熟，可以一步到位，token和用户信息一起返回*/
         val post = new HttpPost("https://oauth.taobao.com/token?grant_type=authorization_code&client_id=21136607&client_secret=c03472fbe94e9fa882c44948e8709320&code="+code+"&redirect_uri=http://smeite.com/user/taobao/getToken")
@@ -64,7 +65,7 @@ object UsersSnsLogin extends Controller {
          val user=UserDao.checkSnsUser(3,openId);
          var uid:Long = 0;
         if (user.isEmpty){
-             UserDao.addSnsUser( java.net.URLDecoder.decode(nick,"UTF-8"),3,openId,"/images/user/default.jpg");
+             UserDao.addSnsUser(java.net.URLDecoder.decode(nick,"UTF-8"),3,openId,"/images/user/default.jpg",i);
           val u=UserDao.checkSnsUser(3,openId);
               Cache.set(u.get.id.get.toString,u);
           uid = u.get.id.get
@@ -121,7 +122,7 @@ object UsersSnsLogin extends Controller {
        val user =UserDao.checkSnsUser(1,openId);
        var uid:Long = 0;
        if (user.isEmpty){
-         UserDao.addSnsUser(nickName,1,openId,pic)
+         UserDao.addSnsUser(nickName,1,openId,pic,i)
          val u=UserDao.checkSnsUser(1,openId);
          Cache.set(u.get.id.get.toString,u);
          uid = u.get.id.get
@@ -161,7 +162,7 @@ object UsersSnsLogin extends Controller {
         val user =UserDao.checkSnsUser(2,openId);
        var uid:Long = 0;
        if (user.isEmpty){
-         UserDao.addSnsUser(nickName,2,openId,pic)
+         UserDao.addSnsUser(nickName,2,openId,pic,i)
          val u=UserDao.checkSnsUser(2,openId);
          Cache.set(u.get.id.get.toString,u);
          uid = u.get.id.get

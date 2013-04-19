@@ -164,6 +164,13 @@
     color: #333;
     font-size: 14px
 }
+.confirm p a{
+    color:#5Ad;
+}
+.confirm p a:hover{
+    color: #ff7f00;
+    text-decoration: underline;
+}
 
 .problem p {
     padding: 15px 0 10px

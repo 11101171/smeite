@@ -81,20 +81,20 @@ object UserDao {
     user
   }
  /* 第三方用户初次登陆 */
-  def addSnsUser(name:String,comeFrom:Int,openId:String,pic:String) =database.withSession{ implicit  session:Session =>
+  def addSnsUser(name:String,comeFrom:Int,openId:String,pic:String,inviteId:Long) =database.withSession{ implicit  session:Session =>
     val id = Users.autoInc3.insert(name,comeFrom,openId,pic)
     /* 添加积分 */
  //   UserSQLDao.updateCredits(id,ShiDouConfig.regCredits)
     UserStatics.autoInc.insert(id)
-    UserProfiles.autoInc.insert(id,new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis()),"sns")
+    UserProfiles.autoInc.insert(id,inviteId,new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis()),"sns")
   }
   /*用户通过网站注册 * */
-  def addSmeiteUser(name:String, passwd:String, email:String,ip:String)=database.withSession{ implicit  session:Session =>
+  def addSmeiteUser(name:String, passwd:String, email:String,inviteId:Long,ip:String)=database.withSession{ implicit  session:Session =>
     val id = Users.autoInc2.insert(name,Codecs.sha1("smeite"+passwd),email)
     /* 添加积分 */
   //  UserSQLDao.updateCredits(id,ShiDouConfig.regCredits)
     UserStatics.autoInc.insert(id)
-    UserProfiles.autoInc.insert(id,new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis()),ip)
+    UserProfiles.autoInc.insert(id,inviteId,new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis()),ip)
   }
   /*修改密码*/
   def modifyPasswd(uid:Long, passwd:String) =database.withSession{ implicit  session:Session =>

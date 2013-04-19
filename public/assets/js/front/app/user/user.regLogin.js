@@ -6,16 +6,8 @@
  * Email:zuosanshao@qq.com
  */
 define(function (require,exports) {
-    var $ =jQuery= require("jquery");
-    $.tools.validator.localize("cn", {
-        ':email'  		: 'email 格式不对',
-        ':number' 		: '请输入数字',
-        '[max]'	 		: '必须小于 $1',
-        '[min]'	 		: '必须大于 $1',
-        '[required]' 	: '必填'
+    require("app/common/validator")($);
+    jQuery(function() {
+        $("#J_regLoginForm").validator();
     });
-    $(function () {
-        $("form").validator({lang:'cn'});
-
-    })
 });

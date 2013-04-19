@@ -21,7 +21,7 @@ title =  "食美特，爱美食爱生活——用户登陆"
 
                         <div class="smeite-login">
                             <p class="ml30 mb10 mt10">没有账号？</p>
-                            <a  class="follow-btn-big  " href="@controllers.users.routes.UsersRegLogin.regist">免费注册</a>
+                            <a  class="follow-btn-big  " href="@controllers.users.routes.UsersRegLogin.regist(0)">免费注册</a>
                         </div>
 
                     </div>
@@ -34,7 +34,7 @@ title =  "食美特，爱美食爱生活——用户登陆"
 
 
                     <div class="field-box pt25 pl20">
-                        <form  id="regLoginForm"  method="post" action="@controllers.users.routes.UsersRegLogin.doEmailLogin">
+                        <form  id="J_regLoginForm"  method="post" action="@controllers.users.routes.UsersRegLogin.doEmailLogin">
                             @form.globalErrors.map { error =>
                             <div class="error-row" style="display:block">
                                 <p class="error"> @error.message</p>
@@ -46,7 +46,7 @@ title =  "食美特，爱美食爱生活——用户登陆"
                             </div>
                             <div class="form-row">
                                 <label>密码：</label>
-                                <input type="password" class="base-input" name="passwd" id="passwd" value="">
+                                <input type="password" class="base-input" name="password" id="password" value="">
                             </div>
                             <div class="form-row">
                                 <label>&nbsp;</label>

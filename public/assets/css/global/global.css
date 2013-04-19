@@ -2246,7 +2246,7 @@ body .redactor_toolbar li a.redactor_btn_alignment	 		{ background-position: -62
 }
 .header .hd-right{
     float: right;
-    width: 600px;
+/*    width: 600px;*/
     display: inline-block;
     margin-top:20px;
 }

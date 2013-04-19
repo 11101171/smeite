@@ -26,17 +26,18 @@ object UsersRegLogin extends Controller {
   val loginForm = Form(
     tuple(
       "email" -> email,
-      "passwd" -> nonEmptyText
+      "password" -> nonEmptyText
     ) verifying ("Email或者密码错误……", fields => fields match {
-      case (email, passwd) => UserDao.authenticate(email, passwd).isDefined
+      case (email, password) => UserDao.authenticate(email, password).isDefined
     })
   )
   val regForm=Form(
     tuple(
       "email" -> email,
-      "passwd" -> nonEmptyText
+      "password" -> nonEmptyText,
+      "inviteId" ->longNumber
     ) verifying ("嘿，Email已存在了", fields => fields match {
-      case (email,passwd) => UserDao.findByEmail(email).isEmpty
+      case (email,password,_) => UserDao.findByEmail(email).isEmpty
     })
   )
   val verifyEmailForm =Form(
@@ -91,27 +92,28 @@ object UsersRegLogin extends Controller {
   }
 
   /*用户注册页面 */
-  def regist =Users.UserAction{   user => implicit request =>
-     if(user.isEmpty) Ok(views.html.users.regLogin.regist(regForm))
+  def regist(inviteId:Long) =Users.UserAction{   user => implicit request =>
+     if(user.isEmpty) Ok(views.html.users.regLogin.regist(regForm,inviteId))
      else Redirect(controllers.users.routes.Users.home(user.get.id.get))
   }
   /*用户注册页面 邮箱已发送*/
   def doRegist=Action{  implicit request =>
     regForm.bindFromRequest.fold(
-      formWithErrors => BadRequest(views.html.users.regLogin.regist(formWithErrors)),
+      formWithErrors => BadRequest(views.html.users.regLogin.regist(formWithErrors,formWithErrors.get._3)),
       user =>{
         /*发送邮件 ,邮件激活后，改变user的status todo */
         /* xxx */
         val email =user._1;
-        val passwd =user._2;
+        val password =user._2;
+        val inviteId=user._3;
         val name =email.split("@").head;
         val gotoEmail:String=email.split("@").last match {
           case  "gmail.com" => "http://mail.google.com"
           case  _ =>"http://mail."+email.split("@").last
         }
      //   User.insertUser(name,email,user._2);
-      UserDao.addSmeiteUser(name,passwd,email,request.remoteAddress)
-        val u=UserDao.authenticate(email,passwd);
+      UserDao.addSmeiteUser(name,password,email,inviteId,request.remoteAddress)
+        val u=UserDao.authenticate(email,password);
         Cache.set(u.get.id.get.toString,u);
         Ok(views.html.users.regLogin.doRegist(u,email,gotoEmail)).withSession("user" -> u.get.id.get.toString) }
     )

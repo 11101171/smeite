@@ -1,4 +1,4 @@
-@(form: Form[(String,String)])
+@(form: Form[(String,String,Long)],i:Long)
 @views.html.template(
 title =  "食美特，爱美食爱生活——用户注册"
 )(css="/assets/css/template/user.regLogin.css") {
@@ -14,9 +14,9 @@ title =  "食美特，爱美食爱生活——用户注册"
                     </legend>
                     <div class="field-box">
                         <div class="sns-login pt20 clearfix">
-                            <a class="l-qq" href="" target="_blank">QQ帐号登录</a>
-                            <a class="l-sina" href="" target="_blank">新浪微博登录</a>
-                            <a class="l-tao" href="" target="_blank">淘宝帐号登录</a>
+                            <a class="l-qq" href='@controllers.users.routes.UsersSnsLogin.snsLogin("qq","syn",i)' target="_blank">QQ帐号登录</a>
+                            <a class="l-sina" href='@controllers.users.routes.UsersSnsLogin.snsLogin("sina","syn",i)' target="_blank">新浪微博登录</a>
+                            <a class="l-tao" href='@controllers.users.routes.UsersSnsLogin.snsLogin("taobao","syn",i)' target="_blank">淘宝帐号登录</a>
                         </div>
 
                         <div class="smeite-login">
@@ -35,6 +35,7 @@ title =  "食美特，爱美食爱生活——用户注册"
 
                     <div class="field-box pt25 pl20">
                         <form id="regForm" class="validateForm" method="post" action="/user/doRegist">
+                          <input type="hidden" name="inviteId" value="@i">
                             @form.globalError.map { error =>
                             <div class="error-row" style="display:block">
                                 <p class="error"> @error.message</p>
@@ -46,7 +47,7 @@ title =  "食美特，爱美食爱生活——用户注册"
                             </div>
                             <div class="form-row">
                                 <label>密码：</label>
-                                <input type="password" class="base-input" name="passwd" id="passwd" value="" required="required">
+                                <input type="password" class="base-input" name="password" id="passwd" value="" required="required">
                             </div>
 
                             <div class="form-row  clearfix">
