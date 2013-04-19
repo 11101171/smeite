@@ -141,7 +141,8 @@
     margin: 0 0 20px 130px
 }
 
-.bind {
+/*我的绑定*/
+/*.bind {
     padding: 0 0 0 60px
 }
 
@@ -313,8 +314,9 @@
     width: 210px;
     font-size: 14px;
     line-height: 1.2
-}
+}*/
 
+/*
 .imgareaselect-border1 {
     background: url(images/border-v.gif) repeat-y left top
 }
@@ -348,6 +350,7 @@
     filter: alpha(opacity = 50);
     opacity: .5
 }
+*/
 
 .photo-row {
     margin: 0 auto;
@@ -404,7 +407,7 @@
 .photo-dialog form {
     margin-left: 40px
 }
-
+/*我的邀请*/
 .invite {
     overflow: hidden;
     zoom: 1;
@@ -415,7 +418,8 @@
     display: block;
     margin-bottom: 15px;
     height: 32px;
-    line-height: 32px
+    line-height: 32px;
+    font-weight: bold;
 }
 
 .invite .li li {
@@ -518,153 +522,8 @@
     border: 1px solid #1c82bf
 }
 
-.weibo_invite {
-    overflow: hidden;
-    zoom: 1;
-    width: 550px
-}
 
-.weibo_invite li {
-    width: 80px;
-    height: 84px;
-    margin: 1px 15px 10px 15px;
-    float: left;
-    display: inline;
-    padding: 0
-}
-
-.weibo_invite li input {
-    float: left
-}
-
-.weibo_invite li img {
-    float: right;
-    padding: 1px;
-    border: 1px solid #f9f9f9
-}
-
-.weibo_invite p {
-    display: block;
-    line-height: 22px;
-    color: #5ad;
-    clear: both;
-    text-align: center;
-    cursor: pointer
-}
-
-.weibo_invite span {
-    height: 22px;
-    line-height: 22px;
-    color: #999;
-    margin-bottom: 12px;
-    margin-right: 14px
-}
-
-.weibo_invite font {
-    font-size: 14px;
-    padding: 0 2px;
-    color: #f32a6b;
-    font-weight: 700;
-    font-family: Georgia, "Times New Roman", Times, serif
-}
-
-.weibo_t {
-    border-bottom: 1px solid #dedede;
-    height: 30px;
-    width: 535px;
-    margin-bottom: 10px
-}
-
-.weibo_t .tab {
-    height: 29px;
-    line-height: 29px;
-    color: #666;
-    float: right;
-    width: 90px;
-    border-radius: 3px 3px 0 0
-}
-
-.weibo_t span {
-    height: 29px;
-    line-height: 29px;
-    float: left;
-    color: #666;
-    margin: 0
-}
-
-.weibo_t .tab a {
-    line-height: 29px;
-    display: block;
-    padding-left: 30px;
-    color: #999;
-    text-decoration: none
-}
-
-.weibo_t .on {
-    border-left: none;
-    background-color: #fff;
-    height: 29px;
-    border: 1px solid #dedede;
-    border-bottom: 1px solid #fff
-}
-
-.weibo_t .on a, .weibo_t .on a:hover {
-    color: #5AD;
-    text-decoration: none
-}
-
-.weibo_t .i-sina {
-    background-position: 10px -410px
-}
-
-.weibo_t .i-qq {
-    background-position: 10px -273px
-}
-
-.img-sina, .img-qq {
-    margin: 120px auto;
-    width: 120px;
-    display: block;
-    height: 49px;
-    line-height: 49px;
-    color: #666;
-    font-size: 12px;
-    font-weight: 400;
-    padding: 0 0 0 60px
-}
-
-.img-sina {
-    background: url(images/weibo_invite.png) 0 0 no-repeat
-}
-
-.img-qq {
-    background: url(images/weibo_invite.png) 0 -49px no-repeat
-}
-
-.sns-scroller {
-    padding-top: 32px;
-    height: 285px;
-    position: relative;
-    overflow: hidden
-}
-
-.sns-scroller .items {
-    position: absolute;
-    width: 2000em
-}
-
-.sns-scroller .items ul {
-    float: left;
-    width: 550px;
-    height: 285px;
-    overflow: hidden
-}
-
-.sns-scroller .next {
-    position: absolute;
-    right: 15px;
-    top: 0
-}
+/* 我的收货地址*/
 
 .address .form-row label {
     width: 130px
@@ -678,7 +537,7 @@
 .address .set-form .intro-txa {
     height: 50px
 }
-
+/*我的奖品*/
 .award {
     padding-left: 40px
 }
@@ -726,7 +585,7 @@
     margin-left: 56px
 }
 
-#view_award_Dialog {
+/*#view_award_Dialog {
     width: 400px
 }
 
@@ -756,9 +615,9 @@
 
 #confirm_award_Dialog {
     width: 460px
-}
+}*/
 
-#address_Dialog {
+/*#address_Dialog {
     width: 366px
 }
 
@@ -778,7 +637,7 @@
 #address_Dialog .tip {
     float: right;
     position: static
-}
+}*/
 /*help*/
 .help .help-title {
     font-weight: bold;
