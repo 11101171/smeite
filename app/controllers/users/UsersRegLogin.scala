@@ -99,7 +99,7 @@ object UsersRegLogin extends Controller {
   /*用户注册页面 邮箱已发送*/
   def doRegist=Action{  implicit request =>
     regForm.bindFromRequest.fold(
-      formWithErrors => BadRequest(views.html.users.regLogin.regist(formWithErrors,formWithErrors.get._3)),
+      formWithErrors => BadRequest(views.html.users.regLogin.regist(formWithErrors,0)),
       user =>{
         /*发送邮件 ,邮件激活后，改变user的status todo */
         /* xxx */

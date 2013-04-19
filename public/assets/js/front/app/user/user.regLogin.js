@@ -6,6 +6,7 @@
  * Email:zuosanshao@qq.com
  */
 define(function (require,exports) {
+    var $ = jQuery = require("jquery");
     require("app/common/validator")($);
     jQuery(function() {
         $("#J_regLoginForm").validator();
