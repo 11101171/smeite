@@ -2465,12 +2465,12 @@ body .redactor_toolbar li a.redactor_btn_alignment	 		{ background-position: -62
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
     #nav .person .arrow-dn, #nav .xiaoxi .arrow-dn { position:absolute;width:24px;height:20px;top:2px;right:2px;background:url(images/arrow-d-x2.png) no-repeat center;background-size: 6px 6px;}
 }
-#nav .person a.gohome { float:left;height:20px;line-height:20px;padding:0 24px 0 28px;max-width:100px;white-space:nowrap;word-wrap:normal;word-break:normal;text-overflow:ellipsis;-o-text-overflow:ellipsis;overflow:hidden; color:#333;border-right:1px dotted #dcdcdc}
+#nav .person a.gohome { float:left;height:20px;line-height:20px;padding:0 24px 0 28px;max-width:100px;white-space:nowrap;word-wrap:normal;word-break:normal;text-overflow:ellipsis;-o-text-overflow:ellipsis;overflow:hidden; color:#333;}
 #nav .person a.gohome:hover, #nav .person .set-dropdown li a:hover, #nav .regLogin a:hover, #nav a.xiaoxi:hover,#nav a.btn-sg:hover, .dropdown li a:hover { color:#55aadd;text-decoration:none; }
 /* end */
 /*登陆后的消息*/
 #nav .xiaoxi-box { margin:8px 0 0 0;position:relative;height:20px;padding:2px 0;background:#fff;border:none;}
-#nav a.xiaoxi{float:left;height:20px;line-height:20px;padding:0 26px 0 12px;max-width:100px;white-space:nowrap;word-wrap:normal;word-break:normal;text-overflow:ellipsis;-o-text-overflow:ellipsis;overflow:hidden; color:#333;border-right:1px dotted #dcdcdc}
+#nav a.xiaoxi{float:left;height:20px;line-height:20px;padding:0 26px 0 12px;max-width:100px;white-space:nowrap;word-wrap:normal;word-break:normal;text-overflow:ellipsis;-o-text-overflow:ellipsis;overflow:hidden; color:#333;}
 #nav .xiaoxi-dropdown { width:110px; }
 #nav .xiaoxi-tip { position:absolute;right:50px;top:41px;z-index:99;border:1px solid #dedede;background:#feffe5;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;padding:5px 10px; }
 #nav .xiaoxi-tip .xiaoxi-item { width:100px;line-height:24px;margin-top:3px; }
@@ -2499,7 +2499,7 @@ body .redactor_toolbar li a.redactor_btn_alignment	 		{ background-position: -62
 /*登录 注册 end*/
 /*分享宝贝*/
 #nav .shareIt { margin:8px 0 0 0;position:relative; }
-#nav a.btn-sg { display:block;height:24px;overflow:hidden;background:#fff;line-height:24px; text-align:center;position:relative;padding:0 26px 0 10px;border:none;color:#333;text-decoration:none; width:61px}
+#nav a.btn-sg { display:block;height:24px;overflow:hidden;background:#fff;line-height:24px; text-align:center;position:relative;padding:0 26px 0 0;border:none;color:#333;text-decoration:none; width:61px}
 #nav .shareit-dropdown { width:86px; }
 #nav .shareit-dropdown li { margin:0 10px;padding:6px 0; }
 #nav .shareit-dropdown .sg-li { border-bottom:1px solid #F3F3F3; }

@@ -16,19 +16,29 @@ user
         <!--side nav end-->
         <div class="main-content">
             <div class="invite">
-                <div class="li fs14">一：邀请有奖之武林秘籍</div>
-                <div class="invite_success" style="margin-bottom:10px">您已成功邀请<span>0</span>人，累计获得<span>0</span>积分</div>
+
+                 <div class="li">一：邀请有奖之规则</div>
+                <ul class="invite-intro clearfix">
+                        <li>1、您每邀请一个朋友加入淘粉吧（登录并有成功返利且用户等级2心以上），可获得最高<strong class="rc">10元</strong>的邀请奖励</li>
+                        <li>2、邀请好友必须是新用户（即以前没登录过淘粉吧且等级在2心以上），如果她已是淘粉吧老用户了，那么是没有奖励的</li>
+                        <li>3、您可以把您的专用邀请链接通过QQ或者旺旺发给您的朋友，也可以分享到您的社区里面去</li>
+                        <li>4、邀请奖金分3次发放：当好友累计返利达到1元时奖2元；当累计返利到10元时再奖3元；当累计返利到30元时再奖3元；</li>
+                        <li>5、新邀请奖励规则从2012.7.10日开始实施，即还未奖励成功的邀请记录将按新奖励规则执行</li>
+                        <li><strong class="alert">禁作弊提醒</strong>：严禁自己邀请自己、刷小号等作弊行为，一旦反作弊系统监测到作弊行为，将拉黑账号处理，邀请也无效</li>
+
+                </ul>
 
 
                 <div class="li">二：这是您的专用邀请链接，可通过任何方式发送给好友</div>
-                <textarea id="clip-text" class="base-txa invite_txa">女人天生爱逛街，和我们一起来逛吧！~http://smeite.com/signup?reg=1341353</textarea>
-
-                <div class="li">
+                <div class="invite-link clearfix">
+                    <textarea id="clip-text" class="base-txa invite_txa">女人天生爱逛街，和我们一起来逛吧！~http://smeite.com/signup?reg=1341353</textarea>
                     <input type="button" class="bbl-btn submit" id="J_Clip" value="复制">
                 </div>
-                <div class="li" style="color:#666; margin-bottom:10px;">三：分享到您的社区</div>
-                <div class="li">
-                    <ul>
+
+
+                <div class="li">三：分享到您的社区</div>
+                <div class="invite-share clearfix">
+                    <ul class="clearfix">
                         <li><a class="i-sina"
                                href="javascript:void((function(){var title=encodeURIComponent('女人天生爱逛街，和我们一起来逛吧！~');var link=encodeURIComponent('http://smeite.com/signup?reg=1341353');window.open('http://service.t.sina.com.cn/share/share.php?appkey=1207757825&title='+title+'&url='+link);})())">新浪微博</a>
                         </li>
@@ -45,22 +55,30 @@ user
                                href="javascript:void((function(){var title=encodeURIComponent('女人天生爱逛街，和我们一起来逛吧！~');var link=encodeURIComponent('http://smeite.com/signup?reg=1341353');window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+link+'&title='+title);})())">QQ空间</a>
                         </li>
                     </ul>
+                    <div class="share-tip">温馨提示：据淘粉吧统计，QQ空间最容易邀请到好友，所以一定记得把您的专用邀请链接发到QQ空间里哦~</div>
                 </div>
-                <div class="li" style="color:#666; margin-bottom:10px;">四：分享到您的社区</div>
+                <div class="li">四：邀请返利记录</div>
+                <div class="invite-record clearfix">
+                    <div class="invite_success mb10">您已成功邀请<span>0</span>人，累计获得<span>0</span>元</div>
 
-                <table id="invite_table" cellpadding="0" cellspacing="0" width="747">
-                    <tbody>
-                    <tr class="invite_tr" height="35">
-                        <td class="table_top" width="110">好友淘宝昵称</td>
-                        <td class="table_top" width="174">是否是tf8新用户</td>
-                        <td class="table_top" width="127">好友是否已返利</td>
-                        <td class="table_top" width="272">奖励情况</td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" class="table_one">您还没有邀请过，赶快加入吧！</td>
-                    </tr>
-                    </tbody>
-                </table>
+                    <table id="invite_table" class="table">
+                        <thead>
+                        <tr class="invite_tr" height="35">
+                            <th class="table_top" width="110">好友淘宝昵称</th>
+                            <th class="table_top" width="174">是否是tf8新用户</th>
+                            <th class="table_top" width="127">好友是否已返利</th>
+                            <th class="table_top" width="272">奖励情况</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr>
+                            <td colspan="4" class="table_one">您还没有邀请过，赶快加入吧！</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
 
 
             </div>
