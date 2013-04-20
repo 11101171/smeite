@@ -472,7 +472,7 @@ define(function(require, exports) {
                 html += '<input type="text" class="base-input" name="email" id="email" value="" placeholder="" />';
                 html += '</div>';
                 html += '<div class="form-row"><label>密码：</label>';
-                html += '<input type="password" class="base-input" name="passwd" id="password" value="" />';
+                html += '<input type="password" class="base-input" name="password" id="password" value="" />';
                 html += '</div>';
                 html += '<div class="form-row"><label>&nbsp;</label>';
                 html += '<input type="checkbox" class="check" name="remember" value="1" checked="checked" />';
@@ -550,7 +550,7 @@ define(function(require, exports) {
                 html += '<input type="text" class="base-input" name="email" id="email" value="" placeholder="" />';
                 html += '</div>';
                 html += '<div class="form-row"><label>密码：</label>';
-                html += '<input type="password" class="base-input" name="passwd" id="password" value="" />';
+                html += '<input type="password" class="base-input" name="password" id="password" value="" />';
                 html += '</div>';
                 html += '<div class="form-row"><label>&nbsp;</label>';
                 html += '<input type="checkbox" class="check" name="remember" value="1" checked="checked" />';

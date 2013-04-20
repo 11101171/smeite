@@ -1,4 +1,4 @@
-/* 通用表单校验 add by @Jeffer on 2012-05-29 */
+       /* 通用表单校验 add by @Jeffer on 2012-05-29 */
 define(function(require, exports) {
 	var $ = jQuery = require("jquery");
 //(function($) { 
@@ -171,8 +171,8 @@ define(function(require, exports) {
 			
 		});
 		
-		if($("input[name=email]")[0]){
-			$("input[name=email]").bind("blur",function(){
+		if($("#J_checkEmail")[0]){
+			$("#J_checkEmail").bind("blur",function(){
 				var $this = $(this);
 				if($this.data("vali")==1 && $this.data("vali")!=11){
 					$this.data("vali", 0);

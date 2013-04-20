@@ -17,7 +17,6 @@ import  scala.collection.mutable.Map
 import java.sql.Timestamp
 
 object Utils {
-
   /*正则表达式验证*/
   private  def  isMatch(regex:String, str:String):Boolean={
     Pattern.compile(regex).matcher(str).matches();
