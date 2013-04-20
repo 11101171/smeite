@@ -485,9 +485,9 @@ define(function(require, exports) {
                 html += '<div class="bd-r">';
                 html += '<p>你也可以使用这些帐号登录</p>';
                 html += '<div class="snslogin mt15 clearfix"><ul class="fl mr20 outlogin-b">';
-                html += '<li><a class="l-qq" href="/user/snsLogin?snsType=qzone&backType=asyn">QQ帐号登录</a></li>';
-                html += '<li><a class="l-sina" href="/user/snsLogin?snsType=sina&backType=asyn">新浪微博登录</a></li>';
-                html += '<li><a class="l-tao" href="/user/snsLogin?snsType=taobao&backType=asyn">淘宝帐号登录</a></li>';
+                html += '<li><a class="l-qq" href="/user/snsLogin?snsType=qzone&backType=asyn&i=0">QQ帐号登录</a></li>';
+                html += '<li><a class="l-sina" href="/user/snsLogin?snsType=sina&backType=asyn&i=0">新浪微博登录</a></li>';
+                html += '<li><a class="l-tao" href="/user/snsLogin?snsType=taobao&backType=asyn&i=0">淘宝帐号登录</a></li>';
                 html += '</ul>';
                 html += '</div>';
                 html += '</div>';
@@ -563,9 +563,9 @@ define(function(require, exports) {
                 html += '<div class="bd-r">';
                 html += '<p>你也可以使用这些帐号登录</p>';
                 html += '<div class="snslogin mt15 clearfix"><ul class="fl mr20 outlogin-b">';
-                html += '<li><a class="l-qq" href="/user/snsLogin?snsType=qzone&backType=asyn">QQ帐号登录</a></li>';
-                html += '<li><a class="l-sina" href="/user/snsLogin?snsType=sina&backType=asyn">新浪微博登录</a></li>';
-                html += '<li><a class="l-tao" href="/user/snsLogin?snsType=taobao&backType=asyn">淘宝帐号登录</a></li>';
+                html += '<li><a class="l-qq" href="/user/snsLogin?snsType=qzone&backType=asyn&i=0">QQ帐号登录</a></li>';
+                html += '<li><a class="l-sina" href="/user/snsLogin?snsType=sina&backType=asyn&i=0">新浪微博登录</a></li>';
+                html += '<li><a class="l-tao" href="/user/snsLogin?snsType=taobao&backType=asyn&i=0">淘宝帐号登录</a></li>';
                 html += '</ul>';
                 html += '</div>';
                 html += '</div>';
@@ -1731,8 +1731,8 @@ define(function(require, exports) {
                             +'<div class="guide_add" style="margin-right:174px;">'
                             +'<div class="favorites" id="J_Favorites"><a href="javascript:void(0);">加入收藏夹</a></div>'
                             +'<div class="weibo">'
-                            +'<a href="javascript:void((function(){var title=encodeURIComponent(\'推荐个不错的网站，能找到好多喜欢的东西。食美特：http://smeite.com\');var link=encodeURIComponent(window.location.href);var pic=\'http://smeite.com/images/banner-index.jpg\';window.open(\'http://service.t.sina.com.cn/share/share.php?appkey=2610725727&title=\'+title+\'&pic=\'+pic);})())" alt="分享到新浪微博">分享到新浪微博</a>'
-                            +'<a style="margin-left:6px; width:130px" href="javascript:void((function(){var title=encodeURIComponent(\'推荐个不错的网站，能找到好多喜欢的东西。食美特：http://smeite.com\');var link=encodeURIComponent(window.location.href);var pic=\'http://smeite.com/images/banner-index.jpg\';window.open(\'http://v.t.qq.com/share/share.php?appkey=db0de5e94b314972b3e7efd23fa7ce1e&title=\'+title+\'&pic=\'+pic+\'&site=\'+link);})())" alt="分享到腾讯微博"></a>'
+                            +'<a href="javascript:void((function(){var title=encodeURIComponent(\'推荐个不错的网站，能找到好多喜欢的东西。食美特：http://smeite.com\');var link=encodeURIComponent(window.location.href);var pic=\'http://smeite.com/assets/ui/smeite.jpg\';window.open(\'http://service.t.sina.com.cn/share/share.php?appkey=2610725727&title=\'+title+\'&pic=\'+pic);})())" alt="分享到新浪微博">分享到新浪微博</a>'
+                            +'<a style="margin-left:6px; width:130px" href="javascript:void((function(){var title=encodeURIComponent(\'推荐个不错的网站，能找到好多喜欢的东西。食美特：http://smeite.com\');var link=encodeURIComponent(window.location.href);var pic=\'http://smeite.com/assets/ui/smeite.jpg\';window.open(\'http://v.t.qq.com/share/share.php?appkey=db0de5e94b314972b3e7efd23fa7ce1e&title=\'+title+\'&pic=\'+pic+\'&site=\'+link);})())" alt="分享到腾讯微博"></a>'
                             +'<a style="margin-left:6px; width:118px" href="javascript:void((function(){var title=encodeURIComponent(\'推荐个不错的网站，能找到好多喜欢的东西。食美特：http://smeite.com\');var link=encodeURIComponent(window.location.href);window.open(\'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=\'+link);})())" alt="分享到QQ空间"></a>'
                             +'</div>'
                             +'</div>'

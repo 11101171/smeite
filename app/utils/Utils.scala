@@ -17,7 +17,6 @@ import  scala.collection.mutable.Map
 import java.sql.Timestamp
 
 object Utils {
-  private def secret: String= Play.maybeApplication.flatMap(_.configuration.getString("application.taobao_secret")).getOrElse("c03472fbe94e9fa882c44948e8709320")
 
   /*正则表达式验证*/
   private  def  isMatch(regex:String, str:String):Boolean={

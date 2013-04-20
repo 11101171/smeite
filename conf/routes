@@ -87,7 +87,7 @@ GET   /user/account/before          controllers.users.UsersRegLogin.before
 POST  /user/doVerifyEmail           controllers.users.UsersRegLogin.doVerifyEmail
 #user sns 第三方登录注册
 GET   /user/snsLogin                 controllers.users.UsersSnsLogin.snsLogin(snsType:String,backType:String ?="syn",i:Long ?=0)
-GET   /user/:snsType/registered/:backType    controllers.users.UsersSnsLogin.registered(snsType:String,code:String,backType:String,i:Long ?=0)
+GET   /user/:snsType/registered/:backType/:i    controllers.users.UsersSnsLogin.registered(snsType:String,code:String,backType:String,i:Long)
 
 #user   用户消息
 GET     /user/msg/system          controllers.users.UsersMsg.system

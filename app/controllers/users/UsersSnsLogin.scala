@@ -32,11 +32,11 @@ object UsersSnsLogin extends Controller {
   * */
   def snsLogin(snsType:String,backType:String,id:Long)=Action{ implicit  request=>
     if(snsType=="taobao"){
-       Redirect("https://oauth.taobao.com/authorize?response_type=code&client_id=21136607&redirect_uri=http://smeite.com/user/taobao/registered/"+backType+"?i="+id)
+       Redirect("https://oauth.taobao.com/authorize?response_type=code&client_id=21136607&redirect_uri=http://smeite.com/user/taobao/registered/"+backType+"/"+id)
     }else if(snsType=="qzone"){
-      Redirect(" https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100344510&state=qq&redirect_uri=http://smeite.com/user/qzone/registered/"+backType+"?i="+id)
+      Redirect(" https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100344510&state=qq&redirect_uri=http://smeite.com/user/qzone/registered/"+backType+"/"+id)
     }else if (snsType=="sina"){
-      Redirect("https://api.weibo.com/oauth2/authorize?client_id=1464940004&response_type=code&redirect_uri=http://smeite.com/user/sina/registered/"+backType+"?i="+id)
+      Redirect("https://api.weibo.com/oauth2/authorize?client_id=1464940004&response_type=code&redirect_uri=http://smeite.com/user/sina/registered/"+backType+"/"+id)
     }
     else{
       Ok("亲，我们只支持淘宝帐号登录 qq帐号登录 和 新浪微博登陆哦…… ")
@@ -47,7 +47,7 @@ object UsersSnsLogin extends Controller {
   def  registered(snsType:String,code:String,backType:String,i:Long)=Action{   implicit request =>
      if(snsType=="taobao"){
        /*第一步 获取token,淘宝的第三方登录比较成熟，可以一步到位，token和用户信息一起返回*/
-        val post = new HttpPost("https://oauth.taobao.com/token?grant_type=authorization_code&client_id=21136607&client_secret=c03472fbe94e9fa882c44948e8709320&code="+code+"&redirect_uri=http://smeite.com/user/taobao/getToken")
+        val post = new HttpPost("https://oauth.taobao.com/token?grant_type=authorization_code&client_id=21136607&client_secret=b43392b7a08581a8916d2f9fa67003db&code="+code+"&redirect_uri=http://smeite.com/user/taobao/getToken")
          val client =new DefaultHttpClient();
          val resp= client.execute(post)
          val entity=resp.getEntity;
