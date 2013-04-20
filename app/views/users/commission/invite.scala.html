@@ -1,4 +1,4 @@
-@(user:Option[models.user.User])
+@(user:Option[models.user.User],page:models.Page[models.user.User],totalInviters:Int,totalReward:Int)
 @views.html.template(
 user
 )(css="/assets/css/template/user.setting.css") {
@@ -10,20 +10,20 @@ user
                 <li><a href="@controllers.users.routes.UsersCommission.myCredits">我的集分宝</a></li>
                 <li><a href="@controllers.users.routes.UsersCommission.myShiDou">我的食豆</a></li>
                 <li><a href="@controllers.users.routes.UsersCommission.myAward">我的奖品</a></li>
-                <li><a class="on" href="@controllers.users.routes.UsersCommission.invite">邀请有奖</a></li>
+                <li><a class="on" href="@controllers.users.routes.UsersCommission.invite(1)">邀请有奖</a></li>
             </ul>
         </div>
         <!--side nav end-->
         <div class="main-content">
             <div class="invite">
 
-                 <div class="li">一：邀请有奖之规则</div>
+                <div class="li">一：邀请有奖之规则</div>
                 <ul class="invite-intro clearfix">
-                        <li>1、您每邀请一个朋友加入淘粉吧（登录并有成功返利且用户等级2心以上），可获得最高<strong class="rc">10元</strong>的邀请奖励</li>
-                        <li>2、邀请好友必须是新用户（即以前没登录过淘粉吧且等级在2心以上），如果她已是淘粉吧老用户了，那么是没有奖励的</li>
-                        <li>3、您可以把您的专用邀请链接通过QQ或者旺旺发给您的朋友，也可以分享到您的社区里面去</li>
-                        <li>4、邀请奖金分3次发放：当好友累计返利达到1元时奖2元；当累计返利到10元时再奖3元；当累计返利到30元时再奖3元；</li>
-                        <li>5、新邀请奖励规则从2012.7.10日开始实施，即还未奖励成功的邀请记录将按新奖励规则执行</li>
+                        <li>1、您每邀请一个朋友加入食美特，（登录并成功返利），最高可获得<strong class="rc">10元</strong>的邀请奖励</li>
+                        <li>2、邀请好友必须是新用户（即以前没登录过食美特，或者没有注册过食美特），如果她已是食美特老用户了，那么是没有奖励的</li>
+                        <li>3、您可以把您的专用邀请链接通过任何方式发给您的朋友，例如，QQ好友，qq群、阿里旺旺、论坛、社区等</li>
+                        <li>4、邀请奖金分3次发放：当好友累计返利达到1元时奖2元；当累计返利到10元时再奖3元；当累计返利到30元时再奖5元；</li>
+
                         <li><strong class="alert">禁作弊提醒</strong>：严禁自己邀请自己、刷小号等作弊行为，一旦反作弊系统监测到作弊行为，将拉黑账号处理，邀请也无效</li>
 
                 </ul>
@@ -31,7 +31,7 @@ user
 
                 <div class="li">二：这是您的专用邀请链接，可通过任何方式发送给好友</div>
                 <div class="invite-link clearfix">
-                    <textarea id="clip-text" class="base-txa invite_txa">女人天生爱逛街，和我们一起来逛吧！~http://smeite.com/signup?reg=1341353</textarea>
+                    <textarea id="clip-text" class="base-txa invite_txa">这里，不仅是中国最大的美食购物分享社区，而且购物还可以获得集分宝哦！~ http://smeite.com/user/regist?i=@user.get.id.get</textarea>
                     <input type="button" class="bbl-btn submit" id="J_Clip" value="复制">
                 </div>
 
@@ -40,46 +40,79 @@ user
                 <div class="invite-share clearfix">
                     <ul class="clearfix">
                         <li><a class="i-sina"
-                               href="javascript:void((function(){var title=encodeURIComponent('女人天生爱逛街，和我们一起来逛吧！~');var link=encodeURIComponent('http://smeite.com/signup?reg=1341353');window.open('http://service.t.sina.com.cn/share/share.php?appkey=1207757825&title='+title+'&url='+link);})())">新浪微博</a>
+                               href="javascript:void((function(){var title=encodeURIComponent('这里，不仅是中国最大的美食购物分享社区，而且购物还可以获得集分宝哦！~ ');var link=encodeURIComponent('http://smeite.com/user/regist?i=@user.get.id.get');window.open('http://service.t.sina.com.cn/share/share.php?appkey=1207757825&title='+title+'&url='+link);})())">新浪微博</a>
                         </li>
                         <li><a class="i-qq"
-                               href="javascript:void((function(){var title=encodeURIComponent('女人天生爱逛街，和我们一起来逛吧！~');var link=encodeURIComponent('http://smeite.com/signup?reg=1341353');window.open('http://v.t.qq.com/share/share.php?appkey=801128565&url='+link+'&title='+title+'&site='+link);})())">腾讯微博</a>
+                               href="javascript:void((function(){var title=encodeURIComponent('这里，不仅是中国最大的美食购物分享社区，而且购物还可以获得集分宝哦！~ ');var link=encodeURIComponent('http://smeite.com/user/regist?i=@user.get.id.get');window.open('http://v.t.qq.com/share/share.php?appkey=801128565&url='+link+'&title='+title+'&site='+link);})())">腾讯微博</a>
                         </li>
                         <li><a class="i-renren"
-                               href="javascript:void((function(){var title=encodeURIComponent('女人天生爱逛街，和我们一起来逛吧！~');var link=encodeURIComponent('http://smeite.com/signup?reg=1341353');window.open('http://share.renren.com/share/buttonshare.do?link='+link+'&title='+title);})())">人人</a>
+                               href="javascript:void((function(){var title=encodeURIComponent('这里，不仅是中国最大的美食购物分享社区，而且购物还可以获得集分宝哦！~ ');var link=encodeURIComponent('http://smeite.com/user/regist?i=@user.get.id.get');window.open('http://share.renren.com/share/buttonshare.do?link='+link+'&title='+title);})())">人人</a>
                         </li>
                         <li><a class="i-douban"
-                               href="javascript:void((function(){var title=encodeURIComponent('女人天生爱逛街，和我们一起来逛吧！~');var link=encodeURIComponent('http://smeite.com/signup?reg=1341353');window.open('http://www.douban.com/recommend/?url='+link+'&title='+title);})())">豆瓣</a>
+                               href="javascript:void((function(){var title=encodeURIComponent('这里，不仅是中国最大的美食购物分享社区，而且购物还可以获得集分宝哦！~ ');var link=encodeURIComponent('http://smeite.com/user/regist?i=@user.get.id.get');window.open('http://www.douban.com/recommend/?url='+link+'&title='+title);})())">豆瓣</a>
                         </li>
                         <li><a class="i-qzone"
-                               href="javascript:void((function(){var title=encodeURIComponent('女人天生爱逛街，和我们一起来逛吧！~');var link=encodeURIComponent('http://smeite.com/signup?reg=1341353');window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+link+'&title='+title);})())">QQ空间</a>
+                               href="javascript:void((function(){var title=encodeURIComponent('这里，不仅是中国最大的美食购物分享社区，而且购物还可以获得集分宝哦！~ ');var link=encodeURIComponent('http://smeite.com/user/regist?i=@user.get.id.get');window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+link+'&title='+title);})())">QQ空间</a>
                         </li>
                     </ul>
-                    <div class="share-tip">温馨提示：据淘粉吧统计，QQ空间最容易邀请到好友，所以一定记得把您的专用邀请链接发到QQ空间里哦~</div>
+                    <div class="share-tip">温馨提示：据食美特统计，QQ空间最容易邀请到好友，所以一定记得把您的专用邀请链接发到QQ空间里哦~</div>
                 </div>
                 <div class="li">四：邀请返利记录</div>
                 <div class="invite-record clearfix">
-                    <div class="invite_success mb10">您已成功邀请<span>0</span>人，累计获得<span>0</span>元</div>
+                    <div class="invite_success mb10">您已成功邀请<span>@totalInviters</span>人，累计获得<span>@totalReward</span>元</div>
 
                     <table id="invite_table" class="table">
                         <thead>
                         <tr class="invite_tr" height="35">
-                            <th class="table_top" width="110">好友淘宝昵称</th>
-                            <th class="table_top" width="174">是否是tf8新用户</th>
-                            <th class="table_top" width="127">好友是否已返利</th>
+                            <th class="table_top" width="110">好友昵称</th>
+                            <th class="table_top" width="174">好友来源</th>
+                            <th class="table_top" width="127">好友返利</th>
                             <th class="table_top" width="272">奖励情况</th>
                         </tr>
                         </thead>
                         <tbody>
-
+                        @if(page.items.length !=0){
+                        @for(item <- page.items){
+                        <tr>
+                            <td><a href="@controllers.users.routes.Users.home(item.id.get)" target="_blank">@item.name </a></td>
+                            <td>@models.user.ComeFrom(item.comeFrom)</td>
+                            <td>@(item.credits/100.0)</td>
+                            <td>
+                             <a href="#">
+                                   @if(item.credits>=100){ 已返利 2元 } &nbsp;@if(item.credits>=1000){ 3元 }&nbsp; @if(item.credits>=3000){ 5元 }
+                                </a>
+                            </td>
+                        </tr>
+                        }
+                        }else{
                         <tr>
                             <td colspan="4" class="table_one">您还没有邀请过，赶快加入吧！</td>
                         </tr>
+                        }
                         </tbody>
                     </table>
 
                 </div>
 
+                <div class="clearfix pt20 pb20">
+                    <div class="pagin fr pagination" id="J_Pagination">
+                        @if(page.nums.length>1){
+                        @page.prev.map { page =>
+                        <a class="prev" href="@controllers.users.routes.UsersCommission.invite(page)">上一页</a>
+                        }
+                        @for(num <-page.nums){
+                        @if(num==page.currentPage){
+                        <a class="current" href="#">@num</a>
+                        }else {
+                        <a href="@controllers.users.routes.UsersCommission.invite(num)">@num</a>
+                        }
+                        }
+                        @page.next.map { page =>
+                        <a class="next" href="@controllers.users.routes.UsersCommission.invite(page)">下一页</a>
+                        }
+                        }
+                    </div>
+                </div>
 
             </div>
             <!-- end -->
@@ -87,11 +120,7 @@ user
     </div>
     }{
     <script type="text/javascript">
-        //sns好友邀请
-        var hasTencent = false;
-        var hasSina = true;
-        var sharetextUrl = "女人天生爱逛街，和我们一起来逛吧！~http://smeite.com/signup?reg=1341353";
-        seajs.use("app/init", function (init) {
+       seajs.use("app/init", function (init) {
             init.load("app/user/user.invitation");
         });
     </script>

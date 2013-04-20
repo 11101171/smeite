@@ -176,9 +176,7 @@ object UsersAccount  extends Controller {
           BadRequest(views.html.users.account.address(user,formWithErrors.fill((profile.receiver,profile.province,profile.city,profile.street,profile.postCode,profile.phone,profile.alipay))))
         } ,
         fields =>{
-
              UserDao.modifyAddr(user.get.id.get, fields._1.getOrElse(""),fields._2.getOrElse(""),fields._3.getOrElse(""),fields._4.getOrElse(""),fields._5.getOrElse(""),fields._6.getOrElse(""),fields._7.getOrElse(""))
-
             Ok(views.html.users.account.address(user,addrForm.fill(fields._1,fields._2,fields._3,fields._4,fields._5,fields._6,fields._7),"收货地址保存成功"))
 
         }

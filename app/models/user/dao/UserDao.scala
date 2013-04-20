@@ -471,11 +471,11 @@ object UserDao {
 
 
 
-  /*user order*/
+  /*user order 添加用户购买记录、浏览记录*/
   def addUserOrder(uid:Long,goodsId:Long,numIid:Long, nick:String, title:String,location:String,pic:String,price:String,withdrawRate:Int,credits:Int,volume:String)=  database.withSession {  implicit session:Session =>
     UserOrders.autoInc2.insert(uid,Some(goodsId),numIid,nick,title,location,pic,price,withdrawRate,credits,volume,new Timestamp(System.currentTimeMillis()))
   }
-
+  /*查找某个用户的购物记录*/
   def findUserOrders(uid:Long,currentPage:Int,pageSize:Int,status:Int): Page[(String,List[(Timestamp,Long,Long,String,String,String,String,String,Int,Int,Int,String)])] =  database.withSession {  implicit session:Session =>
   // val totalRows=Query(UserOrders.filter(_.uid === uid).length)
     var countQuery =(for(c<-UserOrders if c.uid === uid) yield c)
@@ -489,8 +489,31 @@ object UserDao {
 
     Page[(String,List[(Timestamp,Long,Long,String,String,String,String,String,Int,Int,Int,String)])](list,currentPage,totalPages)
   }
-
-  def findUserOrders(num:Int):List[UserOrder]  =  database.withSession {  implicit session:Session =>
+   /*推荐用户购买记录*/
+  def recommendUserOrders(num:Int):List[UserOrder]  =  database.withSession {  implicit session:Session =>
     (for( c<-UserOrders.sortBy(_.createTime desc)) yield c).take(num).list()
+  }
+
+   /*获取用户邀请的 用户数量*/
+  def getInviterNum(inviteId:Long) =  database.withSession {  implicit session:Session =>
+     Query(UserProfiles.filter(_.inviteId === inviteId).length).first()
+   }
+  /* 获取用户邀请的 用户*/
+  def getInviters(inviteId:Long,currentPage:Int,pageSize:Int) =  database.withSession {  implicit session:Session =>
+    val totalRows=Query(UserProfiles.filter(_.inviteId === inviteId).length).first()
+    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+  val list =(for{
+      c<-UserProfiles
+      u<-Users
+      if c.inviteId === inviteId
+      if c.uid===u.id
+    }yield u).drop(startRow).take(pageSize).list()
+
+    Page[User](list,currentPage,totalPages)
+  }
+  /* 获取用用户邀请有奖的 累计金额*/
+  def getInviteReward(inviteId:Long) =  database.withSession {  implicit session:Session =>
+    (for(c<-UserWithdraws if c.uid === inviteId if c.withdrawType===2)yield c.withdrawNum).list().sum
   }
 }

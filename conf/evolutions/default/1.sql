@@ -1249,7 +1249,8 @@ CREATE TABLE `user_order` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 /* 用户提现表
-* withdraw_type 0 集分宝 1 食豆
+* withdraw_type 0 购物返利 1食豆兑换 2 邀请有奖
+* relative_id      宝贝ID   邀请用户Id
 */
 DROP TABLE IF EXISTS `user_withdraw`;
 CREATE TABLE `user_withdraw` (
@@ -1257,6 +1258,7 @@ CREATE TABLE `user_withdraw` (
   `uid`                 int(10) ,
   `withdraw_type`      tinyint  not null default '0',
   `withdraw_num`      smallint(10) ,
+  `relative_id`           int(10) ,
   `handle_result`    tinyint,
   `note`    varchar(200) ,
   `withdraw_time`          timestamp,

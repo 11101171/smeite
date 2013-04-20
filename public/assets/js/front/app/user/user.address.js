@@ -14,6 +14,7 @@
 define(function(require, exports){
 	var $ = jQuery = require("jquery");
 	var Setup = require("app/common/area");
+    require("app/common/validator")($);
 	$("#J_Address").validator({fun:function(vali,inputs){
 		inputs.trigger("blur");
 		if($("#J_City").val().length<2){

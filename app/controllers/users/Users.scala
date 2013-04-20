@@ -179,7 +179,7 @@ object Users extends Controller {
     val  author=UserDao.findById(id)
     val authorStatic=UserDao.findStatic(id);
     val page = UserDao.findUserOrders(id,p,10,s)
-    val orders=UserDao.findUserOrders(10)
+    val orders=UserDao.recommendUserOrders(10)
     Ok(views.html.users.credits(user,author,authorStatic,page,orders,s))
   }
 

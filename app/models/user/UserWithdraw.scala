@@ -15,14 +15,15 @@ import models.Page._
  *
  */
 case class UserWithdraw(
-                    id: Option[Long],
-                    uid: Long,
-                    withdrawType:Int,
+                     id: Option[Long],
+                     uid: Long,
+                     withdrawType:Int,
                      withdrawNum:Int,
+                     relativeId:Option[Long],
                      handleResult:Int,
                      note:String,
                      withdrawTime:Option[Timestamp],
-                      handleTime:Option[Timestamp]
+                     handleTime:Option[Timestamp]
                     )
 
 object UserWithdraws extends Table[UserWithdraw]("user_withdraw") {
@@ -30,11 +31,12 @@ object UserWithdraws extends Table[UserWithdraw]("user_withdraw") {
   def uid = column[Long]("uid")
   def withdrawType = column[Int]("withdraw_type")
   def withdrawNum = column[Int]("withdraw_num")
+  def relativeId = column[Long]("relative_id")
   def handleResult = column[Int]("handle_result")
   def note = column[String]("note")
   def withdrawTime = column[Timestamp]("withdraw_time")
   def handleTime = column[Timestamp]("handle_time")
-  def * = id.? ~ uid ~ withdrawType ~ withdrawNum ~ handleResult ~ note ~ withdrawTime.? ~  handleTime.? <> (UserWithdraw, UserWithdraw.unapply _)
-  def autoInc = id.? ~ uid ~ withdrawType ~ withdrawNum ~ handleResult ~ note ~ withdrawTime.? ~  handleTime.? <> (UserWithdraw, UserWithdraw.unapply _) returning id
+  def * = id.? ~ uid ~ withdrawType ~ withdrawNum ~ relativeId.? ~ handleResult ~ note ~ withdrawTime.? ~  handleTime.? <> (UserWithdraw, UserWithdraw.unapply _)
+  def autoInc = id.? ~ uid ~ withdrawType ~ withdrawNum ~ relativeId.? ~ handleResult ~ note ~ withdrawTime.? ~  handleTime.? <> (UserWithdraw, UserWithdraw.unapply _) returning id
 
 }
