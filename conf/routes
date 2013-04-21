@@ -73,6 +73,7 @@ GET   /user/account/myCredits           controllers.users.UsersCommission.myCred
 GET   /user/account/myShiDou          controllers.users.UsersCommission.myShiDou
 GET   /user/account/myAward           controllers.users.UsersCommission.myAward
 GET   /user/account/invite           controllers.users.UsersCommission.invite(p:Int ?=1)
+POST   /user/account/exchangeShiDou   controllers.users.UsersCommission.exchangeShiDou
 #user 用户登录注册
 GET   /user/login                    controllers.users.UsersRegLogin.login
 GET   /user/logout                   controllers.users.UsersRegLogin.logout

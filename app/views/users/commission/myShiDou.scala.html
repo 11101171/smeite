@@ -1,4 +1,4 @@
-@(user:Option[models.user.User])
+@(user:Option[models.user.User],exchangeForm:Form[Int],msg:String ="")
 @views.html.template(
 user
 )(css="/assets/css/template/user.setting.css") {
@@ -14,14 +14,62 @@ user
             </ul>
         </div>
         <div class="main-content">
+            <div class="shiDou">
+                <div class="shiDou_info mb20">
+                    <div class="credits_info">您已经获得<span>0</span>个食豆（已兑换<span>0</span>，值<span>￥0</span>元）还可以兑换的数量<span>0</span></div>
+                </div>
+
+                <div class="title">申请兑换</div>
+                <div class="set-password clearfix">
+                    <form id="J_payment" method="post" class="set-form" action="@controllers.users.routes.UsersCommission.exchangeShiDou">
+
+                        @exchangeForm.errors.map { error =>
+                        <div class="error-row">
+                            <p class="error"> @error.message</p>
+                        </div>
+                        }
+
+                        <div class="form-row">
+                            <label><span class="rc">*</span>兑换数量：</label>
+                            <input type="text" class="base-input" name="shiDou" id="shiDou" value='@exchangeForm("shiDou").value'>
+                        </div>
+
+                        <div class="form-row">
+                            <label>&nbsp;</label>
+                            <input type="submit" class="bbl-btn submit" value="兑换">
+
+                        </div>
+                    </form>
+                </div>
+                <div class="title">食豆兑换记录</div>
+                <table class="table">
+                    <thead>
+                    <tr  height="35">
+                        <th  width="110">兑换时间</th>
+                        <th  width="174">兑换数量</th>
+                        <th  width="127">处理时间</th>
+                        <th  width="272">处理结果</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr>
+                        <td colspan="4" class="table_one">您还没有兑换，赶快加入吧！</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
 
             <div class="help">
-                <div class="help-title">帮助</div>
+                <div class="help-title">小提示</div>
                 <ul>
-                    <li><a href="/account/tbkhelp#help1" target="_blank">了解游戏规则</a></li>
-                    <li> <a href="/account/tbkhelp#help2" target="_blank">什么是淘宝客？如何注册</a> </li>
-                    <li><a href="/account/tbkhelp#help3" target="_blank">如何获得更高的收益？</a></li>
-                    <li><a href="/account/tbkhelp#help4" target="_blank">收益如何提现？</a></li>
+                    <li>食豆是食美特推出的积分，与集分宝等价。查看如何<a href="/shiDou">获取食豆以及食豆的功能？</a></li>
+                    <li>1个食豆等于1个集分宝，100个食豆等于100个集分宝，相当于1元人民币。</li>
+                    <li>食豆超过1000个方可以兑换 </li>
+                    <li>每次至少兑换1000个，兑换数量必须为1000的倍数（例如：1000，2000，3000）</li>
+
                 </ul>
             </div>
         </div>
