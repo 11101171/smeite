@@ -20,7 +20,7 @@ user
                 </div>
 
                 <div class="title">申请兑换</div>
-                <div class="set-password clearfix">
+                <div class="set-password mb20 clearfix">
                     <form id="J_payment" method="post" class="set-form" action="@controllers.users.routes.UsersCommission.exchangeShiDou">
 
                         @exchangeForm.errors.map { error =>
@@ -31,17 +31,14 @@ user
 
                         <div class="form-row">
                             <label><span class="rc">*</span>兑换数量：</label>
-                            <input type="text" class="base-input" name="shiDou" id="shiDou" value='@exchangeForm("shiDou").value'>
+                            <input type="text" class="base-input fl" name="shiDou" id="shiDou" value='@exchangeForm("shiDou").value'>
+                          &nbsp;&nbsp;&nbsp;  <input type="submit" class="bbl-btn submit ml30" value="兑换">
                         </div>
 
-                        <div class="form-row">
-                            <label>&nbsp;</label>
-                            <input type="submit" class="bbl-btn submit" value="兑换">
 
-                        </div>
                     </form>
                 </div>
-                <div class="title">食豆兑换记录</div>
+                <div class="title">兑换记录</div>
                 <table class="table">
                     <thead>
                     <tr  height="35">
