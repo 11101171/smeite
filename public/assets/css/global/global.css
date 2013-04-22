@@ -728,7 +728,7 @@ input:-moz-placeholder { font-size:12px; }
 /* 提示信息 */
 .error-row { display:none;margin:0 0 20px 70px; }
 .error-row .error { width:210px;height:16px;line-height:16px;padding:8px 10px;color:#bb0000;background:#ffe8e8; }
-.error-row .ok { width:185px;height:16px;line-height:16px;padding:8px 10px;background:#f5fec7 url(images/correct.png) no-repeat 10px 10px;color:#666;padding-left:35px; }
+.error-row .ok { /*width:185px;*/height:16px;line-height:16px;padding:8px 10px;background:#f5fec7 url(images/correct.png) no-repeat 10px 10px;color:#666;padding-left:35px; }
 .error-row-l { display:none;margin:20px 0 20px 0; }
 .error-row-l .error { width:400px;height:16px;line-height:16px;padding:8px 10px;color:#bb0000;background:#ffe8e8; }
 .error-like {margin:10px 0;}

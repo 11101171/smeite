@@ -56,7 +56,6 @@ object UsersCommission  extends Controller {
   /* user account 用户账户 邀请好友 */
   def invite(currentPage:Int) = Users.UserAction {  user => implicit request =>
     if(user.isEmpty)  Redirect(controllers.users.routes.UsersRegLogin.login)
-
     else {
       val totalInviters = UserDao.getInviterNum(user.get.id.get)
       val totalReward = UserDao.getInviteReward(user.get.id.get)

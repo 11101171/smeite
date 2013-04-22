@@ -20,8 +20,12 @@ user
                 </div>
 
                 <div class="title">申请兑换</div>
+                @if(msg !=""){
+                <div class="error-row" style="display:block"><p class="ok">@msg !</p></div>
+                }
+
                 <div class="set-password mb20 clearfix">
-                    <form id="J_payment" method="post" class="set-form" action="@controllers.users.routes.UsersCommission.exchangeShiDou">
+                    <form id="J_exchangeShiDou" method="post" class="set-form" action="@controllers.users.routes.UsersCommission.exchangeShiDou">
 
                         @exchangeForm.errors.map { error =>
                         <div class="error-row">
@@ -31,10 +35,17 @@ user
 
                         <div class="form-row">
                             <label><span class="rc">*</span>兑换数量：</label>
-                            <input type="text" class="base-input fl" name="shiDou" id="shiDou" value='@exchangeForm("shiDou").value'>
-                          &nbsp;&nbsp;&nbsp;  <input type="submit" class="bbl-btn submit ml30" value="兑换">
-                        </div>
+                            <input type="text" class="base-input" name="shiDou" id="shiDou" value='@exchangeForm("shiDou").value'>
 
+                        </div>
+                        <div class="form-row">
+                            <label>&nbsp;</label>
+                            @if((user.get.shiDou - user.get.withdrawShiDou)>=1000){
+                            <input type="submit" class="bbl-btn submit" value="兑换">
+                            }else{
+                            <input type="button" class="bgr-btn submit" value="兑换">
+                            }
+                        </div>
 
                     </form>
                 </div>
@@ -76,7 +87,7 @@ user
 }{
 <script type="text/javascript">
     seajs.use("app/init",function(init){
-
+        init.load("app/user/user.exchangeShiDou");
     });
 </script>
 }

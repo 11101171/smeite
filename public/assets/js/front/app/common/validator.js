@@ -132,6 +132,14 @@ define(function(require, exports) {
 	vali.fn("input[name=alipay]", "支付宝账号不能为空，否则不能成功返利", "require", function(el, v) {
 		return v.length == 0 ? false : true;
 	});
+	vali.fn("input[name=shiDou]", "食豆数量不能为空", "require", function(el, v) {
+		return v.length == 0 ? false : true;
+	});
+	vali.fn("input[name=shiDou]", "食豆的数量需要是1000的整数倍,例如1000,2000,3000等", "error", function(el, v) {
+		return /^([0-9])(000)$/.test(v)
+	});
+	
+	
 	
 	function Validator(form, conf){
 		var self = this,
@@ -203,37 +211,7 @@ define(function(require, exports) {
 				}
 			});
 		}
-        /*判断用户名是否重复，smeite.com 需要判断用户名是否重复吗？*/
-	/*	if($("input[name=nickname]")[0]){
-			$("input[name=nickname]").bind("blur",function(){
-				var $this = $(this);
-				if($this.data("vali")==1 && $this.data("vali")!=11){
-					if($this.val()==SMEITER.nick){
-						return false;
-					}
-					$this.data("vali", 0);
-					vali.effects($this, "", "ajax");
-					$.ajax({
-						type: 'post',  
-                    	url: '/checkEmailExist',
-                    	dataType: 'json',  
-                    	data: "nickname="+$this.val(),
-                    	success: function(data){ 
-                    		if(data.code=="0"){
-                    			$this.data("vali", 11);
-                    			vali.effects($this, "OK", "correct");
-                    		}else if(data.code=="2"){
-                    			$this.data("vali", 0);
-                    			vali.effects($this, "此昵称已被注册", "error");
-                    		}else{
-                    			$this.data("vali", 0);
-                    			vali.effects($this, "系统出错了，请稍后再试…", "error");
-                    		}
-                    	}
-                    });
-				}
-			});
-		}*/
+    
 		if($("input.check")[0]){
 		$("input.check[name!=subscription]").click(function(){
 			if($(this)[0].checked==false){

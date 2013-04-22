@@ -1256,10 +1256,10 @@ DROP TABLE IF EXISTS `user_withdraw`;
 CREATE TABLE `user_withdraw` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `uid`                 int(10) ,
-  `withdraw_type`      tinyint  not null default '0',
-  `withdraw_num`      smallint(10) ,
-  `relative_id`           int(10) ,
-  `handle_result`    tinyint,
+  `num`                 smallint(10) ,
+  `user_order_id`           int(10) ,
+  `handle_result`      varchar(128),
+  `handle_status`          tinyint not null default '0',
   `note`    varchar(200) ,
   `withdraw_time`          timestamp,
   `handle_time`          timestamp,
@@ -1278,5 +1278,37 @@ CREATE TABLE `taobaoke_income` (
   `create_time`               timestamp,
   `pay_time`                   timestamp,
   `add_time`          timestamp,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+/*4月22日*/
+/*用户邀请有奖*/
+DROP TABLE IF EXISTS `user_invite_prize`;
+CREATE TABLE `user_invite_prize` (
+  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `uid`                 int(10) ,
+  `invitee_id`      tinyint  not null default '0',
+  `invitee_credits`      smallint(10) ,
+  `num`                    tinyint (4) ,
+  `create_time`          timestamp,
+  `handle_time`          timestamp,
+  `handle_result`    varchar(128) ,
+  `handle_status`          tinyint not null default '0',
+  `note`    varchar(200) ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+/* 食豆兑换申请 */
+DROP TABLE IF EXISTS `user_exchange_shiDou`;
+CREATE TABLE `user_exchange_shiDou` (
+  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `apply_id`                 int(10) ,
+  `apply_name`      varchar(32),
+  `apply_alipay`      varchar(64) ,
+  `num`              smallint (10) ,
+  `apply_time`          timestamp,
+  `handle_time`          timestamp,
+  `handle_result`    varchar(128),
+  `handle_status`          tinyint not null default '0',
+  `note`    varchar(200) ,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
