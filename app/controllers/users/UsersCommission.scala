@@ -4,6 +4,7 @@ import play.api.mvc.Controller
 import models.user.dao.UserDao
 import play.api.data.Form
 import play.api.data.Forms._
+import java.sql.Timestamp
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,6 +31,7 @@ object UsersCommission  extends Controller {
       Ok(views.html.users.commission.myShiDou(user,exchangeForm) )
     }
   }
+  /* 食豆申请 */
   def exchangeShiDou = Users.UserAction {user => implicit request =>
     if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)
     else {
@@ -38,7 +40,10 @@ object UsersCommission  extends Controller {
           BadRequest(views.html.users.commission.myShiDou(user,formWithErrors))
         } ,
         fields =>{
-       //  UserDao.modifyAlipay(user.get.id.get,fields._1.getOrElse(""),fields._2.getOrElse(""))
+          if((user.get.shiDou - user.get.withdrawShiDou)< fields){
+            Ok(views.html.users.commission.myShiDou(user,exchangeForm.fill(fields),"您申请兑换的食豆数量大于您目前的余额"))
+          }
+          UserDao.addUserExchangeShiDou(user.get.id.get,fields)
           Ok(views.html.users.commission.myShiDou(user,exchangeForm.fill(fields),"兑换申请成功，我们将尽快处理，并把处理结果通知您，谢谢您对我们的信任和支持。"))
 
         }

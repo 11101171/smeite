@@ -60,5 +60,8 @@ object UserSQLDao {
   def updateShiDou(uid:Long,num:Int)=database.withSession{
     sqlu"update user set shi_dou = shi_dou+$num where id =$uid".first
   }
+  def updateWithdrawShiDou(uid:Long,num:Int)=database.withSession{
+    sqlu"update user set withdraw_shi_dou = withdraw_shi_dou+$num where id =$uid".first
+  }
 
 }

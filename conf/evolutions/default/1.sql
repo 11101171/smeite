@@ -1302,12 +1302,10 @@ DROP TABLE IF EXISTS `user_exchange_shiDou`;
 CREATE TABLE `user_exchange_shiDou` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `apply_id`                 int(10) ,
-  `apply_name`      varchar(32),
-  `apply_alipay`      varchar(64) ,
   `num`              smallint (10) ,
-  `apply_time`          timestamp,
   `handle_time`          timestamp,
-  `handle_result`    varchar(128),
+  `apply_time`          timestamp,
+  `handle_result`    varchar(128) default '',
   `handle_status`          tinyint not null default '0',
   `note`    varchar(200) ,
   PRIMARY KEY (`id`)

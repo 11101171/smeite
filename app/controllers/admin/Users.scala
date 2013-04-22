@@ -8,6 +8,7 @@ import models.Page
 import play.api.libs.json.Json
 import models.user.dao.UserDao
 import models.tag.dao.TagDao
+import java.util.Date
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,6 +19,7 @@ import models.tag.dao.TagDao
  */
 case class UserBatchFormData(action:Int,ids:Seq[Long],url:Option[String])
 case  class UserFilterFormData(name:Option[String],status:Option[Int],daren:Option[Int],comeFrom:Option[Int],creditsOrder:String,shiDouOrder:String,idOrder:String,currentPage:Option[Int])
+case class FilterExchangeShiDouFormData(status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
 object Users  extends Controller {
   val batchForm =Form(
     mapping(
@@ -38,6 +40,14 @@ object Users  extends Controller {
       "idOrder"->nonEmptyText(),
       "currentPage"->optional(number)
     )(UserFilterFormData.apply)(UserFilterFormData.unapply)
+  )
+  val filterExchangeShiDouForm =Form(
+    mapping(
+      "status"->optional(number),
+      "startDate"->optional(date("yyyy-MM-dd")),
+      "endDate"->optional(date("yyyy-MM-dd")),
+      "currentPage"->optional(number)
+    )(FilterExchangeShiDouFormData.apply)(FilterExchangeShiDouFormData.unapply)
   )
 
   /*用户管理*/
@@ -94,8 +104,23 @@ def list(p:Int) = Managers.AdminAction{manager => implicit request =>
         Ok(views.html.admin.users.filterUsers(manager,page,userFilterForm.fill(user)))
       }
     )
-
   }
+
+  /*用户申请兑换食豆*/
+ def exchangeShiDous(p:Int) = Managers.AdminAction{ manager => implicit request =>
+       val page = UserDao.findUserExchangeShiDous(p,50)
+    Ok(views.html.admin.users.exchangeShiDous(manager,page))
+  }
+
+def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
+  filterExchangeShiDouForm.bindFromRequest.fold(
+    formWithErrors =>Ok("something wrong" +formWithErrors.errors.toString),
+    data => {
+     val page=UserDao.filterExchangeShiDous(data.status,data.startDate,data.endDate,data.currentPage.getOrElse(1),50);
+      Ok(views.html.admin.users.filterExchangeShiDous(manager,page,filterExchangeShiDouForm.fill(data)))
+    }
+  )
+}
 
 
 }

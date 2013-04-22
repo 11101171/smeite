@@ -15,28 +15,25 @@ import scala.slick.driver.MySQLDriver.simple._
 case class UserExchangeShiDou (
   id: Option[Long],
   applyId: Long,
-  applyName:String,
-  applyAlipay:String,
   num:Int,
   handleStatus:Int,
   handleResult:String,
   note:Option[String],
-  appleTime:Option[Timestamp],
+  applyTime:Option[Timestamp],
   handleTime:Option[Timestamp]
   )
 
   object UserExchangeShiDous extends Table[UserExchangeShiDou]("user_exchange_shiDou") {
     def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
     def applyId = column[Long]("apply_id")
-    def applyName = column[String]("apply_name")
-    def applyAlipay = column[String]("apply_alipay")
     def num = column[Int]("num")
     def handleStatus = column[Int]("handle_status")
     def handleResult = column[String]("handle_result")
     def note = column[String]("note")
-    def createTime = column[Timestamp]("create_time")
+    def applyTime = column[Timestamp]("apply_time")
     def handleTime = column[Timestamp]("handle_time")
-    def * = id.? ~ applyId ~ applyName ~ applyAlipay ~ num~  handleStatus ~ handleResult ~ note.? ~ createTime.? ~  handleTime.? <> (UserExchangeShiDou, UserExchangeShiDou.unapply _)
-    def autoInc = id.? ~ applyId ~ applyName ~ applyAlipay ~ num~  handleStatus ~ handleResult ~ note.? ~ createTime.? ~  handleTime.? <> (UserExchangeShiDou,UserExchangeShiDou.unapply _) returning id
+    def * = id.? ~ applyId  ~ num~  handleStatus ~ handleResult ~ note.? ~ applyTime.? ~  handleTime.? <> (UserExchangeShiDou, UserExchangeShiDou.unapply _)
+    def autoInc = id.? ~ applyId ~ num~  handleStatus ~ handleResult ~ note.? ~ applyTime.? ~  handleTime.? <> (UserExchangeShiDou,UserExchangeShiDou.unapply _) returning id
+    def autoInc2 = applyId  ~ num ~ applyTime  returning id
 
 }

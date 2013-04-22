@@ -61,7 +61,7 @@ gotoTaobao 页面调用淘宝客组件 这里需要把用户的id 当做out_code
 如何处理user_order
 1、通过outcode中的uid 和 反馈过来的num_iid 确定。查询user_code，中的uid和num_iid，如果只有一条记录，直接更改user——order，如果有多条记录，根据user——code和 taobaokereport中的create Time 确定，两者最近的那个，即修改这条记录。
 2、用户集分宝返利
-3、邀请有奖处理(定时处理)
+3、邀请有奖处理(定时处理,每天定时处理)
 4、食豆兑换申请
 
 

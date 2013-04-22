@@ -22,7 +22,7 @@
                     </div>
                     <div class="widget-content nopadding">
                         <form class=" form-horizontal" id="J_filterForm" method="get" action="@controllers.admin.routes.Users.filterUsers">
-                            <input type="hidden" name="currentPage" id="J_currentPage" value="1">
+                            <input type="hidden" name="currentPage" id="J_currentPage" value='@form("currentPage").value'>
                             <div class="error-row">
                                 <p class="error"></p>
                             </div>

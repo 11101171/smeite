@@ -18,6 +18,7 @@ import models.goods.dao.GoodsSQLDao
 import models.theme.dao.ThemeDao
 import models.forum.dao.TopicDao
 import utils.ShiDouConfig
+import java.util.Date
 
 
 /*
@@ -503,17 +504,57 @@ object UserDao {
     val totalRows=Query(UserProfiles.filter(_.inviteId === inviteId).length).first()
     val totalPages=((totalRows + pageSize - 1) / pageSize);
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
-  val list =(for{
+  val list:List[User] =(for{
       c<-UserProfiles
       u<-Users
       if c.inviteId === inviteId
       if c.uid===u.id
-    }yield u).drop(startRow).take(pageSize).list()
+    }yield u ).drop(startRow).take(pageSize).list()
 
     Page[User](list,currentPage,totalPages)
   }
   /* 获取用用户邀请有奖的 累计金额*/
-  def getInviteReward(inviteId:Long) =  database.withSession {  implicit session:Session =>
+  def getInviteReward(inviteId:Long):Int =  database.withSession {  implicit session:Session =>
     (for(c<-UserWithdraws if c.uid === inviteId if c.withdrawType===2)yield c.withdrawNum).list().sum
   }
+
+
+  /*用户申请食豆*/
+  def addUserExchangeShiDou(applyId:Long,num:Int ) =  database.withSession {  implicit session:Session =>
+    Cache.remove("user_"+applyId)
+       UserSQLDao.updateWithdrawShiDou(applyId,num)
+       UserExchangeShiDous.autoInc2.insert(applyId,num,new Timestamp(System.currentTimeMillis()))
+   }
+  /*用户申请食豆列表*/
+  def findUserExchangeShiDous(currentPage:Int,pageSize:Int) =  database.withSession {  implicit session:Session =>
+    val totalRows=Query(UserExchangeShiDous.length).first()
+    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+
+    val list:List[(User,UserExchangeShiDou)] = (for{
+    u <- Users
+    s <- UserExchangeShiDous
+    if u.id === s.applyId
+    }yield (u,s) ).sortBy(_._2.applyTime desc).drop(startRow).take(pageSize).list()
+
+    Page[(User,UserExchangeShiDou)](list,currentPage,totalPages)
+  }
+
+  def filterExchangeShiDous(status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Int,pageSize:Int) = database.withSession {  implicit session:Session =>
+  var query =for{
+    u <- Users
+    s <- UserExchangeShiDous
+    if u.id === s.applyId
+  }yield (u,s)
+
+    if(!status.isEmpty) query = query.filter(_._2.handleStatus === status.get)
+  if(!startDate.isEmpty) query = query.filter(_._2.applyTime >= new Timestamp(startDate.get.getTime))
+  if(!endDate.isEmpty) query = query.filter(_._2.applyTime <= new Timestamp(endDate.get.getTime))
+  val totalRows=query.list().length
+  val totalPages=((totalRows + pageSize - 1) / pageSize);
+  val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+  val list:List[(User,UserExchangeShiDou)]=  query.drop(startRow).take(pageSize).list()
+  Page[(User,UserExchangeShiDou)](list,currentPage,totalPages);
+  }
+
 }
