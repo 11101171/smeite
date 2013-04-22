@@ -20,6 +20,8 @@ import java.util.Date
 case class UserBatchFormData(action:Int,ids:Seq[Long],url:Option[String])
 case  class UserFilterFormData(name:Option[String],status:Option[Int],daren:Option[Int],comeFrom:Option[Int],creditsOrder:String,shiDouOrder:String,idOrder:String,currentPage:Option[Int])
 case class FilterExchangeShiDouFormData(status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
+case class ExchangeShiDouFormData(id:Long,handleStatus:Int,handleResult:String,note:Option[String])
+
 object Users  extends Controller {
   val batchForm =Form(
     mapping(
@@ -48,6 +50,15 @@ object Users  extends Controller {
       "endDate"->optional(date("yyyy-MM-dd")),
       "currentPage"->optional(number)
     )(FilterExchangeShiDouFormData.apply)(FilterExchangeShiDouFormData.unapply)
+  )
+
+  val exchangeShiDouFormData = Form(
+   mapping(
+     "id"->longNumber,
+     "handleStatus"->number,
+     "handleResult"->text,
+     "note"->optional(text)
+   )(ExchangeShiDouFormData.apply)(ExchangeShiDouFormData.unapply)
   )
 
   /*用户管理*/
@@ -121,6 +132,13 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
     }
   )
 }
+  def editExchangeShiDou(id:Long) = Managers.AdminAction{ manager => implicit request =>
+
+    val (user,up,ue) = UserDao.findUserExchangeShiDou(id);
+
+    Ok(views.html.admin.users.editExchangeShiDou(manager,exchangeShiDouFormData.fill(ExchangeShiDouFormData(ue.id.get,ue.handleStatus,ue.handleResult,ue.note))))
+
+  }
 
 
 }

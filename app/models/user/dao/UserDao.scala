@@ -557,4 +557,15 @@ object UserDao {
   Page[(User,UserExchangeShiDou)](list,currentPage,totalPages);
   }
 
+  def findUserExchangeShiDou(id:Long) = database.withSession {  implicit session:Session =>
+    (for{
+       u <- Users
+       up <- UserProfiles
+       ue <- UserExchangeShiDous
+       if u.id === up.uid
+       if u.id === ue.applyId
+       if ue.applyId === id
+     }yield (u,up,ue)).first()
+  }
+
 }
