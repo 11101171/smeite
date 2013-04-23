@@ -118,25 +118,25 @@
             </div>
             <div class="pagination">
                 <ul>
-                    @page.prev.map{ page =>
-                        <li class="prev">
-                            <a href="@controllers.admin.routes.Users.exchangeShiDous(page)">Prev</a>
-                        </li>
+
+                    @page.prev.map { page =>
+                    <li class="prev">
+                        <span  data-page="@page">Prev</span>
+                    </li>
                     }
-                    @for(num <- page.nums) {
-                        @if(num == page.currentPage) {
-                            <li class="active"><a href="@controllers.admin.routes.Users.exchangeShiDous(num)">@num</a></li>
-                        } else {
-
-                            <li><a href="@controllers.admin.routes.Users.exchangeShiDous(num)">@num</a></li>
-                        }
-
+                    @for(num <-page.nums){
+                    @if(num==page.currentPage){
+                    <li class="active"><span  data-page="@num">@num</span></li>
+                    }else {
+                    <li><span data-page="@num">@num</span></li>
+                    }
                     }
                     @page.next.map { page =>
-                        <li class="next">
-                            <a href="@controllers.admin.routes.Users.exchangeShiDous(page)">Next</a>
-                        </li>
+                    <li class="next">
+                        <span href="#" data-page="@page" >Next</span>
+                    </li>
                     }
+
                 </ul>
             </div>
     </div>

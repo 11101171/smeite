@@ -78,9 +78,9 @@ user
                             <td>@models.user.ComeFrom(item.comeFrom)</td>
                             <td>@(item.credits/100.0)</td>
                             <td>
-                             <a href="#">
+
                                    @if(item.credits>=100){ 已返利 2元 } &nbsp;@if(item.credits>=1000){ 3元 }&nbsp; @if(item.credits>=3000){ 5元 }
-                                </a>
+
                             </td>
                         </tr>
                         }

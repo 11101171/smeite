@@ -127,6 +127,24 @@
         <div class="pagination">
             <ul>
 
+                @page.prev.map { page =>
+                <li class="prev">
+                    <span  data-page="@page">Prev</span>
+                </li>
+                }
+                @for(num <-page.nums){
+                @if(num==page.currentPage){
+                <li class="active"><span  data-page="@num">@num</span></li>
+                }else {
+                <li><span data-page="@num">@num</span></li>
+                }
+                }
+                @page.next.map { page =>
+                <li class="next">
+                    <span href="#" data-page="@page" >Next</span>
+                </li>
+                }
+
             </ul>
         </div>
                         </div>

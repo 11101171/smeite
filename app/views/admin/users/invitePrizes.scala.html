@@ -126,7 +126,25 @@
         </div>
         <div class="pagination">
             <ul>
+                @page.prev.map{ page =>
+                <li class="prev">
+                    <a href="@controllers.admin.routes.Users.invitePrizes(page)">Prev</a>
+                </li>
+                }
+                @for(num <- page.nums) {
+                @if(num == page.currentPage) {
+                <li class="active"><a href="@controllers.admin.routes.Users.invitePrizes(num)">@num</a></li>
+                } else {
 
+                <li><a href="@controllers.admin.routes.Users.invitePrizes(num)">@num</a></li>
+                }
+
+                }
+                @page.next.map { page =>
+                <li class="next">
+                    <a href="@controllers.admin.routes.Users.invitePrizes(page)">Next</a>
+                </li>
+                }
             </ul>
         </div>
                         </div>
