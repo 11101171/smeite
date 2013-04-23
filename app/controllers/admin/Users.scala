@@ -70,7 +70,7 @@ def list(p:Int) = Managers.AdminAction{manager => implicit request =>
   Ok(views.html.admin.users.list(manager,page))
 }
    /* 用户拉黑处理 */
-  def black(uid:Long)= Managers.AdminAction{manager => implicit request =>
+  def black(uid:Long)= Managers.AdminAction{ manager => implicit request =>
        val result = UserDao.modifyStatus(uid,4)
      if (result>0)Ok(Json.obj("code"->"100","message"->"success"))
      else Ok(Json.obj("code"->"104","message"->"更新失败"))
@@ -148,6 +148,40 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
       Ok(views.html.admin.users.editExchangeShiDou(manager,exchangeShiDouForm.fill(data),"修改成功"))
       }
     )
+  }
+
+  def invitePrizes(p:Int)  =  Managers.AdminAction{ manager => implicit request =>
+
+    Ok(views.html.admin.users.invitePrizes(manager))
+
+  }
+
+  /* 批量更新 邀请有奖 */
+  def batchInvitePrizes  =  Managers.AdminAction{ manager => implicit request =>
+      val totalRows = UserDao.getInviteeNum(100,3000)
+      val totalPages=((totalRows + 100 - 1) / 100).toInt;
+      for(i<- 1 to totalPages ){
+      val users= UserDao.getInvitees(100,3000,i,100);
+     for((u,up)<- users ){
+       if(u.credits >= 3000){
+         val invitePrize = UserDao.findUserInvitePrize(up.uid,up.inviteId.get,500)
+         if(invitePrize.isEmpty){
+              UserDao.addUserInvitePrize(up.inviteId.get,up.uid,u.credits,500)
+         }
+       }else if(u.credits >=1000 && u.credits< 3000){
+         val invitePrize = UserDao.findUserInvitePrize(up.uid,up.inviteId.get,300)
+         if(invitePrize.isEmpty){
+           UserDao.addUserInvitePrize(up.inviteId.get,up.uid,u.credits,300)
+         }else {
+           val invitePrize = UserDao.findUserInvitePrize(up.uid,up.inviteId.get,200)
+           if(invitePrize.isEmpty){
+             UserDao.addUserInvitePrize(up.inviteId.get,up.uid,u.credits,200)
+           }
+         }
+       }
+     }
+  }
+    Ok(Json.obj("code"->"100","message"->"success"))
   }
 
 }

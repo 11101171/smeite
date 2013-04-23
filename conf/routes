@@ -268,10 +268,14 @@ GET  /admin/users/view            controllers.admin.Users.view(uid:Long)
 GET  /admin/users/filterUsers       controllers.admin.Users.filterUsers
 POST /admin/users/batchUsers       controllers.admin.Users.batchUsers
 
-GET  /admin/users/exchangeShiDous  controllers.admin.Users.exchangeShiDous(p:Int ?=1)
+GET  /admin/users/exchangeShiDous       controllers.admin.Users.exchangeShiDous(p:Int ?=1)
 GET  /admin/users/filterExchangeShiDou  controllers.admin.Users.filterExchangeShiDou
 GET  /admin/users/editExchangeShiDou    controllers.admin.Users.editExchangeShiDou(id:Long)
 POST  /admin/users/saveExchangeShiDou   controllers.admin.Users.saveExchangeShiDou
+
+GET   /admin/users/invitePrizes         controllers.admin.Users.invitePrizes(p:Int ?=1)
+GET  /admin/users/batchInvitePrizes     controllers.admin.Users.batchInvitePrizes
+
 #管理后台  任务管理
 GET   /admin/tasks/edit           controllers.admin.Tasks.edit(id:Long)
 POST  /admin/tasks/save            controllers.admin.Tasks.save

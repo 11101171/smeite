@@ -36,4 +36,6 @@ object Global extends GlobalSettings {
       views.html.utils.global.error()
     )
   }*/
+
+
 }

@@ -7,7 +7,7 @@ import scala.slick.driver.MySQLDriver.simple._
 
 /**
  * Created with IntelliJ IDEA.
- * User: Administrator
+ * User: Administrator   用户邀请有奖处理
  * Date: 13-4-22
  * Time: 上午11:02
  * To change this template use File | Settings | File Templates.
@@ -38,5 +38,5 @@ case class UserInvitePrize (
     def handleTime = column[Timestamp]("handle_time")
     def * = id.? ~ uid ~ inviteeId ~ inviteeCredits ~ num~  handleStatus ~ handleResult ~ note.? ~ createTime.? ~  handleTime.? <> (UserInvitePrize, UserInvitePrize.unapply _)
     def autoInc = id.? ~ uid ~ inviteeId ~ inviteeCredits ~ num~  handleStatus ~ handleResult ~ note.? ~ createTime.? ~  handleTime.? <> (UserInvitePrize, UserInvitePrize.unapply _) returning id
-
+    def autoInc2 = uid ~ inviteeId ~ inviteeCredits ~ num ~ createTime returning id
 }

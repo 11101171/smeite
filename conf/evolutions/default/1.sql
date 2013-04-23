@@ -101,7 +101,7 @@ DROP TABLE IF EXISTS `user_profile`;
 CREATE TABLE IF NOT EXISTS `user_profile` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `uid`                 int(10) NOT NULL ,
-  `invite_id`           int(4) ,
+  `invite_id`           int(10) ,
   `invite_name`         varchar(50),
   `gender`              tinyint(4) not null DEFAULT '2',
   `intro`               varchar(200),
@@ -1290,8 +1290,8 @@ CREATE TABLE `user_invite_prize` (
   `invitee_id`      tinyint  not null default '0',
   `invitee_credits`      smallint(10) ,
   `num`                    tinyint (4) ,
-  `create_time`          timestamp,
   `handle_time`          timestamp,
+  `create_time`          timestamp,
   `handle_result`    varchar(128) ,
   `handle_status`          tinyint not null default '0',
   `note`    varchar(200) ,
@@ -1310,3 +1310,5 @@ CREATE TABLE `user_exchange_shiDou` (
   `note`    varchar(200) ,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+alter table user_profile change invite_id invite_id int(10) default '0'

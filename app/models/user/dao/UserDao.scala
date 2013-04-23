@@ -518,6 +518,39 @@ object UserDao {
     (for(c<-UserWithdraws if c.uid === inviteId if c.withdrawType===2)yield c.withdrawNum).list().sum
   }
 
+  /* 后台处理 用户邀请有奖*/
+  def getInviteeNum(minCredits:Int,maxCredits:Int):Long = database.withSession {  implicit session:Session =>
+       Query(Users.filter(_.credits >= minCredits).filter(_.credits <= maxCredits).length).first()
+  }
+  def getInvitees(minCredits:Int,maxCredits:Int,currentPage:Int,pageSize:Int):List[(User,UserProfile)] = database.withSession {  implicit session:Session =>
+  val totalRows = Query(Users.filter(_.credits >=100).filter(_.credits<=3000).length).first()
+  val totalPages=((totalRows + pageSize - 1) / pageSize);
+  val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+  (for{
+    c<-UserProfiles
+    u<-Users
+    if c.inviteId !=0
+    if c.uid===u.id
+    if u.credits >= minCredits
+    if u.credits <= maxCredits
+  }yield (u,c) ).drop(startRow).take(pageSize).list()
+  }
+
+  /* 查询 user invite prize */
+   def findUserInvitePrize(uid:Long,inviteeId:Long,num:Int):Option[UserInvitePrize] =  database.withSession {  implicit session:Session =>
+    (for {
+      c <- UserInvitePrizes
+      if c.uid === uid
+      if c.inviteeId === inviteeId
+      if c.num === num
+    }yield c ).firstOption
+
+  }
+  /* and user invite prize*/
+  def addUserInvitePrize(uid:Long,inviteeId:Long,inviteeCredits:Int,num:Int) =  database.withSession {  implicit session:Session =>
+    UserInvitePrizes.autoInc2.insert((uid,inviteeId,inviteeCredits,num,new Timestamp(System.currentTimeMillis())))
+  }
+
 
   /*用户申请食豆*/
   def addUserExchangeShiDou(applyId:Long,num:Int ) =  database.withSession {  implicit session:Session =>
