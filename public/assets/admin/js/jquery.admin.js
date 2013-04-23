@@ -90,7 +90,9 @@ $(function(){
     $(".date").dateinput({
         format:"yyyy-mm-dd"
     })
-
+    $("#J_taobaokeDate").dateinput({
+        format:"yyyymmdd"
+    })
 })
 
 

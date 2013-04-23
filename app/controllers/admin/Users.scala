@@ -9,7 +9,12 @@ import play.api.libs.json.Json
 import models.user.dao.UserDao
 import models.tag.dao.TagDao
 import java.util.Date
-
+import play.api.Play
+import com.taobao.api.DefaultTaobaoClient
+import com.taobao.api.request.{TaobaokeReportGetRequest, TaobaokeWidgetItemsConvertRequest, ItemGetRequest}
+import com.taobao.api.response.TaobaokeReportGetResponse
+import com.taobao.api.domain.TaobaokeReport
+import scala.collection.JavaConverters._
 /**
  * Created with IntelliJ IDEA.
  * User: Administrator
@@ -236,5 +241,26 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
       }
     )
   }
+    /* taobaoke  */
+  def taobaokeIncomes(p:Int) = Managers.AdminAction{ manager => implicit request =>
+   Ok(views.html.admin.users.taobaokeIncomes(manager))
+  }
 
+  def getIncomes = Managers.AdminAction{ manager => implicit request =>
+  val url:String = Play.maybeApplication.flatMap(_.configuration.getString("application.taobao_url")).getOrElse("http://gw.api.taobao.com/router/rest")
+   val appkey = Play.maybeApplication.flatMap(_.configuration.getString("application.taobao_appkey")).getOrElse("21136607")
+  val secret = Play.maybeApplication.flatMap(_.configuration.getString("application.taobao_secret")).getOrElse("b43392b7a08581a8916d2f9fa67003db")
+
+   val client =new DefaultTaobaoClient(url, appkey, secret);
+   val  req:TaobaokeReportGetRequest = new TaobaokeReportGetRequest();
+    req.setFields("trade_id,pay_time,pay_price,num_iid,outer_code");
+    req.setDate("20130318");
+    req.setPageNo(1L);
+    req.setPageSize(40L);
+    val report:TaobaokeReport = client.execute(req).getTaobaokeReport;
+  for(item <- report.getTaobaokeReportMembers.asScala){
+    println("trade_id : "+item.getTradeId +" pay_time : "+item.getPayTime +" out_code " +item.getOuterCode)
+  }
+    Ok("success" )
+  }
 }

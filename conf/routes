@@ -279,6 +279,9 @@ GET  /admin/users/editInvitePrize       controllers.admin.Users.editInvitePrize(
 POST  /admin/users/saveInvitePrize      controllers.admin.Users.saveInvitePrize
 GET  /admin/users/filterInvitePrize    controllers.admin.Users.filterInvitePrize
 
+GET  /admin/users/taobaokeIncomes      controllers.admin.Users.taobaokeIncomes(p:Int ?=1)
+GET  /admin/users/getIncomes          controllers.admin.Users.getIncomes
+
 #管理后台  任务管理
 GET   /admin/tasks/edit           controllers.admin.Tasks.edit(id:Long)
 POST  /admin/tasks/save            controllers.admin.Tasks.save
