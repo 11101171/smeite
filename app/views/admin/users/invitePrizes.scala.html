@@ -137,9 +137,13 @@
                           url:"/admin/users/batchInvitePrizes",
                           type:'get',
                           dataType:'json',
+                          beforeSend:function(){
+                              $("#J_batchInvitePrizes").removeClass("btn-success").addClass("btn-warning").html("批量更新中……")
+                          },
                           success:function(data){
                               if(data.code =='100'){
-                                 alert("更新成功")
+                                  $(this).html("更新完成")
+                                  window.refresh()
                               }else{
                                   alert(data.message)
                               }

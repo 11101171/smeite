@@ -164,18 +164,18 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
       val users= UserDao.getInvitees(100,3000,i,100);
      for((u,up)<- users ){
        if(u.credits >= 3000){
-         val invitePrize = UserDao.findUserInvitePrize(up.uid,up.inviteId.get,500)
+         val invitePrize = UserDao.findUserInvitePrize(up.uid,up.inviteId.get,5)
          if(invitePrize.isEmpty){
-              UserDao.addUserInvitePrize(up.inviteId.get,up.uid,u.credits,500)
+              UserDao.addUserInvitePrize(up.inviteId.get,up.uid,u.credits,5)
          }
        }else if(u.credits >=1000 && u.credits< 3000){
-         val invitePrize = UserDao.findUserInvitePrize(up.uid,up.inviteId.get,300)
+         val invitePrize = UserDao.findUserInvitePrize(up.uid,up.inviteId.get,3)
          if(invitePrize.isEmpty){
-           UserDao.addUserInvitePrize(up.inviteId.get,up.uid,u.credits,300)
+           UserDao.addUserInvitePrize(up.inviteId.get,up.uid,u.credits,3)
          }else {
-           val invitePrize = UserDao.findUserInvitePrize(up.uid,up.inviteId.get,200)
+           val invitePrize = UserDao.findUserInvitePrize(up.uid,up.inviteId.get,2)
            if(invitePrize.isEmpty){
-             UserDao.addUserInvitePrize(up.inviteId.get,up.uid,u.credits,200)
+             UserDao.addUserInvitePrize(up.inviteId.get,up.uid,u.credits,2)
            }
          }
        }
