@@ -1286,13 +1286,13 @@ CREATE TABLE `taobaoke_income` (
 DROP TABLE IF EXISTS `user_invite_prize`;
 CREATE TABLE `user_invite_prize` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
-  `uid`                 int(10) ,
-  `invitee_id`      tinyint  not null default '0',
+  `uid`                 int(10) not null ,
+  `invitee_id`         int(10) not null,
   `invitee_credits`      smallint(10) ,
   `num`                    tinyint (4) ,
   `handle_time`          timestamp,
   `create_time`          timestamp,
-  `handle_result`    varchar(128) ,
+  `handle_result`    varchar(128) default '' ,
   `handle_status`          tinyint not null default '0',
   `note`    varchar(200) ,
   PRIMARY KEY (`id`)

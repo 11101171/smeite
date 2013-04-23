@@ -1,0 +1,117 @@
+@(manager:models.admin.Manager,form:Form[controllers.admin.InvitePrizeFormData],msg:String="")
+@views.html.admin.template(manager,"user") {
+<div class="header">
+
+    <h1 class="page-title">标签管理</h1>
+</div>
+
+<ul class="breadcrumb">
+    <li>标签管理 <span class="divider">/</span></li>
+    <li><a href="@controllers.admin.routes.Tags.list(1)">标签管理</a><span class="divider">/</span></li>
+    <li>创建新标签</li>
+</ul>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            @if(msg!=""){
+            <div class="alert alert-success">
+               @msg
+            </div>
+            }
+
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon">
+                        <i class="icon-pencil"></i>
+                    </span>
+                    <h5>处理食豆兑换申请</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <form class=" form-horizontal" id="myForm"  method="post" action="@controllers.admin.routes.Users.saveInvitePrize">
+
+                        <input type="hidden" name="id" value='@form("id").value'>
+                        <input type="hidden" name="name" value='@form("name").value'>
+                        <input type="hidden" name="alipay" value='@form("alipay").value'>
+                        <input type="hidden" name="num" value='@form("num").value'>
+                        @form.globalError.map { error =>
+                        <div class="error-row" style="display:block">
+                            <p class="error"> @error.message</p>
+                        </div>
+                        }
+
+                        <div class="control-group">
+                            <label class="control-label">用户名称</label>
+                            <div class="controls">
+                                @form("name").value
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" >用户支付宝账号</label>
+                            <div class="controls">
+                                @form("alipay").value
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">数量</label>
+                            <div class="controls">
+                              @form("num").value
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" >处理状态</label>
+                            <div class="controls">
+                                <select name="handleStatus" id="J_cid">
+                                    <option value=""  @if(form("handleStatus").value.getOrElse("none")=="none"){ selected="true" } >所有分类</option>
+
+                                    <option value="0"  @if(form("handleStatus").value.getOrElse("none")=="0"){ selected="true" } >处理中</option>
+
+
+                                    <option value="1"  @if(form("handleStatus").value.getOrElse("none")=="1"){ selected="true" } >处理成功</option>
+
+
+                                    <option value="2"  @if(form("handleStatus").value.getOrElse("none")=="2"){ selected="true" } >处理失败</option>
+
+                                  </select>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="seoTitle">处理结果</label>
+                            <div class="controls">
+                                <input type="text" class="input-xlarge" id="seoTitle" name="handleResult" value='@form("handleResult").value' placeholder="handle result" required="required">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" >备注</label>
+                            <div class="controls">
+                                <textarea name="note" required="required"> @form("note").value</textarea>
+
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <div class="controls">
+
+                                <input type="submit" class="btn btn-success" value="保存"/>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+        }
+
+

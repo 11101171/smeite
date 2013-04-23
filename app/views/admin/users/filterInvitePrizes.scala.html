@@ -1,4 +1,4 @@
-@(manager:models.admin.Manager,page:models.Page[(models.user.User,models.user.UserInvitePrize)])
+@(manager:models.admin.Manager,page:models.Page[(models.user.User,models.user.UserInvitePrize)],form: Form[controllers.admin.FilterInvitePrizeFormData])))
 @views.html.admin.template(manager,"user") {
 
     <div id="content-header">
@@ -28,7 +28,7 @@
     </div>
         <div class="widget-content nopadding">
             <form class=" form-horizontal" id="J_filterForm" method="get" action="@controllers.admin.routes.Users.filterInvitePrize">
-                <input type="hidden" name="currentPage" id="J_currentPage" value="1">
+                <input type="hidden" name="currentPage" id="J_currentPage" value='@form("currentPage").value'>
                 <div class="error-row">
                     <p class="error"></p>
                 </div>
@@ -37,16 +37,16 @@
                     <label class="control-label" >处理状态：</label>
                     <div class="controls">
                         <div class="radio">
-                            <input type="radio" name="status" value="" checked="true"> 所有
+                            <input type="radio" name="status" value='' @if(form("status").value.isEmpty){ checked="true" }> 所有
                         </div>
                         <div class="radio">
-                            <input type="radio"  name="status" value="0"> 处理中
+                            <input type="radio"  name="status" value="0" @if(form("status").value.getOrElse("none")=="0"){ checked="true" }> 处理中
                         </div>
                         <div class="radio">
-                            <input type="radio" name="status" value="1"> 兑换成功
+                            <input type="radio" name="status" value="1" @if(form("status").value.getOrElse("none")=="1"){ checked="true" }> 兑换成功
                         </div>
                         <div class="radio">
-                            <input type="radio" name="status" value="2"> 兑换失败
+                            <input type="radio" name="status" value="2" @if(form("status").value.getOrElse("none")=="2"){ checked="true" }> 兑换失败
                         </div>
 
                     </div>
@@ -55,8 +55,8 @@
                 <div class="control-group">
                     <label class="control-label" >申请时间：</label>
                     <div class="controls">
-                        From：<input type="date" name="startDate" class="date" value="">
-                        to：<input type="date" name="endDate" class="date" value="">
+                        From：<input type="date" name="startDate" class="date" value='@form("startDate").value'>
+                        to：<input type="date" name="endDate" class="date" value='@form("endDate").value'>
                     </div>
                 </div>
 
@@ -100,10 +100,10 @@
                         <span class="label label-info">处理中</span>
                         }
                         @if(invitePrize.handleStatus == 1){
-                        <span class="label label-success">成功</span>
+                        <span class="label label-success">兑换成功</span>
                         }
                         @if(invitePrize.handleStatus == 2){
-                        <span class="label label-warning">失败</span>
+                        <span class="label label-warning">兑换失败</span>
                         }</td>
 
                     <td>@invitePrize.handleResult</td>

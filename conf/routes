@@ -275,6 +275,9 @@ POST  /admin/users/saveExchangeShiDou   controllers.admin.Users.saveExchangeShiD
 
 GET   /admin/users/invitePrizes         controllers.admin.Users.invitePrizes(p:Int ?=1)
 GET  /admin/users/batchInvitePrizes     controllers.admin.Users.batchInvitePrizes
+GET  /admin/users/editInvitePrize       controllers.admin.Users.editInvitePrize(id:Long)
+POST  /admin/users/saveInvitePrize      controllers.admin.Users.saveInvitePrize
+GET  /admin/users/filterInvitePrize    controllers.admin.Users.filterInvitePrize
 
 #管理后台  任务管理
 GET   /admin/tasks/edit           controllers.admin.Tasks.edit(id:Long)

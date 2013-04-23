@@ -22,6 +22,10 @@ case  class UserFilterFormData(name:Option[String],status:Option[Int],daren:Opti
 case class FilterExchangeShiDouFormData(status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
 case class ExchangeShiDouFormData(id:Long,name:String,alipay:String,num:Int,handleStatus:Int,handleResult:String,note:Option[String])
 
+case class FilterInvitePrizeFormData(status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
+case class InvitePrizeFormData(id:Long,name:String,alipay:String,num:Int,handleStatus:Int,handleResult:String,note:Option[String])
+
+
 object Users  extends Controller {
   val batchForm =Form(
     mapping(
@@ -64,6 +68,26 @@ object Users  extends Controller {
    )(ExchangeShiDouFormData.apply)(ExchangeShiDouFormData.unapply)
   )
 
+  val filterInvitePrizeForm =Form(
+    mapping(
+      "status"->optional(number),
+      "startDate"->optional(date("yyyy-MM-dd")),
+      "endDate"->optional(date("yyyy-MM-dd")),
+      "currentPage"->optional(number)
+    )(FilterInvitePrizeFormData.apply)(FilterInvitePrizeFormData.unapply)
+  )
+
+  val invitePrizeForm = Form(
+    mapping(
+      "id"->longNumber,
+      "name"->text,
+      "alipay"->text,
+      "num"->number,
+      "handleStatus"->number,
+      "handleResult"->text,
+      "note"->optional(text)
+    )(InvitePrizeFormData.apply)(InvitePrizeFormData.unapply)
+  )
   /*用户管理*/
 def list(p:Int) = Managers.AdminAction{manager => implicit request =>
     val page =UserDao.findAll(p,20)
@@ -151,37 +175,66 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
   }
 
   def invitePrizes(p:Int)  =  Managers.AdminAction{ manager => implicit request =>
-
-    Ok(views.html.admin.users.invitePrizes(manager))
+     val page = UserDao.findUserInvitePrizes(p,50)
+    Ok(views.html.admin.users.invitePrizes(manager,page))
 
   }
 
   /* 批量更新 邀请有奖 */
   def batchInvitePrizes  =  Managers.AdminAction{ manager => implicit request =>
-      val totalRows = UserDao.getInviteeNum(100,3000)
+      val totalRows = UserDao.getInviterNum
+      println("totalRows : "+totalRows)
       val totalPages=((totalRows + 100 - 1) / 100).toInt;
       for(i<- 1 to totalPages ){
-      val users= UserDao.getInvitees(100,3000,i,100);
-     for((u,up)<- users ){
-       if(u.credits >= 3000){
-         val invitePrize = UserDao.findUserInvitePrize(up.uid,up.inviteId.get,5)
+      val userProfiles= UserDao.getInviters(i,100);
+     for(up<- userProfiles ){
+      val user = UserDao.findById(up.uid)
+      if(user.credits >=100 && user.credits < 1000){
+        val invitePrize = UserDao.findUserInvitePrize(up.inviteId.get,up.uid,2)
+        if(invitePrize.isEmpty){
+          UserDao.addUserInvitePrize(up.inviteId.get,up.uid,user.credits,2)
+        }
+      }
+       if(user.credits >=1000 && user.credits < 3000){
+         val invitePrize = UserDao.findUserInvitePrize(up.inviteId.get,up.uid,3)
          if(invitePrize.isEmpty){
-              UserDao.addUserInvitePrize(up.inviteId.get,up.uid,u.credits,5)
+           UserDao.addUserInvitePrize(up.inviteId.get,up.uid,user.credits,3)
          }
-       }else if(u.credits >=1000 && u.credits< 3000){
-         val invitePrize = UserDao.findUserInvitePrize(up.uid,up.inviteId.get,3)
+       }
+       if(user.credits >=3000 ){
+         val invitePrize = UserDao.findUserInvitePrize(up.inviteId.get,up.uid,5)
          if(invitePrize.isEmpty){
-           UserDao.addUserInvitePrize(up.inviteId.get,up.uid,u.credits,3)
-         }else {
-           val invitePrize = UserDao.findUserInvitePrize(up.uid,up.inviteId.get,2)
-           if(invitePrize.isEmpty){
-             UserDao.addUserInvitePrize(up.inviteId.get,up.uid,u.credits,2)
-           }
+           UserDao.addUserInvitePrize(up.inviteId.get,up.uid,user.credits,5)
          }
        }
      }
   }
     Ok(Json.obj("code"->"100","message"->"success"))
+  }
+
+
+  def editInvitePrize(id:Long) = Managers.AdminAction{ manager => implicit request =>
+    val (user,up,ui) = UserDao.findUserInvitePrize(id)
+    Ok(views.html.admin.users.editInvitePrize(manager,invitePrizeForm.fill(InvitePrizeFormData(ui.id.get,user.name,up.alipay.getOrElse("none"),ui.num,ui.handleStatus,ui.handleResult,ui.note))))
+  }
+
+  def saveInvitePrize  = Managers.AdminAction{ manager => implicit request =>
+    invitePrizeForm.bindFromRequest.fold(
+      formWithErrors =>BadRequest(views.html.admin.users.editInvitePrize(manager,formWithErrors,"出错了")),
+      data => {
+        UserDao.modifyUserInvitePrize(data.id,data.handleStatus,data.handleResult,data.note.getOrElse(""))
+      Ok(views.html.admin.users.editInvitePrize(manager,invitePrizeForm.fill(data),"修改成功"))
+      }
+    )
+  }
+  def filterInvitePrize = Managers.AdminAction{ manager => implicit request =>
+    filterInvitePrizeForm.bindFromRequest.fold(
+      formWithErrors =>Ok("something wrong" +formWithErrors.errors.toString),
+      data => {
+        val page=UserDao.filterInvitePrizes(data.status,data.startDate,data.endDate,data.currentPage.getOrElse(1),50);
+        Ok(views.html.admin.users.filterInvitePrizes(manager,page,filterInvitePrizeForm.fill(data)))
+      }
+    )
   }
 
 }

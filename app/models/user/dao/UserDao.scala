@@ -519,21 +519,17 @@ object UserDao {
   }
 
   /* 后台处理 用户邀请有奖*/
-  def getInviteeNum(minCredits:Int,maxCredits:Int):Long = database.withSession {  implicit session:Session =>
-       Query(Users.filter(_.credits >= minCredits).filter(_.credits <= maxCredits).length).first()
+  def getInviterNum:Long = database.withSession {  implicit session:Session =>
+    Query(UserProfiles.filter(_.inviteId =!= 0l).length).first()
   }
-  def getInvitees(minCredits:Int,maxCredits:Int,currentPage:Int,pageSize:Int):List[(User,UserProfile)] = database.withSession {  implicit session:Session =>
-  val totalRows = Query(Users.filter(_.credits >=100).filter(_.credits<=3000).length).first()
+  def getInviters(currentPage:Int,pageSize:Int):List[UserProfile] = database.withSession {  implicit session:Session =>
+  val totalRows = Query(UserProfiles.filter(_.inviteId =!= 0l).length).first()
   val totalPages=((totalRows + pageSize - 1) / pageSize);
   val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
   (for{
     c<-UserProfiles
-    u<-Users
-    if c.inviteId !=0
-    if c.uid===u.id
-    if u.credits >= minCredits
-    if u.credits <= maxCredits
-  }yield (u,c) ).drop(startRow).take(pageSize).list()
+    if c.inviteId =!= 0l
+  }yield (c) ).drop(startRow).take(pageSize).list()
   }
 
   /* 查询 user invite prize */
@@ -549,6 +545,52 @@ object UserDao {
   /* and user invite prize*/
   def addUserInvitePrize(uid:Long,inviteeId:Long,inviteeCredits:Int,num:Int) =  database.withSession {  implicit session:Session =>
     UserInvitePrizes.autoInc2.insert((uid,inviteeId,inviteeCredits,num,new Timestamp(System.currentTimeMillis())))
+  }
+
+ /*用户邀请有奖表*/
+  def findUserInvitePrizes(currentPage:Int,pageSize:Int):Page[(User,UserInvitePrize)] =  database.withSession {  implicit session:Session =>
+   val totalRows=Query(UserInvitePrizes.length).first()
+   val totalPages=((totalRows + pageSize - 1) / pageSize);
+   val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+   val list:List[(User,UserInvitePrize)] = (for{
+     u <- Users
+     s <- UserInvitePrizes
+     if u.id === s.uid
+   }yield (u,s) ).sortBy(_._2.createTime desc).drop(startRow).take(pageSize).list()
+   Page[(User,UserInvitePrize)](list,currentPage,totalPages)
+ }
+
+  /* */
+  def findUserInvitePrize(id:Long):(User,UserProfile,UserInvitePrize) =  database.withSession {  implicit session:Session =>
+    (for{
+        u <- Users
+        up <- UserProfiles
+       ui <- UserInvitePrizes
+      if ui.id === id
+      if ui.uid === u.id
+      if u.id === up.uid
+     }yield(u,up,ui) ).first
+  }
+
+  def modifyUserInvitePrize(id:Long,handleStatus:Int,handleResult:String,note:String) = database.withSession {  implicit session:Session =>
+    (for( c <- UserInvitePrizes if c.id=== id ) yield c.handleStatus ~ c.handleResult ~ c.note).update((handleStatus,handleResult,note))
+  }
+
+  def filterInvitePrizes(status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Int,pageSize:Int) = database.withSession {  implicit session:Session =>
+    var query =for{
+      u <- Users
+      s <- UserInvitePrizes
+      if u.id === s.uid
+    }yield (u,s)
+
+    if(!status.isEmpty) query = query.filter(_._2.handleStatus === status.get)
+    if(!startDate.isEmpty) query = query.filter(_._2.createTime >= new Timestamp(startDate.get.getTime))
+    if(!endDate.isEmpty) query = query.filter(_._2.createTime <= new Timestamp(endDate.get.getTime))
+    val totalRows=query.list().length
+    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val list:List[(User,UserInvitePrize)]=  query.drop(startRow).take(pageSize).list()
+    Page[(User,UserInvitePrize)](list,currentPage,totalPages);
   }
 
 
@@ -602,7 +644,7 @@ object UserDao {
   }
   def modifyUserExchangeShiDou(id:Long,handleStatus:Int,handleResult:String,note:String) = database.withSession {  implicit session:Session =>
 
-    (for( c <- UserExchangeShiDous if c.applyId === id ) yield c.handleStatus ~ c.handleResult ~ c.note).update((handleStatus,handleResult,note))
+    (for( c <- UserExchangeShiDous if c.id === id ) yield c.handleStatus ~ c.handleResult ~ c.note).update((handleStatus,handleResult,note))
   }
 
 }
