@@ -183,7 +183,7 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
   /* 批量更新 邀请有奖 */
   def batchInvitePrizes  =  Managers.AdminAction{ manager => implicit request =>
       val totalRows = UserDao.getInviterNum
-      println("totalRows : "+totalRows)
+
       val totalPages=((totalRows + 100 - 1) / 100).toInt;
       for(i<- 1 to totalPages ){
       val userProfiles= UserDao.getInviters(i,100);
