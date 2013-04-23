@@ -1,4 +1,4 @@
-@(manager:models.admin.Manager,u:(models.users.Users,models.users.UserProfiles,models.users.UserExchangeShiDou),form: Form[controllers.admin.ExchangeShiDouFormData])
+@(manager:models.admin.Manager,form:Form[controllers.admin.ExchangeShiDouFormData],msg:String="")
 @views.html.admin.template(manager,"user") {
 <div class="header">
 
@@ -13,6 +13,12 @@
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span12">
+            @if(msg!=""){
+            <div class="alert alert-success">
+               @msg
+            </div>
+            }
+
             <div class="widget-box">
                 <div class="widget-title">
                     <span class="icon">
@@ -21,10 +27,12 @@
                     <h5>处理食豆兑换申请</h5>
                 </div>
                 <div class="widget-content nopadding">
-                    <form class=" form-horizontal" id="myForm"  method="post" action="@controllers.admin.routes.Themes.saveExchangeShiDou">
+                    <form class=" form-horizontal" id="myForm"  method="post" action="@controllers.admin.routes.Users.saveExchangeShiDou">
 
                         <input type="hidden" name="id" value='@form("id").value'>
-
+                        <input type="hidden" name="name" value='@form("name").value'>
+                        <input type="hidden" name="alipay" value='@form("alipay").value'>
+                        <input type="hidden" name="num" value='@form("num").value'>
                         @form.globalError.map { error =>
                         <div class="error-row" style="display:block">
                             <p class="error"> @error.message</p>
@@ -34,21 +42,21 @@
                         <div class="control-group">
                             <label class="control-label">用户名称</label>
                             <div class="controls">
-                                @u._1.name
+                                @form("name").value
                             </div>
                         </div>
 
                         <div class="control-group">
                             <label class="control-label" >用户支付宝账号</label>
                             <div class="controls">
-                                @u._2.alipay
+                                @form("alipay").value
                             </div>
                         </div>
 
                         <div class="control-group">
                             <label class="control-label">兑换数量</label>
                             <div class="controls">
-                                @u._3.num
+                              @form("num").value
                             </div>
                         </div>
                         <div class="control-group">
@@ -56,15 +64,15 @@
                             <div class="controls">
                                 <select name="handleStatus" id="J_cid">
                                     <option value=""  @if(form("handleStatus").value.getOrElse("none")=="none"){ selected="true" } >所有分类</option>
-                                    @if(form("handleStatus").value.getOrElse("none")=="0"){
-                                    <option value="0" selected="true" >处理中</option>
-                                     }
-                                    @if(form("handleStatus").value.getOrElse("none")=="1"){
-                                    <option value="0" selected="true" >处理成功</option>
-                                    }
-                                    @if(form("handleStatus").value.getOrElse("none")=="2"){
-                                    <option value="0" selected="true" >处理失败</option>
-                                    }
+
+                                    <option value="0"  @if(form("handleStatus").value.getOrElse("none")=="0"){ selected="true" } >处理中</option>
+
+
+                                    <option value="1"  @if(form("handleStatus").value.getOrElse("none")=="1"){ selected="true" } >处理成功</option>
+
+
+                                    <option value="2"  @if(form("handleStatus").value.getOrElse("none")=="2"){ selected="true" } >处理失败</option>
+
                                   </select>
                             </div>
                         </div>
@@ -76,9 +84,10 @@
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" for="seoKeywords">备注</label>
+                            <label class="control-label" >备注</label>
                             <div class="controls">
-                                <input type="text" class="input-xlarge" id="seoKeywords" name="note" value='@form("note").value' placeholder="note" required="required">
+                                <textarea name="note" required="required"> @form("note").value</textarea>
+
                             </div>
                         </div>
 

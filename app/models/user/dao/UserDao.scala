@@ -567,5 +567,9 @@ object UserDao {
        if ue.applyId === id
      }yield (u,up,ue)).first()
   }
+  def modifyUserExchangeShiDou(id:Long,handleStatus:Int,handleResult:String,note:String) = database.withSession {  implicit session:Session =>
+
+    (for( c <- UserExchangeShiDous if c.applyId === id ) yield c.handleStatus ~ c.handleResult ~ c.note).update((handleStatus,handleResult,note))
+  }
 
 }

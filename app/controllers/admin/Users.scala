@@ -20,7 +20,7 @@ import java.util.Date
 case class UserBatchFormData(action:Int,ids:Seq[Long],url:Option[String])
 case  class UserFilterFormData(name:Option[String],status:Option[Int],daren:Option[Int],comeFrom:Option[Int],creditsOrder:String,shiDouOrder:String,idOrder:String,currentPage:Option[Int])
 case class FilterExchangeShiDouFormData(status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
-case class ExchangeShiDouFormData(id:Long,handleStatus:Int,handleResult:String,note:Option[String])
+case class ExchangeShiDouFormData(id:Long,name:String,alipay:String,num:Int,handleStatus:Int,handleResult:String,note:Option[String])
 
 object Users  extends Controller {
   val batchForm =Form(
@@ -52,9 +52,12 @@ object Users  extends Controller {
     )(FilterExchangeShiDouFormData.apply)(FilterExchangeShiDouFormData.unapply)
   )
 
-  val exchangeShiDouFormData = Form(
+  val exchangeShiDouForm = Form(
    mapping(
      "id"->longNumber,
+     "name"->text,
+     "alipay"->text,
+     "num"->number,
      "handleStatus"->number,
      "handleResult"->text,
      "note"->optional(text)
@@ -133,12 +136,18 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
   )
 }
   def editExchangeShiDou(id:Long) = Managers.AdminAction{ manager => implicit request =>
-
     val (user,up,ue) = UserDao.findUserExchangeShiDou(id);
-
-    Ok(views.html.admin.users.editExchangeShiDou(manager,exchangeShiDouFormData.fill(ExchangeShiDouFormData(ue.id.get,ue.handleStatus,ue.handleResult,ue.note))))
-
+    Ok(views.html.admin.users.editExchangeShiDou(manager,exchangeShiDouForm.fill(ExchangeShiDouFormData(ue.id.get,user.name,up.alipay.getOrElse("none"),ue.num,ue.handleStatus,ue.handleResult,ue.note))))
   }
 
+  def saveExchangeShiDou  = Managers.AdminAction{ manager => implicit request =>
+    exchangeShiDouForm.bindFromRequest.fold(
+      formWithErrors =>BadRequest(views.html.admin.users.editExchangeShiDou(manager,formWithErrors,"出错了")),
+      data => {
+         UserDao.modifyUserExchangeShiDou(data.id,data.handleStatus,data.handleResult,data.note.getOrElse(""))
+      Ok(views.html.admin.users.editExchangeShiDou(manager,exchangeShiDouForm.fill(data),"修改成功"))
+      }
+    )
+  }
 
 }

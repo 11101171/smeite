@@ -161,8 +161,7 @@ object  Tags extends Controller {
       }
   }
   /*保存标签组*/
-  def saveGroup=Managers.AdminAction{
-    manager => implicit request =>
+  def saveGroup=Managers.AdminAction{ manager => implicit request =>
       groupForm.bindFromRequest.fold(
         formWithErrors => BadRequest(views.html.admin.tags.editGroup(manager,formWithErrors)),
         group => {
