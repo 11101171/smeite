@@ -1277,7 +1277,7 @@ CREATE TABLE `taobaoke_income` (
   `commission`          smallint(10) ,
   `create_time`               timestamp,
   `pay_time`                   timestamp,
-  `add_time`          timestamp,
+  `day`          varchar(16) not null,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 

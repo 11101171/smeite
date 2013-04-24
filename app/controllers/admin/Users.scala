@@ -13,7 +13,7 @@ import play.api.Play
 import com.taobao.api.DefaultTaobaoClient
 import com.taobao.api.request.{TaobaokeReportGetRequest, TaobaokeWidgetItemsConvertRequest, ItemGetRequest}
 import com.taobao.api.response.TaobaokeReportGetResponse
-import com.taobao.api.domain.TaobaokeReport
+import com.taobao.api.domain.{TaobaokeReportMember, TaobaokeReport}
 import scala.collection.JavaConverters._
 /**
  * Created with IntelliJ IDEA.
@@ -30,6 +30,7 @@ case class ExchangeShiDouFormData(id:Long,name:String,alipay:String,num:Int,hand
 case class FilterInvitePrizeFormData(status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
 case class InvitePrizeFormData(id:Long,name:String,alipay:String,num:Int,handleStatus:Int,handleResult:String,note:Option[String])
 
+case class GetTaobaokeIncomeFormData(day:String)
 
 object Users  extends Controller {
   val batchForm =Form(
@@ -93,6 +94,11 @@ object Users  extends Controller {
       "note"->optional(text)
     )(InvitePrizeFormData.apply)(InvitePrizeFormData.unapply)
   )
+
+  val getTaobaokeIncomeForm = Form(
+     "day"->nonEmptyText
+  )
+
   /*用户管理*/
 def list(p:Int) = Managers.AdminAction{manager => implicit request =>
     val page =UserDao.findAll(p,20)
@@ -247,20 +253,57 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
   }
 
   def getIncomes = Managers.AdminAction{ manager => implicit request =>
-  val url:String = Play.maybeApplication.flatMap(_.configuration.getString("application.taobao_url")).getOrElse("http://gw.api.taobao.com/router/rest")
-   val appkey = Play.maybeApplication.flatMap(_.configuration.getString("application.taobao_appkey")).getOrElse("21136607")
-  val secret = Play.maybeApplication.flatMap(_.configuration.getString("application.taobao_secret")).getOrElse("b43392b7a08581a8916d2f9fa67003db")
+    getTaobaokeIncomeForm.bindFromRequest.fold(
+      formWithErrors =>Ok("something wrong"),
+      data => {
+         incomes(data)
+        Ok("success" )
+      }
+    )
 
-   val client =new DefaultTaobaoClient(url, appkey, secret);
-   val  req:TaobaokeReportGetRequest = new TaobaokeReportGetRequest();
-    req.setFields("trade_id,pay_time,pay_price,num_iid,outer_code");
-    req.setDate("20130318");
-    req.setPageNo(1L);
-    req.setPageSize(40L);
-    val report:TaobaokeReport = client.execute(req).getTaobaokeReport;
-  for(item <- report.getTaobaokeReportMembers.asScala){
-    println("trade_id : "+item.getTradeId +" pay_time : "+item.getPayTime +" out_code " +item.getOuterCode)
   }
-    Ok("success" )
+  /*
+  *  首先判断 report
+  * */
+  private def incomes(day:String) = {
+    val url:String = "http://gw.api.taobao.com/router/rest"
+    val appkey = "21136607"
+    val secret = "b43392b7a08581a8916d2f9fa67003db"
+    val client =new DefaultTaobaoClient(url, appkey, secret);
+    println("         day          "+day)
+    val  req:TaobaokeReportGetRequest = new TaobaokeReportGetRequest();
+    req.setFields("trade_id,real_pay_fee,commission_rate,commission,create_time,pay_time,pay_price,num_iid,outer_code");
+    req.setDate(day);
+    req.setPageSize(100l);
+    var p:Long =1l
+    var flag:Boolean=true
+    while(flag){
+      println("go into while" + p)
+      req.setPageNo(p);
+      val report:TaobaokeReport = client.execute(req).getTaobaokeReport;
+       if(report != null){
+         println("report is not null")
+         var str="";
+         if(report.getTaobaokeReportMembers !=null){
+           println("report taobaoke report member is not null")
+         for(item <- report.getTaobaokeReportMembers.asScala){
+           handleTaobaokeIncome(item)
+         }
+         }else {
+           flag=false
+           println("report taobaoke report member is null")
+
+         }
+         p+=1;
+       }else{
+         println("report is null")
+       }
+      }
+  }
+
+  /* todo */
+  private def handleTaobaokeIncome(item:TaobaokeReportMember)={
+
+    println("handle success")
   }
 }
