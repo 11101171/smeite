@@ -1253,7 +1253,8 @@ CREATE TABLE `user_order` (
 * relative_id      宝贝ID   邀请用户Id
 */
 DROP TABLE IF EXISTS `user_withdraw`;
-CREATE TABLE `user_withdraw` (
+DROP TABLE IF EXISTS `user_rebate`;
+CREATE TABLE `user_rebate` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `uid`                 int(10) ,
   `num`                 smallint(10) ,

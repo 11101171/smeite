@@ -14,7 +14,7 @@ import models.Page._
  * http://www.smeite.com/
  *
  */
-case class UserWithdraw(
+case class UserRebate(
                      id: Option[Long],
                      uid: Long,
                      num:Int,
@@ -27,7 +27,7 @@ case class UserWithdraw(
                      handleTime:Option[Timestamp]
                     )
 
-object UserWithdraws extends Table[UserWithdraw]("user_withdraw") {
+object UserRebates extends Table[UserRebate]("user_rebate") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def num = column[Int]("num")
@@ -38,7 +38,7 @@ object UserWithdraws extends Table[UserWithdraw]("user_withdraw") {
   def note = column[String]("note")
   def withdrawTime = column[Timestamp]("withdraw_time")
   def handleTime = column[Timestamp]("handle_time")
-  def * = id.? ~ uid ~ num ~ userOrderId ~ tradeId ~ handleStatus ~ handleResult ~ note ~ withdrawTime.? ~  handleTime.? <> (UserWithdraw, UserWithdraw.unapply _)
-  def autoInc = id.? ~ uid ~ num ~ userOrderId ~ tradeId ~ handleStatus ~ handleResult ~ note ~ withdrawTime.? ~  handleTime.? <> (UserWithdraw, UserWithdraw.unapply _) returning id
+  def * = id.? ~ uid ~ num ~ userOrderId ~ tradeId ~ handleStatus ~ handleResult ~ note ~ withdrawTime.? ~  handleTime.? <> (UserRebate, UserRebate.unapply _)
+  def autoInc = id.? ~ uid ~ num ~ userOrderId ~ tradeId ~ handleStatus ~ handleResult ~ note ~ withdrawTime.? ~  handleTime.? <> (UserRebate, UserRebate.unapply _) returning id
 
 }
