@@ -515,7 +515,7 @@ object UserDao {
   }
   /* 获取用用户邀请有奖的 累计金额*/
   def getInviteReward(inviteId:Long):Int =  database.withSession {  implicit session:Session =>
-    (for(c<-UserWithdraws if c.uid === inviteId if c.withdrawType===2)yield c.withdrawNum).list().sum
+    (for(c<-UserInvitePrizes if c.uid === inviteId )yield c.num).list().sum
   }
 
   /* 后台处理 用户邀请有奖*/

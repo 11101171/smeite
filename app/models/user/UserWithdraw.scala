@@ -17,10 +17,11 @@ import models.Page._
 case class UserWithdraw(
                      id: Option[Long],
                      uid: Long,
-                     withdrawType:Int,
-                     withdrawNum:Int,
-                     relativeId:Option[Long],
-                     handleResult:Int,
+                     num:Int,
+                     userOrderId:Long,
+                     tradeId:Long,
+                     handleStatus:Int,
+                     handleResult:String,
                      note:String,
                      withdrawTime:Option[Timestamp],
                      handleTime:Option[Timestamp]
@@ -29,14 +30,15 @@ case class UserWithdraw(
 object UserWithdraws extends Table[UserWithdraw]("user_withdraw") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
-  def withdrawType = column[Int]("withdraw_type")
-  def withdrawNum = column[Int]("withdraw_num")
-  def relativeId = column[Long]("relative_id")
-  def handleResult = column[Int]("handle_result")
+  def num = column[Int]("num")
+  def userOrderId = column[Long]("user_order_id")
+  def tradeId = column[Long]("trade_id")
+  def handleStatus = column[Int]("handle_status")
+  def handleResult = column[String]("handle_result")
   def note = column[String]("note")
   def withdrawTime = column[Timestamp]("withdraw_time")
   def handleTime = column[Timestamp]("handle_time")
-  def * = id.? ~ uid ~ withdrawType ~ withdrawNum ~ relativeId.? ~ handleResult ~ note ~ withdrawTime.? ~  handleTime.? <> (UserWithdraw, UserWithdraw.unapply _)
-  def autoInc = id.? ~ uid ~ withdrawType ~ withdrawNum ~ relativeId.? ~ handleResult ~ note ~ withdrawTime.? ~  handleTime.? <> (UserWithdraw, UserWithdraw.unapply _) returning id
+  def * = id.? ~ uid ~ num ~ userOrderId ~ tradeId ~ handleStatus ~ handleResult ~ note ~ withdrawTime.? ~  handleTime.? <> (UserWithdraw, UserWithdraw.unapply _)
+  def autoInc = id.? ~ uid ~ num ~ userOrderId ~ tradeId ~ handleStatus ~ handleResult ~ note ~ withdrawTime.? ~  handleTime.? <> (UserWithdraw, UserWithdraw.unapply _) returning id
 
 }

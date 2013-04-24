@@ -1258,6 +1258,7 @@ CREATE TABLE `user_withdraw` (
   `uid`                 int(10) ,
   `num`                 smallint(10) ,
   `user_order_id`           int(10) ,
+  `trade_id`            bigint (10) ,
   `handle_result`      varchar(128),
   `handle_status`          tinyint not null default '0',
   `note`    varchar(200) ,
@@ -1265,6 +1266,7 @@ CREATE TABLE `user_withdraw` (
   `handle_time`          timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
 /* 淘宝客报表记录*/
 DROP TABLE IF EXISTS `taobaoke_income`;
 CREATE TABLE `taobaoke_income` (
