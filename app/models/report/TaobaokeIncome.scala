@@ -17,26 +17,32 @@ import models.Page._
 case class TaobaokeIncome(
                       id: Option[Long],
                       numIid:Long,
-                      outerCode: String,
                       tradeId:Long,
+                      outerCode: String,
                       realPayFee:String,
-                      commissionRate:Int,
-                      commission:Int,
-                      createTime:Option[Timestamp],
-                      payTime:Option[Timestamp]
+                      commissionRate:String,
+                      commission:String,
+                      payPrice:String,
+                      itemNum:Long,
+                      day:String,
+                      createTime:Timestamp,
+                      payTime:Timestamp
                       )
 object TaobaokeIncomes extends Table[TaobaokeIncome]("taobaoke_income") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def numIid = column[Long]("num_iid")
-  def outerCode = column[String]("outer_code")
   def tradeId = column[Long]("trade_id")
+  def outerCode = column[String]("outer_code")
   def realPayFee = column[String]("real_pay_fee")
-  def commissionRate = column[Int]("commission_rate")
-  def commission = column[Int]("commission")
+  def commissionRate = column[String]("commission_rate")
+  def commission = column[String]("commission")
+  def payPrice = column[String]("pay_price")
+  def itemNum = column[Long]("item_num")
+  def day = column[String]("day")
   def createTime = column[Timestamp]("create_time")
   def payTime = column[Timestamp]("pay_time")
-  def * = id.? ~ numIid ~ outerCode ~ tradeId ~ realPayFee ~ commissionRate ~ commission ~ createTime.? ~ payTime.? <> (TaobaokeIncome, TaobaokeIncome.unapply _)
-  def autoInc = id.? ~ numIid ~ outerCode ~ tradeId ~ realPayFee ~ commissionRate ~ commission ~ createTime.? ~ payTime.?  <> (TaobaokeIncome, TaobaokeIncome.unapply _) returning id
+  def * = id.? ~ numIid ~ tradeId ~ outerCode ~ realPayFee ~ commissionRate ~ commission ~ payPrice ~ itemNum ~ day ~ createTime ~ payTime <> (TaobaokeIncome, TaobaokeIncome.unapply _)
+  def autoInc = id.? ~ numIid ~ tradeId ~ outerCode ~ realPayFee ~ commissionRate ~ commission ~ payPrice ~ itemNum ~ day ~ createTime ~ payTime  <> (TaobaokeIncome, TaobaokeIncome.unapply _) returning id
 
 }
 

@@ -1,4 +1,4 @@
-@(manager:models.admin.Manager,page:models.Page[models.report.TaobaokeIncome])
+@(manager:models.admin.Manager,page:models.Page[models.report.TaobaokeIncome],form: Form[controllers.admin.FilterTaobaokeIncomeFormData])
 @views.html.admin.template(manager,"user") {
 
 <div id="content-header">
@@ -41,7 +41,7 @@
                 </div>
                 <div class="widget-content nopadding">
                     <form class=" form-horizontal" id="J_filterForm" method="get" action="@controllers.admin.routes.Users.filterTaobaokeIncomes">
-                        <input type="hidden" name="currentPage" id="J_currentPage" value="1">
+                        <input type="hidden" name="currentPage" id="J_currentPage" value='@form("currentPage").value'>
                         <div class="error-row">
                             <p class="error"></p>
                         </div>
@@ -49,7 +49,7 @@
                         <div class="control-group">
                             <label class="control-label" >outer_code：</label>
                             <div class="controls">
-                                <input type="text" name="outerCode"  value="">
+                                <input type="text" name="outerCode"  value='@form("outerCode").value'>
 
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                         <div class="control-group">
                             <label class="control-label" >查询时间：</label>
                             <div class="controls">
-                                <input type="date" name="day" class="taobaokeDate" value="">
+                                <input type="date" name="day" class="taobaokeDate" value='@form("day").value' >
                             </div>
                         </div>
 

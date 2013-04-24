@@ -8,6 +8,7 @@ import models.Page
 import play.api.libs.json.Json
 import models.user.dao.UserDao
 import models.tag.dao.TagDao
+import models.report.dao.TaobaokeIncomeDao
 import java.util.Date
 import play.api.Play
 import com.taobao.api.DefaultTaobaoClient
@@ -15,6 +16,9 @@ import com.taobao.api.request.{TaobaokeReportGetRequest, TaobaokeWidgetItemsConv
 import com.taobao.api.response.TaobaokeReportGetResponse
 import com.taobao.api.domain.{TaobaokeReportMember, TaobaokeReport}
 import scala.collection.JavaConverters._
+import models.report.TaobaokeIncome
+import java.sql.Timestamp
+
 /**
  * Created with IntelliJ IDEA.
  * User: Administrator
@@ -31,7 +35,7 @@ case class FilterInvitePrizeFormData(status:Option[Int],startDate:Option[Date],e
 case class InvitePrizeFormData(id:Long,name:String,alipay:String,num:Int,handleStatus:Int,handleResult:String,note:Option[String])
 
 case class GetTaobaokeIncomeFormData(day:String)
-
+case class FilterTaobaokeIncomeFormData(outerCode:Option[String],day:Option[String],currentPage:Option[Int])
 object Users  extends Controller {
   val batchForm =Form(
     mapping(
@@ -97,6 +101,13 @@ object Users  extends Controller {
 
   val getTaobaokeIncomeForm = Form(
      "day"->nonEmptyText
+  )
+  val filterTaobaokeIncomeForm =Form(
+    mapping(
+      "outerCode"->optional(text),
+      "day"->optional(text),
+      "currentPage"->optional(number)
+    )(FilterTaobaokeIncomeFormData.apply)(FilterTaobaokeIncomeFormData.unapply)
   )
 
   /*用户管理*/
@@ -249,18 +260,32 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
   }
     /* taobaoke  */
   def taobaokeIncomes(p:Int) = Managers.AdminAction{ manager => implicit request =>
-   Ok(views.html.admin.users.taobaokeIncomes(manager))
+      val page = TaobaokeIncomeDao.findTaobaokeIncomes(p,50)
+   Ok(views.html.admin.users.taobaokeIncomes(manager,page))
   }
 
+  def filterTaobaokeIncomes = Managers.AdminAction{ manager => implicit request =>
+    filterTaobaokeIncomeForm.bindFromRequest.fold(
+      formWithErrors =>Ok("something wrong"),
+      data => {
+        val page=TaobaokeIncomeDao.filterTaobaokeIncomes(data.day,data.outerCode,data.currentPage.getOrElse(1),50);
+        Ok(views.html.admin.users.filterTaobaokeIncomes(manager,page,filterTaobaokeIncomeForm.fill(data)))
+      }
+    )
+  }
+
+
+
+
+  /* 查询淘宝客，获取收入 */
   def getIncomes = Managers.AdminAction{ manager => implicit request =>
     getTaobaokeIncomeForm.bindFromRequest.fold(
       formWithErrors =>Ok("something wrong"),
       data => {
          incomes(data)
-        Ok("success" )
+        Redirect(controllers.admin.routes.Users.taobaokeIncomes(1))
       }
     )
-
   }
   /*
   *  首先判断 report
@@ -270,9 +295,8 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
     val appkey = "21136607"
     val secret = "b43392b7a08581a8916d2f9fa67003db"
     val client =new DefaultTaobaoClient(url, appkey, secret);
-    println("         day          "+day)
     val  req:TaobaokeReportGetRequest = new TaobaokeReportGetRequest();
-    req.setFields("trade_id,real_pay_fee,commission_rate,commission,create_time,pay_time,pay_price,num_iid,outer_code");
+    req.setFields("num_iid,trade_id,outer_code,real_pay_fee,commission_rate,commission,pay_price,item_num,create_time,pay_time");
     req.setDate(day);
     req.setPageSize(100l);
     var p:Long =1l
@@ -282,28 +306,25 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
       req.setPageNo(p);
       val report:TaobaokeReport = client.execute(req).getTaobaokeReport;
        if(report != null){
-         println("report is not null")
-         var str="";
          if(report.getTaobaokeReportMembers !=null){
-           println("report taobaoke report member is not null")
          for(item <- report.getTaobaokeReportMembers.asScala){
-           handleTaobaokeIncome(item)
+           handleTaobaokeIncome(item,day)
          }
          }else {
            flag=false
-           println("report taobaoke report member is null")
-
          }
          p+=1;
-       }else{
-         println("report is null")
        }
       }
   }
+  /* -1 表示 淘宝客返回的outer——code 为 null*/
+  private def handleTaobaokeIncome(item:TaobaokeReportMember,day:String)={
 
-  /* todo */
-  private def handleTaobaokeIncome(item:TaobaokeReportMember)={
+       val income = TaobaokeIncomeDao.findTaobaokeIncome(item.getTradeId)
+     if(income.isEmpty){
+       val outerCode = if(item.getOuterCode == null){ "-1"} else item.getOuterCode
+        TaobaokeIncomeDao.addTaobaokeIncome(TaobaokeIncome(None,item.getNumIid,item.getTradeId,outerCode,item.getRealPayFee,item.getCommissionRate,item.getCommission,item.getPayPrice,item.getItemNum,day,new Timestamp(item.getCreateTime.getTime),new Timestamp(item.getPayTime.getTime)))
+     }
 
-    println("handle success")
   }
 }

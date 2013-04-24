@@ -1270,14 +1270,16 @@ DROP TABLE IF EXISTS `taobaoke_income`;
 CREATE TABLE `taobaoke_income` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `num_iid`          bigint(10) ,
-  `outer_code`          varchar(32) ,
-  `trade_id`           int(10) NOT NULL ,
+  `trade_id`           bigint(10) NOT NULL ,
+  `outer_code`          varchar(32) default '0' ,
   `real_pay_fee`       varchar(16) ,
-  `commission_rate`    smallint(10) ,
-  `commission`          smallint(10) ,
-  `create_time`               timestamp,
-  `pay_time`                   timestamp,
+  `commission_rate`    varchar(16) ,
+  `commission`         varchar(16) ,
+  `pay_price`           varchar(16) ,
+  `item_num`            int(10) ,
   `day`          varchar(16) not null,
+  `create_time`         timestamp,
+  `pay_time`             timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
