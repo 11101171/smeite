@@ -18,8 +18,9 @@ case class UserRebate(
                      id: Option[Long],
                      uid: Long,
                      num:Int,
-                     userOrderId:Long,
-                     tradeId:Long,
+                     rebateType:Int,
+                     userOrderId:Option[Long],
+                     tradeId:Option[Long],
                      handleStatus:Int,
                      handleResult:String,
                      note:String,
@@ -31,6 +32,7 @@ object UserRebates extends Table[UserRebate]("user_rebate") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def num = column[Int]("num")
+  def rebateType = column[Int]("rebate_type")
   def userOrderId = column[Long]("user_order_id")
   def tradeId = column[Long]("trade_id")
   def handleStatus = column[Int]("handle_status")
@@ -38,7 +40,7 @@ object UserRebates extends Table[UserRebate]("user_rebate") {
   def note = column[String]("note")
   def withdrawTime = column[Timestamp]("withdraw_time")
   def handleTime = column[Timestamp]("handle_time")
-  def * = id.? ~ uid ~ num ~ userOrderId ~ tradeId ~ handleStatus ~ handleResult ~ note ~ withdrawTime.? ~  handleTime.? <> (UserRebate, UserRebate.unapply _)
-  def autoInc = id.? ~ uid ~ num ~ userOrderId ~ tradeId ~ handleStatus ~ handleResult ~ note ~ withdrawTime.? ~  handleTime.? <> (UserRebate, UserRebate.unapply _) returning id
+  def * = id.? ~ uid ~ num ~ rebateType ~ userOrderId.? ~ tradeId.? ~ handleStatus ~ handleResult ~ note ~ withdrawTime.? ~  handleTime.? <> (UserRebate, UserRebate.unapply _)
+  def autoInc = id.? ~ uid ~ num ~ rebateType ~ userOrderId.? ~ tradeId.? ~ handleStatus ~ handleResult ~ note ~ withdrawTime.? ~  handleTime.? <> (UserRebate, UserRebate.unapply _) returning id
 
 }

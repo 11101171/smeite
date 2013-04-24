@@ -1258,6 +1258,7 @@ CREATE TABLE `user_rebate` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `uid`                 int(10) ,
   `num`                 smallint(10) ,
+  `rebate_type`             tinyint(4) not null default '0',
   `user_order_id`           int(10) ,
   `trade_id`            bigint (10) ,
   `handle_result`      varchar(128),
