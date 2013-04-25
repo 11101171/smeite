@@ -656,7 +656,7 @@ define(function(require, exports) {
                 html +='<div class="gift_handle_result" id="J_giftHandleResult"> ';
 
                 html += '</div>';
-                html +='<div class="gift_giveup show"> ';
+                html +='<div class="gift_giveUp show" id="J_giftGiveUp"> ';
                 html +='<a>我放弃见面礼</a>';
                 html += '</div>';
                 html += '</div>';
@@ -674,6 +674,7 @@ define(function(require, exports) {
                     closeOnClick: false,
                     load: true
                 });
+                var prize=0;
                 $("#J_start").click(function(){
                     $this = $(this);
                     $this.html("抽奖中……")
@@ -683,18 +684,48 @@ define(function(require, exports) {
                     setTimeout(function() {
                             var leftValue = 1 + Math.floor(Math.random() * 2);
                             var rightValue = 1 + Math.floor(Math.random() * 3);
-                            var prize =leftValue*10+rightValue
+                             prize =leftValue*10+rightValue
                             $('#J_leftValue').text(leftValue);
                             $('#J_rightValue').text(rightValue);
                             $(".show").show()
                             $(".hide").hide()
                             $("#J_giftHandle").html('<span >抽奖结束</span>')
-                            var msg ="恭喜您获得<strong class='rc'>"+prize+"</strong>个集分宝，去完善<a href='/user/account/payment'>支付宝</a>信息吧，立马"
+                            var msg ="恭喜您获得<strong class='rc'>"+prize+"</strong>个集分宝，去完善<span class='rc'  id='J_gotoPayment'>支付宝</span>信息吧，马上就会打入支付宝中哦"
                             $("#J_giftHandleResult").html(msg)
                         },
                         2500)
 
                 });
+                 $("#J_giftGiveUp").click(function(){
+                     $.ajax({
+                         url: "/user/giveUpGift",
+                         type : "post",
+                         success: function(data){
+                             if(data.code=="100"){
+                                 Cookie.set("newGift",'close')
+                           //      window.location.reload();
+                             }
+                         }
+                     });
+                     $("#J_newGiftDialog").overlay().close()
+                 })
+
+                $("#J_gotoPayment").live("click",function(){
+
+                    $.ajax({
+                        url: "/user/giveGift",
+                        type : "post",
+                        contentType:"application/json; charset=utf-8",
+                        dataType: "json",
+                        data: JSON.stringify({num:prize}),
+                        success: function(data){
+                            if(data.code=="100"){
+                                Cookie.set("newGift",'close')
+                               window.location="/user/account/payment";
+                            }
+                        }
+                    });
+                })
 
                 $("#J_newGiftDialog").overlay().getClosers().bind("click",function(){
                     Cookie.set("newGift",'close')

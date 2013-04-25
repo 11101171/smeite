@@ -42,5 +42,6 @@ object UserRebates extends Table[UserRebate]("user_rebate") {
   def handleTime = column[Timestamp]("handle_time")
   def * = id.? ~ uid ~ num ~ rebateType ~ userOrderId.? ~ tradeId.? ~ handleStatus ~ handleResult ~ note ~ withdrawTime.? ~  handleTime.? <> (UserRebate, UserRebate.unapply _)
   def autoInc = id.? ~ uid ~ num ~ rebateType ~ userOrderId.? ~ tradeId.? ~ handleStatus ~ handleResult ~ note ~ withdrawTime.? ~  handleTime.? <> (UserRebate, UserRebate.unapply _) returning id
-
+  def  autoInc2 = uid ~ num ~ rebateType ~ withdrawTime   returning id
+  def autoInc3 = uid ~ num ~ rebateType ~ userOrderId ~ tradeId ~ withdrawTime returning id
 }

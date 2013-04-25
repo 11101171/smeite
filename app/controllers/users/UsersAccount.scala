@@ -10,7 +10,7 @@ import net.coobird.thumbnailator.Thumbnails
 import java.net.URL
 import play.api.libs.json.Json
 import models.user.User
-import  models.user.dao.UserDao
+import models.user.dao.{UserSQLDao, UserDao}
 import play.api.Play.current
 import utils.Utils
 
@@ -72,7 +72,8 @@ object UsersAccount  extends Controller {
   val alipayForm = Form (
   tuple(
     "alipay" ->optional(text),
-    "phone" ->optional(text)
+    "phone" ->optional(text),
+    "weixin" ->optional(text)
   )
   )
 
@@ -134,7 +135,7 @@ object UsersAccount  extends Controller {
    if(user.isEmpty)  Redirect(controllers.users.routes.UsersRegLogin.login)
    else {
      val profile =UserDao.findProfile(user.get.id.get)
-     Ok(views.html.users.account.payment(user,alipayForm.fill((profile.alipay,profile.phone))))
+     Ok(views.html.users.account.payment(user,alipayForm.fill((profile.alipay,profile.phone,profile.weixin))))
    }
   }
   /* 修改支付宝 */
@@ -143,12 +144,12 @@ object UsersAccount  extends Controller {
     else {
       alipayForm.bindFromRequest.fold(
         formWithErrors => {
-          val profile =UserDao.findProfile(user.get.id.get)
-          BadRequest(views.html.users.account.payment(user,formWithErrors.fill((profile.alipay,profile.phone))))
+
+          BadRequest(views.html.users.account.payment(user,formWithErrors))
         } ,
         fields =>{
-          UserDao.modifyAlipay(user.get.id.get,fields._1.getOrElse(""),fields._2.getOrElse(""))
-          Ok(views.html.users.account.payment(user,alipayForm.fill(fields._1,fields._2),"支付宝账号保存成功"))
+          UserDao.modifyAlipay(user.get.id.get,fields._1.getOrElse(""),fields._2.getOrElse(""),fields._3.getOrElse(""))
+          Ok(views.html.users.account.payment(user,alipayForm.fill(fields._1,fields._2,fields._3),"支付宝账号保存成功"))
 
         }
       )
@@ -181,8 +182,27 @@ object UsersAccount  extends Controller {
       )
     }
   }
-
-
-
+ /* 用户放弃 新人有礼 */
+ def giveUpGift = Users.UserAction {   user => implicit request =>
+   if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)
+   else {
+     UserDao.modifyStatus(user.get.id.get,1)
+     Ok(Json.obj("code" -> "100","message" -> "成功" ))
+   }
+ }
+ /* 用户获得 新人有礼 */
+  def giveGift = Action(parse.json) {  implicit request =>
+   val user:Option[User] =request.session.get("user").map(u=> UserDao.findById(u.toLong) )
+   if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)
+   else {
+     val num = (request.body \ "num").as[Int]
+  //   println("num " +num)
+     UserSQLDao.updateCredits(user.get.id.get,num)
+     UserSQLDao.updateWithdrawCredits(user.get.id.get,num)
+     UserDao.addUserRebate(user.get.id.get,num,1)
+     UserDao.modifyStatus(user.get.id.get,1)
+     Ok(Json.obj("code" -> "100","message" -> "成功" ))
+   }
+ }
 
 }

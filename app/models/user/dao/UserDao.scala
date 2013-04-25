@@ -107,10 +107,10 @@ object UserDao {
     (for(c<-UserProfiles if c.uid === uid) yield c.receiver~c.province~c.city~c.street~c.postCode~c.phone~c.alipay).update((receiver,province,city,street,postCode,phone,alipay))
   }
   /* 修改 支付宝账号,用户的状态 status 从新用户 变成 正常用户 */
-  def modifyAlipay(uid:Long,alipay:String,phone:String)= database.withSession{  implicit session:Session =>
+  def modifyAlipay(uid:Long,alipay:String,phone:String,weixin:String)= database.withSession{  implicit session:Session =>
     Cache.remove("user_"+uid)
     (for(c<-Users if c.id === uid ) yield c.status).update(1)
-    (for(c<-UserProfiles if c.uid === uid) yield c.alipay ~c.phone).update(alipay,phone)
+    (for(c<-UserProfiles if c.uid === uid) yield c.alipay ~ c.phone ~ c.weixin).update(alipay,phone,weixin)
   }
   /*修改user pic*/
   def modifyPic(uid:Long,pic:String)= database.withSession{  implicit session:Session =>
@@ -643,8 +643,12 @@ object UserDao {
      }yield (u,up,ue)).first()
   }
   def modifyUserExchangeShiDou(id:Long,handleStatus:Int,handleResult:String,note:String) = database.withSession {  implicit session:Session =>
-
     (for( c <- UserExchangeShiDous if c.id === id ) yield c.handleStatus ~ c.handleResult ~ c.note).update((handleStatus,handleResult,note))
   }
 
+
+  /* add user rebate */
+   def addUserRebate(uid:Long,num:Int,rebateType:Int) = database.withSession {  implicit session:Session =>
+    UserRebates.autoInc2.insert(uid,num,1,new Timestamp(System.currentTimeMillis()))
+  }
 }

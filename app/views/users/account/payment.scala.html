@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],alipayForm:Form[(Option[String],Option[String])],msg:String ="")
+@(user:Option[models.user.User],alipayForm:Form[(Option[String],Option[String],Option[String])],msg:String ="")
 @views.html.template(
 user
 )(css="/assets/css/template/user.setting.css") {
@@ -31,12 +31,17 @@ user
                                  <div class="form-row">
                                      <label><span class="rc">*</span>支付宝账号：</label>
                                      <input type="text" class="base-input" name="alipay" id="alipay" value='@alipayForm("alipay").value'>
-                                   <!--  <span class="ml10 yc">请确保支付宝账号的正确性，否则无法成功返利</span>-->
+
                                  </div>
                                  <div class="form-row">
                                      <label><span class="rc">*</span>手机号：</label>
                                      <input type="text" class="base-input" name="phone" id="phone" value='@alipayForm("phone").value'>
-                                 <!--    <span class="ml10 yc">请确保手机号的正确性，否则返利成功后，无法提醒您</span>-->
+
+                                 </div>
+                                 <div class="form-row">
+                                     <label><span class="rc">*</span>QQ号：</label>
+                                     <input type="text" class="base-input" name="weixin" id="weixin" value='@alipayForm("weixin").value'>
+
                                  </div>
                                  <div class="form-row">
                                      <label>&nbsp;</label>
@@ -49,8 +54,8 @@ user
                          <div class="help">
                              <div class="help-title">小提示</div>
                              <ul>
-                                 <li>为了确保您能够获得返利，必须填写您的支付宝账号，并确保账号的正确性</li>
-                                 <li>请确保手机号的正确性，否则返利成功后，无法提醒您</li>
+                                 <li>为了确保您能够获得返利，必须填写您的支付宝账号，并确保您的支付宝账号是正确的哦</li>
+                                 <li>为了提醒您收到集分宝，请您填写手机号和QQ号，我们将竭诚为您提供最好的服务。</li>
 
                              </ul>
                          </div>

@@ -57,6 +57,9 @@ object UserSQLDao {
   def updateCredits(uid:Long,num:Int)=database.withSession{
     sqlu"update user set credits = credits+$num where id =$uid".first
   }
+  def updateWithdrawCredits(uid:Long,num:Int)=database.withSession{
+    sqlu"update user set withdraw_credits = withdraw_credits+$num where id =$uid".first
+  }
   def updateShiDou(uid:Long,num:Int)=database.withSession{
     sqlu"update user set shi_dou = shi_dou+$num where id =$uid".first
   }

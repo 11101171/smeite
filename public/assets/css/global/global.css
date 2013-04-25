@@ -39,7 +39,7 @@ ul, ol, li {
 
 a {
     text-decoration: none;
-    color: #ccc;
+    color: #555;
 }
 a:hover{
     color: #ff7f00;
@@ -954,7 +954,7 @@ input:-moz-placeholder { font-size:12px; }
 #J_newGiftDialog .show{
     display:block;
 }
-#J_newGiftDialog .gift_giveup{
+#J_newGiftDialog .gift_giveUp{
     float: right;
 }
 #J_newGiftDialog a{

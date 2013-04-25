@@ -68,6 +68,8 @@ GET   /user/account/address           controllers.users.UsersAccount.address
 POST  /user/account/saveAddr          controllers.users.UsersAccount.saveAddress
 GET   /user/account/payment            controllers.users.UsersAccount.payment
 POST  /user/account/modifyPayment      controllers.users.UsersAccount.modifyPayment
+POST  /user/giveUpGift                 controllers.users.UsersAccount.giveUpGift
+POST  /user/giveGift                   controllers.users.UsersAccount.giveGift
 #user 用户返利
 GET   /user/account/myCredits           controllers.users.UsersCommission.myCredits
 GET   /user/account/myShiDou          controllers.users.UsersCommission.myShiDou

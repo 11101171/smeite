@@ -11,6 +11,6 @@ package models.user
 
 object RebateType extends Enumeration {
   val BuyRebate = Value("购物返利");
-  val giftRebate = Value("食美特赠送")
+  val giftRebate = Value("新人见面礼")
 
 }
