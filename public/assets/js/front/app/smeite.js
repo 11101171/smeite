@@ -651,7 +651,7 @@ define(function(require, exports) {
                 html += '</div>';
 
                 html +='<div class="gift_handle"> ';
-                html += '<i></i><span>开始抽奖</span>';
+                html += '<span id="J_start">开始抽奖</span>';
                 html += '</div>';
                 html +='<div class="gift_giveup show"> ';
                 html +='<a>我放弃见面礼</a>';
