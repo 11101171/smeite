@@ -122,10 +122,10 @@ define(function(require, exports) {
 	vali.fn("input[name=phone]", "请输入正确的手机号码", "error", function(el, v) {
 		return /^0?(13[0-9]|15[012356789]|18[0236789]|14[57])[0-9]{8}$/.test(v);
 	});
-	vali.fn("input[name=phone]", "手机号码不能为空，否则返利成功后，无法提醒您", "require", function(el, v) {
+	/*vali.fn("input[name=phone]", "手机号码不能为空，否则返利成功后，无法提醒您", "require", function(el, v) {
 		return v.length == 0 ? false : true;
-	});
-	vali.fn("input[name=phone]", "请填写11位手机号码", "info");
+	});*/
+	vali.fn("input[name=phone]", "请填写11位手机号码,否则返利成功后，无法提醒您", "info");
 	vali.fn("input[name=alipay]", "请输入正确的支付宝账号", "error", function(el, v) {
 		return $.smeite.util.isEmail(v)||/^(13[0-9]|15[012356789]|18[0236789]|14[57])[0-9]{8}$/.test(v);
 	});

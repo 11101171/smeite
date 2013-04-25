@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],baseForm:Form[(String,Int,String,String,String,String,String,String,String,String)],msg:String ="")
+@(user:Option[models.user.User],baseForm:Form[controllers.users.BaseFormData],msg:String ="")
 @views.html.template(
 user
 )(css="/assets/css/template/user.setting.css") {
@@ -27,12 +27,11 @@ user
                     <div class="error-row"><p></p></div>
                     <div class="form-row">
                         <label><span class="rc">*</span>昵称：</label>
-                        <span class="theemail yc">@user.get.name</span>
-                        <input type="hidden" class="base-input" name="nickname" id="nickname" value="@user.get.name" >
+                        <input type="text" class="base-input" name="nickname" id="nickname" value='@baseForm("nickname").value' >
                     </div>
                     <div class="form-row">
                         <label>邮箱：</label>
-                        <span class="theemail yc">@user.get.email.getOrElse("")</span>
+                        <input type="email" class="base-input" name="email" id="email" value='@baseForm("email").value' >
                     </div>
                     <div class="form-row clearfix">
                         <label>性别：</label>
@@ -49,11 +48,7 @@ user
                         <select id="J_Month" name="month"></select>
                         <select id="J_Day" name="day"></select>
                     </div>
-                    <div class="form-row">
-                        <label>所在地：</label>
-                        <select id="J_Province" name="province"></select>
-                        <select id="J_City" name="city"></select>
-                    </div>
+
 
                     <div class="form-row">
                         <label>个人博客：</label>
@@ -87,9 +82,7 @@ user
 
 }{
 <script type="text/javascript">
-    var address = '@baseForm("province").value|@baseForm("city").value';
     var brithday = '@baseForm("year").value';
-
     seajs.use("app/init",function(init){
         init.load("app/user/user.baseSetting");
     });

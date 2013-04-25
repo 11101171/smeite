@@ -23,7 +23,17 @@ import utils.Utils
  * ***********************
  * description:用于类的说明
  */
-
+case  class BaseFormData(
+                              nickName:String,
+                              email:Option[String],
+                              sex:Int,
+                              year:Option[String],
+                              month:Option[String],
+                              day:Option[String],
+                              blog:Option[String],
+                              weixin:Option[String],
+                              intro:Option[String]
+                              )
 object UsersAccount  extends Controller {
 
   val passwdForm = Form(
@@ -46,18 +56,17 @@ object UsersAccount  extends Controller {
   )
 
   val baseForm =Form(
-  tuple(
-    "nickname"-> nonEmptyText,
+  mapping(
+    "nickname"-> text,
+    "email"->optional(text),
     "sex" -> number,
-    "year"->text,
-    "month"->text,
-    "day"->text,
-    "province" -> text,
-    "city"->text,
-   "blog"->text,
-  "weixin"->text,
-  "intro" ->text
-  )
+    "year"->optional(text),
+    "month"->optional(text),
+    "day"->optional(text),
+   "blog"->optional(text),
+  "weixin"->optional(text),
+  "intro" ->optional(text)
+  )(BaseFormData.apply)(BaseFormData.unapply)
   )
 
   val alipayForm = Form (
@@ -75,7 +84,7 @@ object UsersAccount  extends Controller {
     if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)
      else {
       val profile =UserDao.findProfile(user.get.id.get)
-      Ok(views.html.users.account.base(user,baseForm.fill((user.get.name,profile.gender,profile.birth.getOrElse(""),"","",profile.province.getOrElse(""),profile.city.getOrElse(""),profile.blog.getOrElse(""),profile.weixin.getOrElse(""),profile.intro.getOrElse("")))))
+      Ok(views.html.users.account.base(user,baseForm.fill(BaseFormData(user.get.name,user.get.email,profile.gender,profile.birth,None,None,profile.blog,profile.weixin,profile.intro))))
     }
 
   }
@@ -85,14 +94,11 @@ object UsersAccount  extends Controller {
     else {
       baseForm.bindFromRequest.fold(
         formWithErrors => BadRequest(views.html.users.account.base(user,formWithErrors)) ,
-      fields =>{
-        val birth:String=fields._3+"|"+fields._4+"|"+fields._5 
-        UserDao.modifyBase(user.get.id.get,fields._1,fields._10,fields._2,birth,fields._6,fields._7,fields._8,fields._9)
-        /*处理缓存*/
-        Cache.remove(session.get("user").get)
-        var u:User=UserDao.findById(user.get.id.get)
-        Cache.set(u.id.get.toString,u);
-        Ok(views.html.users.account.base(Some(u),baseForm.fill((fields._1,fields._2,fields._3,fields._4,fields._5,fields._6,fields._7,fields._8,fields._9,fields._10)),"基本资料保存成功"))
+      data =>{
+        /*uid:Long,name:String,intro:String,email:String,gender:Int, birth:String, province:String, city:String, blog:String, weixin:String*/
+        val birth:String=data.year.getOrElse("")+"|"+data.month.getOrElse("")+"|"+data.day.getOrElse("")
+        UserDao.modifyBase(user.get.id.get,data.nickName,data.email.getOrElse(""),data.intro.getOrElse(""),data.sex,birth,data.blog.getOrElse(""),data.weixin.getOrElse(""))
+        Ok(views.html.users.account.base(user,baseForm.fill(data),"基本资料保存成功"))
       }
       )
       
