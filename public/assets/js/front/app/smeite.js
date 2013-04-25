@@ -619,14 +619,87 @@ define(function(require, exports) {
         },
 
         isNew:function(){
-            if(SMEITER.status == "0"){
-                $.smeite.dialog.newGift();
+            if(SMEITER.status == "0" && SMEITER.userId !=""){
+                if("close"!=Cookie.get("newGift")){
+                    $.smeite.dialog.newGift();
+                }
+
                 return false;
             }
             return true;
         },
         newGift:function(){
-             alert("helloxxxxx")
+            if(!$("#J_newGiftDialog")[0]){
+                var html = "";
+                html += '<div id="J_newGiftDialog" class="g-dialog">';
+                html += '<div class="dialog-content">';
+                html += '<div class="hd"><h3>新人见面礼</h3></div>';
+                html += '<div class="bd clearfix">';
+
+
+                html += '<p class="fs14">';
+                html +='亲，作为食美特的新人，来玩个“见面礼”小游戏吧，您将获得<strong class="rc">1-99</strong>个不等的集分宝，抽得的集分宝会马上打到您的支付宝账号哦！'
+               html +='</p>';
+               html +='<div class="gift"> ';
+                         //  这里是抽奖区域
+                html +='<div class="gift_area">';
+                html +='<div class="gift_bg show"><img src="/assets/ui/new_gift.png"> </div>';
+                html +='<div class="gift_roll hide"><img src="/assets/ui/new_gift_roll.gif"> </div>';
+                html +='<div class="gift_left_value show"> 0 </div>';
+                html +='<div class="gift_right_value show"> 0 </div>';
+                html += '</div>';
+                html += '</div>';
+
+                html +='<div class="gift_handle"> ';
+                html += '<i></i><span>开始抽奖</span>';
+                html += '</div>';
+                html +='<div class="gift_giveup show"> ';
+                html +='<a>我放弃见面礼</a>';
+                html += '</div>';
+                html += '</div>';
+                html += '<a class="close" href="javascript:;"></a>';
+                html += '</div>';
+                html += '</div>';
+                $("body").append(html);
+                $("#J_newGiftDialog").overlay({
+                    top: 'center',
+                    mask: {
+                        color: '#000',
+                        loadSpeed: 200,
+                        opacity: 0.3
+                    },
+                    closeOnClick: false,
+                    load: true
+                });
+                $("#J_LoginDForm").submit(function(){
+                    $this = $(this);
+                    $.post($this.attr("action"),$this.serializeArray(),function(data){
+                        if(data.code==100){
+                            $("#loginDialog").overlay().close();
+                            //SMEITER.userId = data.userId;
+                            window.location.reload();
+                        }else if(data.code==101){
+                            $("#loginDialog").find(".error-row").fadeIn();
+                            $("#loginDialog").find(".error").html(data.message);
+                            $("#loginDialog input[name=password]").val("");
+                        }
+                    });
+                    return false;
+                });
+                $(".snslogin a").unbind("click").click(function(){
+                    var snsurl = $(this).attr("href");
+                    $.smeite.util.openWin(snsurl);
+
+                    return false;
+                });
+                $("#J_newGiftDialog").overlay().getClosers().bind("click",function(){
+
+                    Cookie.set("newGift",'close')
+
+                });
+            }else{
+                $("#J_newGiftDialog").data("overlay").load();
+            }
         }
 
     }
@@ -1626,6 +1699,7 @@ define(function(require, exports) {
 
     /* 初始化加载中的内容*/
     $(function(){
+        $.smeite.dialog.isNew()
         // 判断reffer来源,默认是 qq
         var refererUrl=document.referrer
         var referer="smeite"
