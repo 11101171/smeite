@@ -39,9 +39,12 @@ ul, ol, li {
 
 a {
     text-decoration: none;
-    color: #333;
+    color: #ccc;
 }
-
+a:hover{
+    color: #ff7f00;
+    text-decoration: underline;
+}
 
 .black:link, .black:visited {
     color: #333
@@ -954,7 +957,13 @@ input:-moz-placeholder { font-size:12px; }
 #J_newGiftDialog .gift_giveup{
     float: right;
 }
-
+#J_newGiftDialog a{
+    color:#E26;
+}
+#J_newGiftDialog a:hover{
+    color: #ff7f00;
+    text-decoration: underline;
+}
 #J_newGiftDialog .gift_handle { position:relative;margin:50px auto 10px;padding:0 15px 0 40px;width:65px;height:36px;line-height:36px;outline:none;color:#fff;text-align:left;background:#ee2266 url(images/like-btn.png) no-repeat right -45px;-moz-box-shadow:0 0 0 4px rgba(255, 161, 13, 0.6);-webkit-box-shadow:0 0 0 4px rgba(255, 161, 13, 0.6);box-shadow:0 0 0 4px rgba(255, 161, 13, 0.6);-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px; }
 #J_newGiftDialog .gift_handle:hover { background-position:right -140px;text-decoration:none; }
 #J_newGiftDialog .gift_handle:active { background-position:right -240px;text-decoration:none; }
@@ -962,6 +971,10 @@ input:-moz-placeholder { font-size:12px; }
 #J_newGiftDialog .gift_handle:hover i { background-position:0 -92px; }
 #J_newGiftDialog .gift_handle:active i { background-position:0 -191px; }
 
+#J_newGiftDialog .gift_handle_result{
+    margin: 20px auto;
+    font-size: 14px;
+}
 
 /* 第三方登录设置基本信息浮层 */
 .set-box { width:360px;margin:0 auto; }

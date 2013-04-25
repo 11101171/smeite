@@ -645,13 +645,16 @@ define(function(require, exports) {
                 html +='<div class="gift_area">';
                 html +='<div class="gift_bg show"><img src="/assets/ui/new_gift.png"> </div>';
                 html +='<div class="gift_roll hide"><img src="/assets/ui/new_gift_roll.gif"> </div>';
-                html +='<div class="gift_left_value show"> 0 </div>';
-                html +='<div class="gift_right_value show"> 0 </div>';
+                html +='<div class="gift_left_value show" id="J_leftValue"> 0 </div>';
+                html +='<div class="gift_right_value show" id="J_rightValue"> 0 </div>';
                 html += '</div>';
                 html += '</div>';
 
-                html +='<div class="gift_handle"> ';
+                html +='<div class="gift_handle" id="J_giftHandle"> ';
                 html += '<span id="J_start">开始抽奖</span>';
+                html += '</div>';
+                html +='<div class="gift_handle_result" id="J_giftHandleResult"> ';
+
                 html += '</div>';
                 html +='<div class="gift_giveup show"> ';
                 html +='<a>我放弃见面礼</a>';
@@ -666,36 +669,35 @@ define(function(require, exports) {
                     mask: {
                         color: '#000',
                         loadSpeed: 200,
-                        opacity: 0.3
+                        opacity: 0.7
                     },
                     closeOnClick: false,
                     load: true
                 });
-                $("#J_LoginDForm").submit(function(){
+                $("#J_start").click(function(){
                     $this = $(this);
-                    $.post($this.attr("action"),$this.serializeArray(),function(data){
-                        if(data.code==100){
-                            $("#loginDialog").overlay().close();
-                            //SMEITER.userId = data.userId;
-                            window.location.reload();
-                        }else if(data.code==101){
-                            $("#loginDialog").find(".error-row").fadeIn();
-                            $("#loginDialog").find(".error").html(data.message);
-                            $("#loginDialog input[name=password]").val("");
-                        }
-                    });
-                    return false;
-                });
-                $(".snslogin a").unbind("click").click(function(){
-                    var snsurl = $(this).attr("href");
-                    $.smeite.util.openWin(snsurl);
+                    $this.html("抽奖中……")
+                    $(".show").hide()
+                    $(".hide").show()
 
-                    return false;
+                    setTimeout(function() {
+                            var leftValue = 1 + Math.floor(Math.random() * 2);
+                            var rightValue = 1 + Math.floor(Math.random() * 3);
+                            var prize =leftValue*10+rightValue
+                            $('#J_leftValue').text(leftValue);
+                            $('#J_rightValue').text(rightValue);
+                            $(".show").show()
+                            $(".hide").hide()
+                            $("#J_giftHandle").html('<span >抽奖结束</span>')
+                            var msg ="恭喜您获得<strong class='rc'>"+prize+"</strong>个集分宝，去完善<a href='/user/account/payment'>支付宝</a>信息吧，立马"
+                            $("#J_giftHandleResult").html(msg)
+                        },
+                        2500)
+
                 });
+
                 $("#J_newGiftDialog").overlay().getClosers().bind("click",function(){
-
                     Cookie.set("newGift",'close')
-
                 });
             }else{
                 $("#J_newGiftDialog").data("overlay").load();
