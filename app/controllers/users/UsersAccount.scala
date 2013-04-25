@@ -198,7 +198,6 @@ object UsersAccount  extends Controller {
      val num = (request.body \ "num").as[Int]
   //   println("num " +num)
      UserSQLDao.updateCredits(user.get.id.get,num)
-     UserSQLDao.updateWithdrawCredits(user.get.id.get,num)
      UserDao.addUserRebate(user.get.id.get,num,1)
      UserDao.modifyStatus(user.get.id.get,1)
      Ok(Json.obj("code" -> "100","message" -> "成功" ))
