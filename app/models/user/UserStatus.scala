@@ -10,9 +10,9 @@ package models.user
  */
 
 object UserStatus extends Enumeration {
-  val NOPASS = Value("noPass");
-  val NORMAL = Value("normal")
-  val ACTIVE =Value("active")
+  val  NEWMAN   = Value("newMan")
+  val  NORMAL   = Value("Normal")
+  val ACTIVE  = Value("active")
   val DAREN = Value("daren")
   val BLACK = Value("black")
 }

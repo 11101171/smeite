@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],email:String,gotoEmail:String)
+@(user:Option[models.user.User])
 @views.html.template(
 user,
 title =  "食美特，爱美食爱生活——用户注册"
@@ -8,26 +8,14 @@ title =  "食美特，爱美食爱生活——用户注册"
         <div class="content">
             <div class="error-row-l"><p class="error"></p></div>
             <div class="confirm-box">
-              <!--  <h3>验证邮件已发送到你的邮箱：@email</h3>-->
+
                 <div class="confirm">
                     <p class="pt20 pb20 clearfix">
                         非常感谢您注册食美特会员，我们竭诚为您服务。去<a href="/">首页</a>逛逛吧
                     </p>
-                    <!-- <p>
-                        点击邮件里的确认链接完成验证
-                    </p>
-                    <p class="pt20 pb20 clearfix">
-                        <a class="bbl-btn" href="@gotoEmail" target="_blank">查看邮箱</a>
-                    </p>-->
+
                 </div>
-              <!--  <div class="problem">
-                    <p>没有收到验证邮件？</p>
-                    <ol class="gc6">
-                        <li>1. 到广告邮件、垃圾邮件目录里找找看</li>
-                        <li>2. 真没收到？<a id="J_ResendEmail" href="/user/reSendEmail?email=@email">重新发送验证邮件</a></li>
-                        <li>3. 不小心填错了Email？<a href="/user/regist">请更换邮箱</a></li>
-                    </ol>
-                </div>-->
+
             </div>
         </div>
     </div>

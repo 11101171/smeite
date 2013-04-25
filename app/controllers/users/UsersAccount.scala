@@ -74,12 +74,8 @@ object UsersAccount  extends Controller {
   def base = Users.UserAction {user => implicit request =>
     if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)
      else {
-      if(user.get.email.isEmpty){
-        Redirect(controllers.users.routes.UsersRegLogin.before())
-      }else {
       val profile =UserDao.findProfile(user.get.id.get)
       Ok(views.html.users.account.base(user,baseForm.fill((user.get.name,profile.gender,profile.birth.getOrElse(""),"","",profile.province.getOrElse(""),profile.city.getOrElse(""),profile.blog.getOrElse(""),profile.weixin.getOrElse(""),profile.intro.getOrElse("")))))
-    }
     }
 
   }

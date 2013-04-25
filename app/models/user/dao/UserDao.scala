@@ -92,10 +92,9 @@ object UserDao {
   /*用户通过网站注册 * */
   def addSmeiteUser(name:String, passwd:String, email:String,inviteId:Long,ip:String)=database.withSession{ implicit  session:Session =>
     val id = Users.autoInc2.insert(name,Codecs.sha1("smeite"+passwd),email)
-    /* 添加积分 */
-  //  UserSQLDao.updateCredits(id,ShiDouConfig.regCredits)
     UserStatics.autoInc.insert(id)
     UserProfiles.autoInc.insert(id,inviteId,new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis()),ip)
+    id
   }
   /*修改密码*/
   def modifyPasswd(uid:Long, passwd:String) =database.withSession{ implicit  session:Session =>

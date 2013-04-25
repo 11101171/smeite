@@ -96,34 +96,23 @@ object UsersRegLogin extends Controller {
      if(user.isEmpty) Ok(views.html.users.regLogin.regist(regForm,inviteId))
      else Redirect(controllers.users.routes.Users.home(user.get.id.get))
   }
-  /*用户注册页面 邮箱已发送*/
+  /*用户注册 信息*/
   def doRegist=Action{  implicit request =>
     regForm.bindFromRequest.fold(
       formWithErrors => BadRequest(views.html.users.regLogin.regist(formWithErrors,0)),
       user =>{
         /*发送邮件 ,邮件激活后，改变user的status todo */
         /* xxx */
-        val email =user._1;
-        val password =user._2;
-        val inviteId=user._3;
-        val name =email.split("@").head;
-        val gotoEmail:String=email.split("@").last match {
-          case  "gmail.com" => "http://mail.google.com"
-          case  _ =>"http://mail."+email.split("@").last
-        }
-     //   User.insertUser(name,email,user._2);
-      UserDao.addSmeiteUser(name,password,email,inviteId,request.remoteAddress)
+        val email =user._1
+        val password =user._2
+        val inviteId=user._3
+        val name =email.split("@").head
+     val id= UserDao.addSmeiteUser(name,password,email,inviteId,request.remoteAddress)
         val u=UserDao.authenticate(email,password);
         Cache.set(u.get.id.get.toString,u);
-        Ok(views.html.users.regLogin.doRegist(u,email,gotoEmail)).withSession("user" -> u.get.id.get.toString) }
+        Ok(views.html.users.regLogin.doRegist(u)).withSession("user" -> u.get.id.get.toString) }
     )
   }
-
-  /*重新发送验证邮件*/
-  def reSendEmail=Action {  implicit  request =>
-    Ok("todo")
-  }
-
 
    /*检查email 是否存在*/
   def checkEmailExist =Action(parse.json) { implicit  request =>
@@ -134,28 +123,7 @@ object UsersRegLogin extends Controller {
   }
 
 
-  /* user account 开放账号登录后，需要注册一个邮箱 才能修改其他账号信息 */
-  def before = Users.UserAction { user => implicit request =>
-    if(user.isEmpty)  Redirect(controllers.users.routes.UsersRegLogin.login)
-    else   Ok(views.html.users.regLogin.before(user,verifyEmailForm))
 
-  }
 
-  /* sns 修改帐号信息 先要验证邮箱 */
-    def doVerifyEmail =Users.UserAction{   user => implicit request =>
-    verifyEmailForm.bindFromRequest.fold(
-      formWithErrors =>  BadRequest(views.html.users.regLogin.before(user,formWithErrors)),
-      fields =>{
-         UserDao.modifyEmail(fields._1,fields._2);
-        val email =fields._2;
-        val gotoEmail:String=email.split("@").last match {
-          case  "gmail.com" => "http://mail.google.com"
-          case  _ =>"http://mail."+email.split("@").last
-        }
-        Ok(views.html.users.regLogin.doVerifyEmail(user,email,gotoEmail))
-      }
-    )
-
-  }
 
 }

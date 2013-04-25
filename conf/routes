@@ -82,10 +82,8 @@ POST   /user/dialogEmailLogin             controllers.users.UsersRegLogin.dialog
 GET   /user/regist                    controllers.users.UsersRegLogin.regist(i:Long ?=0)
 POST  /user/doRegist                    controllers.users.UsersRegLogin.doRegist
 GET   /user/resetPasswd              controllers.users.UsersRegLogin.resetPasswd
-GET   /user/reSendEmail              controllers.users.UsersRegLogin.reSendEmail
 POST  /user/checkEmailExist          controllers.users.UsersRegLogin.checkEmailExist
-GET   /user/account/before          controllers.users.UsersRegLogin.before
-POST  /user/doVerifyEmail           controllers.users.UsersRegLogin.doVerifyEmail
+
 #user sns 第三方登录注册
 GET   /user/snsLogin                 controllers.users.UsersSnsLogin.snsLogin(snsType:String,backType:String ?="syn",i:Long ?=0)
 GET   /user/:snsType/registered/:backType/:i    controllers.users.UsersSnsLogin.registered(snsType:String,code:String,backType:String,i:Long)
