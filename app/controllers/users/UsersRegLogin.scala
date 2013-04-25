@@ -60,7 +60,6 @@ object UsersRegLogin extends Controller {
         Cache.set(u.id.get.toString,u);
         /*记录登陆信息*/
         UserSQLDao.loginRecord(u.id.get,request.remoteAddress,1)
-
         Redirect(controllers.users.routes.Users.home(u.id.get)).withSession("user" -> u.id.get.toString) }
     )
 
@@ -72,7 +71,6 @@ object UsersRegLogin extends Controller {
   }
 
   /*用户overlay dialog email 登陆*/
-
   def dialogEmailLogin= Action{ implicit request =>
     loginForm.bindFromRequest.fold(
       formWithErrors => Ok(Json.obj("code" -> "101", "message" -> "密码或者email错误……")),

@@ -537,6 +537,7 @@ define(function(require, exports) {
                 $("#loginDialog").data("overlay").load();
             }
         },
+        /* 返利登陆*/
         login2: function(numIid,goodsId,rate){
             if(!$("#loginDialog")[0]){
                 var html = "";
@@ -615,8 +616,18 @@ define(function(require, exports) {
             }else{
                 $("#loginDialog").data("overlay").load();
             }
-        }
+        },
 
+        isNew:function(){
+            if(SMEITER.status == "0"){
+                $.smeite.dialog.newGift();
+                return false;
+            }
+            return true;
+        },
+        newGift:function(){
+             alert("helloxxxxx")
+        }
 
     }
 

@@ -73,9 +73,7 @@ object UsersAccount  extends Controller {
   tuple(
     "alipay" ->optional(text),
     "phone" ->optional(text)
-
   )
-
   )
 
 
@@ -104,8 +102,6 @@ object UsersAccount  extends Controller {
       
     }
   }
-
-
 
   /* user account 用户账户 修改密码 */
   def passwd = Users.UserAction { user => implicit request =>
