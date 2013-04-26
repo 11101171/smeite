@@ -37,26 +37,8 @@ define(function(require, exports){
             $(this).addClass("cur")
         }
     });
-    $(".scrollable").scrollable({circular:!1,
-        prev:".thumb-nav-prev", next:".thumb-nav-next", disabledClass:"disable"});
-    /*product tag*/
-    $(".product-tab a").click(function () {
-        var $this = $(this), b = $this.parent("li"), a = $this.data("index");
-        if (b.hasClass("active"))return!1;
-        $(".product-tab li.active").removeClass("active");
-        b.addClass("active");
-        switch (a) {
-            case 0:
-                $(".pic-list, #product-discuss, #product-like").show();
-                break;
-            case 1:
-                $("#product-discuss, #product-like").show();
-                $(".pic-list").hide();
-                break;
-            case 2:
-                $("#product-like").show(), $(".pic-list, #product-discuss").hide()
-        }
-    });
+
+
 
 
     $("#J_JiuCuo").click(function () {
