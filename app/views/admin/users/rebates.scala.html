@@ -1,5 +1,4 @@
 @(manager: models.admin.Manager, page: models.Page[models.user.UserRebate])
-
 @views.html.admin.template(manager, "user") {
 
     <div id="content-header">
@@ -18,126 +17,67 @@
                         <span class="icon">
                             <i class="icon-pencil"></i>
                         </span>
-                        <h5>用户筛选</h5>
+                        <h5>用户返利筛选</h5>
                     </div>
                     <div class="widget-content nopadding">
-                        <form class=" form-horizontal" id="J_filterForm" method="get" action="@controllers.admin.routes.Users.filterUsers">
+                        <form class=" form-horizontal" id="J_filterForm" method="get" action="@controllers.admin.routes.Users.filterRebates">
                             <input type="hidden" name="currentPage" id="J_currentPage" value="1">
                             <div class="error-row">
                                 <p class="error"></p>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label" for="name">名称</label>
+                                <label class="control-label" for="name">用户Id</label>
                                 <div class="controls">
-                                    <input type="text" id="name" name="name" placeholder="用户名称">
-                                </div>
-                            </div>
-
-                            <div class="control-group">
-                                <label class="control-label" >用户状态</label>
-                                <div class="controls">
-                                    <div class="radio">
-                                        <input type="radio" name="status" value=""> 所有
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio"  name="status" value="0"> 未通过
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio" name="status" value="1"> 正常状态
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio" name="status" value="2"> 活跃状态
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio" name="status" value="3"> 达人状态
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio" name="status" value="4"> 拉黑状态
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="control-group">
-                                <label class="control-label" >达人称号</label>
-                                <div class="controls">
-                                    <div class="radio">
-                                        <input type="radio" name="daren" value=""> 所有达人
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio"  name="daren" value="0"> 普通达人
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio" name="daren" value="1"> 美食达人
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio" name="daren" value="2"> 创意达人
-                                    </div>
-
+                                    <input type="text" id="name" name="uid" placeholder="用户ID">
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label" >注册来源</label>
+                                <label class="control-label" >返利类型：</label>
                                 <div class="controls">
                                     <div class="radio">
-                                        <input type="radio" name="comeFrom" value=""> 所有
+                                        <input type="radio" name="rebateType" value='' checked="true" > 所有
                                     </div>
                                     <div class="radio">
-                                        <input type="radio"  name="comeFrom" value="0"> 食美特
+                                        <input type="radio"  name="rebateType" value="0" > 购物返利
                                     </div>
                                     <div class="radio">
-                                        <input type="radio" name="comeFrom" value="1"> 腾讯QQ
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio" name="comeFrom" value="2"> 新浪微博
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio" name="comeFrom" value="3"> 淘宝
+                                        <input type="radio" name="rebateType" value="1" > 新人好礼
                                     </div>
 
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label" >根据积分排序</label>
+                                <label class="control-label" >处理状态：</label>
                                 <div class="controls">
+                                    <div class="radio">
+                                        <input type="radio" name="status" value='' checked="true" > 所有
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio"  name="status" value="0" > 处理中
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="status" value="1" > 兑换成功
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="status" value="2" > 兑换失败
+                                    </div>
 
-                                    <div class="radio">
-                                        <input type="radio" checked="checked"  name="creditsOrder" value="desc">由高到低
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio" name="creditsOrder" value="asc"> 由低到高
-                                    </div>
                                 </div>
                             </div>
-                            <div class="control-group">
-                                <label class="control-label" >根据食豆排序</label>
-                                <div class="controls">
 
-                                    <div class="radio">
-                                        <input type="radio" checked="checked"  name="shiDouOrder" value="desc">由高到低
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio" name="shiDouOrder" value="asc"> 由低到高
-                                    </div>
-                                </div>
-                            </div>
                             <div class="control-group">
-                                <label class="control-label" >根据ID排序</label>
+                                <label class="control-label" >提交时间：</label>
                                 <div class="controls">
-
-                                    <div class="radio">
-                                        <input type="radio" checked="checked"  name="idOrder" value="desc">由高到低
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio" name="idOrder" value="asc"> 由低到高
-                                    </div>
+                                    From：<input type="date" name="startDate" class="date" value=''>
+                                    to：<input type="date" name="endDate" class="date" value=''>
                                 </div>
                             </div>
 
                             <div class="control-group">
                                 <div class="controls">
-                                <input type="submit" class="btn btn-info" value="筛选"/>
+                                    <input type="submit" class="btn btn-info" value="筛选"/>
                                 </div>
                             </div>
                         </form>
@@ -148,18 +88,7 @@
 
         <div class="row-fluid">
             <div class="well">
-                <form method="post" id="J_batchForm" action="@controllers.admin.routes.Users.batchUsers">
-                    <input type="hidden" id="J_url" name="url" value="">
-                    <div class="controls">
-                        <select id="J_select" name="action">
-                            <option value="-1">批量动作</option>
-                            <option value="4">批量拉黑</option>
-                            <option value="1">批量正常</option>
-                        </select>
-                        <button class="btn btn-info" id="J_batchAction" data-toggle="modal" data-target="#J_batchModal">
-                            批量处理
-                        </button>
-                    </div>
+
                     <table class="table table-bordered table-striped with-check">
                         <thead>
                             <tr>
@@ -177,7 +106,7 @@
                         @for(item <- page.items) {
                             <tr id="@item.id.get">
 
-                                <td><a  href="@controllers.users.routes.Users.home(item.uid)"  target="_blank"> item.uid</a> </td>
+                                <td><a  href="@controllers.users.routes.Users.home(item.uid)"  target="_blank"> @item.uid</a> </td>
                                 <td>@models.user.RebateType(item.rebateType)</td>
                                 <td>@item.num</td>
                                 <td>@item.withdrawTime</td>
@@ -196,14 +125,14 @@
 
                                 <td>
 
-                                    <a href="#"><i class="icon-edit"></i></a>
+                                    <a href="@controllers.admin.routes.Users.editRebate(item.id.get)"><i class="icon-edit"></i></a>
 
                                 </td>
                             </tr>
                         }
                         </tbody>
                     </table>
-                </form>
+
             </div>
             <div class="pagination">
                 <ul>

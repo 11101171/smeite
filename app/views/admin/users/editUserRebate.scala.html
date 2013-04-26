@@ -1,13 +1,14 @@
-@(manager:models.admin.Manager,form:Form[controllers.admin.InvitePrizeFormData],msg:String="")
+@(manager:models.admin.Manager,form:Form[controllers.admin.UserRebateFormData],msg:String="")
 @views.html.admin.template(manager,"user") {
 <div class="header">
 
-    <h1 class="page-title">标签管理</h1>
+    <h1 class="page-title">用户管理</h1>
 </div>
 
 <ul class="breadcrumb">
     <li>用户管理 <span class="divider">/</span></li>
-    <li>处理要求有奖</li>
+
+    <li>处理用户返利</li>
 </ul>
 <div class="container-fluid">
     <div class="row-fluid">
@@ -23,10 +24,10 @@
                     <span class="icon">
                         <i class="icon-pencil"></i>
                     </span>
-                    <h5>处理邀请有奖</h5>
+                    <h5>处理用户返利</h5>
                 </div>
                 <div class="widget-content nopadding">
-                    <form class=" form-horizontal" id="myForm"  method="post" action="@controllers.admin.routes.Users.saveInvitePrize">
+                    <form class=" form-horizontal" id="myForm"  method="post" action="@controllers.admin.routes.Users.saveRebate">
 
                         <input type="hidden" name="id" value='@form("id").value'>
                         <input type="hidden" name="name" value='@form("name").value'>

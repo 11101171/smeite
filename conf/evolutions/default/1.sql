@@ -1261,11 +1261,11 @@ CREATE TABLE `user_rebate` (
   `rebate_type`             tinyint(4) not null default '0',
   `user_order_id`           int(10) ,
   `trade_id`            bigint (10) ,
-  `handle_result`      varchar(128),
+  `handle_result`      varchar(128) default '',
   `handle_status`          tinyint not null default '0',
-  `note`    varchar(200) ,
-  `withdraw_time`          timestamp,
+  `note`    varchar(200)  default '',
   `handle_time`          timestamp,
+  `withdraw_time`          timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 

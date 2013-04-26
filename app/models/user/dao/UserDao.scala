@@ -681,6 +681,21 @@ object UserDao {
   def addUserRebate(uid:Long,num:Int,rebateType:Int,userOrderId:Long,tradeId:Long) = database.withSession {  implicit session:Session =>
       UserRebates.autoInc3.insert(uid,num,rebateType,userOrderId,tradeId,new Timestamp(System.currentTimeMillis()))
   }
+  def findUserRebate(id:Long):(User,UserProfile,UserRebate) =  database.withSession {  implicit session:Session =>
+    (for{
+      u <- Users
+      up <- UserProfiles
+      ur <- UserRebates
+      if ur.id === id
+      if ur.uid === u.id
+      if u.id === up.uid
+    }yield(u,up,ur) ).first
+  }
+
+  def modifyUserRebate(id:Long,handleStatus:Int,handleResult:String,note:String) = database.withSession {  implicit session:Session =>
+    (for( c <- UserRebates if c.id=== id ) yield c.handleStatus ~ c.handleResult ~ c.note).update((handleStatus,handleResult,note))
+  }
+
   /* find user rebate by tradeId*/
   def findUserRebateByTradeId(tradeId:Long):Option[UserRebate]= database.withSession {  implicit session:Session =>
     (for( c <- UserRebates if c.tradeId === tradeId ) yield c).firstOption
@@ -692,5 +707,19 @@ object UserDao {
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val list:List[UserRebate]=( for( c <- UserRebates ) yield c).drop(startRow).take(pageSize).list()
     Page[UserRebate](list,currentPage,totalPages)
+  }
+
+  def filterUserRebates(uid:Option[Long],rebateType:Option[Int],status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Int,pageSize:Int) = database.withSession {  implicit session:Session =>
+    var query =for{ u <- UserRebates }yield (u)
+    if(!uid.isEmpty) query = query.filter(_.uid === uid.get)
+    if(!rebateType.isEmpty) query = query.filter(_.rebateType === rebateType.get)
+    if(!status.isEmpty) query = query.filter(_.handleStatus === status.get)
+    if(!startDate.isEmpty) query = query.filter(_.withdrawTime >= new Timestamp(startDate.get.getTime))
+    if(!endDate.isEmpty) query = query.filter(_.withdrawTime <= new Timestamp(endDate.get.getTime))
+    val totalRows=query.list().length
+    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val list:List[UserRebate]=  query.drop(startRow).take(pageSize).list()
+    Page[UserRebate](list,currentPage,totalPages);
   }
 }

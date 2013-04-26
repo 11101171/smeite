@@ -288,6 +288,9 @@ GET  /admin/users/filterOrders          controllers.admin.Users.filterOrders
 
 
 GET  /admin/users/rebates             controllers.admin.Users.rebates(p:Int ?=1)
+GET  /admin/users/filterRebates       controllers.admin.Users.filterRebates
+GET  /admin/users/editRebate       controllers.admin.Users.editRebate(id:Long)
+POST  /admin/users/saveRebate      controllers.admin.Users.saveRebate
 
 #管理后台  任务管理
 GET   /admin/tasks/edit           controllers.admin.Tasks.edit(id:Long)

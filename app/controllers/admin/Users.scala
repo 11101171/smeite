@@ -39,6 +39,10 @@ case class FilterUserOrderFormData(status:Option[Int],startDate:Option[Date],end
 
 case class GetTaobaokeIncomeFormData(day:String)
 case class FilterTaobaokeIncomeFormData(outerCode:Option[String],day:Option[String],currentPage:Option[Int])
+
+case class FilterUserRebateFormData(uid:Option[Long],rebateType:Option[Int],status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
+case class UserRebateFormData(id:Long,name:String,alipay:String,num:Int,handleStatus:Int,handleResult:String,note:Option[String])
+
 object Users  extends Controller {
   val batchForm =Form(
     mapping(
@@ -120,6 +124,28 @@ object Users  extends Controller {
       "endDate"->optional(date("yyyy-MM-dd")),
       "currentPage"->optional(number)
     )(FilterUserOrderFormData.apply)(FilterUserOrderFormData.unapply)
+  )
+
+  val filterUserRebateForm =Form(
+    mapping(
+      "uid"->optional(longNumber()),
+      "rebateType"->optional(number),
+      "status"->optional(number),
+      "startDate"->optional(date("yyyy-MM-dd")),
+      "endDate"->optional(date("yyyy-MM-dd")),
+      "currentPage"->optional(number)
+    )(FilterUserRebateFormData.apply)(FilterUserRebateFormData.unapply)
+  )
+  val userRebateForm = Form(
+    mapping(
+      "id"->longNumber,
+      "name"->text,
+      "alipay"->text,
+      "num"->number,
+      "handleStatus"->number,
+      "handleResult"->text,
+      "note"->optional(text)
+    )(UserRebateFormData.apply)(UserRebateFormData.unapply)
   )
 
   /*用户管理*/
@@ -298,6 +324,29 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
     Ok(views.html.admin.users.rebates(manager,page))
   }
 
+  def filterRebates  = Managers.AdminAction{ manager => implicit request =>
+    filterUserRebateForm.bindFromRequest.fold(
+      formWithErrors =>Ok("something wrong" +formWithErrors.errors.toString),
+      data => {
+        val page=UserDao.filterUserRebates(data.uid,data.rebateType,data.status,data.startDate,data.endDate,data.currentPage.getOrElse(1),50);
+        Ok(views.html.admin.users.filterUserRebates(manager,page,filterUserRebateForm.fill(data)))
+      }
+    )
+  }
+  def editRebate(id:Long) = Managers.AdminAction{ manager => implicit request =>
+    val (user,up,ui) = UserDao.findUserRebate(id)
+    Ok(views.html.admin.users.editUserRebate(manager,userRebateForm.fill(UserRebateFormData(ui.id.get,user.name,up.alipay.getOrElse("none"),ui.num,ui.handleStatus,ui.handleResult,ui.note))))
+  }
+
+  def saveRebate  = Managers.AdminAction{ manager => implicit request =>
+    userRebateForm.bindFromRequest.fold(
+      formWithErrors =>BadRequest(views.html.admin.users.editUserRebate(manager,formWithErrors,"出错了")),
+      data => {
+        UserDao.modifyUserRebate(data.id,data.handleStatus,data.handleResult,data.note.getOrElse(""))
+        Ok(views.html.admin.users.editUserRebate(manager,userRebateForm.fill(data),"修改成功"))
+      }
+    )
+  }
 
     /*  下面是taobaoke 报表*/
     /* taobaoke  */

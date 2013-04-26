@@ -23,7 +23,7 @@ case class UserRebate(
                      tradeId:Option[Long],
                      handleStatus:Int,
                      handleResult:String,
-                     note:String,
+                     note:Option[String],
                      withdrawTime:Option[Timestamp],
                      handleTime:Option[Timestamp]
                     )
@@ -40,8 +40,8 @@ object UserRebates extends Table[UserRebate]("user_rebate") {
   def note = column[String]("note")
   def withdrawTime = column[Timestamp]("withdraw_time")
   def handleTime = column[Timestamp]("handle_time")
-  def * = id.? ~ uid ~ num ~ rebateType ~ userOrderId.? ~ tradeId.? ~ handleStatus ~ handleResult ~ note ~ withdrawTime.? ~  handleTime.? <> (UserRebate, UserRebate.unapply _)
-  def autoInc = id.? ~ uid ~ num ~ rebateType ~ userOrderId.? ~ tradeId.? ~ handleStatus ~ handleResult ~ note ~ withdrawTime.? ~  handleTime.? <> (UserRebate, UserRebate.unapply _) returning id
+  def * = id.? ~ uid ~ num ~ rebateType ~ userOrderId.? ~ tradeId.? ~ handleStatus ~ handleResult ~ note.? ~ withdrawTime.? ~  handleTime.? <> (UserRebate, UserRebate.unapply _)
+  def autoInc = id.? ~ uid ~ num ~ rebateType ~ userOrderId.? ~ tradeId.? ~ handleStatus ~ handleResult ~ note.? ~ withdrawTime.? ~  handleTime.? <> (UserRebate, UserRebate.unapply _) returning id
   def  autoInc2 = uid ~ num ~ rebateType ~ withdrawTime   returning id
   def autoInc3 = uid ~ num ~ rebateType ~ userOrderId ~ tradeId ~ withdrawTime returning id
 }
