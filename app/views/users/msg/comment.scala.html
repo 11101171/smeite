@@ -1,7 +1,7 @@
 @(user:Option[models.user.User])
 @views.html.template(
 user
-)(css="/assets/css/template/user.css") {
+)(css="/assets/css/template/user.setting.css") {
 <div class="container" id="home">
     <div class="content clearfix">
         <div class="side-nav">
@@ -11,7 +11,7 @@ user
                     <a href="/user/msg/system">系统通知</a>
                 </li>
                 <li>
-                    <a href="/user/msg/comment">评论我的</a>
+                    <a class="on" href="/user/msg/comment">评论我的</a>
                 </li>
                 <li>
                     <a href="/user/msg/reply">回复我的</a>
@@ -19,9 +19,7 @@ user
                 <li>
                     <a href="/user/msg/at">@@我的</a>
                 </li>
-                <li>
-                    <a class="on" href="/user/msg/appraisal">我的求鉴定</a>
-                </li>
+
             </ul>
         </div>				<div class="main-content">
         <div class="my_comment">

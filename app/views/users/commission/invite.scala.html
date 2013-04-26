@@ -19,10 +19,10 @@ user
 
                 <div class="title">一：邀请有奖之规则</div>
                 <ul class="invite-intro clearfix">
-                        <li>1、您每邀请一个朋友加入食美特，（登录并成功返利），最高可获得<strong class="rc">10元</strong>的邀请奖励</li>
+                        <li>1、您每邀请一个朋友加入食美特，（登录并成功返利），最高可获得<strong class="rc">1000个集分宝</strong>的邀请奖励</li>
                         <li>2、邀请好友必须是新用户（即以前没登录过食美特，或者没有注册过食美特），如果她已是食美特老用户了，那么是没有奖励的</li>
                         <li>3、您可以把您的专用邀请链接通过任何方式发给您的朋友，例如，QQ好友，qq群、阿里旺旺、论坛、社区等</li>
-                        <li>4、邀请奖金分3次发放：当好友累计返利达到1元时奖2元；当累计返利到10元时再奖3元；当累计返利到30元时再奖5元；</li>
+                        <li>4、邀请奖金分3次发放：当好友累计返利达到100个集分宝时奖200个；当累计返利到1000个集分宝时再奖300个；当累计返利到3000个集分宝时再奖500个集分宝；</li>
 
                         <li><strong class="alert">禁作弊提醒</strong>：严禁自己邀请自己、刷小号等作弊行为，一旦反作弊系统监测到作弊行为，将拉黑账号处理，邀请也无效</li>
 
@@ -59,7 +59,7 @@ user
                 </div>
                 <div class="title">四：邀请返利记录</div>
                 <div class="invite-record clearfix">
-                    <div class="invite_success mb10">您已成功邀请<span>@totalInviters</span>人，累计获得<span>@totalReward</span>元</div>
+                    <div class="invite_success mb10">您已成功邀请<span>@totalInviters</span>人，累计获得<span>@totalReward</span>个集分宝</div>
 
                     <table  class="table">
                         <thead>
@@ -76,10 +76,10 @@ user
                         <tr>
                             <td><a href="@controllers.users.routes.Users.home(item.id.get)" target="_blank">@item.name </a></td>
                             <td>@models.user.ComeFrom(item.comeFrom)</td>
-                            <td>@(item.credits/100.0)</td>
+                            <td>@(item.credits)</td>
                             <td>
 
-                                   @if(item.credits>=100){ 已返利 2元 } &nbsp;@if(item.credits>=1000){ 3元 }&nbsp; @if(item.credits>=3000){ 5元 }
+                                   @if(item.credits>=100){ 已返利 200 } &nbsp;@if(item.credits>=1000){ 300 }&nbsp; @if(item.credits>=3000){ 500 }
 
                             </td>
                         </tr>

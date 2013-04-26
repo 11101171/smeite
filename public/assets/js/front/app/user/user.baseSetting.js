@@ -14,7 +14,6 @@ define(function(require, exports) {
 	var $ = jQuery = require("jquery");
     require("app/common/validator")($);
 	var DateSelector = require("app/common/dateselect");
-	var Setup = require("app/common/area");
 	require("module/imgareaselect");
 //(function($) { 
 $.smeite.photoarea = null;
@@ -108,15 +107,7 @@ $(function(){
 		$(this).prev("input").trigger("click");
 	});
 	
-	var pro = "请选择";
-	var city = "请选择";
-	if(address != null){
-	  var adds = address.split("|");
-	  pro = adds[0];
-	  city = adds[1];
-	}
-	var setup = new Setup(pro,city);
-	//setup(pro,city);
+
 	var year = 1985;
 	var month = 1;
 	var day = 1;

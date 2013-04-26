@@ -57,43 +57,6 @@
     text-decoration: underline;
 }
 
-/*.set-box {
-    width: 365px;
-    margin: 0 auto
-}
-
-.set-box .title-info {
-    padding: 40px 0 20px 0;
-    border-bottom: 1px dotted #cdcdcd
-}
-
-.set-box .title-info .face {
-    float: left;
-    width: 50px;
-    height: 50px;
-    overflow: hidden
-}
-
-.set-box .title-info .info {
-    float: right;
-    width: 300px
-}
-
-.set-box .title-info .info .name {
-    color: #333;
-    font-size: 14px;
-    font-weight: bold
-}
-
-.set-box .title-info .info p {
-    color: #333;
-    margin-top: 10px
-}
-
-.set-box .set-form {
-    margin-top: 25px
-}*/
-
 .theemail {
     line-height: 32px;
     font-size: 14px;
@@ -148,182 +111,8 @@
     margin: 0 0 20px 130px
 }
 
-/*我的绑定*/
-/*.bind {
-    padding: 0 0 0 60px
-}
 
-.bind .upeng {
-    padding-bottom: 20px;
-    border-bottom: 1px dotted #cdcdcd
-}
-
-.bind .upeng li {
-    width: 320px
-}
-
-.bind .bind-list li {
-    float: left;
-    width: 320px;
-    height: 50px;
-    padding: 15px 0;
-    overflow: hidden
-}
-
-.bind .bind-icon {
-    float: left;
-    width: 50px;
-    height: 50px;
-    overflow: hidden;
-    background-image: url(images/bind-account.png)
-}
-
-.bind .bind-sina {
-    background-position: 0 -50px
-}
-
-.bind .bind-taobao {
-    background-position: 0 -100px
-}
-
-.bind .bind-tencent {
-    background-position: 0 -150px
-}
-
-.bind .bind-163 {
-    background-position: 0 -200px
-}
-
-.bind .bind-douban {
-    background-position: 0 -250px
-}
-
-.bind .bind-alipay {
-    background-position: 0 -300px
-}
-
-.bind .bind-renren {
-    background-position: 0 -350px
-}
-
-.bind .bind-qq {
-    background-position: 0 -400px
-}
-
-.bind .text {
-    float: right;
-    width: 260px
-}
-
-.bind .text .bname {
-    color: #333;
-    font-size: 12px;
-    font-weight: bold
-}
-
-.merge-content {
-    padding: 40px;
-    background: #fff;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
-}
-
-.merge-box h2 {
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #dedede;
-    font-size: 16px;
-    line-height: 1.2
-}
-
-.merge-box h2 a {
-    font-size: 12px;
-    font-weight: normal;
-    margin-top: 5px
-}
-
-.merge-box {
-    width: 550px;
-    margin: 0 auto
-}
-
-.merge-box .form-row label {
-    width: 90px
-}
-
-.merge-box .title {
-    color: #333;
-    font-size: 14px;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px dotted #d1d1d1
-}
-
-.merge-box .itembox {
-    float: left;
-    width: 208px;
-    height: 30px;
-    line-height: 30px;
-    background: #fff;
-    border: 1px solid #ddd;
-    cursor: pointer;
-    overflow: hidden
-}
-
-.merge-box .itembox.checked {
-    background: #fafff0 url(images/correct.png) 190px center no-repeat;
-    border: 1px solid #84b025
-}
-
-.merge-box .nickbox {
-    height: 50px;
-    line-height: 50px
-}
-
-.merge-box .infobox {
-    height: 90px;
-    line-height: 30px
-}
-
-.merge-box .infobox p {
-    line-height: 30px
-}
-
-.merge-box .itembox img.face {
-    float: left;
-    width: 50px;
-    height: 50px
-}
-
-.merge-box .itembox span, .merge-box .infobox p {
-    margin-left: 8px;
-    color: #333;
-    font-size: 14px
-}
-
-.merge-box .btnbox {
-    float: left;
-    padding-left: 95px
-}
-
-.merge-box .warning {
-    float: left;
-    font-size: 12px;
-    color: #b00
-}
-
-.merge-box h3 {
-    float: left;
-    width: 210px;
-    font-size: 14px;
-    line-height: 1.2
-}*/
-
-/*
+  /* 头像上传*/
 .imgareaselect-border1 {
     background: url(images/border-v.gif) repeat-y left top
 }
@@ -357,7 +146,6 @@
     filter: alpha(opacity = 50);
     opacity: .5
 }
-*/
 
 .photo-row {
     margin: 0 auto;
@@ -437,7 +225,6 @@
 
 .invite-intro li{
     padding-left: 15px;
-     height: 30px;
     line-height: 30px;
 }
 .invite-intro .alert{
@@ -642,59 +429,6 @@ table {
     margin-left: 56px
 }
 
-/*#view_award_Dialog {
-    width: 400px
-}
-
-#view_award_Dialog p {
-    line-height: 24px
-}
-
-#get_award_Dialog {
-    width: 350px
-}
-
-#get_award_Dialog p {
-    line-height: 30px;
-    font-size: 14px
-}
-
-#get_award_Dialog .getbtn, #get_award_Dialog .closebtn {
-    margin-left: 128px
-}
-
-#confirm_award_Dialog .img-sina, #confirm_award_Dialog .img-qq {
-    margin: 0;
-    float: left;
-    margin-left: 20px;
-    margin-top: 20px
-}
-
-#confirm_award_Dialog {
-    width: 460px
-}*/
-
-/*#address_Dialog {
-    width: 366px
-}
-
-#address_Dialog .form-row label {
-    width: 80px
-}
-
-#address_Dialog .intro-txa {
-    height: 50px
-}
-
-#address_Dialog select {
-    margin: 6px 0 0 5px;
-    vertical-align: middle
-}
-
-#address_Dialog .tip {
-    float: right;
-    position: static
-}*/
 
 /*我的集分宝*/
 .credits,.shiDou{
