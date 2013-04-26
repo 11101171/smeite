@@ -490,9 +490,36 @@ object UserDao {
 
     Page[(String,List[(Timestamp,Long,Long,String,String,String,String,String,Int,Int,Int,String)])](list,currentPage,totalPages)
   }
+
+  def findUserOrders(currentPage:Int,pageSize:Int)=  database.withSession {  implicit session:Session =>
+    val totalRows = Query(UserOrders.length).first()
+    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val list:List[UserOrder]=( for( c <- UserOrders ) yield c).drop(startRow).take(pageSize).list()
+    Page[UserOrder](list,currentPage,totalPages)
+  }
+
    /*推荐用户购买记录*/
   def recommendUserOrders(num:Int):List[UserOrder]  =  database.withSession {  implicit session:Session =>
     (for( c<-UserOrders.sortBy(_.createTime desc)) yield c).take(num).list()
+  }
+
+  def findUserOrder(uid:Long,numIid:Long):List[UserOrder] =  database.withSession {  implicit session:Session =>
+    (for( c<-UserOrders.sortBy(_.createTime desc)) yield c).list()
+  }
+  def modifyUserOrder(id:Long,status:Int,payTime:Timestamp) =  database.withSession {  implicit session:Session =>
+    ( for( c <- UserOrders if c.id === id) yield c.status ~ c.payTime ).update((status,payTime))
+  }
+  def filterUserOrders(status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Int,pageSize:Int) = database.withSession {  implicit session:Session =>
+    var query =for{ u <- UserOrders }yield (u)
+    if(!status.isEmpty) query = query.filter(_.status === status.get)
+    if(!startDate.isEmpty) query = query.filter(_.createTime >= new Timestamp(startDate.get.getTime))
+    if(!endDate.isEmpty) query = query.filter(_.createTime <= new Timestamp(endDate.get.getTime))
+    val totalRows=query.list().length
+    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val list:List[UserOrder]=  query.drop(startRow).take(pageSize).list()
+    Page[UserOrder](list,currentPage,totalPages);
   }
 
    /*获取用户邀请的 用户数量*/
@@ -650,5 +677,20 @@ object UserDao {
   /* add user rebate */
    def addUserRebate(uid:Long,num:Int,rebateType:Int) = database.withSession {  implicit session:Session =>
     UserRebates.autoInc2.insert(uid,num,1,new Timestamp(System.currentTimeMillis()))
+  }
+  def addUserRebate(uid:Long,num:Int,rebateType:Int,userOrderId:Long,tradeId:Long) = database.withSession {  implicit session:Session =>
+      UserRebates.autoInc3.insert(uid,num,rebateType,userOrderId,tradeId,new Timestamp(System.currentTimeMillis()))
+  }
+  /* find user rebate by tradeId*/
+  def findUserRebateByTradeId(tradeId:Long):Option[UserRebate]= database.withSession {  implicit session:Session =>
+    (for( c <- UserRebates if c.tradeId === tradeId ) yield c).firstOption
+  }
+
+  def findUserRebates(currentPage:Int,pageSize:Int) =  database.withSession {  implicit session:Session =>
+    val totalRows = Query(UserRebates.length).first()
+    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val list:List[UserRebate]=( for( c <- UserRebates ) yield c).drop(startRow).take(pageSize).list()
+    Page[UserRebate](list,currentPage,totalPages)
   }
 }

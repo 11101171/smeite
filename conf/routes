@@ -283,6 +283,12 @@ GET  /admin/users/taobaokeIncomes         controllers.admin.Users.taobaokeIncome
 GET  /admin/users/filterTaobaokeIncomes   controllers.admin.Users.filterTaobaokeIncomes
 GET  /admin/users/getIncomes              controllers.admin.Users.getIncomes
 
+GET  /admin/users/orders               controllers.admin.Users.orders(p:Int ?=1)
+GET  /admin/users/filterOrders          controllers.admin.Users.filterOrders
+
+
+GET  /admin/users/rebates             controllers.admin.Users.rebates(p:Int ?=1)
+
 #管理后台  任务管理
 GET   /admin/tasks/edit           controllers.admin.Tasks.edit(id:Long)
 POST  /admin/tasks/save            controllers.admin.Tasks.save

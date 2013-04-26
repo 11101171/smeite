@@ -18,6 +18,7 @@ import com.taobao.api.domain.{TaobaokeReportMember, TaobaokeReport}
 import scala.collection.JavaConverters._
 import models.report.TaobaokeIncome
 import java.sql.Timestamp
+import models.user.{UserOrder, UserRebate}
 
 /**
  * Created with IntelliJ IDEA.
@@ -33,6 +34,8 @@ case class ExchangeShiDouFormData(id:Long,name:String,alipay:String,num:Int,hand
 
 case class FilterInvitePrizeFormData(status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
 case class InvitePrizeFormData(id:Long,name:String,alipay:String,num:Int,handleStatus:Int,handleResult:String,note:Option[String])
+
+case class FilterUserOrderFormData(status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
 
 case class GetTaobaokeIncomeFormData(day:String)
 case class FilterTaobaokeIncomeFormData(outerCode:Option[String],day:Option[String],currentPage:Option[Int])
@@ -108,6 +111,15 @@ object Users  extends Controller {
       "day"->optional(text),
       "currentPage"->optional(number)
     )(FilterTaobaokeIncomeFormData.apply)(FilterTaobaokeIncomeFormData.unapply)
+  )
+
+  val filterUserOrderForm =Form(
+    mapping(
+      "status"->optional(number),
+      "startDate"->optional(date("yyyy-MM-dd")),
+      "endDate"->optional(date("yyyy-MM-dd")),
+      "currentPage"->optional(number)
+    )(FilterUserOrderFormData.apply)(FilterUserOrderFormData.unapply)
   )
 
   /*用户管理*/
@@ -258,6 +270,36 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
       }
     )
   }
+
+
+  /*下面是 User orders */
+  def orders(p:Int) = Managers.AdminAction{ manager => implicit request =>
+         val page = UserDao.findUserOrders(p,50)
+    Ok(views.html.admin.users.orders(manager,page))
+  }
+
+  def filterOrders = Managers.AdminAction{ manager => implicit request =>
+    filterUserOrderForm.bindFromRequest.fold(
+      formWithErrors =>Ok("something wrong" +formWithErrors.errors.toString),
+      data => {
+        val page=UserDao.filterUserOrders(data.status,data.startDate,data.endDate,data.currentPage.getOrElse(1),50);
+        Ok(views.html.admin.users.filterUserOrders(manager,page,filterUserOrderForm.fill(data)))
+      }
+    )
+  }
+
+
+
+
+
+  /* 下面 是 user rebate */
+  def  rebates(p:Int) = Managers.AdminAction{ manager => implicit request =>
+    val page = UserDao.findUserRebates(p,50)
+    Ok(views.html.admin.users.rebates(manager,page))
+  }
+
+
+    /*  下面是taobaoke 报表*/
     /* taobaoke  */
   def taobaokeIncomes(p:Int) = Managers.AdminAction{ manager => implicit request =>
       val page = TaobaokeIncomeDao.findTaobaokeIncomes(p,50)
@@ -319,7 +361,32 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
   }
   /* -1 表示 淘宝客返回的outer——code 为 null*/
   private def handleTaobaokeIncome(item:TaobaokeReportMember,day:String)={
+         /* 处理 user order 与 淘宝客report 的关系
+         * 1. 判断outer_code 是否为null
+         * 2、根据user_id 和 num_iid 查找 user_order , 如果不为空，判断 list大小，如果list.length=1,直接使用userOrder ,如果list.length >1 则判断userOrder createTime 与 taobaoke的create time 最近的那个 获得userOrder
+         *
+         * */
 
+    if(item.getOuterCode != null){
+      val uid = item.getOuterCode.toLong
+      val list:List[UserOrder]=UserDao.findUserOrder(uid,item.getNumIid)
+      /* 获取 user order*/
+      var order:UserOrder= null;
+      if(!list.isEmpty){
+      order=  if(list.length == 1) {list.head } else { list.sortBy(x=>(x.createTime.get.getTime-item.getCreateTime.getTime).abs).head }
+
+      }
+      val userCommission = if(order !=null ){ (item.getCommission.toFloat*order.withdrawRate).toInt }else { (item.getCommission.toFloat*70/100).toInt }
+      val userOrderId:Long = if(order != null){ order.id.get }else{ 0 }
+      UserDao.modifyUserOrder(order.id.get,1,new Timestamp(item.getCreateTime.getTime))
+
+      /* 查看 user rebate 是否添加，如果没有，则添加*/
+      val rebate = UserDao.findUserRebateByTradeId(item.getTradeId)
+      if(rebate.isEmpty){
+        UserDao.addUserRebate(uid,userCommission,0,userOrderId,item.getTradeId)
+      }
+
+    }
        val income = TaobaokeIncomeDao.findTaobaokeIncome(item.getTradeId)
      if(income.isEmpty){
        val outerCode = if(item.getOuterCode == null){ "-1"} else item.getOuterCode
