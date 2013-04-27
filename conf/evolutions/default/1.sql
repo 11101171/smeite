@@ -1318,3 +1318,6 @@ CREATE TABLE `user_exchange_shiDou` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 alter table user_profile change invite_id invite_id int(10) default '0'
+
+  /*  4月27 */
+delete from advert where id =11;

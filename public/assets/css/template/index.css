@@ -6,26 +6,27 @@
  * 维护：zuosanshao@qq.com
 */
 .main-box{width:950px;margin:0 auto 25px;background:#fff;padding:15px; }
-.flash {width:735px;height:350px;background-color:#fff;overflow:hidden;position:relative;z-index: 99}
+.flash {width:735px;height:270px;background-color:#fff;overflow:hidden;position:relative;z-index: 99}
 .flash .scrollable { width:720px;height:270px;background-color:#fff;overflow:hidden;position:relative; }
 .flash .scrollable .items { width:20000em;position:absolute;z-index:1; }
 .flash .scrollable .items .item { width:720px;height:270px;position:relative;float:left; }
 .flash .scrollable .items .item a{cursor: pointer;color:#333;}
 
-.flash .navi { background-color:#fff;/*overflow:hidden;height:3px;position:relative;*/}
-.flash .navi { /*background:#fff url(../../images/ui/navi-wrap-bg.png) repeat-x top;*/overflow:hidden; }
-.flash .navi li { position:relative;width:130px;float:left;display:inline;padding-top:11px;margin-right:17px}
-.flash .navi li.last{margin-right:0}
-.flash .navi li .thumb { height:45px;overflow:hidden;cursor:pointer; }
-.flash .navi li .topicTitle { cursor:pointer;line-height:18px;height:18px;margin-top:5px;margin-left:5px;font-weight:normal;color:#666; _width:125px}
-.flash .navi li a{text-decoration:none;}
-.flash .navi li span {
+.flash .navi {
+     z-index: 9;
     position: absolute;
-    top: 9px;
-    width: 130px;
-    height: 2px;
+    left: 0;
+    bottom: 2;overflow:hidden; }
+.flash .navi li { position:relative;width:144px;float:left;display:inline;padding-top:11px}
+.flash .navi li.last{margin-right:0}
+.flash .navi li span {
+    z-index: 10;
+    position: absolute;
+    top: 7px;
+    width: 140px;
+    height: 4px;
     overflow: hidden;
-    background: url(images/navi-bg.png) no-repeat 0 -7px
+    background: url(images/navi-bg.png) repeat-x 0 -8px
 }
 
 .flash .navi li.active span {
@@ -38,7 +39,7 @@
 .bulletin{width:210px;background-color:#fff;}
 .bulletin h3{color:#e26;font-size:14px;line-height:30px;padding-bottom:4px;}
 .bulletin ul{}
-.bulletin ul li{line-height:40px;height:40px;border-top:1px dotted #ddd;max-width:208px;*width:208px;display:block;}
+.bulletin ul li{line-height:40px;height:40px;border-bottom:1px dotted #ddd;max-width:208px;*width:208px;display:block;}
 .bulletin ul li a{color:#333;font-size:12px;line-height:37px;}
 .bulletin ul li a img{margin-top:10px;margin-right:5px;*margin-top:0;;_float:left;}
 .bulletin ul li a em{_float:left;_width:160px;_overflow:hidden;}

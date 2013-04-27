@@ -2401,45 +2401,20 @@ body .redactor_toolbar li a.redactor_btn_alignment	 		{ background-position: -62
     overflow: hidden;
     line-height: 24px;
     padding: 0 12px 0 26px;
-    color: #111;
-    border: 1px solid #dcdcdc;
+    color: white;
+    border: 1px solid gainsboro;
     border-top: none;
     border-left: none;
     text-decoration: none;
-    background: #fff url(images/like-icon.png) 10px center no-repeat;
-
+    background: #92B03B url(images/signIn-status.png) 07px 2px no-repeat;
+    _background: #92b03b url(images/signIn-status-ie6.png) 07px 2px no-repeat;
 }
 
-#nav a.btn-signIn:hover {
-    text-decoration: none;
-    background: #D5D5D5 url(images/like-icon.png) 10px center no-repeat;
-    transition: bottom 0.3s;
-    -webkit-transition: bottom 0.3s;
-    -moz-transition: bottom 0.3s;
-    -o-transition: bottom 0.3s;
 
-}
+#nav a.btn-signIn:hover {text-decoration:none;background:#92b03b url(images/signIn-status.png) 07px -23px no-repeat;transition:bottom 0.3s;-webkit-transition:bottom 0.3s;-moz-transition:bottom 0.3s;-o-transition:bottom 0.3s;_background:#92b03b url(images/signIn-status-ie6.png) 07px -23px no-repeat; }
 
-#nav a.checked {
-    color: #999;
-    display: block;
-    margin: 8px 0 0 5px;
-    height: 24px;
-    overflow: hidden;
-    line-height: 24px;
-    padding: 0 12px 0 26px;
-    border: 1px solid #dcdcdc;
-    border-top: none;
-    border-left: none;
-    text-decoration: none;
-    background: #fff url(images/signIn-status.png) 07px -54px no-repeat;
-    _background: #92b03b url(images/signIn-status-ie6.png) 07px -54px no-repeat;
-}
-
-#nav a.checked:hover {
-    background: #fff url(images/signIn-status.png) 07px -54px no-repeat;
-    _background: #92b03b url(images/signIn-status-ie6.png) 07px -54px no-repeat;
-}
+#nav a.checked {color:#999;display:block;margin:8px 0 0 5px;height:24px;overflow:hidden;line-height:24px;padding:0 12px 0 26px;border:1px solid #dcdcdc;border-top:none;border-left:none;text-decoration:none;background:#fff url(images/signIn-status.png) 07px -54px no-repeat;_background:#92b03b url(images/signIn-status-ie6.png) 07px -54px no-repeat; }
+#nav a.checked:hover{background:#fff url(images/ui/signIn-status.png) 07px -54px no-repeat;_background:#92b03b url(images/ui/signIn-status-ie6.png) 07px -54px no-repeat; }
 
 
 /* 签到  end*/
