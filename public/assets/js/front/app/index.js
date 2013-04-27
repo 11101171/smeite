@@ -15,16 +15,12 @@
  */
 define(function (require,exports) {
     var $ = jQuery = require("jquery");
-    require("module/feedSlider")($);
     require("module/scrollImg")($);
     require("module/lazyload")($);
     require("module/jquery.tools.tabs")($)
     $(function () {
         /*顶部slide show*/
-        (function (a) {
-            for (var b = $.find("ul"), d = b.children().length, e = 1; e < d; e++)b.find("li:eq(" + (d - 1 - e) + ")").appendTo(b);
-            $.feedSlider({direction:"right"})
-        })
+
 
         $(".scrollable").scrollImg({timer:1E4, startHandle:function (c) {
             c && setTimeout(function () {
@@ -57,7 +53,6 @@ define(function (require,exports) {
         /*懒加载*/
         $(".category img").lazyload({effect:"fadeIn", threshold:200});
         /* 品牌大全 美食大全*/
-
             $("div.tabs").tabs(".panes > ul",{
                 event: 'mouseover'
             })

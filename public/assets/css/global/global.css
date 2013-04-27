@@ -2475,12 +2475,20 @@ body .redactor_toolbar li a.redactor_btn_alignment	 		{ background-position: -62
 #nav .shareit-dropdown .hd-create-topic:hover { background-position:-90px -16px; }
 /* 分享好东西 end*/
 /* 下拉菜单 */
-.dropdown { display:none;position:absolute;top:30px;right:0;z-index:9996;width:81px;margin:0;padding:2px 0;background:#fff;border:1px solid #e5e5e5;border-top: none }
+.dropdown { display:none;position:absolute;top:30px;right:0;z-index:9996;margin:0;padding:2px 0;background:#fff;border:1px solid #e5e5e5;border-top: none }
 .dropdown li { padding:0 10px;_height:29px; }
 .dropdown li a { display:block;padding:7px 0;line-height:1.2;color:#666;border-bottom:1px solid #F3F3F3; }
 .dropdown li.last a { border:none; }
 
-
+#checkin_intro{line-height:20px;color:#666;padding:10px;width:110px;background:#FFF;}
+#checkin_intro b{color:#F32A6B;}
+#checkin_intro  .signIn-prize{line-height: 30px; background: url(images/btn100.png) no-repeat 0 0 transparent;width: 107px;height: 30px;display: block;color: #fff;text-align: center;font-size: 14px;font-weight: bold}
+#checkin_intro p{line-height:18px;border-top:1px solid #f3f3f3;padding-top:5px;margin-top:5px;}
+#checkin_intro  .invite{color:#e26;;text-decoration: none;display: block;padding-top: 10px}
+#checkin_intro  .invite:hover{color:#ff7f00;text-decoration:underline;}
+#checkin_intro .checkin_on{color:#fff;background-color:#88b735;height:18px;line-height:18px;}
+#checkin_intro .checkin_off{color:#333;background-color:#dedede;height:18px;line-height:18px;}
+#checkin_intro .checkin_days{color:#9dc62c;font-size:30px;}
 
 /*全局 底部样式*/
 /*

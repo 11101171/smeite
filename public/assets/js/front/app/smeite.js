@@ -2052,6 +2052,10 @@ define(function(require, exports) {
         $(".btn-sg").dropDown({
             classNm: ".shareit-dropdown"
         });
+        $(".btn-signIn").dropDown({
+            classNm: ".signIn-dropdown"
+        });
+
         /*消息*/
         $(".xiaoxi").dropDown({
             classNm: ".xiaoxi-dropdown"
