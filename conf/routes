@@ -38,10 +38,10 @@ GET    /forum/addFollow             controllers.Forums.addFollow(topicId:Long)
 GET    /forum/removeFollow          controllers.Forums.removeFollow(topicId:Long)
 
 
-
+#User 签到
+GET    /user/signIn                          controllers.users.Users.signIn
 
 #user 用户页面
-
 GET    /user/$id<[0-9]+>                          controllers.users.Users.home(id:Long)
 GET    /user/$id<[0-9]+>/credits                    controllers.users.Users.credits(id:Long,s:Int ?=-1,p:Int ?=1)
 GET    /user/$id<[0-9]+>/baobei                   controllers.users.Users.baobei(id:Long,t:String ?="share",p:Int ?=1)
@@ -139,6 +139,7 @@ GET   /sitemap                                         controllers.Infos.siteMap
 GET   /friends                                         controllers.Infos.friends
 GET   /jifenbao                                         controllers.Infos.jifenbao
 GET   /shiDou                                         controllers.Infos.shiDou
+GET   /rebate                                         controllers.Infos.rebate
 GET   /jiucuo                                          controllers.Infos.jiucuo
 GET   /xtaoAuth.html                                   controllers.Infos.xtaoAuth
 GET   /wb_59dcb1f27fb8d6af.txt                         controllers.Infos.weiboAuth

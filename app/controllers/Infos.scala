@@ -56,6 +56,13 @@ object Infos extends Controller {
     Ok(views.html.infos.shiDou(user))
   }
 
+  /* 返现教程 */
+  def rebate = Users.UserAction { user => implicit request =>
+    Ok(views.html.infos.rebate(user))
+  }
+
+
+
   // 淘宝客的验证
   def xtaoAuth =Action{
     Ok(views.html.infos.xtaoAuth())
