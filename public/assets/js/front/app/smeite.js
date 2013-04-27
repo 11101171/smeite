@@ -20,6 +20,7 @@ define(function(require, exports) {
     var $ =jQuery= require("jquery");
     require("module/json");
     require("module/jquery.tools.overlay")($);
+    require("module/jquery.tools.tabs")($);
     var Cookie = require("module/cookie")
     $.smeite = $.smeite || {
         version: "v1.0.0"
@@ -1732,7 +1733,11 @@ define(function(require, exports) {
 
     /* 初始化加载中的内容*/
     $(function(){
+        /* 判断用户是否为新用户*/
         $.smeite.dialog.isNew()
+        /* 底部 友情链接 */
+
+
         // 判断reffer来源,默认是 qq
         var refererUrl=document.referrer
         var referer="smeite"

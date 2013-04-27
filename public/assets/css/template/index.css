@@ -16,7 +16,8 @@
      z-index: 9;
     position: absolute;
     left: 0;
-    bottom: 2;overflow:hidden; }
+    bottom: 0;
+    overflow:hidden; }
 .flash .navi li { position:relative;width:144px;float:left;display:inline;padding-top:11px}
 .flash .navi li.last{margin-right:0}
 .flash .navi li span {
