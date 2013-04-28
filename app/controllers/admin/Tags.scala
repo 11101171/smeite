@@ -275,7 +275,6 @@ object  Tags extends Controller {
       tagForm.bindFromRequest.fold(
         formWithErrors => BadRequest(views.html.admin.tags.editTag(manager,formWithErrors)),
         tag => {
-
           /*如果tag id 为空，则保存数据 ，否则，则update数据*/
           if(tag.id.isEmpty){
             TagDao.addTag(Tag(None,tag.name,tag.cid,tag.groupId,tag.groupName,tag.hotIndex,1,tag.isTop,tag.isHighlight,tag.sortNum,tag.checkState,tag.seoTitle,tag.seoKeywords,tag.seoDesc,None,None))

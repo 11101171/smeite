@@ -33,8 +33,9 @@ object TagDao {
   def deleteTag(name:String)=database.withSession {  implicit session:Session =>
     Tags.delete(name)
   }
-
+  /*修改tag时，同时修改 tag_goods 的 cid*/
   def modifyTag(tag:Tag)= database.withSession{ implicit session:Session =>
+    (for( c <- TagGoodses if c.tagName === tag.name )yield c.cid ).update(tag.cid.getOrElse(0))
     (for(c<-Tags if c.id === tag.id)yield(c)).update(tag)
   }
   def modifyTag(id:Long,addNum:Int)=database.withSession{ implicit session:Session =>
@@ -94,6 +95,9 @@ object TagDao {
 
   /* 查找 tagGroup 下 所有的商品 */
   def findCateGoodses(cid:Int,currentPage:Int,pageSize:Int ):Page[((Int,Long,String,String,Int,String,Option[String],String),List[(Option[Long],Option[String],Option[String],Option[String])])] = database.withSession{ implicit session:Session =>
+
+
+
    val ids = for{
     t<- Tags.filter(_.cid === cid)
     g<-TagGoodses.filter(_.checkState === 1).sortBy(_.sortNum)
@@ -131,7 +135,8 @@ object TagDao {
   }
   /*保存*/
   def addGoods(tagName:String,goodsId:Long)=database.withSession {  implicit session:Session =>
-    TagGoodses.insert(tagName,goodsId)
+    val cid =( for( c<- Tags if c.name === tagName ) yield c.cid ).first()
+    TagGoodses.insert(tagName,goodsId,cid)
   }
   def modifyGoods(tagName:String,goodsId:Long,addNum:Int)=database.withSession {  implicit session:Session =>
     (for(c<-TagGoodses if c.tagName===tagName if c.goodsId===goodsId)yield(c.addNum) ).update(addNum)

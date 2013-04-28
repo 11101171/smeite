@@ -1380,3 +1380,4 @@ CREATE TABLE `user_vote` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
+alter table tag_goods add  cid  smallint(10)  default '0';
