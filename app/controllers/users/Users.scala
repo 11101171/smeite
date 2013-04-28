@@ -184,8 +184,8 @@ object Users extends Controller {
   }
 
   /* 用户签到 */
-  def signIn = Users.UserAction{   user => implicit request =>
+  def checkIn = Users.UserAction{   user => implicit request =>
 
-    Ok(views.html.users.signIn(user))
+    Ok(views.html.users.checkIn(user))
   }
 }

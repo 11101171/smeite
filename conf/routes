@@ -39,7 +39,7 @@ GET    /forum/removeFollow          controllers.Forums.removeFollow(topicId:Long
 
 
 #User 签到
-GET    /user/signIn                          controllers.users.Users.signIn
+GET    /user/checkIn                          controllers.users.Users.checkIn
 
 #user 用户页面
 GET    /user/$id<[0-9]+>                          controllers.users.Users.home(id:Long)

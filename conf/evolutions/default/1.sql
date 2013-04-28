@@ -1317,7 +1317,21 @@ CREATE TABLE `user_exchange_shiDou` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-alter table user_profile change invite_id invite_id int(10) default '0'
+alter table user_profile change invite_id invite_id int(10) default '0';
 
-  /*  4月27 */
-delete from advert where id =11;
+
+
+/*  4月28 日 */
+DROP TABLE IF EXISTS `user_check_in`;
+CREATE TABLE `user_check_in` (
+  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `uid`                 int(10) ,
+  `num`              smallint (10) ,
+  `check_in_days`              smallint (10) ,
+  `check_in_time`          timestamp,
+  `check_in_month`         varchar(16),
+  `check_in_history`         varchar(16),
+
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+

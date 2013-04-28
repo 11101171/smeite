@@ -2394,7 +2394,7 @@ body .redactor_toolbar li a.redactor_btn_alignment	 		{ background-position: -62
 }
 
 /* channel end */
-#nav a.btn-signIn {
+#nav a.btn-checkIn {
     display: block;
     margin: 8px 0 0 5px;
     height: 24px;
@@ -2407,15 +2407,15 @@ body .redactor_toolbar li a.redactor_btn_alignment	 		{ background-position: -62
     border-top: none;
     border-left: none;
     text-decoration: none;
-    background: #92B03B url(images/signIn-status.png) 7px 2px no-repeat;
-    _background: #92b03b url(images/signIn-status-ie6.png) 7px 2px no-repeat;
+    background: #92B03B url(images/checkIn-status.png) 7px 2px no-repeat;
+    _background: #92b03b url(images/checkIn-status-ie6.png) 7px 2px no-repeat;
 }
 
 
-#nav a.btn-signIn:hover {text-decoration:none;background:#92b03b url(images/signIn-status.png) 07px -23px no-repeat;transition:bottom 0.3s;-webkit-transition:bottom 0.3s;-moz-transition:bottom 0.3s;-o-transition:bottom 0.3s;_background:#92b03b url(images/signIn-status-ie6.png) 07px -23px no-repeat; }
+#nav a.btn-checkIn:hover {text-decoration:none;background:#92b03b url(images/checkIn-status.png) 07px -23px no-repeat;transition:bottom 0.3s;-webkit-transition:bottom 0.3s;-moz-transition:bottom 0.3s;-o-transition:bottom 0.3s;_background:#92b03b url(images/checkIn-status-ie6.png) 07px -23px no-repeat; }
 
-#nav a.checked {color:#999;display:block;margin:8px 0 0 5px;height:24px;overflow:hidden;line-height:24px;padding:0 12px 0 26px;border:1px solid #dcdcdc;border-top:none;border-left:none;text-decoration:none;background:#fff url(images/signIn-status.png) 07px -54px no-repeat;_background:#92b03b url(images/signIn-status-ie6.png) 07px -54px no-repeat; }
-#nav a.checked:hover{background:#fff url(images/ui/signIn-status.png) 07px -54px no-repeat;_background:#92b03b url(images/ui/signIn-status-ie6.png) 07px -54px no-repeat; }
+#nav a.checked {color:#999;display:block;margin:8px 0 0 5px;height:24px;overflow:hidden;line-height:24px;padding:0 12px 0 26px;border:1px solid #dcdcdc;border-top:none;border-left:none;text-decoration:none;background:#fff url(images/checkIn-status.png) 07px -54px no-repeat;_background:#92b03b url(images/checkIn-status-ie6.png) 07px -54px no-repeat; }
+#nav a.checked:hover{background:#fff url(images/checkIn-status.png) 07px -54px no-repeat;_background:#92b03b url(images/checkIn-status-ie6.png) 07px -54px no-repeat; }
 
 
 /* 签到  end*/
@@ -2483,7 +2483,7 @@ body .redactor_toolbar li a.redactor_btn_alignment	 		{ background-position: -62
 
 #checkin_intro{line-height:20px;color:#666;padding:10px;width:110px;background:#FFF;}
 #checkin_intro b{color:#F32A6B;}
-#checkin_intro  .signIn-prize{line-height: 30px; background: url(images/btn100.png) no-repeat 0 0 transparent;width: 107px;height: 30px;display: block;color: #fff;text-align: center;font-size: 14px;font-weight: bold;margin-top: 10px;}
+#checkin_intro  .checkIn-prize{line-height: 30px; background: url(images/btn100.png) no-repeat 0 0 transparent;width: 107px;height: 30px;display: block;color: #fff;text-align: center;font-size: 14px;font-weight: bold;margin-top: 10px;}
 #checkin_intro p{line-height:18px;border-top:1px solid #f3f3f3;padding-top:5px;margin-top:5px;}
 #checkin_intro  .invite{color:#e26;;text-decoration: none;display: block;padding-top: 10px}
 #checkin_intro  .invite:hover{color:#ff7f00;text-decoration:underline;}

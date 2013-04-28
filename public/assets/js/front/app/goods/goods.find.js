@@ -15,18 +15,16 @@ define(function (require, exports) {
     var $ = jQuery = require("jquery");
     require('module/lazyload')($);
     $(function () {
-        $(".goods-pic img").lazyload({effect:"fadeIn", threshold:200});
-
-      /*  "ipad" != navigator.userAgent.toLowerCase().match(/ipad/i) ? $(".goods-pic img").lazyload({effect: "fadeIn", threshold: 200, load: function (a) {
-            var b = a.height, a = a.width;
-           ($(this).css({width: a, height: b}), $(this).parent().css({position: "absolute", height: b, width: a, top: (210 - b) / 2, left: (210 - a) / 2}))
-
-        }}) : $(".goods-pic img").each(function (a) {
-            var b = $(this);
-            19 < a ? setTimeout(function () {
-                b.attr("src", b.data("original"))
-            }, 3E3) : b.attr("src", b.data("original"))
-        });*/
+        if($.smeite.isIE6()){
+            $(".goods-pic img").each(function (a) {
+                var b = $(this);
+                19 < a ? setTimeout(function () {
+                    b.attr("src", b.data("original"))
+                }, 3E3) : b.attr("src", b.data("original"))
+            });
+        }else{
+            $(".goods-pic img").lazyload({effect:"fadeIn", threshold:200});
+        }
         /*当鼠标移到goods上的效果*/
         $(".goods").hover(function () {
             var a = $(this);

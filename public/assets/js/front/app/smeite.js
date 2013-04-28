@@ -2052,8 +2052,8 @@ define(function(require, exports) {
         $(".btn-sg").dropDown({
             classNm: ".shareit-dropdown"
         });
-        $(".btn-signIn").dropDown({
-            classNm: ".signIn-dropdown"
+        $(".btn-checkIn").dropDown({
+            classNm: ".checkIn-dropdown"
         });
 
         /*消息*/
