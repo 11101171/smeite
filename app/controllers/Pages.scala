@@ -72,8 +72,8 @@ import java.util.Calendar
     }
     val tags = TagDao.findCateTags(cid,30)
      var page:models.Page[((Int,Long,String,String,Int,String,Option[String],String),List[(Option[Long],Option[String],Option[String],Option[String])])] = null
-      if (tag =="tag")  page = TagDao.findCateGoodses(cid,p,54);
-      else   page = TagDao.findTagGoodses(tag,p,54)
+      if (tag =="tag")  page = TagDao.findCateGoodses(cid,p,48);
+      else   page = TagDao.findTagGoodses(tag,p,48)
     Ok(views.html.pages.find(user,page,cate,tag,tags))
   }
 

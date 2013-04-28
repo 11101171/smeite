@@ -13,18 +13,19 @@
 
 define(function (require, exports) {
     var $ = jQuery = require("jquery");
-    require('module/lazyload')($);
+  /*  require('module/lazyload')($);*/
     $(function () {
-        if($.smeite.isIE6()){
-            $(".goods-pic img").each(function (a) {
-                var b = $(this);
-                19 < a ? setTimeout(function () {
-                    b.attr("src", b.data("original"))
-                }, 3E3) : b.attr("src", b.data("original"))
-            });
-        }else{
-            $(".goods-pic img").lazyload({effect:"fadeIn", threshold:200});
-        }
+       // $(".goods-pic img").lazyload({effect:"fadeIn", threshold:200});
+
+    /*    "ipad" != navigator.userAgent.toLowerCase().match(/ipad/i) ? $(".goods-pic img").lazyload({effect: "fadeIn", threshold: 200, load: function (a) {
+            var b = a.height, a = a.width;
+           ($(this).css({width: a, height: b}), $(this).parent().css({position: "absolute", height: b, width: a, top: (210 - b) / 2, left: (210 - a) / 2}))
+        }}) : $(".goods-pic img").each(function (a) {
+            var b = $(this);
+            19 < a ? setTimeout(function () {
+                b.attr("src", b.data("original"))
+            }, 3E3) : b.attr("src", b.data("original"))
+        });*/
         /*当鼠标移到goods上的效果*/
         $(".goods").hover(function () {
             var a = $(this);
@@ -42,20 +43,16 @@ define(function (require, exports) {
             b.fadeIn("fast");
             b.slideDown("slow");
             a.find(".ilike-m")[0] && a.find(".ilike-m").show();
-            a.find(".ilike-del")[0] && a.find(".ilike-del").show();
-            a.find(".ilike-topic")[0] && a.find(".ilike-topic").show()
+
         }, function () {
             var a = $(this);
             a.removeClass("cur-goods");
             var b = a.find(".goods-clone");
             1 == b.length && (b.fadeOut("fast"), b.slideUp("slow"));
             a.find(".ilike-m")[0] && a.find(".ilike-m").hide();
-            a.find(".ilike-del")[0] && a.find(".ilike-del").hide();
-            a.find(".ilike-topic")[0] && a.find(".ilike-topic").hide()
+
         });
-       /* var c = window.location.href;
-        -1 != c.indexOf("find") && 2 < c.split("find")[1].split("/").length && ($("#J_GoodsTitle").offset(), $("html, body").animate({scrollTop: 93}, 120));
-*/
+
         $(".pagin4faxian .current").hover(function () {
             var b = this;
             this.timeout && clearTimeout(this.timeout);
@@ -77,8 +74,7 @@ define(function (require, exports) {
                 $(".pagin4faxian ul").fadeOut()
             }, 200)
         });
-       var c = $(".section:last");
-        5 >= c.find(".goods").length && c.height(660)
+
     });
 
 

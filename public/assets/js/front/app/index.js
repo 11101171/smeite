@@ -16,7 +16,7 @@
 define(function (require,exports) {
     var $ = jQuery = require("jquery");
     require("module/scrollImg")($);
-    require("module/lazyload")($);
+  /*  require("module/lazyload")($);*/
     require("module/jquery.tools.tabs")($)
     $(function () {
         /*顶部slide show*/
@@ -51,7 +51,9 @@ define(function (require,exports) {
             $(this).find("#J_Weixin").fadeOut(200)
         });
         /*懒加载*/
-        $(".category img").lazyload({effect:"fadeIn", threshold:200});
+     /*   $(".category img").lazyload({effect:"fadeIn", threshold:200});
+        $(".brand-list img").lazyload({effect:"fadeIn", threshold:200});
+*/
         /* 品牌大全 美食大全*/
             $("div.tabs").tabs(".panes > ul",{
                 event: 'mouseover'

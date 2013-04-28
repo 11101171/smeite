@@ -1,25 +1,17 @@
 @(user:Option[models.user.User])
 @views.html.template(
 user,
-title =  "关于我们_食美特，爱美食爱生活"
-)(css="/assets/css/template/user.regLogin.css") {
+title =  "签到_食美特，爱美食爱生活"
+)(css="/assets/css/template/user.checkIn.css") {
 
 <div class="container">
-    <div class="common">
-        <h2>关于食豆</h2>
-        <div>
 
-
-
-
-        </div>
-    </div>
 </div>
 
         }{
 <script type="text/javascript">
     seajs.use('app/init', function (init) {
-        init.load("app/infos")
+        init.load("app/user/user.checkIn")
     });
 </script>
 }

@@ -1,6 +1,166 @@
-define("module/lazyload",[],function(){return function(b){b.fn.lazyload=function(c){var a={threshold:0,failure_limit:0,event:"scroll",effect:"show",container:window,data_attribute:"original",skip_invisible:!0,appear:null,load:null};c&&(void 0!==c.failurelimit&&(c.failure_limit=c.failurelimit,delete c.failurelimit),void 0!==c.effectspeed&&(c.effect_speed=c.effectspeed,delete c.effectspeed),b.extend(a,c));var e=this;0==a.event.indexOf("scroll")&&b(a.container).bind(a.event,function(){var c=0;e.each(function(){$this=
-b(this);if((!a.skip_invisible||$this.is(":visible"))&&!b.abovethetop(this,a)&&!b.leftofbegin(this,a))if(!b.belowthefold(this,a)&&!b.rightoffold(this,a))$this.trigger("appear");else if(++c>a.failure_limit)return!1})});this.each(function(){var c=this,d=b(c);c.loaded=!1;d.one("appear",function(){this.loaded||(a.appear&&a.appear.call(c,e.length,a),b("<img />").bind("load",function(){d.hide().attr("src",d.data(a.data_attribute))[a.effect](a.effect_speed);c.loaded=!0;var f=b.grep(e,function(a){return!a.loaded});
-e=b(f);a.load&&a.load.call(c,this,e.length,a)}).attr("src",d.data(a.data_attribute)))});0!=a.event.indexOf("scroll")&&d.bind(a.event,function(){c.loaded||d.trigger("appear")})});b(window).bind("resize",function(){b(a.container).trigger(a.event)});b(a.container).trigger(a.event);return this};b.belowthefold=function(c,a){return(void 0===a.container||a.container===window?b(window).height()+b(window).scrollTop():b(a.container).offset().top+b(a.container).height())<=b(c).offset().top-a.threshold};b.rightoffold=
-function(c,a){return(void 0===a.container||a.container===window?b(window).width()+b(window).scrollLeft():b(a.container).offset().left+b(a.container).width())<=b(c).offset().left-a.threshold};b.abovethetop=function(c,a){return(void 0===a.container||a.container===window?b(window).scrollTop():b(a.container).offset().top)>=b(c).offset().top+a.threshold+b(c).height()};b.leftofbegin=function(c,a){return(void 0===a.container||a.container===window?b(window).scrollLeft():b(a.container).offset().left)>=b(c).offset().left+
-a.threshold+b(c).width()};b.inviewport=function(c,a){return!b.rightofscreen(c,a)&&!b.leftofscreen(c,a)&&!b.belowthefold(c,a)&&!b.abovethetop(c,a)};b.extend(b.expr[":"],{"below-the-fold":function(c){return b.belowthefold(c,{threshold:0,container:window})},"above-the-top":function(c){return!b.belowthefold(c,{threshold:0,container:window})},"right-of-screen":function(c){return b.rightoffold(c,{threshold:0,container:window})},"left-of-screen":function(c){return!b.rightoffold(c,{threshold:0,container:window})},
-"in-viewport":function(c){return!b.inviewport(c,{threshold:0,container:window})},"above-the-fold":function(c){return!b.belowthefold(c,{threshold:0,container:window})},"right-of-fold":function(c){return b.rightoffold(c,{threshold:0,container:window})},"left-of-fold":function(c){return!b.rightoffold(c,{threshold:0,container:window})}})}});
+/*
+ * 图片延迟加载
+ * Add on 2012-02-16 by @JefferXia
+ * modify on 2012-05-29
+ * 模块化by heiniu@guang.com 2012-08-15
+ */
+define("module/lazyload", [],function(require, exports) {
+    return function($) {
+
+//(function($) {    
+        $.fn.lazyload = function(options) {
+            var settings = {
+                threshold       : 0,
+                failure_limit   : 0,
+                event           : "scroll",
+                effect          : "show",
+                container       : window,
+                data_attribute  : "original",
+                skip_invisible  : true,
+                appear          : null,
+                load            : null
+            };
+
+            if(options) {
+                if (undefined !== options.failurelimit) {
+                    options.failure_limit = options.failurelimit;
+                    delete options.failurelimit;
+                }
+                if (undefined !== options.effectspeed) {
+                    options.effect_speed = options.effectspeed;
+                    delete options.effectspeed;
+                }
+
+                $.extend(settings, options);
+            }
+
+            var elements = this;
+            if (0 == settings.event.indexOf("scroll")) {
+                $(settings.container).bind(settings.event, function(event) {
+                    var counter = 0;
+                    elements.each(function() {
+                        $this = $(this);
+                        if (settings.skip_invisible && !$this.is(":visible")) return;
+                        if ($.abovethetop(this, settings) || $.leftofbegin(this, settings)) {
+
+                        } else if (!$.belowthefold(this, settings) && !$.rightoffold(this, settings)) {
+                            $this.trigger("appear");
+                        } else {
+                            if (++counter > settings.failure_limit) {
+                                return false;
+                            }
+                        }
+                    });
+                });
+            }
+
+            this.each(function() {
+                var self = this;
+                var $self = $(self);
+
+                self.loaded = false;
+
+                /* When appear is triggered load original image. */
+                $self.one("appear", function() {
+                    if (!this.loaded) {
+                        if (settings.appear) {
+                            var elements_left = elements.length;
+                            settings.appear.call(self, elements_left, settings);
+                        }
+                        $("<img />").bind("load", function() {
+                            $self.hide().attr("src", $self.data(settings.data_attribute))[settings.effect](settings.effect_speed);
+                            self.loaded = true;
+
+                            var temp = $.grep(elements, function(element) {
+                                return !element.loaded;
+                            });
+                            elements = $(temp);
+
+                            if (settings.load) {
+                                var elements_left = elements.length;
+                                settings.load.call(self, this, elements_left, settings);
+                            }
+                        }).attr("src", $self.data(settings.data_attribute));
+                    };
+                });
+
+                if (0 != settings.event.indexOf("scroll")) {
+                    $self.bind(settings.event, function(event) {
+                        if (!self.loaded) {
+                            $self.trigger("appear");
+                        }
+                    });
+                }
+            });
+
+            $(window).bind("resize", function(event) {
+                $(settings.container).trigger(settings.event);
+            });
+
+            $(settings.container).trigger(settings.event);
+
+            return this;
+
+        };
+
+
+        $.belowthefold = function(element, settings) {
+            if (settings.container === undefined || settings.container === window) {
+                var fold = $(window).height() + $(window).scrollTop();
+            } else {
+                var fold = $(settings.container).offset().top + $(settings.container).height();
+            }
+            return fold <= $(element).offset().top - settings.threshold;
+        };
+
+        $.rightoffold = function(element, settings) {
+            if (settings.container === undefined || settings.container === window) {
+                var fold = $(window).width() + $(window).scrollLeft();
+            } else {
+                var fold = $(settings.container).offset().left + $(settings.container).width();
+            }
+            return fold <= $(element).offset().left - settings.threshold;
+        };
+
+        $.abovethetop = function(element, settings) {
+            if (settings.container === undefined || settings.container === window) {
+                var fold = $(window).scrollTop();
+            } else {
+                var fold = $(settings.container).offset().top;
+            }
+            return fold >= $(element).offset().top + settings.threshold  + $(element).height();
+        };
+
+        $.leftofbegin = function(element, settings) {
+            if (settings.container === undefined || settings.container === window) {
+                var fold = $(window).scrollLeft();
+            } else {
+                var fold = $(settings.container).offset().left;
+            }
+            return fold >= $(element).offset().left + settings.threshold + $(element).width();
+        };
+
+        $.inviewport = function(element, settings) {
+            return !$.rightofscreen(element, settings) && !$.leftofscreen(element, settings) &&
+                !$.belowthefold(element, settings) && !$.abovethetop(element, settings);
+        };
+
+        /* Custom selectors for your convenience.   */
+        /* Use as $("img:below-the-fold").something() */
+
+        $.extend($.expr[':'], {
+            "below-the-fold" : function(a) { return $.belowthefold(a, {threshold : 0, container: window}) },
+            "above-the-top"  : function(a) { return !$.belowthefold(a, {threshold : 0, container: window}) },
+            "right-of-screen": function(a) { return $.rightoffold(a, {threshold : 0, container: window}) },
+            "left-of-screen" : function(a) { return !$.rightoffold(a, {threshold : 0, container: window}) },
+            "in-viewport"    : function(a) { return !$.inviewport(a, {threshold : 0, container: window}) },
+            /* Maintain BC for couple of versions. */
+            "above-the-fold" : function(a) { return !$.belowthefold(a, {threshold : 0, container: window}) },
+            "right-of-fold"  : function(a) { return $.rightoffold(a, {threshold : 0, container: window}) },
+            "left-of-fold"   : function(a) { return !$.rightoffold(a, {threshold : 0, container: window}) }
+        });
+
+//})(jQuery);
+
+    }
+});

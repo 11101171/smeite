@@ -424,11 +424,11 @@ nav="index"
         @for((advert,i)<- meishiBrands.view.zipWithIndex) {
         @if(((i+1)%9==0)){
         <li class="last-item">
-            <a  href="@advert.link" title="@advert.title" target="_blank"><img src="/assets/ui/blank.gif" data-original="@advert.pic" alt="@advert.title" width="100px" height="60px"></a>
+            <a  href="@advert.link" title="@advert.title" target="_blank"><img src="@advert.pic" alt="@advert.title" width="100px" height="60px"></a>
         </li>
         }else {
         <li>
-            <a  href="@advert.link" title="@advert.title" target="_blank"><img src="/assets/ui/blank.gif" data-original="@advert.pic" alt="@advert.title" width="100px" height="60px"></a>
+            <a  href="@advert.link" title="@advert.title" target="_blank"><img src="@advert.pic" alt="@advert.title" width="100px" height="60px"></a>
         </li>
         }
         }
