@@ -21,7 +21,7 @@ case class TagFormData(id:Option[Long],name:String,cid:Option[Int],groupId:Optio
 case class BatchFormData(action:Int,ids:Seq[Long],nums:Seq[Int],url:Option[String])
 case class GroupFilterFormData(name:Option[String],cid:Option[Int],isVisible:Option[Boolean],currentPage:Option[Int])
 case  class TagFilterFormData(name:Option[String],cid:Option[Int],groupId:Option[Long],checkState:Option[Int],isTop:Option[Boolean],isHighlight:Option[Boolean],currentPage:Option[Int])
-case class TagGoodsFilterFormData(name:Option[String],checkState:Option[Int],currentPage:Option[Int])
+case class TagGoodsFilterFormData(name:Option[String],cid:Option[Int],checkState:Option[Int],currentPage:Option[Int])
 
 case class TagGoodsBatchFormData(action:Int,ids:Seq[Long],tagNames:Seq[String],sortNums:Seq[Int],url:Option[String])
 
@@ -103,6 +103,7 @@ object  Tags extends Controller {
   val tagGoodsFilterForm =Form(
     mapping(
       "name"->optional(text),
+      "cid"->optional(number),
       "checkState"->optional(number),
       "currentPage"->optional(number)
     )(TagGoodsFilterFormData.apply)(TagGoodsFilterFormData.unapply)
@@ -344,9 +345,9 @@ object  Tags extends Controller {
   def filterTagGoodses= Managers.AdminAction{ manager => implicit request =>
     tagGoodsFilterForm.bindFromRequest.fold(
       formWithErrors =>Ok("something wrong"),
-      goods => {
-       val page=TagDao.filterTagGoodses(goods.name,goods.checkState,goods.currentPage.getOrElse(1),50);
-       Ok(views.html.admin.tags.filterTagGoodses(manager,page,tagGoodsFilterForm.fill(goods)))
+      data => {
+       val page=TagDao.filterTagGoodses(data.name,data.cid,data.checkState,data.currentPage.getOrElse(1),50);
+       Ok(views.html.admin.tags.filterTagGoodses(manager,page,tagGoodsFilterForm.fill(data)))
 
       }
     )

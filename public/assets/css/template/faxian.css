@@ -1,0 +1,490 @@
+/**
+* Created by zuosanshao.
+* Email:zuosanshao@qq.com
+* @contain: 
+* @depends: 
+* Since:13-1-1上午9:32
+* ModifyTime :
+* ModifyContent:
+* http://www.smeite.com/
+*
+*/
+
+.tag-list {
+
+    position: relative;
+    border-bottom: 1px solid #d9d9d9;
+
+}
+ .tag-list dl{
+     width: 960px;
+     margin: 0 auto;
+     padding: 10px;
+
+ }
+ .tag-list dl dt, .tag-list dl dd{
+     float: left;
+ }
+ .tag-list dl dt.title{
+     width: 100px;
+     line-height:70px;
+     color: #333;
+     font-weight: bold;
+     font-family: "Microsoft YaHei";
+
+ }
+.tag-list-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    background-color: #f3f3f3;
+}
+.tag-list dl dd{
+    width: 830px;
+    padding-left: 10px;
+    border-left: 2px solid #9b9b9b;
+}
+
+.tag-list .tag, .tag-list .tag:link, .tag-list .tag:visited {
+    float: left;
+    height: 22px;
+    padding: 0 10px;
+    margin: 0 5px 8px 0;
+    border: 1px solid #d3d3d3;
+    border-radius: 12px;
+    line-height: 22px;
+    color: #666;
+    white-space: nowrap;
+    background-color: #fff
+}
+
+.tag-list .tag:hover, .tag-list .tag:focus {
+    border-color: #588C0E;
+    color: #fff;
+    background-color: #588C0E
+}
+
+.tag-list .curr:link, .tag-list .curr:visited, .tag-list .curr:hover {
+    border-color: #588C0E;
+    color: #fff;
+    background-color: #588C0E
+}
+
+.goods-title {
+    height: 28px;
+    line-height: 28px;
+    padding: 0;
+    padding-top: 15px
+}
+
+.goods-title h2 {
+    color: #333;
+    font-size: 20px;
+    float: left;
+    font-weight: 400;
+    font-family: 'Microsoft YaHei', '榛戜綋'
+}
+
+.goods-title h2 i {
+    margin: 0 10px
+}
+
+.goods-title a.gallery-title {
+    color: #0095bc
+}
+
+.goods-title a.gallery-title:hover {
+    text-decoration: none
+}
+
+span.tag-title {
+    font-weight: normal;
+    font-size: 14px
+}
+
+
+
+
+.goods-wall {
+    margin-top: 10px
+}
+
+
+
+.box-shadow {
+    box-shadow: 0 1px 3px rgba(34, 25, 25, 0.2);
+    -moz-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.2);
+    -webkit-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.2);
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px
+}
+
+.sort {
+    color: #dedede;
+    line-height: 20px;
+    height: 20px;
+    padding-top: 7px
+}
+
+.sort span {
+    color: #999
+}
+
+.sort a {
+    padding: 0 6px;
+    color: #666;
+    text-decoration: none
+}
+
+.sort .on {
+    color: #333
+}
+
+
+.goods-wall {
+    position: relative;
+    min-height: 500px;
+    margin-top: 20px
+}
+
+.goods-wall .section .left {
+    float: left
+}
+
+.goods-wall .section .right {
+    float: right
+}
+
+.goods-wall .section .col-l {
+    float: left
+}
+
+.goods-wall .section .col-c {
+    float: left;
+    width: 230px
+}
+
+.goods-wall .section .col-r {
+    float: right
+}
+
+.goods {
+    position: relative;
+    float: left;
+    width: 210px;
+    height: 290px;
+    padding: 9px;
+    border: 1px #fff solid;
+    color: #999;
+    background-color: white;
+    box-shadow: 0 0 0 rgba(34, 25, 25, 0.2);
+    -moz-box-shadow: 0 0 0 rgba(34, 25, 25, 0.2);
+    -webkit-box-shadow: 0 0 0 rgba(34, 25, 25, 0.2);
+    transition: 0s;
+    -webkit-transition: 0s;
+    -moz-transition: 0s;
+    -o-transition: 0s
+}
+
+.goods .goods-title {
+    width: 210px;
+    padding-top: 6px;
+    height: 20px;
+    line-height: 20px;
+    color: #999
+}
+
+.goods .goods-11-title {
+    width: 210px
+}
+
+.goods .goods-11-title .goods-title {
+    float: left;
+    width: 170px
+}
+
+.goods .goods-11-title .goods-title-11-mark {
+    float: left;
+    background: #e26;
+    color: #fff;
+    font-size: 12px;
+    padding: 0 2px;
+    margin-top: 8px
+}
+
+.goods .goods-pic {
+    width: 210px;
+    height: 210px;
+    overflow: hidden;
+    background: #fff url(images/bg-photo.gif) repeat-y;
+    position: relative;
+}
+
+.goods .goods-pic img {
+    filter: alpha(opacity = 95);
+    opacity: .95
+}
+
+.goods .goods-stat {
+    color: #999;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 0 3px 10px;
+    background: url(images/grayHeart2.png) 0 5px no-repeat;
+    font-family: 'Microsoft YaHei', '黑体'
+}
+
+.goods .goods-stat del {
+    margin-right: 5px
+}
+
+.goods .goods-stat .price-discount {
+    padding-right: 43px;
+    background: url(images/detail-sprite.png) right -103px no-repeat
+}
+
+.goods .goods-des {
+    display: none
+}
+
+.goods .comment {
+    position: relative;
+    background: #fff;
+    overflow: hidden
+}
+
+.goods .comment .user-pic {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    overflow: hidden
+}
+
+.goods .comment .user-pic img {
+    height: 20px;
+    width: 20px
+}
+
+.goods .comment .content {
+    margin-left: 30px;
+    line-height: 20px;
+    height: 20px;
+    overflow: hidden;
+    word-wrap: break-word;
+    word-break: break-all;
+    width: 180px
+}
+
+.goods .comment .content span {
+    color: #999
+}
+
+.goods .comment .content span em {
+    color: #999;
+    margin: 0 5px
+}
+
+.goods .comment .content span a {
+    color: #999
+}
+
+.goods .comment .content span a:hover {
+    text-decoration: none;
+    color: #333
+}
+
+.goods .comment .user-name {
+    color: #999
+}
+
+.goods .comment .user-name:hover {
+    text-decoration: none
+}
+
+.goods .comment .comment-item {
+    padding: 10px 0;
+    position: relative;
+    border-top: 1px dotted #dedede
+}
+
+.goods .ilike-topic {
+    padding-left: 26px;
+    left: 80px;
+    top: 10px
+}
+
+.small .comment {
+    height: 41px
+}
+
+.s1024 {
+    margin-top: 0
+}
+.s1024 .section {
+    position: relative;
+}
+
+.s1024 .goods {
+    margin-top: 20px;
+    margin-right: 20px
+}
+.s1024 .last{
+    margin-right: 0;
+}
+.cur-goods {
+    z-index: 100
+}
+
+.cur-goods .goods-pic img {
+    filter: alpha(opacity = 100);
+    opacity: 1
+}
+
+.cur-goods .goods-title {
+    color: #333
+}
+
+.cur-goods .goods-stat {
+    color: #333
+}
+
+.cur-goods .goods-des {
+    color: #333
+}
+
+.cur-goods .comment .content span {
+    color: #333
+}
+
+.cur-goods .comment .user-name {
+    color: #333
+}
+
+.cur-goods .comment .content span a {
+    color: #333
+}
+
+.s1024 .section .cur-goods .goods-title {
+    color: #333
+}
+
+.goods-clone {
+    position: absolute;
+    z-index: 100;
+    top: -1px;
+    left: -1px;
+    border: 1px #fff solid;
+    padding: 0 9px;
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.2) 1px 2px 8px
+}
+
+.goods .goods-clone .goods-pic {
+    margin-top: 9px
+}
+
+.goods .goods-clone .comment {
+    overflow: visible;
+    height: auto
+}
+
+.goods .goods-clone .comment .content {
+    height: auto;
+    overflow: visible
+}
+
+.small .goods-clone {
+    min-height: 290px;
+    width: 210px;
+
+
+}
+
+.small .goods-clone .comment {
+    min-height: 41px
+}
+
+.pagin4faxian {
+    position: relative;
+    height: 32px;
+    margin-left: 362px;
+    float: left
+}
+
+.pagin4faxian ul {
+    display: none;
+    border: 1px solid #ececec;
+    padding: 1px;
+    position: absolute;
+    background: #fff;
+    bottom: 34px;
+    left: 0;
+    width: 60px
+}
+
+.pagin4faxian li a {
+    display: block;
+    height: 25px;
+    line-height: 25px;
+    color: #333
+}
+
+.pagin4faxian li span {
+    color: #999;
+    height: 25px;
+    line-height: 25px
+}
+
+.pagin4faxian li a:hover {
+    color: #666;
+    background: #ececec;
+    text-decoration: none
+}
+
+.pagin4faxian .current {
+    float: left;
+    width: 62px;
+    line-height: 32px;
+    height: 32px;
+    margin-right: 10px;
+    color: #666
+}
+
+.pagin4faxian .next {
+    float: left;
+    background: #e26;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 20px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px
+}
+
+.pagin4faxian .next:hover {
+    text-decoration: none
+}
+.n-s-no-result {
+height: 40px;
+line-height: 40px;
+background: #FEFBEA;
+border: 1px solid #E8E4CC;
+margin-top: 20px;
+}
+.n-s-no-result-des {
+margin-left: 10px;
+}
+.n-s-product-relative {
+font-size: 16px;
+font-weigh: bold;
+margin-right: 10px;
+font-family: 'Microsoft YaHei','黑体';
+}

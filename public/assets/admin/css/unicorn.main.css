@@ -1643,3 +1643,6 @@ a.caldisabled {
     background-color:#333;
     color:#fff;
 }
+.with-check input{
+    width: 60px;
+}

@@ -9,6 +9,7 @@ import models.Page
 import java.util.Calendar
 
 
+
 /**
    * Created by zuosanshao.
    * email:zuosanshao@qq.com
@@ -59,7 +60,7 @@ import java.util.Calendar
   /*发现
   * 1.首先判断 cate tag 是否存在，不存在，则返回到/find 页面    滋补保健 特产的标签放在美食中
   * */
-  def find(cate:String,tag:String,p:Int) = Users.UserAction{ user => implicit request =>
+  def faxian(cate:String,tag:String,p:Int) = Users.UserAction{ user => implicit request =>
     val cid:Int = cate match {
       case "美食" => 0
       case "特产" => 1
@@ -74,9 +75,26 @@ import java.util.Calendar
      var page:models.Page[((Int,Long,String,String,Int,String,Option[String],String),List[(Option[Long],Option[String],Option[String],Option[String])])] = null
       if (tag =="tag")  page = TagDao.findCateGoodses(cid,p,48);
       else   page = TagDao.findTagGoodses(tag,p,48)
-    Ok(views.html.pages.find(user,page,cate,tag,tags))
+    Ok(views.html.pages.faxian(user,page,cate,tag,tags))
   }
 
+  def find(cate:String,tag:String,p:Int) = Users.UserAction{ user => implicit request =>
+    val cid:Int = cate match {
+      case "美食" => 0
+      case "特产" => 1
+      case "滋补" => 2
+      case "居家" =>3
+      case "礼物" => 4
+      case "好玩意" => 5
+      case "其他" =>6
+      case _ => 0
+    }
+    val tags = TagDao.findCateTags(cid,30)
+    var page:models.Page[models.goods.Goods] = null
+    if (tag =="tag")  page = TagDao.findSimpleCateGoodses(cid,p,48);
+    else   page = TagDao.findSimpleTagGoodses(tag,p,48)
+    Ok(views.html.pages.find(user,page,cate,tag,tags))
+  }
 
 
   /* 美食街*/

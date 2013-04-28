@@ -83,10 +83,8 @@ object TagDao {
     val totalRows = Query(TagGoodses.filter(_.tagName === tagName ).filter(_.checkState ===1).length).first()
     val totalPages=((totalRows + pageSize - 1) / pageSize);
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
-    val ids = for(c<- TagGoodses.filter(_.tagName === tagName).filter(_.checkState===1).drop(startRow).take(pageSize) )yield c.goodsId
-
-    val q = for{
-      (((t,g),a),u)<-TagGoodses.filter(_.tagName === tagName).filter(_.checkState===1).drop(startRow).take(pageSize) leftJoin Goodses on (_.goodsId ===_.id) leftJoin  GoodsAssesses  on (_._2.id ===_.goodsId) leftJoin Users on (_._2.uid === _.id)
+     val q = for{
+      (((t,g),a),u)<-TagGoodses.filter(_.tagName === tagName).filter(_.checkState===1).drop(startRow).take(pageSize) innerJoin Goodses on (_.goodsId ===_.id)  leftJoin  GoodsAssesses  on (_._2.id ===_.goodsId) leftJoin Users on (_._2.uid === _.id)
     }yield(t.sortNum,g.id,g.name,g.pic,g.loveNum,g.price,g.promotionPrice.?,g.intro,u.id.?,u.name.?,u.pic.?,a.content.?)
 
     val list:List[((Int,Long,String,String,Int,String,Option[String],String),List[(Option[Long],Option[String],Option[String],Option[String])])] = q.list.groupBy(x=>(x._1,x._2,x._3,x._4,x._5,x._6,x._7,x._8)).map(x=>(x._1,x._2.map(y=>(y._9,y._10,y._11,y._12)))).toList.sortBy(_._1)
@@ -95,24 +93,53 @@ object TagDao {
 
   /* 查找 tagGroup 下 所有的商品 */
   def findCateGoodses(cid:Int,currentPage:Int,pageSize:Int ):Page[((Int,Long,String,String,Int,String,Option[String],String),List[(Option[Long],Option[String],Option[String],Option[String])])] = database.withSession{ implicit session:Session =>
+    val totalRows = Query(TagGoodses.filter(_.cid === cid ).filter(_.checkState ===1).length).first()
+    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    println(" totalRows  " + totalRows + " totalPages  " + totalPages  + " startRow " +startRow )
 
-
-
-   val ids = for{
-    t<- Tags.filter(_.cid === cid)
-    g<-TagGoodses.filter(_.checkState === 1).sortBy(_.sortNum)
-     if t.name === g.tagName
-   }yield g.goodsId
-   val totalRows = ids.list().length
-   val totalPages=((totalRows + pageSize - 1) / pageSize);
-   val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
-   val q = for{
-     ((g,a),u)<- Goodses.sortBy(_.collectTime desc).filter(_.id in ( ids.drop(startRow).take(pageSize))) leftJoin  GoodsAssesses.filter(_.checkState===1)  on (_.id ===_.goodsId) leftJoin Users on (_._2.uid === _.id)
-   }yield(g.commissionRate,g.id,g.name,g.pic,g.loveNum,g.price,g.promotionPrice.?,g.intro,u.id.?,u.name.?,u.pic.?,a.content.?)
-   val list:List[((Int,Long,String,String,Int,String,Option[String],String),List[(Option[Long],Option[String],Option[String],Option[String])])] = q.list.groupBy(x=>(x._1,x._2,x._3,x._4,x._5,x._6,x._7,x._8)).map(x=>(x._1,x._2.map(y=>(y._9,y._10,y._11,y._12)))).toList
-   Page(list,currentPage,totalPages)
+    val q = for{
+      (((t,g),a),u)<-TagGoodses.filter(_.cid === cid).filter(_.checkState===1).sortBy(_.sortNum desc).drop(startRow).take(pageSize) innerJoin Goodses on (_.goodsId ===_.id) leftJoin  GoodsAssesses  on (_._2.id ===_.goodsId) leftJoin Users on (_._2.uid === _.id)
+    }yield(t.sortNum,g.id,g.name,g.pic,g.loveNum,g.price,g.promotionPrice.?,g.intro,u.id.?,u.name.?,u.pic.?,a.content.?)
+     println(" sq  " +q.list().length)
+	 for( x <- q.list()){
+	 println(x._2)
+	 }
+    val list:List[((Int,Long,String,String,Int,String,Option[String],String),List[(Option[Long],Option[String],Option[String],Option[String])])] = q.list.groupBy(x=>(x._1,x._2,x._3,x._4,x._5,x._6,x._7,x._8)).map(x=>(x._1,x._2.map(y=>(y._9,y._10,y._11,y._12)))).toList.sortBy(_._1)
+    Page(list,currentPage,totalPages)
   }
 
+  /* 查找tag下的所有审核过的商品 */
+  def findSimpleTagGoodses(tagName:String,currentPage:Int,pageSize: Int ):Page[Goods] = database.withSession{ implicit session:Session =>
+    val totalRows = Query(TagGoodses.filter(_.tagName === tagName ).filter(_.checkState ===1).length).first()
+    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val q = for{
+      t <- TagGoodses.filter(_.tagName === tagName).sortBy(_.sortNum asc); g <- Goodses;  if t.goodsId === g.id
+    }yield(g)
+    val list:List[Goods] = q.drop(startRow).take(pageSize).list()
+    for(item <- list){
+      println(item.id.get)
+    }
+    Page(list,currentPage,totalPages)
+  }
+
+  def findSimpleCateGoodses(cid:Int,currentPage:Int,pageSize:Int ):Page[Goods] = database.withSession{ implicit session:Session =>
+    val totalRows = Query(TagGoodses.filter(_.cid === cid ).filter(_.checkState ===1).length).first()
+    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val q = for{
+      t <- TagGoodses
+      g <- Goodses
+      if  t.cid === cid
+      if  t.goodsId === g.id
+    }yield(g,t.sortNum)
+    val list:List[Goods] = q.drop(startRow).take(pageSize).list().sortBy(x=>x._2).map(x => x._1)
+    for(item <- list){
+      println(item.id.get)
+    }
+    Page(list,currentPage,totalPages)
+  }
 
   /* 显示所有的商品*/
   def findAllGoodses(currentPage:Int ,pageSize: Int):Page[((Long,String,String,Int,String,Option[String],String),List[(Option[Long],Option[String],Option[String],Option[String])])] = database.withSession{ implicit session:Session =>
@@ -154,14 +181,14 @@ object TagDao {
     TagGoodses.delete(id)
   }
   /*查找所用的标签商品*/
-  def findAllTagGoodses(currentPage: Int , pageSize: Int ): Page[(Long,Long,String,String,String,Int,Int,Int)] = database.withSession {  implicit session:Session =>
+  def findAllTagGoodses(currentPage: Int , pageSize: Int ): Page[(Long,Long,String,String,String,Int,Int,Int,Int)] = database.withSession {  implicit session:Session =>
     val totalRows=Query(TagGoodses.length).first()
     val totalPages=((totalRows + pageSize - 1) / pageSize);
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
-    val q=  for(t <- TagGoodses.sortBy(_.sortNum asc); g <- Goodses;  if t.goodsId === g.id) yield(t.id~g.id~g.name~g.pic~t.tagName~t.addNum~t.checkState~t.sortNum)
-    val assesses:List[(Long,Long,String,String,String,Int,Int,Int)]=  q.drop(startRow).take(pageSize).list()
-    Page[(Long,Long,String,String,String,Int,Int,Int)](assesses,currentPage,totalPages);
+    val q=  for(t <- TagGoodses.sortBy(_.sortNum asc); g <- Goodses;  if t.goodsId === g.id) yield(t.id~g.id~g.name~g.pic~t.tagName~t.addNum~t.checkState~t.sortNum~t.cid)
+    val assesses:List[(Long,Long,String,String,String,Int,Int,Int,Int)]=  q.drop(startRow).take(pageSize).list()
+    Page[(Long,Long,String,String,String,Int,Int,Int,Int)](assesses,currentPage,totalPages);
   }
 
   /* 查找 宝贝的 标签*/
@@ -268,17 +295,18 @@ def findRelativeTagGoodses(goodsId:Long) = database.withSession{ implicit  sessi
 
   }
 
-  def filterTagGoodses(name:Option[String],checkState:Option[Int],currentPage:Int, pageSize:Int): Page[(Long,Long,String,String,String,Int,Int,Int)] = database.withSession {  implicit session:Session =>
-    var query = for(t <- TagGoodses.sortBy(_.sortNum asc); g <- Goodses;  if t.goodsId === g.id) yield(t.id~g.id~g.name~g.pic~t.tagName~t.addNum~t.checkState~t.sortNum)
+  def filterTagGoodses(name:Option[String],cid:Option[Int],checkState:Option[Int],currentPage:Int, pageSize:Int): Page[(Long,Long,String,String,String,Int,Int,Int,Int)] = database.withSession {  implicit session:Session =>
+    var query = for(t <- TagGoodses.sortBy(_.sortNum asc); g <- Goodses;  if t.goodsId === g.id) yield(t.id ~g.id~g.name~g.pic~t.tagName~t.addNum~t.checkState~t.sortNum ~ t.cid)
     if(!name.isEmpty) query =query.filter(_._5 === name.get)
+    if(!cid.isEmpty) query =query.filter(_._9 === cid.get)
     if(!checkState.isEmpty) query =query.filter(_._7 === checkState.get)
     val totalRows=query.list().length
     val totalPages=((totalRows + pageSize - 1) / pageSize);
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     //println(" q sql "+query.selectStatement)
-    val assesses:List[(Long,Long,String,String,String,Int,Int,Int)]=  query.drop(startRow).take(pageSize).list()
-    Page[(Long,Long,String,String,String,Int,Int,Int)](assesses,currentPage,totalPages);
+    val assesses:List[(Long,Long,String,String,String,Int,Int,Int,Int)]=  query.drop(startRow).take(pageSize).list()
+    Page[(Long,Long,String,String,String,Int,Int,Int,Int)](assesses,currentPage,totalPages);
   }
 
 

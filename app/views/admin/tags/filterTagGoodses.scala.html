@@ -1,4 +1,4 @@
-@(manager:models.admin.Manager,page:models.Page[(Long,Long,String,String,String,Int,Int,Int)],form: Form[controllers.admin.TagGoodsFilterFormData])
+@(manager:models.admin.Manager,page:models.Page[(Long,Long,String,String,String,Int,Int,Int,Int)],form: Form[controllers.admin.TagGoodsFilterFormData])
 @views.html.admin.template(manager,"tag") {
 
     <div id="content-header">
@@ -35,6 +35,19 @@
                                 <input type="text" id="name" name="name" value='@form("name").value'  placeholder="标签组组名称" >
                             </div>
                         </div>
+                        <div class="control-group">
+                            <label class="control-label">分类</label>
+                            <div class="controls">
+                                <select name="cid" id="J_cid">
+                                    <option value=""  @if(form("cid").value.getOrElse("none")=="none"){ selected="true" } >所有分类</option>
+                                    @for(cate<-models.Cate.values){
+                                    <option value="@cate.id" @if(form("cid").value.getOrElse("none")==cate.id.toString){ selected="true" }>@cate</option>
+                                    }
+                                </select>
+
+                            </div>
+                        </div>
+
     <div class="control-group">
     <label class="control-label" >审核状态</label>
     <div class="controls">
@@ -106,12 +119,12 @@
                 <tr id="@item._1">
                     <td><input type="checkbox" name="ids[@i]" value="@item._1" /></td>
                     <td> @item._1</td>
-                    <td><input type="text" name="tagNames[@i]" value="@item._5"></td>
-                    <td><img src='@(item._4+"_80x80.jpg")' width="80" height="80"></td>
+                    <td><input type="text" name="tagNames[@i]" value="@item._5" width="80"></td>
+                    <td><img src='@(item._4+"_210x210.jpg")' width="210" height="210"></td>
                     <td><a href="@controllers.routes.Goods.view(item._2)">@item._3</a></td>
                     <td>@item._6</td>
                     <td>@if(item._7==0){<span class="label label-warning">未审核</span>} @if(item._7 ==1){<span class="label label-success">审核通过</span>}@if(item._7 ==2){<span class="label ">审核不通过</span>}</td>
-                    <td><input type="text" name="sortNums[@i]" value="@item._8"></td>
+                    <td><input type="text" name="sortNums[@i]" value="@item._8" width="80"></td>
 
 
                     <td>
