@@ -10,7 +10,7 @@ import models.Page._
  * Email:zuosanshao@qq.com
 *  Since:13-4-14下午6:01
  * ModifyTime :
- * ModifyContent:
+ * ModifyContent:用户通过购物返利
  * http://www.smeite.com/
  *
  */

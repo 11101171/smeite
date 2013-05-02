@@ -1326,24 +1326,25 @@ alter table user_profile change invite_id invite_id int(10) default '0';
 * 用户签到表设计
 * check_in_days 连续签到时间
 * credits 获得的积分
+* check_in_month 201305
+* check_in_history day:state:credit  01:1:3,02:0:0,03:1:2 诸如此类
 */
  */
 DROP TABLE IF EXISTS `user_check_in`;
 CREATE TABLE `user_check_in` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `uid`                 int(10) ,
-  `credits`              smallint (10) ,
-  `check_in_days`              smallint (10) ,
-  `check_in_time`          timestamp,
-  `check_in_month`         varchar(16),
-  `check_in_history`         varchar(16),
-
+  `credits`             smallint (10) ,
+  `days`      smallint (10) ,
+  `month`     smallint(10),
+  `history`   varchar(200),
+  `add_time`      timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 /* 用户 投票表 设计
  * voteType:0 话题  1 产品
- * day  哪天
+ * valid_state  0 未开始 1 正在进行 2 已结束
  * thirdId 第三方id
  * intro 说明
  * pic   图片
@@ -1360,13 +1361,14 @@ CREATE TABLE `user_check_in` (
 */
 
 DROP TABLE IF EXISTS `user_vote`;
-CREATE TABLE `user_vote` (
+DROP TABLE IF EXISTS `vote`;
+CREATE TABLE `vote` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `vote_type`                tinyint(4) ,
-  `day`              varchar(16) ,
-  `third_id`              smallint (10) ,
-  `intro`          varchar(144),
-  `pic`          varchar(128),
+  `valid_state`              tinyint(4) ,
+  `third_id`             int (10) ,
+  `intro`           varchar(144),
+  `pic`             varchar(128),
   `select1`          varchar(128),
   `select2`          varchar(128),
   `select3`          varchar(128),
@@ -1377,6 +1379,7 @@ CREATE TABLE `user_vote` (
   `value3`          varchar(128),
   `value4`          varchar(128),
   `value5`          varchar(128),
+  `add_time`      timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
