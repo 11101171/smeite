@@ -435,24 +435,10 @@ define(function(require, exports) {
             fun();
         });
     }
-    //使用弹窗方式登录
-    if($("a[rel=loginD]")[0]){
-        $("a[rel=loginD]").click(function(event){
-            event.preventDefault();
-            $.smeite.dialog.login();
-        });
-    }
-    if($("a[rel=loginD2]")[0]){
-        $("a[rel=loginD2]").click(function(event){
-            event.preventDefault();
-            var numIid =$(this).data("numiid")
-            var goodsId=$(this).data("goodsid")
-            var rate=$(this).data("rate")
-            $.smeite.dialog.login2(numIid,goodsId,rate);
-        });
-    }
-    /* 登录框*/
+
+    /* 对话框：用户登陆 和 判断是否为新用户 */
     $.smeite.dialog = {
+        /*判断是否登陆*/
         isLogin: function(){
             if(SMEITER.userId == ""){
                 $.smeite.dialog.login();
@@ -618,7 +604,7 @@ define(function(require, exports) {
                 $("#loginDialog").data("overlay").load();
             }
         },
-
+        /* 判断是否为新用户 */
         isNew:function(){
             if(SMEITER.status == "0" && SMEITER.userId !=""){
                 if("close"!=Cookie.get("newGift")){
@@ -629,6 +615,7 @@ define(function(require, exports) {
             }
             return true;
         },
+        /*新用户有礼*/
         newGift:function(){
             if(!$("#J_newGiftDialog")[0]){
                 var html = "";
@@ -829,55 +816,6 @@ define(function(require, exports) {
         }
     }
 
-    /*
-     * 文字上下滚动
-     */
-    $.fn.textSlider = function(conf){
-        conf = $.extend({
-            speed: "normal",
-            step: 1,
-            timer: 1000
-        },conf || {});
-
-        return this.each(function() {
-            $.fn.textSlider.scllor($(this), conf);
-        });
-    }
-    $.fn.textSlider.scllor = function(obj, conf){
-        var ul = obj.find("ul:eq(0)"),
-            timerID,
-            li = ul.children(),
-            liHeight=$(li[0]).outerHeight(),
-            upHeight=0-conf.step*liHeight;//滚动的高度；
-        var scrollUp=function(){
-            ul.animate({marginTop:upHeight}, conf.speed, function(){
-                for(i=0;i<conf.step;i++){
-                    ul.find("li:first").removeClass("fade");
-                    ul.find("li:first").appendTo(ul);
-                }
-                ul.css({marginTop:0});
-                ul.find("li:first").addClass("fade");
-            });
-        };
-        var scrollDown=function(){
-            ul.animate({marginTop:-1*upHeight}, conf.speed, function(){
-                for(i=0;i<conf.step;i++){
-                    ul.find("li:last").prependTo(ul);
-                }
-                ul.css({marginTop:0});
-            });
-        };
-        var autoPlay=function(){
-            timerID = window.setInterval(scrollUp,conf.timer);
-        };
-        var autoStop = function(){
-            window.clearInterval(timerID);
-        };
-        if(li.length>5){
-            autoPlay();
-        }
-        ul.hover(autoStop,autoPlay);
-    }
     /*
      * 提示框
      */
@@ -1303,230 +1241,6 @@ define(function(require, exports) {
             }
         }
     }
-
-        /*分享网络商品*/
-    if($("a[rel=shareGoods]")[0]){
-        $("a[rel=shareGoods]").click(function(){
-            if(!$.smeite.dialog.isLogin()){
-                return false;
-            }
-            if(SMEITER.isBlack=="true"){
-                alert("您的分享功能已被禁用");
-                return false;
-            }
-            var $this = $(this);
-            if(!$("#J_ShareGoodsD")[0]){
-                var html = "";
-                html += '<div id="J_ShareGoodsD" class="g-dialog sg-dialog">';
-                html += '<div class="content">';
-                html += '<p class="title">将宝贝网址粘贴到下面框中：</p>';
-                html += '<form class="sg-form" name="shareGoods" action="/ugc/api/findProduct">';
-                html += '<div class="clearfix"><input class="base-input sg-input" name="url" value="" placeholder="http://" autocomplete="off" />';
-                html += '<input type="submit" id="J_GoodsUrlSubmit" class="bbl-btn url-sub" value="确定" /></div>';
-                html += '<div class="text-tip"></div>';
-                html += '</form>';
-                html += '<div class="sg-source">';
-                html += '<p class="pt5 pb5">已支持网站：</p>';
-                html += '<div class="source-list clearfix">';
-                html += '<a class="icon-source icon-taobao" href="http://www.taobao.com/" target="_blank">淘宝网</a>';
-                html += '<a class="icon-source icon-tmall" href="http://www.tmall.com/" target="_blank">天猫商城</a>';
-                html += '</div>';
-                html += '<p class="contact"><strong>不欢迎商家分享，合作请<a href="http://smeite.com/contactUs" target="_blank">点击此处</a>。</strong></p>';
-                html += '</div>';
-                html += '<div class="tipbox-up"><em>◆</em><span>◆</span></div>';
-                html += '<a class="close" href="javascript:;"></a>';
-                html += '</div>';
-                html += '</div>';
-                $("body").append(html);
-                $(".sg-dialog .close").click(function(){
-                    $("#J_GoodsUrlSubmit").enableBtn("bbl-btn");
-                    $("#J_ShareGoodsD").fadeOut("fast");
-
-                });
-                $(".sg-form").submit(function(){
-                    var $this = $(this);
-                    var url = $.smeite.util.trim($(".sg-input").val());
-                    if(url==""){
-                        $(".text-tip").html('<span class="errc">宝贝网址不能为空~</span>').show();
-                    }else if(!$.smeite.util.validSite(url)){
-                        $(".text-tip").html('<span class="errc">暂时还不支持这个网站呢~</span>').show();
-                    }else{
-                        $(".text-tip").html('<span class="gc6">宝贝信息抓取中…</span>').show();
-                        $("#J_GoodsUrlSubmit").disableBtn("bbl-btn");
-                        $.get($this.attr("action"),$this.serializeArray(),function(data){
-                            $("#J_GoodsUrlSubmit").enableBtn("bbl-btn");
-                            if(data.code=="100"){
-                                $("#J_ShareGoodsD").hide();
-                                $.smeite.ugc.goodspub(data.product);
-                            }else if(data.code=="105"){
-                                $("#J_ShareGoodsD").hide();
-                                $.smeite.ugc.goodsExist(data.product);
-                            }else if(data.code=="104"){
-                                $(".text-tip").html('<span class="errc">宝贝信息抓取失败，请重试…</span>').show();
-                            }else if(data.code=="107"){
-                                $(".text-tip").html('<span class="errc">暂时还不支持这个宝贝…</span>').show();
-                            }else if(data.code=="108"){
-                                $(".text-tip").html('<span class="errc">你已经分享过这个宝贝啦…</span>').show();
-                            }else if(data.code=="110"){
-                                $(".text-tip").html('<span class="errc">亲，该商品所在商家已列入黑名单，申诉请联系service@smeite.com</span>').show();
-                            }else if(data.code=="400"){
-                                alert("亲，你还没有登录！");
-                                window.location.href="/user/login";
-                            } else if(data.code=="444"){
-                                alert("你已被禁止登录！");
-                                window.location.href="/user/logout";
-                            }else if(data.code=="442"){
-                                alert("请不要频繁分享同一店铺的商品，否则帐户可能会被冻结。如果你是优质商户，请联系我们（bd@smeite.com）");
-                            }else if(data.code=="443"){
-                                alert("由于你频繁分享同一店铺商品，分享功能已被禁用。有疑问请联系 GCTU@smeite.com（注：邮件附上用户名）");
-                            }else if(data.code=="445"){
-                                alert("城管大队怀疑你恶意发广告，将禁止你发布商品的权利，申诉请联系GCTU@smeite.com");
-                            }
-                        });
-                    }
-                    return false;
-                });
-            }else{
-                $(".sg-input").val("");
-                $(".text-tip").html("");
-            }
-            if($this.hasClass("hd-share-goods")){
-                $(".shareIt").append($("#J_ShareGoodsD"));
-            }else{
-                $("body").append($("#J_ShareGoodsD"));
-            }
-            var position = $.smeite.util.getPosition($this).leftBottom();
-            var W = $("#J_ShareGoodsD").outerWidth(),
-                H = $("#J_ShareGoodsD").outerHeight(),
-                btnW = $this.outerWidth(),
-                dLeft = position.x,
-                tipLeft = btnW/2 - 8;
-            if((position.x + W) > 960){
-                dLeft = position.x - (W - btnW);
-                tipLeft = W - btnW/2 - 8;
-            }
-            $("#J_ShareGoodsD .tipbox-up").css({
-                left: tipLeft + "px"
-            });
-            if($this.hasClass("hd-share-goods")){
-                $("#J_ShareGoodsD").css({
-                    left: "auto",
-                    right: "0",
-                    top: "33px"
-                }).fadeIn("fast");
-            }else{
-                $("#J_ShareGoodsD").css({
-                    right: "auto",
-                    left: dLeft + "px",
-                    top: position.y + 10 + "px"
-                }).fadeIn("fast");
-            }
-            $(".sg-input").focus();
-        });
-    }
-    //标签输入框自动转换“,”
-    $("input[rel=tagsInput]").live("keyup",function(){
-        //限制每个标签的中文长度
-        var MaxSingleTagLength = 14,
-            MaxAllTagsLength = 64,
-            thisVal = $(this).val();
-        if($.smeite.util.getStrLength($.smeite.util.htmlToTxt(thisVal))<=MaxAllTagsLength){
-            var $this = $(this);
-            thisVal = thisVal.replace(/\uff0c|\s+/g,",");
-            while(thisVal.indexOf(',,')>=0){
-                thisVal = thisVal.replace(',,',',');
-            }
-            var thisValueArr = thisVal.split(","),
-                thisValueArrIndex = 0,
-                istoolong = false;
-            for(;thisValueArrIndex<thisValueArr.length;thisValueArrIndex++){
-                var val = thisValueArr[thisValueArrIndex]
-                if($.smeite.util.htmlToTxt(val).length>MaxSingleTagLength){
-                    istoolong = true;
-                    thisValueArr[thisValueArrIndex] = $.smeite.util.substring4ChAndEn(val,MaxSingleTagLength);
-                }
-            }
-            if(istoolong){
-                thisVal = thisValueArr.join(",");
-            }
-            if(thisVal != this.value){
-                this.value = thisVal;
-            }
-        }else{
-            this.value = $.smeite.util.substring4ChAndEn(thisVal,64);
-        }
-    });
-
-
-
-    /* 分享按钮 */
-    $.fn.shareBtn = function(){
-        if(!$(".share-dropdown")[0]){
-            var html = '';
-            html += '<ul class="share-link share-dropdown">';
-            html += '<li><a class="s-sina" href="javascript:;">分享到新浪微博</a></li>';
-            html += '<li><a class="s-qzone" href="javascript:;">分享到QQ空间</a></li>';
-            html += '<li><a class="s-tencent" href="javascript:;">分享到腾讯微博</a></li>';
-            html += '<li><a class="s-douban" href="javascript:;">分享到豆瓣</a></li>';
-            html += '<li><a class="s-renren" href="javascript:;">分享到人人网</a></li>';
-            html += '<li><a class="s-163" href="javascript:;">分享到网易微博</a></li>';
-            html += '</ul>';
-            $("body").append(html);
-        }
-        return this.each(function() {
-            var $this = $(this);
-            $this.bind("mouseover",function(){
-                $(".share-dropdown a").unbind("click").click(function(){
-                    var type = $(this).attr("class"),
-                        shareTxt = encodeURIComponent($this.data("sharetxt")),
-                        shareLink = $this.data("sharelink"),
-                        sharePic = encodeURIComponent($this.data("sharepic"));
-                    if(shareLink.indexOf("http://smeite.com")==-1){
-                        shareLink = encodeURIComponent("http://smeite.com" + shareLink);
-                    }
-                    switch(type){
-                        case "s-sina":
-                            window.open('http://service.t.sina.com.cn/share/share.php?appkey=1464940004&title='+shareTxt+'&pic='+sharePic+'&url='+shareLink);
-                            break;
-                        case "s-tencent":
-                            window.open('http://v.t.qq.com/share/share.php?appkey=100344510&url='+shareLink+'&title='+shareTxt+'&pic='+sharePic+'&site='+shareLink);
-                            break;
-                        case "s-douban":
-                            window.open('http://www.douban.com/recommend/?url='+shareLink+'&title='+shareTxt);
-                            break;
-                        case "s-qzone":
-                            window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+shareLink);
-                            break;
-                        case "s-renren":
-                            window.open('http://share.renren.com/share/buttonshare.do?link='+shareLink+'&title='+shareTxt);
-                            break;
-                        case "s-163":
-                            window.open('http://t.163.com/article/user/checkLogin.do?link='+shareLink+'&source=&info='+shareTxt+'&images='+sharePic);
-                    }
-                });
-            });
-            $this.dropDown({
-                classNm: ".share-dropdown",
-                offsetX: 122,
-                offsetY: 0,
-                isLocation: true
-            });
-        });
-    }
-
- /*创建主题  先判断是否登录 2012-12-26 */
-    if($("a[rel=createTheme]")[0]){
-        $("a[rel=createTheme]").click(function(){
-            if(!$.smeite.dialog.isLogin()){
-                return false;
-            }
-            if(SMEITER.isBlack=="true"){
-                alert("您的分享功能已被禁用");
-                return false;
-            }
-
-        })
-    }
    /*用户喜欢操作*/
     $.smeite.favor = {
         //喜欢第一次提交
@@ -1712,6 +1426,62 @@ define(function(require, exports) {
         }
     };
 
+
+    /* 分享按钮 */
+    $.fn.shareBtn = function(){
+        if(!$(".share-dropdown")[0]){
+            var html = '';
+            html += '<ul class="share-link share-dropdown">';
+            html += '<li><a class="s-sina" href="javascript:;">分享到新浪微博</a></li>';
+            html += '<li><a class="s-qzone" href="javascript:;">分享到QQ空间</a></li>';
+            html += '<li><a class="s-tencent" href="javascript:;">分享到腾讯微博</a></li>';
+            html += '<li><a class="s-douban" href="javascript:;">分享到豆瓣</a></li>';
+            html += '<li><a class="s-renren" href="javascript:;">分享到人人网</a></li>';
+            html += '<li><a class="s-163" href="javascript:;">分享到网易微博</a></li>';
+            html += '</ul>';
+            $("body").append(html);
+        }
+        return this.each(function() {
+            var $this = $(this);
+            $this.bind("mouseover",function(){
+                $(".share-dropdown a").unbind("click").click(function(){
+                    var type = $(this).attr("class"),
+                        shareTxt = encodeURIComponent($this.data("sharetxt")),
+                        shareLink = $this.data("sharelink"),
+                        sharePic = encodeURIComponent($this.data("sharepic"));
+                    if(shareLink.indexOf("http://smeite.com")==-1){
+                        shareLink = encodeURIComponent("http://smeite.com" + shareLink);
+                    }
+                    switch(type){
+                        case "s-sina":
+                            window.open('http://service.t.sina.com.cn/share/share.php?appkey=1464940004&title='+shareTxt+'&pic='+sharePic+'&url='+shareLink);
+                            break;
+                        case "s-tencent":
+                            window.open('http://v.t.qq.com/share/share.php?appkey=100344510&url='+shareLink+'&title='+shareTxt+'&pic='+sharePic+'&site='+shareLink);
+                            break;
+                        case "s-douban":
+                            window.open('http://www.douban.com/recommend/?url='+shareLink+'&title='+shareTxt);
+                            break;
+                        case "s-qzone":
+                            window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+shareLink);
+                            break;
+                        case "s-renren":
+                            window.open('http://share.renren.com/share/buttonshare.do?link='+shareLink+'&title='+shareTxt);
+                            break;
+                        case "s-163":
+                            window.open('http://t.163.com/article/user/checkLogin.do?link='+shareLink+'&source=&info='+shareTxt+'&images='+sharePic);
+                    }
+                });
+            });
+            $this.dropDown({
+                classNm: ".share-dropdown",
+                offsetX: 122,
+                offsetY: 0,
+                isLocation: true
+            });
+        });
+    }
+
     //广告位点击数
     function countAdNum(obj){
         var $this=$(obj);
@@ -1731,238 +1501,351 @@ define(function(require, exports) {
     }
 
 
+    /*用户的签到功能*/
+    $.smeite.checkIn={
+        changeCheckInIcon :function(status){
+            if(status){
+                $("a[rel=checkIn]").addClass("checked").text("已签");
+            }else{
+                $("a[rel=checkIn]").removeClass("checked").text("签到");
+            }
+        },
+        checkInIntro:function(o,data,show){
+            $("#checkin_intro").unbind().remove();
+            var userCheckinDays = (data.userCheckinDays+'').length==1?('0'+data.userCheckinDays):data.userCheckinDays;
+            var HTML = ""
+                +'<div id="checkin_intro">'
+                +'连签：<b class="checkin_days">'+userCheckinDays+'</b>&nbsp;天<br/>'
+                +'积分：<b id="jifen">'+data.userScore+'</b>&nbsp;分<br/>'
+
+                +'<p>'
+                +'签到：送集分宝，每次1-20个集分宝，随机赠送<br/>'
+                +'连签7天：额外送7个<br/>'
+                +'连签15天：额外送15个<br/>'
+                +'连签30天：额外送30个<br/>'
+                +'<a href="/user/account/invite" target="_blank">邀请可获更多集分宝</a>'
+                +'</p>'
+                +'</div>';
+            o.after(HTML);
+
+        },
+
+        /* 判断用户是否已经签到*/
+         judgeCheckInState:function(){
+                 if(SMEITER.userId.length<=1){
+                     return "Not login";
+                 }
+                 $.ajax({
+                     url:"/checkInState",
+                     type : "post",
+                     dataType: "json",
+                     success: function(data){
+                         if(data.code==100){
+                             $.smeite.checkIn.changeCheckInIcon(true);
+                         }else if(data.code==101){
+                             //积分获取失败
+                             //$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error3";
+                             //$.smeite.tip.show($this,">_<积分获取失败");
+                         }else if(data.code==300){
+                             //未登录
+                             $.smeite.checkIn.changeCheckInIcon(false);
+                         }
+                     }
+                 });
+
+         },
+        /* 签到过程 */
+        checkInProcess:function(){
+
+        },
+        /* 调查过程 */
+        voteProcess:function(){
+
+        }
+    }
+
+
+
     /* 初始化加载中的内容*/
     $(function(){
-        /* 判断用户是否为新用户*/
-        $.smeite.dialog.isNew()
-        /* 底部 友情链接 */
 
-
-        // 判断reffer来源,默认是 qq
-        var refererUrl=document.referrer
-        var referer="smeite"
-        if(refererUrl.indexOf("qq")>0)referer ="qq"
-        if(refererUrl.indexOf("taobao")>0 || refererUrl.indexOf("tmall")>0)referer ="taobao"
-        if(refererUrl.indexOf("weibo")>0) referer="weibo"
-        function addToFav(o){
-            var url = "http://smeite.com";
-            var title = "食美特，爱美食爱生活";
-            if (window.sidebar) { // Mozilla Firefox Bookmark
-                window.sidebar.addPanel(title, url,"");
-            } else if( window.external&&document.all) { // IE Favorite
-                window.external.AddFavorite( url, title);
-            } else if(window.opera) { // Opera 7+
-                return false; // do nothing
-            } else {
-                jQuery.smeite.tip.conf.tipClass = "tipmodal tipmodal-error2";
-                jQuery.smeite.tip.show($(o),"您的浏览器不支持自动加收藏，请按 ctrl+d 加入收藏。");
-            }
-        }
-
-        //第三方登录优先级
-        var loginNavArr = [
-            {"referer":"qq", "snsType":"qzong"},//4
-            {"referer":"weibo", "snsType":"sina"},//3
-            {"referer":"taobao", "snsType":"taobao"}//8
-        ]
-        var RefererGuide = function(curReferer, snsType){
-            if(!$(".guide")[0]){
-                var otherLoginArr = $.grep(loginNavArr, function(value, index){
-                    return (value.referer != curReferer);
-                });
-                var otherLoginHtml = "";
-                $.map(otherLoginArr, function(value, index){
-                    otherLoginHtml += '<li><a target="_blank" class="shortcut-login-' + value.referer + '" href="http://smeite.com/user/snsLogin?snsType=' + value.snsType + '">' + value.referer + '</a></li>';
-                });
-                var HTML = '<div class="guide guide-' + curReferer + '">'
-                    +'<div class="guide_boby">'
-                    +'<p><i></i>登录 smeite.com ，发现你的喜欢！<span><a href="/user/regist">注册帐号 ></a></span></p>'
-                    +'<div class="guide_add">'
-                    +'<a id="J_RefererLogin" class="referer-login" target="_blank" href="http://smeite.com/user/snsLogin?snsType=' + snsType + '">' + curReferer + '</a>'
-                    +'<div class="favorites" id="J_Favorites"><a href="javascript:void(0);">加入收藏夹</a></div>'
-                    +'<ul class="other-login">' + otherLoginHtml + '</ul>'
-                    +'</div>'
-                    +'<div class="del" id="J_CloseGuide">'
-                    +'<a href="javascript:void(0);">关闭引导</a>'
-                    +'</div>'
-                    +'</div>'
-                    +'</div>';
-                $("body").append(HTML);
-                $("#J_Favorites").click(function(){
-                    addToFav(this);
-                })
-                $("#J_CloseGuide").click(function(){
-                    Cookie.set("refererGuide","no")    // 点击取消之后，不在出现
-                    $(".guide").hide();
-                })
-            }
-            var posGuide = function(){
-                if($.smeite.util.isIE6()){
-                    var windowtop = $(window).height()-90;
-                    $(".guide").css({
-                        position:"absolute",
-                        top:windowtop
-                    }).show();
-                    $(window).bind("scroll",function(){
-                        var docScrollTop = $(document).scrollTop();
-                        if ($.smeite.util.isIE6()) {
-                            $(".guide").css("top", (docScrollTop+windowtop)+"px")
-                        }
-                    });
-                }else{
-                    $(".guide").show().animate({
-                        bottom:0
-                    },500);
-                }
-            }
-            var href = window.location.href;
-            if(href.indexOf("/user/login")==-1 && href.indexOf("/user/doEmailLogin")==-1&& href.indexOf("/user/regist")==-1){
-                if("no" != Cookie.get("refererGuide") && referer !="smeite"){
-                    posGuide();
-                }
-            }
-
-        }
-
-        //不登陆的用户会出现分享条 并且根据referer 引导登录
-        if(SMEITER.userId == "" && typeof referer != 'undefined'){
-            switch(referer){
-                case "smeite":
-                    break;
-                case "taobao" : {
-                    RefererGuide("taobao", "taobao");
-                }break;
-                case "weibo" : {
-                    RefererGuide("weibo", "sina");
-                }break;
-                case "qq": {
-                    RefererGuide("qq", "qzone");
-                }break;
-                /*default : {
-                    RefererGuide("qq", "qzone");
-                }*/
-            }
-        }else{
-            $(window).bind("scroll",function(){
-                var showguide = function(){
-                    var win = $(window);
-                    var HTML = "";
-                    if($(".guide").length!==1){
-                        HTML = '<div class="guide guide-share">'
-                            +'<div class="guide_boby">'
-                            +'<p>如果你喜欢食美特，就把Smeite.com加入收藏夹吧，或者分享给你的朋友~</p>'
-                            +'<div class="guide_add" style="margin-right:174px;">'
-                            +'<div class="favorites" id="J_Favorites"><a href="javascript:void(0);">加入收藏夹</a></div>'
-                            +'<div class="weibo">'
-                            +'<a href="javascript:void((function(){var title=encodeURIComponent(\'推荐个不错的网站，能找到好多喜欢的东西。食美特：http://smeite.com\');var link=encodeURIComponent(window.location.href);var pic=\'http://smeite.com/assets/ui/smeite.jpg\';window.open(\'http://service.t.sina.com.cn/share/share.php?appkey=2610725727&title=\'+title+\'&pic=\'+pic);})())" alt="分享到新浪微博">分享到新浪微博</a>'
-                            +'<a style="margin-left:6px; width:130px" href="javascript:void((function(){var title=encodeURIComponent(\'推荐个不错的网站，能找到好多喜欢的东西。食美特：http://smeite.com\');var link=encodeURIComponent(window.location.href);var pic=\'http://smeite.com/assets/ui/smeite.jpg\';window.open(\'http://v.t.qq.com/share/share.php?appkey=db0de5e94b314972b3e7efd23fa7ce1e&title=\'+title+\'&pic=\'+pic+\'&site=\'+link);})())" alt="分享到腾讯微博"></a>'
-                            +'<a style="margin-left:6px; width:118px" href="javascript:void((function(){var title=encodeURIComponent(\'推荐个不错的网站，能找到好多喜欢的东西。食美特：http://smeite.com\');var link=encodeURIComponent(window.location.href);window.open(\'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=\'+link);})())" alt="分享到QQ空间"></a>'
-                            +'</div>'
-                            +'</div>'
-                            +'<div class="del" id="J_CloseGuide">'
-                            +'<a href="javascript:void(0);">关闭引导</a>'
-                            +'</div>'
-                            +'</div>'
-                            +'</div>';
-                        $("body").append(HTML);
-
-                        $("#J_Favorites").click(function(){
-                            addToFav(this);
-                        })
-                        $("#J_CloseGuide").click(function(){
-                            // 用户取消后，cookie 记录，为了保证不在出现，扰民
-                           Cookie.set("showGuide","no")
-                            $(".guide").hide();
-                        })
-                    }
-                    if($.smeite.util.isIE6()){
-                        $(".guide").css({
-                            position:"absolute",
-                            top:win.scrollTop()+win.height()-90
-                        })
-                        if(win.scrollTop()>800){
-                            $(".guide").show();
-                        }
-                    }else{
-
-                        if(win.scrollTop()>800){
-
-                            $(".guide").show().animate({
-                                bottom:0
-                            },500);
-                        }
-                    }
-                }
-                /*如果用户没有点击取消 则显示 引导*/
-                if("no" != Cookie.get("showGuide")){
-                    showguide();
-                }
+        //使用弹窗方式登录
+        if($("a[rel=loginD]")[0]){
+            $("a[rel=loginD]").click(function(event){
+                event.preventDefault();
+                $.smeite.dialog.login();
             });
         }
-        //同步授权登录后关注弹出层
-        window.followSmeite = function(code,msg,site,flag,refresh){
-            if(code==444){
-                alert(msg);
-                return false;
-            }
-            if((site!="sina" && site!="qzone" ) || flag=="true" ){
-                if(refresh){
-                    window.location.reload();
-                }
-                return false;
-            }
-            var bdClass = "",
-                frameHtml = "";
-            if(site=="sina"){
-                bdClass = "sinaBd";
-                frameHtml = '<iframe width="63" height="24" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" border="0" src="http://widget.weibo.com/relationship/followbutton.php?language=zh_cn&width=63&height=24&uid=1283431903&style=1&btn=red&dpc=1"></iframe>';
-            }else if(site=="qzone"){
-                bdClass = "qzoneBd";
-                frameHtml = '<iframe src="http://open.qzone.qq.com/like?url=http%3A%2F%2Fuser.qzone.qq.com%2F1469909930&type=button&width=400&height=30&style=2" allowtransparency="true" scrolling="no" border="0" frameborder="0" style="width:65px;height:30px;border:none;overflow:hidden;"></iframe>';
-            }
-
-            if(!$("#followDialog")[0]){
-                var html = '<div id="followDialog" class="g-dialog">';
-                html +=	'<div class="dialog-content">';
-                html +=	'<div class="hd"><h3></h3></div>';
-                html +=	'<div class="bd clearfix '+bdClass+'">';
-                html +=	'<div class="btnFrame">';
-                html +=	frameHtml;
-                html +=	'</div>';
-                html +=	'</div>';
-                html +=	'<i></i>';
-                html +=	'<label><input type="checkbox" class="check" name="noMore" />不再提示</label>';
-                html +=	'<a class="close" href="javascript:;"></a>';
-                html +=	'</div>';
-                html +=	'</div>';
-                $("body").append(html);
-                if($("#loginDialog:visible")[0]){
-                    $("#loginDialog").empty().remove();
-                    $("#exposeMask").empty().remove();
-                }
-                $("#followDialog").overlay({
-                    top: 'center',
-                    mask: {
-                        color: '#000',
-                        loadSpeed: 200,
-                        opacity: 0.3
-                    },
-                    closeOnClick: false,
-                    load: true
-                });
-                $("#followDialog").overlay().getClosers().bind("click",function(){
-                    if($("input[name=noMore]")[0].checked){
-                        Cookie.set("noMoreTip","n");
-                    }
-                    if(refresh){
-                        window.location.reload();
-                    }
-                });
-            }
+        if($("a[rel=loginD2]")[0]){
+            $("a[rel=loginD2]").click(function(event){
+                event.preventDefault();
+                var numIid =$(this).data("numiid")
+                var goodsId=$(this).data("goodsid")
+                var rate=$(this).data("rate")
+                $.smeite.dialog.login2(numIid,goodsId,rate);
+            });
         }
-         /*异步授权登陆后*/
-        window.refresh=function(){
-            window.location.reload();
+        /*分享网络商品*/
+        if($("a[rel=shareGoods]")[0]){
+            $("a[rel=shareGoods]").click(function(){
+                if(!$.smeite.dialog.isLogin()){
+                    return false;
+                }
+                if(SMEITER.isBlack=="true"){
+                    alert("您的分享功能已被禁用");
+                    return false;
+                }
+                var $this = $(this);
+                if(!$("#J_ShareGoodsD")[0]){
+                    var html = "";
+                    html += '<div id="J_ShareGoodsD" class="g-dialog sg-dialog">';
+                    html += '<div class="content">';
+                    html += '<p class="title">将宝贝网址粘贴到下面框中：</p>';
+                    html += '<form class="sg-form" name="shareGoods" action="/ugc/api/findProduct">';
+                    html += '<div class="clearfix"><input class="base-input sg-input" name="url" value="" placeholder="http://" autocomplete="off" />';
+                    html += '<input type="submit" id="J_GoodsUrlSubmit" class="bbl-btn url-sub" value="确定" /></div>';
+                    html += '<div class="text-tip"></div>';
+                    html += '</form>';
+                    html += '<div class="sg-source">';
+                    html += '<p class="pt5 pb5">已支持网站：</p>';
+                    html += '<div class="source-list clearfix">';
+                    html += '<a class="icon-source icon-taobao" href="http://www.taobao.com/" target="_blank">淘宝网</a>';
+                    html += '<a class="icon-source icon-tmall" href="http://www.tmall.com/" target="_blank">天猫商城</a>';
+                    html += '</div>';
+                    html += '<p class="contact"><strong>不欢迎商家分享，合作请<a href="http://smeite.com/contactUs" target="_blank">点击此处</a>。</strong></p>';
+                    html += '</div>';
+                    html += '<div class="tipbox-up"><em>◆</em><span>◆</span></div>';
+                    html += '<a class="close" href="javascript:;"></a>';
+                    html += '</div>';
+                    html += '</div>';
+                    $("body").append(html);
+                    $(".sg-dialog .close").click(function(){
+                        $("#J_GoodsUrlSubmit").enableBtn("bbl-btn");
+                        $("#J_ShareGoodsD").fadeOut("fast");
+
+                    });
+                    $(".sg-form").submit(function(){
+                        var $this = $(this);
+                        var url = $.smeite.util.trim($(".sg-input").val());
+                        if(url==""){
+                            $(".text-tip").html('<span class="errc">宝贝网址不能为空~</span>').show();
+                        }else if(!$.smeite.util.validSite(url)){
+                            $(".text-tip").html('<span class="errc">暂时还不支持这个网站呢~</span>').show();
+                        }else{
+                            $(".text-tip").html('<span class="gc6">宝贝信息抓取中…</span>').show();
+                            $("#J_GoodsUrlSubmit").disableBtn("bbl-btn");
+                            $.get($this.attr("action"),$this.serializeArray(),function(data){
+                                $("#J_GoodsUrlSubmit").enableBtn("bbl-btn");
+                                if(data.code=="100"){
+                                    $("#J_ShareGoodsD").hide();
+                                    $.smeite.ugc.goodspub(data.product);
+                                }else if(data.code=="105"){
+                                    $("#J_ShareGoodsD").hide();
+                                    $.smeite.ugc.goodsExist(data.product);
+                                }else if(data.code=="104"){
+                                    $(".text-tip").html('<span class="errc">宝贝信息抓取失败，请重试…</span>').show();
+                                }else if(data.code=="107"){
+                                    $(".text-tip").html('<span class="errc">暂时还不支持这个宝贝…</span>').show();
+                                }else if(data.code=="108"){
+                                    $(".text-tip").html('<span class="errc">你已经分享过这个宝贝啦…</span>').show();
+                                }else if(data.code=="110"){
+                                    $(".text-tip").html('<span class="errc">亲，该商品所在商家已列入黑名单，申诉请联系service@smeite.com</span>').show();
+                                }else if(data.code=="400"){
+                                    alert("亲，你还没有登录！");
+                                    window.location.href="/user/login";
+                                } else if(data.code=="444"){
+                                    alert("你已被禁止登录！");
+                                    window.location.href="/user/logout";
+                                }else if(data.code=="442"){
+                                    alert("请不要频繁分享同一店铺的商品，否则帐户可能会被冻结。如果你是优质商户，请联系我们（bd@smeite.com）");
+                                }else if(data.code=="443"){
+                                    alert("由于你频繁分享同一店铺商品，分享功能已被禁用。有疑问请联系 GCTU@smeite.com（注：邮件附上用户名）");
+                                }else if(data.code=="445"){
+                                    alert("城管大队怀疑你恶意发广告，将禁止你发布商品的权利，申诉请联系GCTU@smeite.com");
+                                }
+                            });
+                        }
+                        return false;
+                    });
+                }else{
+                    $(".sg-input").val("");
+                    $(".text-tip").html("");
+                }
+                if($this.hasClass("hd-share-goods")){
+                    $(".shareIt").append($("#J_ShareGoodsD"));
+                }else{
+                    $("body").append($("#J_ShareGoodsD"));
+                }
+                var position = $.smeite.util.getPosition($this).leftBottom();
+                var W = $("#J_ShareGoodsD").outerWidth(),
+                    H = $("#J_ShareGoodsD").outerHeight(),
+                    btnW = $this.outerWidth(),
+                    dLeft = position.x,
+                    tipLeft = btnW/2 - 8;
+                if((position.x + W) > 960){
+                    dLeft = position.x - (W - btnW);
+                    tipLeft = W - btnW/2 - 8;
+                }
+                $("#J_ShareGoodsD .tipbox-up").css({
+                    left: tipLeft + "px"
+                });
+                if($this.hasClass("hd-share-goods")){
+                    $("#J_ShareGoodsD").css({
+                        left: "auto",
+                        right: "0",
+                        top: "33px"
+                    }).fadeIn("fast");
+                }else{
+                    $("#J_ShareGoodsD").css({
+                        right: "auto",
+                        left: dLeft + "px",
+                        top: position.y + 10 + "px"
+                    }).fadeIn("fast");
+                }
+                $(".sg-input").focus();
+            });
+        }
+        //标签输入框自动转换“,”
+        $("input[rel=tagsInput]").live("keyup",function(){
+            //限制每个标签的中文长度
+            var MaxSingleTagLength = 14,
+                MaxAllTagsLength = 64,
+                thisVal = $(this).val();
+            if($.smeite.util.getStrLength($.smeite.util.htmlToTxt(thisVal))<=MaxAllTagsLength){
+                var $this = $(this);
+                thisVal = thisVal.replace(/\uff0c|\s+/g,",");
+                while(thisVal.indexOf(',,')>=0){
+                    thisVal = thisVal.replace(',,',',');
+                }
+                var thisValueArr = thisVal.split(","),
+                    thisValueArrIndex = 0,
+                    istoolong = false;
+                for(;thisValueArrIndex<thisValueArr.length;thisValueArrIndex++){
+                    var val = thisValueArr[thisValueArrIndex]
+                    if($.smeite.util.htmlToTxt(val).length>MaxSingleTagLength){
+                        istoolong = true;
+                        thisValueArr[thisValueArrIndex] = $.smeite.util.substring4ChAndEn(val,MaxSingleTagLength);
+                    }
+                }
+                if(istoolong){
+                    thisVal = thisValueArr.join(",");
+                }
+                if(thisVal != this.value){
+                    this.value = thisVal;
+                }
+            }else{
+                this.value = $.smeite.util.substring4ChAndEn(thisVal,64);
+            }
+        });
+        /*创建主题  先判断是否登录 2012-12-26 */
+        if($("a[rel=createTheme]")[0]){
+            $("a[rel=createTheme]").click(function(){
+                if(!$.smeite.dialog.isLogin()){
+                    return false;
+                }
+                if(SMEITER.isBlack=="true"){
+                    alert("您的分享功能已被禁用");
+                    return false;
+                }
+
+            })
+        }
+        /* 判断用户是否为新用户 如果是新用户 则显示见面有礼*/
+        $.smeite.dialog.isNew()
+
+       /* 用户签到 */
+        $("a[rel=checkIn]").click(function(){
+            if(!$.smeite.dialog.isLogin()){
+                return false;
+            }
+            if($("a[rel=checkIn]").hasClass("checked")){
+                return false;
+            }
+            /* 显示用户签到过程 */
+            $.smeite.checkIn.checkInProcess()
+
+        })
+
+        $("a[rel=checkIn]").hover(function(){
+            if(SMEITER.userId.length<=1){
+                return "Not login";
+            }
+            $this = $(this);
+            $.ajax({
+                url: "/user_score",
+                type : "post",
+                dataType: "json",
+                success: function(data){
+                    if(data.code==100){
+                        $.smeite.checkIn.checkInIntro($this,data);
+                    }else if(data.code==101){
+                        //积分获取失败
+                        data.userScore = 0;
+                        data.userCheckinDays = 0;
+                        $.smeite.checkIn.checkInIntro($this,data)
+                    }else if(data.code==300){
+                        //未登录
+                        $.smeite.dialog.login();
+                    }
+                }
+            });
+        },function(){
+            if($("#checkin_intro")[0]){
+               setTimeout(function(){
+                    $("#checkin_intro").remove();
+                },500);
+            }
+        });
+
+        /* 下拉框 */
+        $(".gohome").dropDown({
+            classNm: ".set-dropdown"
+        });
+        /*分享好东西*/
+        $(".btn-sg").dropDown({
+            classNm: ".shareit-dropdown"
+        });
+        $(".btn-checkIn").dropDown({
+            classNm: ".checkIn-dropdown"
+        });
+        /*消息*/
+        $(".xiaoxi").dropDown({
+            classNm: ".xiaoxi-dropdown"
+        });
+
+
+        /* 顶部固定： 如果是find 页面 则 fix tag nav，否则 显示 #nav fixed */
+        var href = window.location.href;
+        if(href.indexOf("/find")==-1){
+            $(window).bind("scroll",function(){
+                var docScrollTop = $(document).scrollTop();
+                //IOS平台如iphone、ipad、ipod不执行导航滚动
+                if(!$.smeite.util.isIOS()){
+                    if(docScrollTop >0){
+                        $("#top").addClass("fixed")
+
+                    }else{
+                        $("#top").removeClass("fixed")
+
+                    };
+                }
+            });
+        }else{
+            $(window).bind("scroll",function(){
+                var docScrollTop = $(document).scrollTop();
+                //IOS平台如iphone、ipad、ipod不执行导航滚动
+                if(!$.smeite.util.isIOS()){
+                    if(docScrollTop >123){
+                        $("#J_tags").addClass("tag-list-fixed")
+
+                    }else{
+                        $("#J_tags").removeClass("tag-list-fixed");
+
+                    };
+
+                }
+
+            });
         }
 
         /* 搜索框效果 header 搜索框*/
@@ -2044,58 +1927,8 @@ define(function(require, exports) {
             }
         });
 
-        /* 用户登录后的下拉框 */
-        $(".gohome").dropDown({
-            classNm: ".set-dropdown"
-        });
-        /*分享好东西*/
-        $(".btn-sg").dropDown({
-            classNm: ".shareit-dropdown"
-        });
-        $(".btn-checkIn").dropDown({
-            classNm: ".checkIn-dropdown"
-        });
-
-        /*消息*/
-        $(".xiaoxi").dropDown({
-            classNm: ".xiaoxi-dropdown"
-        });
-
-        /* 如果是find 页面 则 fix tag nav，否则 显示 #nav fixed */
-        var href = window.location.href;
-        if(href.indexOf("/find")==-1){
-            $(window).bind("scroll",function(){
-                var docScrollTop = $(document).scrollTop();
-                //IOS平台如iphone、ipad、ipod不执行导航滚动
-                if(!$.smeite.util.isIOS()){
-                   if(docScrollTop >0){
-                        $("#top").addClass("fixed")
-
-                   }else{
-                       $("#top").removeClass("fixed")
-
-                  };
-                }
-            });
-        }else{
-            $(window).bind("scroll",function(){
-                var docScrollTop = $(document).scrollTop();
-                //IOS平台如iphone、ipad、ipod不执行导航滚动
-                if(!$.smeite.util.isIOS()){
-                    if(docScrollTop >123){
-                        $("#J_tags").addClass("tag-list-fixed")
-
-                    }else{
-                        $("#J_tags").removeClass("tag-list-fixed");
-
-                    };
-
-                }
-
-            });
-        }
+        /* 返回顶部 */
         $("#returnTop").returntop();
-
     });
 
 

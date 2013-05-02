@@ -16,10 +16,7 @@ define(function(require, exports){
     var $ = jQuery = require("jquery");
     require("app/smeite.goods")
 
-    /*scroll up*/
-    function scrollTo(o) {
-        $("html, body").animate({scrollTop:o}, 120)
-    }
+
     /*判断评价的内容长短*/
     function L(a, b) {
         if ("" != b && 2 <= $.smeite.util.getStrLength(b)) {
@@ -38,8 +35,8 @@ define(function(require, exports){
         }
     });
 
-
-
+    /* 分享*/
+    $(".btn-share").shareBtn()
 
     $("#J_JiuCuo").click(function () {
         $(this).html("<span>已反馈，谢谢^_^</span>");

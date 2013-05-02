@@ -238,6 +238,7 @@
 }
 .brands .tabs{
     list-style: none;
+    padding: 5px 10px;
 }
 .brands .tabs li{
 

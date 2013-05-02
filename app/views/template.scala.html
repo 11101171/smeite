@@ -66,12 +66,12 @@
                 <li class='@("on".when(nav == "miss"))'>  <a href="/miss" >生活馆</a> </li>
             </ul>
             <div class="checkIn fr">
-                <a class="btn-checkIn" href="@controllers.users.routes.Users.checkIn">签到</a>
+                <a class="btn-checkIn" href="javascript:;" rel="checkIn">签到</a>
                 <div id="checkin_intro" class="dropdown checkIn-dropdown" >
 
-                    集分宝：<b class="checkin_days">0</b>&nbsp;个<br/>
+                    连签：<b class="checkin_days" id="J_checkInDays">0</b>&nbsp;个<br/>
+                    集分宝：<b id="J_jifenbao">0</b>&nbsp;分<br/>
 
-                    <a href="@controllers.users.routes.Users.checkIn" target="_blank" class="checkIn-prize">签到有奖</a>
                   <p>
                       签到送集分宝，每次1-20个集分宝，随机赠送
                   </p>

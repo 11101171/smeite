@@ -60,7 +60,7 @@ import java.util.Calendar
   /*发现
   * 1.首先判断 cate tag 是否存在，不存在，则返回到/find 页面    滋补保健 特产的标签放在美食中
   * */
-  def faxian(cate:String,tag:String,p:Int) = Users.UserAction{ user => implicit request =>
+  def find(cate:String,tag:String,p:Int) = Users.UserAction{ user => implicit request =>
     val cid:Int = cate match {
       case "美食" => 0
       case "特产" => 1
@@ -78,7 +78,7 @@ import java.util.Calendar
     Ok(views.html.pages.faxian(user,page,cate,tag,tags))
   }
 
-  def find(cate:String,tag:String,p:Int) = Users.UserAction{ user => implicit request =>
+  def faxian(cate:String,tag:String,p:Int) = Users.UserAction{ user => implicit request =>
     val cid:Int = cate match {
       case "美食" => 0
       case "特产" => 1

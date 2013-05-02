@@ -548,5 +548,8 @@ UserTheme.init();
 	$.smeite.goods.conf.justFlow = true;
     $.smeite.goods.init();
     /*  分享 */
+
+
+
     $(".btn-share").shareBtn()
 });

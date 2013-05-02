@@ -324,10 +324,12 @@ background: url(images/ico-quotation.png) no-repeat
     padding: 10px;
     background: #FFFDF7;
     border-radius: 0 0 5px 5px;
+    height:30px;
+    line-height: 30px;
 }
 
 .side .buy-info .info-wrong {
-    float: left;
+    float: right;
 }
 
 /* comment */
