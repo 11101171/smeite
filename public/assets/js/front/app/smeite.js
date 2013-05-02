@@ -1607,11 +1607,12 @@ define(function(require, exports) {
                     html += '<div class="text-tip"></div>';
                     html += '</form>';
                     html += '<div class="sg-source">';
-                    html += '<p class="pt5 pb5">已支持网站：</p>';
-                    html += '<div class="source-list clearfix">';
+                    html += '<p class="pt5 pb5 fl">已支持网站：</p>';
+                    html += '<div class="source-list fl">';
                     html += '<a class="icon-source icon-taobao" href="http://www.taobao.com/" target="_blank">淘宝网</a>';
                     html += '<a class="icon-source icon-tmall" href="http://www.tmall.com/" target="_blank">天猫商城</a>';
                     html += '</div>';
+                    html += '<div class="clear"></div>';
                     html += '<p class="contact"><strong>不欢迎商家分享，合作请<a href="http://smeite.com/contactUs" target="_blank">点击此处</a>。</strong></p>';
                     html += '</div>';
                     html += '<div class="tipbox-up"><em>◆</em><span>◆</span></div>';

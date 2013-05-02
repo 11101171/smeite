@@ -1,0 +1,20 @@
+/**
+ * Created by zuosanshao.
+ * Date: 12-9-21
+ * Time: 上午10:45
+ * 维护人员:zuosanshao@qq.com
+ */
+
+.common { padding:40px;margin:0 auto;background:#fff;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;-moz-box-shadow:0 1px 1px rgba(0,0,0,0.1);-webkit-box-shadow:0 1px 1px rgba(0,0,0,0.1);box-shadow:0 1px 1px rgba(0,0,0,0.1); }
+.common h2 { line-height:1.2;margin:0 auto 20px;padding:0 0 10px 0;font-size:16px;border-bottom:1px dotted #d1d1d1; }
+.common p { margin:0 0 20px 0; }
+.common .job-block { margin-bottom:30px; }
+.common .job-block h3 { font-size:14px;font-weight:normal;margin-bottom:20px; }
+.agreement-box h2{text-align:center;border-bottom:none;}
+.agreement-box ul li{line-height:2;color:#333;}
+.agreement-box ul li h3{margin:20px 0 0 0;}
+.agreement-box ul li ol{line-height:1.8;margin-left:2em;}
+.agreement-box ul li ol pre,.agreement-box ul li pre{margin-left:2em;}
+.agreement-box ul li p{line-height:1.6;padding-left:2em;margin:15px 0 0 0;color:#333;}
+
+
