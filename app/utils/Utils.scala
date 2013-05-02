@@ -92,4 +92,16 @@ object Utils {
   def getIntervalDays(startTime:Timestamp,endTime:Timestamp)={
     (startTime.getTime- endTime.getTime())/(24*60*60*1000)
   }
+  /* 例如 201305*/
+  def getYearMonth(date:Timestamp) ={
+    val calendar:Calendar = Calendar.getInstance()
+    calendar.setTime(date)
+    calendar.get(Calendar.YEAR)*100+calendar.get(Calendar.MONTH)+1
+  }
+  /* 获得某个时间的 所在月份的天 */
+  def getDay(date:Timestamp) ={
+    val calendar:Calendar = Calendar.getInstance()
+    calendar.setTime(date)
+    calendar.get(Calendar.DAY_OF_MONTH)
+  }
 }

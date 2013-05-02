@@ -1336,7 +1336,7 @@ CREATE TABLE `user_check_in` (
   `uid`                 int(10) ,
   `credits`             smallint (10) ,
   `days`      smallint (10) ,
-  `month`     smallint(10),
+  `month`     smallint(10) unsigned ,
   `history`   varchar(200),
   `add_time`      timestamp,
   PRIMARY KEY (`id`)

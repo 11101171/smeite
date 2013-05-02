@@ -723,6 +723,27 @@ object UserDao {
     Page[UserRebate](list,currentPage,totalPages);
   }
 
+   /* 添加用户签到记录 */
+  def addUserCheckIn(uid: Long, credits: Int,days: Int, month: Int, history: String, addTime: Timestamp)= database.withSession {  implicit session:Session =>
+        UserCheckIns.autoInc.insert(UserCheckIn(None,uid,credits,days,month,history,addTime))
+   }
+  /* 查找用户签到记录 */
+  def findUserCheckIn(uid:Long) :Option[UserCheckIn] = database.withSession {  implicit session:Session =>
+  (for( c <- UserCheckIns.filter(_.uid === uid).sortBy(_.id desc ))yield c).firstOption
+  }
+  def findUserCheckIn(uid:Long,month:Int) :Option[UserCheckIn] = database.withSession {  implicit session:Session =>
+    (for( c <- UserCheckIns.filter(_.uid === uid).filter(_.month === month).sortBy(_.id desc ))yield c).firstOption
+  }
+  def findUserCheckIns(uid:Long) :List[UserCheckIn] = database.withSession {  implicit session:Session =>
+    (for( c <- UserCheckIns.filter(_.uid === uid).sortBy(_.id desc ))yield c).list()
+  }
+  def modifyUserCheckIn(uid:Long,month:Int,credits:Int,days:Int,history:String) = database.withSession {  implicit session:Session =>
+    (for(c <- UserCheckIns if c.uid === uid if c.month === month)yield(c.credits ~ c.days ~ c.history)).update(credits,days,history)
+  }
+  def modifyUserCheckIn(id:Long,credits:Int,days:Int,history:String)= database.withSession {  implicit session:Session =>
+    (for(c <- UserCheckIns if c.id ===id )yield(c.credits ~ c.days ~ c.history)).update(credits,days,history)
+  }
 
-  /**/
+
+
 }

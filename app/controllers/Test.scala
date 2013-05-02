@@ -10,6 +10,7 @@ import models.user.dao.UserDao
 import play.api.cache.Cache
 import models.user.User
 import models.goods.dao.GoodsSQLDao
+import java.sql.Timestamp
 
 /**
 * Created by zuosanshao.
@@ -56,11 +57,18 @@ object Test extends Controller {
     Ok("send email success" )
   }
   def testJDBC  =Action {
-   // val result =GoodsSQLDao.updateLoveNum(14)
-   val result =UserDao.findUserOrders(2,1,30,-1);
-    println(result.toString)
+ /*  // val result =GoodsSQLDao.updateLoveNum(14)
+   val userCheckIn =UserDao.isCheckedIn(2)
+    val isChecked =   if(userCheckIn.isEmpty){ false } else {
+  userCheckIn.get.addTime.after(utils.Utils.getStartOfDay( new Timestamp(System.currentTimeMillis())))
+    }
 
-    Ok(result.toString)
+     val days =utils.Utils.getIntervalDays(userCheckIn.get.addTime,new Timestamp(System.currentTimeMillis()))
+    println("is checked " + isChecked + " days " +days)
+*/
+
+//   Ok(userCheckIn.toString)
+    Ok(utils.Utils.getYearMonth(new Timestamp(System.currentTimeMillis())).toString +"    ssss  " + utils.Utils.getDay(new Timestamp(System.currentTimeMillis())))
   }
 
 
