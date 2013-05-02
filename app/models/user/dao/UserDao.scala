@@ -722,4 +722,7 @@ object UserDao {
     val list:List[UserRebate]=  query.drop(startRow).take(pageSize).list()
     Page[UserRebate](list,currentPage,totalPages);
   }
+
+
+  /**/
 }

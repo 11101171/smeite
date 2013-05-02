@@ -15,6 +15,7 @@ import play.api.libs.Codecs
 import play.api.{Play, PlayException}
 import  scala.collection.mutable.Map
 import java.sql.Timestamp
+import java.util.Calendar
 
 object Utils {
   /*正则表达式验证*/
@@ -66,4 +67,29 @@ object Utils {
   def subString(str:String,minLength:Int,maxLength:Int)={
      if(str.length>minLength) str.substring(0,maxLength)
    }
+
+  /* 获得一天的结束时间 */
+  def getEndOfDay(date:Timestamp):Timestamp = {
+   val calendar:Calendar = Calendar.getInstance();
+    calendar.setTime(date);
+    calendar.set(Calendar.HOUR_OF_DAY, 23);
+    calendar.set(Calendar.MINUTE, 59);
+    calendar.set(Calendar.SECOND, 59);
+    calendar.set(Calendar.MILLISECOND, 999);
+   new Timestamp(calendar.getTimeInMillis)
+  }
+   /* 获得 一天的 开始时间 */
+  def  getStartOfDay(date:Timestamp):Timestamp ={
+   val calendar:Calendar = Calendar.getInstance();
+    calendar.setTime(date);
+    calendar.set(Calendar.HOUR_OF_DAY, 0);
+    calendar.set(Calendar.MINUTE, 0);
+    calendar.set(Calendar.SECOND, 0);
+    calendar.set(Calendar.MILLISECOND, 0);
+    new Timestamp(calendar.getTimeInMillis)
+  }
+  /* 获取两个时间的间隔天数 */
+  def getIntervalDays(startTime:Timestamp,endTime:Timestamp)={
+    (startTime.getTime- endTime.getTime())/(24*60*60*1000)
+  }
 }
