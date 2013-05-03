@@ -985,7 +985,7 @@ input:-moz-placeholder { font-size:12px; }
     font-weight: bolder;
 }
 #J_checkInDialog .checkIn{
-    margin: 30px auto;
+    margin: 20px auto;
     position: relative;
 }
 #J_checkInDialog .checkIn_area{
@@ -1024,7 +1024,7 @@ input:-moz-placeholder { font-size:12px; }
     color:#E26;
 }
 #J_checkInDialog a:hover{
-    color: #ff7f00;
+
     text-decoration: underline;
 }
 #J_checkInDialog .checkIn_handle { position:relative;margin:50px auto 10px;padding:0 15px 0 40px;width:65px;height:36px;line-height:36px;outline:none;color:#fff;text-align:left;background:#ee2266 url(images/like-btn.png) no-repeat right -45px;-moz-box-shadow:0 0 0 4px rgba(255, 161, 13, 0.6);-webkit-box-shadow:0 0 0 4px rgba(255, 161, 13, 0.6);box-shadow:0 0 0 4px rgba(255, 161, 13, 0.6);-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px; }
@@ -1037,6 +1037,41 @@ input:-moz-placeholder { font-size:12px; }
 #J_checkInDialog .checkIn_handle_result{
     margin: 20px auto;
     font-size: 14px;
+}
+#J_checkInDialog .vote_info{
+    width: 300px;
+    padding-left: 5px;
+}
+#J_checkInDialog .vote_info h3{
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 10px;
+}
+#J_checkInDialog  .buy-btn {
+      float:right;
+      width: 70px;
+      height: 25px;
+      line-height: 25px;
+      text-align: center;
+      font-size: 14px;
+      color: white;
+      background: #FF7F00;
+      border: 1px solid #E67300;
+      border-radius: 2px;
+      -moz-border-radius: 2px;
+      -webkit-border-radius: 2px;
+      text-decoration: none;
+  }
+#J_checkInDialog .form-row {
+    margin-bottom: 0;
+}
+#J_checkInDialog .form-row label {
+    line-height: 25px;
+}
+#J_checkInDialog .form-row .radio{
+    height: 25px;
+    line-height:25px;
+    margin-left: 15px;
 }
 
 /* 第三方登录设置基本信息浮层 */
@@ -2462,8 +2497,6 @@ body .redactor_toolbar li a.redactor_btn_alignment	 		{ background-position: -62
 #nav a.btn-checkIn:hover {text-decoration:none;background:#92b03b url(images/checkIn-status.png) 07px -23px no-repeat;transition:bottom 0.3s;-webkit-transition:bottom 0.3s;-moz-transition:bottom 0.3s;-o-transition:bottom 0.3s;_background:#92b03b url(images/checkIn-status-ie6.png) 07px -23px no-repeat; }
 #nav a.checked {color:#999;display:block;margin:8px 0 0 5px;height:24px;overflow:hidden;line-height:24px;padding:0 12px 0 26px;text-decoration:none;background:#fff url(images/checkIn-status.png) 07px -54px no-repeat;_background:#92b03b url(images/checkIn-status-ie6.png) 07px -54px no-repeat; }
 #nav a.checked:hover{background:#fff url(images/checkIn-status.png) 07px -54px no-repeat;_background:#92b03b url(images/checkIn-status-ie6.png) 7px -54px no-repeat; }
-
-
 #checkin_intro{width:130px;line-height:20px;color:#666;padding:10px;position:absolute;z-index:9998;background:#FFF;top:38px;right:0;border:1px solid #e4e4e4;}
 #checkin_intro b{color:#F32A6B;}
 #checkin_intro  img{padding:5px 0;}
@@ -2474,6 +2507,7 @@ body .redactor_toolbar li a.redactor_btn_alignment	 		{ background-position: -62
 #checkin_intro .checkin_off{color:#333;background-color:#dedede;height:18px;line-height:18px;}
 #checkin_intro .checkin_days{color:#9dc62c;font-size:30px;}
 /* 签到  end*/
+
 
 
 

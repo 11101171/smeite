@@ -1602,7 +1602,7 @@ define(function(require, exports) {
                             $('#J_rightValue').text(rightValue);
                             $(".show").hide()
                             $(".hide").show()
-                            var msg ="恭喜您获得<strong class='rc'>"+data.shiDou+"</strong>个集分宝"
+                            var msg ="恭喜您获得<strong class='rc'>"+data.shiDou+"</strong>个集分宝，帮我们做个小调查吧"
                             $("#J_checkInMsg").html(msg)
                             $.ajax({
                                 type : "POST",
@@ -1634,9 +1634,19 @@ define(function(require, exports) {
         /* 调查过程 */
         voteProcess:function(){
             var html = "";
-            html +='<div class="vote_area">';
-            html +='<div class=""> 这里是 vote 区域 </div>';
-
+            html +='<div class="vote_area clearfix">';
+            html +='<div class="vote_pic fl"><a> <img src="/assets/temp/vote.jpg"></a> </div>';
+            html +='<div class="vote_info fl">';
+            html +='<h3>原价2000，现价20，您认为左侧的商品怎么样侧的商品怎么样侧的商品怎么样</h3>';
+            html +='<from>';
+            html +='<div class="form-row"><label>值:</label><input type="radio" name="vote" value="0" class="radio" ><span class="tip" ></span> </div> ';
+            html +='<div class="form-row"><label>不值:</label><input type="radio" name="vote" value="1" class="radio" ><span class="tip" ></span> </div> ';
+            html +='<div class="form-row"><label>不知道:</label><input type="radio" name="vote" value="0" class="radio" ><span class="tip" ></span> </div> ';
+            html +='<div class="form-row"><label> &nbsp; </label><input type="button" class="bbl-btn submit"  value="提交" > </div> ' ;
+            html+='</from>';
+            html += '</div>';
+            html +='<div class="clear"></div>';
+            html +='<a class="buy-btn"> 去看看&gt; </a>';
             html += '</div>';
             $("#J_checkIn").html(html);
         }
