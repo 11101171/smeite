@@ -132,7 +132,11 @@ object UserDao {
   def modifyStatus(uid:Long,status:Int)= database.withSession {  implicit session:Session =>
     (for(u<-Users if u.id === uid) yield u.status ).update(status)
   }
-
+  /* 修改 食豆 数量*/
+  def modifyShiDou(uid:Long,shiDou:Int)= database.withSession{  implicit session:Session =>
+    Cache.remove("user_"+uid)
+    UserSQLDao.updateShiDou(uid,shiDou)
+  }
 
   /*  list  user */
   def findAll(currentPage: Int, pageSize: Int ): Page[User] = database.withSession {  implicit session:Session =>

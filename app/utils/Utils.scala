@@ -89,8 +89,8 @@ object Utils {
     new Timestamp(calendar.getTimeInMillis)
   }
   /* 获取两个时间的间隔天数 */
-  def getIntervalDays(startTime:Timestamp,endTime:Timestamp)={
-    (startTime.getTime- endTime.getTime())/(24*60*60*1000)
+  def getIntervalDays(currentTime:Timestamp,beforeTime:Timestamp)={
+    (currentTime.getTime- beforeTime.getTime())/(24*60*60*1000)
   }
   /* 例如 201305*/
   def getYearMonth(date:Timestamp) ={

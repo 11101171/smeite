@@ -41,7 +41,9 @@ GET    /forum/removeFollow          controllers.Forums.removeFollow(topicId:Long
 
 
 #User 签到
-GET    /user/checkIn                          controllers.users.Users.checkIn
+GET    /checkIn                          controllers.users.UsersCheckIn.checkIn
+POST   /checkInState                     controllers.users.UsersCheckIn.checkInState
+POST   /ajaxCheckIn                      controllers.users.UsersCheckIn.ajaxCheckIn
 
 #user 用户页面
 GET    /user/$id<[0-9]+>                          controllers.users.Users.home(id:Long)

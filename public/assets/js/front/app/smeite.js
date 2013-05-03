@@ -1483,7 +1483,7 @@ define(function(require, exports) {
     }
 
     //广告位点击数
-    function countAdNum(obj){
+    $.fn.countAdNum=function(obj){
         var $this=$(obj);
         var data={
             id: $this.attr("data")
@@ -1516,8 +1516,7 @@ define(function(require, exports) {
             var HTML = ""
                 +'<div id="checkin_intro">'
                 +'连签：<b class="checkin_days">'+userCheckinDays+'</b>&nbsp;天<br/>'
-                +'积分：<b id="jifen">'+data.userScore+'</b>&nbsp;分<br/>'
-
+                +'集分宝：<b id="jifen">'+data.userScore+'</b>&nbsp;分<br/>'
                 +'<p>'
                 +'签到：送集分宝，每次1-20个集分宝，随机赠送<br/>'
                 +'连签7天：额外送7个<br/>'
@@ -1532,7 +1531,7 @@ define(function(require, exports) {
 
         /* 判断用户是否已经签到*/
          judgeCheckInState:function(){
-                 if(SMEITER.userId.length<=1){
+                 if(SMEITER.userId ==""){
                      return "Not login";
                  }
                  $.ajax({
@@ -1540,13 +1539,13 @@ define(function(require, exports) {
                      type : "post",
                      dataType: "json",
                      success: function(data){
-                         if(data.code==100){
+                         if(data.code=="100"){
                              $.smeite.checkIn.changeCheckInIcon(true);
-                         }else if(data.code==101){
-                             //积分获取失败
+                         }else if(data.code=="104"){
+                             //未签到
                              //$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error3";
                              //$.smeite.tip.show($this,">_<积分获取失败");
-                         }else if(data.code==300){
+                         }else if(data.code=="404"){
                              //未登录
                              $.smeite.checkIn.changeCheckInIcon(false);
                          }
@@ -1556,7 +1555,83 @@ define(function(require, exports) {
          },
         /* 签到过程 */
         checkInProcess:function(){
+            if(!$("#J_checkInDialog")[0]){
+                var html = "";
+                html += '<div id="J_checkInDialog" class="g-dialog">';
+                html += '<div class="dialog-content">';
+                html += '<div class="hd"><h3>亲，签到送集分宝哦</h3></div>';
+                html += '<div class="bd clearfix">';
+                html += '<p class="fs14" id="J_checkInMsg">';
+                html +='亲，您将获得<strong class="rc">1-20</strong>个不等的<a href="/jifenbao">集分宝</a>。亲由于签到的人很多，无法每天都返还。我们将您获得集分宝以<a href="/shiDou">食豆</a>的形式返还，1个食豆 = 1个集分宝，获得1000个食豆就可以提现了哦，价值10元'
+                html +='</p>';
+                html +='<div class="checkIn"> ';
+                //  这里是抽奖区域
+                html +='<div class="checkIn_area">';
+                html +='<div class="checkIn_bg show"><img src="/assets/ui/new_gift.png"> </div>';
+                html +='<div class="checkIn_roll hide"><img src="/assets/ui/new_gift_roll.gif"> </div>';
+                html +='<div class="checkIn_left_value show" id="J_leftValue"> 0 </div>';
+                html +='<div class="checkIn_right_value show" id="J_rightValue"> 0 </div>';
+                html += '</div>';
+                html += '</div>';
 
+                html += '</div>';
+                html += '<a class="close" href="javascript:;"></a>';
+                html += '</div>';
+                html += '</div>';
+                $("body").append(html);
+                $("#J_checkInDialog").overlay({
+                    top: 'center',
+                    mask: {
+                        color: '#000',
+                        loadSpeed: 200,
+                        opacity: 0.7
+                    },
+                    closeOnClick: false,
+                    load: true
+                });
+                var data={
+                    shiDou:0
+                };
+                $(".show").hide()
+                $(".hide").show()
+                    setTimeout(function() {
+                            var leftValue = 0;
+                            var rightValue = 1 + Math.floor(Math.random() * 3);
+                            data.shiDou =leftValue*10+rightValue
+                            $('#J_leftValue').text(leftValue);
+                            $('#J_rightValue').text(rightValue);
+                            $(".show").show()
+                            $(".hide").hide()
+                            var msg ="恭喜您获得<strong class='rc'>"+data.shiDou+"</strong>个集分宝"
+                            $("#J_checkInMsg").html(msg)
+                            $.ajax({
+                                url: "/ajaxCheckIn",
+                                contentType:"application/json; charset=utf-8",
+                                dataType: "json",
+                                data: JSON.stringify(data),
+                                success: function(data){
+                                    if(data.code=="100"){
+                                       setTimeout(function(){
+                                           $("#J_checkInDialog").overlay().close()
+                                       },2500)
+                                    }else if(data.code=="404"){
+                                        //未登录
+                                        $.smeite.dialog.login();
+                                    }
+                                }
+                            });
+
+                        },
+                        2500)
+
+
+
+                $("#J_checkInDialog").overlay().getClosers().bind("click",function(){
+                    Cookie.set("checkIn",'close')
+                });
+            }else{
+                $("#J_checkInDialog").data("overlay").load();
+            }
         },
         /* 调查过程 */
         voteProcess:function(){
@@ -1755,6 +1830,7 @@ define(function(require, exports) {
         $.smeite.dialog.isNew()
 
        /* 用户签到 */
+        $.smeite.checkIn.judgeCheckInState()
         $("a[rel=checkIn]").click(function(){
             if(!$.smeite.dialog.isLogin()){
                 return false;
@@ -1768,23 +1844,23 @@ define(function(require, exports) {
         })
 
         $("a[rel=checkIn]").hover(function(){
-            if(SMEITER.userId.length<=1){
+            if(SMEITER.userId ==""){
                 return "Not login";
             }
-            $this = $(this);
+           var $this = $(this);
             $.ajax({
-                url: "/user_score",
+                url: "/checkInState",
                 type : "post",
                 dataType: "json",
                 success: function(data){
-                    if(data.code==100){
+                    if(data.code=="100"){
                         $.smeite.checkIn.checkInIntro($this,data);
-                    }else if(data.code==101){
+                    }else if(data.code=="104"){
                         //积分获取失败
                         data.userScore = 0;
                         data.userCheckinDays = 0;
                         $.smeite.checkIn.checkInIntro($this,data)
-                    }else if(data.code==300){
+                    }else if(data.code=="404"){
                         //未登录
                         $.smeite.dialog.login();
                     }
@@ -1794,7 +1870,7 @@ define(function(require, exports) {
             if($("#checkin_intro")[0]){
                setTimeout(function(){
                     $("#checkin_intro").remove();
-                },500);
+                },2000);
             }
         });
 
