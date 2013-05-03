@@ -7,14 +7,7 @@ import scala.slick.driver.MySQLDriver.simple._
 import models.Page
 import models.Page._
 
-/**
- * Created with IntelliJ IDEA.
- * User: Administrator
- * Date: 13-5-2
- * Time: 下午3:40
- * To change this template use File | Settings | File Templates.
- *
- */
+
 case class Vote(
                         id: Option[Long],
                         voteType: Int,

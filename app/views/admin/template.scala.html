@@ -99,7 +99,13 @@
                         <li><a href='@controllers.admin.routes.Adverts.channel("forum")'>讨论吧频道管理</a></li>
                     </ul>
                 </li>
+                <li class="submenu @if(nav=="vote"){active open}">
+                <a href="#"><i class="icon icon-th-list"></i> <span>调查投票管理</span></a>
+                <ul>
+                    <li><a href='@controllers.admin.routes.Votes.votes(1)'>调查投票管理</a></li>
 
+                </ul>
+                </li>
 
             </ul>
 

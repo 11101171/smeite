@@ -1,0 +1,79 @@
+@(manager:models.admin.Manager)
+@views.html.admin.template(manager,"tag") {
+    <div id="content-header">
+        <h1>标签管理</h1>
+    </div>
+    <div id="breadcrumb">
+        <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+        <a href="#" class="current">标签组管理</a>
+        <a href="#" class="current">编辑标签</a>
+    </div>
+
+    <div class="container-fluid">
+    <div class="row-fluid">
+    <div class="span12">
+    <div class="widget-box">
+    <div class="widget-title">
+        <span class="icon">
+            <i class="icon-pencil"></i>
+        </span>
+        <h5>编辑标签</h5>
+    </div>
+    <div class="widget-content nopadding">
+        <form class=" form-horizontal" id="J_tagForm"  method="post" action="@controllers.admin.routes.Votes.save">
+
+
+
+            <div class="control-group">
+                <div class="controls">
+
+                    <input type="submit" class="btn" value="保存"/>
+                </div>
+            </div>
+        </form>
+
+
+                  </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<script type="text/javascript">
+            $(function(){
+                $("#J_cid").change(function(){
+                  var cid =$(this).val()
+
+if(cid ==""){
+       $("#J_groupId").html(" ")
+    }else{
+    $.ajax({
+    url:"/admin/tags/getSimpleGroups?cid="+cid,
+    type:'get',
+    dataType:'html',
+    success:function(data){
+    $("#J_groupId").html(data)
+    }
+    })
+    }
+
+    })
+
+
+
+
+
+
+                $("#J_tagForm").submit(function(){
+                  var name=  $("#J_groupId").find("option:selected").text();
+                    $("#groupName").val(name)
+                })
+            })
+       </script>
+
+        }
+
+

@@ -305,6 +305,14 @@ GET  /admin/tasks/delete          controllers.admin.Tasks.delete(id:Long)
 GET  /admin/tasks/view          controllers.admin.Tasks.view(id:Long)
 GET  /admin/tasks/filterTasks      controllers.admin.Tasks.filterTasks
 
+#管理后台 投票管理
+GET  /admin/votes/votes          controllers.admin.Votes.votes(p:Int ?=1)
+GET  /admin/votes/edit             controllers.admin.Votes.edit(id:Long)
+POST  /admin/votes/save           controllers.admin.Votes.save
+GET  /admin/votes/delete             controllers.admin.Votes.delete(id:Long)
+GET  /admin/votes/batch             controllers.admin.Votes.batch
+GET  /admin/votes/filter             controllers.admin.Votes.filter
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public/assets", file)
 GET     /images/*file               controllers.Assets.at(path="/public/images", file)
