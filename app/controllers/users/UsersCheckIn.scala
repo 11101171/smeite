@@ -55,18 +55,26 @@ object UsersCheckIn extends Controller {
       if(userCheckIn.isEmpty){
         val history =currentDay+":"+shiDou
         UserDao.addUserCheckIn(user.get.id.get,shiDou,1,month,history,timestamp)
+        UserDao.modifyShiDou(user.get.id.get,shiDou)
+        Ok(Json.obj("code" -> "100", "message" ->"success","userCheckInDays" ->"1","userScore"->(user.get.shiDou+shiDou).toString ))
       } else{
-        val days = if(utils.Utils.getIntervalDays(timestamp,userCheckIn.get.addTime) ==0) userCheckIn.get.days+1 else{ 0}
-        if(month == userCheckIn.get.month){
-          val history = userCheckIn.get.history+","+currentDay+":"+shiDou
-          UserDao.modifyUserCheckIn(userCheckIn.get.id.get,shiDou,days,history)
-        }else {
-          val history =currentDay+":"+shiDou
-          UserDao.addUserCheckIn(user.get.id.get,shiDou,days,month,history,timestamp)
-        }
+        val isChecked =   userCheckIn.get.addTime.after(utils.Utils.getStartOfDay( new Timestamp(System.currentTimeMillis())))
+          if(isChecked){
+            Ok(Json.obj("code" -> "104", "message" ->"用户已签到" ))
+          }else{
+            val days = if(utils.Utils.getIntervalDays(timestamp,userCheckIn.get.addTime) ==0 ) userCheckIn.get.days+1 else{ 1 }
+            if(month == userCheckIn.get.month){
+              val history = userCheckIn.get.history+","+currentDay+":"+shiDou
+              UserDao.modifyUserCheckIn(userCheckIn.get.id.get,shiDou,days,history)
+            }else {
+              val history =currentDay+":"+shiDou
+              UserDao.addUserCheckIn(user.get.id.get,shiDou,days,month,history,timestamp)
+            }
+            UserDao.modifyShiDou(user.get.id.get,shiDou)
+            Ok(Json.obj("code" -> "100","userCheckInDays" -> days.toString,"userScore"->(user.get.shiDou+shiDou).toString ))
+          }
+
       }
-      UserDao.modifyShiDou(user.get.id.get,shiDou)
-      Ok(Json.obj("code" -> "100", "message" ->"success" ))
     }
 
   }

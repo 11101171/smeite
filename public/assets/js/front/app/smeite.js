@@ -1510,12 +1510,12 @@ define(function(require, exports) {
                 $("a[rel=checkIn]").removeClass("checked").text("签到");
             }
         },
-        checkInIntro:function(o,data,show){
+        checkInIntro:function(o,data){
             $("#checkin_intro").unbind().remove();
-            var userCheckinDays = (data.userCheckinDays+'').length==1?('0'+data.userCheckinDays):data.userCheckinDays;
+            var userCheckInDays = (data.userCheckInDays+'').length==1?('0'+data.userCheckInDays):data.userCheckInDays;
             var HTML = ""
                 +'<div id="checkin_intro">'
-                +'连签：<b class="checkin_days">'+userCheckinDays+'</b>&nbsp;天<br/>'
+                +'连签：<b class="checkin_days">'+userCheckInDays+'</b>&nbsp;天<br/>'
                 +'集分宝：<b id="jifen">'+data.userScore+'</b>&nbsp;分<br/>'
                 +'<p>'
                 +'签到：送集分宝，每次1-20个集分宝，随机赠送<br/>'
@@ -1564,14 +1564,15 @@ define(function(require, exports) {
                 html += '<p class="fs14" id="J_checkInMsg">';
                 html +='亲，您将获得<strong class="rc">1-20</strong>个不等的<a href="/jifenbao">集分宝</a>。亲由于签到的人很多，无法每天都返还。我们将您获得集分宝以<a href="/shiDou">食豆</a>的形式返还，1个食豆 = 1个集分宝，获得1000个食豆就可以提现了哦，价值10元'
                 html +='</p>';
-                html +='<div class="checkIn"> ';
+                html +='<div class="checkIn" id="J_checkIn"> ';
                 //  这里是抽奖区域
                 html +='<div class="checkIn_area">';
-                html +='<div class="checkIn_bg show"><img src="/assets/ui/new_gift.png"> </div>';
-                html +='<div class="checkIn_roll hide"><img src="/assets/ui/new_gift_roll.gif"> </div>';
-                html +='<div class="checkIn_left_value show" id="J_leftValue"> 0 </div>';
-                html +='<div class="checkIn_right_value show" id="J_rightValue"> 0 </div>';
+                html +='<div class="checkIn_bg hide"><img src="/assets/ui/new_gift.png"> </div>';
+                html +='<div class="checkIn_roll show"><img src="/assets/ui/new_gift_roll.gif"> </div>';
+                html +='<div class="checkIn_left_value hide" id="J_leftValue"> 0 </div>';
+                html +='<div class="checkIn_right_value hide" id="J_rightValue"> 0 </div>';
                 html += '</div>';
+
                 html += '</div>';
 
                 html += '</div>';
@@ -1592,28 +1593,31 @@ define(function(require, exports) {
                 var data={
                     shiDou:0
                 };
-                $(".show").hide()
-                $(".hide").show()
+
                     setTimeout(function() {
                             var leftValue = 0;
                             var rightValue = 1 + Math.floor(Math.random() * 3);
                             data.shiDou =leftValue*10+rightValue
                             $('#J_leftValue').text(leftValue);
                             $('#J_rightValue').text(rightValue);
-                            $(".show").show()
-                            $(".hide").hide()
+                            $(".show").hide()
+                            $(".hide").show()
                             var msg ="恭喜您获得<strong class='rc'>"+data.shiDou+"</strong>个集分宝"
                             $("#J_checkInMsg").html(msg)
                             $.ajax({
+                                type : "POST",
                                 url: "/ajaxCheckIn",
                                 contentType:"application/json; charset=utf-8",
                                 dataType: "json",
                                 data: JSON.stringify(data),
                                 success: function(data){
                                     if(data.code=="100"){
-                                       setTimeout(function(){
+                                        $.smeite.checkIn.changeCheckInIcon(true);
+                                        $.smeite.checkIn.checkInIntro($this,data);
+                                     /*  setTimeout(function(){
                                            $("#J_checkInDialog").overlay().close()
-                                       },2500)
+                                       },2500)*/
+                                        $.smeite.checkIn.voteProcess(data)
                                     }else if(data.code=="404"){
                                         //未登录
                                         $.smeite.dialog.login();
@@ -1623,19 +1627,18 @@ define(function(require, exports) {
 
                         },
                         2500)
-
-
-
-                $("#J_checkInDialog").overlay().getClosers().bind("click",function(){
-                    Cookie.set("checkIn",'close')
-                });
             }else{
                 $("#J_checkInDialog").data("overlay").load();
             }
         },
         /* 调查过程 */
         voteProcess:function(){
+            var html = "";
+            html +='<div class="vote_area">';
+            html +='<div class=""> 这里是 vote 区域 </div>';
 
+            html += '</div>';
+            $("#J_checkIn").html(html);
         }
     }
 
@@ -1858,7 +1861,7 @@ define(function(require, exports) {
                     }else if(data.code=="104"){
                         //积分获取失败
                         data.userScore = 0;
-                        data.userCheckinDays = 0;
+                        data.userCheckInDays = 0;
                         $.smeite.checkIn.checkInIntro($this,data)
                     }else if(data.code=="404"){
                         //未登录
