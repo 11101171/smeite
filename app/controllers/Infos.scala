@@ -47,20 +47,23 @@ object Infos extends Controller {
     Ok(Json.obj("code"->"100","message"->"success"))
  }
 
-  /*集分宝介绍*/
+  /*集分宝介绍toto*/
   def jifenbao = Users.UserAction { user => implicit request =>
       Ok(views.html.infos.jifenbao(user))
   }
-  /*食豆介绍*/
+  /*食豆介绍todo*/
   def shiDou = Users.UserAction { user => implicit request =>
     Ok(views.html.infos.shiDou(user))
   }
 
-  /* 返现教程 */
+  /* 返现教程todo */
   def rebate = Users.UserAction { user => implicit request =>
     Ok(views.html.infos.rebate(user))
   }
-
+  /* 签到介绍 todo */
+  def aboutCheckIn = Users.UserAction { user => implicit request =>
+    Ok(views.html.infos.aboutCheckIn(user))
+  }
 
 
   // 淘宝客的验证

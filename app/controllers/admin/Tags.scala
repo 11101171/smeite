@@ -164,17 +164,17 @@ object  Tags extends Controller {
   /*保存标签组*/
   def saveGroup=Managers.AdminAction{ manager => implicit request =>
       groupForm.bindFromRequest.fold(
-        formWithErrors => BadRequest(views.html.admin.tags.editGroup(manager,formWithErrors)),
-        group => {
-        /*如果group id 为空，则保存数据 ，否则，则update数据*/
-          if(group.id.isEmpty){
-            TagDao.addGroup(TagGroup(None,group.name,group.pic,group.intro,group.cid,group.hotIndex,group.isVisible,0,group.seoTitle,group.seoKeywords,group.seoDesc,None,None))
-          }else{
-            TagDao.modifyGroup(TagGroup(group.id,group.name,group.pic,group.intro,group.cid,group.hotIndex,group.isVisible,0,group.seoTitle,group.seoKeywords,group.seoDesc,None,None))
-          }
-          Redirect(controllers.admin.routes.Tags.groupList(1))
-        }
-      )
+    formWithErrors => BadRequest(views.html.admin.tags.editGroup(manager,formWithErrors)),
+    group => {
+      /*如果group id 为空，则保存数据 ，否则，则update数据*/
+      if(group.id.isEmpty){
+        TagDao.addGroup(TagGroup(None,group.name,group.pic,group.intro,group.cid,group.hotIndex,group.isVisible,0,group.seoTitle,group.seoKeywords,group.seoDesc,None,None))
+      }else{
+        TagDao.modifyGroup(TagGroup(group.id,group.name,group.pic,group.intro,group.cid,group.hotIndex,group.isVisible,0,group.seoTitle,group.seoKeywords,group.seoDesc,None,None))
+      }
+      Redirect(controllers.admin.routes.Tags.groupList(1))
+    }
+  )
   }
   /*删除Tag group*/
   def deleteGroup(gid:Long)=Managers.AdminAction{

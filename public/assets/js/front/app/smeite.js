@@ -894,7 +894,7 @@ define(function(require, exports) {
                 html += '<div class="dialog-content">';
                 html += '<div class="bd clearfix">';
                 html += '<p class="success-text"><span class="correct">宝贝发布成功！</span></p>';
-                html += '<p class="clearfix"><a class="bbl-btn goCheck" href="/user/'+ SMEITER.userId + '/baobei">前往查看宝贝</a>';
+                html += '<p class="clearfix"><a class="bbl-btn goCheck" href="/user/baobei">前往查看宝贝</a>';
                 html += '<a class="bgr-btn closeD ml10" href="javascript:;">关闭</a></p>';
                 html += '</div>';
                 html += '</div>';
@@ -1248,39 +1248,6 @@ define(function(require, exports) {
         //喜欢重复提交
         repeatLoveBaobeiClk : function(o){},
         //提交按钮操作
-        awardClk : function(o){
-            var html = ""
-                +'<div id="awardDialog" class="g-dialog" style="width:400px;z-index: 9999; top: 363.5px; left: 643px; position: fixed; display: block; ">'
-                +'<div class="dialog-content">'
-                +'<div class="hd"><h3>你喜欢，我买单</h3></div>'
-                +'<div class="bd clearfix tac">'
-                +'<span style="color:#E26;font-size:16px;font-weight:bold;line-height:30px;">恭喜，你中奖了</span><br/>'
-                +'<span style="font-size:14px;line-height:30px;">请在规定时间内领取神秘奖品</span><br/>'
-                +'<a href="/account/award" target="_blank" class="bbl-btn award-tag mt20" style="margin-left:148px;cursor:pointer;">查看</a>'
-                +'</div>'
-                +'<a class="close" href="javascript:;"></a>'
-                +'</div>'
-                +'</div>';
-            $("body").append(html);
-            $("#awardDialog").overlay({
-                top: 'center',
-                mask: {
-                    color: '#000',
-                    loadSpeed: 200,
-                    opacity: 0.3
-                },
-                closeOnClick: true,
-                load: true,
-                onClose: function() {
-                    $("#awardDialog,#exposeMask").remove();
-                }
-            });
-            $(".award-tag").unbind();
-            $(".award-tag").bind("click",function(){
-                $("#awardDialog,#exposeMask").overlay().close();
-                return true;
-            })
-        },
         loveBaobeiSubmit:function(o, productId){
             if(!$.smeite.dialog.isLogin()){
                 return false;
@@ -1562,7 +1529,7 @@ define(function(require, exports) {
                 html += '<div class="hd"><h3>亲，签到送集分宝哦</h3></div>';
                 html += '<div class="bd clearfix">';
                 html += '<p class="fs14" id="J_checkInMsg">';
-                html +='亲，您将获得<strong class="rc">1-20</strong>个不等的<a href="/jifenbao">集分宝</a>。亲由于签到的人很多，无法每天都返还。我们将您获得集分宝以<a href="/shiDou">食豆</a>的形式返还，1个食豆 = 1个集分宝，获得1000个食豆就可以提现了哦，价值10元'
+                html +='亲，您将获得<strong class="rc">1-20</strong>个不等的<a href="/jifenbao">集分宝</a>。<a href="/aboutCheckIn">去看看详细介绍</a>'
                 html +='</p>';
                 html +='<div class="checkIn" id="J_checkIn"> ';
                 //  这里是抽奖区域
@@ -1602,7 +1569,7 @@ define(function(require, exports) {
                             $('#J_rightValue').text(rightValue);
                             $(".show").hide()
                             $(".hide").show()
-                            var msg ="恭喜您获得<strong class='rc'>"+data.shiDou+"</strong>个集分宝，帮我们做个小调查吧"
+                            var msg ="恭喜您获得<strong class='rc'>"+data.shiDou+"</strong>个集分宝，向您推荐~ "
                             $("#J_checkInMsg").html(msg)
                             $.ajax({
                                 type : "POST",
@@ -1617,7 +1584,7 @@ define(function(require, exports) {
                                      /*  setTimeout(function(){
                                            $("#J_checkInDialog").overlay().close()
                                        },2500)*/
-                                        $.smeite.checkIn.voteProcess(data)
+                                        $.smeite.checkIn.recommendProcess(data.goods)
                                     }else if(data.code=="404"){
                                         //未登录
                                         $.smeite.dialog.login();
@@ -1631,24 +1598,22 @@ define(function(require, exports) {
                 $("#J_checkInDialog").data("overlay").load();
             }
         },
-        /* 调查过程 */
-        voteProcess:function(){
+        /* 推荐 */
+        recommendProcess:function(data){
             var html = "";
-            html +='<div class="vote_area clearfix">';
-            html +='<div class="vote_pic fl"><a> <img src="/assets/temp/vote.jpg"></a> </div>';
-            html +='<div class="vote_info fl">';
-            html +='<h3>原价2000，现价20，您认为左侧的商品怎么样侧的商品怎么样侧的商品怎么样</h3>';
-            html +='<from>';
-            html +='<div class="form-row"><label>值:</label><input type="radio" name="vote" value="0" class="radio" ><span class="tip" ></span> </div> ';
-            html +='<div class="form-row"><label>不值:</label><input type="radio" name="vote" value="1" class="radio" ><span class="tip" ></span> </div> ';
-            html +='<div class="form-row"><label>不知道:</label><input type="radio" name="vote" value="0" class="radio" ><span class="tip" ></span> </div> ';
-            html +='<div class="form-row"><label> &nbsp; </label><input type="button" class="bbl-btn submit"  value="提交" > </div> ' ;
-            html+='</from>';
+            html +='<div class="goods-area clearfix">';
+            html +='<div class="goods-pic fl"><a href="/ugc/api/gotoTaobao/'+data.numIid+"?goodsId="+data.goodsId+"&rate="+data.rate +'"> <img src="'+data.pic+'" width="150" height="150" ></a> </div>';
+            html +='<div class="buy-box clearfix fl">';
+            html +='<dl class="buy-meta">';
+            html +='<dt>'+data.title+'</dt>';
+            html +='<dd class="clearfix"> <div class="price">价格：<span class="price-promotion"> '+data.price+'</span></div></dd>';
+            html +='<dd>返利:&nbsp;<span> '+data.jifenbao+'</span>&nbsp;个集分宝</a>，值<span>'+data.jifenbaoValue+'</span>元</dd>';
+            html +="</dl>";
+            html +='<a class="buy-btn" href="/ugc/api/gotoTaobao/'+data.numIid+"?goodsId="+data.goodsId+"&rate="+data.rate +'"> 去看看&gt; </a>';
             html += '</div>';
-            html +='<div class="clear"></div>';
-            html +='<a class="buy-btn"> 去看看&gt; </a>';
             html += '</div>';
             $("#J_checkIn").html(html);
+
         }
     }
 

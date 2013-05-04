@@ -45,6 +45,7 @@ GET    /checkIn                          controllers.users.UsersCheckIn.checkIn
 POST   /checkInState                     controllers.users.UsersCheckIn.checkInState
 POST   /ajaxCheckIn                      controllers.users.UsersCheckIn.ajaxCheckIn
 
+
 #user 用户页面
 GET    /user/$id<[0-9]+>                          controllers.users.Users.home(id:Long)
 GET    /user/$id<[0-9]+>/credits                    controllers.users.Users.credits(id:Long,s:Int ?=-1,p:Int ?=1)
@@ -141,9 +142,11 @@ GET   /aboutUs                                         controllers.Infos.aboutUs
 GET   /contactUs                                       controllers.Infos.contactUs
 GET   /sitemap                                         controllers.Infos.siteMap
 GET   /friends                                         controllers.Infos.friends
+
 GET   /jifenbao                                         controllers.Infos.jifenbao
 GET   /shiDou                                         controllers.Infos.shiDou
 GET   /rebate                                         controllers.Infos.rebate
+GET   /aboutCheckIn                                   controllers.Infos.aboutCheckIn
 GET   /jiucuo                                          controllers.Infos.jiucuo
 GET   /xtaoAuth.html                                   controllers.Infos.xtaoAuth
 GET   /wb_59dcb1f27fb8d6af.txt                         controllers.Infos.weiboAuth

@@ -257,10 +257,9 @@ object API extends Controller {
   /* 淘宝客 go to taobao */
   def gotoTaobao(numIid:Long,goodsId:Long,rate:Int) =Users.UserAction { user => implicit request =>
       val uid:Long = if(!user.isEmpty){ user.get.id.get }else{ 0 }
-      val goods =GoodsDao.findById(goodsId)
       val timestamp= String.valueOf(System.currentTimeMillis)
       val sign=TaobaoConfig.getSign(timestamp)
-      Ok(views.html.ugc.api.gotoTaobao(numIid,uid,goodsId,rate,goods.get.detailUrl)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
+      Ok(views.html.ugc.api.gotoTaobao(numIid,uid,goodsId,rate)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
   }
   /*
   * uid:Long,goodsId:Long,numIid:Long,nick:String,title:String,location:String,pic:String,price:String,withdrawRate:Int,credits:Int

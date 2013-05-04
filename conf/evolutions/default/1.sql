@@ -1374,11 +1374,11 @@ CREATE TABLE `vote` (
   `select3`          varchar(128),
   `select4`          varchar(128),
   `select5`          varchar(128),
-  `value1`          varchar(128),
-  `value2`          varchar(128),
-  `value3`          varchar(128),
-  `value4`          varchar(128),
-  `value5`          varchar(128),
+  `value1`            smallint(10) unsigned ,
+  `value2`         smallint(10) unsigned ,
+  `value3`          smallint(10) unsigned ,
+  `value4`         smallint(10) unsigned ,
+  `value5`         smallint(10) unsigned ,
   `add_time`      timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;

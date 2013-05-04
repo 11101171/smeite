@@ -1038,16 +1038,43 @@ input:-moz-placeholder { font-size:12px; }
     margin: 20px auto;
     font-size: 14px;
 }
-#J_checkInDialog .vote_info{
+
+#J_checkInDialog .buy-box {
     width: 300px;
     padding-left: 5px;
 }
-#J_checkInDialog .vote_info h3{
-    font-size: 14px;
-    font-weight: normal;
-    padding-bottom: 10px;
+
+#J_checkInDialog .buy-meta {
+    margin-bottom: 15px;
+    overflow: hidden
 }
+
+#J_checkInDialog dt{
+    font-size: 14px;
+    font-family:"微软雅黑";
+   font-weight: bold;
+}
+#J_checkInDialog  dd {
+    font-size: 14px;
+    font-family:"微软雅黑";
+    padding: 5px 0;
+    color: #000;
+}
+
+
+#J_checkInDialog .price{
+    float: left;
+    height: 35px;
+    line-height: 35px;
+}
+
+#J_checkInDialog  dd span{
+    color: #e26;
+    font-weight: bold;
+}
+
 #J_checkInDialog  .buy-btn {
+    margin-right: 25px;
       float:right;
       width: 70px;
       height: 25px;
@@ -1062,17 +1089,7 @@ input:-moz-placeholder { font-size:12px; }
       -webkit-border-radius: 2px;
       text-decoration: none;
   }
-#J_checkInDialog .form-row {
-    margin-bottom: 0;
-}
-#J_checkInDialog .form-row label {
-    line-height: 25px;
-}
-#J_checkInDialog .form-row .radio{
-    height: 25px;
-    line-height:25px;
-    margin-left: 15px;
-}
+
 
 /* 第三方登录设置基本信息浮层 */
 .set-box { width:360px;margin:0 auto; }
