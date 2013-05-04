@@ -1084,10 +1084,11 @@ define(function(require, exports) {
                 html += '</div>';
                 html += '<div class="gallery-ft clearfix">';
                 html += '<span class="status">已选 <em>0</em> 张</span><span class="errc"></span>';
-                html += '<div class="gallery-pagin"><a href="javascript:;" class="sgr-btn prev">上页</a>';
-                html += '<span class="num-box"><em class="curP">1</em>/<em class="totalP"></em></span>';
-                html += '<a href="javascript:;" class="sgr-btn next">下页</a></div>';
-
+               html += '<div class="gallery-pagin">';
+              //   html += '<a href="javascript:;" class="sgr-btn prev">上页</a>';
+              //  html += '<span class="num-box"><em class="curP">1</em><em class="totalP"></em></span>';
+             //  html += '<a href="javascript:;" class="sgr-btn next">下页</a>';
+                html += '</div>';
                 html += '</div>';
                 html += '</div>';
                 html += '</div>';
@@ -1113,37 +1114,16 @@ define(function(require, exports) {
                     load: true
                 });
                 //宝贝图片
-            //    alert(jsonObj.itemPics)
                 var photoArr = jsonObj.itemPics,
                     photoHtml = "";
                 if(photoArr.length>0){
                     photoHtml += '<ul>';
                         for(var i=0,length=photoArr.length;i<length;i++){
                             photoHtml += '<li><a href="javascript:;"><img src="' + photoArr[i] + '" alt="" /></a><i></i></li>';
-                            if((i+1)%8==0 && i!=photoArr.length-1){
-                                photoHtml += '</ul><ul>';
-                            }
                         }
                     photoHtml += '</ul>';
                     $("#J_GoodsPubD .items").append(photoHtml);
-                    //$("#J_GoodsPubD .items img").resizeImage(94,94);
-                    //图片分页滚动
-                    $("#J_GoodsPubD .gallery-bd").scrollable({vertical: true});
-                    $("#J_GoodsPubD .prev").click(function(){
-                        var curPage = parseInt($(".curP").text()),
-                            totalPage = parseInt($(".totalP").text());
-                        if(curPage>1){
-                            $(".curP").text(curPage-1);
-                        }
-                    });
-                    $("#J_GoodsPubD .next").click(function(){
-                        var curPage = parseInt($(".curP").text()),
-                            totalPage = parseInt($(".totalP").text());
-                        if(curPage<totalPage){
-                            $(".curP").text(curPage+1);
-                        }
-                    });
-                    $("#J_GoodsPubD .totalP").text($("#J_GoodsPubD .gallery-bd ul").length);
+
                 }
                 //图片选择操作
                 $("#J_GoodsPubD li a, #J_GoodsPubD li i").die().live("click",function(e){

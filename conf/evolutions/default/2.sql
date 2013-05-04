@@ -288,15 +288,15 @@ insert into advert(position_code,name)value("index-haowanyi-right","新-首页-h
 insert into advert(position_code,name)value("index-haowanyi-right","新-首页-haowanyi-9") ;
 insert into advert(position_code,name)value("index-haowanyi-right","新-首页-haowanyi-10") ;
 
- insert into advert_position(position,name,code,advert_type)values("index","新-底部-图片","index-bottom",0) ;
+insert into advert_position(position,name,code,advert_type)values("index","新-底部-图片","index-bottom",0) ;
 insert into advert(position_code,name)value("index-bottom","新-首页-底部-广告");
 
 
 /*5 月 4 */
-  insert into advert_position(position,name,code,advert_type)values("checkIn","签到推荐","checkIn",2);
+ insert into advert_position(position,name,code,advert_type)values("checkIn","签到推荐","checkIn",2);
  insert into advert(position_code,name,third_id)value("checkIn","签到推荐1",2) ;
  insert into advert(position_code,name)value("checkIn","签到推荐2");
-  insert into advert(position_code,name)value("checkIn","签到推荐3");
-   insert into advert(position_code,name)value("checkIn","签到推荐4");
-    insert into advert(position_code,name)value("checkIn","签到推荐5");
-     insert into advert(position_code,name)value("checkIn","签到推荐6");
+ insert into advert(position_code,name)value("checkIn","签到推荐3");
+ insert into advert(position_code,name)value("checkIn","签到推荐4");
+ insert into advert(position_code,name)value("checkIn","签到推荐5");
+ insert into advert(position_code,name)value("checkIn","签到推荐6");
