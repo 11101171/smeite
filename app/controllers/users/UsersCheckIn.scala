@@ -6,11 +6,9 @@ import play.api.libs.json._
 import java.sql.Timestamp
 
 import models.user.User
-import models.vote.dao.VoteDao
 
 import play.api.libs.json._
 import play.api.libs.functional.syntax._
-import models.goods.dao.GoodsDao
 import models.advert.dao.AdvertDao
 
 /**
@@ -33,7 +31,7 @@ case class RecommendGoods(
 
 object UsersCheckIn extends Controller {
 
-  implicit val goodsVoteFormat = (
+  implicit val recommendGoodsFormat = (
     (__ \ "goodsId").format[Long] and
       (__ \ "numIid").format[Long] and
       (__ \ "rate").format[Int] and

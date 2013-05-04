@@ -530,7 +530,7 @@ define(function(require, exports) {
                 var html = "";
                 html += '<div id="loginDialog" class="g-dialog">';
                 html += '<div class="dialog-content">';
-                html += '<div class="hd"><h3>登录</h3></div>';
+                html += '<div class="hd"><h3 class="rc fl">登录购买之后，可以获得返利哦~</h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/ugc/api/gotoTaobao/'+numIid+"?goodsId="+goodsId+"&rate="+rate +'" target="_blank" >您也可以直接去购买&gt;&gt;</a></div>';
                 html += '<div class="bd clearfix"><div class="bd-l">';
                 html += '<form id="J_LoginDForm" action="/user/dialogEmailLogin" method="POST">';
                 html += '<div class="error-row"><p class="error"></p></div>';
@@ -558,7 +558,7 @@ define(function(require, exports) {
                 html += '</div>';
                 html += '</div>';
                 html += '<div class="clear"></div>';
-                html += '<div class="nofanli">无须登录获得返利，<a href="/ugc/api/gotoTaobao/'+numIid+"?goodsId="+goodsId+"&rate="+rate +'">直接去购买&gt;&gt;</a></div>';
+                html += '<div class="nofanli">无须登录获得返利，<a href="/ugc/api/gotoTaobao/'+numIid+"?goodsId="+goodsId+"&rate="+rate +'" target="_blank" >直接去购买&gt;&gt;</a></div>';
                 html += '</div>';
                 html += '<a class="close" href="javascript:;"></a>';
                 html += '</div>';

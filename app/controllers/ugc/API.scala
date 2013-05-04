@@ -21,15 +21,15 @@ import models.user._
 import play.api.libs.json.JsArray
 import play.api.libs.json.JsSuccess
 import play.api.libs.json.JsString
-import scala.Some
 import play.api.libs.json.JsNumber
-import models.user.User
-import models.user.UserShareGoods
-import models.goods.GoodsAssess
 import play.api.libs.json.JsObject
+
+import play.api.libs.json._
+import play.api.libs.functional.syntax._
+import models.user.User
+import models.goods.GoodsAssess
 import play.api.mvc.Cookie
-import models.tag.TagGoods
-import dao.{UserSQLDao, UserDao}
+import dao. UserDao
 import utils.{TaobaoConfig, Utils}
 
 /**
@@ -59,8 +59,8 @@ case class Product(
 case class BuyRecord(
                     uid:String,
                     goodsId:String,
-                    rate:String,
                     numIid:String,
+                    rate:String,
                     nick:String,
                     title:String,
                     location:String,
@@ -106,39 +106,23 @@ object API extends Controller {
   }
 
   /*json */
-  implicit  object BuyRecordFormat extends Format[BuyRecord]{
-    def writes(o: BuyRecord): JsValue = JsObject(
-      List(
-        "uid"->JsString(o.uid),
-        "goodsId"->JsString(o.goodsId),
-        "rate"->JsString(o.rate),
-        "numIid"->JsString(o.numIid),
-        "nick" -> JsString(o.nick),
-        "title" -> JsString(o.title),
-        "location" -> JsString(o.location),
-        "pic" -> JsString(o.pic),
-        "price" -> JsString(o.price),
-        "promotionPrice" -> JsString(o.promotionPrice),
-        "commissionRate" -> JsString(o.commissionRate),
-        "volume" -> JsNumber(o.volume)
-      )
-    )
-    def reads(json: JsValue): JsResult[BuyRecord] = JsSuccess(BuyRecord(
-      (json \ "uid").as[String],
-      (json \ "goodsId").as[String],
-      (json \ "rate").as[String],
-      (json \ "numIid").as[String],
-      (json \ "nick").as[String],
-      (json \ "title").as[String],
-      (json \ "location").as[String],
-      (json \ "pic").as[String],
-      (json \ "price").as[String],
-      (json \ "promotionPrice").as[String],
-      (json \ "commissionRate").as[String],
-      (json \ "volume").as[Int]
-    )
-    )
-  }
+  implicit val buyRecordFormat = (
+    (__ \ "uid").format[String] and
+      (__ \ "goodsId").format[String] and
+      (__ \ "numIid").format[String] and
+      (__ \ "rate").format[String] and
+      (__ \ "nick").format[String] and
+      (__ \ "title").format[String] and
+      (__ \ "location").format[String] and
+      (__ \ "pic").format[String] and
+      (__ \ "price").format[String] and
+      (__ \ "promotionPrice").format[String] and
+      (__ \ "commissionRate").format[String] and
+      (__ \ "volume").format[Int]
+    )(BuyRecord.apply,unlift(BuyRecord.unapply))
+
+
+
 
   private def url:String = Play.maybeApplication.flatMap(_.configuration.getString("application.taobao_url")).getOrElse("http://gw.api.taobao.com/router/rest")
   private def appkey = Play.maybeApplication.flatMap(_.configuration.getString("application.taobao_appkey")).getOrElse("21136607")
@@ -269,7 +253,7 @@ object API extends Controller {
       val uid = record.uid.toLong
       val numIid=record.numIid.toLong
       val goodsId=record.goodsId.toLong
-      val rate =record.rate.toInt
+      val rate = record.rate.toInt
       val price =if(record.promotionPrice!="")record.promotionPrice else record.price
       val withdrawRate= (rate*0.01*record.commissionRate.toFloat).toInt
       val credits = (price.toFloat*withdrawRate*0.01).toInt
