@@ -13,7 +13,7 @@
 .flash .scrollable .items .item a{cursor: pointer;color:#333;}
 
 .flash .navi {
-     z-index: 9;
+    z-index: 1;
     position: absolute;
     left: 0;
     bottom: 0;
