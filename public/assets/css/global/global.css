@@ -2546,6 +2546,13 @@ a.f-tencent {
     width: 100%;
     text-align: center;
 }
+#footer .footer-nav .service{
+    width:250px;
+}
+#footer .footer-nav dt span {
+     color: #999;
+     font-size: 12px;
+}
 
 /*return top 样式*/
 /**
