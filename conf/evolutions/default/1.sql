@@ -1141,10 +1141,10 @@ create table advert(
   width           smallint(10) default '0',
   height          smallint(10) default '0',
   link            varchar(128),
- note              varchar(200) default 'note',
-  click_num       smallint(10) default '1',
-  add_time          timestamp default '2012-5-12 14:18:00',
-  PRIMARY KEY (`id`)
+note              varchar(200) default 'note',
+click_num       smallint(10) default '1',
+add_time          timestamp default '2012-5-12 14:18:00',
+PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -1245,7 +1245,7 @@ CREATE TABLE `user_order` (
   `volume`          varchar(16) ,
   `pay_time`          timestamp,
   `create_time`          timestamp,
-   PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 /* 用户提现表
@@ -1329,7 +1329,7 @@ alter table user_profile change invite_id invite_id int(10) default '0';
 * check_in_month 201305
 * check_in_history day:state:credit  01:1:3,02:0:0,03:1:2 诸如此类
 */
- */
+*/
 DROP TABLE IF EXISTS `user_check_in`;
 CREATE TABLE `user_check_in` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
@@ -1384,3 +1384,6 @@ CREATE TABLE `vote` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 alter table tag_goods add  cid  smallint(10)  default '0';
+
+#20130505
+alter table advert change link  link   varchar(250);
