@@ -1849,40 +1849,6 @@ define(function(require, exports) {
         });
 
 
-        /* 顶部固定： 如果是find 页面 则 fix tag nav，否则 显示 #nav fixed */
-        var href = window.location.href;
-        if(href.indexOf("/find")==-1){
-            $(window).bind("scroll",function(){
-                var docScrollTop = $(document).scrollTop();
-                //IOS平台如iphone、ipad、ipod不执行导航滚动
-                if(!$.smeite.util.isIOS()){
-                    if(docScrollTop >0){
-                        $("#top").addClass("fixed")
-
-                    }else{
-                        $("#top").removeClass("fixed")
-
-                    };
-                }
-            });
-        }else{
-            $(window).bind("scroll",function(){
-                var docScrollTop = $(document).scrollTop();
-                //IOS平台如iphone、ipad、ipod不执行导航滚动
-                if(!$.smeite.util.isIOS()){
-                    if(docScrollTop >123){
-                        $("#J_tags").addClass("tag-list-fixed")
-
-                    }else{
-                        $("#J_tags").removeClass("tag-list-fixed");
-
-                    };
-
-                }
-
-            });
-        }
-
         /* 搜索框效果 header 搜索框*/
         $(".header-search-button").bind("click",function(){
             var self=$(this);

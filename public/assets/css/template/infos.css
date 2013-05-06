@@ -5,16 +5,89 @@
  * 维护人员:zuosanshao@qq.com
  */
 
-.common { padding:40px;margin:0 auto;background:#fff;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;-moz-box-shadow:0 1px 1px rgba(0,0,0,0.1);-webkit-box-shadow:0 1px 1px rgba(0,0,0,0.1);box-shadow:0 1px 1px rgba(0,0,0,0.1); }
-.common h2 { line-height:1.2;margin:0 auto 20px;padding:0 0 10px 0;font-size:16px;border-bottom:1px dotted #d1d1d1; }
-.common p { margin:0 0 20px 0; }
-.common .job-block { margin-bottom:30px; }
-.common .job-block h3 { font-size:14px;font-weight:normal;margin-bottom:20px; }
-.agreement-box h2{text-align:center;border-bottom:none;}
-.agreement-box ul li{line-height:2;color:#333;}
-.agreement-box ul li h3{margin:20px 0 0 0;}
-.agreement-box ul li ol{line-height:1.8;margin-left:2em;}
-.agreement-box ul li ol pre,.agreement-box ul li pre{margin-left:2em;}
-.agreement-box ul li p{line-height:1.6;padding-left:2em;margin:15px 0 0 0;color:#333;}
 
+.common{ width:980px; margin:35px auto 20px;  background:url(images/bg-help.png) repeat-y;}
+.main{ float:right; width:820px; background-color: #fff;}
+.aside{ float:left; width:160px;}
+.aside .inner{ padding-top: 50px;}
+.aside-nav{ width: 160px;}
+.aside-nav li{ height: 28px; margin-bottom: 5px;}
+.aside-nav li a{ display: block; width: 160px; height: 28px; text-align: center; font: 14px/28px SimSun; color: #588c0d; text-decoration:none;}
+.aside-nav li a:hover{ background-color: #ebebeb;}
+.aside-nav .current{ background-color: #67a727;}
+.aside-nav .current a,
+.aside-nav .current a:hover{ background-color: #67a727; color: #fff; font-weight: bold;}
+.aside-contact {
+     padding: 30px 10px;
+     width: 140px;
+ }
+.aside-contact h3{
+    font-size: 14px;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #999;
+}
+.aside-contact p{
+    padding-bottom: 10px;
+}
+/* main */
+.main .inner{ padding: 50px; min-height: 700px; _height: 700px;}
+.help-hd h3{ height: 30px; margin-bottom: 15px; font: bold 14px/30px SimSun; border-bottom: 1px solid #ededed; }
+.help-bd{ line-height:22px;}
 
+/** 乐活协议 **/
+.help-bd ol h5{margin: 6px auto;}
+.help-bd ol ol{margin-left:2em;color:#666;}
+.help-bd ol li{margin:10px 0;}
+.help-bd .help-pic{text-align:center;text-align:center;margin:30px 0;}
+.help-bd .help-pic img{margin:0 auto;}
+.help-bd .help-pic span{display:block;}
+.help-bd p a,
+.help-bd p a:hover,
+.help-bd p a:active{text-decoration:underline;}
+
+/* 友情链接页面 */
+.friends{ padding:40px;background:#fff;overflow:hidden; }
+.friends h2 { font-size:16px;padding-bottom:10px;border-bottom:1px dotted #d1d1d1; }
+.friends h3 { font-size:14px;padding:20px 0 15px; }
+.friends ul.imglinks { width:912px; }
+.friends ul.imglinks li { float:left;display:inline;width:120px;height:50px;margin:0 32px 20px 0; }
+.friends ul.textlinks { padding-left:15px; }
+.friends ul.textlinks li { float:left;display:inline;width:140px;margin-bottom:20px;line-height:18px; }
+.friendApply {padding-top:10px;border-top:1px dotted #d1d1d1;}
+.friendApply h3 { font-size:14px;padding:5px 0 10px; }
+.friendApply p{ line-height:2;}
+
+.aboutUs p {
+    margin: 0 0 20px 0;
+}
+
+.agreement h2 {
+    text-align: center;
+    border-bottom: none;
+}
+
+.agreement ul li {
+    line-height: 2;
+    color: #333;
+}
+
+.agreement ul li h3 {
+    margin: 20px 0 0 0;
+}
+
+.agreement ul li ol {
+    line-height: 1.8;
+    margin-left: 2em;
+}
+
+.agreement ul li ol pre, .agreement-box ul li pre {
+    margin-left: 2em;
+}
+
+.agreement ul li p {
+    line-height: 1.6;
+    padding-left: 2em;
+    margin: 15px 0 0 0;
+    color: #333;
+}

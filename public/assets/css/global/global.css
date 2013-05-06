@@ -1192,21 +1192,6 @@ input:-moz-placeholder { font-size:12px; }
 .tipmodal-error2{background:#fff url(images/alert.png) no-repeat 10px 10px;border-color:#d6d6d6;padding-left:35px;color:#666;}
 .tipmodal-error3{width:auto;background:#fff url(images/alert.png) no-repeat 10px 10px;border-color:#d6d6d6;padding-left:35px;color:#666;}
 
-/* 欢迎页面 */
-
-/* 友情链接页面 */
-.friends{ padding:40px;background:#fff;overflow:hidden; }
-.friends h2 { font-size:16px;padding-bottom:10px;border-bottom:1px dotted #d1d1d1; }
-.friends h3 { font-size:14px;padding:20px 0 15px; }
-.friends ul.imglinks { width:912px; }
-.friends ul.imglinks li { float:left;display:inline;width:120px;height:50px;margin:0 32px 20px 0; }
-.friends ul.textlinks { padding-left:15px; }
-.friends ul.textlinks li { float:left;display:inline;width:140px;margin-bottom:20px;line-height:18px; }
-.friendApply {padding-top:10px;border-top:1px dotted #d1d1d1;}
-.friendApply h3 { font-size:14px;padding:5px 0 10px; }
-.friendApply p{ line-height:2;}
-
-
 
 /* 标签背景 */
 .tag-link li { float:left;display:inline;margin:10px 4px 0 4px;padding-left:12px;background:url(images/tag-bg2.png) no-repeat;_background:url(images/tag-bg2-ie6.png) no-repeat;cursor:pointer; }
