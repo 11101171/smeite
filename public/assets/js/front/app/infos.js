@@ -13,4 +13,10 @@
  */
 define(function(require, exports) {
     var $ = jQuery = require("jquery");
+
+    $("#J_help").find("dt").toggle(function(){
+        $(this).next("dd").show()
+    },function(){
+        $(this).next("dd").hide()
+    })
 })

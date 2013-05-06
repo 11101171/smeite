@@ -1,31 +1,34 @@
 @(user:Option[models.user.User])
 @views.html.template(
 user,
+nav="aboutUs",
 title =  "关于我们_食美特，爱美食爱生活"
 )(css="/assets/css/template/infos.css") {
 
 <div class="container common clearfix">
 
-         <div class="aside">
-             <!-- http://www.leho.com -->
-             <div class="inner">
-                 <ul class="aside-nav">
-                     <li class="faq help"><a href="/help">帮助中心</a></li>
-                     <li class="apply"><a href="/aboutUs">关于食美特</a></li>
-                     <li class="jubao"><a href="/contactUs">联系我们</a></li>
-                     <li class="jubao"><a href="/cooperation">商务合作</a></li>
-                     <li class="contact current"><a href="/friends">友情链接</a></li>
-                 </ul>
-                 <div class="aside-contact">
-                     <h3>在线客服</h3>
-                     <p>通过QQ、旺旺等方式为你提供免费在线咨询服务。</p>
-                     <p><a href="/contactUs"><img src="/assets/ui/help-service.png"></a></p>
-                     <p>（8:30-23:00,创业伤不起啊）</p>
-                 </div>
-             </div>
+    <div class="aside">
+        <!-- http://www.leho.com -->
+        <div class="inner">
+            <ul class="aside-nav">
+                <li ><a href="/help">帮助中心</a></li>
+                <li class="current"><a href="/aboutUs">关于食美特</a></li>
+                <li ><a href="/jifenbao">购物送集分宝</a></li>
+                <li ><a href="/rebate">天猫/淘宝返利</a></li>
+                <li ><a href="/shiDou">食豆攻略</a></li>
+                <li ><a href="/aboutCheckIn">签到有奖</a></li>
+                <li ><a href="/contactUs">联系我们</a></li>
+                <li ><a href="/cooperation">商务合作</a></li>
+                <li ><a href="/friends">友情链接</a></li>
+            </ul>
+            <div class="aside-contact">
+                <p><a href="/contactUs"><img src="/assets/ui/help-service.png"></a></p>
+                <p>8:30-23:00创业伤不起</p>
+            </div>
+        </div>
 
-         </div>
-         <div class="main aboutUs">
+    </div>
+     <div class="main aboutUs">
              <div class="inner">
                  <div class="help-con">
                      <div class="help-hd">

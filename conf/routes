@@ -140,14 +140,18 @@ POST     /theme/removeGoods                   controllers.Themes.removeGoods
 GET   /agreement                                       controllers.Infos.agreement
 GET   /aboutUs                                         controllers.Infos.aboutUs
 GET   /contactUs                                       controllers.Infos.contactUs
-GET   /sitemap                                         controllers.Infos.siteMap
 GET   /friends                                         controllers.Infos.friends
+GET   /help                                            controllers.Infos.help
+GET   /cooperation                                     controllers.Infos.cooperation
 
+GET   /sitemap                                         controllers.Infos.siteMap
 GET   /jifenbao                                         controllers.Infos.jifenbao
 GET   /shiDou                                         controllers.Infos.shiDou
 GET   /rebate                                         controllers.Infos.rebate
 GET   /aboutCheckIn                                   controllers.Infos.aboutCheckIn
+
 GET   /jiucuo                                          controllers.Infos.jiucuo
+
 GET   /xtaoAuth.html                                   controllers.Infos.xtaoAuth
 GET   /wb_59dcb1f27fb8d6af.txt                         controllers.Infos.weiboAuth
 GET   /686d2b12a3c8fa6430c6f32b51d504ca.txt            controllers.Infos.qzone

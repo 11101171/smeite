@@ -1,31 +1,66 @@
 @(user:Option[models.user.User])
 @views.html.template(
 user,
+nav="contactUs",
 title = "联系我们_食美特，爱美食爱生活"
 )(css="/assets/css/template/infos.css") {
 
-<div class="container">
-    <div class="common">
-        <h2>合作联系</h2>
-        <div>
-            <p>Smeite.com致力于发现绿色安全、健康美味的食品，推荐美观实用、简约实惠的家居用品以及充满创意的好玩意。
-                我们严格把控商品的品质，用心创造一个值得信赖的购物分享社区。
-                我们所做的一切，就是通过我们的努力，为更多的消费者提供更有效、更有价值的购物决策建议。
-            </p>
-            <p>
-                我们不鼓励商家擅自在网站上分享自家的商品，但欢迎优质的商家和品牌商与我们联系，按照我们的要求来推荐合适商品，参与活动，并为用户提供丰厚、可靠的商品。
-                <br><br><strong>商家合作内容如下：</strong>
-            </p>
-          <!--  <p>1）	专享优惠 <a href="#" target="_blank">（查看详细介绍）</a></p>
-            <p>2）	活动赞助 <a href="#" target="_blank">（查看详细介绍）</a></p>-->
-            <p><strong>合作联系：</strong></p>
-            <p>1）	加入合作QQ群：241691464</p>
-            <p>2）	发送需求至Email：service@@smeite.com</p>
-            <!--   <p>3）	加入商家微信群：微信号</p>
-             <p>合作联系人：周先生</p>-->
+<div class="container common clearfix">
+    <div class="aside">
+        <!-- http://www.leho.com -->
+        <div class="inner">
+            <ul class="aside-nav">
+                <li ><a href="/help">帮助中心</a></li>
+                <li ><a href="/aboutUs">关于食美特</a></li>
+                <li ><a href="/jifenbao">购物送集分宝</a></li>
+                <li ><a href="/rebate">天猫/淘宝返利</a></li>
+                <li ><a href="/shiDou">食豆攻略</a></li>
+                <li ><a href="/aboutCheckIn">签到有奖</a></li>
+                <li class="current"><a href="/contactUs">联系我们</a></li>
+                <li ><a href="/cooperation">商务合作</a></li>
+                <li ><a href="/friends">友情链接</a></li>
+            </ul>
+            <div class="aside-contact">
+                <p><a href="/contactUs"><img src="/assets/ui/help-service.png"></a></p>
+                <p>8:30-23:00创业伤不起</p>
+            </div>
+        </div>
 
+    </div>
+    <div class="main contactUs">
+        <div class="inner">
+            <div class="help-con">
+                <div class="help-hd">
+                    <h3>联系我们</h3>
+                </div>
+                <div class="help-bd">
+                    <!-- 内容 start -->
+                    <div>
+                        <p>Smeite.com致力于发现绿色安全、健康美味的食品，推荐美观实用、简约实惠的家居用品以及充满创意的好玩意。
+                            我们严格把控商品的品质，用心创造一个值得信赖的购物分享社区。
+                            我们所做的一切，就是通过我们的努力，为更多的消费者提供更有效、更有价值的购物决策建议。
+                        </p>
+                        <p>
+                            我们不鼓励商家擅自在网站上分享自家的商品，但欢迎优质的商家和品牌商与我们联系，按照我们的要求来推荐合适商品，参与活动，并为用户提供丰厚、可靠的商品。
+                            <br><br><strong>商家合作内容如下：</strong>
+                        </p>
+                        <!--  <p>1）	专享优惠 <a href="#" target="_blank">（查看详细介绍）</a></p>
+                          <p>2）	活动赞助 <a href="#" target="_blank">（查看详细介绍）</a></p>-->
+                        <p><strong>合作联系：</strong></p>
+                        <p>1）	加入合作QQ群：241691464</p>
+                        <p>2）	发送需求至Email：service@@smeite.com</p>
+                        <!--   <p>3）	加入商家微信群：微信号</p>
+                         <p>合作联系人：周先生</p>-->
+
+                    </div>
+
+                    <!-- 内容 end -->
+                </div>
+            </div>
         </div>
     </div>
+
+
 </div>
 
         }{

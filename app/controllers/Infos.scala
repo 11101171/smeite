@@ -22,7 +22,7 @@ object Infos extends Controller {
   }
 
   /* 帮助中心 */
-  def help = Users.UserAction { user => implicit request =>
+  def cooperation = Users.UserAction { user => implicit request =>
     Ok(views.html.infos.help.cooperation(user))
   }
   /*用户注册页面 注册条款*/

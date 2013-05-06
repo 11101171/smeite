@@ -7,6 +7,12 @@
 
 
 .common{ width:980px; margin:35px auto 20px;  background:url(images/bg-help.png) repeat-y;}
+.common a:link,
+.common a:visited,
+.common a:hover,
+.common a:active,
+.common a:focus{ color: #588C0E; text-decoration: none;}
+.common a:hover{ text-decoration: underline}
 .main{ float:right; width:820px; background-color: #fff;}
 .aside{ float:left; width:160px;}
 .aside .inner{ padding-top: 50px;}
@@ -14,20 +20,18 @@
 .aside-nav li{ height: 28px; margin-bottom: 5px;}
 .aside-nav li a{ display: block; width: 160px; height: 28px; text-align: center; font: 14px/28px SimSun; color: #588c0d; text-decoration:none;}
 .aside-nav li a:hover{ background-color: #ebebeb;}
-.aside-nav .current{ background-color: #67a727;}
+.aside-nav .current{ background-color: #839A1D;}
 .aside-nav .current a,
-.aside-nav .current a:hover{ background-color: #67a727; color: #fff; font-weight: bold;}
+.aside-nav .current a:hover{ background-color: #839A1D; color: #fff; font-weight: bold;}
 .aside-contact {
-     padding: 30px 10px;
-     width: 140px;
+    border-top: 1px dotted #999;
+    margin: 30px 10px;
+    width: 140px;
+    padding-top: 10px;
  }
-.aside-contact h3{
-    font-size: 14px;
-    margin-bottom: 5px;
-    padding-bottom: 5px;
-    border-bottom: 1px dotted #999;
-}
+
 .aside-contact p{
+      text-align: center;
     padding-bottom: 10px;
 }
 /* main */
@@ -47,10 +51,9 @@
 .help-bd p a:active{text-decoration:underline;}
 
 /* 友情链接页面 */
-.friends{ padding:40px;background:#fff;overflow:hidden; }
-.friends h2 { font-size:16px;padding-bottom:10px;border-bottom:1px dotted #d1d1d1; }
-.friends h3 { font-size:14px;padding:20px 0 15px; }
-.friends ul.imglinks { width:912px; }
+
+.friends h3 { font-size:14px;padding-bottom:15px; }
+.friends ul.imglinks { padding-left:15px; }
 .friends ul.imglinks li { float:left;display:inline;width:120px;height:50px;margin:0 32px 20px 0; }
 .friends ul.textlinks { padding-left:15px; }
 .friends ul.textlinks li { float:left;display:inline;width:140px;margin-bottom:20px;line-height:18px; }
@@ -61,33 +64,40 @@
 .aboutUs p {
     margin: 0 0 20px 0;
 }
-
 .agreement h2 {
     text-align: center;
     border-bottom: none;
 }
-
 .agreement ul li {
     line-height: 2;
     color: #333;
 }
-
 .agreement ul li h3 {
     margin: 20px 0 0 0;
 }
-
 .agreement ul li ol {
     line-height: 1.8;
     margin-left: 2em;
 }
-
 .agreement ul li ol pre, .agreement-box ul li pre {
     margin-left: 2em;
 }
-
 .agreement ul li p {
     line-height: 1.6;
     padding-left: 2em;
     margin: 15px 0 0 0;
     color: #333;
+}
+
+
+.help .help-bd dl{margin:0;}
+.help .help-bd dt{height:20px;line-height:20px; padding: 5px 0;}
+.help .help-bd dd{display:none;}
+.help h5{margin:20px 0 5px;}
+.help h5 span{
+    color: #333;
+    font-weight: normal;
+}
+.help p{
+    padding-bottom: 5px;
 }
