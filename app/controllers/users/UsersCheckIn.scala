@@ -53,23 +53,25 @@ object UsersCheckIn extends Controller {
       val userCheckIn = UserDao.findUserCheckIn(user.get.id.get)
       val isChecked =   if(userCheckIn.isEmpty){ false } else { userCheckIn.get.addTime.after(utils.Utils.getStartOfDay( new Timestamp(System.currentTimeMillis()))) }
       if(isChecked){
-        Ok(Json.obj("code" -> "100","userCheckInDays" -> userCheckIn.get.days.toString,"userScore"->user.get.shiDou.toString ))
+        Ok(Json.obj("code" -> "100","checkInDays" -> userCheckIn.get.days.toString,"userScore"->user.get.shiDou.toString ))
       }else{
         Ok(Json.obj("code" -> "104","message" -> "未签到" ))
       }
     }
   }
 
-  /* checkIn 食豆  用户签到后获取的食豆 */
-  def ajaxCheckIn = Action(parse.json) { implicit  request =>
-    val shiDou = (request.body \ "shiDou").as[Int]
-    val user:Option[User] =request.session.get("user").map(u=> UserDao.findById(u.toLong) )
+  /* checkIn 食豆  用户签到后获取的食豆  */
+  def ajaxCheckIn = Users.UserAction {   user => implicit request =>
     if(user.isEmpty) {Ok(Json.obj("code" -> "404", "message" ->"用户未登陆" ))}
      else {
+      val leftValue=0
+      val rightValue = (Math.random()*5).toInt
+      val shiDou = rightValue +leftValue*10
       val timestamp =  new Timestamp(System.currentTimeMillis())
       val month =utils.Utils.getYearMonth(timestamp)
       val currentDay = utils.Utils.getDay(timestamp)
       val userCheckIn =UserDao.findUserCheckIn(user.get.id.get)
+      var checkInDays=0
       /* todo 以后根据用户的喜好推荐 */
       val goods = AdvertDao.getGoods("checkIn").head
       val jifenbao=(goods.promotionPrice.get.toDouble*goods.commissionRate.get*goods.rate*0.0001).toInt
@@ -82,25 +84,26 @@ object UsersCheckIn extends Controller {
       *  1、 判断用户本月是否签到  如果本月签到，直接在 history 加上 本天的签到记录,如果不是，则直接添加一条记录
       * */
       if(userCheckIn.isEmpty){
+        checkInDays=1;
         val history =currentDay+":"+shiDou
         UserDao.addUserCheckIn(user.get.id.get,shiDou,1,month,history,timestamp)
         UserDao.modifyShiDou(user.get.id.get,shiDou)
-        Ok(Json.obj("goods"->Json.toJson(recommendGoods),"code" -> "100","userCheckInDays" ->"1","userScore"->(user.get.shiDou+shiDou).toString ))
+        Ok(Json.obj("goods"->Json.toJson(recommendGoods),"code" -> "100","checkInDays" ->checkInDays.toString,"leftValue"->leftValue,"rightValue"->rightValue, "userScore"->(user.get.shiDou+shiDou).toString ))
       } else{
         val isChecked =   userCheckIn.get.addTime.after(utils.Utils.getStartOfDay( new Timestamp(System.currentTimeMillis())))
           if(isChecked){
             Ok(Json.obj("code" -> "104", "message" ->"用户已签到" ))
           }else{
-            val days = if(utils.Utils.getIntervalDays(timestamp,userCheckIn.get.addTime) ==0 ) userCheckIn.get.days+1 else{ 1 }
+             checkInDays = if(utils.Utils.getIntervalDays(timestamp,userCheckIn.get.addTime) ==0 ) userCheckIn.get.days+1 else{ 1 }
             if(month == userCheckIn.get.month){
               val history = userCheckIn.get.history+","+currentDay+":"+shiDou
-              UserDao.modifyUserCheckIn(userCheckIn.get.id.get,shiDou,days,history)
+              UserDao.modifyUserCheckIn(userCheckIn.get.id.get,shiDou,checkInDays,history)
             }else {
               val history =currentDay+":"+shiDou
-              UserDao.addUserCheckIn(user.get.id.get,shiDou,days,month,history,timestamp)
+              UserDao.addUserCheckIn(user.get.id.get,shiDou,checkInDays,month,history,timestamp)
             }
             UserDao.modifyShiDou(user.get.id.get,shiDou)
-            Ok(Json.obj("goods"->Json.toJson(recommendGoods),"code" -> "100","userCheckInDays" ->"1","userScore"->(user.get.shiDou+shiDou).toString ))
+            Ok(Json.obj("goods"->Json.toJson(recommendGoods),"code" -> "100","checkInDays" ->checkInDays.toString,"leftValue"->leftValue,"rightValue"->rightValue,"userScore"->(user.get.shiDou+shiDou).toString ))
           }
       }
     }

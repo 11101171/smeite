@@ -1450,6 +1450,10 @@ define(function(require, exports) {
 
     /*用户的签到功能*/
     $.smeite.checkIn={
+          checkInState:{
+           shiDou:0,
+           checkInDays:0
+          } ,
         changeCheckInIcon :function(status){
             if(status){
                 $("a[rel=checkIn]").addClass("checked").text("已签");
@@ -1459,10 +1463,10 @@ define(function(require, exports) {
         },
         checkInIntro:function(o,data){
             $("#checkin_intro").unbind().remove();
-            var userCheckInDays = (data.userCheckInDays+'').length==1?('0'+data.userCheckInDays):data.userCheckInDays;
+            var checkInDays = (data.checkInDays+'').length==1?('0'+data.checkInDays):data.checkInDays;
             var HTML = ""
                 +'<div id="checkin_intro">'
-                +'连签：<b class="checkin_days">'+userCheckInDays+'</b>&nbsp;天<br/>'
+                +'连签：<b class="checkin_days">'+checkInDays+'</b>&nbsp;天<br/>'
                 +'集分宝：<b id="jifen">'+data.userScore+'</b>&nbsp;分<br/>'
                 +'<p>'
                 +'签到：送集分宝，每次1-20个集分宝，随机赠送<br/>'
@@ -1488,6 +1492,7 @@ define(function(require, exports) {
                      success: function(data){
                          if(data.code=="100"){
                              $.smeite.checkIn.changeCheckInIcon(true);
+                             $.smeite.checkIn.checkInState.checkInDays=data.checkInDays
                          }else if(data.code=="104"){
                              //未签到
                              //$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error3";
@@ -1509,7 +1514,7 @@ define(function(require, exports) {
                 html += '<div class="hd"><h3>亲，签到送集分宝哦</h3></div>';
                 html += '<div class="bd clearfix">';
                 html += '<p class="fs14" id="J_checkInMsg">';
-                html +='亲，您将获得<strong class="rc">1-20</strong>个不等的<a href="/jifenbao">集分宝</a>。<a href="/aboutCheckIn">去看看详细介绍</a>'
+                html +='亲，您将获得<strong class="rc">1-20</strong>个不等的<a href="/jifenbao">集分宝</a>,连签7天：额外送7个,连签15天：额外送15个,连签30天：额外送30个……';
                 html +='</p>';
                 html +='<div class="checkIn" id="J_checkIn"> ';
                 //  这里是抽奖区域
@@ -1519,9 +1524,7 @@ define(function(require, exports) {
                 html +='<div class="checkIn_left_value hide" id="J_leftValue"> 0 </div>';
                 html +='<div class="checkIn_right_value hide" id="J_rightValue"> 0 </div>';
                 html += '</div>';
-
                 html += '</div>';
-
                 html += '</div>';
                 html += '<a class="close" href="javascript:;"></a>';
                 html += '</div>';
@@ -1537,33 +1540,23 @@ define(function(require, exports) {
                     closeOnClick: false,
                     load: true
                 });
-                var data={
-                    shiDou:0
-                };
-
                     setTimeout(function() {
-                            var leftValue = 0;
-                            var rightValue = 1 + Math.floor(Math.random() * 3);
-                            data.shiDou =leftValue*10+rightValue
-                            $('#J_leftValue').text(leftValue);
-                            $('#J_rightValue').text(rightValue);
-                            $(".show").hide()
-                            $(".hide").show()
-                            var msg ="恭喜您获得<strong class='rc'>"+data.shiDou+"</strong>个集分宝，向您推荐~ "
-                            $("#J_checkInMsg").html(msg)
+                          //  var leftValue = 0;
+                         //   var rightValue = 1 + Math.floor(Math.random() * 3);
+                        //    $.smeite.checkIn.checkInState.shiDou =leftValue*10+rightValue
+
                             $.ajax({
                                 type : "POST",
                                 url: "/ajaxCheckIn",
-                                contentType:"application/json; charset=utf-8",
-                                dataType: "json",
-                                data: JSON.stringify(data),
                                 success: function(data){
                                     if(data.code=="100"){
+                                        $('#J_leftValue').text(data.leftValue);
+                                        $('#J_rightValue').text(data.rightValue);
+                                        $(".show").hide()
+                                        $(".hide").show()
+                                        var msg ='恭喜您获得<strong class="rc">'+(data.leftValue*10+data.rightValue)+'</strong>个集分宝，<span style="color:#9dc62c;font-size:20px;">'+ data.checkInDays +'</span>天。向您推荐~ '
+                                        $("#J_checkInMsg").html(msg)
                                         $.smeite.checkIn.changeCheckInIcon(true);
-                                        $.smeite.checkIn.checkInIntro($this,data);
-                                     /*  setTimeout(function(){
-                                           $("#J_checkInDialog").overlay().close()
-                                       },2500)*/
                                         $.smeite.checkIn.recommendProcess(data.goods)
                                     }else if(data.code=="404"){
                                         //未登录
@@ -1656,7 +1649,6 @@ define(function(require, exports) {
                     $(".sg-dialog .close").click(function(){
                         $("#J_GoodsUrlSubmit").enableBtn("bbl-btn");
                         $("#J_ShareGoodsD").fadeOut("fast");
-
                     });
                     $(".sg-form").submit(function(){
                         var $this = $(this);
@@ -1705,6 +1697,7 @@ define(function(require, exports) {
                     $(".sg-input").val("");
                     $(".text-tip").html("");
                 }
+
                 if($this.hasClass("hd-share-goods")){
                     $(".shareIt").append($("#J_ShareGoodsD"));
                 }else{
@@ -1739,6 +1732,83 @@ define(function(require, exports) {
                 $(".sg-input").focus();
             });
         }
+
+        /* 查询返利 */
+        if($("a[rel=rebateGoods]")[0]){
+            $("a[rel=rebateGoods]").click(function(){
+                if(!$.smeite.dialog.isLogin()){
+                    return false;
+                }
+                var $this = $(this);
+                if(!$("#J_RebateGoodsD")[0]){
+                    var html = "";
+                    html += '<div id="J_RebateGoodsD" class="g-dialog sg-dialog" >';
+                    html += '<div class="content">';
+                    html += '<p class="title">将宝贝网址粘贴到下面框中：</p>';
+                    html += '<form class="sg-form" id="J_rebateForm" name="rebateGoods" action="/ugc/api/rebateProduct">';
+                    html += '<div class="clearfix"><input class="base-input sg-input" id="J_rebateInput" name="url" value="" placeholder="http://" autocomplete="off" />';
+                    html += '<input type="submit" id="J_GoodsUrlSubmit" class="bbl-btn url-sub" value="确定" /></div>';
+                    html += '<div class="text-tip"></div>';
+                    html += '</form>';
+                    html += '<div class="sg-source">';
+                    html += '<p class="pt5 pb5 fl">已支持的返利网站：</p>';
+                    html += '<div class="source-list fl">';
+                    html += '<a class="icon-source icon-taobao" href="http://www.taobao.com/" target="_blank">淘宝网</a>';
+                    html += '<a class="icon-source icon-tmall" href="http://www.tmall.com/" target="_blank">天猫商城</a>';
+                    html += '</div>';
+                    html += '<div class="clear"></div>';
+                    html += '<p class="contact rc">为了确保您返利成功，请立即下单购买、一气呵成的完成购买，否则，有可能出现丢单的情况</p>';
+                    html += '</div>';
+                    html += '<div class="tipbox-up"><em>◆</em><span>◆</span></div>';
+                    html += '<a class="close" href="javascript:;"></a>';
+                    html += '</div>';
+                    html += '</div>';
+                    $(".btn-rebate").after(html)
+                    var position = $.smeite.util.getPosition($this).leftBottom();
+                    var W = $("#J_RebateGoodsD").outerWidth(),
+                        H = $("#J_RebateGoodsD").outerHeight(),
+                        btnW = $this.outerWidth(),
+                        dLeft = position.x,
+                        tipLeft = btnW/2 -70;
+                    if((position.x + W) > 960){
+                        dLeft = position.x - (W - btnW);
+                        tipLeft = W - btnW/2 -70;
+                    }
+                    $("#J_RebateGoodsD .tipbox-up").css({
+                        left: tipLeft + "px"
+                    });
+                    $("#J_rebateInput").focus();
+                    $("#J_rebateForm").submit(function(){
+                        var $this = $(this);
+                        var flag=true
+                        var url = $.smeite.util.trim($("#J_rebateInput").val());
+                        if(url==""){
+                            $(".text-tip").html('<span class="errc">宝贝网址不能为空~</span>').show();
+                            flag = false
+                        }else if(!$.smeite.util.validSite(url)){
+                            $(".text-tip").html('<span class="errc">暂时还不支持这个网站呢~</span>').show();
+                            flag = false
+                        }else{
+                            $(".text-tip").html('<span class="gc6">宝贝信息抓取中…</span>').show();
+                            $("#J_GoodsUrlSubmit").disableBtn("bbl-btn");
+                        }
+                        return flag
+
+                    });
+                }else{
+                    $("#J_rebateInput").val("");
+                    $(".text-tip").html("");
+                    $("#J_RebateGoodsD").show()
+
+                }
+                $("#J_RebateGoodsD").find(".close").click(function(){
+                    $("#J_GoodsUrlSubmit").enableBtn("bbl-btn");
+                    $("#J_RebateGoodsD").hide()
+                });
+
+            });
+        }
+
         //标签输入框自动转换“,”
         $("input[rel=tagsInput]").live("keyup",function(){
             //限制每个标签的中文长度
@@ -1801,7 +1871,7 @@ define(function(require, exports) {
 
         })
 
-        $("a[rel=checkIn]").hover(function(){
+  /*      $("a[rel=checkIn]").hover(function(){
             if(SMEITER.userId ==""){
                 return "Not login";
             }
@@ -1816,7 +1886,7 @@ define(function(require, exports) {
                     }else if(data.code=="104"){
                         //积分获取失败
                         data.userScore = 0;
-                        data.userCheckInDays = 0;
+                        data.checkInDays = 0;
                         $.smeite.checkIn.checkInIntro($this,data)
                     }else if(data.code=="404"){
                         //未登录
@@ -1828,9 +1898,9 @@ define(function(require, exports) {
             if($("#checkin_intro")[0]){
                setTimeout(function(){
                     $("#checkin_intro").remove();
-                },2000);
+                },1000);
             }
-        });
+        });*/
 
         /* 下拉框 */
         $(".gohome").dropDown({

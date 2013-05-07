@@ -64,7 +64,10 @@
                 <li class='@("on".when(nav == "jie"))'><a href="/jie" >美食街</a></li>
                 <li class='@("on".when(nav == "miss"))'>  <a href="/miss" >生活馆</a> </li>
             </ul>
+            <!-- 签到 -->
                 <a class="btn-checkIn fr" href="javascript:;" rel="checkIn">签到</a>
+            <!-- 查询返利 -->
+            <a class="btn-rebate fr" href="javascript:;" rel="rebateGoods">查返利</a>
             <!--分享宝贝-->
             <div class="shareIt fr">
                 <a  class="btn-sg" href="javascript:;">分享好东西<span class="arrow-dn"></span></a>
@@ -72,8 +75,9 @@
                     <li class="sg-li"><a rel="shareGoods" href="javascript:;" class="hd-share-goods">发布宝贝</a></li>
                     <li><a href="@controllers.routes.Themes.edit(0)" rel="createTheme" class="hd-create-topic">创作主题</a></li>
                 </ul>
-
             </div>
+
+
             @if(user.isEmpty){
             <div  class="regLogin fr clearfix">
                 <a rel="loginD" href="javascript:;">登录</a><span class="vline5">-</span><a href="/user/regist">注册</a>

@@ -168,6 +168,8 @@ GET     /ugc/api/gotoTaobao/$numIid<[0-9]+>        controllers.ugc.API.gotoTaoba
 POST    /ugc/api/updateProduct                     controllers.ugc.API.updateProduct
 POST    /ugc/api/ajaxRecord                        controllers.ugc.API.ajaxRecord
 
+GET    /ugc/api/rebateProduct                     controllers.ugc.API.rebateProduct(url:String)
+
 
 
 #常用的upload

@@ -261,4 +261,10 @@ object API extends Controller {
 
   Ok(Json.obj("code"->"100","message"->"success"))
   }
+
+  /* 查询淘宝客返利 */
+  def rebateProduct(detailUrl:String) = Users.UserAction { user => implicit request =>
+    val numIid =Utils.getURLParam(detailUrl,"id").get.toLong;
+    Redirect(controllers.routes.Search.convertProduct(numIid))
+  }
 }
