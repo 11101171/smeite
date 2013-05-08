@@ -96,14 +96,14 @@ object TagDao {
     val totalRows = Query(TagGoodses.filter(_.cid === cid ).filter(_.checkState ===1).length).first()
     val totalPages=((totalRows + pageSize - 1) / pageSize);
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
-    println(" totalRows  " + totalRows + " totalPages  " + totalPages  + " startRow " +startRow )
+    //println(" totalRows  " + totalRows + " totalPages  " + totalPages  + " startRow " +startRow )
 
     val q = for{
       (((t,g),a),u)<-TagGoodses.filter(_.cid === cid).filter(_.checkState===1).sortBy(_.sortNum desc).drop(startRow).take(pageSize) innerJoin Goodses on (_.goodsId ===_.id) leftJoin  GoodsAssesses  on (_._2.id ===_.goodsId) leftJoin Users on (_._2.uid === _.id)
     }yield(t.sortNum,g.id,g.name,g.pic,g.loveNum,g.price,g.promotionPrice.?,g.intro,u.id.?,u.name.?,u.pic.?,a.content.?)
-     println(" sq  " +q.list().length)
+   //  println(" sq  " +q.list().length)
 	 for( x <- q.list()){
-	 println(x._2)
+	 //println(x._2)
 	 }
     val list:List[((Int,Long,String,String,Int,String,Option[String],String),List[(Option[Long],Option[String],Option[String],Option[String])])] = q.list.groupBy(x=>(x._1,x._2,x._3,x._4,x._5,x._6,x._7,x._8)).map(x=>(x._1,x._2.map(y=>(y._9,y._10,y._11,y._12)))).toList.sortBy(_._1)
     Page(list,currentPage,totalPages)
@@ -119,7 +119,7 @@ object TagDao {
     }yield(g)
     val list:List[Goods] = q.drop(startRow).take(pageSize).list()
     for(item <- list){
-      println(item.id.get)
+      //println(item.id.get)
     }
     Page(list,currentPage,totalPages)
   }
@@ -136,7 +136,7 @@ object TagDao {
     }yield(g,t.sortNum)
     val list:List[Goods] = q.drop(startRow).take(pageSize).list().sortBy(x=>x._2).map(x => x._1)
     for(item <- list){
-      println(item.id.get)
+      //println(item.id.get)
     }
     Page(list,currentPage,totalPages)
   }

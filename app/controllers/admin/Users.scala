@@ -393,7 +393,7 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
     var p:Long =1l
     var flag:Boolean=true
     while(flag){
-      println("go into while" + p)
+      //println("go into while" + p)
       req.setPageNo(p);
       val report:TaobaokeReport = client.execute(req).getTaobaokeReport;
        if(report != null){

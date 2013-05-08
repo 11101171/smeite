@@ -1736,9 +1736,9 @@ define(function(require, exports) {
         /* 查询返利 */
         if($("a[rel=rebateGoods]")[0]){
             $("a[rel=rebateGoods]").click(function(){
-                if(!$.smeite.dialog.isLogin()){
+                /*if(!$.smeite.dialog.isLogin()){
                     return false;
-                }
+                }*/
                 var $this = $(this);
                 if(!$("#J_RebateGoodsD")[0]){
                     var html = "";

@@ -1,0 +1,242 @@
+/**
+* Created by zuosanshao.
+* Email:zuosanshao@qq.com
+* @contain: 
+* @depends: 
+* Since:12-11-28下午1:07 
+* ModifyTime : 2012-10-23 10:05
+* ModifyContent:
+* http://www.smeite.com/
+*
+*/
+#container {
+    width: 980px
+}
+
+.product-main {
+    width: 920px;
+    margin: 0 auto 25px;
+    background: #fff;
+    padding: 30px 30px 30px 30px;
++ padding : 30 px;
+    _padding: 30px 30px 30px 30px;
+}
+
+.main {
+    float: left;
+    background-color: #f5f5f5
+}
+
+.gallery {
+    padding:5px;
+    border-bottom: 1px dotted #eee;
+    float: left
+}
+
+.gallery .pic-box {
+    width: 400px;
+    height: 400px;
+    overflow: hidden;
+    position: relative
+}
+
+.gallery .pic-box .pic-link {
+    width: 400px;
+    height: 400px;
+    display: table-cell;
+    *display: block;
+    vertical-align: middle;
+    text-align: center;
+    *font-size: 412px;
+    *line-height: 1;
+    outline: 0
+}
+
+.gallery .pic-box img {
+    max-width: 400px;
+    vertical-align: middle
+}
+
+
+
+
+/*side */
+.side {
+    float: right;
+    position: relative;
+}
+
+.side .buy-info {
+    position: relative;
+    margin: 0 0 20px;
+}
+
+
+.side .intro  {
+    position: relative;
+    text-indent: 30px;
+    padding: 10px;
+    font: 14px/24px SimSun;
+    color: #333;
+    word-wrap: break-word;
+    word-break: break-all;
+    zoom: 1;
+}
+.side .intro-quot {
+    position: absolute;
+    top: 8px;
+    left: 15px;
+    width: 20px;
+    height: 20px;
+background: url(images/ico-quotation.png) no-repeat
+}
+ /* user info */
+.side .first-share {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+
+.side .user-info .pic {
+    margin-right: 8px;
+}
+
+.side .user-info .info{
+    height: 30px;
+    line-height: 30px;
+}
+.side .user-info  a {
+    font-size: 14px;
+}
+.side .user-info  a:hover{
+    color: #ff7f00;
+    text-decoration: underline;
+}
+
+.side .user-info  .come-from {
+    color: #CCC;
+}
+
+.side .title {
+    font-size: 16px;
+    font-weight: bolder;
+    padding: 10px 0;
+}
+.side .buy-box {
+    padding: 10px 0;
+    position: relative;
+}
+
+.side .buy-box .buy-meta {
+    overflow: hidden
+}
+
+
+.side .buy-box  dd {
+    font-size: 14px;
+    font-family:"微软雅黑";
+    padding: 10px;
+    color: #000;
+}
+.side .buy-box  dd a{
+    /*color: #5AD;*/
+}
+.side .buy-box  dd  a:hover{
+    color: #ff7f00;
+    text-decoration: underline;
+}
+.side .buy-box .price,.side .buy-box .volume{
+    float: left;
+    height: 35px;
+    line-height: 35px;
+}
+.side .buy-box .price{
+    width: 250px;
+}
+.side .buy-box .volume{
+
+}
+.side .buy-box  dd span{
+    color: #e26;
+    font-weight: bold;
+}
+.side .buy-box  .price-normal {
+    font-size: 14px;
+    text-decoration: line-through;
+    color: #555;
+}
+
+.side .buy-box  .price-promotion {
+    font-size: 20px;
+    font-weight: bolder;
+    color: #e26;
+}
+
+
+.buy-btn {
+    float: right;
+    margin-right: 30px;
+    width: 100px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    font-size: 14px;
+    color: white;
+    background: #FF7F00;
+    border: 1px solid #E67300;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    text-decoration: none;
+}
+
+.buy-btn2 {
+    float:right;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    font-size: 12px;
+    color:#555;
+
+
+}
+
+.side .buy-info .operate {
+    padding: 10px;
+    background: #FFFDF7;
+    border-radius: 0 0 5px 5px;
+    height:30px;
+    line-height: 30px;
+}
+
+.side .buy-info .info-wrong {
+    float: right;
+}
+
+.how-to-tip {
+    width: 478px;
+    background-color: #FFFFF6;
+    border: 1px dotted #F9F2A7;
+    color: #666;
+    position: relative;
+    zoom: 1;
+    padding: 10px;
+}
+
+.how-to-tip .title{
+    border-top: 3px solid #F90;
+    color: #F60;
+    display: inline-block;
+    font-weight: bold;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 15px;
+}
+.how-to-tip p{
+    line-height: 25px;
+}
+.green{
+    color: #588c0d;
+}
+
+
