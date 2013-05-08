@@ -38,7 +38,10 @@
 .main .inner{ padding: 50px; min-height: 500px; _height: 500px;}
 .help-hd h3{ height: 30px; margin-bottom: 15px; font: bold 14px/30px SimSun; border-bottom: 1px solid #ededed; }
 .help-bd{ line-height:22px;}
-
+.help-bd p{
+    line-height: 25px;
+    padding-bottom: 10px;
+}
 /** 乐活协议 **/
 .help-bd ol h5{margin: 6px auto;}
 .help-bd ol ol{margin-left:2em;color:#666;}
@@ -54,7 +57,7 @@
 
 .friends h3 { font-size:14px;padding-bottom:15px; }
 .friends ul.imglinks { padding-left:15px; }
-.friends ul.imglinks li { float:left;display:inline;width:120px;height:50px;margin:0 32px 20px 0; }
+.friends ul.imglinks li { float:left;display:inline;margin:0 40px 20px 0; }
 .friends ul.textlinks { padding-left:15px; }
 .friends ul.textlinks li { float:left;display:inline;width:140px;margin-bottom:20px;line-height:18px; }
 .friendApply {padding-top:10px;border-top:1px dotted #d1d1d1;}
@@ -62,7 +65,7 @@
 .friendApply p{ line-height:2;}
 
 .aboutUs p {
-    margin: 0 0 20px 0;
+    margin: 0 0 10px 0;
     line-height: 30px;
 }
 .agreement h2 {
@@ -102,3 +105,4 @@
 .help p{
     padding-bottom: 5px;
 }
+
