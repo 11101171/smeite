@@ -17,11 +17,11 @@ title ="食美特，爱美食爱生活"
                 <div class="pic-box">
                     @if(user.isEmpty){
                     <a id="J_noAccount" class="pic-link clearfix"  rel="loginD2" data-numiid="" data-goodsid="0" data-rate="70"  target="_blank" rel="nofollow" >
-                        <img id="J_PicCover" src="" alt="" />
+                        <img id="J_PicCover" src="" width="400" height="400"/>
                     </a>
                     }else{
                     <a class="pic-link clearfix" id="J_gotoTaobao"  href="" target="_blank"  rel="nofollow">
-                        <img id="J_PicCover" src="" alt="" />
+                        <img id="J_PicCover" src=""  width="400" height="400"/>
                     </a>
                     }
                 </div>
@@ -93,14 +93,12 @@ title ="食美特，爱美食爱生活"
         },function(resp){
             if(resp.error_response){
                 window.location.href ="/ugc/api/convertError?errorAPI=taobao.taobaoke.widget.items.convert接口获取商信息品失败!"+resp.error_response.msg;
-
                 return false;
             } else {
                 var total=resp.total_results;
                 if (total > 0) {
                     var respItem=resp.taobaoke_items.taobaoke_item;
                     if (respItem.length > 0) {
-
                         $("#J_PicCover").attr("src",respItem[0].pic_url)
                         $("#J_noAccount").data("numiid",respItem[0].num_iid)
                         $("#J_noAccount2").data("numiid",respItem[0].num_iid)
@@ -114,7 +112,8 @@ title ="食美特，爱美食爱生活"
                         //返利金额
                         var fanli=getRound(Number(respItem[0].promotion_price)*Number(0.7)*Number(respItem[0].commission_rate)/10000,2);
                         //返集分宝
-                        var point=Number(fanli)*100;
+                        var point=parseInt(Number(fanli*100))
+
                         $("#J_value").html(fanli)
                         $("#J_jifenbao").html("").html(point);
                         var clickUrl="/ugc/api/gotoTaobao/"+respItem[0].num_iid+"?goodsId=0&rate=70";
