@@ -39,8 +39,12 @@
 .help-hd h3{ height: 30px; margin-bottom: 15px; font: bold 14px/30px SimSun; border-bottom: 1px solid #ededed; }
 .help-bd{ line-height:22px;}
 .help-bd p{
+    color: #333;
     line-height: 25px;
     padding-bottom: 10px;
+}
+.help-bd .team{
+    padding-top: 50px;
 }
 /** 乐活协议 **/
 .help-bd ol h5{margin: 6px auto;}
@@ -64,10 +68,6 @@
 .friendApply h3 { font-size:14px;padding:5px 0 10px; }
 .friendApply p{ line-height:2;}
 
-.aboutUs p {
-    margin: 0 0 10px 0;
-    line-height: 30px;
-}
 .agreement h2 {
     text-align: center;
     border-bottom: none;
@@ -104,5 +104,11 @@
 }
 .help p{
     padding-bottom: 5px;
+}
+.rebate h5{
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    margin-bottom: 10px;
 }
 
