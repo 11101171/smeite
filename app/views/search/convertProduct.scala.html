@@ -4,70 +4,13 @@ user,
 title ="食美特，爱美食爱生活"
 )(css="/assets/css/template/convert.product.css") {
 
-<div class="container clearfix">
-    <!--main end-->
-    <div class="product-main clearfix">
-        <div class="mb15">
-            <img src="/assets/ui/help/3step2.png" alt="食美特 购物返利">
-        </div>
+<div class="container clearfix" id="J_rebateShow">
 
-        <div class="main">
-            <!-- pic show-->
-            <div class="gallery">
-                <div class="pic-box">
-                    @if(user.isEmpty){
-                    <a id="J_noAccount" class="pic-link clearfix"  rel="loginD2" data-numiid="" data-goodsid="0" data-rate="70"  target="_blank" rel="nofollow" >
-                        <img id="J_PicCover" src="" width="400" height="400"/>
-                    </a>
-                    }else{
-                    <a class="pic-link clearfix" id="J_gotoTaobao"  href="" target="_blank"  rel="nofollow">
-                        <img id="J_PicCover" src=""  width="400" height="400"/>
-                    </a>
-                    }
-                </div>
-            </div>
-            <!--pic show end-->
-
-
-
-        </div>
-        <!-- aside begin -->
-        <div class="side">
-            <div class="buy-info">
-                <div class="buy-box  clearfix">
-                    <dl class="buy-meta">
-                        <dt><h3 class="title" id="J_title"> </h3></dt>
-                        <dd class="clearfix">
-                            <div class="price">
-                                价格：
-                                <span class="price-promotion" id="J_pricePromotion"></span>
-                                <span class="price-normal" id="J_priceNormal"></span>
-                            </div>
-                            <div class="volume" id="J_volume">30天已售 </div>
-                        </dd>
-                       <dd>返利:&nbsp;<span id="J_jifenbao"> </span>&nbsp;<a href="/jifenbao">个集分宝</a>，值<span id="J_value"></span>元( 返利比例:<span id="J_rate"></span>%,奖励<a href="/shiDou">食豆</a>：<span>1</span>个 )</dd>
-                      <dd class="location" id="J_location"></dd>
-                    </dl>
-                    @if(user.isEmpty){
-                    <a class="buy-btn" rel="loginD2" id="J_noAccount2" data-numiid="" data-goodsid="0" data-rate="70"  target="_blank" rel="nofollow">去看看 &gt; </a>
-                    }else{
-                    <a class="buy-btn" id="J_gotoTaobao2"  href="" target="_blank" rel="nofollow">去看看 &gt; </a>
-                    }
-                </div>
-            </div>
-
-            <div class="clear"></div>
-            <div class="how-to-tip">
-                <span class="title">友情提醒</span>
-                <p>1) 确认收货后即可返利，返利金额与实际成交价相关，打折商品可在成交价基础上获得等比例返利，享折上折待遇；</p>
-                <p>2) 为确保您返利成功，请在点击“去购物，拿返利”之后<span class="green">尽快在淘宝下单，中途不要关闭浏览器或更换淘宝帐号。</span></p>
-            </div>
-        </div>
-        <!-- aside end -->
-
+    <div style="padding:100px;text-align: center">
+        <img src="/assets/ui/loading1.gif">
     </div>
 
-</div><!--container end-->
+</div>
 
 
 
@@ -85,6 +28,73 @@ title ="食美特，爱美食爱生活"
             f = Math.round(f * t) / t;
             return f;
         };
+        var rebateShow = function(data){
+            var pic =data.pic_url
+            var numIid=data.num_iid
+            var promotionPrice=data.promotion_price
+            var  price = data.price
+            var volume = data.volume
+           var location = data.item_location
+           var title =data.title
+           var rate = getRound(Number(0.7)*Number(data.commission_rate)/100,2)
+            //返利金额
+            var fanli=getRound(Number(data.promotion_price)*Number(0.7)*Number(data.commission_rate)/10000,2);
+            //返集分宝
+            var jifenbao=parseInt(Number(fanli*100))
+            var clickUrl="/ugc/api/gotoTaobao/"+numIid+"?goodsId=0&rate=70";
+
+            var html="";
+            html +='<div class="product-main clearfix" >';
+            html+='<div class="mb15"><img src="/assets/ui/help/3step2.png" alt="食美特 购物返利"></div>';
+          //   main
+            html+='<div class="main">';
+            html+='<div class="gallery">';
+            html+='  <div class="pic-box">';
+            if(SMEITER.userId == ""){
+             html +='<a class="pic-link clearfix"  rel="loginD2" data-numiid="'+numIid+'" data-goodsid="0" data-rate="70"  target="_blank" rel="nofollow" >';
+             html +='<img  src="'+pic+'" width="400" height="400"/>';
+             html+='</a>';
+            }else{
+                html +=' <a class="pic-link clearfix" id="J_gotoTaobao"  href="'+clickUrl+'" target="_blank"  rel="nofollow">';
+                html +='<img  src="'+pic+'" width="400" height="400"/>';
+                html +='</a>';
+            }
+            html+='</div>';
+            html+='</div>';
+            html+='</div>';
+          //   side
+            html+='<div class="side">';
+             /*buy info*/
+            html+='<div class="buy-info">';
+            html+='<div class="buy-box  clearfix">';
+            html+='<dl class="buy-meta">';
+            html+='<dt><h3 class="title">'+title+'</h3></dt>';
+            html+='<dd class="clearfix"><div class="price"> 价格：<span class="price-promotion">'+promotionPrice+'</span><span class="price-normal">'+price+'</span></div><div class="volume" id="J_volume">30天已售 '+volume+' </div></dd>';
+            html+='<dd>返利:&nbsp;<span id="J_jifenbao">'+jifenbao+'</span>&nbsp;<a href="/jifenbao">个集分宝</a>，值<span id="J_value">'+fanli+'</span>元( 返利比例:<span id="J_rate"></span>%,奖励<a href="/shiDou">食豆</a>：<span>1</span>个 )</dd>';
+            html+='<dd class="location" id="J_location">'+ location +'</dd>';
+            html+='</dl>';
+
+            if(SMEITER.userId == ""){
+                html +='<a class="buy-btn" rel="loginD2" id="J_noAccount2" data-numiid="'+numIid+'" data-goodsid="0" data-rate="70"  target="_blank" rel="nofollow">去看看 &gt; </a>';
+            }else{
+                html +='<a class="buy-btn" id="J_gotoTaobao2"  href="'+clickUrl+'" target="_blank" rel="nofollow">去看看 &gt; </a>';
+            }
+
+            html+='</div>';
+            html+='</div>';
+            /* how to tip*/
+            html+='<div class="how-to-tip">';
+            html +='<span class="title">友情提醒</span>';
+            html +='<p>1) 确认收货后即可返利，返利金额与实际成交价相关，打折商品可在成交价基础上获得等比例返利，享折上折待遇；</p>';
+            html +='<p>2) 为确保您返利成功，请在点击“去购物，拿返利”之后<span class="green">尽快在淘宝下单，中途不要关闭浏览器或更换淘宝帐号。</span></p>';
+            html+='</div>';
+
+
+            html+='</div>';
+            html+='</div>';
+            $("#J_rebateShow").html(html)
+        }
+
         TOP.api('rest','post',{
             method:'taobao.taobaoke.widget.items.convert',
             num_iids:'@numIid',
@@ -99,26 +109,8 @@ title ="食美特，爱美食爱生活"
                 if (total > 0) {
                     var respItem=resp.taobaoke_items.taobaoke_item;
                     if (respItem.length > 0) {
-                        $("#J_PicCover").attr("src",respItem[0].pic_url)
-                        $("#J_noAccount").data("numiid",respItem[0].num_iid)
-                        $("#J_noAccount2").data("numiid",respItem[0].num_iid)
-                        $("#J_pricePromotion").html("￥"+respItem[0].promotion_price)
-                        $("#J_priceNormal").html("￥"+respItem[0].price)
-                        $("#J_volume").html("30天已售："+respItem[0].volume)
-                        $("#J_location").html("所在地："+respItem[0].item_location)
-                        $("#J_title").html(respItem[0].title)
-                        //返利比例
-                        $("#J_rate").html(getRound(Number(0.7)*Number(respItem[0].commission_rate)/100,2));
-                        //返利金额
-                        var fanli=getRound(Number(respItem[0].promotion_price)*Number(0.7)*Number(respItem[0].commission_rate)/10000,2);
-                        //返集分宝
-                        var point=parseInt(Number(fanli*100))
+                      rebateShow(respItem[0])
 
-                        $("#J_value").html(fanli)
-                        $("#J_jifenbao").html("").html(point);
-                        var clickUrl="/ugc/api/gotoTaobao/"+respItem[0].num_iid+"?goodsId=0&rate=70";
-                        $("#J_gotoTaobao").attr("href",clickUrl)
-                        $("#J_gotoTaobao2").attr("href",clickUrl)
                     }
                 }
             }
