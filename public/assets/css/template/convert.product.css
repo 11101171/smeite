@@ -238,6 +238,20 @@ background: url(images/ico-quotation.png) no-repeat
 .green{
     color: #588c0d;
 }
+.convert-error{
+
+}
+.convert-error dl{
+   padding-left: 80px;
+}
+.convert-error dl h3{
+    padding-top: 100px;
+    padding-bottom: 20px;
+    font-size: 20px;
+}
+.convert-error dl dd{
+    padding: 10px 0;
+}
 
 
 

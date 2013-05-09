@@ -2,52 +2,37 @@
 @views.html.template(
 user,
 title ="食美特，爱美食爱生活"
-)(css="/assets/css/template/goods.detail.css") {
+)(css="/assets/css/template/convert.product.css") {
 
 <div class="container clearfix">
 
     <!--main end-->
     <div class="product-main clearfix">
-
-        <div class="main">
+        <div class="mb15"><img src="/assets/ui/help/3step2.png" alt="食美特 购物返利"></div>
+        <div class="convert-error">
             <!-- pic show-->
-            <div class="gallery">
-                <div class="pic-box">
-
-                    失败
-
+                <div class="pic-box fl">
+                    <img src="/assets/ui/wenhao.jpg">
                 </div>
-
-            </div>
             <!--pic show end-->
-
-
-
-        </div>
-        <!-- aside begin -->
-        <div class="side">
-
-
-
-
-
-
-
-
+            <dl class=" fl">
+                <dt> <h3 class="title">亲，没找到您要的宝贝！（已下架的商品是查询不到的）</h3></dt>
+                <dd>1) 我们只支持天猫、淘宝哦</dd>
+                <dd>2) 如有其他疑问，请联系我们 <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1469909930&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:1469909930:51" alt="食美特" title="食美特"/></a></dd>
+            </dl>
 
         </div>
-        <!-- aside end -->
+
 
     </div>
 
 </div><!--container end-->
 
 
-
 }{
 <script type="text/javascript">
 
-    seajs.use('app/init', function(init) {
+    seajs.use('app/init', function (init) {
 
     })
 </script>
