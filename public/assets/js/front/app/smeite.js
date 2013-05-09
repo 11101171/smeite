@@ -581,7 +581,8 @@ define(function(require, exports) {
                             $("#loginDialog").overlay().close();
                             //SMEITER.userId = data.userId;
                             var sellUrl="/ugc/api/gotoTaobao/"+numIid+"?goodsId="+goodsId+"&rate="+rate
-                            window.location=sellUrl;
+                           window.location=sellUrl;
+                         //   window.open(sellUrl)
                         }else if(data.code==101){
                             $("#loginDialog").find(".error-row").fadeIn();
                             $("#loginDialog").find(".error").html(data.message);
@@ -593,7 +594,6 @@ define(function(require, exports) {
                 $(".snslogin a").unbind("click").click(function(){
                     var snsurl = $(this).attr("href");
                     $.smeite.util.openWin(snsurl);
-
                     return false;
                 });
                 $("#loginDialog").overlay().getClosers().bind("click",function(){
@@ -1871,36 +1871,6 @@ define(function(require, exports) {
 
         })
 
-  /*      $("a[rel=checkIn]").hover(function(){
-            if(SMEITER.userId ==""){
-                return "Not login";
-            }
-           var $this = $(this);
-            $.ajax({
-                url: "/checkInState",
-                type : "post",
-                dataType: "json",
-                success: function(data){
-                    if(data.code=="100"){
-                        $.smeite.checkIn.checkInIntro($this,data);
-                    }else if(data.code=="104"){
-                        //积分获取失败
-                        data.userScore = 0;
-                        data.checkInDays = 0;
-                        $.smeite.checkIn.checkInIntro($this,data)
-                    }else if(data.code=="404"){
-                        //未登录
-                        $.smeite.dialog.login();
-                    }
-                }
-            });
-        },function(){
-            if($("#checkin_intro")[0]){
-               setTimeout(function(){
-                    $("#checkin_intro").remove();
-                },1000);
-            }
-        });*/
 
         /* 下拉框 */
         $(".gohome").dropDown({

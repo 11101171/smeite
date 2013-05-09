@@ -178,7 +178,7 @@ object Users extends Controller {
   def credits(id:Long,s:Int,p:Int) = UserAction{ user => implicit request =>
     val  author=UserDao.findById(id)
     val authorStatic=UserDao.findStatic(id);
-    val page = UserDao.findUserOrders(id,p,10,s)
+    val page = UserDao.findUserOrders(id,s,p,10)
     val orders=UserDao.recommendUserOrders(10)
     Ok(views.html.users.credits(user,author,authorStatic,page,orders,s))
   }

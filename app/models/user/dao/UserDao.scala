@@ -481,15 +481,14 @@ object UserDao {
     UserOrders.autoInc2.insert(uid,Some(goodsId),numIid,nick,title,location,pic,price,withdrawRate,credits,volume,new Timestamp(System.currentTimeMillis()))
   }
   /*查找某个用户的购物记录*/
-  def findUserOrders(uid:Long,currentPage:Int,pageSize:Int,status:Int): Page[(String,List[(Timestamp,Long,Long,String,String,String,String,String,Int,Int,Int,String)])] =  database.withSession {  implicit session:Session =>
+  def findUserOrders(uid:Long,status:Int,currentPage:Int,pageSize:Int): Page[(String,List[(Timestamp,Long,Long,String,String,String,String,String,Int,Int,Int,String)])] =  database.withSession {  implicit session:Session =>
   // val totalRows=Query(UserOrders.filter(_.uid === uid).length)
-    var countQuery =(for(c<-UserOrders if c.uid === uid) yield c)
-     if(status != -1) countQuery.filter(_.status === status)
+    var countQuery =(for(c<-UserOrders if c.uid === uid if c.status === status) yield c)
+
      val totalRows= Query(countQuery.length).first()
     val totalPages=((totalRows + pageSize - 1) / pageSize);
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
-    var query=for(c<- UserOrders if c.uid===uid)yield (c.createTime,c.uid,c.numIid,c.nick,c.title,c.location,c.pic,c.price,c.withdrawRate,c.credits,c.status,c.volume)
-    if(status != -1) query.filter( _._11 === status )
+    var query=for(c<- UserOrders if c.uid===uid if c.status === status )yield (c.createTime,c.uid,c.numIid,c.nick,c.title,c.location,c.pic,c.price,c.withdrawRate,c.credits,c.status,c.volume)
    val list:List[(String,List[(Timestamp,Long,Long,String,String,String,String,String,Int,Int,Int,String)])]= query.drop(startRow).take(pageSize).list().map(x=>( utils.Utils.timestampFormat2(x._1),x._1,x._2,x._3,x._4,x._5,x._6,x._7,x._8,x._9,x._10,x._11,x._12)).groupBy(x=>x._1).map(x=>(x._1,x._2.map(y=>(y._2,y._3,y._4,y._5,y._6,y._7,y._8,y._9,y._10,y._11,y._12,y._13)))).toList
 
     Page[(String,List[(Timestamp,Long,Long,String,String,String,String,String,Int,Int,Int,String)])](list,currentPage,totalPages)

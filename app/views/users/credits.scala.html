@@ -26,7 +26,7 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                 <div class="main box-shadow plr15">
                     <div class="main-title clearfix">
                         <h2>
-                            @if(s == -1){  最近30天浏览的宝贝 }else{ <a href="@controllers.users.routes.Users.credits(author.id.get,-1,1)">最近30天浏览的宝贝 </a> }
+                            @if(s == -1){  最近30天浏览的宝贝 }else{ <a href="@controllers.users.routes.Users.credits(author.id.get,0,1)">最近30天浏览的宝贝 </a> }
                             <span class="ml5 mr5">|</span>
                             @if(s == 1){  成功返利的宝贝 }else{ <a href="@controllers.users.routes.Users.credits(author.id.get,1,1)">成功返利的宝贝 </a> }
                         </h2>

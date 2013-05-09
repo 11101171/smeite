@@ -111,4 +111,11 @@
     font-size: 16px;
     margin-bottom: 10px;
 }
+#J_loading{
+    padding:100px;text-align: center;
+}
+#J_productMain{
+    display: none;
+}
+
 
