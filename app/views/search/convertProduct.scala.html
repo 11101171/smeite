@@ -104,7 +104,6 @@ title ="食美特，爱美食爱生活"
                 if (total > 0) {
                     var respItem=resp.taobaoke_items.taobaoke_item;
                     if (respItem.length > 0) {
-
                         $("#J_PicCover").attr("src",respItem[0].pic_url)
                         $("#J_noAccount").data("numiid",respItem[0].num_iid)
                         $("#J_noAccount2").data("numiid",respItem[0].num_iid)
@@ -128,6 +127,10 @@ title ="食美特，爱美食爱生活"
                         $("#J_productMain").show()
                         $("#J_loading").hide()
                     }
+                }else{
+
+
+
                 }
             }
 
