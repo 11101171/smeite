@@ -138,13 +138,12 @@ object TopicDao {
   /*topic 推荐*/
   def recommendTopics(nums:Int,groupId:Int,typeId:Int):List[(Long, String, String, Long, String, Int, Int, Int)] =database.withSession{implicit session:Session =>
     val query = for{
-      c<-Topics.sortBy(_.addTime)
+      c<-Topics.sortBy(_.addTime desc)
       u<-Users
       if c.uid===u.id
       if c.typeId===typeId
       if c.groupId===groupId
     }yield(u.id~u.name~u.pic~c.id~c.title~c.replyNum~c.loveNum~c.hotIndex)
-    //println(query.selectStatement)
     query.take(nums).list
   }
 

@@ -54,8 +54,8 @@ object Forums extends Controller {
   /*讨论吧 */
   def forum(p:Int) =Users.UserAction { user => implicit request =>
     val page =TopicDao.findTopics(0,p,10)
-    val wenTopics=TopicDao.recommendTopics(4,1,1);
-    val zhiTopics=TopicDao.recommendTopics(4,1,2);
+    val wenTopics=AdvertDao.getTopics("hot_question")
+    val zhiTopics=AdvertDao.getTopics("hot_knowledge")
     val users=UserDao.recommendUser(0,10)
     val advert =AdvertDao.findAdvert("forum_activity");
     Ok(views.html.forums.forum(user,page,wenTopics,zhiTopics,users,advert))

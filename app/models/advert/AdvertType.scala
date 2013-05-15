@@ -15,4 +15,5 @@ object AdvertType extends Enumeration {
   val PRODUCT =Value("商品")
   val USER =Value("用户")
   val Theme = Value("主题")
+  val TOPIC = Value("话题")
 }
