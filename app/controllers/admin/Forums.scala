@@ -117,6 +117,10 @@ object Forums extends Controller {
           for(id<-batch.ids){
             TopicDao.modifyTopicBest(id,false)
           }
+        }else if (batch.action ==6){
+          for(id<-batch.ids){
+            TopicDao.deleteTopic(id)
+          }
         }
 
         Redirect(batch.url.getOrElse("/admin/forums/list"))
