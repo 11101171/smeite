@@ -23,24 +23,13 @@ object Search extends Controller {
   * */
   def search(keyword: String, p: Int) = Users.UserAction { user => implicit request =>
       if (Utils.isNumber(keyword)) {
-        Redirect(controllers.routes.Search.convertProduct(keyword.toLong))
+        Redirect(controllers.ugc.routes.API.convertProduct(keyword.toLong))
       } else {
         val page = TagDao.findTagGoodses(keyword, p, 54)
         Ok(views.html.search.baobei(user, page, keyword))
       }
   }
-  /* 淘宝返利 convert*/
-  def convertProduct(numIid:Long) = Users.UserAction { user => implicit request =>
-    val id= if(!user.isEmpty) user.get.id.get else 0
-    val timestamp= String.valueOf(System.currentTimeMillis)
-    val sign=TaobaoConfig.getSign(timestamp)
-    Ok(views.html.search.convertProduct(user,numIid,id)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
-  }
 
-  /* 调用淘宝客接口失败*/
-  def convertError(error:String)  = Users.UserAction { user => implicit request =>
-    Ok(views.html.search.convertError(user))
-  }
 
 
 }

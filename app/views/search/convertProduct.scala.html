@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],numIid:Long,uid:Long)
+@(user:Option[models.user.User],numIid:Long,uid:Long,title:String,pic:String,price:String,location:String)
 @views.html.template(
 user,
 title ="食美特，爱美食爱生活"
@@ -89,6 +89,18 @@ title ="食美特，爱美食爱生活"
             f = Math.round(f * t) / t;
             return f;
         };
+        var data ={
+            title:'@title',
+            pic:'@pic',
+            numIid:'@numIid',
+            promotionPrice:'@price',
+            price:'@price',
+            volume:'30',
+            location:'@location',
+            rate:'0',
+            jifenbao:'0',
+            jifenbaoValue:'0'
+        }
         TOP.api('rest','post',{
             method:'taobao.taobaoke.widget.items.convert',
             num_iids:'@numIid',
@@ -104,37 +116,43 @@ title ="食美特，爱美食爱生活"
                 if (total > 0) {
                     var respItem=resp.taobaoke_items.taobaoke_item;
                     if (respItem.length > 0) {
-                        $("#J_PicCover").attr("src",respItem[0].pic_url)
-                        $("#J_noAccount").data("numiid",respItem[0].num_iid)
-                        $("#J_noAccount2").data("numiid",respItem[0].num_iid)
-                        $("#J_pricePromotion").html("￥"+respItem[0].promotion_price)
-                        $("#J_priceNormal").html("￥"+respItem[0].price)
-                        $("#J_volume").html("30天已售："+respItem[0].volume)
-                        $("#J_location").html("所在地："+respItem[0].item_location)
-                        $("#J_title").html(respItem[0].title)
-                        //返利比例
-                        $("#J_rate").html(getRound(Number(0.7)*Number(respItem[0].commission_rate)/100,2));
-                        //返利金额
-                        var fanli=getRound(Number(respItem[0].promotion_price)*Number(0.7)*Number(respItem[0].commission_rate)/10000,2);
-                        //返集分宝
-                        var point=Number(fanli)*100;
-                        $("#J_value").html(fanli)
-                        $("#J_jifenbao").html("").html(point);
-                        var clickUrl="/ugc/api/gotoTaobao/"+respItem[0].num_iid+"?goodsId=0&rate=70";
-                        $("#J_gotoTaobao").attr("href",clickUrl)
-                        $("#J_gotoTaobao2").attr("href",clickUrl)
-
-                        $("#J_productMain").show()
-                        $("#J_loading").hide()
+                        data.title = respItem[0].title
+                        data.pic = respItem[0].pic_url
+                        data.numIid = respItem[0].num_iid
+                        data.promotionPrice = respItem[0].promotion_price
+                        data.price = respItem[0].price
+                        data.volume = respItem[0].volume
+                        data.location = respItem[0].item_location
+                        data.rate = getRound(Number(0.7)*Number(respItem[0].commission_rate)/100,2)
+                        data.jifenbao = getRound(Number(respItem[0].promotion_price)*Number(0.7)*Number(respItem[0].commission_rate)/10000,2)
+                        data.jifenbaoValue = getRound(Number(respItem[0].promotion_price)*Number(0.7)*Number(respItem[0].commission_rate)/100,2)
+                        productShow(data)
                     }
                 }else{
-
-
-
+                    /* 显示服务端传过来的数据*/
+                    productShow(data)
                 }
             }
 
         })
+
+        var productShow=function(data){
+            $("#J_PicCover").attr("src",data.pic)
+            $("#J_noAccount").data("numiid",data.numIid)
+            $("#J_noAccount2").data("numiid",data.numIid)
+            $("#J_pricePromotion").html("￥"+data.promotionPrice)
+            $("#J_priceNormal").html("￥"+data.price)
+            $("#J_volume").html("30天已售："+data.volume)
+            $("#J_location").html("所在地："+data.location)
+            $("#J_title").html(data.title)
+            $("#J_rate").html(data.rate);
+            $("#J_value").html(data.jifenbaoValue)
+            $("#J_jifenbao").html("").html(data.jifenbao);
+            $("#J_gotoTaobao").attr("href","/ugc/api/gotoTaobao/"+data.numIid+"?goodsId=0&rate=70")
+            $("#J_gotoTaobao2").attr("href","/ugc/api/gotoTaobao/"+data.numIid+"?goodsId=0&rate=70")
+            $("#J_productMain").show()
+            $("#J_loading").hide()
+        }
 
     })
 </script>

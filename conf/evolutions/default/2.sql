@@ -302,13 +302,13 @@ insert into advert(position_code,name)value("index-bottom","新-首页-底部-�
  insert into advert(position_code,name)value("checkIn","签到推荐6");
 
 /*5月 15 日 */
- insert into advert_position(position,name,code,advert_type)values("forum","热门问答","hot_question",5)
+ insert into advert_position(position,name,code,advert_type)values("forum","热门问答","hot_question",5);
  insert into advert(position_code,name)value("hot_question","热门问答1") ;
  insert into advert(position_code,name)value("hot_question","热门问答2") ;
  insert into advert(position_code,name)value("hot_question","热门问答3") ;
  insert into advert(position_code,name)value("hot_question","热门问答4") ;
 
-   insert into advert_position(position,name,code,advert_type)values("forum","精华知识","hot_knowledge",5)
+   insert into advert_position(position,name,code,advert_type)values("forum","精华知识","hot_knowledge",5);
  insert into advert(position_code,name)value("hot_knowledge","精华知识1") ;
  insert into advert(position_code,name)value("hot_knowledge","精华知识2") ;
  insert into advert(position_code,name)value("hot_knowledge","精华知识3") ;

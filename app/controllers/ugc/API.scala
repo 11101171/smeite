@@ -161,7 +161,7 @@ object API extends Controller {
                val  req=new ItemGetRequest();
                req.setFields("num_iid,nick,title,price,pic_url,detail_url,item_img.url");
                req.setNumIid(numIid);
-               val respItem = client.execute(req ).getItem;
+               val respItem = client.execute(req ).getItem
                val itemImgs= for(i<-respItem.getItemImgs)yield(i.getUrl)
              val product = Product(
                  None,
@@ -262,9 +262,44 @@ object API extends Controller {
   Ok(Json.obj("code"->"100","message"->"success"))
   }
 
-  /* 查询淘宝客返利 */
+  /* 查询淘宝客返利
+   * 先使用
+   * */
   def rebateProduct(detailUrl:String) = Users.UserAction { user => implicit request =>
-    val numIid =Utils.getURLParam(detailUrl,"id").get.toLong;
-    Redirect(controllers.routes.Search.convertProduct(numIid))
+    val id= if(!user.isEmpty) user.get.id.get else 0
+    val numIid = Utils.getURLParam(detailUrl,"id").get.toLong
+    val client=new DefaultTaobaoClient(url, appkey, secret);
+    val  req=new ItemGetRequest();
+    req.setFields("num_iid,title,price,pic_url,location");
+    req.setNumIid(numIid);
+    val respItem = client.execute(req ).getItem
+
+    val timestamp= String.valueOf(System.currentTimeMillis)
+    val sign=TaobaoConfig.getSign(timestamp)
+    Ok(views.html.search.convertProduct(user,numIid,id,respItem.getTitle,respItem.getPicUrl,respItem.getPrice,respItem.getLocation.getState+"/"+respItem.getLocation.getCity)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
+
+
   }
+
+  /* 淘宝返利 convert*/
+  def convertProduct(numIid:Long) = Users.UserAction { user => implicit request =>
+    val id= if(!user.isEmpty) user.get.id.get else 0
+
+  /* 从 淘宝上 查询*/
+    val client=new DefaultTaobaoClient(url, appkey, secret);
+    val  req=new ItemGetRequest();
+    req.setFields("num_iid,title,price,pic_url,location");
+    req.setNumIid(numIid);
+    val respItem = client.execute(req ).getItem
+
+    val timestamp= String.valueOf(System.currentTimeMillis)
+    val sign=TaobaoConfig.getSign(timestamp)
+    Ok(views.html.search.convertProduct(user,numIid,id,respItem.getTitle,respItem.getPicUrl,respItem.getPrice,respItem.getLocation.getState+"/"+respItem.getLocation.getCity)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
+  }
+
+  /* 调用淘宝客接口失败*/
+  def convertError(error:String)  = Users.UserAction { user => implicit request =>
+    Ok(views.html.search.convertError(user))
+  }
+
 }
