@@ -48,11 +48,10 @@ description =  topic._2.intro
             <a class="edit mt5" href="@controllers.routes.Forums.edit(topic._2.id.get)" rel="nofollow" >编辑</a>
              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
             }
-            <a rel="follow" href="javascript:;" class="follow mt5" data-followtype="0" data-topictitle="@topic._2.title" data-topicid="@topic._2.id.get" title="@topic._2.title">+ 关注</a>
-
+            <a  class="follow-topic" href="javascript:;" class="follow mt5" data-followtype="0" data-topictitle="@topic._2.title" data-topicid="@topic._2.id.get" title="@topic._2.title">+ 关注</a>
         </div>
         <div class="forum-con">
-            <ul class="forum-post " id="J_ForumPost" style="display: block; ">
+            <ul class="forum-post " id="J_ForumPost">
                 <li class="first">
                     <a class="img" href="@controllers.users.routes.Users.home(topic._1.id.get)" target="_blank">
                         <img src="@topic._1.pic" width="80" height="80" alt="@topic._1.name"></a>
@@ -188,16 +187,17 @@ description =  topic._2.intro
 
 }{
 <script type="text/javascript">
-    seajs.use(["app/init", "redactor"], function(init){
+    seajs.use(["app/init", "app/smeite.editor"], function(init){
         var $ = jQuery;
         var snstitle = $("#J_PostArtical").text();
         var snscontent = $("#J_Forumtitle").text();
 
-        $("#J_ForumPostCon").redactor({
-            buttons:[ 'formatting', '|', 'bold', 'italic', 'deleted', '|', 'unorderedlist', 'orderedlist', 'outdent', 'indent',  'fontcolor', 'backcolor'],
-            imageUpload: '/editor/uploadPic',
-            minHeight: 100
-        })
+        $.smeite.editor = $.smeite.Editor({
+            formId:"J_PostCmtArea",
+
+            btnImg:{visible:false} ,
+            btnBaobei:{visible:false}
+        });
 
 
         $(".share-link a").click(function(){
@@ -227,8 +227,9 @@ description =  topic._2.intro
 
         });
 
+        $.smeite.editor.mediaImgList = {"1":"http://s6.img.guang.com/f/252306_5523327282_1368687198687.jpg"};
+     init.load("app/forum/forum,app/forum/forum.follow,app/forum/forum.view.decode");
 
-        init.load("app/forum/forum,app/forum/forum.follow");
     });
 </script>
 }

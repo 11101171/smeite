@@ -883,7 +883,7 @@ define(function (require, exports) {
                 },
                 html:"<div class='media-btns img'><a href='javascript:;' btntype='btnImg' title='图片' unselectable='on'>图片</a></div>"
             },
-            btnVideo:{
+       /*     btnVideo:{
                 visible:true,
                 exec:function (self) {
                     if (!self.VideoWrapDom || self.VideoWrapDom.length == 0) {
@@ -956,13 +956,13 @@ define(function (require, exports) {
                     }
                 },
                 html:"<div class='media-btns video'><a href='javascript:;' btntype='btnVideo' title='视频' unselectable='on'>视频</a></div>"
-            },
+            },*/
             btnSplit:{
                 visible:true,
                 html:"<span class='split'></span>"
             },
             //按钮按顺序加载
-            btnsLoadOrder:['btnFontSize', 'btnFontBold', 'btnFontColo', 'btnSplit', 'btnFace', 'btnBaobei', 'btnImg', 'btnVideo']
+            btnsLoadOrder:['btnFontSize', 'btnFontBold', 'btnFontColo', 'btnSplit', 'btnFace', 'btnBaobei', 'btnImg']
         },
         isIE678:!+"\v1",
         iframe:null,
@@ -1227,9 +1227,9 @@ define(function (require, exports) {
             if (type == "img") {
                 tag = "[图片" + (index) + "]";
             }
-            if (type == "video") {
+           /* if (type == "video") {
                 tag = "[视频" + (index) + "]";
-            }
+            }*/
             this.insertMediaTag(tag);
         },
         //deleteMedia 删除媒体model
@@ -1243,9 +1243,9 @@ define(function (require, exports) {
             if (type == "img") {
                 tag = "[图片" + (index + 1) + "]";
             }
-            if (type == "video") {
+           /* if (type == "video") {
                 tag = "[视频" + (index + 1) + "]";
-            }
+            }*/
             //media data删除
             //this.config.mediaDate[type].splice(index,1);
             this.config.mediaDate[type][index].id = "0";
@@ -1329,9 +1329,9 @@ define(function (require, exports) {
                 if (type == "img") {
                     tag = "图片" + (index + 1);
                 }
-                if (type == "video") {
+               /* if (type == "video") {
                     tag = "视频" + (index + 1);
-                }
+                }*/
                 html = '<div class="item"><div class="mediaImg"><img src="' + m.pic + '" alt="' + m.name + '" title="' + m.name + '"><div class="btn"><a href="javascript:;" data-type="' + type + '" data-behavior="insert" data-tag="[' + tag + ']" data-id="' + m.id + '">插入</a>&nbsp;|&nbsp;<a href="javascript:;" data-type="' + type + '" data-behavior="delete" data-id="' + m.id + '" data-index="' + index + '">删除</a></div></div><p>' + tag + '</p></div>';
                 return html;
             }
@@ -1376,7 +1376,6 @@ define(function (require, exports) {
             var length = 0;
             var i = 0;
             var data = {};
-
             if (!this.tagsData) {
                 this.tagsData = {};
                 data = this.tagsData;
@@ -1425,6 +1424,7 @@ define(function (require, exports) {
                 return data[t] || tag;
             })
             if (!noMediaDecode) {
+
                 val = this.mediaDecode(val);
             }
             return val;
@@ -1432,16 +1432,19 @@ define(function (require, exports) {
         //mediaDecode 媒体解码
         //@param html (String)
         mediaDecode:function (html) {
+
             var self = this;
             var val = html;
             self.tag2HtmlData = {};
             var reg_imgtag = /\[图片(\d+)\]/;
-            var reg_videotag = /\[视频(\d+)\]/;
+          //  var reg_videotag = /\[视频(\d+)\]/;
             var reg_baobeitag = /\[宝贝(\d+)\]/;
             var reg_imgtag_nopick = /\[图片\d+\]/g;
-            var reg_videotag_nopick = /\[视频\d+\]/g;
+        //    var reg_videotag_nopick = /\[视频\d+\]/g;
             var reg_baobeitag_nopick = /\[宝贝\d+\]/g;
-            if (self.mediaImgList) {
+
+
+             if (self.mediaImgList) {
                 val = val.replace(reg_imgtag_nopick, function (t) {
                     var id = t.match(reg_imgtag)[1];
                     self.id++;
@@ -1454,28 +1457,13 @@ define(function (require, exports) {
                     }
                     var length = self.imgviewDoms[id].length;
                     self.imgviewDoms[id][length] = hid;
-                    var imgHtml = '<div class="pt10 pb10" id="J_Img_' + hid + '"></div>'
+
+                    var imgHtml = '<div class="pt10 pb10" id="J_Img_' + hid + '"></div>' ;
+
                     return imgHtml;
                 })
             }
-            if (self.mediaVideoList) {
-                var VideoLoadNum = 0;
-                val = val.replace(reg_videotag_nopick, function (t) {
-                    VideoLoadNum++;
-                    if (VideoLoadNum <= self.config.videoLoadMaxNum) {
-                        if (self.tag2HtmlData[t]) {
-                            return self.tag2HtmlData[t];
-                        } else {
-                            var id = t.match(reg_videotag)[1];
-                            var videoHtml = "<div class='pt10 pb10'>" + self.getVideoHtml(self.mediaVideoList[id]) + "</div>";
-                            self.tag2HtmlData[t] = videoHtml;
-                            return videoHtml;
-                        }
-                    } else {
-                        return "";
-                    }
-                })
-            }
+
             if (val.indexOf("[宝贝") != -1) {
                 val = val.replace(reg_baobeitag_nopick, function (t) {
                     var id = t.match(reg_baobeitag)[1];
@@ -1534,6 +1522,7 @@ define(function (require, exports) {
                         for (var i = 0; i < length; i++) {
                             $("#J_Img_" + hids[i]).html(img);
                         }
+
                     }
                 }
             }
@@ -1754,12 +1743,12 @@ define(function (require, exports) {
             var html = this.iframeDocument.body.innerHTML;
             var map = {
                 "宝贝":"baobei",
-                "图片":"img",
-                "视频":"video"
+                "图片":"img"
+              //  "视频":"video"
             };
-            var tagArr = ["宝贝", "图片", "视频"];
-            var regArr_nopick = [/\[宝贝\d{1,2}\]/gi, /\[图片\d{1,2}\]/gi, /\[视频\d{1,2}\]/gi];
-            var regArr = [/\[宝贝(\d{1,2})\]/, /\[图片(\d{1,2})\]/, /\[视频(\d{1,2})\]/];
+            var tagArr = ["宝贝", "图片"];
+            var regArr_nopick = [/\[宝贝\d{1,2}\]/gi, /\[图片\d{1,2}\]/gi];
+            var regArr = [/\[宝贝(\d{1,2})\]/, /\[图片(\d{1,2})\]/];
             var existMediasIndex = {}; //记录存在的媒体的序列号
             var recordMoveNum = 0; //用来记录标签序号需要移动的位数，比如把[图片3]变成[图片1]，则移动位数是2
             var mediaDateTypes = this.config.mediaDateTypes;
@@ -1826,7 +1815,7 @@ define(function (require, exports) {
         //@param url (String)
         //@param width (Int)
         //@param height (Int)
-        getVideoHtml:function (url, width, height) {
+        /*getVideoHtml:function (url, width, height) {
             var _width = width || 480;
             var _height = height || 400;
             var html = '<embed height="' + _height + '" width="' + _width + '" allowscriptaccess="never" style="visibility: visible;" pluginspage="http://get.adobe.com/cn/flashplayer/" flashvars="playMovie=true&amp;auto=1" allowfullscreen="true" quality="hight" src="' + url + '" type="application/x-shockwave-flash" wmode="transparent"/>';
@@ -1834,7 +1823,7 @@ define(function (require, exports) {
                 html = '<OBJECT style="VISIBILITY: visible" classid=clsid:D27CDB6E-AE6D-11cf-96B8-444553540000 width=' + _width + ' height=' + _height + '><PARAM NAME="_cx" VALUE="11641"><PARAM NAME="_cy" VALUE="9419"><PARAM NAME="FlashVars" VALUE="playMovie=true&amp;auto=1&amp;adss=0"><PARAM NAME="Movie" VALUE="' + url + '"><PARAM NAME="Src" VALUE="' + url + '"><PARAM NAME="WMode" VALUE="Transparent"><PARAM NAME="Play" VALUE="0"><PARAM NAME="Loop" VALUE="-1"><PARAM NAME="Quality" VALUE="High"><PARAM NAME="SAlign" VALUE="LT"><PARAM NAME="Menu" VALUE="0"><PARAM NAME="Base" VALUE=""><PARAM NAME="AllowScriptAccess" VALUE="never"><PARAM NAME="Scale" VALUE="NoScale"><PARAM NAME="DeviceFont" VALUE="0"><PARAM NAME="EmbedMovie" VALUE="0"><PARAM NAME="BGColor" VALUE=""><PARAM NAME="SWRemote" VALUE=""><PARAM NAME="MovieData" VALUE=""><PARAM NAME="SeamlessTabbing" VALUE="1"><PARAM NAME="Profile" VALUE="0"><PARAM NAME="ProfileAddress" VALUE=""><PARAM NAME="ProfilePort" VALUE="0"><PARAM NAME="AllowNetworking" VALUE="all"><PARAM NAME="AllowFullScreen" VALUE="true"><PARAM NAME="AllowFullScreenInteractive" VALUE=""><div class="note_noflash"><p>你还未安装flash播放器，所以无法播放。</p></div><a href="http://www.adobe.com/go/getflashplayer"><img alt="获取flash播放器" src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif"/></a></OBJECT>';
             }
             return html;
-        },
+        },*/
         //richText2text 将"[b]文字[/b]"转成"文本"供回复的回复使用
         //@param html (String)
         richText2text:function (html) {

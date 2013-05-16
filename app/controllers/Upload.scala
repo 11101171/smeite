@@ -52,13 +52,12 @@ object Upload extends Controller{
 
    /* upload img for redactorjs editor*/
   def uploadEditorPic =Action(parse.multipartFormData)  {   request =>
-
-    request.body.file("file").map { picture =>
+    request.body.file("filedata").map { picture =>
       val filename = picture.filename
       if(Utils.isImage(filename)){
         picture.ref.moveTo(new File("/opt/static/images/editor/"+filename),true)
         val picSrc ="/images/editor/"+filename
-        Ok(Json.obj("code"->"100","filelink"->picSrc))
+        Ok(views.html.utils.uploadSmeiteEditorPic(picSrc))
 
       }else{
         Ok(Json.obj("code"->"104","filelink"->"亲，服务器欧巴桑了，请重试"))

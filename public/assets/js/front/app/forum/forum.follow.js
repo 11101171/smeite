@@ -101,7 +101,7 @@ define(function(require, exports) {
         alert("hello")
         var topicId =$(this).data("topicid"),
             $topicItem = $(this).parents(".topic-item");
-        $.smeite.confirmUI("真要取消关注这个主题吗？亲，你不在喜欢我了嘛...", $.smeite.favor.removeTopicCallback($topicItem,parseInt(topicId)),function(){
+        $.smeite.confirmUI("真要取消关注这个话题吗？亲，你不在喜欢我了嘛...", $.smeite.favor.removeTopicCallback($topicItem,parseInt(topicId)),function(){
 
         });
     })

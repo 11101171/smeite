@@ -1,0 +1,18 @@
+@(pic:String)
+<!doctype html>
+<html>
+<head>
+    <title></title>
+    <script>
+        if(top.jQuery.smeite&&top.jQuery.smeite.editor){
+            top.jQuery.smeite.editor.uploadImgCallback(true,"@pic");
+        }
+        if(top.uploadImgCallback){
+            top.uploadImgCallback(true,"@pic");
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

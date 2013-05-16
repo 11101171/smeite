@@ -64,16 +64,16 @@ object Forums extends Controller {
 
   /*create 帖子 */
   def edit(id:Long) = Users.UserAction { user => implicit request =>
-    if (user.isEmpty){
-      Redirect(controllers.users.routes.UsersRegLogin.login)
-    } else{
+  //  if (user.isEmpty){
+  //    Redirect(controllers.users.routes.UsersRegLogin.login)
+ //   } else{
       if(id ==0)Ok(views.html.forums.edit(user,topicForm))
       else {
         val topic=TopicDao.findById(id);
         if (topic.isEmpty)Ok(views.html.forums.edit(user,topicForm))
         else Ok(views.html.forums.edit(user,topicForm.fill((topic.get.id,topic.get.title,topic.get.groupId,topic.get.typeId,topic.get.content))))
       }
-    }
+//    }
 
   }
 
