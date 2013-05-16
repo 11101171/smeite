@@ -426,8 +426,7 @@ define(function (require, exports) {
             //mediaDateTypes 媒体类模型（图片，视频，宝贝）
             //["baobei","img","video"]
             mediaDateTypes:[],
-            //videoLoadMaxNum 视频每栏最大加载数
-            videoLoadMaxNum:5,
+
             //按钮参数配置
             btnFontSize:{
                 cssName:"font-size",
@@ -1573,14 +1572,15 @@ define(function (require, exports) {
                 for (var id in self.baobeiviewDoms) {
                     $.ajax({
                         url:"/editor/fetchBaobei",
-                        type:"post",
+                        type:"get",
                         dataType:"json",
                         data:{
                             id:id
                         },
-                        boabeiId:id,
+                     //   boabeiId:id,
                         success:function (json) {
-                            var hids = self.baobeiviewDoms[this.boabeiId];
+                        //    var hids = self.baobeiviewDoms[this.boabeiId];
+                            var hids = self.baobeiviewDoms[id];
                             var length = hids.length;
                             if (json) {
                                 if (json.code == 100) {

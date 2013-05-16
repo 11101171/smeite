@@ -1387,3 +1387,19 @@ alter table tag_goods add  cid  smallint(10)  default '0';
 
 #20130505
 alter table advert change link  link   varchar(250);
+
+
+#20130516
+
+/*
+* 跟topic 关联的media类型  图片  宝贝
+ */
+DROP TABLE IF EXISTS `topic_media`;
+CREATE TABLE `topic_media` (
+  `id`                    int(10) NOT NULL  AUTO_INCREMENT ,
+  `thirdId`              int(10),
+  `media_type`          tinyint (4),
+  `pic`                  varchar(200),
+  `add_time`      timestamp,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;

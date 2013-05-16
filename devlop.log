@@ -102,5 +102,14 @@ find  goods  搜索sql 语句有问题
 
 
 
+2013 年 5 月 16 日
+
+forum 处理
+1、需要有个表topic_media  记录跟topic相关的 图片 和 宝贝
+2、forum 编辑器采用 guang 的编辑器
+3、图片decode 用法 在view 页面 直接把相关的图片生成json 格式
+4、宝贝 decode 用法，使用 /editor/fetchBaobei  获得宝贝，展示宝贝
+
+
 
 

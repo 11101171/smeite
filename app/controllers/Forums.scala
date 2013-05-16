@@ -151,7 +151,15 @@ object Forums extends Controller {
   }
 
 
+  /*
+  *
+  * 获取帖子中的宝贝
+  *
+  * */
+ def fetchBaobei(id:Long) = Users.UserAction{ user => implicit request =>
 
+    Ok(Json.obj("code"->100,"baobei" -> "100" ))
+  }
 
 
 }

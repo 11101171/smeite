@@ -39,6 +39,8 @@ POST   /forum/reply                  controllers.Forums.reply
 GET    /forum/addFollow             controllers.Forums.addFollow(topicId:Long)
 GET    /forum/removeFollow          controllers.Forums.removeFollow(topicId:Long)
 
+GET   /editor/fetchBaobei            controllers.Forums.fetchBaobei(id:Long)
+
 
 #User 签到
 GET    /checkIn                          controllers.users.UsersCheckIn.checkIn
