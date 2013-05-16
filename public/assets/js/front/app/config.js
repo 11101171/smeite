@@ -17,10 +17,6 @@ seajs.config({
     // shim 配置项
     alias: {
        'jquery' :'jquery.js',
-        'redactor':{
-           src: 'module/jquery.redactor.js',
-           deps:['jquery']
-        },
         'smeite': 'app/smeite',
         'json' : 'module/json'
     },

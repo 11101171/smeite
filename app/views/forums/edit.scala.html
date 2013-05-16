@@ -44,17 +44,12 @@ title = "发布主题_讨论吧_广场_食美特，爱美食爱生活"
 }{
 <script type="text/javascript">
 
-    seajs.use(["app/init", "redactor"], function(init){
+    seajs.use(["app/init", "app/smeite.editor"], function(init){
         var $ = jQuery;
-        if(SMEITER.userId ==""){
+        if(SMEITER.userId == ""){
             $.smeite.dialog.isLogin();
         }
-        $("#J_ForumPostCon").redactor({
-            buttons:[ 'formatting', '|', 'bold', 'italic', 'deleted', '|', 'unorderedlist', 'orderedlist', 'outdent', 'indent', '|', 'image', 'link', '|', 'fontcolor', 'backcolor', '|', 'alignment', '|', 'horizontalrule'],
-            imageUpload: '/editor/uploadPic',
-            minHeight: 200
-        })
-
+        $.smeite.editor = $.smeite.Editor();
         init.load("app/forum/forum");
     });
 
