@@ -5,7 +5,7 @@ import controllers.users.Users
 
 import play.api.data.Forms._
 import play.api.data.Form
-import play.api.libs.json.Json
+import play.api.libs.json._
 import models.forum._
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -14,6 +14,14 @@ import models.user.dao.UserDao
 import  models.user._
 import models.forum.dao.TopicDao
 import models.advert.dao.AdvertDao
+import scala.Some
+import models.forum.Topic
+import models.forum.TopicReply
+import play.api.libs.functional.syntax._
+import scala.Some
+import models.forum.Topic
+import models.forum.TopicReply
+import models.goods.dao.GoodsDao
 
 
 /**
@@ -23,7 +31,21 @@ import models.advert.dao.AdvertDao
  * Time: 下午8:04
  * Email:zuosanshao@qq.com
  */
-
+/* smeite.com 编辑器 所用的 editor goods decode  */
+case class EditorGoods(
+                           goodsId:Long,
+                           numIid:Long,
+                           name:String,
+                           intro:String,
+                           price:String,
+                           promotionPrice:String,
+                           pic:String,
+                           loveNum:Int,
+                           volume:Int,
+                           rate:Int,
+                           jifenbao:String,
+                           jifenbaoValue:String
+                           )
 
 object Forums extends Controller {
   val topicForm = Form(
@@ -50,6 +72,21 @@ object Forums extends Controller {
   )
   )
 
+
+  implicit val editorGoodsFormat = (
+    (__ \ "goodsId").format[Long] and
+      (__ \ "numIid").format[Long] and
+      (__ \ "name").format[String] and
+      (__ \ "intro").format[String] and
+      (__ \ "price").format[String] and
+      (__ \ "promotionPrice").format[String] and
+      (__ \ "pic").format[String] and
+      (__ \ "loveNum").format[Int] and
+      (__ \ "volume").format[Int] and
+      (__ \ "rate").format[Int] and
+      (__ \ "jifenbao").format[String] and
+      (__ \ "jifenbaoValue").format[String]
+    )(EditorGoods.apply,unlift(EditorGoods.unapply))
 
   /*讨论吧 */
   def forum(p:Int) =Users.UserAction { user => implicit request =>
@@ -157,8 +194,17 @@ object Forums extends Controller {
   *
   * */
  def fetchBaobei(id:Long) = Users.UserAction{ user => implicit request =>
+      val goods = GoodsDao.findById(id)
+    if(goods.isEmpty){
+      Ok(Json.obj("code"->104,"msg" -> "宝贝不存在" ))
+    }else {
+      val jifenbao=(goods.get.promotionPrice.getOrElse("0").toDouble*goods.get.commissionRate.getOrElse(0)*goods.get.rate*0.0001).toInt
+      val jifenbaoValue = jifenbao/100.0
+      val rate = (goods.get.commissionRate.getOrElse(0)*goods.get.rate*0.0001).toInt
+      val baobei = EditorGoods(goods.get.id.get,goods.get.numIid,goods.get.name,goods.get.intro,goods.get.price,goods.get.promotionPrice.getOrElse(goods.get.price),goods.get.pic,goods.get.loveNum,goods.get.volume,rate,jifenbao.toString,jifenbaoValue.toString)
+      Ok(Json.obj("code"->100,"baobei"->Json.toJson(baobei),"msg"->"success" ))
+    }
 
-    Ok(Json.obj("code"->100,"baobei" -> "100" ))
   }
 
 

@@ -2,7 +2,6 @@ package controllers.users
 
 import play.api.mvc.{Action, Controller}
 import models.user.dao.{UserSQLDao, UserDao}
-import play.api.libs.json._
 import java.sql.Timestamp
 
 import models.user.User
@@ -74,7 +73,7 @@ object UsersCheckIn extends Controller {
       var checkInDays=0
       /* todo 以后根据用户的喜好推荐 */
       val goods = AdvertDao.getGoods("checkIn").head
-      val jifenbao=(goods.promotionPrice.get.toDouble*goods.commissionRate.get*goods.rate*0.0001).toInt
+      val jifenbao=(goods.promotionPrice.getOrElse("0").toDouble*goods.commissionRate.getOrElse(0)*goods.rate*0.0001).toInt
       val jifenbaoValue = jifenbao/100.0
       val recommendGoods = new RecommendGoods(goods.id.get,goods.numIid,goods.rate,goods.pic+"_160x160.jpg",goods.name,goods.promotionPrice.get,jifenbao.toString,jifenbaoValue.toString)
       /*

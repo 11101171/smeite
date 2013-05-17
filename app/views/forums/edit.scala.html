@@ -49,13 +49,7 @@ title = "发布主题_讨论吧_广场_食美特，爱美食爱生活"
         if(SMEITER.userId == ""){
             $.smeite.dialog.isLogin();
         }
-        $.smeite.editor = $.smeite.Editor({
-            mediaDateTypes:["baobei","img"],
-            mediaDate:{
-                baobei:[],
-                img:[{id:"http://s6.img.guang.com/f/252306_5523327282_1368687198687.jpg",name:"图片",pic:"http://s6.img.guang.com/f/252306_5523327282_1368687198687.jpg"},								{id:"http://s9.img.guang.com/f/252306_9968758613_1368693654751.jpg",name:"图片",pic:"http://s9.img.guang.com/f/252306_9968758613_1368693654751.jpg"}],														video:[]
-            }
-        });
+        $.smeite.editor = $.smeite.Editor();
         init.load("app/forum/forum.new");
     });
 

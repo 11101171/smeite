@@ -1403,3 +1403,5 @@ CREATE TABLE `topic_media` (
   `add_time`      timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+alter table tag change  cid  cid   tinyint (4)  default '6';

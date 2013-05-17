@@ -5,7 +5,8 @@ define(function (require, exports) {
      * Copyright 2011-2012, Guang.com
      * @contain: 富文本编辑器
      * @depends: jquery.js
-     * smeite.com 采用guang的富文本编辑器
+     * smeite.com 采用guang的富文本编辑器  ,去掉了vedio ,修改了goods decode ，感谢guang的解决方案    图片直接上传到编辑器中。
+     * zuosanshao@qq.com
      */
 
 //(function ($) {
@@ -416,15 +417,7 @@ define(function (require, exports) {
             textareaID:"J_ForumPostCon",
             formId:"J_ForumPostEditForm",
             toolbarId:"J_GuangEditorToolbar",
-            //mediaDate 媒体集模型（图片，视频，宝贝）
-            // {
-            // baobei:[{id:"100001",name:"宝贝名字",pic:{"http://img"}}],
-            // img:...,
-            // video:...
-            // }
             mediaDate:{},
-            //mediaDateTypes 媒体类模型（图片，视频，宝贝）
-            //["baobei","img","video"]
             mediaDateTypes:[],
 
             //按钮参数配置
@@ -689,24 +682,36 @@ define(function (require, exports) {
                 visible:true,
                 exec:function (self) {
                     if (!self.BaobeiWrapDom || self.BaobeiWrapDom.length == 0) {
-                        var html = '<div class="baobeiWrap"><div class="content"><p class="title">将宝贝网址粘贴到下面框中：</p><div class="sg-form"><div class="clearfix"><input class="base-input sg-input" id="J_BaobeiUrl" name="url" value="" placeholder="http://" autocomplete="off"><input type="button" class="bbl-btn" id="J_InsertBaobei" value="确定"></div><div class="text-tip"></div></div><div class="sg-source"><p class="pt5 pb5">已支持网站：</p><div class="source-list pt5 clearfix"><a class="icon-source icon-taobao" href="http://www.taobao.com/" target="_blank">淘宝网</a><a class="icon-source icon-tmall" href="http://www.tmall.com/" target="_blank">天猫商城</a></div></div><div class="tipbox-up"><em>◆</em><span>◆</span></div></div></div>';
+                        var html = '<div class="baobeiWrap"><div class="content"><p class="title">将宝贝网址粘贴到下面框中：</p><div class="sg-form"><div class="clearfix"><input class="base-input sg-input" id="J_BaobeiUrl" name="url" value="" placeholder="http://" autocomplete="off"><input type="button" class="bbl-btn" id="J_InsertBaobei" value="确定"></div><div class="text-tip"></div></div><div class="sg-source"><p class="pt5 pb5 fl">已支持网站：</p><div class="source-list pt5 fl clearfix"><a class="icon-source icon-taobao" href="http://www.taobao.com/" target="_blank">淘宝网</a><a class="icon-source icon-tmall" href="http://www.tmall.com/" target="_blank">天猫商城</a></div></div><div class="tipbox-up"><em>◆</em><span>◆</span></div></div></div>';
                         var getBaobei = function (id) {
+                      //      alert(id)
                             $.ajax({
-                                url:"/editor/getbaobei",
-                                type:"post",
+                                url:"/editor/fetchBaobei",
+                                type:"get",
                                 dataType:"json",
-                                data:{
-                                    id:id
-                                },
-                                baobeiId:id,
+                                data:{  id:id  },
+                                //  baobeiId:id,
                                 success:function (json) {
                                     switch (json.code) {
                                         case 100:
                                         {
-                                            json.id = this.baobeiId;
-                                            json.pic = json.baobeiPic;
-                                            json.name = json.baobeiName;
-                                            self.insertMedia(json, "baobei");
+                                            json.id = id;
+                                            json.pic = json.baobei.pic;
+                                            json.name = json.baobei.name;
+
+                                        //    self.insertMedia(json, "baobei");
+                                            if (self.isIE678) {
+                                                self.insertHTML("<img unselectable='on' class='img-upload'data-goodsid='"+id+"' src='" + json.pic + "'/>");
+                                            } else {
+                                                var imgDom = self.iframeDocument.createElement("img");
+                                                imgDom.src = json.pic;
+                                                imgDom.setAttribute("class","img-upload")
+                                                imgDom.setAttribute("data-goodsid",id)
+                                                imgDom.setAttribute("unselectable", "on")
+                                                //    imgDom.setAttribute("title", $srcElement.attr("title"))
+                                                //     imgDom.setAttribute("alt", $srcElement.attr("title"))
+                                                self.insertHTML(imgDom);
+                                            }
                                             self.btnBaobeiUrl.val("");
                                             if (self.curVisiableDom) {
                                                 self.curVisiableDom.hide();
@@ -743,24 +748,25 @@ define(function (require, exports) {
                                 } else {
                                     $(".text-tip").html('<span class="gc6">宝贝信息抓取中…</span>').show();
                                     self.BaobeiInerstSubmit.disableBtn("bbl-btn");
-                                    $.post(
+                                    $.get(
                                         '/ugc/api/findProduct', {
                                             url:url
                                         },
                                         function (data) {
                                             if (data.code == 100) {
                                                 $(".text-tip").html('');
-                                                $.smeite.ugc.goodspub(data.product, data.isUploadRole, getBaobei);
+                                                $.smeite.ugc.goodspub(data.product,getBaobei);
                                             } else if (data.code == 105) {
                                                 $(".text-tip").html('');
-                                                getBaobei(data.product.productVoId);
+                                             //   alert(data.product.goodsId)
+                                                getBaobei(data.product.id);
                                             } else if (data.code == 101 || data.code == 106) {
                                                 $(".text-tip").html('<span class="errc">宝贝信息抓取失败，请重试…</span>').show();
                                             } else if (data.code == 107) {
                                                 $(".text-tip").html('<span class="errc">暂时还不支持这个宝贝…</span>').show();
                                             } else if (data.code == 108) {
                                                 $(".text-tip").html('');
-                                                getBaobei(data.product.productVoId);
+                                                getBaobei(data.product.id);
                                             } else if (data.code == 110) {
                                                 $(".text-tip").html('<span class="errc">亲，该商品所在商家已列入黑名单，申诉请联系service@smeite.com</span>').show();
                                             } else if (data.code == 444) {
@@ -829,7 +835,18 @@ define(function (require, exports) {
                                 media.id = data;
                                 media.pic = data;
                                 media.name = "上传图片";
-                                self.insertMedia(media, "img");
+                             //   self.insertMedia(media, "img");
+                                if (self.isIE678) {
+                                    self.insertHTML("<img unselectable='on'class='img-upload'  src='" +data + "'/>");
+                                } else {
+                                    var imgDom = self.iframeDocument.createElement("img");
+                                    imgDom.src = data;
+                                    imgDom.setAttribute("class","img-upload")
+                                    imgDom.setAttribute("unselectable", "on")
+                                //    imgDom.setAttribute("title", $srcElement.attr("title"))
+                               //     imgDom.setAttribute("alt", $srcElement.attr("title"))
+                                    self.insertHTML(imgDom);
+                                }
                                 self.ImgUploadSubmitDom.val("");
                             } else {
                                 self.ImgUploadSubmitDom.val("");
@@ -854,7 +871,18 @@ define(function (require, exports) {
                                 media.id = url;
                                 media.pic = url;
                                 media.name = "网络图片";
-                                self.insertMedia(media, "img");
+                             //   self.insertMedia(media, "img");
+                                if (self.isIE678) {
+                                    self.insertHTML("<img unselectable='on'class='img-upload'  src='" + url + "'/>");
+                                } else {
+                                    var imgDom = self.iframeDocument.createElement("img");
+                                    imgDom.src = url;
+                                    imgDom.setAttribute("class","img-upload")
+                                    imgDom.setAttribute("unselectable", "on")
+                                    //    imgDom.setAttribute("title", $srcElement.attr("title"))
+                                    //     imgDom.setAttribute("alt", $srcElement.attr("title"))
+                                    self.insertHTML(imgDom);
+                                }
                                 self.insertNetImgInputDom.val("");
                                 self.curVisiableDom.hide();
                                 self.curVisiableDom = null
@@ -882,80 +910,7 @@ define(function (require, exports) {
                 },
                 html:"<div class='media-btns img'><a href='javascript:;' btntype='btnImg' title='图片' unselectable='on'>图片</a></div>"
             },
-       /*     btnVideo:{
-                visible:true,
-                exec:function (self) {
-                    if (!self.VideoWrapDom || self.VideoWrapDom.length == 0) {
-                        var html = '<div class="videoWrap sg-dialog"><div class="content"><p class="title">输入视频播放页网址：</p><form class="sg-form" name="shareGoods" action=""><div class="clearfix"><input class="base-input sg-input" id="J_InsertVideoInput" name="url" value="" placeholder="http://" autocomplete="off"><input type="button" id="J_InsertVideo" class="bbl-btn" value="确定"></div></form><div class="sg-source"><p>已支持网站：</p><div class="source-list clearfix"><a class="icon-youku" href="http://www.youku.com/" target="_blank">优酷网</a><a class="icon-tudou" href="http://www.tudou.com/" target="_blank">土豆网</a><a class="icon-sinavideo" href="http://video.sina.com.cn/" target="_blank">新浪视频</a></div></div><div class="tipbox-up"><em>◆</em><span>◆</span></div></div></div>';
-                        $('#' + self.config.toolbarId).append(html);
-                        self.insertVideoSubmitDom = $('#J_InsertVideo');
-                        self.VideoInputDom = $('#J_InsertVideoInput');
-                        self.insertVideoSubmitDom.bind("click", function () {
-                            var videoUrl = $.trim(self.VideoInputDom.val());
-                            var reg_url = /^https?\:\/\//i;
-                            var reg_youku = /^https?\:\/\/v\.youku\.com\//i;
-                            var reg_sinavideo = /^https?\:\/\/[^\/]+sina\.com\.cn\//i;
-                            var reg_tudou = /^https?\:\/\/[^\/]+tudou\.com\//i;
-                            if (reg_url.test(videoUrl)) {
-                                if (reg_youku.test(videoUrl) || reg_sinavideo.test(videoUrl) || reg_tudou.test(videoUrl)) {
-                                    self.VideoInputDom.val("");
-                                    $.ajax({
-                                        url:"/editor/getVideo",
-                                        type:"post",
-                                        dataType:"json",
-                                        data:{
-                                            url:videoUrl
-                                        },
-                                        success:function (json) {
-                                            switch (json.code) {
-                                                case 100:
-                                                {
-                                                    self.curVisiableDom.hide();
-                                                    self.curVisiableDom = null;
-                                                    json.id = json.swf;
-                                                    json.name = json.title;
-                                                    self.insertMedia(json, "video");
-                                                }
-                                                    break;
-                                                case 101:
-                                                {
-                                                    $.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
-                                                    $.smeite.tip.show(self.btnBaobei, json.msg);
-                                                    self.curVisiableDom.hide();
-                                                    self.curVisiableDom = null;
-                                                }
-                                                    break;
-                                            }
-                                        }
-                                    });
-                                } else {
-                                    $.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
-                                    $.smeite.tip.show(self.insertVideoSubmitDom, "不支持该站视频");
-                                }
-                            } else {
-                                $.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
-                                $.smeite.tip.show(self.insertVideoSubmitDom, "请输入一个正确的视频网页地址(带http://)");
-                            }
-                        });
-                        self.VideoWrapDom = $('#' + self.config.toolbarId + ' .videoWrap');
-                        if (self.curVisiableDom) {
-                            self.curVisiableDom.hide();
-                        }
-                        self.curVisiableDom = self.VideoWrapDom;
-                    } else {
-                        if (self.curVisiableDom == self.VideoWrapDom) {
-                            self.VideoWrapDom.hide();
-                            self.curVisiableDom = null;
-                        } else {
-                            if (self.curVisiableDom)
-                                self.curVisiableDom.hide();
-                            self.VideoWrapDom.show();
-                            self.curVisiableDom = self.VideoWrapDom;
-                        }
-                    }
-                },
-                html:"<div class='media-btns video'><a href='javascript:;' btntype='btnVideo' title='视频' unselectable='on'>视频</a></div>"
-            },*/
+
             btnSplit:{
                 visible:true,
                 html:"<span class='split'></span>"
@@ -976,9 +931,9 @@ define(function (require, exports) {
             //加载Editor
             this.insertEditor();
             this.setEditor();
-            if (this.config.mediaDateTypes.length !== 0) {
+           /* if (this.config.mediaDateTypes.length !== 0) {
                 this.reflowMedia();
-            }
+            }*/
             this.id = 0;
         },
         insertEditor:function () {
@@ -1209,7 +1164,7 @@ define(function (require, exports) {
         //insertMedia 插入媒体model
         //@param media (mediaDate)
         //@param type 媒体类型
-        insertMedia:function (media, type) {
+      /*  insertMedia:function (media, type) {
             //media data插入
             if (!this.config.mediaDate[type]) {
                 this.config.mediaDate[type] = [];
@@ -1226,15 +1181,15 @@ define(function (require, exports) {
             if (type == "img") {
                 tag = "[图片" + (index) + "]";
             }
-           /* if (type == "video") {
+           *//* if (type == "video") {
                 tag = "[视频" + (index) + "]";
-            }*/
+            }*//*
             this.insertMediaTag(tag);
         },
-        //deleteMedia 删除媒体model
+       */ //deleteMedia 删除媒体model
         //@param type 媒体类型
         //@param index 媒体在model里的索引
-        deleteMedia:function (type, index) {
+       /* deleteMedia:function (type, index) {
             var tag = "";
             if (type == "baobei") {
                 tag = "[宝贝" + (index + 1) + "]";
@@ -1242,9 +1197,9 @@ define(function (require, exports) {
             if (type == "img") {
                 tag = "[图片" + (index + 1) + "]";
             }
-           /* if (type == "video") {
+           *//* if (type == "video") {
                 tag = "[视频" + (index + 1) + "]";
-            }*/
+            }*//*
             //media data删除
             //this.config.mediaDate[type].splice(index,1);
             this.config.mediaDate[type][index].id = "0";
@@ -1253,8 +1208,8 @@ define(function (require, exports) {
             //延时渲染medias
             setTimeout(this.reflowMedia(), 300);
         },
-        //reflowMedia 重绘媒体model 每次对媒体做删除插入操作后都会重绘
-        reflowMedia:function () {
+        *///reflowMedia 重绘媒体model 每次对媒体做删除插入操作后都会重绘
+      /*  reflowMedia:function () {
             var self = this;
             var getMediasHtml = this.getMediasHtml();
             if (!self.MediaViewWrapDom || self.MediaViewWrapDom.length == 0) {
@@ -1290,8 +1245,8 @@ define(function (require, exports) {
             }
             this.setMediasInput4form();
         },
-        //setMediasInput4form 装载提交给后台的所有媒体参数
-        setMediasInput4form:function () {
+      */  //setMediasInput4form 装载提交给后台的所有媒体参数
+     /*   setMediasInput4form:function () {
             var mediasInputs = "";
             var mediaDateTypes = this.config.mediaDateTypes;
             var mediaDateTypesLength = this.config.mediaDateTypes.length;
@@ -1313,8 +1268,8 @@ define(function (require, exports) {
             }
             $("#J_GuangEidtorInput").html(mediasInputs)
         },
-        //getMediasHtml 获取编辑器下面的所有预览媒体的html编码
-        getMediasHtml:function () {
+       */ //getMediasHtml 获取编辑器下面的所有预览媒体的html编码
+      /*  getMediasHtml:function () {
             var mediasHtml = "";
             var mediaDateTypes = this.config.mediaDateTypes;
             var mediaDateTypesLength = this.config.mediaDateTypes.length;
@@ -1328,9 +1283,9 @@ define(function (require, exports) {
                 if (type == "img") {
                     tag = "图片" + (index + 1);
                 }
-               /* if (type == "video") {
+               *//* if (type == "video") {
                     tag = "视频" + (index + 1);
-                }*/
+                }*//*
                 html = '<div class="item"><div class="mediaImg"><img src="' + m.pic + '" alt="' + m.name + '" title="' + m.name + '"><div class="btn"><a href="javascript:;" data-type="' + type + '" data-behavior="insert" data-tag="[' + tag + ']" data-id="' + m.id + '">插入</a>&nbsp;|&nbsp;<a href="javascript:;" data-type="' + type + '" data-behavior="delete" data-id="' + m.id + '" data-index="' + index + '">删除</a></div></div><p>' + tag + '</p></div>';
                 return html;
             }
@@ -1346,9 +1301,9 @@ define(function (require, exports) {
             }
             return mediasHtml;
         },
-        //insertMediaTag 插入媒体标签
+       */ //insertMediaTag 插入媒体标签
         //@param tag (String) eg:"[图片1]"
-        insertMediaTag:function (tag) {
+       /* insertMediaTag:function (tag) {
             if (this.isIE678) {
                 this.insertHTML(tag);
             } else {
@@ -1356,9 +1311,9 @@ define(function (require, exports) {
                 this.insertHTML(textDom);
             }
         },
-        //deleteMediaTag 删除媒体标签
+        *///deleteMediaTag 删除媒体标签
         //@param tag (String) eg:"[图片1]"
-        deleteMediaTag:function (tag) {
+       /* deleteMediaTag:function (tag) {
             var body = this.iframeDocument.body;
             var html = body.innerHTML;
             while (html.indexOf(tag) != -1) {
@@ -1367,7 +1322,7 @@ define(function (require, exports) {
             body.innerHTML = html;
             this.iframe.contentWindow.focus();
         },
-        //contentDecode 内容解码
+       */ //contentDecode 内容解码
         //@param html (String)
         //@param noMediaDecode (Bool)
         contentDecode:function (html, noMediaDecode) {
@@ -1464,6 +1419,7 @@ define(function (require, exports) {
             }
 
             if (val.indexOf("[宝贝") != -1) {
+              // alert(" baobei ")
                 val = val.replace(reg_baobeitag_nopick, function (t) {
                     var id = t.match(reg_baobeitag)[1];
                     self.id++;
@@ -1530,42 +1486,20 @@ define(function (require, exports) {
         baobeiDecode:function () {
             var self = this;
             var getBaobeiHtml = function (json) {
-                var baobeiId = json.baobei.id;
+                var baobeiId = json.baobei.goodsId;
                 var baobeiUrl = "http://smeite.com/goods/" + baobeiId;
                 var baobeiName = json.baobei.name;
                 baobeiName = $.smeite.util.getStrLength(baobeiName) > 15 ? $.smeite.util.substring4ChAndEn(baobeiName, 15) + "..." : baobeiName;
                 var baobeiPhoto = json.baobei.pic;
-                var baobeiRecommend = json.baobei.recommend;
-                if (baobeiRecommend) {
-                    baobeiRecommend = baobeiRecommend.length > 40 ? baobeiRecommend.substring(0, 40) + "..." : baobeiRecommend;
+                var baobeiIntro = json.baobei.intro;
+                if (baobeiIntro) {
+                    baobeiIntro = baobeiIntro.length > 40 ? baobeiIntro.substring(0, 40) + "..." : baobeiIntro;
                 } else {
-                    baobeiRecommend = "";
+                    baobeiIntro = "";
                 }
-                var baobeiBrand = "";
-                if (json.baobei.brandList && json.baobei.brandList.length > 0) {
-                    baobeiBrand += "<p>品牌：";
-                    for (var i = 0; i < json.baobei.brandList.length; i++) {
-                        var brand = json.baobei.brandList[i];
-                        baobeiBrand += '<a target="_blank" href="http://guang.com/pinpai/' + brand.url + '">' + brand.brandName + '</a>';
-                    }
-                    baobeiBrand += "</p>";
-                }
-                var tags = "";
-                if (json.baobei.tags && json.baobei.tags.length > 0) {
-                    for (var i = 0; i < json.baobei.tags.length; i++) {
-                        var tag = json.baobei.tags[i].tagKeyword;
-                        var tagUrl = "http://guang.com/xihuan/tag/" + tag;
-                        tags += '<a target="_blank" href="' + tagUrl + '">' + tag + '</a>';
-                    }
-                }
-                var tagCount = json.baobei.tagCount;
-                var worth = json.baobei.summary.worthCount;
-                var unworth = json.baobei.summary.unworthCount;
-                var Jtotal = worth + unworth;
-                var Ctotal = json.baobei.commentNum;
-                var priceMin = json.baobei.priceMin / 100;
-                var priceMax = json.baobei.priceMax / 100;
-                var html = '<div class="baobei-pic"><a target="_blank" href="' + baobeiUrl + '"><img src="' + baobeiPhoto + '" alt="' + baobeiName + '" /></a><span>￥' + priceMin + '～' + priceMax + '</span></div><div class="baobei-text"><h4><a target="_blank" href="' + baobeiUrl + '">' + baobeiName + '</a></h4><div class="baobei-info"><p>' + baobeiRecommend + '</p>' + baobeiBrand + '<p>标签(' + tagCount + ')：	' + tags + '</p></div><div class="clearfix mt15"><a class="ilike-n" data-prourl="' + baobeiUrl + '" data-proimgsrc="' + baobeiPhoto + '" data-proname="' + baobeiName + '" data-type="0" data-proid="' + baobeiId + '" href="javascript:;">喜欢</a><div class="stat-box fr"><a target="_blank" href="' + baobeiUrl + '">鉴定(' + worth + '/' + Jtotal + ')</a><span class="mr5 ml5">|</span><a target="_blank" href="' + baobeiUrl + '">评论(' + Ctotal + ')</a></div></div></div><a target="_blank" href="' + baobeiUrl + '" class="baobei-link"></a>';
+
+                var baobeiPrice = json.baobei.price;
+                var html = '<div class="baobei-pic"><a target="_blank" href="' + baobeiUrl + '"><img src="' + baobeiPhoto + '" alt="' + baobeiName + '" /></a><span>￥' + baobeiPrice + '</span></div><div class="baobei-text"><h4><a target="_blank" href="' + baobeiUrl + '">' + baobeiName + '</a></h4><div class="baobei-info"><p>' + baobeiIntro + '</p></div><div class="clearfix mt15"><a class="ilike-n" data-prourl="' + baobeiUrl + '" data-proimgsrc="' + baobeiPhoto + '" data-proname="' + baobeiName + '" data-type="0" data-proid="' + baobeiId + '" href="javascript:;">喜欢</a><div class="stat-box fr"><span class="mr5 ml5">|</span></div></div></div><a target="_blank" class="baobei-link"  href="' + baobeiUrl + '"></a>';
                 return html;
             }
             if (self.baobeiviewDoms) {
@@ -1617,7 +1551,7 @@ define(function (require, exports) {
             var reg_p = /\<p[^\>]*\>/gi;
             var reg_pEnd = /\<\/p\>/gi;
             var reg_br = /\<br[^\>]*\>/gi;
-            var reg_img = /\<img[^>]+alt\=\"?(\[.{1,4}\])[^>]+\>/gi;
+        //    var reg_img = /\<img[^>]+alt\=\"?(\[.{1,4}\])[^>]+\>/gi;
             var reg_enter = /\r|\n/g;
             var reg_nbsp = /\&nbsp\;?/gi;
             var reg_tagSplit = /\<[^\>]+\>/g;
@@ -1691,9 +1625,9 @@ define(function (require, exports) {
             //nbsp
             encodeHtml = encodeHtml.replace(reg_nbsp, SPACE + '[s]');
             //img
-            if (encodeHtml.indexOf("<img") != -1 || encodeHtml.indexOf("<IMG") != -1) {
+           /* if (encodeHtml.indexOf("<img") != -1 || encodeHtml.indexOf("<IMG") != -1) {
                 encodeHtml = encodeHtml.replace(reg_img, SPACE + '$1');
-            }
+            }*/
             //br
             if (encodeHtml.indexOf("<br") != -1 || encodeHtml.indexOf("<BR") != -1) {
                 encodeHtml = encodeHtml.replace(reg_br, SPACE + '[br]');
@@ -1811,19 +1745,7 @@ define(function (require, exports) {
             }
             return html;
         },
-        //getVideoHtml 视频代码生成器
-        //@param url (String)
-        //@param width (Int)
-        //@param height (Int)
-        /*getVideoHtml:function (url, width, height) {
-            var _width = width || 480;
-            var _height = height || 400;
-            var html = '<embed height="' + _height + '" width="' + _width + '" allowscriptaccess="never" style="visibility: visible;" pluginspage="http://get.adobe.com/cn/flashplayer/" flashvars="playMovie=true&amp;auto=1" allowfullscreen="true" quality="hight" src="' + url + '" type="application/x-shockwave-flash" wmode="transparent"/>';
-            if ($.browser.msie) {
-                html = '<OBJECT style="VISIBILITY: visible" classid=clsid:D27CDB6E-AE6D-11cf-96B8-444553540000 width=' + _width + ' height=' + _height + '><PARAM NAME="_cx" VALUE="11641"><PARAM NAME="_cy" VALUE="9419"><PARAM NAME="FlashVars" VALUE="playMovie=true&amp;auto=1&amp;adss=0"><PARAM NAME="Movie" VALUE="' + url + '"><PARAM NAME="Src" VALUE="' + url + '"><PARAM NAME="WMode" VALUE="Transparent"><PARAM NAME="Play" VALUE="0"><PARAM NAME="Loop" VALUE="-1"><PARAM NAME="Quality" VALUE="High"><PARAM NAME="SAlign" VALUE="LT"><PARAM NAME="Menu" VALUE="0"><PARAM NAME="Base" VALUE=""><PARAM NAME="AllowScriptAccess" VALUE="never"><PARAM NAME="Scale" VALUE="NoScale"><PARAM NAME="DeviceFont" VALUE="0"><PARAM NAME="EmbedMovie" VALUE="0"><PARAM NAME="BGColor" VALUE=""><PARAM NAME="SWRemote" VALUE=""><PARAM NAME="MovieData" VALUE=""><PARAM NAME="SeamlessTabbing" VALUE="1"><PARAM NAME="Profile" VALUE="0"><PARAM NAME="ProfileAddress" VALUE=""><PARAM NAME="ProfilePort" VALUE="0"><PARAM NAME="AllowNetworking" VALUE="all"><PARAM NAME="AllowFullScreen" VALUE="true"><PARAM NAME="AllowFullScreenInteractive" VALUE=""><div class="note_noflash"><p>你还未安装flash播放器，所以无法播放。</p></div><a href="http://www.adobe.com/go/getflashplayer"><img alt="获取flash播放器" src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif"/></a></OBJECT>';
-            }
-            return html;
-        },*/
+
         //richText2text 将"[b]文字[/b]"转成"文本"供回复的回复使用
         //@param html (String)
         richText2text:function (html) {

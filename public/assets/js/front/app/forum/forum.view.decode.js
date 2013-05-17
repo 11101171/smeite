@@ -37,10 +37,9 @@ define(function(require, exports) {
 		//var time2 = new Date();
 		//alert(time2-time);
 		$("#J_ForumPost").show();
-		if(editor.imgviewDoms){
-            alert("img decode ")
+		/*if(editor.imgviewDoms){
 			editor.imgDecode();
-		}
+		}*/
 		if(editor.baobeiviewDoms){
 			editor.baobeiDecode();
 		}

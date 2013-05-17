@@ -1173,3 +1173,25 @@
 .main-content {
     background: #fff
 }
+
+
+.baobei { border:1px solid #f3f3f3;border-bottom:3px solid #f3f3f3;position:relative; }
+.baobei .baobei-pic { width:270px;height:270px;position:relative;float:left;overflow:hidden;background:url(images/bg-photo.gif) repeat-y;}
+.baobei .baobei-pic a { width:270px;height:270px;display:table-cell;*display:block;vertical-align:middle;text-align:center;*font-size:212px;*line-height:1;outline:none; }
+.baobei .baobei-pic img { max-width:270px;vertical-align:middle; }
+.baobei .baobei-pic span{opacity:0.5;padding:0 5px;font-weight:normal;line-height:20px;color:white;position:absolute;height:20px;bottom:5px;right:5px;background-color:#000;}
+.baobei .baobei-text { padding:0px 20px 0px 290px;background:#FFF; }
+.baobei .baobei-text h4{ padding-top:6px;line-height:35px;font-size:16px;border-bottom:1px dotted #D1D1D1;color:#333; }
+.baobei .baobei-text h4 a { color:#333;}
+.baobei .baobei-text h4 a:hover { color:#5AD;text-decoration:none; }
+.baobei .baobei-text p { line-height:35px;background:url(images/baobei-text-bg.gif);font-size: 12px;font-weight:normal;}
+.baobei .baobei-text p a { color:#333;text-decoration:none;font-size:12px;font-weight:normal;margin-right:5px; }
+.baobei .baobei-text p a:hover { color:#5AD;text-decoration:none; }
+.baobei .baobei-text .stat-box{font-size: 12px;width:190px;line-height:30px;padding-left:10px;background:#f3f3f3;text-align:left;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
+.baobei .baobei-text .stat-box a{color:#333;text-decoration:none;font-size:12px;font-weight:normal;}
+.baobei .baobei-text .stat-box a:hover{color:#5AD;text-decoration:none;}
+.baobei .baobei-text .stat-box span{color:#999;}
+.ilike-n { float:left;margin-right:10px;display:inline-block;*display:inline;zoom:1;width:31px;height:30px;line-height:30px;padding:0 10px 0 35px;color:#fff;font-size:12px;overflow:hidden;background-image:url(images/button.png);background-position:0 -510px; }
+.ilike-n:hover { background-position:-76px -510px;text-decoration:none; }
+.ilike-n:active { background-position:-152px -510px;text-decoration:none; }
+.baobei-link{ position:absolute;top:8px;right:8px;height:14px;width:14px;background:url(images/link-icon.gif) no-repeat;}
