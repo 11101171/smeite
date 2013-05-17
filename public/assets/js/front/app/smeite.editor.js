@@ -690,7 +690,6 @@ define(function (require, exports) {
                                 type:"get",
                                 dataType:"json",
                                 data:{  id:id  },
-                                //  baobeiId:id,
                                 success:function (json) {
                                     switch (json.code) {
                                         case 100:
@@ -698,18 +697,19 @@ define(function (require, exports) {
                                             json.id = id;
                                             json.pic = json.baobei.pic;
                                             json.name = json.baobei.name;
-
-                                        //    self.insertMedia(json, "baobei");
                                             if (self.isIE678) {
-                                                self.insertHTML("<img unselectable='on' class='img-upload'data-goodsid='"+id+"' src='" + json.pic + "'/>");
+                                                self.insertHTML("<img unselectable='on' class='img-goods'data-goodsid='"+id+"' src='" + json.pic + "'/>");
                                             } else {
+
+
                                                 var imgDom = self.iframeDocument.createElement("img");
                                                 imgDom.src = json.pic;
-                                                imgDom.setAttribute("class","img-upload")
+                                                imgDom.setAttribute("class","img-goods")
                                                 imgDom.setAttribute("data-goodsid",id)
                                                 imgDom.setAttribute("unselectable", "on")
                                                 //    imgDom.setAttribute("title", $srcElement.attr("title"))
                                                 //     imgDom.setAttribute("alt", $srcElement.attr("title"))
+
                                                 self.insertHTML(imgDom);
                                             }
                                             self.btnBaobeiUrl.val("");
@@ -732,7 +732,7 @@ define(function (require, exports) {
                         var shareBaobei = function (url) {
                             var localUrl = "smeite.com";
                             if (url.indexOf(localUrl) != -1) {
-                                var reg = /baobei\/(\d{3,12})/i;
+                                var reg = /baobei\/(\d{1,12})/i;
                                 var regResult = url.match(reg);
                                 if (regResult && regResult[1]) {
                                     getBaobei(regResult[1]);
@@ -753,30 +753,29 @@ define(function (require, exports) {
                                             url:url
                                         },
                                         function (data) {
-                                            if (data.code == 100) {
+                                            if (data.code =="100") {
                                                 $(".text-tip").html('');
                                                 $.smeite.ugc.goodspub(data.product,getBaobei);
-                                            } else if (data.code == 105) {
+                                            } else if (data.code =="105") {
                                                 $(".text-tip").html('');
-                                             //   alert(data.product.goodsId)
                                                 getBaobei(data.product.id);
-                                            } else if (data.code == 101 || data.code == 106) {
+                                            } else if (data.code == "101" || data.code == "106") {
                                                 $(".text-tip").html('<span class="errc">宝贝信息抓取失败，请重试…</span>').show();
-                                            } else if (data.code == 107) {
+                                            } else if (data.code == "107") {
                                                 $(".text-tip").html('<span class="errc">暂时还不支持这个宝贝…</span>').show();
-                                            } else if (data.code == 108) {
+                                            } else if (data.code == "108") {
                                                 $(".text-tip").html('');
                                                 getBaobei(data.product.id);
-                                            } else if (data.code == 110) {
+                                            } else if (data.code == "110") {
                                                 $(".text-tip").html('<span class="errc">亲，该商品所在商家已列入黑名单，申诉请联系service@smeite.com</span>').show();
-                                            } else if (data.code == 444) {
+                                            } else if (data.code == "444") {
                                                 alert("你已被禁止登录！");
                                                 window.location.href = "/user/logout";
-                                            } else if (data.code == 442) {
+                                            } else if (data.code == "442") {
                                                 alert("亲，请不要频繁推荐同一店铺商品");
-                                            } else if (data.code == 443) {
+                                            } else if (data.code == "443") {
                                                 alert("由于过度推荐同店铺商品，账户已冻结，如有疑问请联系 service@smeite.com");
-                                            } else if (data.code == 445) {
+                                            } else if (data.code == "445") {
                                                 alert("城管大队怀疑你恶意发广告，将禁止你发布商品的权利，申诉请联系service@smeite.com");
                                             }
                                             self.BaobeiInerstSubmit.enableBtn("bbl-btn");
@@ -990,14 +989,14 @@ define(function (require, exports) {
             self.iframeDocument.designMode = "on";
             self.iframeDocument.open();
             if (self.isIE678) {
-                self.iframeDocument.write('<html><head><style type="text/css">html,body{height:100%;width:100%;margin:0;padding:0;border:0;overflow:auto;background:#fff;cursor:text;font-size:14px;word-wrap:break-word;}p{padding:0;margin:0;}*{line-height:160%;}body{font-family:Arial,Helvetica,Sans-Serif;font-size:14px;text-align:left;} p{margin:10px 0;} em{font-style:italic;} img{border:0;max-width:100%;cursor:default;}</style></head></html>');
+                self.iframeDocument.write('<html><head><style type="text/css">html,body{height:100%;width:100%;margin:0;padding:0;border:0;overflow:auto;background:#fff;cursor:text;font-size:14px;word-wrap:break-word;}p{padding:0;margin:0;}*{line-height:160%;}body{font-family:Arial,Helvetica,Sans-Serif;font-size:14px;text-align:left;} p{margin:10px 0;} em{font-style:italic;} img{border:0;max-width:100%;cursor:default;}.img-goods,.img-upload { display: block;max-width: 200px; max-height: 250px; _width: 200px;background:  url(/assets/css/global/images/editor-img.gif) no-repeat bottom right transparent;}</style></head></html>');
             } else {
-                self.iframeDocument.write('<html><head><style type="text/css">html,body{height:100%;width:100%;margin:0;padding:0;border:0;overflow:auto;background:#fff;cursor:text;font-size:14px;word-wrap:break-word;}p{padding:0;margin:0;}*{line-height:160%;}html{height:1px;overflow:visible;} body{overflow:hidden;font-family:Arial,Helvetica,Sans-Serif;font-size:14px;text-align:left;} p{margin:10px 0;} em{font-style:italic;} img{border:0;max-width:100%;}</style></head></html>');
+                self.iframeDocument.write('<html><head><style type="text/css">html,body{height:100%;width:100%;margin:0;padding:0;border:0;overflow:auto;background:#fff;cursor:text;font-size:14px;word-wrap:break-word;}p{padding:0;margin:0;}*{line-height:160%;}html{height:1px;overflow:visible;} body{overflow:hidden;font-family:Arial,Helvetica,Sans-Serif;font-size:14px;text-align:left;} p{margin:10px 0;} em{font-style:italic;} img{border:0;max-width:100%;}.img-goods,.img-upload { display: block;max-width: 200px; max-height: 250px; _width: 200px;background:  url(/assets/css/global/images/editor-img.gif) no-repeat bottom right transparent;}</style></head></html>');
             }
             self.iframeDocument.close();
             var textareaVal = $("#" + self.config.textareaID).val();
             if (textareaVal != "") {
-                self.iframeDocument.body.innerHTML = self.contentDecode(textareaVal, true);
+              self.iframeDocument.body.innerHTML =textareaVal;
                 self.iframe.contentWindow.focus();
                 $(self.iframe).height($(self.iframeDocument).height());
             }
@@ -1161,590 +1160,6 @@ define(function (require, exports) {
             } catch (e) {
             }
         },
-        //insertMedia 插入媒体model
-        //@param media (mediaDate)
-        //@param type 媒体类型
-      /*  insertMedia:function (media, type) {
-            //media data插入
-            if (!this.config.mediaDate[type]) {
-                this.config.mediaDate[type] = [];
-                this.config.mediaDateTypes.push(type);
-            }
-            this.config.mediaDate[type].push(media);
-            var index = this.config.mediaDate[type].length;
-            //渲染medias
-            this.reflowMedia();
-            var tag = "";
-            if (type == "baobei") {
-                tag = "[宝贝" + (index) + "]";
-            }
-            if (type == "img") {
-                tag = "[图片" + (index) + "]";
-            }
-           *//* if (type == "video") {
-                tag = "[视频" + (index) + "]";
-            }*//*
-            this.insertMediaTag(tag);
-        },
-       */ //deleteMedia 删除媒体model
-        //@param type 媒体类型
-        //@param index 媒体在model里的索引
-       /* deleteMedia:function (type, index) {
-            var tag = "";
-            if (type == "baobei") {
-                tag = "[宝贝" + (index + 1) + "]";
-            }
-            if (type == "img") {
-                tag = "[图片" + (index + 1) + "]";
-            }
-           *//* if (type == "video") {
-                tag = "[视频" + (index + 1) + "]";
-            }*//*
-            //media data删除
-            //this.config.mediaDate[type].splice(index,1);
-            this.config.mediaDate[type][index].id = "0";
-            //清理多余[];
-            this.deleteMediaTag(tag);
-            //延时渲染medias
-            setTimeout(this.reflowMedia(), 300);
-        },
-        *///reflowMedia 重绘媒体model 每次对媒体做删除插入操作后都会重绘
-      /*  reflowMedia:function () {
-            var self = this;
-            var getMediasHtml = this.getMediasHtml();
-            if (!self.MediaViewWrapDom || self.MediaViewWrapDom.length == 0) {
-                var html = '<div class="guang-editor-mediaViewWrap clearfix"></div>';
-                $(self.iframe).parents(".guang-editor").after(html);
-                self.MediaViewWrapDom = $('.guang-editor-mediaViewWrap');
-                self.MediaViewWrapDom.bind("click", function () {
-                    var e = arguments[0] || window.event,
-                        curElm;
-                    var curElm = e.srcElement ? e.srcElement : e.target;
-                    var $curElm = $(curElm);
-                    if (curElm.nodeName.toLowerCase() == 'a') {
-                        if ($curElm.data("behavior") == "insert") {
-                            self.insertMediaTag($curElm.data("tag"));
-                        }
-                        if ($curElm.data("behavior") == "delete") {
-                            self.deleteMedia($curElm.data("type"), parseInt($curElm.data("index"), 10))
-                        }
-                    }
-                })
-                $('.guang-editor-mediaViewWrap .item').live("mouseover", function () {
-                    $(this).find(".btn").show();
-                })
-                $('.guang-editor-mediaViewWrap .item').live("mouseout", function () {
-                    $(this).find(".btn").hide();
-                })
-            }
-            this.MediaViewWrapDom.html(getMediasHtml);
-            if (getMediasHtml.length == 0) {
-                this.MediaViewWrapDom.hide();
-            } else {
-                this.MediaViewWrapDom.show();
-            }
-            this.setMediasInput4form();
-        },
-      */  //setMediasInput4form 装载提交给后台的所有媒体参数
-     /*   setMediasInput4form:function () {
-            var mediasInputs = "";
-            var mediaDateTypes = this.config.mediaDateTypes;
-            var mediaDateTypesLength = this.config.mediaDateTypes.length;
-            var mediaDate = this.config.mediaDate;
-            for (var i = 0; i < mediaDateTypesLength; i++) {
-                var type = mediaDateTypes[i];
-                var media = mediaDate[type];
-                var meidaLength = mediaDate[mediaDateTypes[i]].length;
-                var value = "";
-                for (var j = 0; j < meidaLength; j++) {
-                    if (media[j].id !== "0") {
-                        value += value.length ? ("," + media[j].id) : media[j].id;
-                    }
-                }
-                mediasInputs += '<input type="hidden" id="J_GuangEidtorInput_' + type + '" name="' + type + 'List" value="' + value + '"/>';
-            }
-            if ($("#J_GuangEidtorInput").length == 0) {
-                $("#" + this.config.formId).append('<span id="J_GuangEidtorInput"></span>');
-            }
-            $("#J_GuangEidtorInput").html(mediasInputs)
-        },
-       */ //getMediasHtml 获取编辑器下面的所有预览媒体的html编码
-      /*  getMediasHtml:function () {
-            var mediasHtml = "";
-            var mediaDateTypes = this.config.mediaDateTypes;
-            var mediaDateTypesLength = this.config.mediaDateTypes.length;
-            var mediaDate = this.config.mediaDate;
-            var getMediaHtml = function (m, type, index) {
-                var tag = "",
-                    html = "";
-                if (type == "baobei") {
-                    tag = "宝贝" + (index + 1);
-                }
-                if (type == "img") {
-                    tag = "图片" + (index + 1);
-                }
-               *//* if (type == "video") {
-                    tag = "视频" + (index + 1);
-                }*//*
-                html = '<div class="item"><div class="mediaImg"><img src="' + m.pic + '" alt="' + m.name + '" title="' + m.name + '"><div class="btn"><a href="javascript:;" data-type="' + type + '" data-behavior="insert" data-tag="[' + tag + ']" data-id="' + m.id + '">插入</a>&nbsp;|&nbsp;<a href="javascript:;" data-type="' + type + '" data-behavior="delete" data-id="' + m.id + '" data-index="' + index + '">删除</a></div></div><p>' + tag + '</p></div>';
-                return html;
-            }
-            for (var i = 0; i < mediaDateTypesLength; i++) {
-                var type = mediaDateTypes[i];
-                var media = mediaDate[type];
-                var meidaLength = media.length;
-                for (var j = 0; j < meidaLength; j++) {
-                    if (media[j].id !== "0") {
-                        mediasHtml += getMediaHtml(media[j], type, j);
-                    }
-                }
-            }
-            return mediasHtml;
-        },
-       */ //insertMediaTag 插入媒体标签
-        //@param tag (String) eg:"[图片1]"
-       /* insertMediaTag:function (tag) {
-            if (this.isIE678) {
-                this.insertHTML(tag);
-            } else {
-                var textDom = this.iframeDocument.createTextNode(tag);
-                this.insertHTML(textDom);
-            }
-        },
-        *///deleteMediaTag 删除媒体标签
-        //@param tag (String) eg:"[图片1]"
-       /* deleteMediaTag:function (tag) {
-            var body = this.iframeDocument.body;
-            var html = body.innerHTML;
-            while (html.indexOf(tag) != -1) {
-                html = html.replace(tag, "");
-            }
-            body.innerHTML = html;
-            this.iframe.contentWindow.focus();
-        },
-       */ //contentDecode 内容解码
-        //@param html (String)
-        //@param noMediaDecode (Bool)
-        contentDecode:function (html, noMediaDecode) {
-            var val = html;
-            var length = 0;
-            var i = 0;
-            var data = {};
-            if (!this.tagsData) {
-                this.tagsData = {};
-                data = this.tagsData;
-                //插入表情数组
-                length = FACEJSON.length;
-                for (; i < length; i++) {
-                    data[FACEJSON[i].key] = '<img src="/assets/emotion/' + FACEJSON[i].val + '" unselectable="on" title="' + FACEJSON[i].key + '" alt="' + FACEJSON[i].key + '">';
-                }
-                //插入span font数组
-                length = COLOR.length;
-                i = 0;
-                for (; i < length; i++) {
-                    var colorkey = COLOR[i].key
-                    data['[font' + colorkey + ']'] = '<font color="#' + colorkey + '">';
-                    data['[font1' + colorkey + ']'] = '<font size="1" color="#' + colorkey + '">';
-                    data['[font2' + colorkey + ']'] = '<font size="2" color="#' + colorkey + '">';
-                    data['[font3' + colorkey + ']'] = '<font size="3" color="#' + colorkey + '">';
-                    data['[font4' + colorkey + ']'] = '<font size="4" color="#' + colorkey + '">';
-                }
-                data['[font1]'] = '<font size="1">';
-                data['[font2]'] = '<font size="2">';
-                data['[font3]'] = '<font size="3">';
-                data['[font4]'] = '<font size="4">';
-                data['[/font]'] = '</font>';
-                data['[span]'] = '<span>';
-                data['[/span]'] = '</span>';
-
-                data['[b]'] = '<b>';
-                data['[/b]'] = '</b>';
-                data['[p]'] = '<p>';
-                data['[/p]'] = '</p>';
-                data['[br]'] = '<br/>';
-                data['[s]'] = '&nbsp;';
-            } else {
-                data = this.tagsData;
-            }
-            val = val.replace(/\x20?\[[^\[\]]+\]/gi, function (tag) {
-                var t = tag;
-                //好方法是tag[0],但ie67不支持
-                //测试100W次substring(0,1)和tag.charAt(0)时间都差不多（毫秒）
-                //chrome是830和760  ie7是1034和1016
-                //chrome下tag[0]的时间也是760左右
-                if (tag.substring(0, 1) == " ") {
-                    t = tag.substring(1);
-                }
-                return data[t] || tag;
-            })
-            if (!noMediaDecode) {
-
-                val = this.mediaDecode(val);
-            }
-            return val;
-        },
-        //mediaDecode 媒体解码
-        //@param html (String)
-        mediaDecode:function (html) {
-
-            var self = this;
-            var val = html;
-            self.tag2HtmlData = {};
-            var reg_imgtag = /\[图片(\d+)\]/;
-          //  var reg_videotag = /\[视频(\d+)\]/;
-            var reg_baobeitag = /\[宝贝(\d+)\]/;
-            var reg_imgtag_nopick = /\[图片\d+\]/g;
-        //    var reg_videotag_nopick = /\[视频\d+\]/g;
-            var reg_baobeitag_nopick = /\[宝贝\d+\]/g;
-
-
-             if (self.mediaImgList) {
-                val = val.replace(reg_imgtag_nopick, function (t) {
-                    var id = t.match(reg_imgtag)[1];
-                    self.id++;
-                    var hid = id + self.id;
-                    if (!self.imgviewDoms) {
-                        self.imgviewDoms = {};
-                    }
-                    if (!self.imgviewDoms[id]) {
-                        self.imgviewDoms[id] = [];
-                    }
-                    var length = self.imgviewDoms[id].length;
-                    self.imgviewDoms[id][length] = hid;
-
-                    var imgHtml = '<div class="pt10 pb10" id="J_Img_' + hid + '"></div>' ;
-
-                    return imgHtml;
-                })
-            }
-
-            if (val.indexOf("[宝贝") != -1) {
-              // alert(" baobei ")
-                val = val.replace(reg_baobeitag_nopick, function (t) {
-                    var id = t.match(reg_baobeitag)[1];
-                    self.id++;
-                    var hid = id + self.id;
-                    if (!self.baobeiviewDoms) {
-                        self.baobeiviewDoms = {};
-                    }
-                    if (!self.baobeiviewDoms[id]) {
-                        self.baobeiviewDoms[id] = [];
-                    }
-                    var length = self.baobeiviewDoms[id].length;
-                    self.baobeiviewDoms[id][length] = hid;
-                    return "<div class='pt10 pb10'><div id='J_Baobei_" + hid + "' class='baobei clearfix'></div></div>";
-                })
-            }
-            return val;
-        },
-        //imgDecode 图片解码
-        imgDecode:function () {
-            var self = this;
-            var callback = function (imgDom) {
-                var width = parseInt(imgDom.width, 10);
-                width = width > 600 ? 600 : width;
-                var img = '<img width="' + width + '" src="' + imgDom.url + '"/>';
-                var hids = self.imgviewDoms[imgDom.id];
-                var length = hids.length;
-                for (var i = 0; i < length; i++) {
-                    $("#J_Img_" + hids[i]).html(img);
-                }
-            }
-            if (self.imgviewDoms) {
-                for (var id in self.imgviewDoms) {
-                    var url = self.mediaImgList[id];
-                    if ($.browser.msie && parseInt($.browser.version, 10) <= 7) {
-                        $("#ie6img").append('<img id="img' + id + '" src="' + url + '"/>');
-                    } else {
-                        var imgDom = new Image();
-                        imgDom.id = id;
-                        imgDom.url = url;
-                        imgDom.onload = function () {
-                            callback(this);
-                        }
-                        imgDom.src = url;
-                    }
-                }
-                if ($.browser.msie && parseInt($.browser.version, 10) <= 7) {
-                    for (var id in self.imgviewDoms) {
-                        var imgHtmlDom = $("#img" + id);
-                        var width = imgHtmlDom.width();
-                        width = width > 600 ? 600 : width;
-                        var url = self.mediaImgList[id];
-                        var img = '<img width="' + width + '" src="' + url + '"/>';
-                        var hids = self.imgviewDoms[id];
-                        var length = hids.length;
-                        for (var i = 0; i < length; i++) {
-                            $("#J_Img_" + hids[i]).html(img);
-                        }
-
-                    }
-                }
-            }
-        },
-        //baobeiDecode 宝贝解码
-        baobeiDecode:function () {
-            var self = this;
-            var getBaobeiHtml = function (json) {
-                var baobeiId = json.baobei.goodsId;
-                var baobeiUrl = "http://smeite.com/goods/" + baobeiId;
-                var baobeiName = json.baobei.name;
-                baobeiName = $.smeite.util.getStrLength(baobeiName) > 15 ? $.smeite.util.substring4ChAndEn(baobeiName, 15) + "..." : baobeiName;
-                var baobeiPhoto = json.baobei.pic;
-                var baobeiIntro = json.baobei.intro;
-                if (baobeiIntro) {
-                    baobeiIntro = baobeiIntro.length > 40 ? baobeiIntro.substring(0, 40) + "..." : baobeiIntro;
-                } else {
-                    baobeiIntro = "";
-                }
-
-                var baobeiPrice = json.baobei.price;
-                var html = '<div class="baobei-pic"><a target="_blank" href="' + baobeiUrl + '"><img src="' + baobeiPhoto + '" alt="' + baobeiName + '" /></a><span>￥' + baobeiPrice + '</span></div><div class="baobei-text"><h4><a target="_blank" href="' + baobeiUrl + '">' + baobeiName + '</a></h4><div class="baobei-info"><p>' + baobeiIntro + '</p></div><div class="clearfix mt15"><a class="ilike-n" data-prourl="' + baobeiUrl + '" data-proimgsrc="' + baobeiPhoto + '" data-proname="' + baobeiName + '" data-type="0" data-proid="' + baobeiId + '" href="javascript:;">喜欢</a><div class="stat-box fr"><span class="mr5 ml5">|</span></div></div></div><a target="_blank" class="baobei-link"  href="' + baobeiUrl + '"></a>';
-                return html;
-            }
-            if (self.baobeiviewDoms) {
-                for (var id in self.baobeiviewDoms) {
-                    $.ajax({
-                        url:"/editor/fetchBaobei",
-                        type:"get",
-                        dataType:"json",
-                        data:{
-                            id:id
-                        },
-                     //   boabeiId:id,
-                        success:function (json) {
-                        //    var hids = self.baobeiviewDoms[this.boabeiId];
-                            var hids = self.baobeiviewDoms[id];
-                            var length = hids.length;
-                            if (json) {
-                                if (json.code == 100) {
-                                    var html = getBaobeiHtml(json);
-                                    for (var i = 0; i < length; i++) {
-                                        $("#J_Baobei_" + hids[i]).html(html);
-                                    }
-                                } else {
-                                    for (var i = 0; i < length; i++) {
-                                        $("#J_Baobei_" + hids[i]).hide();
-                                    }
-                                }
-                            } else {
-                                for (var i = 0; i < length; i++) {
-                                    $("#J_Baobei_" + hids[i]).hide();
-                                }
-                            }
-                        }
-                    });
-                }
-            }
-        },
-        //contentEncode 内容编码
-        contentEncode:function (html) {
-            var self = this;
-            var encodeHtml = this.filterMediaTag(html); //去掉多余的类似[图片1]
-
-            var reg_spanColse = /\<span(?!.*?\<span).*?\<\/span\>/gi;
-            var reg_fontColse = /\<font(?!.*?\<font).*?\<\/font\>/gi;
-            var reg_bColse = /\<b(?!.*?\<b).*?\<\/b\>/gi;
-            var reg_strongColse = /\<strong(?!.*?\<strong).*?\<\/strong\>/gi;
-            var reg_div = /\<div[^\>]*\>/gi;
-            var reg_divEnd = /\<\/div\>/gi;
-            var reg_p = /\<p[^\>]*\>/gi;
-            var reg_pEnd = /\<\/p\>/gi;
-            var reg_br = /\<br[^\>]*\>/gi;
-        //    var reg_img = /\<img[^>]+alt\=\"?(\[.{1,4}\])[^>]+\>/gi;
-            var reg_enter = /\r|\n/g;
-            var reg_nbsp = /\&nbsp\;?/gi;
-            var reg_tagSplit = /\<[^\>]+\>/g;
-            var SPACE = " ";
-
-            //将匹配出来的闭合标签转换成"[b]xxx[/b]"之类的
-            var encode = function (t, b) {
-                var tagArr = t.match(reg_tagSplit);
-                var tagHead = tagArr[0];
-                var tagFoot = tagArr[tagArr.length - 1];
-                var tagBody = t.replace(tagHead, "").replace(tagFoot, "");
-                var color = null;
-                var size = null;
-                var bold = b || null;
-                if (!bold && tagHead.indexOf("bold") != -1) {
-                    bold = true;
-                }
-                if (tagHead.indexOf("size") != -1) {
-                    size = tagHead.match(/size[\s\=\"]+(\d{1})/i);
-                    if (size) {
-                        size = size[1];
-                    }
-                }
-                if (tagHead.indexOf("color") != -1) {
-                    color = tagHead.match(/\#([0-9a-f]{6})/i);
-                    if (!color) {
-                        color = tagHead.match(/rgb\(\s?(\d{1,3})\,\s?(\d{1,3})\,\s?(\d{1,3})\)/i);
-                        if (color) {
-                            color = RGB2HEX["_" + color[1] + color[2] + color[3]];
-                        }
-                    } else {
-                        color = color[1];
-                    }
-                }
-                //验证是否属于网站规定的颜色
-                if (!self.hasHexColor) {
-                    var hasHexColor = self.hasHexColor = {};
-                    for (var i = 0; i < COLOR.length; i++) {
-                        hasHexColor[COLOR[i].key] = true;
-                    }
-                }
-                if (color) {
-                    color = self.hasHexColor[color] ? color : null;
-                }
-                //验证是否属于网站规定的字体大小
-                if (size && parseInt(size, 10) > 4) {
-                    size = "4";
-                }
-                if (bold) {
-                    if (size || color) {
-                        tagHead = SPACE + "[b]" + SPACE + "[font" + (size || "") + (color || "") + "]"
-                        tagFoot = SPACE + "[/b]" + SPACE + "[/font]";
-                    } else {
-                        tagHead = SPACE + "[b]";
-                        tagFoot = SPACE + "[/b]";
-                    }
-                } else {
-                    if (size || color) {
-                        tagHead = SPACE + "[font" + (size || "") + (color || "") + "]"
-                        tagFoot = SPACE + "[/font]";
-                    } else {
-                        tagHead = "";
-                        tagFoot = "";
-                    }
-                }
-                return tagHead + tagBody + tagFoot;
-            }
-            //优先匹配速度快的正则
-            //清除换行符
-            encodeHtml = encodeHtml.replace(reg_enter, SPACE + '[span][/span]');
-            //nbsp
-            encodeHtml = encodeHtml.replace(reg_nbsp, SPACE + '[s]');
-            //img
-           /* if (encodeHtml.indexOf("<img") != -1 || encodeHtml.indexOf("<IMG") != -1) {
-                encodeHtml = encodeHtml.replace(reg_img, SPACE + '$1');
-            }*/
-            //br
-            if (encodeHtml.indexOf("<br") != -1 || encodeHtml.indexOf("<BR") != -1) {
-                encodeHtml = encodeHtml.replace(reg_br, SPACE + '[br]');
-            }
-            //div
-            if (encodeHtml.indexOf("<div") != -1 || encodeHtml.indexOf("<DIV") != -1) {
-                encodeHtml = encodeHtml.replace(reg_div, SPACE + '[p]');
-                encodeHtml = encodeHtml.replace(reg_divEnd, SPACE + '[/p]');
-            }
-            //p
-            if (encodeHtml.indexOf("<p") != -1 || encodeHtml.indexOf("<P") != -1) {
-                encodeHtml = encodeHtml.replace(reg_p, SPACE + '[p]');
-                encodeHtml = encodeHtml.replace(reg_pEnd, SPACE + '[/p]');
-            }
-            //b
-            while (encodeHtml.indexOf("<b") != -1 || encodeHtml.indexOf("<B") != -1) {
-                encodeHtml = encodeHtml.replace(reg_bColse, function (t) {
-                    return encode(t, true);
-                });
-            }
-            //strong
-            while (encodeHtml.indexOf("<strong") != -1 || encodeHtml.indexOf("<STRONT") != -1) {
-                encodeHtml = encodeHtml.replace(reg_strongColse, function (t) {
-                    return encode(t, true);
-                });
-            }
-            //span
-            while (encodeHtml.indexOf("<span") != -1 || encodeHtml.indexOf("<SPAN") != -1) {
-                encodeHtml = encodeHtml.replace(reg_spanColse, function (t) {
-                    return encode(t);
-                });
-            }
-            //font
-            while (encodeHtml.indexOf("<font") != -1 || encodeHtml.indexOf("<FONT") != -1) {
-                encodeHtml = encodeHtml.replace(reg_fontColse, function (t) {
-                    return encode(t);
-                });
-            }
-            //过滤最后的标签，强制删除标签
-            if (encodeHtml.indexOf("<") != -1) {
-                encodeHtml = encodeHtml.replace(reg_tagSplit, '');
-            }
-            return encodeHtml
-        },
-        //filterMediaTag 过滤不存在的媒体的媒体标签
-        filterMediaTag:function () {
-            var html = this.iframeDocument.body.innerHTML;
-            var map = {
-                "宝贝":"baobei",
-                "图片":"img"
-              //  "视频":"video"
-            };
-            var tagArr = ["宝贝", "图片"];
-            var regArr_nopick = [/\[宝贝\d{1,2}\]/gi, /\[图片\d{1,2}\]/gi];
-            var regArr = [/\[宝贝(\d{1,2})\]/, /\[图片(\d{1,2})\]/];
-            var existMediasIndex = {}; //记录存在的媒体的序列号
-            var recordMoveNum = 0; //用来记录标签序号需要移动的位数，比如把[图片3]变成[图片1]，则移动位数是2
-            var mediaDateTypes = this.config.mediaDateTypes;
-            if (mediaDateTypes) {
-                var mediaDateTypesLength = this.config.mediaDateTypes.length;
-                var mediaDate = this.config.mediaDate;
-                for (var i = 0; i < mediaDateTypesLength; i++) {
-                    var type = mediaDateTypes[i];
-                    var media = mediaDate[type];
-                    var meidaLength = mediaDate[type].length;
-                    for (var j = 0; j < meidaLength; j++) {
-                        if (media[j].id !== "0") {
-                            if (existMediasIndex[type]) {
-                                existMediasIndex[type][existMediasIndex[type].length] = j;
-                            } else {
-                                existMediasIndex[type] = [j];
-                            }
-                        }
-                    }
-                }
-            }
-            for (var i = 0; i < 3; i++) {
-                if (html.indexOf('[' + tagArr[i]) != -1) {
-                    var existTags = {};
-                    var changeTags = {};
-                    var existIndexArr = existMediasIndex[map[tagArr[i]]];
-                    if (existIndexArr) {
-                        var lastIndex = existIndexArr.length;
-                        for (var j = 0; j < lastIndex; j++) {
-                            var existTag = "[" + tagArr[i] + (existIndexArr[j] + 1) + "]";
-                            existTags[existTag] = true;
-                            if (j === 0) {
-                                if (existIndexArr[0] !== 0) {
-                                    changeTags[existTag] = "[" + tagArr[i] + "1]";
-                                    recordMoveNum = existIndexArr[0];
-                                }
-                            } else {
-                                if (existIndexArr[j] - existIndexArr[j - 1] !== 1 || recordMoveNum !== 0) {
-                                    recordMoveNum += (existIndexArr[j] - existIndexArr[j - 1] - 1);
-                                    changeTags[existTag] = "[" + tagArr[i] + (existIndexArr[j] - recordMoveNum + 1) + "]";
-                                }
-                            }
-                        }
-                        html = html.replace(regArr_nopick[i], function (t) {
-                            if (existTags[t]) {
-                                if (changeTags[t]) {
-                                    return changeTags[t];
-                                } else {
-                                    return t;
-                                }
-                            } else {
-                                return "";
-                            }
-                        })
-                    } else {
-                        html = html.replace(regArr_nopick[i], '');
-                    }
-                }
-                ;
-            }
-            return html;
-        },
 
         //richText2text 将"[b]文字[/b]"转成"文本"供回复的回复使用
         //@param html (String)
@@ -1792,26 +1207,6 @@ define(function (require, exports) {
                     return "";
                 }
             })
-            return html;
-        },
-        decodeContent4Sns:function (html) {
-            var data;
-            if (!this.faceTagsData) {
-                data = this.faceTagsData = {};
-                for (var i = 0; i < FACEJSON.length; i++) {
-                    data[FACEJSON[i].key] = 'true';
-                }
-            } else {
-                data = this.faceTagsData;
-            }
-            html = html.replace(/\[[^\[\]]+\]/gi, function (tag) {
-                if (data[tag]) {
-                    return tag;
-                } else {
-                    return "";
-                }
-            })
-            html = $.smeite.util.ellipse(html, 120);
             return html;
         }
     }

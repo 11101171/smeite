@@ -372,7 +372,8 @@
     padding: 0 15px 15px;
     display: none
 }
-
+.forum-post  .img-goods { width: 270px;height: 270px}
+.forum-post .img-upload{max-width: 600px;_width:600px}
 .forum-post li {
     padding: 10px 0 5px 90px;
     line-height: 24px;
@@ -1187,10 +1188,33 @@
 .baobei .baobei-text p { line-height:35px;background:url(images/baobei-text-bg.gif);font-size: 12px;font-weight:normal;}
 .baobei .baobei-text p a { color:#333;text-decoration:none;font-size:12px;font-weight:normal;margin-right:5px; }
 .baobei .baobei-text p a:hover { color:#5AD;text-decoration:none; }
-.baobei .baobei-text .stat-box{font-size: 12px;width:190px;line-height:30px;padding-left:10px;background:#f3f3f3;text-align:left;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
+.baobei .baobei-text .stat-box{font-size: 12px;line-height:30px;padding:0px 10px;background:#f3f3f3;text-align:left;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
 .baobei .baobei-text .stat-box a{color:#333;text-decoration:none;font-size:12px;font-weight:normal;}
 .baobei .baobei-text .stat-box a:hover{color:#5AD;text-decoration:none;}
 .baobei .baobei-text .stat-box span{color:#999;}
+.baobei .price .promotionPrice{
+    font-size: 16px;
+    font-weight: bolder;
+    color: #e26;
+    padding-right: 15px;
+}
+.baobei .price{
+    padding: 5px;
+}
+.baobei .price .normalPrice{
+    font-size: 14px;
+    text-decoration: line-through;
+    color: #555;
+    padding-right: 10px;
+}
+.baobei .credits {
+    border-bottom: 1px dotted #D1D1D1;
+    padding-bottom: 5px;
+}
+.baobei .credits span{
+    color: #e26;
+    font-weight: bold;
+}
 .ilike-n { float:left;margin-right:10px;display:inline-block;*display:inline;zoom:1;width:31px;height:30px;line-height:30px;padding:0 10px 0 35px;color:#fff;font-size:12px;overflow:hidden;background-image:url(images/button.png);background-position:0 -510px; }
 .ilike-n:hover { background-position:-76px -510px;text-decoration:none; }
 .ilike-n:active { background-position:-152px -510px;text-decoration:none; }
