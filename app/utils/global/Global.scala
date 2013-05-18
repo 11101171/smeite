@@ -16,7 +16,7 @@ import play.api.mvc.Results._
 object Global extends GlobalSettings {
 
  //  When an exception occurs in your application, the onError operation will be called
- /* override def onError(request: RequestHeader, ex: Throwable) = {
+ override def onError(request: RequestHeader, ex: Throwable) = {
     InternalServerError(
       views.html.utils.global.error()
     )
@@ -35,7 +35,7 @@ object Global extends GlobalSettings {
     //  views.html.utils.global.badRequest()
       views.html.utils.global.error()
     )
-  }*/
+  }
 
 
 }
