@@ -29,8 +29,9 @@
     font-size: 18px;
     line-height: 24px
 }
-.forum-main .forum-title a.follow {
+.forum-main .forum-title a.follow-btn {
        float: right;
+    margin-top: 5px;
        width: 56px;
        height: 24px;
        background: #86B835;
@@ -39,9 +40,22 @@
        color: white;
        line-height: 24px;
        font-weight: 400;
-       border-radius: 2px;
+       border-radius: 3px;
        display: inline-block;
    }
+.forum-main .forum-title .followed-btn{
+    float: right;
+    margin-top: 5px;
+    padding: 0 5px;
+    height: 24px;
+    background-color: #f3f3f3;
+    _margin-right: 20px;
+    text-align: center;
+    line-height: 24px;
+    font-weight: 400;
+    border-radius: 3px;
+    display: inline-block;
+}
 .forum-main .forum-title a.edit {
     float: right;
     width: 56px;

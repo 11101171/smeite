@@ -236,24 +236,31 @@ object Themes extends Controller {
     })
     if(user.isEmpty)Ok(Json.obj("code" -> "200", "message" ->"你还没有登录" ))
     else {
-      val themeId = (request.body \ "themeId").as[Long]
-    //  println("add Follow theme id " +themeId)
-     val loveTheme=UserDao.checkLoveTheme(user.get.id.get,themeId);
-      if(!loveTheme.isEmpty) Ok(Json.obj("code" -> "103", "message" ->"你已经喜欢了"))
-      else { UserDao.addLoveTheme(user.get.id.get,themeId);   Ok(Json.obj("code" -> "100", "message" ->"成功"))}
+      val themeId = (request.body \ "themeId").asOpt[Long]
+         if(themeId.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
+        else{
+           val loveTheme=UserDao.checkLoveTheme(user.get.id.get,themeId.get);
+           if(!loveTheme.isEmpty) Ok(Json.obj("code" -> "103", "message" ->"你已经喜欢了"))
+           else { UserDao.addLoveTheme(user.get.id.get,themeId.get);   Ok(Json.obj("code" -> "100", "message" ->"成功"))}
+
+         }
+
     }
   }
   
-  def removeFollow=Action(parse.json) {implicit request =>
+  def removeFollow = Action(parse.json) {implicit request =>
     val user:Option[User] =request.session.get("user").map(u=>Cache.getOrElse[User](u){
       UserDao.findById(u.toLong)
     })
     if(user.isEmpty)Ok(Json.obj("code" -> "200", "message" ->"你还没有登录"))
     else {
-      val themeId = (request.body \ "themeId").as[Long]
-      //println("add Follow theme id " +themeId)
-       UserDao.deleteLoveTheme(user.get.id.get,themeId);
-      Ok(Json.obj("code" -> "100", "message" ->"成功"))
+      val themeId = (request.body \ "themeId").asOpt[Long]
+      if(themeId.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
+      else{
+        UserDao.deleteLoveTheme(user.get.id.get,themeId.get);
+        Ok(Json.obj("code" -> "100", "message" ->"成功"))
+      }
+
 
     }
   }

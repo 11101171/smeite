@@ -396,7 +396,6 @@ define(function(require, exports) {
         }
     });
     /* 确认框 */
-    //确认框
     $.smeite.confirmUI = function(txt,fun,cancelfun){
         if($("#J_ConfirmD")[0]){
             $("#J_ConfirmD").remove();
@@ -1267,7 +1266,7 @@ define(function(require, exports) {
         repeatLoveTopicClk : function(o, commentType, desirableType){},
         //喜欢帖子操作
         loveTopicSubmit : function(o,topicId){
-            var ajaxUrl = "/topic/removeFollow";
+            var ajaxUrl = "/forum/addFollow";
             $.ajax({
                 url:  ajaxUrl,
                 type : "post",
@@ -1298,7 +1297,7 @@ define(function(require, exports) {
         },
         // 取消喜欢帖子
         removeTopicCallback:function(o,topicId){
-            var ajaxUrl = "/topic/removeFollow";
+            var ajaxUrl = "/forum/removeFollow";
             $.ajax({
                 url:  ajaxUrl,
                 type : "post",
@@ -1306,12 +1305,9 @@ define(function(require, exports) {
                 dataType: "json",
                 data: JSON.stringify({"topicId": topicId }),
                 success: function(data){
-                    switch(data.code){
-                        case "100":
-
-                            break;
-                        case "101":
-                            alert(data.message);
+                   if(data.code =="100"){
+                            var html ="<a rel='topicFollow'class='follow-btn' href='javascript:;' data-topicid='"+ topicId +"'>+ 关注</a>"
+                            o.replaceWith(html)
                     }
                 }
             });

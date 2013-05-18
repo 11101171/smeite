@@ -120,37 +120,55 @@ object Users extends Controller {
   }
 
   /*添加 关注人
-  * code :100 成功 101 参数错误  103 重复关注 111 关注人数已达到上限 300 用户未登录 444 被禁止关注
+  * code :100 成功 104 参数错误  103 重复关注 111 关注人数已达到上限 300 用户未登录 444 被禁止关注
   * */
-  def addFollow(followId:Long) = UserAction{ user => implicit request =>
+  def addFollow  =  Action(parse.json){  implicit request =>
+    val user:Option[User] =request.session.get("user").map(u=> UserDao.findById(u.toLong) )
         if(user.isEmpty)  Ok(Json.obj("code" -> "300", "isYourFans"->"false","message" -> "亲，你还没有登录呢" ))
        else if(user.get.status ==4) Ok(Json.obj("code" -> "444", "isYourFans"->"false","message" -> "亲，你被禁止了" ))
        else {
-          val follow =UserDao.checkFollow(followId,user.get.id.get);
-          if(!follow.isEmpty) Ok(Json.obj("code" -> "103", "isYourFans"->"false","message" -> "重复关注了"  ))
-          else {
-            UserDao.addFollow(followId,user.get.id.get)
-            val followed= UserDao.checkFollow(followId,user.get.id.get)
-            if(followed.isEmpty) Ok(Json.obj("code" -> "100", "isYourFans"->"false","message" -> "关注成功" ))
-             else  Ok(Json.obj("code" -> "100", "isYourFans"->"true","message" -> "关注成功"  ))
+          val followId=(request.body \ "userId").asOpt[Long]
+          if(followId.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
+          else{
+            val follow =UserDao.checkFollow(followId.get,user.get.id.get);
+            if(!follow.isEmpty) Ok(Json.obj("code" -> "103", "isYourFans"->"false","message" -> "重复关注了"  ))
+            else {
+              UserDao.addFollow(followId.get,user.get.id.get)
+              val followed= UserDao.checkFollow(followId.get,user.get.id.get)
+              if(followed.isEmpty) Ok(Json.obj("code" -> "100", "isYourFans"->"false","message" -> "关注成功" ))
+              else  Ok(Json.obj("code" -> "100", "isYourFans"->"true","message" -> "关注成功"  ))
+            }
           }
+
         }
 
   }
-  /* 取消关注 code 100 成功  101 参数错误 300 用户未登录*/
-  def removeFollow(followId:Long) =  UserAction{ user => implicit request =>
+  /* 取消关注 code 100 成功  104 参数错误 300 用户未登录*/
+  def removeFollow =   Action(parse.json){  implicit request =>
+    val user:Option[User] =request.session.get("user").map(u=> UserDao.findById(u.toLong) )
     if(user.isEmpty)  Ok(Json.obj("code" -> "300", "isYourFans"->"false","message" -> "亲，你还没有登录呢" ))
     else{
-      UserDao.deleteFollow(followId,user.get.id.get)
-     Ok(Json.obj("code" -> "100","message" -> "取消成功" ))
+      val followId=(request.body \ "userId").asOpt[Long]
+      if(followId.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
+      else{
+        UserDao.deleteFollow(followId.get,user.get.id.get)
+        Ok(Json.obj("code" -> "100","message" -> "取消成功" ))
+      }
+
     }
   }
   /* 取消关注 code 100 成功  101 参数错误 300 用户未登录*/
-  def removeFans(fansId:Long) =  UserAction{ user => implicit request =>
+  def removeFans = Action(parse.json){  implicit request =>
+    val user:Option[User] =request.session.get("user").map(u=> UserDao.findById(u.toLong) )
     if(user.isEmpty)  Ok(Json.obj("code" -> "300", "isYourFans"->"false","message" -> "亲，你还没有登录呢"))
     else{
-      UserDao.deleteFans(user.get.id.get,fansId)
-      Ok(Json.obj("code" -> "100","message" ->"取消成功"))
+      val fansId=(request.body \ "userId").asOpt[Long]
+      if(fansId.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
+      else{
+        UserDao.deleteFans(user.get.id.get,fansId.get)
+        Ok(Json.obj("code" -> "100","message" ->"取消成功"))
+      }
+
     }
   }
 

@@ -13,65 +13,27 @@
 define(function(require, exports) {
     var $ = require("jquery");
 	
-	var confirmUI = function(txt,fun,cancelfun){
-		if($("#J_ConfirmD")[0]){
-			$("#J_ConfirmD").remove();
-		}
-		var html = "";
-		html += '<div id="J_ConfirmD" class="g-dialog tip-dialog">';
-		html += '<div class="dialog-content">';
-		html += '<div class="hd"><h3>提示</h3></div>';
-		html += '<div class="bd clearfix">';
-		html += '<p class="pt10 tac">'+txt+'</p>';
-		html += '<div class="act-row"><p class="inlineblock"><a class="bbl-btn mr10" id="J_Confirm" href="javascript:;">确定</a><a class="bgr-btn" id="J_Cancel" href="javascript:;">取消</a></p></div>';
-		html += '</div>';
-		html += '<a class="close" href="javascript:;"></a>';
-		html += '</div>';
-		html += '</div>';
-		$("body").append(html);
-		$("#J_ConfirmD").overlay({
-			top: 'center',
-			mask: {
-				color: '#000',
-				loadSpeed: 200,
-				opacity: 0.3
-			},
-			closeOnClick: true,
-			load: true,
-			onClose: function() {
-				cancelfun();
-				$("#commentDialog,#exposeMask").remove();
-			}				
-		});
-		$("#J_Cancel").unbind("click").click(function(){
-			$("#J_ConfirmD").overlay().close();
-		});
-		$("#J_Confirm").unbind("click").click(function(){
-			$("#J_ConfirmD").overlay().close();
-			fun();
-		});
-	}
+
 	//加关注
 	$("a[rel=follow]").live("click",function(){
 		if($.smeite.dialog.isLogin()){
 			if($(this).data("enable")=="false") return;
 			$(this).data("enable","false");
 			$this = $(this);
+            var userId = $this.data("userid")
 			$.ajax({
 				url:"/user/addFollow",
-				type : "get",
-				dataType: "json",
-				data: {
-					userId : $(this).data("userid")
-				},
-				jQueryDom:$this,
+                type : "post",
+                contentType:"application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify({"userId": userId }),
 				success: function(data){
 					switch(data.code){
 						case("100"):
-							this.jQueryDom.data("enable","true");
-							$.smeite.addFollowCallback(data,this.jQueryDom);
+							$this.data("enable","true");
+							$.smeite.addFollowCallback(data,$this);
 						break;
-						case("101"):
+						case("104"):
 							$this.data("enable","true");
 							$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error2";
 							$.smeite.tip.show($this,"参数错误");
@@ -102,30 +64,31 @@ define(function(require, exports) {
 	$.smeite.removeFansCallback = function(o){
 		o.parents(".section").remove();
 	}
+
 	$("a[rel=removefans]").live("click",function(){
 		if($.smeite.dialog.isLogin()){
 			if($(this).data("enable")=="false") return;
 			$(this).data("enable","false");
 			$this = $(this);
+            var userId = $this.data("userid")
 			var txt = "确定要移除粉丝“"+$this.data("usernick")+"”？";
 			var confirmCallback = function(){
 				$.ajax({
 					url:"/user/removeFans",
-					type : "get",
-					dataType: "json",
-					data: {
-						userId : $this.data("userid")
-					},
+                    type : "post",
+                    contentType:"application/json; charset=utf-8",
+                    dataType: "json",
+                    data: JSON.stringify({"userId": userId }),
 					success: function(data){
 						switch(data.code){
 							case("100"):
 								$this.data("enable","true");
 								$.smeite.removeFansCallback($this,data);
 							break;
-							case("101"):
+							case("104"):
 								$this.data("enable","true");
 								$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error2";
-								$.smeite.tip.show($this,data.msg);
+								$.smeite.tip.show($this,"参数出错");
 							break;
 							case("300"):
 								$.smeite.dialog.login();
@@ -134,7 +97,7 @@ define(function(require, exports) {
 					}
 				});
 			}
-			confirmUI(txt,confirmCallback,function(){
+            $.smeite.confirmUI(txt,confirmCallback,function(){
 				$this.data("enable","true");
 			});
 		}
@@ -149,22 +112,22 @@ define(function(require, exports) {
 			if($(this).data("enable")=="false") return;
 			$(this).data("enable","false");
 			var $this = $(this)
+            var userId = $this.data("userid")
 			var txt = "确定不再关注“"+$this.data("usernick")+"”？";
 			var confirmCallback = function(){
 				$.ajax({
 					url:"/user/removeFollow",
-					type : "get",
-					dataType: "json",
-					data: {
-						userId : $this.data("userid")
-					},
+                    type : "post",
+                    contentType:"application/json; charset=utf-8",
+                    dataType: "json",
+                    data: JSON.stringify({"userId": userId }),
 					success: function(data){
 						switch(data.code){
 							case("100"):
 								$this.data("enable","true");
 								$.smeite.removeFollowCallback(data,$this);
 							break;
-							case("101"):
+							case("104"):
 								$this.data("enable","true");
 								$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error2";
 								$.smeite.tip.show($this,"参数错误");
@@ -176,7 +139,7 @@ define(function(require, exports) {
 					}
 				});
 			};
-			confirmUI(txt,confirmCallback,function(){
+            $.smeite.confirmUI(txt,confirmCallback,function(){
 				$this.data("enable","true");
 			})
 		}

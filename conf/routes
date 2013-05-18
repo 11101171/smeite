@@ -36,8 +36,9 @@ GET    /forum/view/:id               controllers.Forums.view(id:Long,p:Int ?=1)
 POST   /forum/save                   controllers.Forums.save
 GET    /forum                        controllers.Forums.forum(p:Int ?=1)
 POST   /forum/reply                  controllers.Forums.reply
-GET    /forum/addFollow             controllers.Forums.addFollow(topicId:Long)
-GET    /forum/removeFollow          controllers.Forums.removeFollow(topicId:Long)
+POST    /forum/addFollow             controllers.Forums.addFollow
+POST    /forum/removeFollow          controllers.Forums.removeFollow
+POST    /forum/checkTopicLoveState   controllers.Forums.checkTopicLoveState
 
 GET   /editor/fetchBaobei            controllers.Forums.fetchBaobei(id:Long)
 
@@ -60,9 +61,9 @@ GET    /user/$id<[0-9]+>/appraisal                  controllers.users.Users.appr
 
 
 #user 添加关注
-GET    /user/addFollow                      controllers.users.Users.addFollow(userId:Long)
-GET    /user/removeFollow                   controllers.users.Users.removeFollow(userId:Long)
-GET    /user/removeFans                     controllers.users.Users.removeFans(userId:Long)
+POST    /user/addFollow                      controllers.users.Users.addFollow
+POST    /user/removeFollow                   controllers.users.Users.removeFollow
+POST    /user/removeFans                     controllers.users.Users.removeFans
 GET    /user/getUserInterested              controllers.users.Users.getUserInterested(userId:Long)
 
 

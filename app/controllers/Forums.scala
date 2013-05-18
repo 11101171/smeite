@@ -22,6 +22,7 @@ import scala.Some
 import models.forum.Topic
 import models.forum.TopicReply
 import models.goods.dao.GoodsDao
+import play.api.mvc.BodyParsers.parse
 
 
 /**
@@ -169,27 +170,51 @@ object Forums extends Controller {
       }
     )
   }
+  def checkTopicLoveState = Action(parse.json){  implicit request =>
+    val user:Option[User] =request.session.get("user").map(u=> UserDao.findById(u.toLong) )
+    if(user.isEmpty)  Ok(Json.obj("code" -> "300","message" -> "亲，你还没有登录呢" ))
+    else{
+      val topicId=(request.body \ "topicId").asOpt[Long];
+      if (topicId.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
+      else{
+        val follow =UserDao.checkLoveTopic(user.get.id.get,topicId.get);
+        if(!follow.isEmpty)  Ok(Json.obj("code" -> "100","message" -> "已关注" ))
+        else Ok(Json.obj("code" -> "101","message" -> "未关注" ))
+      }
 
-  def addFollow(topicId:Long) = Users.UserAction{ user => implicit request =>
+    }
+  }
+
+  def addFollow = Action(parse.json){  implicit request =>
+    val user:Option[User] =request.session.get("user").map(u=> UserDao.findById(u.toLong) )
     if(user.isEmpty)  Ok(Json.obj("code" -> "300","message" -> "亲，你还没有登录呢" ))
     else if(user.get.status ==4) Ok(Json.obj("code" -> "444","message" -> "亲，你被禁止了" ))
     else {
-      val follow =UserDao.checkLoveTopic(topicId,user.get.id.get);
+      val topicId=(request.body \ "topicId").asOpt[Long];
+      if (topicId.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
+      else {
+      val follow =UserDao.checkLoveTopic(user.get.id.get,topicId.get);
       if(!follow.isEmpty) Ok(Json.obj("code" -> "103","message" ->"重复关注了"))
       else {
-        UserDao.addLoveTopic(topicId,user.get.id.get)
+        UserDao.addLoveTopic(user.get.id.get,topicId.get)
        Ok(Json.obj("code" -> "100","message" -> "关注成功" ))
-
       }
+    }
     }
 
   }
-  /* 取消关注 code 100 成功  101 参数错误 300 用户未登录*/
-  def removeFollow(topicId:Long) =  Users.UserAction{ user => implicit request =>
+  /* 取消关注 code 100 成功  104 参数错误 300 用户未登录*/
+  def removeFollow =  Action(parse.json){  implicit request =>
+    val user:Option[User] =request.session.get("user").map(u=> UserDao.findById(u.toLong) )
     if(user.isEmpty)  Ok(Json.obj("code" -> "300", "message" ->"亲，你还没有登录呢"  ))
     else{
-      UserDao.deleteLoveTopic(topicId,user.get.id.get)
-      Ok(Json.obj("code" -> "100","message" -> "取消成功" ))
+      val topicId=(request.body \ "topicId").asOpt[Long];
+      if (topicId.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
+      else{
+        UserDao.deleteLoveTopic(user.get.id.get,topicId.get)
+        Ok(Json.obj("code" -> "100","message" -> "取消成功" ))
+      }
+
     }
   }
 
