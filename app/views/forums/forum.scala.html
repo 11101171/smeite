@@ -20,7 +20,7 @@ title = "讨论吧_广场_食美特，爱美食爱生活"
                 </a>
 
                 <div class="text ofh">
-                    <a href="@controllers.routes.Forums.view(cid)" target="_blank">@ctitle</a>
+                    <a href="@controllers.routes.Forums.view(cid)" >@ctitle</a>
                 </div>
                 <span class="reply-num gc">@creplyNum 条回复</span>
             </li>
@@ -41,7 +41,7 @@ title = "讨论吧_广场_食美特，爱美食爱生活"
                 </a>
 
                 <div class="text ofh">
-                    <a href="@controllers.routes.Forums.view(cid)" target="_blank">@ctitle</a>
+                    <a href="@controllers.routes.Forums.view(cid)" >@ctitle</a>
                 </div>
                 <span class="reply-num gc">@creplyNum 条回复</span>
             </li>
@@ -53,7 +53,7 @@ title = "讨论吧_广场_食美特，爱美食爱生活"
         <!--<ul class="ac-list clearfix">
                                               </ul>-->
         <div class="ad-box">
-            <a href="@advert.link" title="@advert.title" target="_blank">
+            <a href="@advert.link" title="@advert.title" >
                 <img src="@advert.pic" width="210" height="150" alt="@advert.title" >
             </a>
         </div>
@@ -116,7 +116,7 @@ title = "讨论吧_广场_食美特，爱美食爱生活"
                     @if(item.typeId == 2){
                     <div class="icon i-forum i-status-knowlege" title="知识帖"></div>
                     }
-                    <a href="@controllers.routes.Forums.view(item.id.get)" target="_blank">@item.title</a>
+                    <a href="@controllers.routes.Forums.view(item.id.get)" >@item.title</a>
                 </div>
               <p class="topic-text">@Html(item.intro)</p>
             </div>
@@ -180,7 +180,7 @@ title = "讨论吧_广场_食美特，爱美食爱生活"
 </div>
 </div>
 <div class="discuss-aside">
-    <a class="create-topic" href="@controllers.routes.Forums.edit(0)" title="+创建话题" rel="nofollow">＋创建话题</a>
+    <a class="create-topic" href="@controllers.routes.Forums.edit(0)" title="+创建话题" >＋创建话题</a>
 
     <div class="box">
         <div class="hd">

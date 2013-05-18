@@ -1,5 +1,6 @@
 package controllers
 
+
 import _root_.utils.Utils
 import play.api.mvc.{Action, Controller}
 import java.io.File
@@ -50,10 +51,10 @@ object Upload extends Controller{
     }
   }
 
-   /* upload img for redactorjs editor*/
+  /* upload img for redactorjs editor*/
   def uploadEditorPic =Action(parse.multipartFormData)  {   request =>
     request.body.file("filedata").map { picture =>
-      val filename = picture.filename
+      val filename =System.currentTimeMillis()+(picture.filename.substring(picture.filename.lastIndexOf(".")+1))
       if(Utils.isImage(filename)){
         picture.ref.moveTo(new File("/opt/static/images/editor/"+filename),true)
         val picSrc ="/images/editor/"+filename
