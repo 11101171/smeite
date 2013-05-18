@@ -75,9 +75,9 @@ define(function(require, exports) {
 					$this.attr('disabled',false);
 					return;
 				}
-				if($.smeite.util.getStrLength($.smeite.editor.iframeDocument.body.innerHTML) >= 1000){
+				if($.smeite.util.getStrLength($.smeite.editor.iframeDocument.body.innerHTML) >= 10000){
 					$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
-					$.smeite.tip.show($this,"内容不得超过1000字");
+					$.smeite.tip.show($this,"内容不得超过10000字");
 					$this.attr('disabled',false);
 					return;
 				}
@@ -88,10 +88,10 @@ define(function(require, exports) {
 			if(title == "" || $.trim(content) == ""){
 				$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
 				$.smeite.tip.show($this,"标题和内容不能为空哦！");
-			}else if($.smeite.util.getStrLength(title) > 50 || $.smeite.util.getStrLength(content) >= 1000){
+			}else if($.smeite.util.getStrLength(title) > 50 || $.smeite.util.getStrLength(content) >= 10000){
 				
 				$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
-				$.smeite.tip.show($this,"亲，标题<50字，内容<1000字");
+				$.smeite.tip.show($this,"亲，标题<50字，内容<10000字");
 			}else{
                 $("#J_ForumPostEditForm").submit();
 

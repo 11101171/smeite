@@ -1392,5 +1392,5 @@ alter table advert change link  link   varchar(250);
 #20130516
 
 alter table tag change  cid  cid   tinyint (4)  default '6';
-alter table topic_reply  change content content varchar(1000);
+alter table topic_reply  change content content text ;
 alter table topic_reply  change quote_reply quote_reply varchar(1000);
