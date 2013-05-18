@@ -67,9 +67,8 @@ define(function(require, exports) {
          /* 取消topic */
          $("a[rel=removeTopicFollow]").live("click",function(){
              var topicId =$(this).data("topicid");
-             $.smeite.confirmUI("真要取消关注这个话题吗？亲，你不在喜欢我了嘛...", $.smeite.favor.removeTopicCallback($(this).parent("div"),parseInt(topicId)),function(){
-
-             });
+             $.smeite.favor.removeTopicCallback($(this).parent("div"),parseInt(topicId))
+         //    $.smeite.confirmUI("真要取消关注这个话题吗？亲，你不在喜欢我了嘛...", $.smeite.favor.removeTopicCallback($(this).parent("div"),parseInt(topicId)),function(){ });
          })
 
      })
