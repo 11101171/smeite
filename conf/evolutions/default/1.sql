@@ -385,8 +385,8 @@ CREATE TABLE IF NOT EXISTS `topic_reply`(
     `uid`                    int(10) NOT NULL ,
    `uname`                   varchar (32) NOT NULL ,
   `topic_id`                 int(10) NOT NULL ,
-  `quote_reply`              varchar (255),
-  `content`                 varchar (200) ,
+  `quote_reply`              varchar (1000),
+  `content`                 varchar (1000) ,
    `check_state`          tinyint NOT NULL DEFAULT '0',
   `add_time`               timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
@@ -1391,17 +1391,6 @@ alter table advert change link  link   varchar(250);
 
 #20130516
 
-/*
-* 跟topic 关联的media类型  图片  宝贝
- */
-DROP TABLE IF EXISTS `topic_media`;
-CREATE TABLE `topic_media` (
-  `id`                    int(10) NOT NULL  AUTO_INCREMENT ,
-  `thirdId`              int(10),
-  `media_type`          tinyint (4),
-  `pic`                  varchar(200),
-  `add_time`      timestamp,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
-
 alter table tag change  cid  cid   tinyint (4)  default '6';
+alter table topic_reply  change content content varchar(1000);
+alter table topic_reply  change quote_reply quote_reply varchar(1000);

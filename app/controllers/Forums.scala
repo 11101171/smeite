@@ -122,11 +122,16 @@ object Forums extends Controller {
         var intro =Jsoup.clean(fields._5,Whitelist.none());
         if(intro.length()>100) intro =intro.substring(0,100)+"..."
        val  doc =Jsoup.parseBodyFragment(fields._5);
-       val images= doc.body().getElementsByTag("img")
+        val goodsImages =doc.body().getElementsByClass("img-goods")
+       val uploadImages= doc.body().getElementsByClass("img-upload")
        var pics ="";
-        val it=images.iterator()
+        val it=uploadImages.iterator()
         while(it.hasNext){
           pics +=it.next().attr("src")+","
+        }
+        val it2= goodsImages.iterator()
+        while(it2.hasNext){
+          pics +=it2.next().attr("src")+","
         }
         if (fields._1.isEmpty){
           val id= TopicDao.addTopic(Topic(None,user.get.id.get,user.get.name,fields._2,fields._5,intro,Some(pics.trim),fields._3,fields._4,false,false,0,0,1,0,1,None))
@@ -159,7 +164,8 @@ object Forums extends Controller {
 
         TopicDao.addReply(TopicReply(None,user.get.id.get,user.get.name,fields._1,fields._3,fields._2,1,None))
 
-        Ok(Json.obj("code" -> "100", "message" ->"发布成功"))
+     //   Ok(Json.obj("code" -> "100", "message" ->"发布成功"))
+        Redirect(controllers.routes.Forums.view(fields._1))
       }
     )
   }

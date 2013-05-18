@@ -8,19 +8,7 @@ description =  topic._2.intro
 
 <div class="forum clearfix">
 <div class="forum-main">
-    <!--<div class="forum-oper">
-        <dl>
-            <dt>浏览话题：</dt>
-            <dd><a href="/forum?sort=&amp;text=">全部</a>-</dd>
-            <dd><a href="/forum?type=best&amp;sort=&amp;text=">精华</a>-</dd>
-            <dd><a href="/forum?type=knowledge&amp;sort=&amp;text=">知识</a>-</dd>
-            <dd class="last"><a href="/forum?type=question&amp;sort=&amp;text=">问答</a></dd>
-        </dl>
-        <form class="search-forum" action="/forum">
-            <input name="text" type="text" class="txt" value="">
-            <input type="submit" class="sbl-btn" value="搜索">
-        </form>
-    </div>-->
+
     <div class="main-content">
         <div class="forum-title clearfix">
             <h3>
@@ -48,7 +36,7 @@ description =  topic._2.intro
             <a class="edit mt5" href="@controllers.routes.Forums.edit(topic._2.id.get)" rel="nofollow" >编辑</a>
              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
             }
-            <a  class="follow-topic" href="javascript:;" class="follow mt5" data-followtype="0" data-topictitle="@topic._2.title" data-topicid="@topic._2.id.get" title="@topic._2.title">+ 关注</a>
+            <a   href="javascript:;" class="follow-topic follow mt5" data-followtype="0" data-topictitle="@topic._2.title" data-topicid="@topic._2.id.get" title="@topic._2.title">+ 关注</a>
         </div>
         <div class="forum-con">
             <ul class="forum-post " id="J_ForumPost">
@@ -73,14 +61,10 @@ description =  topic._2.intro
                             <a class="s-sina" href="javascript:;" alt="分享到新浪微博">新浪微博</a>
                             <a class="s-qzone" href="javascript:;" alt="分享到QQ空间">QQ空间</a>
                             <a class="s-tencent" href="javascript:;" alt="分享到腾讯微博">腾讯微博</a>
-                            <a class="s-douban" href="javascript:;" alt="分享到豆瓣"></a>
-                         <a class="s-renren" href="javascript:;" alt="分享到人人网"></a>
-                         <a class="s-163" href="javascript:;" alt="分享到网易微博"></a>
+                            <a class="s-douban" href="javascript:;" alt="分享到豆瓣">豆瓣</a>
+                         <a class="s-renren" href="javascript:;" alt="分享到人人网">人人网</a>
+                         <a class="s-163" href="javascript:;" alt="分享到网易微博">网易微博</a>
                         </div>
-                    </div>
-
-                    <div class="tar mt20">
-                        <a id="J_PostCmt">回复</a>
                     </div>
                 </li>
                 @for((uname,upic,replyId,replyUid,replyQuoteReply,replyContent,replyCheckState,replyAddTime) <- page.items){
@@ -132,12 +116,12 @@ description =  topic._2.intro
             </div>
             </div>
             <div class="forum-editor clearfix">
-                <form class="form-cmt" id="J_PostCmtArea" action="#" method="post">
+                <form class="form-cmt" id="J_PostCmtArea" action="/forum/reply" method="post">
                     <input type="hidden" name="topicId" id="J_topicId" value="@topic._2.id.get" >
-
+                    <input type="hidden" name="replyContent" id="J_replyContent" value="">
                     <ul class="pos-r clearfix">
                         @if(!user.isEmpty){
-                        <li class="g-daren">@user.get.name ，<!--<a class="J_UserAddExperience">添加相关经验</a>--></li>
+                        <li class="g-daren">@user.get.name</li>
                        }
                         <li id="J_PostCmtSegment" class="post-reply">
                         </li>
@@ -226,7 +210,7 @@ description =  topic._2.intro
 
         });
 
-   init.load("app/forum/forum,app/forum/forum.follow,app/forum/forum");
+   init.load("app/forum/forum,app/forum/forum.follow,app/forum/forum.view");
 
     });
 </script>

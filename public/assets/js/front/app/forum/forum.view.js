@@ -4,7 +4,7 @@ define(function(require, exports) {
 
     var getBaobeiHtml = function (json) {
         var baobeiId = json.baobei.goodsId;
-        var baobeiUrl = "http://smeite.com/goods/" + baobeiId;
+        var baobeiUrl = "/goods/" + baobeiId;
         var baobeiName = json.baobei.name;
         baobeiName = $.smeite.util.getStrLength(baobeiName) > 15 ? $.smeite.util.substring4ChAndEn(baobeiName, 15) + "..." : baobeiName;
         var baobeiPhoto = json.baobei.pic;
@@ -36,8 +36,8 @@ define(function(require, exports) {
             '<div class="price">价格：￥<span class="normalPrice">'+baobeiPrice+'</span><span class="promotionPrice">'+baobeiPromotionPrice+'</span><span class="volume">30天已售 '+baobeiVolume+'</span></div>'+
             '<div class="credits">返利:&nbsp;<span>'+baobeiJifenbao+'</span>&nbsp;个集分宝，值<span>'+baobeiJifenbaoValue+'</span>元</div>'+
             '<div class="clearfix mt15">' +
-            '<a class="ilike-n" data-prourl="' + baobeiUrl + '" data-proimgsrc="' + baobeiPhoto + '" data-proname="' + baobeiName + '" data-type="0" data-proid="' + baobeiId + '" href="javascript:;">喜欢('+baobeiLoveNum+')</a>' +
-            '<div class="stat-box fr"><span class="mr5 ml5">去看看&gt;</span></div>' +
+            '<a class="ilike-n" data-prourl="' + baobeiUrl + '" data-proimgsrc="' + baobeiPhoto + '" data-proname="' + baobeiName + '" data-type="0" data-proid="' + baobeiId + '" href="javascript:;">喜欢</a>' +
+            '<div class="stat-box fr"><span class="mr5 ml5"><a href="'+baobeiUrl+'">去看看&gt;</a></span></div>' +
             '</div>' +
             '</div>' +
             '<a target="_blank" class="baobei-link"  href="' + baobeiUrl + '"></a></div>';
@@ -58,21 +58,18 @@ define(function(require, exports) {
             }
         });
     }
-	if($.smeite.editor){
 
-		var editor = $.smeite.editor;
 
    $(".img-goods").each(function(){
        var id =$(this).data("goodsid")
-             fetchBaobei(id,$(this))
-        //  alert($(this).data("goodsid"))
+         fetchBaobei(id,$(this))
       })
 
 
 		$("#J_ForumPost").show();
 
 
-	}
+
 
 
 

@@ -179,10 +179,10 @@ define(function(require, exports) {
 
 			
 			//评论精确定位
-			if($("#J_ForumCmtId")[0] && $("#J_ForumCmtId").val() != ""){
+		/*	if($("#J_ForumCmtId")[0] && $("#J_ForumCmtId").val() != ""){
 				var $cmtLi = $("#J_ForumPost").find("li[data-cmtid=" + $("#J_ForumCmtId").val() + "]");
 
-			}
+			}*/
 
 			
 			//帖子内容格式化

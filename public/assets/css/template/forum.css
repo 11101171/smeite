@@ -1176,7 +1176,7 @@
 }
 
 
-.baobei { border:1px solid #f3f3f3;border-bottom:3px solid #f3f3f3;position:relative; }
+.baobei {margin: 10px auto; border:1px solid #f3f3f3;border-bottom:3px solid #f3f3f3;position:relative; }
 .baobei .baobei-pic { width:270px;height:270px;position:relative;float:left;overflow:hidden;background:url(images/bg-photo.gif) repeat-y;}
 .baobei .baobei-pic a { width:270px;height:270px;display:table-cell;*display:block;vertical-align:middle;text-align:center;*font-size:212px;*line-height:1;outline:none; }
 .baobei .baobei-pic img { max-width:270px;vertical-align:middle; }

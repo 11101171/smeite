@@ -37,9 +37,9 @@ define(function(require, exports) {
 					$this.attr('disabled',false);
 					return;
 				}
-				if($.smeite.util.getStrLength($.smeite.editor.iframeDocument.body.innerHTML) >= 200){
+				if($.smeite.util.getStrLength($.smeite.editor.iframeDocument.body.innerHTML) >= 500){
 					$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
-					$.smeite.tip.show($this,"内容不得超过200字");
+					$.smeite.tip.show($this,"内容不得超过500字");
 					$this.attr('disabled',false);
 					return;
 				}
@@ -47,38 +47,20 @@ define(function(require, exports) {
 			}
 			var $postCmtArea = $("#J_PostCmtArea");
 			var $textarea = $postCmtArea.find("textarea");
+           $("#J_replyContent").val($("#J_PostCmtSegment").html())
 			if($.smeite.dialog.isLogin()){
 				if($.trim($textarea.val()) == ""){
 					$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
 					$.smeite.tip.show($this,"亲，评论内容不能为空哦！");
 					$this.attr('disabled',false);
-				}else if($.smeite.util.getStrLength($textarea.val()) >= 10000){
+				}else if($.smeite.util.getStrLength($textarea.val()) >= 500){
 					$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
 					$.smeite.tip.show($this,"内容小于10000字！");
 					$this.attr('disabled',false);
 				}else{
-					//$this.attr('disabled',false);
-//					$postCmtArea.submit();
-					$.ajax({
-						url : "/forum/validate",
-						type : "post",
-						dataType : "json",
-						data : {
-							content : $textarea.val()
-						},
-						success : function($json){
-							switch($json.code){
-							case 100 : {
-								$postCmtArea.submit();
-							}break;
-							case 101 : {
-								$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
-								$.smeite.tip.show($this,$json.msg);
-								$this.attr('disabled',false);
-							}break;
-							}
-						}
-					});
+				$this.attr('disabled',false);
+				$postCmtArea.submit();
+
 				}
 			}
 		},
@@ -93,9 +75,9 @@ define(function(require, exports) {
 					$this.attr('disabled',false);
 					return;
 				}
-				if($.smeite.util.getStrLength($.smeite.editor.iframeDocument.body.innerHTML) >= 10000){
+				if($.smeite.util.getStrLength($.smeite.editor.iframeDocument.body.innerHTML) >= 1000){
 					$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
-					$.smeite.tip.show($this,"内容不得超过10000字");
+					$.smeite.tip.show($this,"内容不得超过1000字");
 					$this.attr('disabled',false);
 					return;
 				}
@@ -106,42 +88,13 @@ define(function(require, exports) {
 			if(title == "" || $.trim(content) == ""){
 				$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
 				$.smeite.tip.show($this,"标题和内容不能为空哦！");
-			}else if($.smeite.util.getStrLength(title) > 50 || $.smeite.util.getStrLength(content) >= 10000){
+			}else if($.smeite.util.getStrLength(title) > 50 || $.smeite.util.getStrLength(content) >= 1000){
 				
 				$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
-				$.smeite.tip.show($this,"亲，标题<50字，内容<10000字");
+				$.smeite.tip.show($this,"亲，标题<50字，内容<1000字");
 			}else{
                 $("#J_ForumPostEditForm").submit();
-				/*if($("#J_UserSns a").length>0){
-				var snsArr = [];
-				for(var i=0;i<$("#J_UserSns a").length;i++){
-					if($("#J_UserSns a").eq(i).data("status")=="on"){
-						var snsSiteId = $("#J_UserSns a").eq(i).data("snsid");
-						snsArr.push(snsSiteId);
-					}
-				}
-				$("input[name=sites]").val(snsArr.join(","));
-				}*/
-				/*$.ajax({
-					url :"/forum/validate",
-					type : "post",
-					dataType : "json",
-					data : {
-						title : title,
-						content : content
-					},
-					success : function($json){
-						switch($json.code){
-						case 100 : {
-							$("#J_ForumPostEditForm").submit();
-						}break;
-						case 101 : {
-							$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
-							$.smeite.tip.show($this,$json.msg);
-						}break;
-						}
-					}
-				});*/
+
 			}
 		},
 
@@ -171,32 +124,25 @@ define(function(require, exports) {
 			
 			//回复
 			$(".J_PostCmtReply").click(function(){
-				var $li = $(this).closest("li");
-				var userNick = $li.find(".J_UserNick:first").html();
-				var replyCon = $li.find(".J_PostCon:first").html();
-				if($.smeite.simpleEditor){
-					replyCon = $.smeite.simpleEditor.richText2text($li.find(".J_PostCon:first").data("content"));
-				}
-				if($.smeite.editor){
-					replyCon = $.smeite.editor.richText2text($li.find(".J_PostCon:first").attr("data-content"));
-				}
-				var time = $li.find(".time").html();
-				var segmentHtml = "";
-				segmentHtml += '<blockquote>';
-				segmentHtml += '<input type="hidden" name="commentId" value="' + $li.data("cmtid") + '"/>';
-				segmentHtml += '<span class="info g-daren">回复 ' + userNick + ' <span class="time">' + time + '</span></span>';
-				segmentHtml += '<p>' + $.trim(replyCon).substring(0,40) + '</p>';
-				segmentHtml += '<a class="close">X</a>';
-				segmentHtml += '</blockquote>';
-				//console.log(segmentHtml);
-				$postCmtSegment.html(segmentHtml);
-				
-				$("html, body").scrollTop($postCmtArea.offset().top -50);
-				
-				//删除回应
-				$postCmtSegment.find(".close:first").unbind("click").click(function(){
-					$postCmtSegment.html("");
-				});
+
+                var $li = $(this).closest("li");
+                var userNick = $li.find(".J_UserNick:first").html();
+                var replyCon = $li.find(".J_PostCon").html();
+                var time = $li.find(".time").html();
+                var segmentHtml = "";
+                segmentHtml += '<blockquote>';
+                segmentHtml += '<span class="info g-daren">回复 ' + userNick + ' <span class="time">' + time + '</span></span>';
+                segmentHtml += '<p>' + $.trim(replyCon) + '</p>';
+                segmentHtml += '</blockquote>';
+                //console.log(segmentHtml);
+                $postCmtSegment.html(segmentHtml);
+
+                $("html, body").scrollTop($postCmtArea.offset().top -50);
+
+                //删除回应
+                $postCmtSegment.find(".close:first").unbind("click").click(function(){
+                    $postCmtSegment.html("");
+                });
 			});
 			
 			$("#J_CmtPublishBtn").click(function(event){
@@ -209,15 +155,13 @@ define(function(require, exports) {
 			});
 			
 			//回车键提交评论
-			/*
 			$postCmtArea.find("textarea").live("keyup",function(e){
 				var $this = $(this);
-				$.guang.util.submitByEnter(e, function(){
-					$.guang.forum.postCommentSubmit($("#J_CmtPublishBtn"));
+				$.smeite.util.submitByEnter(e, function(){
+					$.smeite.forum.postCommentSubmit($("#J_CmtPublishBtn"));
 				});
 			});
-			*/
-			
+
 
 			//话题创建与编辑
 			if($("#J_ForumPostEditBtn")[0]){
@@ -239,20 +183,12 @@ define(function(require, exports) {
 
 			
 			//评论精确定位
-			if($("#J_ForumCmtId")[0] && $("#J_ForumCmtId").val() != ""){
+		/*	if($("#J_ForumCmtId")[0] && $("#J_ForumCmtId").val() != ""){
 				var $cmtLi = $("#J_ForumPost").find("li[data-cmtid=" + $("#J_ForumCmtId").val() + "]");
-				//$("html, body").scrollTop($cmtLi.offset().top - 50);
-				/*
-				$cmtLi.highlight({color:'#ffe5c4',speed:500,complete:function(){
-					$cmtLi.highlight({color:'#ffe5c4',speed:500,complete:function(){},iterator:'sinusoidal'});
-				},iterator:'sinusoidal'});
-				*/
-			}
+
+			}*/
 			
-			/*//喜欢操作
-			$("#J_ForumLover").click(function(){
-				$.smeite.forum.lover($(this));
-			});*/
+
 			
 			//帖子内容格式化
 			if($("#J_PostArtical")[0]){
