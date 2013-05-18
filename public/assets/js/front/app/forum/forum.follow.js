@@ -21,7 +21,7 @@ define(function(require, exports) {
             data: JSON.stringify({"topicId": topicId }),
             success: function(data){
                 if(data.code=="100"){
-                    var html ="<div class='followed'>已关注<span class='mr5 ml5'>|</span><a rel='removeTopicFollow' href='javascript:;' data-topicid='"+ topicId +"'>取消</a></div>"
+                    var html ="<div class='followed-btn'>已关注<span class='mr5 ml5'>|</span><a rel='removeTopicFollow' href='javascript:;' data-topicid='"+ topicId +"'>取消</a></div>"
                     $elm.replaceWith(html)
                 }
             }
@@ -37,28 +37,20 @@ define(function(require, exports) {
              })
          }
 
-
          /* 关注 topic*/
          $("a[rel=topicFollow]").live("click",function(){
              if(!$.smeite.dialog.isLogin()){
                  return false;
              }
              var $this = $(this);
-             if($this.data("enable") == "disable"){
-                 return;
-             }
              var topicId = $this.data("topicid");
              $.smeite.favor.repeatLoveTopicClk = function(o){
-                 if(o.attr("data-followtype")=="0"){
                      o.after("<div class='followed-btn'>已关注<span class='mr5 ml5'>|</span><a rel='removeTopicFollow' data-followtype='1' data-topictitle="+o.data("topictitle")+" data-topicid='"+o.data("topicid")+"' href='javascript:;'>取消</a></div>")
                      o.remove();
-                 }
              }
              $.smeite.favor.loveTopicCallback = function(o){
-                 if(o.attr("data-followtype")=="0"){
                      o.after("<div class='unfollow-topic followed-btn'>已关注<span class='mr5 ml5'>|</span><a rel='removeTopicFollow' data-followtype='1' data-topictitle="+o.data("topictitle")+" data-topicid='"+o.data("topicid")+"' href='javascript:;'>取消</a></div>")
                      o.remove();
-                 }
              }
 
              $.smeite.favor.loveTopicSubmit($this, parseInt(topicId));
