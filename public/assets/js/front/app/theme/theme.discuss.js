@@ -14,7 +14,6 @@
 define(function(require, exports) {
 	var $ = require("jquery");
 	require("module/highlight")($);
-//鼠标移动 topic-item 变色
     $(".clearfix li").hover(function() {
             var self = $(this);
                 self.find(".follow-btn").addClass("on");

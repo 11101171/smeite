@@ -243,7 +243,7 @@ description = theme.intro.get
 </div>
 
 <div class="theme_share clearfix box-shadow">
-    <span class="topic_tip">看完啦？别忘了关注一下~</span>
+    <span class="theme_tip">看完啦？别忘了关注一下~</span>
     <a rel="followTheme" class="ifollow" data-type="1" data-themeid="@theme.id.get" href="javascript:;" title="关注">+ 关注</a>
     <a class="icomment" href="@controllers.routes.Themes.board(theme.id.get,1)#cmtlist" title="讨论">讨论</a>
 
@@ -276,7 +276,7 @@ description = theme.intro.get
 <script type="text/javascript">
 
     seajs.use('app/init', function (init) {
-        init.load("app/theme/theme.detail,app/theme/theme.board,app/theme/theme.discuss,app/smeite.simpleEditor");
+        init.load("app/theme/theme.detail,app/theme/theme.board,app/theme/theme.discuss,app/theme/favor,app/smeite.simpleEditor");
     });
 </script>
 }
