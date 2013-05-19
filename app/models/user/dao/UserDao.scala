@@ -60,9 +60,48 @@ object UserDao {
       userStatic.get
     }
   }
+  def modifyUserStatic(uid: Long, fansNum: Int, followNum: Int,  trendNum: Int, loveBaobeiNum: Int, loveThemeNum: Int, loveTopicNum: Int,postBaobeiNum: Int, postThemeNum: Int, postTopicNum: Int) = database.withSession{  implicit session:Session =>
+    (for(c <- UserStatics if c.uid === uid )yield(c.fansNum~c.followNum~c.trendNum~c.loveBaobeiNum~c.loveThemeNum~c.loveTopicNum~c.postBaobeiNum~c.postThemeNum~c.postTopicNum)).update(fansNum,followNum,trendNum,loveBaobeiNum,loveThemeNum,loveTopicNum,postBaobeiNum,postThemeNum,postTopicNum)
+  }
   /* count user */
   def countUser:Int = database.withSession{  implicit session:Session =>
        Query(Users.length).first
+  }
+  /* 统计用户的粉丝数*/
+  def countUserFans(uid:Long)  = database.withSession{  implicit session:Session =>
+    Query(UserFollows.filter(_.uid === uid).length).first
+  }
+  /* 统计用户的关注数 */
+  def countUserFollows(uid:Long)  = database.withSession{  implicit session:Session =>
+    Query(UserFollows.filter(_.fansId === uid).length).first
+  }
+   /* 统计用户的 趋势数 */
+   def countUserTrends(uid:Long)  = database.withSession{  implicit session:Session =>
+     Query(UserTrends.filter(_.uid === uid).length).first
+   }
+  /* 统计用户喜欢宝贝数 */
+  def countUserLoveGoods(uid:Long)  = database.withSession{  implicit session:Session =>
+    Query(UserLoveGoodses.filter(_.uid === uid).length).first
+  }
+  /* 统计用户分享宝贝数 */
+  def countUserShareGoods(uid:Long)  = database.withSession{  implicit session:Session =>
+      Query(UserShareGoodses.filter(_.uid === uid).length).first
+    }
+  /* 统计用户喜欢主题数 */
+  def countUserLoveTheme(uid:Long)  = database.withSession{  implicit session:Session =>
+    Query(UserLoveThemes.filter(_.uid === uid).length).first
+  }
+  /* 统计用户创作的主题数 */
+  def countUserPostTheme(uid:Long)  = database.withSession{  implicit session:Session =>
+    Query(Themes.filter(_.uid === uid).length).first
+  }
+  /* 统计用户喜欢topic数 */
+  def countUserLoveTopic(uid:Long)  = database.withSession{  implicit session:Session =>
+    Query(UserLoveTopics.filter(_.uid === uid).length).first
+  }
+  /* 统计用户喜欢主题数 */
+  def countUserPostTopic(uid:Long)  = database.withSession{  implicit session:Session =>
+    Query(Topics.filter(_.uid === uid).length).first
   }
   /*find by email */
   def findByEmail(email: String):Option[User] = database.withSession{ implicit session:Session =>

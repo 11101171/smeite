@@ -195,6 +195,7 @@ GET   /admin/manager/pullGoods         controllers.admin.Managers.pullGoods
 GET   /admin/manager/getNumIids        controllers.admin.Managers.getNumIids(p:Int)
 GET   /admin/manager/pushMsg           controllers.admin.Managers.pushMsg
 GET   /admin/manager/check           controllers.admin.Managers.check
+GET   /admin/manager/updateUserStats   controllers.admin.Managers.updateUserStats
 
 
 

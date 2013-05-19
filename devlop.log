@@ -116,5 +116,8 @@ forum 处理
 重新处理 guang.editor  直接上传图片 和 显示商品图片，但是，在商品图片中，显示data-goodsid,在forum view 页面，再读取data-goodsid，ajax加载商品信息.
 
 
+2013年5月19日
+测试所有功能，并对所有功能进行梳理，注释功能！
+
 
 

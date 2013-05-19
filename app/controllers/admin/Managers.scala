@@ -102,12 +102,11 @@ object Managers extends Controller {
   }
   /*更新商品管理*/
   def pullGoods = AdminAction{    manager => implicit request =>
-
     val timestamp= String.valueOf(System.currentTimeMillis)
     val sign=TaobaoConfig.getSign(timestamp)
      Ok(views.html.admin.pullGoods(manager)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
   }
-
+   /* 每个页面显示40个 然后 淘宝客  在然后 更新商品管理 */
   def getNumIids(p:Int) =AdminAction{    manager => implicit request =>
     val page:Page[Long] = GoodsDao.getNumiids(p,40);
       Ok(Json.obj("code"->"100","totalPages"->page.totalPages,"nums"->page.items.mkString(",")))
@@ -121,6 +120,25 @@ object Managers extends Controller {
 
   def check =AdminAction{    manager => implicit request =>
     Ok("主要检测是否有恶意用户 todo ")
+  }
+
+  /* 更新用户的各种数据 */
+  def updateUserStats = AdminAction{    manager => implicit request =>
+       val totalUsers = UserDao.countUser
+       for(i <- 1 to totalUsers){
+         val fansNum = UserDao.countUserFans(i)
+         val followNum = UserDao.countUserFollows(i)
+         val trendNum = UserDao.countUserTrends(i)
+         val loveBaobeiNum = UserDao.countUserLoveGoods(i)
+         val loveThemeNum = UserDao.countUserLoveTheme(i)
+         val loveTopicNum = UserDao.countUserLoveTopic(i)
+         val postBaobeiNum = UserDao.countUserShareGoods(i)
+         val postThemeNum = UserDao.countUserPostTheme(i)
+         val postTopicNum = UserDao.countUserPostTopic(i)
+         UserDao.modifyUserStatic(i,fansNum,followNum,trendNum,loveBaobeiNum,loveThemeNum,loveTopicNum,postBaobeiNum,postThemeNum,postTopicNum)
+       }
+
+    Ok(views.html.admin.updateUserStats(manager))
   }
 
 
