@@ -51,15 +51,27 @@ object UserDao {
     }
   }
   def findStatic(uid:Long):UserStatic = database.withSession{  implicit session:Session =>
-    Cache.getOrElse[UserStatic]("user_static"+uid) {
+   // Cache.getOrElse[UserStatic]("user_static_"+uid) {
       //println("get it from db")
       val userStatic = UserStatics.findByUid(uid)
-      if(!userStatic.isEmpty){
-        Cache.set("user_static"+uid,userStatic.get)
-      }
+   //   if(!userStatic.isEmpty){
+     //   Cache.set("user_static_"+uid,userStatic.get)
+    //  }
       userStatic.get
-    }
+   // }
   }
+  def findUserWithStatic(uid:Long):(User,UserStatic) = database.withSession{  implicit session:Session =>
+      (for{
+        c <-Users
+        s<-UserStatics
+        if c.id ===s.uid
+        if c.id ===uid
+      }yield(c,s)).first
+
+  }
+
+
+
   def modifyUserStatic(uid: Long, fansNum: Int, followNum: Int,  trendNum: Int, loveBaobeiNum: Int, loveThemeNum: Int, loveTopicNum: Int,postBaobeiNum: Int, postThemeNum: Int, postTopicNum: Int) = database.withSession{  implicit session:Session =>
     (for(c <- UserStatics if c.uid === uid )yield(c.fansNum~c.followNum~c.trendNum~c.loveBaobeiNum~c.loveThemeNum~c.loveTopicNum~c.postBaobeiNum~c.postThemeNum~c.postTopicNum)).update(fansNum,followNum,trendNum,loveBaobeiNum,loveThemeNum,loveTopicNum,postBaobeiNum,postThemeNum,postTopicNum)
   }
@@ -142,7 +154,7 @@ object UserDao {
   }
   /*保存地址*/
   def modifyAddr(uid:Long, receiver:String,province:String, city:String, street:String, postCode:String, phone:String,alipay:String)= database.withSession{  implicit session:Session =>
-    Cache.remove("user_"+uid)
+
     (for(c<-UserProfiles if c.uid === uid) yield c.receiver~c.province~c.city~c.street~c.postCode~c.phone~c.alipay).update((receiver,province,city,street,postCode,phone,alipay))
   }
   /* 修改 支付宝账号,用户的状态 status 从新用户 变成 正常用户 */
@@ -169,6 +181,7 @@ object UserDao {
   }
   /* 修改用户状态 */
   def modifyStatus(uid:Long,status:Int)= database.withSession {  implicit session:Session =>
+    Cache.remove("user_"+uid)
     (for(u<-Users if u.id === uid) yield u.status ).update(status)
   }
   /* 修改 食豆 数量*/

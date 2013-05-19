@@ -14,7 +14,7 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                     <li><a href="@controllers.users.routes.Users.credits(author.id.get)">N+<br>集分宝</a></li>
                     <li><a href="@controllers.users.routes.Users.baobei(author.id.get)">@(authorStatic.postBaobeiNum+authorStatic.loveBaobeiNum)<br>宝贝</a></li>
                     <li><a href="@controllers.users.routes.Users.theme(author.id.get)">@(authorStatic.postThemeNum+authorStatic.loveThemeNum)<br>主题</a></li>
-                    <li class="cur"><a href="@controllers.users.routes.Users.square(author.id.get)">@(authorStatic.postTopicNum+authorStatic.loveTopicNum)<br>讨论</a></li>
+                    <li class="cur"><a href="@controllers.users.routes.Users.forum(author.id.get)">@(authorStatic.postTopicNum+authorStatic.loveTopicNum)<br>讨论</a></li>
                     <li ><a href="@controllers.users.routes.Users.fans(author.id.get)">@authorStatic.fansNum<br>粉丝</a></li>
                     <li class="last"><a href="@controllers.users.routes.Users.follow(author.id.get)">@(authorStatic.followNum)<br>我关注的</a></li>
                  <!--   <li class="last"><a href="@controllers.users.routes.Users.appraisal(author.id.get)">N+<br>求鉴定</a></li>
@@ -27,9 +27,9 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                         <div class="main-title clearfix">
                             <h2>
 
-                               @if(t=="my"){ @if(!user.isEmpty && user.get.id==author.id){我}else{Ta}创建的(@authorStatic.postTopicNum)    } else {<a href='@controllers.users.routes.Users.square(author.id.get,"my",1)'>  @if(!user.isEmpty && user.get.id==author.id){我}else{Ta}创建的(@authorStatic.postTopicNum)  </a> }
+                               @if(t=="my"){ @if(!user.isEmpty && user.get.id==author.id){我}else{Ta}创建的(@authorStatic.postTopicNum)    } else {<a href='@controllers.users.routes.Users.forum(author.id.get,"my",1)'>  @if(!user.isEmpty && user.get.id==author.id){我}else{Ta}创建的(@authorStatic.postTopicNum)  </a> }
                                 <span class="ml5 mr5">|</span>
-                                @if(t=="love"){ @if(!user.isEmpty && user.get.id==author.id){我}else{Ta}关注的(@authorStatic.loveTopicNum)    } else {<a href='@controllers.users.routes.Users.square(author.id.get,"love",1)'>  @if(!user.isEmpty && user.get.id==author.id){我}else{Ta}关注的(@authorStatic.loveTopicNum)  </a> }
+                                @if(t=="love"){ @if(!user.isEmpty && user.get.id==author.id){我}else{Ta}关注的(@authorStatic.loveTopicNum)    } else {<a href='@controllers.users.routes.Users.forum(author.id.get,"love",1)'>  @if(!user.isEmpty && user.get.id==author.id){我}else{Ta}关注的(@authorStatic.loveTopicNum)  </a> }
                             </h2>
 										<span class="fr">
 					<a  class="bbl-btn ml10" href="@controllers.routes.Forums.edit(0)">+ 创建话题</a>
@@ -59,19 +59,19 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                                                 <div class="col-title">
                                                     <div class="topic-title">
                                                         @if(item.isTop){
-                                                        <div class="icon i-forum i-status-top" title="置顶帖">置顶帖</div>
+                                                        <div class="icon i-forum i-status-top" title="置顶帖"></div>
                                                         }
                                                         @if(item.isBest){
-                                                        <div class="icon i-forum i-status-best" title="精华">精华帖</div>
+                                                        <div class="icon i-forum i-status-best" title="精华"></div>
                                                         }
                                                         @if(item.typeId == 0){
-                                                        <div class="icon i-forum i-status-general" title="普通帖">普通帖</div>
+                                                        <div class="icon i-forum i-status-general" title="普通帖"></div>
                                                         }
                                                         @if(item.typeId == 1){
-                                                        <div class="icon i-forum i-status-ask" title="问答帖">问答帖</div>
+                                                        <div class="icon i-forum i-status-ask" title="问答帖"></div>
                                                         }
                                                         @if(item.typeId == 1){
-                                                        <div class="icon i-forum i-status-knowlege" title="知识帖">知识帖</div>
+                                                        <div class="icon i-forum i-status-knowlege" title="知识帖"></div>
                                                         }
                                                         <a href="@controllers.routes.Forums.view(item.id.get)" target="_blank">@item.title</a>
                                                     </div>
@@ -116,17 +116,17 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                             <div class="pagin fr pagination" id="J_Pagination">
                                 @if(page.nums.length>1){
                                 @page.prev.map { page =>
-                                <a class="prev" href="@controllers.users.routes.Users.square(author.id.get,t,page)"> 上一页</a>
+                                <a class="prev" href="@controllers.users.routes.Users.forum(author.id.get,t,page)"> 上一页</a>
                                 }
                                 @for(num <-page.nums){
                                 @if(num==page.currentPage){
                                 <a class="current" href="#">@num</a>
                                 }else {
-                                <a href="@controllers.users.routes.Users.square(author.id.get,t,num)">@num</a>
+                                <a href="@controllers.users.routes.Users.forum(author.id.get,t,num)">@num</a>
                                 }
                                 }
                                 @page.next.map { page =>
-                                <a class="next" href="@controllers.users.routes.Users.square(author.id.get,t,page)">下一页 </a>
+                                <a class="next" href="@controllers.users.routes.Users.forum(author.id.get,t,page)">下一页 </a>
                                 }
                                 }
                             </div>

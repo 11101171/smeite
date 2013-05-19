@@ -1492,7 +1492,7 @@ padding: 20px;
 #J_LikeDialog .content .title { padding-left: 30px;height: 24px;line-height: 24px; color: #8fc31f;
 font-size: 18px;
  background: url(images/detail-sprite.png) 0 0 no-repeat}
-#J_LikeDialog p {padding: 10px 0 12px}
+/*#J_LikeDialog p {padding: 10px 0 12px}*/
 #J_LikeDialog .topic-box { width: 298px; height: 72px; border: 1px solid #ddd;overflow: auto}
 #J_LikeDialog .topic-box .topic-list {margin: 0; padding: 6px 0 0 6px}
 #J_LikeDialog .topic-list li {float: left; width: 143px;margin: 0 0 10px 0}

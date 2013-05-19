@@ -65,25 +65,24 @@ object Users extends Controller {
 
   }
   /*user   square 广场 */
-  def square(id:Long,t:String,p:Int) = UserAction{ user => implicit request =>
+  def forum(id:Long,t:String,p:Int) = UserAction{ user => implicit request =>
 
     val  author=UserDao.findById(id)
     val authorStatic=UserDao.findStatic(id);
     val   topics:List[(Long, String, String, Long, String, Int, Int, Int)]=TopicDao.recommendTopics(8)
      if (t=="love"){
          val page =UserDao.findLoveTopics(id,p)
-       Ok(views.html.users.square(user,author,page,t,topics,authorStatic))
+       Ok(views.html.users.forum(user,author,page,t,topics,authorStatic))
      }
     else{
       val page=TopicDao.findUserTopics(id,p)
-      Ok(views.html.users.square(user,author,page,t,topics,authorStatic))
+      Ok(views.html.users.forum(user,author,page,t,topics,authorStatic))
     }
    
   }
 
   /*user theme 主题*/
   def theme(id:Long,t:String,p:Int) = UserAction{ user => implicit request =>
-
     val  author=UserDao.findById(id)
     val authorStatic=UserDao.findStatic(id);
     if(t=="my"){

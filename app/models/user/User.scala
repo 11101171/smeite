@@ -86,5 +86,6 @@ object Users extends Table[User]("user") {
 }
 
 
+case class SuperUser(base:User,static:UserStatic)
 
 

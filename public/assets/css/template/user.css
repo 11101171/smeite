@@ -614,11 +614,7 @@ html {
     color: #eee
 }
 
-.topic-row .col-title .topic-title .i-forum {
-    *text-indent: 2px;
-    *font-size: 0;
-    *color: #fff
-}
+
 
 .topic-row .col-title p {
     color: #999

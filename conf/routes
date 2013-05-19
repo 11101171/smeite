@@ -54,7 +54,7 @@ GET    /user/$id<[0-9]+>                          controllers.users.Users.home(i
 GET    /user/$id<[0-9]+>/credits                    controllers.users.Users.credits(id:Long,s:Int ?=0,p:Int ?=1)
 GET    /user/$id<[0-9]+>/baobei                   controllers.users.Users.baobei(id:Long,t:String ?="share",p:Int ?=1)
 GET    /user/$id<[0-9]+>/theme                   controllers.users.Users.theme(id:Long,t:String ?="my",p:Int ?=1)
-GET    /user/$id<[0-9]+>/square                   controllers.users.Users.square(id:Long,t:String ?="my",p:Int ?=1)
+GET    /user/$id<[0-9]+>/forum                   controllers.users.Users.forum(id:Long,t:String ?="my",p:Int ?=1)
 GET    /user/$id<[0-9]+>/fans                    controllers.users.Users.fans(id:Long,p:Int ?=1)
 GET    /user/$id<[0-9]+>/follow                  controllers.users.Users.follow(id:Long,p:Int ?=1)
 GET    /user/$id<[0-9]+>/appraisal                  controllers.users.Users.appraisal(id:Long,p:Int ?=1)
