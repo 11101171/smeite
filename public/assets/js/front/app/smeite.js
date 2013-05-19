@@ -1357,12 +1357,9 @@ define(function(require, exports) {
                 dataType: "json",
                 data: JSON.stringify({"themeId": themeId }),
                 success: function(data){
-                    switch(data.code){
-                        case "100":
-                            o.addClass("goods-gray");
-                            break;
-                        case "101":
-                            alert(data.message);
+                    if(data.code=="100"){
+                        var html ="<a rel='themeFollow'class='follow-btn' href='javascript:;' data-themeid='"+ themeId +"'>+ 关注</a>"
+                        o.replaceWith(html)
                     }
                 }
             });

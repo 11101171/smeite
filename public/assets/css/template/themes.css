@@ -170,7 +170,7 @@ background: url(images/on.png) repeat-x top;
     overflow: hidden
 }
 
-.theme-item .follow-theme {
+.theme-item .follow {
     height: 24px;
     width: 53px;
     border-radius: 2px;
@@ -178,16 +178,21 @@ background: url(images/on.png) repeat-x top;
     display: inline-block;
     line-height: 24px;
     color: #fff;
-    background-color: #f2f2f2;
+    background-color:#86b835;
     border: 0;
-    color: #999
+}
+.theme-item .followed {
+    height: 24px;
+    width: 53px;
+    border-radius: 2px;
+    text-align: center;
+    display: inline-block;
+    line-height: 24px;
+    color: #999;
+    background-color:#f3f3f3;
+    border: 0;
 }
 
-.theme-item .follow-btn:hover {
-    text-decoration: none;
-    background: #86b835;
-    color: #fff
-}
 
 .theme-item a.on {
     height: 24px;
@@ -202,10 +207,7 @@ background: url(images/on.png) repeat-x top;
     text-decoration: none
 }
 
-.theme-item .follow-btn:active {
-    text-decoration: none;
-    background: #86b835
-}
+
 
 .theme-item .followed-btn {
     cursor: default;

@@ -135,6 +135,7 @@ POST      /theme/addFollow                     controllers.Themes.addFollow
 POST      /theme/removeFollow                  controllers.Themes.removeFollow
 POST     /theme/addGoods                      controllers.Themes.addGoods
 POST     /theme/removeGoods                   controllers.Themes.removeGoods
+POST    /theme/checkThemeLoveState            controllers.Themes.checkThemeLoveState
 
 
 

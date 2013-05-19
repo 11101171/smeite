@@ -12,25 +12,40 @@
  */
 define(function(require, exports){
 	var $ = jQuery = require("jquery");
-    /* 主题关注操作*/
-    $(".follow-theme").live("click",function(){
-        if(!$.smeite.dialog.isLogin()){
-            return false;
-        }
-            var $this = $(this);
-            if($this.data("enable") == "disable"){
-                return;
+    var judgeThemeFollowState=function(themeId,$elm){
+        $.ajax({
+            url:"/theme/checkThemeLoveState",
+            type : "post",
+            contentType:"application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify({"themeId": themeId }),
+            success: function(data){
+                if(data.code=="100"){
+                    $elm.removeClass("follow").addClass("followed").text("已关注");
+                }
             }
+        });
 
-            $this.data("enable","disable");
-            setTimeout(function(){
-                $this.data("enable","enable");
-            },1000);
+    }
+
+    $(function(){
+        /*先判断状态 */
+        if(SMEITER.userId !=""){
+            $("a[rel=followTheme]").each(function(){
+                var id =$(this).data("themeid")
+                judgeThemeFollowState(id,$(this))
+            })
+        }
+        /* 主题关注操作*/
+        $("a[rel=followTheme]").live("click",function(){
+            if(!$.smeite.dialog.isLogin()){
+                return false;
+            }
+            var $this = $(this);
             var themeId = $this.data("themeid");
             var cmtHref ='/theme/'+ themeId +'/board#cmt';
             var cmtTarget = "";
             var $likeCount;
-
             //在主题频道页面
             if(window.location.href.indexOf(themeId) == -1){
                 cmtTarget = 'target="_blank"';
@@ -57,12 +72,13 @@ define(function(require, exports){
                     H = $("#cmtDialog").outerHeight();
                 $("#cmtDialog").css({
                     left: position.x - W/2 + "px",
-                    top: position.y - H - 12 + "px"
+                    top: position.y - H + 80+ "px"
                 }).fadeIn();
                 o.data("timeout",setTimeout(function(){$("#cmtDialog").fadeOut()},3000));
 
-                $this.text("已关注");
+                $this.removeClass("follow").addClass("followed").text("已关注");
             }
+
             $.smeite.favor.loveThemeCallback = function(o){
                 o.data("enable","enable");
                 //主题频道页中可同时喜欢多个主题
@@ -70,12 +86,10 @@ define(function(require, exports){
                     $("#cmtDialog").remove();
                     clearTimeout(parseInt(o.data("timeout"),10));
                 }
-
-
                 var html = "";
                 html += '<div id="cmtDialog" class="c-dialog">';
                 html += '<p class="title clearfix"><a class="cmtclose fr" href="javascript:;">x</a>关注了~</p>';
-                html += '<a class="sbl-btn speakmore" ' + cmtTarget + ' href="' + cmtHref + '">再说两句</a>'
+                html += '<a class="sbl-btn speakmore" ' + cmtTarget + ' href="' + cmtHref + '">去说两句</a>'
                 html += '</div>';
                 //console.log("no-repeat:" + html);
                 $("body").append(html);
@@ -84,30 +98,26 @@ define(function(require, exports){
                     H = $("#cmtDialog").outerHeight();
                 $("#cmtDialog").css({
                     left: position.x - W/2 + "px",
-                    top: position.y - H - 12 + "px"
+                    top: position.y - H +80 + "px"
                 }).fadeIn();
                 var newCount = parseInt($likeCount.text(),10) + 1;
                 $likeCount.text(newCount);
                 o.data("timeout",setTimeout(function(){$("#cmtDialog").fadeOut()},3000));
-                $this.text("已关注");
+                $this.removeClass("follow").addClass("followed").text("已关注");
             }
             $.smeite.favor.loveThemeSubmit($this, parseInt(themeId));
 
-    });
+        });
 
-    /* 取消主题关注操作*/
-        //确认框
-
-        /* 取消主题 */
-        $(".unfollow-theme").click(function(){
-            alert("hello")
+        /* 取消主题关注操作*/
+        $("a[rel=removeThemeFollow]").click(function(){
             var themeId =$(this).data("themeid"),
-            $topicItem = $(this).parents(".topic-item");
-            $.smeite.confirmUI("真要取消关注这个主题吗？亲，你不在喜欢我了嘛...", $.smeite.favor.removeThemeCallback($topicItem,parseInt(themeId)),function(){
-
-            });
+                $themeItem = $(this).parents(".followed-btn");
+            $.smeite.favor.removeThemeCallback($themeItem,parseInt(themeId));
         })
 
+
+    })
 
 
 });

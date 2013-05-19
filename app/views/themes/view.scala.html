@@ -80,9 +80,9 @@ description =  theme.intro.getOrElse("食美特，爱美食爱生活")
                         <a href="@controllers.routes.Themes.view(theme.id.get)" data-val="0">@theme.name</a>
                     </h2>
                     @if(!user.isEmpty && user.get.id.get == author.id.get){
-                    <a href="javascript:;" class="follow  mt5 mr10" data-type="0" data-themeid="@theme.id.get" title="我的主题">我的主题</a>
+                    <a href="javascript:;" class="follow  mt5 mr10"  title="我的主题">我的主题</a>
                     }else{
-                    <a href="javascript:;" class="follow follow-theme mt5 mr10" data-type="0" data-themeid="@theme.id.get" title="关注">关注</a>
+                    <a rel="followTheme" href="javascript:;" class="follow  mt5 mr10" data-type="1" data-themeid="@theme.id.get" title="关注">+ 关注</a>
                     }
                     <a class="btn-share mt5" href="javascript:;" data-sharetxt="我在食美特发现了这个主题，我很喜欢，分享给大家 :@theme.name  " data-sharelink="@controllers.routes.Themes.view(theme.id.get)" data-sharepic="@theme.pic" title="分享">分享</a>
 
@@ -218,7 +218,7 @@ description =  theme.intro.getOrElse("食美特，爱美食爱生活")
 </div>
 <div class="theme_share clearfix box-shadow">
     <span class="theme_tip">看完啦？别忘了关注一下~</span>
-    <a class="ifollow follow-theme" data-topicurl="amYRbi" href="javascript:;" title="关注">关注</a>
+    <a rel="followTheme" class="ifollow" data-type="0" data-themeid="@theme.id.get" href="javascript:;" title="关注">+ 关注</a>
     <a class="icomment" href="@controllers.routes.Themes.board(theme.id.get,1)#cmtlist" title="讨论">讨论</a>
 
     <div class="share fr">

@@ -301,5 +301,20 @@ object Themes extends Controller {
     }
   }
 
+  def checkThemeLoveState = Action(parse.json){  implicit request =>
+    val user:Option[User] =request.session.get("user").map(u=> UserDao.findById(u.toLong) )
+    if(user.isEmpty)  Ok(Json.obj("code" -> "300","message" -> "亲，你还没有登录呢" ))
+    else{
+      val themeId=(request.body \ "themeId").asOpt[Long];
+      if (themeId.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
+      else{
+        val loveTheme=UserDao.checkLoveTheme(user.get.id.get,themeId.get);
+        if(!loveTheme.isEmpty)  Ok(Json.obj("code" -> "100","message" -> "已关注" ))
+        else Ok(Json.obj("code" -> "101","message" -> "未关注" ))
+      }
+
+    }
+  }
+
 
  }
