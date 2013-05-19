@@ -101,9 +101,9 @@ GET   /user/:snsType/registered/:backType/:i    controllers.users.UsersSnsLogin.
 #user   用户消息
 GET     /user/msg/system          controllers.users.UsersMsg.system
 GET     /user/msg/comment          controllers.users.UsersMsg.comment
-GET     /user/msg/reply          controllers.users.UsersMsg.reply
+GET     /user/msg/love          controllers.users.UsersMsg.love
 GET     /user/msg/at          controllers.users.UsersMsg.at
-GET     /user/msg/appraisal          controllers.users.UsersMsg.appraisal
+
 
 
 #goods  页面
