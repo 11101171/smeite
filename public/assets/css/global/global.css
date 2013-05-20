@@ -72,6 +72,17 @@ a:hover{
     color: #fff
 }
 
+.red {
+    color: #E26;
+}
+.red:link, .red:visited {
+    color: #E26
+}
+.red:hover, .red:active {
+    background: #E26;
+    color: white;
+}
+
 
 sup {
     vertical-align: text-top
@@ -732,7 +743,7 @@ input:-moz-placeholder { font-size:12px; }
 .tip { display:none;position:absolute;width:160px;line-height:16px;padding:8px 10px;color:#666;background:#f3f3f3;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px; }
 .errc { color:#bb0000; }
 .error { color:#bb0000;background:#ffe8e8;padding: 5px }
-.ajaxvali { background:#fff url(images/loading.gif) left center no-repeat;height:16px; }
+.ajaxvali { background:#fff url(images/loading16.gif) left center no-repeat;height:16px; }
 .correct { background:#fff url(images/correct.png) left center no-repeat;height:16px; }
 .empty { height:32px;line-height:32px;padding:0 10px; }
 /* 按钮 */
@@ -1675,7 +1686,7 @@ font-size: 18px;
 
 #nav .channel li.choice {
     padding-right: 20px;
-    background: url(images/icon-new.png) no-repeat right 1px;
+    background: url(images/new.gif) no-repeat right 1px;
 }
 
 #nav .channel .on a{

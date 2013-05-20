@@ -64,7 +64,7 @@ title ="食美特，爱美食爱生活"
             <div class="how-to-tip">
                 <span class="title">友情提醒</span>
                 <p>1) 确认收货后即可返利，返利金额与实际成交价相关，打折商品可在成交价基础上获得等比例返利，享折上折待遇；</p>
-                <p>2) 为确保您返利成功，请在点击“去购物，拿返利”之后<span class="green">尽快在淘宝下单，中途不要关闭浏览器或更换淘宝帐号。</span></p>
+                <p>2) 为确保您返利成功，请在点击“去购物，拿返利”之后<span class="red">尽快在淘宝下单，中途不要关闭浏览器或更换淘宝帐号。</span></p>
             </div>
         </div>
         <!-- aside end -->
@@ -124,8 +124,8 @@ title ="食美特，爱美食爱生活"
                         data.volume = respItem[0].volume
                         data.location = respItem[0].item_location
                         data.rate = getRound(Number(0.7)*Number(respItem[0].commission_rate)/100,2)
-                        data.jifenbao = getRound(Number(respItem[0].promotion_price)*Number(0.7)*Number(respItem[0].commission_rate)/10000,2)
-                        data.jifenbaoValue = getRound(Number(respItem[0].promotion_price)*Number(0.7)*Number(respItem[0].commission_rate)/100,2)
+                        data.jifenbaoValue = getRound(Number(respItem[0].promotion_price)*Number(0.7)*Number(respItem[0].commission_rate)/10000,2)
+                        data.jifenbao = getRound(Number(respItem[0].promotion_price)*Number(0.7)*Number(respItem[0].commission_rate)/100,2)
                         productShow(data)
                     }
                 }else{

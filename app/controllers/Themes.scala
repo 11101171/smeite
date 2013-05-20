@@ -185,7 +185,7 @@ object Themes extends Controller {
      if(themeId.isEmpty){
        Ok(Json.obj( "code" -> "101", "message" ->"theme id 为空，不能保存"))
      }else{
-       ThemeDao.modifyStyle(themeId.get,pageBgColor.getOrElse("#F9F9EF"),pageBgImage.getOrElse("none"),pageBgRepeat.getOrElse("no-repeat"),pageBgPosition.getOrElse("center top"),pageBgAttachment.getOrElse("scroll"))
+       ThemeDao.modifyStyle(themeId.get,pageBgColor.getOrElse("#F9F9EF"),pageBgImage.getOrElse(""),pageBgRepeat.getOrElse("no-repeat"),pageBgPosition.getOrElse("center top"),pageBgAttachment.getOrElse("scroll"))
 
        Ok(Json.obj("code" -> "100", "pagePic"->pageBgImage, "message" ->"保存不成功，请重新提交试试"))
      }

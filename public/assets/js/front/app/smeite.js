@@ -1463,9 +1463,11 @@ define(function(require, exports) {
                 +'集分宝：<b id="jifen">'+data.userScore+'</b>&nbsp;分<br/>'
                 +'<p>'
                 +'签到：送集分宝，每次1-20个集分宝，随机赠送<br/>'
-                +'连签7天：额外送7个<br/>'
-                +'连签15天：额外送15个<br/>'
-                +'连签30天：额外送30个<br/>'
+                +'连签7天：额外送15个<br/>'
+                +'连签15天：额外送30个<br/>'
+                +'连签30天：额外送60个<br/>'
+                +'连签60天：额外送100个<br/>'
+                +'连签100天：额外送200个<br/>'
                 +'<a href="/user/account/invite" target="_blank">邀请可获更多集分宝</a>'
                 +'</p>'
                 +'</div>';
@@ -1507,7 +1509,7 @@ define(function(require, exports) {
                 html += '<div class="hd"><h3>亲，签到送集分宝哦</h3></div>';
                 html += '<div class="bd clearfix">';
                 html += '<p class="fs14" id="J_checkInMsg">';
-                html +='亲，您将获得<strong class="rc">1-20</strong>个不等的<a href="/jifenbao">集分宝</a>,连签7天：额外送7个,连签15天：额外送15个,连签30天：额外送30个……';
+                html +='亲，您将获得<strong class="rc">1-20</strong>个不等的<a href="/jifenbao">集分宝</a>,连签7天：额外送15个,连签30天：额外送60个,连签30天：额外送60个……';
                 html +='</p>';
                 html +='<div class="checkIn" id="J_checkIn"> ';
                 //  这里是抽奖区域
@@ -1547,7 +1549,9 @@ define(function(require, exports) {
                                         $('#J_rightValue').text(data.rightValue);
                                         $(".show").hide()
                                         $(".hide").show()
-                                        var msg ='恭喜您获得<strong class="rc">'+(data.leftValue*10+data.rightValue)+'</strong>个集分宝，<span style="color:#9dc62c;font-size:20px;">'+ data.checkInDays +'</span>天。向您推荐~ '
+                                        var shiDouGiftMsg =""
+                                        if(data.shiDouGift!=0) giftMsg="，额外获得"+data.shiDouGift
+                                        var msg ='恭喜您获得<strong class="rc">'+(data.leftValue*10+data.rightValue)+'</strong>个集分宝，连续签到<span style="color:#9dc62c;font-size:20px;">'+ data.checkInDays +'</span> 天'+shiDouGiftMsg+'。向您推荐~ '
                                         $("#J_checkInMsg").html(msg)
                                         $.smeite.checkIn.changeCheckInIcon(true);
                                         $.smeite.checkIn.recommendProcess(data.goods)

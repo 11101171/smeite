@@ -94,6 +94,18 @@ object UsersCheckIn extends Controller {
             Ok(Json.obj("code" -> "104", "message" ->"用户已签到" ))
           }else{
              checkInDays = if(utils.Utils.getIntervalDays(timestamp,userCheckIn.get.addTime) ==0 ) userCheckIn.get.days+1 else{ 1 }
+            /* 判断checkInDays  获得额外奖励 */
+            val shiDouGift = checkInDays match {
+              case 7 => 15
+              case 15 => 30
+              case 30 => 60
+              case 60 => 100
+              case 100 => 200
+              case 200 => 500
+              case 365 => 1000
+              case _ => 0
+            }
+
             if(month == userCheckIn.get.month){
               val history = userCheckIn.get.history+","+currentDay+":"+shiDou
               UserDao.modifyUserCheckIn(userCheckIn.get.id.get,shiDou,checkInDays,history)
@@ -101,8 +113,8 @@ object UsersCheckIn extends Controller {
               val history =currentDay+":"+shiDou
               UserDao.addUserCheckIn(user.get.id.get,shiDou,checkInDays,month,history,timestamp)
             }
-            UserDao.modifyShiDou(user.get.id.get,shiDou)
-            Ok(Json.obj("goods"->Json.toJson(recommendGoods),"code" -> "100","checkInDays" ->checkInDays.toString,"leftValue"->leftValue,"rightValue"->rightValue,"userScore"->(user.get.shiDou+shiDou).toString ))
+            UserDao.modifyShiDou(user.get.id.get,shiDou+shiDouGift)
+            Ok(Json.obj("goods"->Json.toJson(recommendGoods),"code" -> "100","checkInDays" ->checkInDays.toString,"leftValue"->leftValue,"rightValue"->rightValue,"shiDouGift"->shiDouGift,"userScore"->(user.get.shiDou+shiDou).toString ))
           }
       }
     }
