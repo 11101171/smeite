@@ -17,7 +17,6 @@ import models.goods.dao.GoodsDao
 import models.goods.dao.GoodsSQLDao
 import models.theme.dao.ThemeDao
 import models.forum.dao.TopicDao
-import utils.ShiDouConfig
 import java.util.Date
 
 
@@ -135,8 +134,6 @@ object UserDao {
  /* 第三方用户初次登陆 */
   def addSnsUser(name:String,comeFrom:Int,openId:String,pic:String,inviteId:Long) =database.withSession{ implicit  session:Session =>
     val id = Users.autoInc3.insert(name,comeFrom,openId,pic)
-    /* 添加积分 */
- //   UserSQLDao.updateCredits(id,ShiDouConfig.regCredits)
     UserStatics.autoInc.insert(id)
     UserProfiles.autoInc.insert(id,inviteId,new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis()),"sns")
   }
@@ -454,8 +451,7 @@ object UserDao {
     val goods =GoodsDao.findById(goodsId)
     /*保存用户动作*/
     addTrend(UserTrend(None,uid,"发布了宝贝",goods.get.id.get,"/goods/"+goods.get.id.get,goods.get.name,None))
-    /* 用户分享一个商品 获得一个食豆 */
-    UserSQLDao.updateShiDou(uid,ShiDouConfig.postBaobeiShiDou)
+
     UserShareGoodses.autoInc.insert(uid,goodsId)
 
   }
@@ -797,6 +793,19 @@ object UserDao {
   }
   def modifyUserCheckIn(id:Long,credits:Int,days:Int,history:String)= database.withSession {  implicit session:Session =>
     (for(c <- UserCheckIns if c.id ===id )yield(c.credits ~ c.days ~ c.history)).update(credits,days,history)
+  }
+
+  /* 添加用户积分记录 */
+  def addUserCreditRecord(record:UserCreditRecord) = database.withSession {  implicit session:Session =>
+       UserCreditRecords.autoInc.insert(record)
+  }
+  /* 查看用户积分记录 */
+  def findUserCreditRecords(uid:Long,creditType:Int,currentPage:Int,pageSize:Int) = database.withSession {  implicit session:Session =>
+    val totalRows = Query(UserCreditRecords.filter(_.uid === uid).filter(_.creditType === creditType).length).first()
+    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+   val list:List[UserCreditRecord] = ( for(c<-UserCreditRecords if c.uid===uid if c.creditType === creditType )yield c).drop(startRow).take(pageSize).list()
+    Page[UserCreditRecord](list,currentPage,totalPages);
   }
 
 

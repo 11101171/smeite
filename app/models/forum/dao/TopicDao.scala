@@ -6,7 +6,6 @@ import models.forum._
 import models.Page
 import  models.user._
 import models.user.dao.{UserSQLDao, UserDao}
-import utils.ShiDouConfig
 import java.sql.Timestamp
 
 /**
@@ -25,16 +24,13 @@ object TopicDao {
    val id = Topics.autoInc.insert(topic)     
    /*保存用户动作*/
     UserDao.addTrend(UserTrend(None,topic.uid,"创建了话题",id,"/forum/view/"+id,topic.title,None))
-   /* 用户分享一个商品 获得一个食豆 */
-   UserSQLDao.updateShiDou(topic.uid,ShiDouConfig.postTopicShiDou)
 	id
   }
   def addTopic(uid:Long,uname:String,title:String,content:String,groupId:Int,typeId:Int)=database.withSession {  implicit session:Session =>
   val id = Topics.insert(uid,uname,title,content,groupId,typeId)
   /*保存用户动作*/
     UserDao.addTrend(UserTrend(None,uid,"创建了话题",id,"/forum/view/"+id,title,None))
-  /* 用户分享一个商品 获得一个食豆 */
-  UserSQLDao.updateShiDou(uid,ShiDouConfig.postTopicShiDou)
+
 
 	id
   }

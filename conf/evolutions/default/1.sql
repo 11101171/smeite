@@ -203,9 +203,8 @@ CREATE TABLE `user_tag` (
   -- 表的结构 `user_trend`
      id 表的ID
      uid 用户的id
-     uname 用户的昵称
      action_type 行为动作，例如 0、喜欢的商品 1、关注主题 2、发布宝贝 3、创作主题 4、评论主题 5、回复话题 6 认为值得
-     action_id 行为的名称
+     action_id 行为的第三方Id 或者 数量
      action_url   链接的url
      action_content 行为的内容
      add_time  添加时间
@@ -1394,3 +1393,18 @@ alter table advert change link  link   varchar(250);
 alter table tag change  cid  cid   tinyint (4)  default '6';
 alter table topic_reply  change content content text ;
 alter table topic_reply  change quote_reply quote_reply varchar(1000);
+
+#20130520
+/*
+* credit_type 0 集分宝 1 食豆
+ */
+DROP TABLE IF EXISTS `user_credit_record`;
+CREATE TABLE `user_credit_record` (
+  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `uid`                 int(10) ,
+  `credit_type`        tinyint  default '0',
+  `num`                 smallint(10) ,
+  `content`             varchar(200) ,
+  `add_time`           timestamp,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;

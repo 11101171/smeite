@@ -9,10 +9,11 @@ import java.io.File
 import net.coobird.thumbnailator.Thumbnails
 import java.net.URL
 import play.api.libs.json.Json
-import models.user.User
+import models.user.{UserCreditRecord, User}
 import models.user.dao.{UserSQLDao, UserDao}
 import play.api.Play.current
 import utils.Utils
+import java.sql.Timestamp
 
 
 /**
@@ -200,6 +201,7 @@ object UsersAccount  extends Controller {
      UserSQLDao.updateCredits(user.get.id.get,num)
      UserDao.addUserRebate(user.get.id.get,num,1)
      UserDao.modifyStatus(user.get.id.get,1)
+     UserDao.addUserCreditRecord(UserCreditRecord(None,user.get.id.get,0,num,"新人见面礼",new Timestamp(System.currentTimeMillis())))    // 添加用户获得集分宝记录
      Ok(Json.obj("code" -> "100","message" -> "成功" ))
    }
  }

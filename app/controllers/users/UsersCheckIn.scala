@@ -4,7 +4,7 @@ import play.api.mvc.{Action, Controller}
 import models.user.dao.{UserSQLDao, UserDao}
 import java.sql.Timestamp
 
-import models.user.User
+import models.user.{ShiDouSetting,UserCreditRecord ,User}
 
 import play.api.libs.json._
 import play.api.libs.functional.syntax._
@@ -86,7 +86,8 @@ object UsersCheckIn extends Controller {
         checkInDays=1;
         val history =currentDay+":"+shiDou
         UserDao.addUserCheckIn(user.get.id.get,shiDou,1,month,history,timestamp)
-        UserDao.modifyShiDou(user.get.id.get,shiDou)
+        UserDao.modifyShiDou(user.get.id.get,shiDou)   // 修改用户的食豆
+        UserDao.addUserCreditRecord(UserCreditRecord(None,user.get.id.get,1,shiDou,"签到送食豆",timestamp))
         Ok(Json.obj("goods"->Json.toJson(recommendGoods),"code" -> "100","checkInDays" ->checkInDays.toString,"leftValue"->leftValue,"rightValue"->rightValue, "userScore"->(user.get.shiDou+shiDou).toString ))
       } else{
         val isChecked =   userCheckIn.get.addTime.after(utils.Utils.getStartOfDay( new Timestamp(System.currentTimeMillis())))
@@ -96,13 +97,13 @@ object UsersCheckIn extends Controller {
              checkInDays = if(utils.Utils.getIntervalDays(timestamp,userCheckIn.get.addTime) ==0 ) userCheckIn.get.days+1 else{ 1 }
             /* 判断checkInDays  获得额外奖励 */
             val shiDouGift = checkInDays match {
-              case 7 => 15
-              case 15 => 30
-              case 30 => 60
-              case 60 => 100
-              case 100 => 200
-              case 200 => 500
-              case 365 => 1000
+              case 7 => ShiDouSetting.checkIn7Days
+              case 15 => ShiDouSetting.checkIn15Days
+              case 30 => ShiDouSetting.checkIn30Days
+              case 60 => ShiDouSetting.checkIn60Days
+              case 100 => ShiDouSetting.checkIn100Days
+              case 200 => ShiDouSetting.checkIn200Days
+              case 365 => ShiDouSetting.checkIn365Days
               case _ => 0
             }
 
@@ -114,6 +115,8 @@ object UsersCheckIn extends Controller {
               UserDao.addUserCheckIn(user.get.id.get,shiDou,checkInDays,month,history,timestamp)
             }
             UserDao.modifyShiDou(user.get.id.get,shiDou+shiDouGift)
+            UserDao.addUserCreditRecord(UserCreditRecord(None,user.get.id.get,1,shiDou,"签到送食豆",timestamp))
+            if(shiDouGift != 0)  UserDao.addUserCreditRecord(UserCreditRecord(None,user.get.id.get,1,shiDouGift,"连续签到 "+checkInDays+" 天，额外赠送食豆",timestamp))
             Ok(Json.obj("goods"->Json.toJson(recommendGoods),"code" -> "100","checkInDays" ->checkInDays.toString,"leftValue"->leftValue,"rightValue"->rightValue,"shiDouGift"->shiDouGift,"userScore"->(user.get.shiDou+shiDou).toString ))
           }
       }

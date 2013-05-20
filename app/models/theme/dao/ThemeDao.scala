@@ -13,7 +13,7 @@ import models.goods.{Goodses, Goods}
 import models.theme._
 import models.user.dao.UserSQLDao
 import models.user.dao.UserDao
-import utils.ShiDouConfig
+
 
 
 /**
@@ -35,8 +35,7 @@ object ThemeDao {
     ThemeStyles.insert(ThemeStyle(themeId,"#F9F9EF","none","no-repeat","center top","scroll","70","#666","#fafafa","none","repeat","center top"))
     /*保存用户动作*/
     UserDao.addTrend(UserTrend(None,uid,"创建了主题",themeId,"/theme/"+themeId,name,None))
-    /* 用户分享一个商品 获得一个食豆 */
-    UserSQLDao.updateShiDou(uid,ShiDouConfig.postThemeShiDou)
+
     themeId
   }
   def addTheme(name:String,intro:Option[String],uid:Long,uname:String,cid:Int,tags:Option[String])=database.withSession {  implicit session:Session =>
@@ -45,10 +44,6 @@ object ThemeDao {
     ThemeStyles.insert(ThemeStyle(themeId,"#F9F9EF","none","no-repeat","center top","scroll","70","#666","#fafafa","none","repeat","center top"))
    /*保存用户动作*/
     UserDao.addTrend(UserTrend(None,uid,"创建了主题",themeId,"/theme/"+themeId,name,None))
-    /* 添加积分 */
-    /* 用户分享一个商品 获得一个食豆 */
-    UserSQLDao.updateShiDou(uid,ShiDouConfig.postThemeShiDou)
-
 	themeId
 
   }
