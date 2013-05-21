@@ -32,21 +32,6 @@
                                     <input type="text" id="name" name="uid" placeholder="用户ID">
                                 </div>
                             </div>
-                            <div class="control-group">
-                                <label class="control-label" >返利类型：</label>
-                                <div class="controls">
-                                    <div class="radio">
-                                        <input type="radio" name="rebateType" value='' checked="true" > 所有
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio"  name="rebateType" value="0" > 购物返利
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio" name="rebateType" value="1" > 新人好礼
-                                    </div>
-
-                                </div>
-                            </div>
 
                             <div class="control-group">
                                 <label class="control-label" >处理状态：</label>
@@ -94,7 +79,7 @@
                             <tr>
 
                                 <th>用户Id</th>
-                                <th>返利类型</th>
+
                                 <th>返利数量</th>
                                 <th>提交时间</th>
                                 <th>处理状态</th>
@@ -107,7 +92,7 @@
                             <tr id="@item.id.get">
 
                                 <td><a  href="@controllers.users.routes.Users.home(item.uid)"  target="_blank"> @item.uid</a> </td>
-                                <td>@models.user.RebateType(item.rebateType)</td>
+
                                 <td>@item.num</td>
                                 <td>@item.withdrawTime</td>
                                 <td>

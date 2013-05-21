@@ -40,7 +40,7 @@ case class FilterUserOrderFormData(status:Option[Int],startDate:Option[Date],end
 case class GetTaobaokeIncomeFormData(day:String)
 case class FilterTaobaokeIncomeFormData(outerCode:Option[String],day:Option[String],currentPage:Option[Int])
 
-case class FilterUserRebateFormData(uid:Option[Long],rebateType:Option[Int],status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
+case class FilterUserRebateFormData(uid:Option[Long],status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
 case class UserRebateFormData(id:Long,name:String,alipay:String,num:Int,handleStatus:Int,handleResult:String,note:Option[String])
 
 object Users  extends Controller {
@@ -129,7 +129,6 @@ object Users  extends Controller {
   val filterUserRebateForm =Form(
     mapping(
       "uid"->optional(longNumber()),
-      "rebateType"->optional(number),
       "status"->optional(number),
       "startDate"->optional(date("yyyy-MM-dd")),
       "endDate"->optional(date("yyyy-MM-dd")),
@@ -328,7 +327,7 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
     filterUserRebateForm.bindFromRequest.fold(
       formWithErrors =>Ok("something wrong" +formWithErrors.errors.toString),
       data => {
-        val page=UserDao.filterUserRebates(data.uid,data.rebateType,data.status,data.startDate,data.endDate,data.currentPage.getOrElse(1),50);
+        val page=UserDao.filterUserRebates(data.uid,data.status,data.startDate,data.endDate,data.currentPage.getOrElse(1),50);
         Ok(views.html.admin.users.filterUserRebates(manager,page,filterUserRebateForm.fill(data)))
       }
     )
@@ -432,7 +431,7 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
       /* 查看 user rebate 是否添加，如果没有，则添加*/
       val rebate = UserDao.findUserRebateByTradeId(item.getTradeId)
       if(rebate.isEmpty){
-        UserDao.addUserRebate(uid,userCommission,0,userOrderId,item.getTradeId)
+        UserDao.addUserRebate(uid,userCommission,userOrderId,item.getTradeId)
       }
 
     }

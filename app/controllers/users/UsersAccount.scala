@@ -191,17 +191,16 @@ object UsersAccount  extends Controller {
      Ok(Json.obj("code" -> "100","message" -> "成功" ))
    }
  }
- /* 用户获得 新人有礼 */
+ /* 用户获得 新人有礼 以食豆的方式记录，发放 */
   def giveGift = Action(parse.json) {  implicit request =>
    val user:Option[User] =request.session.get("user").map(u=> UserDao.findById(u.toLong) )
    if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)
    else {
      val num = (request.body \ "num").as[Int]
-  //   println("num " +num)
-     UserSQLDao.updateCredits(user.get.id.get,num)
-     UserDao.addUserRebate(user.get.id.get,num,1)
+     UserSQLDao.updateShiDou(user.get.id.get,num)
+     UserDao.addUserExchangeShiDou(user.get.id.get,num)
      UserDao.modifyStatus(user.get.id.get,1)
-     UserDao.addUserCreditRecord(UserCreditRecord(None,user.get.id.get,0,num,"新人见面礼",new Timestamp(System.currentTimeMillis())))    // 添加用户获得集分宝记录
+     UserDao.addUserCreditRecord(UserCreditRecord(None,user.get.id.get,1,num,"新人见面礼",new Timestamp(System.currentTimeMillis())))    // 添加用户获得集分宝 食豆记录
      Ok(Json.obj("code" -> "100","message" -> "成功" ))
    }
  }

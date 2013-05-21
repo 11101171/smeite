@@ -1408,3 +1408,8 @@ CREATE TABLE `user_credit_record` (
   `add_time`           timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+/*
+20130521
+ */
+alter table user_rebate drop column rebate_type;

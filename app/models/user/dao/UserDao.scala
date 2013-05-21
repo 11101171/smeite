@@ -638,7 +638,6 @@ object UserDao {
    Page[(User,UserInvitePrize)](list,currentPage,totalPages)
  }
 
-  /* */
   def findUserInvitePrize(id:Long):(User,UserProfile,UserInvitePrize) =  database.withSession {  implicit session:Session =>
     (for{
         u <- Users
@@ -655,7 +654,7 @@ object UserDao {
   }
 
   def filterInvitePrizes(status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Int,pageSize:Int) = database.withSession {  implicit session:Session =>
-    var query =for{
+    var query = for{
       u <- Users
       s <- UserInvitePrizes
       if u.id === s.uid
@@ -669,6 +668,16 @@ object UserDao {
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val list:List[(User,UserInvitePrize)]=  query.drop(startRow).take(pageSize).list()
     Page[(User,UserInvitePrize)](list,currentPage,totalPages);
+  }
+
+  def filterInvitePrizes(minCredits:Int,maxCredits:Int) =  database.withSession {  implicit session:Session =>
+    (for{
+    u <- Users
+    s <- UserProfiles
+    if u.id === s.uid
+    if s.inviteId =!=0l
+    if u.credits between(minCredits,maxCredits)
+  }yield (u.id~u.credits~s.inviteId)).list()
   }
 
 
@@ -726,11 +735,11 @@ object UserDao {
 
 
   /* add user rebate */
-   def addUserRebate(uid:Long,num:Int,rebateType:Int) = database.withSession {  implicit session:Session =>
-    UserRebates.autoInc2.insert(uid,num,1,new Timestamp(System.currentTimeMillis()))
+   def addUserRebate(uid:Long,num:Int) = database.withSession {  implicit session:Session =>
+    UserRebates.autoInc2.insert(uid,num,new Timestamp(System.currentTimeMillis()))
   }
-  def addUserRebate(uid:Long,num:Int,rebateType:Int,userOrderId:Long,tradeId:Long) = database.withSession {  implicit session:Session =>
-      UserRebates.autoInc3.insert(uid,num,rebateType,userOrderId,tradeId,new Timestamp(System.currentTimeMillis()))
+  def addUserRebate(uid:Long,num:Int,userOrderId:Long,tradeId:Long) = database.withSession {  implicit session:Session =>
+      UserRebates.autoInc3.insert(uid,num,userOrderId,tradeId,new Timestamp(System.currentTimeMillis()))
   }
   def findUserRebate(id:Long):(User,UserProfile,UserRebate) =  database.withSession {  implicit session:Session =>
     (for{
@@ -760,10 +769,9 @@ object UserDao {
     Page[UserRebate](list,currentPage,totalPages)
   }
 
-  def filterUserRebates(uid:Option[Long],rebateType:Option[Int],status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Int,pageSize:Int) = database.withSession {  implicit session:Session =>
+  def filterUserRebates(uid:Option[Long],status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Int,pageSize:Int) = database.withSession {  implicit session:Session =>
     var query =for{ u <- UserRebates }yield (u)
     if(!uid.isEmpty) query = query.filter(_.uid === uid.get)
-    if(!rebateType.isEmpty) query = query.filter(_.rebateType === rebateType.get)
     if(!status.isEmpty) query = query.filter(_.handleStatus === status.get)
     if(!startDate.isEmpty) query = query.filter(_.withdrawTime >= new Timestamp(startDate.get.getTime))
     if(!endDate.isEmpty) query = query.filter(_.withdrawTime <= new Timestamp(endDate.get.getTime))
