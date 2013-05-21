@@ -31,7 +31,8 @@ case class User(
                  shiDou:Int,
                  withdrawCredits:Int,
                  withdrawShiDou:Int,
-                 tags:Option[String]
+                 tags:Option[String],
+                 modifyTime:Option[Timestamp]
                  )
 
 
@@ -50,10 +51,10 @@ object Users extends Table[User]("user") {
   def withdrawCredits = column[Int]("withdraw_credits")
   def withdrawShiDou = column[Int]("withdraw_shi_dou")
   def tags     = column[String]("tags")
-
+  def modifyTime = column[Timestamp]("modify_time")
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ name ~ passwd ~ email.? ~ credits ~ pic  ~ daren  ~ status ~ comeFrom ~ openId.? ~ shiDou~ withdrawCredits~ withdrawShiDou ~ tags.?  <>(User, User.unapply _)
-  def autoInc = id.? ~ name ~ passwd ~ email.? ~ credits ~ pic  ~ daren  ~ status ~ comeFrom ~ openId.? ~ shiDou~ withdrawCredits~ withdrawShiDou ~ tags.? <>(User, User.unapply _) returning id
+  def * = id.? ~ name ~ passwd ~ email.? ~ credits ~ pic  ~ daren  ~ status ~ comeFrom ~ openId.? ~ shiDou~ withdrawCredits~ withdrawShiDou ~ tags.? ~ modifyTime.?  <>(User, User.unapply _)
+  def autoInc = id.? ~ name ~ passwd ~ email.? ~ credits ~ pic  ~ daren  ~ status ~ comeFrom ~ openId.? ~ shiDou~ withdrawCredits~ withdrawShiDou ~ tags.? ~ modifyTime.? <>(User, User.unapply _) returning id
   def autoInc2 = name ~ passwd ~ email returning id
   def autoInc3 = name ~ comeFrom ~ openId ~ pic returning id
   /* count  */
@@ -86,6 +87,6 @@ object Users extends Table[User]("user") {
 }
 
 
-case class SuperUser(base:User,static:UserStatic)
+
 
 

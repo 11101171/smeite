@@ -649,6 +649,7 @@ object UserDao {
      }yield(u,up,ui) ).first
   }
 
+
   def modifyUserInvitePrize(id:Long,handleStatus:Int,handleResult:String,note:String) = database.withSession {  implicit session:Session =>
     (for( c <- UserInvitePrizes if c.id=== id ) yield c.handleStatus ~ c.handleResult ~ c.note).update((handleStatus,handleResult,note))
   }
@@ -669,14 +670,18 @@ object UserDao {
     val list:List[(User,UserInvitePrize)]=  query.drop(startRow).take(pageSize).list()
     Page[(User,UserInvitePrize)](list,currentPage,totalPages);
   }
-
-  def filterInvitePrizes(minCredits:Int,maxCredits:Int) =  database.withSession {  implicit session:Session =>
+  /* 查找过去几天可能产生invite prize  */
+  def findPossibleInvitePrizes(minCredits:Int,days:Int):List[(Long,Int,Long)] =  database.withSession {  implicit session:Session =>
+   val now = new Timestamp(System.currentTimeMillis())
+   val before = new Timestamp(now.getTime-1000*60*60*24*days)
     (for{
     u <- Users
     s <- UserProfiles
     if u.id === s.uid
+    if u.modifyTime between(before,now)
     if s.inviteId =!=0l
-    if u.credits between(minCredits,maxCredits)
+    if u.credits > minCredits
+
   }yield (u.id~u.credits~s.inviteId)).list()
   }
 

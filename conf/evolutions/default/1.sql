@@ -1413,3 +1413,5 @@ CREATE TABLE `user_credit_record` (
 20130521
  */
 alter table user_rebate drop column rebate_type;
+
+alter table user add column modify_time timestamp  default '2013-5-21 22:00:00';
