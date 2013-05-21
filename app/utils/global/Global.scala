@@ -12,9 +12,20 @@ package utils.global
 import play.api._
 import play.api.mvc._
 import play.api.mvc.Results._
+import scala.concurrent.duration._
+import play.api.libs.concurrent.Akka
+import akka.actor.Props
+import schedule.TestActor
+import play.api.Play.current
+import play.api.libs.concurrent.Execution.Implicits.defaultContext
+
 
 object Global extends GlobalSettings {
 
+  override def onStart(app: Application) {
+    val testActor = Akka.system.actorOf(Props[TestActor], name = "testActor")
+    Akka.system.scheduler.schedule(1 seconds, 60 seconds, testActor, "start")
+  }
 //  When an exception occurs in your application, the onError operation will be called
  override def onError(request: RequestHeader, ex: Throwable) = {
     InternalServerError(
