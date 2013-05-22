@@ -28,7 +28,7 @@ object Global extends GlobalSettings {
     //   val testActor = Akka.system.actorOf(Props[TestActor], name = "testActor")
   //     Akka.system.scheduler.schedule(1 seconds, 60 seconds, testActor, "start")
        val invitePrizeActor = Akka.system.actorOf(Props[InvitePrizeActor], name = "invitePrizeActor")
-       Akka.system.scheduler.schedule(1 seconds, 30 seconds, invitePrizeActor, "start")
+       Akka.system.scheduler.schedule(1 hours, 17 hours, invitePrizeActor, "start")
      }
 
   }

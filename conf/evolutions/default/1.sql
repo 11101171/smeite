@@ -1415,3 +1415,7 @@ CREATE TABLE `user_credit_record` (
 alter table user_rebate drop column rebate_type;
 
 alter table user add column modify_time timestamp  default '2013-5-21 22:00:00';
+
+update user_profile set invite_id = 0;
+alter table  user_invite_prize change num num smallint(10);
+
