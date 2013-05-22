@@ -1,3 +1,4 @@
  发布的时候
 1、确保数据库密码的正确性
 2、确保 schedule 配置是否正确,包括1、application.conf 2、global.scala 中的定时
+3、确保css js 的版本 在template.scala.html 修改
