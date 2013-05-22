@@ -5,18 +5,21 @@ import models.user.dao.UserDao
 import play.api.data.Form
 import play.api.data.Forms._
 import java.sql.Timestamp
+import play.api.libs.json._
+import play.api.libs.functional.syntax._
 
-/**
- * Created with IntelliJ IDEA.
- * User: Administrator
- * Date: 13-4-10
- * Time: 上午9:25
- * To change this template use File | Settings | File Templates.
- */
+case class InvitePrize(num:Int,handleStatus:Int,handleResult:String)
 object UsersCommission  extends Controller {
   val exchangeForm = Form (
       "shiDou" ->number(min=1000)
   )
+  implicit val userInvitePrizeFormat = (
+      (__ \ "num").format[Int] and
+      (__ \ "handleStatus").format[Int] and
+      (__ \ "handleResult").format[String]
+    )(InvitePrize.apply,unlift(InvitePrize.unapply))
+
+
 /*我的返利*/
  def myCredits= Users.UserAction {user => implicit request =>
     if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)
@@ -66,6 +69,16 @@ object UsersCommission  extends Controller {
       val totalReward = UserDao.getInviteReward(user.get.id.get)
       val page =UserDao.getInviters(user.get.id.get,currentPage,20)
       Ok(views.html.users.commission.invite(user,page,totalInviters,totalReward))
+    }
+  }
+
+  /* 获得 邀请有奖 */
+ def  getInvitePrizes(uid:Long,inviteeId:Long)  = Users.UserAction {  user => implicit request =>
+    if(user.isEmpty)  Redirect(controllers.users.routes.UsersRegLogin.login)
+    else {
+      val prizes = UserDao.findUserInvitePrizes(uid,inviteeId).map(x=>InvitePrize(x.num,x.handleStatus,x.handleResult))
+      Ok(Json.obj("code"->"100","length"->prizes.length,"prizes"->Json.toJson(prizes)))
+
     }
   }
 

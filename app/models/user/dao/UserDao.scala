@@ -647,6 +647,15 @@ object UserDao {
      }yield(u,ui) ).first
   }
 
+  def findUserInvitePrizes(uid:Long,inviteeId:Long):List[UserInvitePrize] =  database.withSession {  implicit session:Session =>
+    (for{
+      u <- UserInvitePrizes
+      if u.uid === uid
+      if u.inviteeId === inviteeId
+    }yield(u) ).list
+  }
+
+
 
   def modifyUserInvitePrize(id:Long,handleStatus:Int,handleResult:String,note:String) = database.withSession {  implicit session:Session =>
     (for( c <- UserInvitePrizes if c.id=== id ) yield c.handleStatus ~ c.handleResult ~ c.note).update((handleStatus,handleResult,note))

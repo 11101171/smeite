@@ -25,7 +25,7 @@ class InvitePrizeActor extends  Actor{
          val invitePrize2 = UserDao.findUserInvitePrize(inviteId,uid,300)
          if(invitePrize2.isEmpty)UserDao.addUserInvitePrize(inviteId,uid,credits,300)
 
-       } else if(credits >=5000) {
+       } else if(credits >= 5000) {
          val invitePrize1 = UserDao.findUserInvitePrize(inviteId,uid,200)
          if(invitePrize1.isEmpty)UserDao.addUserInvitePrize(inviteId,uid,credits,200)
 
@@ -36,6 +36,9 @@ class InvitePrizeActor extends  Actor{
          if(invitePrize.isEmpty)UserDao.addUserInvitePrize(inviteId,uid,credits,500)
 
        } else {
+         val invitePrize1 = UserDao.findUserInvitePrize(inviteId,uid,200)
+         if(invitePrize1.isEmpty)UserDao.addUserInvitePrize(inviteId,uid,credits,200)
+
          val invitePrize = UserDao.findUserInvitePrize(inviteId,uid,300)
          if(invitePrize.isEmpty)UserDao.addUserInvitePrize(inviteId,uid,credits,300)
        }

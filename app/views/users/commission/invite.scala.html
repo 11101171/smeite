@@ -65,7 +65,7 @@ user
                         <thead>
                         <tr  height="35">
                             <th  width="110">好友昵称</th>
-                            <th  width="174">好友来源</th>
+                            <th  width="120">好友来源</th>
                             <th  width="127">好友消费积分</th>
                             <th  width="272">奖励情况</th>
                         </tr>
@@ -78,7 +78,11 @@ user
                             <td>@models.user.ComeFrom(item.comeFrom)</td>
                             <td>@(item.credits)</td>
                             <td>
-                                   @if(item.credits>=100){ 已返利 200 } &nbsp;@if(item.credits>=1000){ 300 }&nbsp; @if(item.credits>=3000){ 500 }
+                                  @if(user.get.alipay.isEmpty || user.get.alipay.get.trim ==""){
+                                您还没有填写支付宝，<a href="@controllers.users.routes.UsersAccount.payment">现在就去填写吧</a>
+                                }else{
+                                <a rel="getInvitePrizes" class="getInvitePrizes" data-credits="@item.credits" data-uid="@user.get.id.get" data-inviteeid="@item.id.get">查看详情</a>
+                                }
                             </td>
                         </tr>
                         }

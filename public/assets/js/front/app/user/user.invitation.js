@@ -14,16 +14,53 @@
 define(function(require, exports){
 	var $ = jQuery = require("jquery");
 	window.ZeroClipboard = require("module/zeroclipboard");
-	
-	var clip = new ZeroClipboard.Client();
-	clip.setHandCursor( true );
-	clip.addEventListener('mouseover', function (client) {
-		clip.setText($('#clip-text').val());
-	});
-	clip.glue('J_Clip');
-	document.getElementById("J_Clip").onmouseover = function(){
-		clip.reposition(this);
-	}
-		
+
+    $(function(){
+        /* 复制 */
+        var clip = new ZeroClipboard.Client();
+        clip.setHandCursor( true );
+        clip.addEventListener('mouseover', function (client) {
+            clip.setText($('#clip-text').val());
+        });
+        clip.glue('J_Clip');
+        document.getElementById("J_Clip").onmouseover = function(){
+            clip.reposition(this);
+        }
+
+        var getInvitePrizesHtml=function(json){
+            alert(json)
+        }
+
+        var getInvitePrizes = function(uid,inviteeId,$elm){
+            $.ajax({
+                url:"/user/account/getInvitePrizes",
+                type:"get",
+                dataType:"json",
+                data:{
+                    uid:parseInt(uid),
+                    inviteeId:parseInt(inviteeId)
+                },
+                success:function (json) {
+                    if (json.code == 100) {
+                        var html = getInvitePrizesHtml(json);
+                        $elm.replaceWith(html)
+                    }
+
+                }
+            });
+        }
+
+        /* 处理 用户的邀请有奖 */
+           $(".getInvitePrizes").each(function(){
+               var $this =$(this) ;
+               var uid =$this.data("uid")  ;
+               var inviteeId = $this.data("inviteeid");
+               var credits =$this.data("credits") ;
+               if(credits > 99 ){
+                   getInvitePrizes(uid,inviteeId,$this)
+               }
+           })
+    })
+
 
 });
