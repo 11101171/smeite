@@ -32,7 +32,7 @@ SWFUpload.prototype.initSWFUpload = function (settings) {
 		this.movieElement = null;
 
 
-		// Setup utils.global control tracking
+		// Setup common.global control tracking
 		SWFUpload.instances[this.movieName] = this;
 
 		// Load the settings.  Load the Flash movie.

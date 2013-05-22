@@ -219,8 +219,8 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
   )
 }
   def editExchangeShiDou(id:Long) = Managers.AdminAction{ manager => implicit request =>
-    val (user,up,ue) = UserDao.findUserExchangeShiDou(id);
-    Ok(views.html.admin.users.editExchangeShiDou(manager,exchangeShiDouForm.fill(ExchangeShiDouFormData(ue.id.get,user.name,up.alipay.getOrElse("none"),ue.num,ue.handleStatus,ue.handleResult,ue.note))))
+    val (user,ue) = UserDao.findUserExchangeShiDou(id);
+    Ok(views.html.admin.users.editExchangeShiDou(manager,exchangeShiDouForm.fill(ExchangeShiDouFormData(ue.id.get,user.name,user.alipay.getOrElse("none"),ue.num,ue.handleStatus,ue.handleResult,ue.note))))
   }
 
   def saveExchangeShiDou  = Managers.AdminAction{ manager => implicit request =>
@@ -273,8 +273,8 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
 
 
   def editInvitePrize(id:Long) = Managers.AdminAction{ manager => implicit request =>
-    val (user,up,ui) = UserDao.findUserInvitePrize(id)
-    Ok(views.html.admin.users.editInvitePrize(manager,invitePrizeForm.fill(InvitePrizeFormData(ui.id.get,user.name,up.alipay.getOrElse("none"),ui.num,ui.handleStatus,ui.handleResult,ui.note))))
+    val (user,ui) = UserDao.findUserInvitePrize(id)
+    Ok(views.html.admin.users.editInvitePrize(manager,invitePrizeForm.fill(InvitePrizeFormData(ui.id.get,user.name,user.alipay.getOrElse("none"),ui.num,ui.handleStatus,ui.handleResult,ui.note))))
   }
 
   def saveInvitePrize  = Managers.AdminAction{ manager => implicit request =>
@@ -333,8 +333,8 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
     )
   }
   def editRebate(id:Long) = Managers.AdminAction{ manager => implicit request =>
-    val (user,up,ui) = UserDao.findUserRebate(id)
-    Ok(views.html.admin.users.editUserRebate(manager,userRebateForm.fill(UserRebateFormData(ui.id.get,user.name,up.alipay.getOrElse("none"),ui.num,ui.handleStatus,ui.handleResult,ui.note))))
+    val (user,ui) = UserDao.findUserRebate(id)
+    Ok(views.html.admin.users.editUserRebate(manager,userRebateForm.fill(UserRebateFormData(ui.id.get,user.name,user.alipay.getOrElse("none"),ui.num,ui.handleStatus,ui.handleResult,ui.note))))
   }
 
   def saveRebate  = Managers.AdminAction{ manager => implicit request =>

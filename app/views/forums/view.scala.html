@@ -1,4 +1,5 @@
 @(user:Option[models.user.User],topic:(models.user.User,models.forum.Topic),page:models.Page[(String,String,Long,Long,Option[String],String,Int,java.sql.Timestamp)],topics:List[(Long, String, String, Long, String, Int, Int, Int)])
+@import _root_.utils.Utils
 @views.html.template(
 user,
 title = topic._2.title+"_讨论吧_广场_食美特，爱美食爱生活",
@@ -49,7 +50,7 @@ description =  topic._2.intro
                                                   <em>@topic._1.name</em>
                                                  @if(topic._1.status==3){ <i class="i-daren">达人</i>}
                                                 </a>
-			                      <span class="time">/ @controllers.DateFormat(topic._2.addTime.get)</span>
+			                      <span class="time">/ @Utils.timestampFormat(topic._2.addTime.get)</span>
 					</span>
 
                     <div class="post wordbreak" id="J_PostArtical"> @Html(topic._2.content)  </div>
@@ -74,7 +75,7 @@ description =  topic._2.intro
             		<span class="info"><a class="J_UserNick" href="@controllers.users.routes.Users.home(replyUid)" target="_blank" title="@uname">@uname</a>/ <span class="time">@replyAddTime </span> </span>
 
                     <div class="post">
-                        @if(!replyQuoteReply.isEmpty){
+                        @if(!replyQuoteReply.isEmpty && replyQuoteReply.get.trim !=""){
                         <div class="post-reply">
                               @Html(replyQuoteReply.get)
                         </div>
@@ -99,7 +100,7 @@ description =  topic._2.intro
                 }
                 @for(num <-page.nums){
                 @if(num==page.currentPage){
-                <a class="active" href="#">@num</a>
+                <span class="current">@num</span>
                 }else {
 
                 <a href="@controllers.routes.Forums.view(topic._2.id.get,num)">@num</a>

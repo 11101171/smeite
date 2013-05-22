@@ -31,7 +31,7 @@ user
 
                 <div class="title">二：这是您的专用邀请链接，可通过任何方式发送给好友</div>
                 <div class="invite-link clearfix">
-                    <textarea id="clip-text" class="base-txa invite_txa">这里，不仅是中国最大的美食购物社区，而且还赠送额外的集分宝哦！~ http://smeite.com/user/regist?i=@user.get.id.get</textarea>
+                    <textarea id="clip-text" class="base-txa invite_txa">这里，不仅是中国最大的美食购物社区，而且，购物还赠送额外的集分宝哦！~ http://smeite.com/user/regist?i=@user.get.id.get</textarea>
                     <input type="button" class="bbl-btn submit" id="J_Clip" value="复制">
                 </div>
 
@@ -59,14 +59,14 @@ user
                 </div>
                 <div class="title">四：邀请返利记录</div>
                 <div class="invite-record clearfix">
-                    <div class="invite_success mb10">您已成功邀请<span>@totalInviters</span>人，累计获得<span>@totalReward</span>个集分宝</div>
+                    <div class="invite_success mb10">您已成功邀请<span>@totalInviters</span>人，累计获得<span>@totalReward</span>个集分宝，相当于现金<span>@(totalReward/100.0)</span>元</div>
 
                     <table  class="table">
                         <thead>
                         <tr  height="35">
                             <th  width="110">好友昵称</th>
                             <th  width="174">好友来源</th>
-                            <th  width="127">好友返利</th>
+                            <th  width="127">好友消费积分</th>
                             <th  width="272">奖励情况</th>
                         </tr>
                         </thead>
@@ -78,9 +78,7 @@ user
                             <td>@models.user.ComeFrom(item.comeFrom)</td>
                             <td>@(item.credits)</td>
                             <td>
-
                                    @if(item.credits>=100){ 已返利 200 } &nbsp;@if(item.credits>=1000){ 300 }&nbsp; @if(item.credits>=3000){ 500 }
-
                             </td>
                         </tr>
                         }
@@ -102,7 +100,7 @@ user
                         }
                         @for(num <-page.nums){
                         @if(num==page.currentPage){
-                        <a class="current" href="#">@num</a>
+                        <span class="current">@num</span>
                         }else {
                         <a href="@controllers.users.routes.UsersCommission.invite(num)">@num</a>
                         }

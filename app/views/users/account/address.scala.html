@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],addrForm:Form[(Option[String],Option[String],Option[String],Option[String],Option[String],Option[String],Option[String])],msg:String="")
+@(user:Option[models.user.User],addrForm:Form[(Option[String],Option[String],Option[String],Option[String],Option[String],Option[String])],msg:String="")
 @views.html.template(
 user
 )(css="/assets/css/template/user.setting.css") {
@@ -46,16 +46,12 @@ user
                                  <label>邮编：</label>
                                  <input type="text" class="base-input" name="postcode" id="zipcode" value='@addrForm("postcode").value'>
                              </div>
-                             <!--<div class="form-row">
+                             <div class="form-row">
                                  <label><span class="rc">*</span>手机：</label>
                                  <input type="text" class="base-input" name="cellphone" id="mobilephone" value='@addrForm("cellphone").value'>
                                  @if(!addrForm.error("cellphone").isEmpty){<span class="error">@addrForm.error("cellphone").get.message</span> }
                              </div>
-                             <div class="form-row">
-                                 <label></span>支付宝：</label>
-                                 <input type="text" class="base-input" name="alipay" id="alipayaccount" value='@addrForm("alipay").value'>
-                                 @if(!addrForm.error("alipay").isEmpty){<span class="error">@addrForm.error("alipay").get.message</span> }
-                             </div>-->
+
                              <div class="form-row">
                                  <label>&nbsp;</label>
                                  <input type="submit" class="bbl-btn submit" value="保存"><a class="ml10 mt5 fl" href="@controllers.users.routes.UsersCommission.myAward">去看我的奖品</a>

@@ -51,8 +51,7 @@ object UsersAccount  extends Controller {
      "city" -> optional(text),
      "addressDetail" ->optional(text),
      "postcode" -> optional(text),
-     "cellphone" ->optional(text),
-     "alipay" ->optional(text)
+     "cellphone" ->optional(text)
    )
   )
 
@@ -136,7 +135,7 @@ object UsersAccount  extends Controller {
    if(user.isEmpty)  Redirect(controllers.users.routes.UsersRegLogin.login)
    else {
      val profile =UserDao.findProfile(user.get.id.get)
-     Ok(views.html.users.account.payment(user,alipayForm.fill((profile.alipay,profile.phone,profile.weixin))))
+     Ok(views.html.users.account.payment(user,alipayForm.fill((user.get.alipay,profile.phone,profile.weixin))))
    }
   }
   /* 修改支付宝 */
@@ -162,7 +161,7 @@ object UsersAccount  extends Controller {
    if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)
    else {
       val profile =UserDao.findProfile(user.get.id.get)
-     Ok(views.html.users.account.address(user,addrForm.fill((profile.receiver,profile.province,profile.city,profile.street,profile.postCode,profile.phone,profile.alipay))))
+     Ok(views.html.users.account.address(user,addrForm.fill((profile.receiver,profile.province,profile.city,profile.street,profile.postCode,profile.phone))))
 
    }
   }
@@ -173,11 +172,11 @@ object UsersAccount  extends Controller {
       addrForm.bindFromRequest.fold(
         formWithErrors => {
           val profile =UserDao.findProfile(user.get.id.get)
-          BadRequest(views.html.users.account.address(user,formWithErrors.fill((profile.receiver,profile.province,profile.city,profile.street,profile.postCode,profile.phone,profile.alipay))))
+          BadRequest(views.html.users.account.address(user,formWithErrors.fill((profile.receiver,profile.province,profile.city,profile.street,profile.postCode,profile.phone))))
         } ,
         fields =>{
-             UserDao.modifyAddr(user.get.id.get, fields._1.getOrElse(""),fields._2.getOrElse(""),fields._3.getOrElse(""),fields._4.getOrElse(""),fields._5.getOrElse(""),fields._6.getOrElse(""),fields._7.getOrElse(""))
-            Ok(views.html.users.account.address(user,addrForm.fill(fields._1,fields._2,fields._3,fields._4,fields._5,fields._6,fields._7),"收货地址保存成功"))
+             UserDao.modifyAddr(user.get.id.get, fields._1.getOrElse(""),fields._2.getOrElse(""),fields._3.getOrElse(""),fields._4.getOrElse(""),fields._5.getOrElse(""),fields._6.getOrElse(""))
+            Ok(views.html.users.account.address(user,addrForm.fill(fields._1,fields._2,fields._3,fields._4,fields._5,fields._6),"收货地址保存成功"))
 
         }
       )

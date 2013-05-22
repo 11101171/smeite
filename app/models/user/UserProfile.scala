@@ -25,7 +25,7 @@ case class UserProfile (
                          intro:Option[String],
                          birth: Option[String],
                          weixin: Option[String],
-                         alipay: Option[String],
+                         qq: Option[String],
                          receiver: Option[String],
                          province: Option[String],
                          city: Option[String],
@@ -48,7 +48,7 @@ object UserProfiles extends Table[UserProfile]("user_profile") {
   def intro = column[String]("intro")
   def birth = column[String]("birth")
   def weixin = column[String]("weixin")
-  def alipay = column[String]("alipay")
+  def qq = column[String]("qq")
   def receiver = column[String]("receiver")
   def province = column[String]("province")
   def city = column[String]("city")
@@ -62,7 +62,7 @@ object UserProfiles extends Table[UserProfile]("user_profile") {
   def loginIP = column[String]("login_ip")
   def registTime = column[Timestamp]("regist_time")
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ uid ~ inviteId.? ~ inviteName.? ~ gender ~ intro.? ~ birth.? ~ weixin.? ~ alipay.? ~ receiver.? ~ province.? ~ city.? ~ town.? ~ street.? ~ postCode.? ~ phone.? ~ blog.? ~ loginTime.? ~ loginNum ~ loginIP.? ~ registTime.? <>(UserProfile, UserProfile.unapply _)
+  def * = id.? ~ uid ~ inviteId.? ~ inviteName.? ~ gender ~ intro.? ~ birth.? ~ weixin.? ~ qq.? ~ receiver.? ~ province.? ~ city.? ~ town.? ~ street.? ~ postCode.? ~ phone.? ~ blog.? ~ loginTime.? ~ loginNum ~ loginIP.? ~ registTime.? <>(UserProfile, UserProfile.unapply _)
 
   def autoInc = uid ~ inviteId ~ loginTime  ~ registTime~ loginIP  returning id
 

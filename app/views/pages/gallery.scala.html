@@ -63,7 +63,7 @@ title = "美食街,特色馆_食美特，爱美食爱生活"
                 }
                 @for(num <-page.nums){
                 @if(num==page.currentPage){
-                <a class="current" href="#">@num</a>
+                <span class="current" >@num</span>
                 }else {
                 <a href="@controllers.routes.Pages.gallery(cid,sortBy,num)">@num</a>
                 }

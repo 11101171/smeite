@@ -103,7 +103,7 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                             }
                             @for(num <-page.nums){
                             @if(num==page.currentPage){
-                            <a class="current" href="#">@num</a>
+                            <span class="current">@num</span>
                             }else {
                             <a href="@controllers.users.routes.Users.credits(author.id.get,s,num)">@num</a>
                             }

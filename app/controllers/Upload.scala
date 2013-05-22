@@ -60,7 +60,7 @@ object Upload extends Controller{
       if(Utils.isImage(filename)){
         picture.ref.moveTo(new File("/opt/static/images/editor/"+filename),true)
         val picSrc ="/images/editor/"+filename
-        Ok(views.html.utils.uploadSmeiteEditorPic(picSrc))
+        Ok(views.html.common.uploadSmeiteEditorPic(picSrc))
 
       }else{
         Ok(Json.obj("code"->"104","filelink"->"亲，服务器欧巴桑了，请重试"))
@@ -80,13 +80,13 @@ object Upload extends Controller{
       if(Utils.isImage(filename)){
         picture.ref.moveTo(new File("/opt/static/images/theme/"+filename),true)
         val picSrc ="/images/theme/"+filename
-        Ok(views.html.utils.uploadThemeStylePicSuccess("100",picType,picSrc))
+        Ok(views.html.common.uploadThemeStylePicSuccess("100",picType,picSrc))
       }else{
-        Ok(views.html.utils.uploadThemeStylePicSuccess("101",picType,"none"))
+        Ok(views.html.common.uploadThemeStylePicSuccess("101",picType,"none"))
       }
 
     }.getOrElse {
-      Ok(views.html.utils.uploadThemeStylePicSuccess("101",picType,"none"))
+      Ok(views.html.common.uploadThemeStylePicSuccess("101",picType,"none"))
     }
   }
 
@@ -100,13 +100,13 @@ object Upload extends Controller{
         picture.ref.moveTo(new File("/opt/static/images/temp/"+filename),true)
         Thumbnails.of(new File("/opt/static/images/temp/"+filename)).size(300,300).toFile(new File("/opt/static/images/temp/"+filename))
         val picSrc ="/images/temp/"+filename
-        Ok(views.html.utils.uploadUserPicSuccess(true,picSrc))
+        Ok(views.html.common.uploadUserPicSuccess(true,picSrc))
       }else{
-        Ok(views.html.utils.uploadUserPicSuccess(false,"亲，服务器欧巴桑了，请重试"))
+        Ok(views.html.common.uploadUserPicSuccess(false,"亲，服务器欧巴桑了，请重试"))
       }
 
     }.getOrElse {
-      Ok(views.html.utils.uploadUserPicSuccess(false,"亲，服务器欧巴桑了，请重试"))
+      Ok(views.html.common.uploadUserPicSuccess(false,"亲，服务器欧巴桑了，请重试"))
     }
   }
 

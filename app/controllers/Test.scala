@@ -60,10 +60,10 @@ object Test extends Controller {
  /*  // val result =GoodsSQLDao.updateLoveNum(14)
    val userCheckIn =UserDao.isCheckedIn(2)
     val isChecked =   if(userCheckIn.isEmpty){ false } else {
-  userCheckIn.get.addTime.after(utils.Utils.getStartOfDay( new Timestamp(System.currentTimeMillis())))
+  userCheckIn.get.addTime.after(common.Utils.getStartOfDay( new Timestamp(System.currentTimeMillis())))
     }
 
-     val days =utils.Utils.getIntervalDays(userCheckIn.get.addTime,new Timestamp(System.currentTimeMillis()))
+     val days =common.Utils.getIntervalDays(userCheckIn.get.addTime,new Timestamp(System.currentTimeMillis()))
     println("is checked " + isChecked + " days " +days)
 */
 

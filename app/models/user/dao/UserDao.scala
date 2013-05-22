@@ -150,15 +150,15 @@ object UserDao {
     (for(c<-Users if c.id === uid)yield c.passwd).update(Codecs.sha1("smeite"+passwd))
   }
   /*保存地址*/
-  def modifyAddr(uid:Long, receiver:String,province:String, city:String, street:String, postCode:String, phone:String,alipay:String)= database.withSession{  implicit session:Session =>
+  def modifyAddr(uid:Long, receiver:String,province:String, city:String, street:String, postCode:String, phone:String)= database.withSession{  implicit session:Session =>
 
-    (for(c<-UserProfiles if c.uid === uid) yield c.receiver~c.province~c.city~c.street~c.postCode~c.phone~c.alipay).update((receiver,province,city,street,postCode,phone,alipay))
+    (for(c<-UserProfiles if c.uid === uid) yield c.receiver~c.province~c.city~c.street~c.postCode~c.phone).update((receiver,province,city,street,postCode,phone))
   }
   /* 修改 支付宝账号,用户的状态 status 从新用户 变成 正常用户 */
   def modifyAlipay(uid:Long,alipay:String,phone:String,weixin:String)= database.withSession{  implicit session:Session =>
     Cache.remove("user_"+uid)
-    (for(c<-Users if c.id === uid ) yield c.status).update(1)
-    (for(c<-UserProfiles if c.uid === uid) yield c.alipay ~ c.phone ~ c.weixin).update(alipay,phone,weixin)
+    (for(c<-Users if c.id === uid ) yield c.status ~ c.alipay).update(1,alipay)
+    (for(c<-UserProfiles if c.uid === uid) yield  c.phone ~ c.weixin).update(phone,weixin)
   }
   /*修改user pic*/
   def modifyPic(uid:Long,pic:String)= database.withSession{  implicit session:Session =>
@@ -587,7 +587,7 @@ object UserDao {
       u<-Users
       if c.inviteId === inviteId
       if c.uid===u.id
-    }yield u ).drop(startRow).take(pageSize).list()
+    }yield u ).sortBy(_.id desc).drop(startRow).take(pageSize).list()
 
     Page[User](list,currentPage,totalPages)
   }
@@ -638,15 +638,13 @@ object UserDao {
    Page[(User,UserInvitePrize)](list,currentPage,totalPages)
  }
 
-  def findUserInvitePrize(id:Long):(User,UserProfile,UserInvitePrize) =  database.withSession {  implicit session:Session =>
+  def findUserInvitePrize(id:Long):(User,UserInvitePrize) =  database.withSession {  implicit session:Session =>
     (for{
         u <- Users
-        up <- UserProfiles
        ui <- UserInvitePrizes
       if ui.id === id
       if ui.uid === u.id
-      if u.id === up.uid
-     }yield(u,up,ui) ).first
+     }yield(u,ui) ).first
   }
 
 
@@ -727,12 +725,10 @@ object UserDao {
   def findUserExchangeShiDou(id:Long) = database.withSession {  implicit session:Session =>
     (for{
        u <- Users
-       up <- UserProfiles
        ue <- UserExchangeShiDous
-       if u.id === up.uid
        if u.id === ue.applyId
        if ue.applyId === id
-     }yield (u,up,ue)).first()
+     }yield (u,ue)).first()
   }
   def modifyUserExchangeShiDou(id:Long,handleStatus:Int,handleResult:String,note:String) = database.withSession {  implicit session:Session =>
     (for( c <- UserExchangeShiDous if c.id === id ) yield c.handleStatus ~ c.handleResult ~ c.note).update((handleStatus,handleResult,note))
@@ -746,15 +742,13 @@ object UserDao {
   def addUserRebate(uid:Long,num:Int,userOrderId:Long,tradeId:Long) = database.withSession {  implicit session:Session =>
       UserRebates.autoInc3.insert(uid,num,userOrderId,tradeId,new Timestamp(System.currentTimeMillis()))
   }
-  def findUserRebate(id:Long):(User,UserProfile,UserRebate) =  database.withSession {  implicit session:Session =>
+  def findUserRebate(id:Long):(User,UserRebate) =  database.withSession {  implicit session:Session =>
     (for{
       u <- Users
-      up <- UserProfiles
       ur <- UserRebates
       if ur.id === id
       if ur.uid === u.id
-      if u.id === up.uid
-    }yield(u,up,ur) ).first
+    }yield(u,ur) ).first
   }
 
   def modifyUserRebate(id:Long,handleStatus:Int,handleResult:String,note:String) = database.withSession {  implicit session:Session =>

@@ -157,7 +157,7 @@ description = theme.intro.get
                     }
                     @for(num <-page.nums){
                     @if(num==page.currentPage){
-                    <a class="current" href="#">@num</a>
+                    <span class="current">@num</span>
                     }else {
                     <a href="@controllers.routes.Themes.board(theme.id.get,num)">@num</a>
                     }
