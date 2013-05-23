@@ -30,6 +30,7 @@
                     <form class=" form-horizontal" id="myForm"  method="post" action="@controllers.admin.routes.Users.saveRebate">
 
                         <input type="hidden" name="id" value='@form("id").value'>
+                        <input type="hidden" name="uid" value='@form("uid").value'>
                         <input type="hidden" name="name" value='@form("name").value'>
                         <input type="hidden" name="alipay" value='@form("alipay").value'>
                         <input type="hidden" name="num" value='@form("num").value'>

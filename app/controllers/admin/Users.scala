@@ -35,7 +35,7 @@ case class GetTaobaokeIncomeFormData(day:String)
 case class FilterTaobaokeIncomeFormData(outerCode:Option[String],day:Option[String],currentPage:Option[Int])
 
 case class FilterUserRebateFormData(uid:Option[Long],status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
-case class UserRebateFormData(id:Long,name:String,alipay:String,num:Int,handleStatus:Int,handleResult:String,note:Option[String])
+case class UserRebateFormData(id:Long,uid:Long,name:String,alipay:String,num:Int,handleStatus:Int,handleResult:String,note:Option[String])
 
 object Users  extends Controller {
   val batchForm =Form(
@@ -132,6 +132,7 @@ object Users  extends Controller {
   val userRebateForm = Form(
     mapping(
       "id"->longNumber,
+      "uid"->longNumber,
       "name"->text,
       "alipay"->text,
       "num"->number,
@@ -328,7 +329,7 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
   }
   def editRebate(id:Long) = Managers.AdminAction{ manager => implicit request =>
     val (user,ui) = UserDao.findUserRebate(id)
-    Ok(views.html.admin.users.editUserRebate(manager,userRebateForm.fill(UserRebateFormData(ui.id.get,user.name,user.alipay.getOrElse("none"),ui.num,ui.handleStatus,ui.handleResult,ui.note))))
+    Ok(views.html.admin.users.editUserRebate(manager,userRebateForm.fill(UserRebateFormData(ui.id.get,user.id.get,user.name,user.alipay.getOrElse("none"),ui.num,ui.handleStatus,ui.handleResult,ui.note))))
   }
 
   def saveRebate  = Managers.AdminAction{ manager => implicit request =>
@@ -336,6 +337,8 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
       formWithErrors =>BadRequest(views.html.admin.users.editUserRebate(manager,formWithErrors,"出错了")),
       data => {
         UserDao.modifyUserRebate(data.id,data.handleStatus,data.handleResult,data.note.getOrElse(""))
+        /* 如果处理成功 则修改user withdraw credits 数量 */
+        if(data.handleStatus == 1) UserSQLDao.updateWithdrawCredits(data.uid,data.num)
         Ok(views.html.admin.users.editUserRebate(manager,userRebateForm.fill(data),"修改成功"))
       }
     )

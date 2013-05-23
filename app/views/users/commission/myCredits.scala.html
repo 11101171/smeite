@@ -15,8 +15,7 @@ user
         </div>
         <div class="main-content">
             <div class="credits mb20">
-                <div class="credits_info">您已经获得<span>@user.get.credits</span>个集分宝，值<span>￥@(user.get.credits/100.0)</span>元</div>
-
+                <div class="credits_info">您已经获得<span>@user.get.credits</span>个集分宝，值<span>￥@(user.get.credits/100.0)</span>元,已成功发放<span>@user.get.withdrawCredits</span>个集分宝 </div>
                 <div class="title">集分宝发放记录</div>
             <table class="table">
                 <thead>
@@ -24,6 +23,7 @@ user
                     <th  width="110">发放原因</th>
                     <th  width="80">发放数量</th>
                     <th  width="100">发放时间</th>
+                    <th  width="80">处理状态</th>
                     <th  width="100">处理时间</th>
                     <th  width="272">处理结果</th>
                 </tr>
@@ -44,7 +44,10 @@ user
                             @item.num
                         </td>
                         <td>
-                            @item.withdrawTime
+                        @item.withdrawTime
+                    </td>
+                        <td>
+                            @models.user.HandleStatus(item.handleStatus)
                         </td>
                         <td>
                             @item.handleTime
