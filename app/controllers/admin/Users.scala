@@ -216,7 +216,7 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
   )
 }
   def editExchangeShiDou(id:Long) = Managers.AdminAction{ manager => implicit request =>
-    val (user,ue) = UserDao.findUserExchangeShiDou(id);
+    val (user,ue) = UserDao.findUserExchangeShiDou(id)
     Ok(views.html.admin.users.editExchangeShiDou(manager,exchangeShiDouForm.fill(ExchangeShiDouFormData(ue.id.get,user.id.get,user.name,user.alipay.getOrElse("none"),ue.num,ue.handleStatus,ue.handleResult,ue.note))))
   }
 

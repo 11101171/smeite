@@ -669,7 +669,7 @@ object UserDao {
   }
 
   def findUserInvitePrizes(uid:Long,currentPage:Int,pageSize:Int):Page[UserInvitePrize] =  database.withSession {  implicit session:Session =>
-    val totalRows=Query(UserInvitePrizes.filter(_.uid == uid).length).first()
+    val totalRows=Query(UserInvitePrizes.filter(_.uid === uid).length).first()
     val totalPages=((totalRows + pageSize - 1) / pageSize);
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val list:List[UserInvitePrize] = (for{
@@ -737,6 +737,18 @@ object UserDao {
 
     Page[(User,UserExchangeShiDou)](list,currentPage,totalPages)
   }
+  def findUserExchangeShiDous(uid:Long,currentPage:Int,pageSize:Int) =  database.withSession {  implicit session:Session =>
+    val totalRows=Query(UserExchangeShiDous.filter(_.applyId === uid).length).first()
+    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+
+    val list:List[UserExchangeShiDou] = (for{
+      s <- UserExchangeShiDous
+      if s.applyId === uid
+    }yield (s) ).drop(startRow).take(pageSize).list()
+
+    Page[UserExchangeShiDou](list,currentPage,totalPages)
+  }
 
   def filterExchangeShiDous(status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Int,pageSize:Int) = database.withSession {  implicit session:Session =>
   var query =for{
@@ -755,13 +767,13 @@ object UserDao {
   Page[(User,UserExchangeShiDou)](list,currentPage,totalPages);
   }
 
-  def findUserExchangeShiDou(id:Long) = database.withSession {  implicit session:Session =>
+  def findUserExchangeShiDou(id:Long):(User,UserExchangeShiDou) =  database.withSession {  implicit session:Session =>
     (for{
-       u <- Users
-       ue <- UserExchangeShiDous
-       if u.id === ue.applyId
-       if ue.applyId === id
-     }yield (u,ue)).first()
+      u <- Users
+      ur <- UserExchangeShiDous
+      if ur.id === id
+      if ur.applyId === u.id
+    }yield(u,ur) ).first
   }
   def modifyUserExchangeShiDou(id:Long,handleStatus:Int,handleResult:Int,note:String) = database.withSession {  implicit session:Session =>
     (for( c <- UserExchangeShiDous if c.id === id ) yield c.handleStatus ~ c.handleResult ~ c.note).update((handleStatus,handleResult,note))

@@ -108,7 +108,25 @@ user
                 </table>
             </div>
 
-
+            <div class="clearfix pt20 pb20">
+                <div class="pagin fr pagination" id="J_Pagination">
+                    @if(page.nums.length>1){
+                    @page.prev.map { page =>
+                    <a class="prev" href="@controllers.users.routes.UsersCommission.myCredits(page)">上一页</a>
+                    }
+                    @for(num <-page.nums){
+                    @if(num==page.currentPage){
+                    <span class="current">@num</span>
+                    }else {
+                    <a href="@controllers.users.routes.UsersCommission.myCredits(num)">@num</a>
+                    }
+                    }
+                    @page.next.map { page =>
+                    <a class="next" href="@controllers.users.routes.UsersCommission.myCredits(page)">下一页</a>
+                    }
+                    }
+                </div>
+            </div>
             <div class="help">
                 <div class="help-title">帮助</div>
                 <ul>

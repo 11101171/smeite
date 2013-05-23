@@ -80,7 +80,7 @@ POST  /user/giveUpGift                 controllers.users.UsersAccount.giveUpGift
 POST  /user/giveGift                   controllers.users.UsersAccount.giveGift
 #user 用户返利
 GET   /user/account/myCredits           controllers.users.UsersCommission.myCredits(p:Int ?=1)
-GET   /user/account/myShiDou          controllers.users.UsersCommission.myShiDou
+GET   /user/account/myShiDou          controllers.users.UsersCommission.myShiDou(p:Int ?=1)
 GET   /user/account/myAward           controllers.users.UsersCommission.myAward
 GET   /user/account/invite           controllers.users.UsersCommission.invite(p:Int ?=1)
 POST   /user/account/exchangeShiDou   controllers.users.UsersCommission.exchangeShiDou
