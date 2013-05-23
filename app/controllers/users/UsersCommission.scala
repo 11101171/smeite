@@ -77,7 +77,7 @@ object UsersCommission  extends Controller {
     if(user.isEmpty)  Redirect(controllers.users.routes.UsersRegLogin.login)
     else {
       val prizes = UserDao.findUserInvitePrizes(uid,inviteeId).map(x=>InvitePrize(x.num,x.handleStatus,x.handleResult))
-      Ok(Json.obj("code"->"100","length"->prizes.length,"prizes"->Json.toJson(prizes)))
+      Ok(Json.obj("code"->"100","size"->prizes.length,"prizes"->Json.toJson(prizes)))
 
     }
   }

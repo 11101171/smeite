@@ -587,7 +587,7 @@ object UserDao {
       u<-Users
       if c.inviteId === inviteId
       if c.uid===u.id
-    }yield u ).sortBy(_.id desc).drop(startRow).take(pageSize).list()
+    }yield u ).sortBy(_.credits desc).drop(startRow).take(pageSize).list()
 
     Page[User](list,currentPage,totalPages)
   }
@@ -745,11 +745,11 @@ object UserDao {
 
 
   /* add user rebate */
-   def addUserRebate(uid:Long,num:Int) = database.withSession {  implicit session:Session =>
-    UserRebates.autoInc2.insert(uid,num,new Timestamp(System.currentTimeMillis()))
+   def addUserRebate(uid:Long,num:Int,rebateType:Int) = database.withSession {  implicit session:Session =>
+    UserRebates.autoInc2.insert(uid,num,rebateType,new Timestamp(System.currentTimeMillis()))
   }
-  def addUserRebate(uid:Long,num:Int,userOrderId:Long,tradeId:Long) = database.withSession {  implicit session:Session =>
-      UserRebates.autoInc3.insert(uid,num,userOrderId,tradeId,new Timestamp(System.currentTimeMillis()))
+  def addUserRebate(uid:Long,num:Int,rebateType:Int,userOrderId:Long,tradeId:Long) = database.withSession {  implicit session:Session =>
+      UserRebates.autoInc3.insert(uid,num,rebateType,userOrderId,tradeId,new Timestamp(System.currentTimeMillis()))
   }
   def findUserRebate(id:Long):(User,UserRebate) =  database.withSession {  implicit session:Session =>
     (for{

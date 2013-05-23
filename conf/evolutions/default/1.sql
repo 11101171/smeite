@@ -1422,3 +1422,6 @@ alter table  user_invite_prize change num num smallint(10);
 #20130522
 alter table user add column alipay varchar(128);
 alter table user_profile change alipay qq varchar(64);
+
+#20130523 rebate_type :1 购物返利 0 新人见面礼
+alter table user_rebate add column rebate_type tinyint(4) default '1';

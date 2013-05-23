@@ -2,13 +2,9 @@ package models.user
 
 import java.sql.Timestamp
 import scala.slick.driver.MySQLDriver.simple._
-/**
- * Created with IntelliJ IDEA.
- * User: Administrator
- * Date: 13-5-20
- * Time: 下午2:34
- * To change this template use File | Settings | File Templates.
- */
+/*
+* credit_type 0 集分宝 1 食豆
+* */
 case class UserCreditRecord(
                              id: Option[Long],
                              uid: Long,

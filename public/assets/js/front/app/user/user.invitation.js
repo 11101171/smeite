@@ -27,8 +27,39 @@ define(function(require, exports){
             clip.reposition(this);
         }
 
+        var prizeHtml=function(prize){
+            var html ="<div class='handle'>您获得 "+ prize.num ;
+            if(prize.handleStatus ==0){
+               html +=" ,系统将在24小时内发放"
+            }
+            if(prize.handleStatus== 1){
+                html+=" ,已发放"
+            }
+            if(prize.handleStatus == 2){
+                html+=" ,"+prize.handleResult
+            }
+            html+="</div>" ;
+            return html;
+        }
+
         var getInvitePrizesHtml=function(json){
-            alert(json)
+            var html ="";
+            if(json.size==1){
+               html+=prizeHtml(json.prizes[0])
+            }
+            if(json.size==2){
+
+                html+=prizeHtml(json.prizes[0])
+                html+=prizeHtml(json.prizes[1])
+            }
+            if(json.size==3){
+                html+=prizeHtml(json.prizes[0])
+                html+=prizeHtml(json.prizes[1])
+                html+=prizeHtml(json.prizes[2])
+            }
+
+            return html;
+
         }
 
         var getInvitePrizes = function(uid,inviteeId,$elm){

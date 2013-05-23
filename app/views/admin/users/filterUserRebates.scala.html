@@ -80,7 +80,7 @@
                 <tr>
 
                     <th>用户Id</th>
-
+                    <th>类型</th>
                     <th>返利数量</th>
                     <th>提交时间</th>
                     <th>处理状态</th>
@@ -93,7 +93,15 @@
                 <tr id="@item.id.get">
 
                     <td><a  href="@controllers.users.routes.Users.home(item.uid)"  target="_blank"> @item.uid</a> </td>
+                    <td>
+                        @if(item.rebateType == 0){
+                        <span class="label label-info">新人见面礼</span>
+                        }
+                        @if(item.rebateType == 1){
+                        <span class="label label-success">购物返利</span>
+                        }
 
+                    </td>
                     <td>@item.num</td>
                     <td>@item.withdrawTime</td>
                     <td>

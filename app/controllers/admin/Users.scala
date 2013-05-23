@@ -6,7 +6,7 @@ import play.api.data.Forms._
 import play.api.data.Form
 import models.Page
 import play.api.libs.json.Json
-import models.user.dao.UserDao
+import models.user.dao.{UserSQLDao, UserDao}
 import models.tag.dao.TagDao
 import models.report.dao.TaobaokeIncomeDao
 import java.util.Date
@@ -18,15 +18,9 @@ import com.taobao.api.domain.{TaobaokeReportMember, TaobaokeReport}
 import scala.collection.JavaConverters._
 import models.report.TaobaokeIncome
 import java.sql.Timestamp
-import models.user.{UserOrder, UserRebate}
+import models.user.{UserCreditRecord, UserOrder,ShiDouSetting,UserRebate}
 
-/**
- * Created with IntelliJ IDEA.
- * User: Administrator
- * Date: 12-12-13
- * Time: 上午8:54
- * To change this template use File | Settings | File Templates.
- */
+
 case class UserBatchFormData(action:Int,ids:Seq[Long],url:Option[String])
 case  class UserFilterFormData(name:Option[String],status:Option[Int],daren:Option[Int],comeFrom:Option[Int],creditsOrder:String,shiDouOrder:String,idOrder:String,currentPage:Option[Int])
 case class FilterExchangeShiDouFormData(status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
@@ -431,7 +425,10 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
       /* 查看 user rebate 是否添加，如果没有，则添加*/
       val rebate = UserDao.findUserRebateByTradeId(item.getTradeId)
       if(rebate.isEmpty){
-        UserDao.addUserRebate(uid,userCommission,userOrderId,item.getTradeId)
+        /* 赠送额外的 食豆 和 食豆记录,目前所有用户都获得额外的1个食豆*/
+        UserSQLDao.updateShiDou(uid,ShiDouSetting.rebateShiDou1)
+        UserDao.addUserCreditRecord(UserCreditRecord(None,uid,1,ShiDouSetting.rebateShiDou1,"购物成功后获赠",new Timestamp(System.currentTimeMillis())))
+        UserDao.addUserRebate(uid,userCommission,1,userOrderId,item.getTradeId)
       }
 
     }
