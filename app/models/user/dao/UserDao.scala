@@ -719,8 +719,6 @@ object UserDao {
 
   /*用户申请食豆*/
   def addUserExchangeShiDou(applyId:Long,num:Int ) =  database.withSession {  implicit session:Session =>
-    Cache.remove("user_"+applyId)
-       modifyWithdrawShiDou(applyId,num)
        UserExchangeShiDous.autoInc2.insert(applyId,num,new Timestamp(System.currentTimeMillis()))
    }
   /*用户申请食豆列表*/
@@ -786,7 +784,7 @@ object UserDao {
     UserRebates.autoInc2.insert(uid,num,rebateType,new Timestamp(System.currentTimeMillis()))
   }
   def addUserRebate(uid:Long,num:Int,rebateType:Int,userOrderId:Long,tradeId:Long) = database.withSession {  implicit session:Session =>
-      modifyCredits(uid,num)
+     modifyCredits(uid,num)
       UserRebates.autoInc3.insert(uid,num,rebateType,userOrderId,tradeId,new Timestamp(System.currentTimeMillis()))
   }
   def findUserRebate(id:Long):(User,UserRebate) =  database.withSession {  implicit session:Session =>

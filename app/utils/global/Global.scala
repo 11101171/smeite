@@ -28,8 +28,8 @@ object Global extends GlobalSettings {
     //   val testActor = Akka.system.actorOf(Props[TestActor], name = "testActor")
   //     Akka.system.scheduler.schedule(1 seconds, 60 seconds, testActor, "start")
        /* 邀请有奖，每天夜里3点-4点统计 发布的时候注意修改时间 */
-    //   val invitePrizeActor = Akka.system.actorOf(Props[InvitePrizeActor], name = "invitePrizeActor")
-   //    Akka.system.scheduler.schedule(1 seconds, 30 seconds, invitePrizeActor, "start")
+  //    val invitePrizeActor = Akka.system.actorOf(Props[InvitePrizeActor], name = "invitePrizeActor")
+  //    Akka.system.scheduler.schedule(1 seconds, 30 seconds, invitePrizeActor, "start")
        /* 淘宝客收入 每天晚上11:30左右统计 发布的时候注意修改时间 */
        //   val taobaokeIncomeActor = Akka.system.actorOf(Props[TaobaokeIncomeActor], name = "taobaokeIncomeActor")
        //    Akka.system.scheduler.schedule(1 seconds, 30 seconds, taobaokeIncomeActor, "start")

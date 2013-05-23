@@ -15,7 +15,7 @@ user
         </div>
         <div class="main-content">
             <div class="credits mb20">
-                <div class="credits_info">您已经获得<span>@user.get.credits</span>个集分宝，值<span>￥@(user.get.credits/100.0)</span>元,已成功发放<span>@user.get.withdrawCredits</span>个集分宝 </div>
+                <div class="credits_info">您已经获得<span>@user.get.credits</span>个集分宝，值<span>￥@(user.get.credits/100.0)</span>元， 已成功发放<span>@user.get.withdrawCredits</span>个集分宝 </div>
                 <div class="title">集分宝发放记录</div>
             <table class="table">
                 <thead>
@@ -64,9 +64,27 @@ user
                   }
                 </tbody>
             </table>
-
+                <div class="clearfix pt20 pb20">
+                    <div class="pagin fr pagination" id="J_Pagination">
+                        @if(page.nums.length>1){
+                        @page.prev.map { page =>
+                        <a class="prev" href="@controllers.users.routes.UsersCommission.myCredits(page)">上一页</a>
+                        }
+                        @for(num <-page.nums){
+                        @if(num==page.currentPage){
+                        <span class="current">@num</span>
+                        }else {
+                        <a href="@controllers.users.routes.UsersCommission.myCredits(num)">@num</a>
+                        }
+                        }
+                        @page.next.map { page =>
+                        <a class="next" href="@controllers.users.routes.UsersCommission.myCredits(page)">下一页</a>
+                        }
+                        }
+                    </div>
+                </div>
            <!-- 邀请有奖发放情况 -->
-                <div class="title">集分宝发放记录</div>
+                <div class="title">集分宝-邀请有奖发放记录</div>
                 <table class="table">
                     <thead>
                     <tr  height="35">
@@ -95,7 +113,11 @@ user
                             @item.handleTime
                         </td>
                         <td>
+                            @if(user.get.alipay.isEmpty || user.get.alipay.get.trim ==""){
+                            您还没有填写支付宝，<a href="@controllers.users.routes.UsersAccount.payment">现在就去填写吧</a>
+                            }else{
                             @models.user.HandleResult(item.handleResult)
+                            }
                         </td>
                     </tr>
                     }
@@ -106,27 +128,28 @@ user
                     }
                     </tbody>
                 </table>
-            </div>
-
-            <div class="clearfix pt20 pb20">
-                <div class="pagin fr pagination" id="J_Pagination">
-                    @if(page.nums.length>1){
-                    @page.prev.map { page =>
-                    <a class="prev" href="@controllers.users.routes.UsersCommission.myCredits(page)">上一页</a>
-                    }
-                    @for(num <-page.nums){
-                    @if(num==page.currentPage){
-                    <span class="current">@num</span>
-                    }else {
-                    <a href="@controllers.users.routes.UsersCommission.myCredits(num)">@num</a>
-                    }
-                    }
-                    @page.next.map { page =>
-                    <a class="next" href="@controllers.users.routes.UsersCommission.myCredits(page)">下一页</a>
-                    }
-                    }
+                <div class="clearfix pt20 pb20">
+                    <div class="pagin fr pagination" id="J_Pagination">
+                        @if(prizes.nums.length>1){
+                        @prizes.prev.map { page =>
+                        <a class="prev" href="@controllers.users.routes.UsersCommission.myCredits(page)">上一页</a>
+                        }
+                        @for(num <-prizes.nums){
+                        @if(num==prizes.currentPage){
+                        <span class="current">@num</span>
+                        }else {
+                        <a href="@controllers.users.routes.UsersCommission.myCredits(num)">@num</a>
+                        }
+                        }
+                        @prizes.next.map { page =>
+                        <a class="next" href="@controllers.users.routes.UsersCommission.myCredits(page)">下一页</a>
+                        }
+                        }
+                    </div>
                 </div>
             </div>
+
+
             <div class="help">
                 <div class="help-title">帮助</div>
                 <ul>
