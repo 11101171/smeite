@@ -21,10 +21,11 @@ object UsersCommission  extends Controller {
 
 
 /*我的返利*/
- def myCredits= Users.UserAction {user => implicit request =>
+ def myCredits(p:Int)= Users.UserAction {user => implicit request =>
     if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)
     else {
-        Ok(views.html.users.commission.myCredits(user))
+      val page = UserDao.findUserRebates(user.get.id.get,p,20)
+        Ok(views.html.users.commission.myCredits(user,page))
     }
   }
   /*我的食豆*/

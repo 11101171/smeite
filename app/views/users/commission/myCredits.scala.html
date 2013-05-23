@@ -1,4 +1,4 @@
-@(user:Option[models.user.User])
+@(user:Option[models.user.User],page:Page[models.user.UserRebate])
 @views.html.template(
 user
 )(css="/assets/css/template/user.setting.css") {
@@ -7,7 +7,7 @@ user
         <div class="side-nav">
             <h2>我的返利</h2>
             <ul>
-                <li> <a class="on"  href="@controllers.users.routes.UsersCommission.myCredits">我的集分宝</a> </li>
+                <li> <a class="on"  href="@controllers.users.routes.UsersCommission.myCredits(1)">我的集分宝</a> </li>
                 <li> <a  href="@controllers.users.routes.UsersCommission.myShiDou">我的食豆</a>  </li>
                 <li> <a  href="@controllers.users.routes.UsersCommission.myAward">我的奖品</a>  </li>
                 <li> <a href="@controllers.users.routes.UsersCommission.invite(1)">邀请有奖</a> </li>
@@ -17,22 +17,48 @@ user
             <div class="credits mb20">
                 <div class="credits_info">您已经获得<span>@user.get.credits</span>个集分宝，值<span>￥@(user.get.credits/100.0)</span>元</div>
 
-                <div class="title">集分宝返利记录</div>
+                <div class="title">集分宝发放记录</div>
             <table class="table">
                 <thead>
                 <tr  height="35">
-                    <th  width="110">返利商品</th>
-                    <th  width="174">返利数量</th>
-                    <th  width="127">处理时间</th>
+                    <th  width="110">发放原因</th>
+                    <th  width="80">发放数量</th>
+                    <th  width="100">发放时间</th>
+                    <th  width="100">处理时间</th>
                     <th  width="272">处理结果</th>
                 </tr>
                 </thead>
                 <tbody>
-
+                @if(page.items.length !=0){
+                   @for(item <- page.items){
+                    <tr>
+                        <td>
+                            @if(item.rebateType == 0){
+                            <span>新人见面礼</span>
+                            }
+                            @if(item.rebateType == 1){
+                            <span>购物返利,<a href="@controllers.users.routes.Users.credits(user.get.id.get,1,1)">去看看购买的订单</a></span>
+                            }
+                        </td>
+                        <td>
+                            @item.num
+                        </td>
+                        <td>
+                            @item.withdrawTime
+                        </td>
+                        <td>
+                            @item.handleTime
+                        </td>
+                        <td>
+                            @item.handleResult
+                        </td>
+                    </tr>
+                }
+                }else{
                 <tr>
-                    <td colspan="4" class="table_one">您还没有返利，赶快加入吧！</td>
+                    <td colspan="5" class="table_one">您还没有集分宝发放记录，<a href="/">去挑选心动的商品吧</a> </td>
                 </tr>
-
+                  }
                 </tbody>
             </table>
 

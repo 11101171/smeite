@@ -776,6 +776,13 @@ object UserDao {
     val list:List[UserRebate]=( for( c <- UserRebates ) yield c).drop(startRow).take(pageSize).list()
     Page[UserRebate](list,currentPage,totalPages)
   }
+  def findUserRebates(uid:Long,currentPage:Int,pageSize:Int) =  database.withSession {  implicit session:Session =>
+    val totalRows = Query(UserRebates.filter(_.uid === uid).length).first()
+    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val list:List[UserRebate]=( for( c <- UserRebates.filter(_.uid === uid) ) yield c).drop(startRow).take(pageSize).list()
+    Page[UserRebate](list,currentPage,totalPages)
+  }
 
   def filterUserRebates(uid:Option[Long],status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Int,pageSize:Int) = database.withSession {  implicit session:Session =>
     var query =for{ u <- UserRebates }yield (u)
