@@ -32,7 +32,7 @@ case  class BaseFormData(
                               month:Option[String],
                               day:Option[String],
                               blog:Option[String],
-                              weixin:Option[String],
+                              qq:Option[String],
                               intro:Option[String]
                               )
 object UsersAccount  extends Controller {
@@ -64,7 +64,7 @@ object UsersAccount  extends Controller {
     "month"->optional(text),
     "day"->optional(text),
    "blog"->optional(text),
-  "weixin"->optional(text),
+  "qq"->optional(text),
   "intro" ->optional(text)
   )(BaseFormData.apply)(BaseFormData.unapply)
   )
@@ -83,7 +83,7 @@ object UsersAccount  extends Controller {
     if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)
      else {
       val profile =UserDao.findProfile(user.get.id.get)
-      Ok(views.html.users.account.base(user,baseForm.fill(BaseFormData(user.get.name,user.get.email,profile.gender,profile.birth,None,None,profile.blog,profile.weixin,profile.intro))))
+      Ok(views.html.users.account.base(user,baseForm.fill(BaseFormData(user.get.name,user.get.email,profile.gender,profile.birth,None,None,profile.blog,profile.qq,profile.intro))))
     }
 
   }
@@ -94,9 +94,9 @@ object UsersAccount  extends Controller {
       baseForm.bindFromRequest.fold(
         formWithErrors => BadRequest(views.html.users.account.base(user,formWithErrors)) ,
       data =>{
-        /*uid:Long,name:String,intro:String,email:String,gender:Int, birth:String, province:String, city:String, blog:String, weixin:String*/
+        /*uid:Long,name:String,intro:String,email:String,gender:Int, birth:String, province:String, city:String, blog:String, qq:String*/
         val birth:String=data.year.getOrElse("")+"|"+data.month.getOrElse("")+"|"+data.day.getOrElse("")
-        UserDao.modifyBase(user.get.id.get,data.nickName,data.email.getOrElse(""),data.intro.getOrElse(""),data.sex,birth,data.blog.getOrElse(""),data.weixin.getOrElse(""))
+        UserDao.modifyBase(user.get.id.get,data.nickName,data.email.getOrElse(""),data.intro.getOrElse(""),data.sex,birth,data.blog.getOrElse(""),data.qq.getOrElse(""))
         Ok(views.html.users.account.base(user,baseForm.fill(data),"基本资料保存成功"))
       }
       )
@@ -135,7 +135,7 @@ object UsersAccount  extends Controller {
    if(user.isEmpty)  Redirect(controllers.users.routes.UsersRegLogin.login)
    else {
      val profile =UserDao.findProfile(user.get.id.get)
-     Ok(views.html.users.account.payment(user,alipayForm.fill((user.get.alipay,profile.phone,profile.weixin))))
+     Ok(views.html.users.account.payment(user,alipayForm.fill((user.get.alipay,profile.phone,profile.qq))))
    }
   }
   /* 修改支付宝 */

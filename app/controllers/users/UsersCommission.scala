@@ -41,17 +41,19 @@ object UsersCommission  extends Controller {
   def exchangeShiDou = Users.UserAction {user => implicit request =>
     if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)
     else {
+      var page = UserDao.findUserExchangeShiDous(user.get.id.get,1,20)
       exchangeForm.bindFromRequest.fold(
         formWithErrors => {
-          BadRequest(views.html.users.commission.myShiDou(user,formWithErrors))
+          BadRequest(views.html.users.commission.myShiDou(user,formWithErrors,page))
         } ,
         fields =>{
           if((user.get.shiDou - user.get.withdrawShiDou)< fields){
-            Ok(views.html.users.commission.myShiDou(user,exchangeForm.fill(fields),"您申请兑换的食豆数量大于您目前的余额"))
+            Redirect(controllers.users.routes.UsersCommission.myShiDou(1))
+         ///   Ok(views.html.users.commission.myShiDou(user,exchangeForm.fill(fields),page,"您申请兑换的食豆数量大于您目前的余额"))
           }
           UserDao.addUserExchangeShiDou(user.get.id.get,fields)
-          Ok(views.html.users.commission.myShiDou(user,exchangeForm.fill(fields),"兑换申请成功，我们将尽快处理，并把处理结果通知您，谢谢您对我们的信任和支持。"))
-
+        //  Ok(views.html.users.commission.myShiDou(user,exchangeForm.fill(fields),page,"兑换申请成功，我们将尽快处理，并把处理结果通知您，谢谢您对我们的信任和支持。"))
+          Redirect(controllers.users.routes.UsersCommission.myShiDou(1))
         }
       )
     }

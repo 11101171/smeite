@@ -8,7 +8,7 @@ user
             <h2>帐号设置</h2>
             <ul>
                 <li> <a  href="@controllers.users.routes.UsersCommission.myCredits(1)">我的集分宝</a> </li>
-                <li> <a class="on"  href="@controllers.users.routes.UsersCommission.myShiDou">我的食豆</a>  </li>
+                <li> <a class="on"  href="@controllers.users.routes.UsersCommission.myShiDou(1)">我的食豆</a>  </li>
                 <li> <a  href="@controllers.users.routes.UsersCommission.myAward">我的奖品</a>  </li>
                 <li> <a  href="@controllers.users.routes.UsersCommission.invite(1)">邀请有奖</a> </li>
             </ul>
@@ -54,18 +54,29 @@ user
                 <table class="table">
                     <thead>
                     <tr  height="35">
-                        <th  width="110">兑换时间</th>
-                        <th  width="174">兑换数量</th>
-                        <th  width="127">处理时间</th>
+                        <th  width="120">兑换时间</th>
+                        <th  width="80">兑换数量</th>
+                        <th  width="120">处理状态</th>
+                        <th  width="120">处理时间</th>
                         <th  width="272">处理结果</th>
                     </tr>
                     </thead>
                     <tbody>
-
+                    @if(page.items.length !=0){
+                       @for(item <- page.items){
+                       <tr>
+                           <td>@item.applyTime </td>
+                           <td>@item.num </td>
+                           <td>@item.handleTime </td>
+                           <td>@models.user.HandleStatus(item.handleStatus) </td>
+                           <td>@models.user.HandleResult(item.handleResult)</td>
+                       </tr>
+                        }
+                    }else{
                     <tr>
-                        <td colspan="4" class="table_one">您还没有兑换，赶快加入吧！</td>
+                        <td colspan="5" class="table_one">您还没有兑换记录！</td>
                     </tr>
-
+                    }
                     </tbody>
                 </table>
 
