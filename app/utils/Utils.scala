@@ -63,6 +63,9 @@ object Utils {
   def timestampFormat2(time:Timestamp)={
     new java.text.SimpleDateFormat("yyyy-MM-dd").format(time)
   }
+  def timestampFormat3(time:Timestamp)={
+    new java.text.SimpleDateFormat("yyyyMMdd").format(time)
+  }
    /* 截取字符串 */
   def subString(str:String,minLength:Int,maxLength:Int)={
      if(str.length>minLength) str.substring(0,maxLength)
