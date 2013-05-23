@@ -196,7 +196,6 @@ object UsersAccount  extends Controller {
    if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)
    else {
      val num = (request.body \ "num").as[Int]
-     UserSQLDao.updateCredits(user.get.id.get,num)
      UserDao.addUserRebate(user.get.id.get,num,0)
      UserDao.modifyStatus(user.get.id.get,1)
      UserDao.addUserCreditRecord(UserCreditRecord(None,user.get.id.get,0,num,"新人见面礼",new Timestamp(System.currentTimeMillis())))    // 添加用户获得集分宝 食豆记录

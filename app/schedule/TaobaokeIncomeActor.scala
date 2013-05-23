@@ -72,7 +72,7 @@ class TaobaokeIncomeActor extends Actor {
       val rebate = UserDao.findUserRebateByTradeId(item.getTradeId)
       if(rebate.isEmpty){
         /* 赠送额外的 食豆 和 食豆记录,目前所有用户都获得额外的1个食豆*/
-        UserSQLDao.updateShiDou(uid,ShiDouSetting.rebateShiDou1)
+        UserDao.modifyShiDou(uid,ShiDouSetting.rebateShiDou1)
         UserDao.addUserCreditRecord(UserCreditRecord(None,uid,1,ShiDouSetting.rebateShiDou1,"购物成功后获赠",new Timestamp(System.currentTimeMillis())))
         UserDao.addUserRebate(uid,userCommission,1,userOrderId,item.getTradeId)
       }

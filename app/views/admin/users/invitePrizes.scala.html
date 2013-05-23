@@ -106,7 +106,7 @@
                         <span class="label label-warning">失败</span>
                         }</td>
 
-                    <td>@invitePrize.handleResult</td>
+                    <td>@models.user.HandleResult(invitePrize.handleResult)</td>
                     <td>
 
                         <a href="@controllers.admin.routes.Users.editInvitePrize(invitePrize.id.get)"><i class="icon-edit"></i></a>

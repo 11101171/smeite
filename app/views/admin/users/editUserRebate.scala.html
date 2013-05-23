@@ -83,7 +83,7 @@
                             <div class="controls">
                                 <select name="handleResult" id="handleResult">
                                     @for(result<-models.user.HandleResult.values){
-                                    <option value="@result" @(if(form("handleResult").value.getOrElse("") == result) {"selected"})>@result</option>
+                                    <option value="@result.id" @(if(form("handleResult").value.getOrElse("") == result) {"selected"})>@result</option>
                                     }
                                 </select>
                             </div>

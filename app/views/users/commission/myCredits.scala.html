@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],page:Page[models.user.UserRebate])
+@(user:Option[models.user.User],page:Page[models.user.UserRebate],prizes:Page[models.user.UserInvitePrize])
 @views.html.template(
 user
 )(css="/assets/css/template/user.setting.css") {
@@ -53,18 +53,59 @@ user
                             @item.handleTime
                         </td>
                         <td>
-                            @item.handleResult
+                            @models.user.HandleResult(item.handleResult)
                         </td>
                     </tr>
                 }
                 }else{
                 <tr>
-                    <td colspan="5" class="table_one">您还没有集分宝发放记录，<a href="/">去挑选心动的商品吧</a> </td>
+                    <td colspan="6" class="table_one">您还没有集分宝发放记录，<a href="/">去挑选心动的商品吧</a> </td>
                 </tr>
                   }
                 </tbody>
             </table>
 
+           <!-- 邀请有奖发放情况 -->
+                <div class="title">集分宝发放记录</div>
+                <table class="table">
+                    <thead>
+                    <tr  height="35">
+                        <th  width="80">发放数量</th>
+                        <th  width="100">发放时间</th>
+                        <th  width="80">处理状态</th>
+                        <th  width="100">处理时间</th>
+                        <th  width="272">处理结果</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @if(prizes.items.length !=0){
+                    @for(item <- prizes.items){
+                    <tr>
+
+                        <td>
+                            @item.num
+                        </td>
+                        <td>
+                            @item.createTime
+                        </td>
+                        <td>
+                            @models.user.HandleStatus(item.handleStatus)
+                        </td>
+                        <td>
+                            @item.handleTime
+                        </td>
+                        <td>
+                            @models.user.HandleResult(item.handleResult)
+                        </td>
+                    </tr>
+                    }
+                    }else{
+                    <tr>
+                        <td colspan="5" class="table_one">您还没有获得邀请有奖，<a href="@controllers.users.routes.UsersCommission.invite(1)">去邀请朋友吧</a> </td>
+                    </tr>
+                    }
+                    </tbody>
+                </table>
             </div>
 
 

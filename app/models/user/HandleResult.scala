@@ -10,6 +10,7 @@ package models.user
  */
 
 object HandleResult extends Enumeration {
+  val unProcess = Value("还没有处理结果");
   val Success = Value("发放成功，(*^__^*) 嘻嘻……");
   val Fail0 = Value("发放失败，没有支付宝")
   val Fail1 = Value("发放失败，支付宝未通过实名认证")

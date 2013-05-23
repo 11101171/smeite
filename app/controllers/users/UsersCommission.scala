@@ -25,7 +25,8 @@ object UsersCommission  extends Controller {
     if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)
     else {
       val page = UserDao.findUserRebates(user.get.id.get,p,20)
-        Ok(views.html.users.commission.myCredits(user,page))
+      val prizes = UserDao.findUserInvitePrizes(user.get.id.get,p,20)
+        Ok(views.html.users.commission.myCredits(user,page,prizes))
     }
   }
   /*我的食豆*/
@@ -77,7 +78,7 @@ object UsersCommission  extends Controller {
  def  getInvitePrizes(uid:Long,inviteeId:Long)  = Users.UserAction {  user => implicit request =>
     if(user.isEmpty)  Redirect(controllers.users.routes.UsersRegLogin.login)
     else {
-      val prizes = UserDao.findUserInvitePrizes(uid,inviteeId).map(x=>InvitePrize(x.num,x.handleStatus,x.handleResult))
+      val prizes = UserDao.findUserInvitePrizes(uid,inviteeId).map(x=>InvitePrize(x.num,x.handleStatus,models.user.HandleResult(x.handleResult).toString))
       Ok(Json.obj("code"->"100","size"->prizes.length,"prizes"->Json.toJson(prizes)))
 
     }

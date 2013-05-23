@@ -24,10 +24,10 @@ import models.user.{UserCreditRecord, UserOrder,ShiDouSetting,UserRebate}
 case class UserBatchFormData(action:Int,ids:Seq[Long],url:Option[String])
 case  class UserFilterFormData(name:Option[String],status:Option[Int],daren:Option[Int],comeFrom:Option[Int],creditsOrder:String,shiDouOrder:String,idOrder:String,currentPage:Option[Int])
 case class FilterExchangeShiDouFormData(status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
-case class ExchangeShiDouFormData(id:Long,name:String,alipay:String,num:Int,handleStatus:Int,handleResult:String,note:Option[String])
+case class ExchangeShiDouFormData(id:Long,uid:Long,name:String,alipay:String,num:Int,handleStatus:Int,handleResult:Int,note:Option[String])
 
 case class FilterInvitePrizeFormData(status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
-case class InvitePrizeFormData(id:Long,name:String,alipay:String,num:Int,handleStatus:Int,handleResult:String,note:Option[String])
+case class InvitePrizeFormData(id:Long,uid:Long,name:String,alipay:String,num:Int,handleStatus:Int,handleResult:Int,note:Option[String])
 
 case class FilterUserOrderFormData(status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
 
@@ -35,7 +35,7 @@ case class GetTaobaokeIncomeFormData(day:String)
 case class FilterTaobaokeIncomeFormData(outerCode:Option[String],day:Option[String],currentPage:Option[Int])
 
 case class FilterUserRebateFormData(uid:Option[Long],status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
-case class UserRebateFormData(id:Long,uid:Long,name:String,alipay:String,num:Int,handleStatus:Int,handleResult:String,note:Option[String])
+case class UserRebateFormData(id:Long,uid:Long,name:String,alipay:String,num:Int,handleStatus:Int,handleResult:Int,note:Option[String])
 
 object Users  extends Controller {
   val batchForm =Form(
@@ -70,11 +70,12 @@ object Users  extends Controller {
   val exchangeShiDouForm = Form(
    mapping(
      "id"->longNumber,
+     "uid"->longNumber,
      "name"->text,
      "alipay"->text,
      "num"->number,
      "handleStatus"->number,
-     "handleResult"->text,
+     "handleResult"->number,
      "note"->optional(text)
    )(ExchangeShiDouFormData.apply)(ExchangeShiDouFormData.unapply)
   )
@@ -91,11 +92,12 @@ object Users  extends Controller {
   val invitePrizeForm = Form(
     mapping(
       "id"->longNumber,
+      "uid"->longNumber,
       "name"->text,
       "alipay"->text,
       "num"->number,
       "handleStatus"->number,
-      "handleResult"->text,
+      "handleResult"->number,
       "note"->optional(text)
     )(InvitePrizeFormData.apply)(InvitePrizeFormData.unapply)
   )
@@ -137,7 +139,7 @@ object Users  extends Controller {
       "alipay"->text,
       "num"->number,
       "handleStatus"->number,
-      "handleResult"->text,
+      "handleResult"->number,
       "note"->optional(text)
     )(UserRebateFormData.apply)(UserRebateFormData.unapply)
   )
@@ -215,7 +217,7 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
 }
   def editExchangeShiDou(id:Long) = Managers.AdminAction{ manager => implicit request =>
     val (user,ue) = UserDao.findUserExchangeShiDou(id);
-    Ok(views.html.admin.users.editExchangeShiDou(manager,exchangeShiDouForm.fill(ExchangeShiDouFormData(ue.id.get,user.name,user.alipay.getOrElse("none"),ue.num,ue.handleStatus,ue.handleResult,ue.note))))
+    Ok(views.html.admin.users.editExchangeShiDou(manager,exchangeShiDouForm.fill(ExchangeShiDouFormData(ue.id.get,user.id.get,user.name,user.alipay.getOrElse("none"),ue.num,ue.handleStatus,ue.handleResult,ue.note))))
   }
 
   def saveExchangeShiDou  = Managers.AdminAction{ manager => implicit request =>
@@ -223,6 +225,8 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
       formWithErrors =>BadRequest(views.html.admin.users.editExchangeShiDou(manager,formWithErrors,"出错了")),
       data => {
          UserDao.modifyUserExchangeShiDou(data.id,data.handleStatus,data.handleResult,data.note.getOrElse(""))
+        /* 如果处理成功 则修改user withdraw shidou 数量 */
+        if(data.handleStatus == 1) UserDao.modifyWithdrawShiDou(data.uid,data.num)
       Ok(views.html.admin.users.editExchangeShiDou(manager,exchangeShiDouForm.fill(data),"修改成功"))
       }
     )
@@ -244,22 +248,25 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
      for(up<- userProfiles ){
       val user = UserDao.findById(up.uid)
       if(user.credits >=100 && user.credits < 1000){
-        val invitePrize = UserDao.findUserInvitePrize(up.inviteId.get,up.uid,2)
-        if(invitePrize.isEmpty){
-          UserDao.addUserInvitePrize(up.inviteId.get,up.uid,user.credits,2)
-        }
+        val invitePrize = UserDao.findUserInvitePrize(up.inviteId.get,up.uid,200)
+        if(invitePrize.isEmpty){ UserDao.addUserInvitePrize(up.inviteId.get,up.uid,user.credits,200)  }
       }
-       if(user.credits >=1000 && user.credits < 3000){
-         val invitePrize = UserDao.findUserInvitePrize(up.inviteId.get,up.uid,3)
-         if(invitePrize.isEmpty){
-           UserDao.addUserInvitePrize(up.inviteId.get,up.uid,user.credits,3)
-         }
+       if(user.credits >=1000 && user.credits < 5000){
+         val invitePrize1 = UserDao.findUserInvitePrize(up.inviteId.get,up.uid,200)
+         if(invitePrize1.isEmpty){  UserDao.addUserInvitePrize(up.inviteId.get,up.uid,user.credits,200)}
+
+         val invitePrize2 = UserDao.findUserInvitePrize(up.inviteId.get,up.uid,300)
+         if(invitePrize2.isEmpty){  UserDao.addUserInvitePrize(up.inviteId.get,up.uid,user.credits,300)}
        }
-       if(user.credits >=3000 ){
-         val invitePrize = UserDao.findUserInvitePrize(up.inviteId.get,up.uid,5)
-         if(invitePrize.isEmpty){
-           UserDao.addUserInvitePrize(up.inviteId.get,up.uid,user.credits,5)
-         }
+       if(user.credits >= 5000 ){
+         val invitePrize1 = UserDao.findUserInvitePrize(up.inviteId.get,up.uid,200)
+         if(invitePrize1.isEmpty){  UserDao.addUserInvitePrize(up.inviteId.get,up.uid,user.credits,200)}
+
+         val invitePrize2 = UserDao.findUserInvitePrize(up.inviteId.get,up.uid,300)
+         if(invitePrize2.isEmpty){  UserDao.addUserInvitePrize(up.inviteId.get,up.uid,user.credits,300)}
+
+         val invitePrize3 = UserDao.findUserInvitePrize(up.inviteId.get,up.uid,500)
+         if(invitePrize3.isEmpty){ UserDao.addUserInvitePrize(up.inviteId.get,up.uid,user.credits,500) }
        }
      }
   }
@@ -269,7 +276,7 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
 
   def editInvitePrize(id:Long) = Managers.AdminAction{ manager => implicit request =>
     val (user,ui) = UserDao.findUserInvitePrize(id)
-    Ok(views.html.admin.users.editInvitePrize(manager,invitePrizeForm.fill(InvitePrizeFormData(ui.id.get,user.name,user.alipay.getOrElse("none"),ui.num,ui.handleStatus,ui.handleResult,ui.note))))
+    Ok(views.html.admin.users.editInvitePrize(manager,invitePrizeForm.fill(InvitePrizeFormData(ui.id.get,user.id.get,user.name,user.alipay.getOrElse("none"),ui.num,ui.handleStatus,ui.handleResult,ui.note))))
   }
 
   def saveInvitePrize  = Managers.AdminAction{ manager => implicit request =>
@@ -277,6 +284,8 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
       formWithErrors =>BadRequest(views.html.admin.users.editInvitePrize(manager,formWithErrors,"出错了")),
       data => {
         UserDao.modifyUserInvitePrize(data.id,data.handleStatus,data.handleResult,data.note.getOrElse(""))
+        /* 如果处理成功 则修改user withdraw credits 数量 */
+        if(data.handleStatus == 1) UserDao.modifyWithdrawCredits(data.uid,data.num)
       Ok(views.html.admin.users.editInvitePrize(manager,invitePrizeForm.fill(data),"修改成功"))
       }
     )
@@ -338,7 +347,7 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
       data => {
         UserDao.modifyUserRebate(data.id,data.handleStatus,data.handleResult,data.note.getOrElse(""))
         /* 如果处理成功 则修改user withdraw credits 数量 */
-        if(data.handleStatus == 1) UserSQLDao.updateWithdrawCredits(data.uid,data.num)
+        if(data.handleStatus == 1) UserDao.modifyWithdrawCredits(data.uid,data.num)
         Ok(views.html.admin.users.editUserRebate(manager,userRebateForm.fill(data),"修改成功"))
       }
     )
@@ -429,7 +438,7 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
       val rebate = UserDao.findUserRebateByTradeId(item.getTradeId)
       if(rebate.isEmpty){
         /* 赠送额外的 食豆 和 食豆记录,目前所有用户都获得额外的1个食豆*/
-        UserSQLDao.updateShiDou(uid,ShiDouSetting.rebateShiDou1)
+        UserDao.modifyShiDou(uid,ShiDouSetting.rebateShiDou1)
         UserDao.addUserCreditRecord(UserCreditRecord(None,uid,1,ShiDouSetting.rebateShiDou1,"购物成功后获赠",new Timestamp(System.currentTimeMillis())))
         UserDao.addUserRebate(uid,userCommission,1,userOrderId,item.getTradeId)
       }

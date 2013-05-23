@@ -17,7 +17,7 @@ case class UserExchangeShiDou (
   applyId: Long,
   num:Int,
   handleStatus:Int,
-  handleResult:String,
+  handleResult:Int,
   note:Option[String],
   applyTime:Option[Timestamp],
   handleTime:Option[Timestamp]
@@ -28,7 +28,7 @@ case class UserExchangeShiDou (
     def applyId = column[Long]("apply_id")
     def num = column[Int]("num")
     def handleStatus = column[Int]("handle_status")
-    def handleResult = column[String]("handle_result")
+    def handleResult = column[Int]("handle_result")
     def note = column[String]("note")
     def applyTime = column[Timestamp]("apply_time")
     def handleTime = column[Timestamp]("handle_time")

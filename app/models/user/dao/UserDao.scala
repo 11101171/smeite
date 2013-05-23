@@ -186,6 +186,18 @@ object UserDao {
     Cache.remove("user_"+uid)
     UserSQLDao.updateShiDou(uid,shiDou)
   }
+  def modifyWithdrawShiDou(uid:Long,shiDou:Int)= database.withSession{  implicit session:Session =>
+    Cache.remove("user_"+uid)
+    UserSQLDao.updateWithdrawShiDou(uid,shiDou)
+  }
+  def modifyCredits(uid:Long,credits:Int)= database.withSession{  implicit session:Session =>
+    Cache.remove("user_"+uid)
+    UserSQLDao.updateCredits(uid,credits)
+  }
+  def modifyWithdrawCredits(uid:Long,credits:Int)= database.withSession{  implicit session:Session =>
+    Cache.remove("user_"+uid)
+    UserSQLDao.updateWithdrawCredits(uid,credits)
+  }
 
   /*  list  user */
   def findAll(currentPage: Int, pageSize: Int ): Page[User] = database.withSession {  implicit session:Session =>
@@ -622,6 +634,7 @@ object UserDao {
   }
   /* and user invite prize*/
   def addUserInvitePrize(uid:Long,inviteeId:Long,inviteeCredits:Int,num:Int) =  database.withSession {  implicit session:Session =>
+    modifyCredits(uid,num)
     UserInvitePrizes.autoInc2.insert((uid,inviteeId,inviteeCredits,num,new Timestamp(System.currentTimeMillis())))
   }
 
@@ -655,9 +668,20 @@ object UserDao {
     }yield(u) ).list
   }
 
+  def findUserInvitePrizes(uid:Long,currentPage:Int,pageSize:Int):Page[UserInvitePrize] =  database.withSession {  implicit session:Session =>
+    val totalRows=Query(UserInvitePrizes.filter(_.uid == uid).length).first()
+    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val list:List[UserInvitePrize] = (for{
+      s <- UserInvitePrizes
+       if s.uid === uid
+    }yield (s) ).drop(startRow).take(pageSize).list()
+    Page[UserInvitePrize](list,currentPage,totalPages)
+  }
 
 
-  def modifyUserInvitePrize(id:Long,handleStatus:Int,handleResult:String,note:String) = database.withSession {  implicit session:Session =>
+
+  def modifyUserInvitePrize(id:Long,handleStatus:Int,handleResult:Int,note:String) = database.withSession {  implicit session:Session =>
     (for( c <- UserInvitePrizes if c.id=== id ) yield c.handleStatus ~ c.handleResult ~ c.note).update((handleStatus,handleResult,note))
   }
 
@@ -696,7 +720,7 @@ object UserDao {
   /*用户申请食豆*/
   def addUserExchangeShiDou(applyId:Long,num:Int ) =  database.withSession {  implicit session:Session =>
     Cache.remove("user_"+applyId)
-       UserSQLDao.updateWithdrawShiDou(applyId,num)
+       modifyWithdrawShiDou(applyId,num)
        UserExchangeShiDous.autoInc2.insert(applyId,num,new Timestamp(System.currentTimeMillis()))
    }
   /*用户申请食豆列表*/
@@ -739,16 +763,18 @@ object UserDao {
        if ue.applyId === id
      }yield (u,ue)).first()
   }
-  def modifyUserExchangeShiDou(id:Long,handleStatus:Int,handleResult:String,note:String) = database.withSession {  implicit session:Session =>
+  def modifyUserExchangeShiDou(id:Long,handleStatus:Int,handleResult:Int,note:String) = database.withSession {  implicit session:Session =>
     (for( c <- UserExchangeShiDous if c.id === id ) yield c.handleStatus ~ c.handleResult ~ c.note).update((handleStatus,handleResult,note))
   }
 
 
   /* add user rebate */
    def addUserRebate(uid:Long,num:Int,rebateType:Int) = database.withSession {  implicit session:Session =>
+    modifyCredits(uid,num)
     UserRebates.autoInc2.insert(uid,num,rebateType,new Timestamp(System.currentTimeMillis()))
   }
   def addUserRebate(uid:Long,num:Int,rebateType:Int,userOrderId:Long,tradeId:Long) = database.withSession {  implicit session:Session =>
+      modifyCredits(uid,num)
       UserRebates.autoInc3.insert(uid,num,rebateType,userOrderId,tradeId,new Timestamp(System.currentTimeMillis()))
   }
   def findUserRebate(id:Long):(User,UserRebate) =  database.withSession {  implicit session:Session =>
@@ -760,7 +786,7 @@ object UserDao {
     }yield(u,ur) ).first
   }
 
-  def modifyUserRebate(id:Long,handleStatus:Int,handleResult:String,note:String) = database.withSession {  implicit session:Session =>
+  def modifyUserRebate(id:Long,handleStatus:Int,handleResult:Int,note:String) = database.withSession {  implicit session:Session =>
     (for( c <- UserRebates if c.id=== id ) yield c.handleStatus ~ c.handleResult ~ c.note).update((handleStatus,handleResult,note))
   }
 

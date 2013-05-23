@@ -19,7 +19,7 @@ case class UserInvitePrize (
   inviteeCredits:Int,
   num:Int,
   handleStatus:Int,
-  handleResult:String,
+  handleResult:Int,
   note:Option[String],
   createTime:Option[Timestamp],
   handleTime:Option[Timestamp]
@@ -32,7 +32,7 @@ case class UserInvitePrize (
     def inviteeCredits = column[Int]("invitee_credits")
     def num = column[Int]("num")
     def handleStatus = column[Int]("handle_status")
-    def handleResult = column[String]("handle_result")
+    def handleResult = column[Int]("handle_result")
     def note = column[String]("note")
     def createTime = column[Timestamp]("create_time")
     def handleTime = column[Timestamp]("handle_time")

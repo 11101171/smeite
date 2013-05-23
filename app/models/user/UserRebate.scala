@@ -22,7 +22,7 @@ case class UserRebate(
                      userOrderId:Option[Long],
                      tradeId:Option[Long],
                      handleStatus:Int,
-                     handleResult:String,
+                     handleResult:Int,
                      note:Option[String],
                      withdrawTime:Option[Timestamp],
                      handleTime:Option[Timestamp]
@@ -36,7 +36,7 @@ object UserRebates extends Table[UserRebate]("user_rebate") {
   def userOrderId = column[Long]("user_order_id")
   def tradeId = column[Long]("trade_id")
   def handleStatus = column[Int]("handle_status")
-  def handleResult = column[String]("handle_result")
+  def handleResult = column[Int]("handle_result")
   def note = column[String]("note")
   def withdrawTime = column[Timestamp]("withdraw_time")
   def handleTime = column[Timestamp]("handle_time")
