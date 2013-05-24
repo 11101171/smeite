@@ -1685,7 +1685,7 @@ font-size: 18px;
     line-height: 26px;
     color: #333;
     font-weight: bold;
-    padding: 0 10px 0 0;
+    padding: 0 6px 0 0;
     font-family: "Microsoft YaHei";
 }
 #nav .channel li a:hover{
@@ -1693,7 +1693,7 @@ font-size: 18px;
 }
 
 #nav .channel li.choice {
-    padding-right: 20px;
+    padding-right: 10px;
     background: url(images/new.gif) no-repeat right 1px;
 }
 

@@ -355,6 +355,7 @@ object UserDao {
    UserLoveThemes.find(uid,themeId)
   }
 
+
   def addLoveTheme(uid:Long, themeId:Long)  =database.withSession {  implicit session:Session =>
     UserSQLDao.updateLoveThemeNum(uid,1)
     ThemeSQLDao.updateLoveNum(themeId,1)

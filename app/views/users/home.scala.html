@@ -51,8 +51,9 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                         <a class="pic-link" target="_blank" href="@controllers.routes.Goods.view(goods.id.get)">
                             <img src='@(goods.pic+"_210x210.jpg")' alt="@goods.name">
                         </a>
+                        @if(!user.isEmpty && user.get.id==author.id){
                         <a class="ilike-del"  href="javascript:;" data-type="share" data-proid="@goods.id.get">喜欢-1</a>
-
+                         }
                     </div>
                     <div class="goods-title ofh inlineblock">
                         @goods.name
@@ -106,7 +107,9 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                 <div class="theme-state">
                     <span>@item._1._4 人关注</span>
                 </div>
-                <a class="ilike-del" href="javascript:;" data-type="5" data-proid="@item._1._1">删除</a>
+                @if(!user.isEmpty && user.get.id==author.id){
+                <a class="ilike-del" href="javascript:;" data-type="my" data-proid="@item._1._1">删除</a>
+                }
             </div>
             }
 

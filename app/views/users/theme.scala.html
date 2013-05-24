@@ -64,10 +64,9 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                                     }else {
                                     <span>@item._1._4 人关注</span>
                                     }
-
                                 </div>
                                 @if(!user.isEmpty && user.get.id.get == author.id.get){
-                                <a class="ilike-del" href="javascript:;" data-type="5" data-themeid="@item._1._1">删除</a>
+                                <a class="ilike-del" href="javascript:;" data-type="@t" data-themeid="@item._1._1">删除</a>
                                 }
                             </div>
                             }

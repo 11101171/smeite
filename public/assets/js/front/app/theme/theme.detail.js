@@ -21,19 +21,25 @@ var UserTheme = {
 	themeId : $("#J_ThemeId").val(),
 	//删除主题
 	deleteUserTheme : function(){
-		var $del = $("#J_UserThemeDel");
+		var $del = $("#J_UserThemeDel"),
+            dataType=$del.data("type"),
+            themeId =$del.data("themeid");
 		$.ajax({
-			url:"/theme/delete?id="+UserTheme.themeId,
-			dataType : "json",
-			type : "get",
+			url:"/theme/delete",
+            type : "post",
+            contentType:"application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify({
+                themeId:themeId,
+                dataType:dataType
+            }),
 			success : function(data){
-
 				switch(data.code){
 					case "100" :
 						var html = "";
 						html += '<p class="success-text"><span class="correct">主题已删除成功！</span></p>';
 						html += '<p class="clearfix"><span class="fl mr10 l30">5秒后将</span><a class="bbl-btn goCheck" href="/user/' + SMEITER.userId + '/theme">返回我的主题</a>';
-						//html += '<a class="bgr-btn closeD ml10" href="javascript:;">关闭</a></p>';
+						html += '<a class="bgr-btn closeD ml10" href="javascript:;">关闭</a></p>';
 						$.smeite.tipForOper.conf.html = html;
 						$.smeite.tipForOper.init();
 						//5秒后自动跳转到我的主题
@@ -421,7 +427,7 @@ var UserTheme = {
 						       $goodsItem.addClass("goods-gray");
 						       break;
 					       case("101"):
-						       alert(data.msg);
+						       alert(data.message);
 					   }  
 				   }
 			});

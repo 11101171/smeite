@@ -9,7 +9,7 @@ import ugc.Product
 import ugc.API.ProductFormat
 import play.api.mvc.{Action, Controller}
 import models.theme._
-import models.theme.dao.ThemeDao
+import models.theme.dao.{ThemeSQLDao, ThemeDao}
 import models.user.{User,  UserStatus}
 import play.api.cache.Cache
 import play.api.Play.current
@@ -159,18 +159,33 @@ object Themes extends Controller {
 
 
   /*删除主题 *100 删除成功 * 101 请求失败 * 103 主题不存在 104 你还没有登录 105 没有权限删除  * */
-  def delete(id:Long) = Users.UserAction { user => implicit request =>
-       val theme=ThemeDao.findById(id);
-       if(theme.isEmpty) Ok(Json.obj("code" -> "103", "message" -> "主题不存在"))
-      else if(user.isEmpty)Ok(Json.obj("code" -> "104", "message" -> "你还没有登录" ))
-      else if(user.get.id.get != theme.get.uid) Ok(Json.obj("code" -> "104", "message" ->"你没有权限删除"))
-      else {
-        val result = ThemeDao.deleteTheme(id);
-        UserSQLDao.updatePostThemeNum(user.get.id.get,-1);
-         if (result>0)Ok(Json.obj( "code" -> "100", "message" ->"删除成功"))
-         else Ok(Json.obj("code" -> "101", "message" ->"数据库请求删除失败"))
-       }
-
+    def delete = Action(parse.json) {  implicit request =>
+    val user:Option[User] =request.session.get("user").map(u=> UserDao.findById(u.toLong) )
+    if(user.isEmpty)  Ok(Json.obj("code" -> "104", "message" -> "你还没有登录" ))
+    else {
+      val id = (request.body \ "themeId").as[Long]
+      val dataType =(request.body \ "dataType").as[String]
+      if(dataType=="my"){
+        val theme=ThemeDao.findById(id);
+        if(theme.isEmpty) Ok(Json.obj("code" -> "103", "message" -> "主题不存在"))
+        else if(user.get.id.get != theme.get.uid) Ok(Json.obj("code" -> "104", "message" ->"你没有权限删除"))
+        else {
+          val result = ThemeDao.deleteTheme(id)
+            /* 删除用户相关数据 */
+          UserSQLDao.updatePostThemeNum(user.get.id.get,-1)
+          if (result>0)Ok(Json.obj( "code" -> "100", "message" ->"删除成功"))
+          else Ok(Json.obj("code" -> "101", "message" ->"数据库请求删除失败"))
+        }
+      }else {
+        val loveTheme=UserDao.checkLoveTheme(user.get.id.get,id)
+        if(loveTheme.isEmpty) Ok(Json.obj("code" -> "103", "message" -> "喜欢的主题不存在"))
+        else {
+          val result = UserDao.deleteLoveTheme(user.get.id.get,id)
+          if (result>0)Ok(Json.obj( "code" -> "100", "message" ->"删除成功"))
+          else Ok(Json.obj("code" -> "101", "message" ->"数据库请求删除失败"))
+        }
+      }
+    }
   }
 
   /*主题美化 100 成功 101保存不成功*/

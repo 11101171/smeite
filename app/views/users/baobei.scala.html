@@ -42,8 +42,9 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                                 <a class="pic-link" target="_blank" href="@controllers.routes.Goods.view(goods.id.get)">
                                     <img src='@(goods.pic+"_210x210.jpg")' alt="@goods.name">
                                 </a>
-                                <a class="ilike-del" href="javascript:;" data-type="4" data-proid="@goods.id.get">喜欢-1</a>
-
+                                @if(!user.isEmpty && user.get.id==author.id){
+                                <a class="ilike-del" href="javascript:;" data-type="@t" data-proid="@goods.id.get">喜欢-1</a>
+                               }
                             </div>
                             <div class="goods-title ofh inlineblock">
                                 @goods.name

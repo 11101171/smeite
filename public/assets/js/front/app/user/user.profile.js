@@ -32,14 +32,15 @@ define(function(require, exports) {
         self.find(".ilike-del").hide();
     });
     //删除喜欢的商品
-    $(".baobei .ilike-del").die().live("click",function(){
+    $(".goods-item .ilike-del").die().live("click",function(){
         var $delBtn = $(this),
-            $goodsItem = $delBtn.parents(".goods"),
+            $goodsItem = $delBtn.parents(".goods-item"),
             productId = $delBtn.data("proid"),
-            ajaxUrl ="/theme/removeGoods",
+            ajaxUrl ="/user/removeGoods",
+            dataType = $delBtn.data("type") ,
             ajaxData = {
-                themeId: parseInt(UserTheme.themeId),
-                goodsId: parseInt(productId)
+                goodsId: parseInt(productId),
+                dataType:dataType
             };
         $.ajax({
             url: ajaxUrl,
@@ -48,36 +49,47 @@ define(function(require, exports) {
             dataType:"json",
             data:JSON.stringify(ajaxData),
             success: function(data){
-                switch(data.code){
-                    case("100"):
-                        $goodsItem.addClass("goods-gray");
-                        break;
-                    case("101"):
-                        alert(data.msg);
+                if(data.code=="100"){
+
+                    $goodsItem.addClass("goods-gray")
+                    $delBtn.empty().remove()
+                }else{
+                    alert(data.message);
                 }
-            }
+
+                }
         });
     });
 
 
     $(".theme-item .ilike-del").die().click(function(){
-        var $delBtn = $(this),
-            $topicItem = $delBtn.parents(".topic-item"),
-            themeId = $delBtn.data("themeid");
+        var $this = $(this),
+            $themeItem = $this.parents(".theme-item"),
+            dataType = $this.data("type"),
+            themeId = $this.data("themeid");
+
+            var ajaxUrl="";
+           if(dataType=="my"){
+               ajaxUrl="/theme/delete"
+           } else{
+               ajaxUrl="/user/remove/loveTheme"
+           }
         var confirmCallback = function(){
             $.ajax({
-                url: "/theme/delete?id="+themeId,
-                type : "get",
+                url:ajaxUrl,
+                type : "post",
+                contentType:"application/json; charset=utf-8",
                 dataType: "json",
+                data: JSON.stringify({
+                    themeId:themeId,
+                    dataType:dataType
+                }),
                 success: function(data){
-                    var $json = data;
-                    switch($json.code){
-                        case "100":
-                            $topicItem.addClass("goods-gray");
-                            $delBtn.empty().remove();
-                            break;
-                        case "101":
-                            alert($json.message);
+                    if(data.code=="100"){
+                            $themeItem.addClass("goods-gray")
+                        $this.empty().remove()
+                    }else{
+                            alert(data.message);
                     }
                 }
             });

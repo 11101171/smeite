@@ -11,7 +11,7 @@ import models.theme.dao.ThemeDao
 import models.goods.Goods
 import models.theme.Theme
 import models.user.User
-import models.user.dao.UserDao
+import models.user.dao.{UserSQLDao, UserDao}
 import models.Page
 
 
@@ -199,6 +199,38 @@ object Users extends Controller {
     val orders=UserDao.recommendUserOrders(10)
     Ok(views.html.users.credits(user,author,authorStatic,page,orders,s))
   }
+
+
+  /*删除主题 *100 删除成功 * 101 请求失败 * 103 主题不存在 104 你还没有登录 105   * */
+  def deleteGoods = Action(parse.json) {  implicit request =>
+    val user:Option[User] =request.session.get("user").map(u=> UserDao.findById(u.toLong) )
+    if(user.isEmpty)  Ok(Json.obj("code" -> "104", "message" -> "你还没有登录" ))
+    else {
+      val goodsId = (request.body \ "goodsId").as[Long]
+      val dataType =(request.body \ "dataType").as[String]
+      if(dataType=="share"){
+        val shareGoods = UserDao.checkShareGoods(user.get.id.get,goodsId)
+        if(shareGoods.isEmpty) Ok(Json.obj("code" -> "103", "message" -> "您分享的宝贝不存在"))
+        else {
+          val result = UserDao.deleteShareGoods(user.get.id.get,goodsId);
+          if (result>0)Ok(Json.obj( "code" -> "100", "message" ->"删除成功"))
+          else Ok(Json.obj("code" -> "101", "message" ->"数据库请求删除失败"))
+        }
+      }else if(dataType=="love") {
+        val loveGoods = UserDao.checkLoveGoods(user.get.id.get,goodsId)
+        if(loveGoods.isEmpty) Ok(Json.obj("code" -> "103", "message" -> "您喜欢的宝贝不存在"))
+        else {
+          val result = UserDao.deleteLoveGoods(user.get.id.get,goodsId)
+          if (result>0)Ok(Json.obj( "code" -> "100", "message" ->"删除成功"))
+          else Ok(Json.obj("code" -> "101", "message" ->"数据库请求删除失败"))
+        }
+      }else {
+        Ok(Json.obj("code" -> "105", "message" ->"请求错误"))
+      }
+    }
+  }
+
+
 
 
 }

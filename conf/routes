@@ -65,7 +65,7 @@ POST    /user/addFollow                      controllers.users.Users.addFollow
 POST    /user/removeFollow                   controllers.users.Users.removeFollow
 POST    /user/removeFans                     controllers.users.Users.removeFans
 GET    /user/getUserInterested              controllers.users.Users.getUserInterested(userId:Long)
-
+POST   /user/removeGoods                    controllers.users.Users.deleteGoods
 
 #user 用户设定页面
 GET   /user/account/base           controllers.users.UsersAccount.base
@@ -128,7 +128,7 @@ POST     /theme/save                      controllers.Themes.save
 GET      /theme/$id<[0-9]+>               controllers.Themes.view(id:Long)
 GET      /theme/$id<[0-9]+>/board         controllers.Themes.board(id:Long,currentPage:Int ?=1)
 GET      /theme/$id<[0-9]+>/likes         controllers.Themes.likes(id:Long,currentPage:Int ?=1)
-GET      /theme/delete                    controllers.Themes.delete(id:Long)
+POST      /theme/delete                    controllers.Themes.delete
 POST     /theme/editStyle                controllers.Themes.editStyle
 POST      /theme/quickReply               controllers.Themes.quickReply
 POST     /theme/reply                     controllers.Themes.reply
