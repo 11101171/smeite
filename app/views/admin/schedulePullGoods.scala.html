@@ -1,0 +1,68 @@
+
+
+
+
+
+        <script>
+
+
+
+                getNumIids(1)
+            function getNumIids(page){
+                $.ajax({
+                    url:"/admin/manager/getNumIids?p="+page,
+                    type:'get',
+                    dataType:'json',
+                    success:function(data){
+                        if(data.code =='100'){
+                           pullTaobaoke(data.nums)
+                          if(page <=data.totalPages){
+                              getNumIids(page+1)
+                          }else{
+                          //    $('#J_batchAction').removeClass("btn-warning").addClass("btn-info").html("批量更新完成")
+                          }
+
+                        }
+                    }
+                })
+            }
+
+            function pullTaobaoke(nums){
+                TOP.api('rest','post',{
+                    method:'taobao.taobaoke.widget.items.convert',
+                    num_iids:nums,
+                    outer_code:'smeite',
+                    fields:'title,num_iid,volume,price,promotion_price,commission_rate'
+                },function(resp){
+                    if(resp.error_response){
+                        alert('taobao.taobaoke.widget.items.convert接口获取商信息品失败!'+resp.error_response.msg);
+                        return false;
+                    } else {
+                        var total=resp.total_results;
+                        if (total > 0) {
+                            var respItem=resp.taobaoke_items.taobaoke_item;
+                            if (respItem.length > 0) {
+                                $.ajax({
+                                    type:"POST",
+                                    url:"/admin/goods/collectGoodses",
+                                    data:JSON.stringify(respItem),
+                                    contentType:"application/json; charset=utf-8",
+                                    dataType: "json",
+                                    success:function(data){
+                                        if(data.code=="100"){
+
+                                        }
+                                    }
+                                })
+
+
+
+                            }
+                        }
+                    }
+
+                })
+            }
+
+
+</script>

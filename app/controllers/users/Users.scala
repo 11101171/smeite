@@ -45,7 +45,7 @@ object Users extends Controller {
     val author=UserDao.findById(id)
     val authorStatic=UserDao.findStatic(id);
     val goodses =UserDao.findShareGoodses(id,1,9);
-    val  page =UserDao.findLoveThemes(author.id.get,1,9)
+    val  page =UserDao.findPostThemes(author.id.get,1,9)
     Ok(views.html.users.home(user,author,goodses,page,authorStatic) )
   }
 
@@ -55,10 +55,10 @@ object Users extends Controller {
     val  author=UserDao.findById(id)
     val authorStatic=UserDao.findStatic(id);
     if(t=="share"){
-     val page =UserDao.findShareGoodses(id,p,9);
+     val page =UserDao.findShareGoodses(id,p,16);
       Ok(views.html.users.baobei(user,author,page,t,authorStatic))
     }else{
-      val page =UserDao.findLoveGoodses(id,p,9);
+      val page =UserDao.findLoveGoodses(id,p,16);
       Ok(views.html.users.baobei(user,author,page,t,authorStatic))
     }
 
@@ -86,10 +86,10 @@ object Users extends Controller {
     val  author=UserDao.findById(id)
     val authorStatic=UserDao.findStatic(id);
     if(t=="my"){
-      val  page =UserDao.findPostThemes(author.id.get,p)
+      val  page =UserDao.findPostThemes(author.id.get,p,12)
       Ok(views.html.users.theme(user,author,page,t,authorStatic))
     } else {
-      val  page =UserDao.findLoveThemes(author.id.get,p)
+      val  page =UserDao.findLoveThemes(author.id.get,p,12)
       Ok(views.html.users.theme(user,author,page,t,authorStatic))
     }
 

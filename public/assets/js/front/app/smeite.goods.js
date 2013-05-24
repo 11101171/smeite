@@ -8,7 +8,7 @@ define(function(require, exports) {
     		page: 1,
     		container: ".goods-block",
     		colArray: [],
-    		containerW: 960,
+    		containerW: 980,
     		columns: 4,
     		columnWidthInner: 210,
     		columnMargin: 20,
@@ -25,14 +25,13 @@ define(function(require, exports) {
     			pubTime:null,
     			sort:null
     		},
-    		justFlow: false, //判断是否只需要画报流化，无需其他操作 add by @Jeffer
+    		justFlow: false, //判断是否只需要画报流化，无需其他操作
     		isGrid : false,//非画报流排列，判断是否是table一样的正规网格形式排列
     		isAjaxLoad : "true"//是否采用ajax，true采用ajax；false不采用ajax，而是采用hiddenshow方式
 		},
 		init: function(){			
 			var self = $.smeite.goods,
     		conf = $.smeite.goods.conf;
-			
 			conf.columnWidthOuter = conf.columnWidthInner + conf.columnMargin + conf.columnPadding;
         	if(conf.colArray.length==0){
         		for (var i = 0; i < conf.columns; i++) {
@@ -49,6 +48,7 @@ define(function(require, exports) {
             		});
             		$(".page-box").show();
             	}else{
+
             		if(ele.length>0 && conf.isAjaxLoad == "true"){
             			self.flowGoods(ele);
             		}else{
@@ -61,7 +61,7 @@ define(function(require, exports) {
         		self.fill();
         	}
        		
-       		ele.live("mouseover mouseout",function(event){
+       		/*ele.live("mouseover mouseout",function(event){
        			var $this = $(this); 
 				if(event.type == "mouseover"){
 					$this.css({
@@ -96,7 +96,7 @@ define(function(require, exports) {
 						$this.find(".ilike-topic").hide();
 					}
 				}
-			});
+			});*/
 		},
 		isLoading: false,
 		lazyLoad: function() {
@@ -184,6 +184,7 @@ define(function(require, exports) {
     		if(!$(".goods-block")[0]){
     			$(".goods-wall").append('<div class="goods-block"></div>');
     		}
+
         	a.each(function(i){
             	var d = $(this)[0],
             	c = jQuery.inArray(Math.min.apply(Math, conf.colArray), conf.colArray),
@@ -235,7 +236,7 @@ define(function(require, exports) {
 	    		limitNum:100,
 	    		container: ".goods-new-block",
 	    		colArray: [],
-	    		containerW: 960,
+	    		containerW: 980,
 	    		columns: 4,
 	    		columnWidthInner: 210,
 	    		columnMargin: 13,
@@ -251,7 +252,7 @@ define(function(require, exports) {
 	        			conf.colArray[i] = 0;
 	        		}
 	        	}
-	        	var ele = $(conf.container).find(".goods");
+	        /*	var ele = $(conf.container).find(".goods");
 	       		ele.live("mouseover mouseout",function(event){
 	       			var $this = $(this); 
 					if(event.type == "mouseover"){
@@ -287,7 +288,7 @@ define(function(require, exports) {
 							$this.find(".ilike-topic").hide();
 						}
 					}
-				});
+				});*/
 	       		self.load();
 	       		$(window).bind("scroll", self.lazyLoad);
 			},
@@ -372,7 +373,7 @@ $.smeite.gridGoods = {
 	init:function(){
 		var self=$.smeite.gridGoods;
 		var conf=self.conf;
-		var ele =conf.goods;
+		/*var ele =conf.goods;
 		ele.live("mouseover mouseout",function(event){
    			var $this = $(this); 
 			if(event.type == "mouseover"){
@@ -408,7 +409,7 @@ $.smeite.gridGoods = {
 					$this.find(".ilike-topic").hide();
 				}
 			}
-		});
+		});*/
 		conf.uinitContainer.each(function(){
 			var $this = $(this);
 			$this.find("."+conf.goodsName).css("height",$this.outerHeight() - 20);

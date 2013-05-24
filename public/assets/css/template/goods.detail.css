@@ -321,11 +321,11 @@ background: url(images/ico-quotation.png) no-repeat
 }
 
 .side .buy-info .operate {
-    padding: 10px;
+    padding: 15px 5px;
     background: #FFFDF7;
     border-radius: 0 0 5px 5px;
-    height:30px;
-    line-height: 30px;
+    height: 16px;
+    line-height: 16px;
 }
 
 .side .buy-info .info-wrong {

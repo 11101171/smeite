@@ -12,9 +12,55 @@
  */
 define(function(require, exports) {
 	var $ = jQuery = require("jquery");
-    /* theme  删除主题 */
+    /*  goods 喜欢 删除 */
+    /* 移动到主题图片显示效果*/
+    $(".goods-item").hover(function() {
+        var self = $(this);
+        self.find(".ilike-del").show();
+    }, function() {
+        var self = $(this);
+        self.find(".ilike-del").hide();
+    });
+    /* 移动到主题图片显示效果*/
+    $(".theme-item").hover(function() {
+        var self = $(this);
+        self.find("img").addClass("hover")
+        self.find(".ilike-del").show();
+    }, function() {
+        var self = $(this);
+        self.find("img").removeClass("hover")
+        self.find(".ilike-del").hide();
+    });
+    //删除喜欢的商品
+    $(".baobei .ilike-del").die().live("click",function(){
+        var $delBtn = $(this),
+            $goodsItem = $delBtn.parents(".goods"),
+            productId = $delBtn.data("proid"),
+            ajaxUrl ="/theme/removeGoods",
+            ajaxData = {
+                themeId: parseInt(UserTheme.themeId),
+                goodsId: parseInt(productId)
+            };
+        $.ajax({
+            url: ajaxUrl,
+            type:"post",
+            contentType:"application/json; charset=utf-8",
+            dataType:"json",
+            data:JSON.stringify(ajaxData),
+            success: function(data){
+                switch(data.code){
+                    case("100"):
+                        $goodsItem.addClass("goods-gray");
+                        break;
+                    case("101"):
+                        alert(data.msg);
+                }
+            }
+        });
+    });
 
-    $(".topic-item .ilike-del").die().click(function(){
+
+    $(".theme-item .ilike-del").die().click(function(){
         var $delBtn = $(this),
             $topicItem = $delBtn.parents(".topic-item"),
             themeId = $delBtn.data("themeid");
@@ -40,16 +86,7 @@ define(function(require, exports) {
 
         });
     });
-    /* 移动到主题图片显示效果*/
-    $(".topic-item").hover(function() {
-        var self = $(this);
-        self.find("img").addClass("hover")
-        self.find(".ilike-del").show();
-    }, function() {
-        var self = $(this);
-        self.find("img").removeClass("hover")
-        self.find(".ilike-del").hide();
-    });
+
 
 
 

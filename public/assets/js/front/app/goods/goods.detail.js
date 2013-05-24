@@ -36,7 +36,7 @@ define(function(require, exports){
     });
 
     /* 分享*/
-    $(".btn-share").shareBtn()
+   // $(".btn-share").shareBtn()
 
     $("#J_JiuCuo").click(function () {
         $(this).html("<span>已反馈，谢谢^_^</span>");

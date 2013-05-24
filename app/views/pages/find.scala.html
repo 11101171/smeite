@@ -1,9 +1,9 @@
-@(user:Option[models.user.User],page:models.Page[models.goods.Goods],cate:String,tag:String,tags:List[models.tag.Tag] )
+@(user:Option[models.user.User],page:models.Page[((Int,Long,String,String,Int,String,Option[String],String),List[(Option[Long],Option[String],Option[String],Option[String])])],cate:String,tag:String,tags:List[models.tag.Tag] )
 @views.html.template(
 user,
 nav=cate,
 title =  "发现喜欢_"+ cate +"_"+tag +"_食美特，爱美食爱生活"
-)(css="/assets/css/template/faxian.css") {
+)(css="/assets/css/template/find.css") {
 <div class="container" id="find">
     <div class="tag-list clearfix" id="J_tags">
              <dl class="clearfix">
@@ -31,41 +31,58 @@ title =  "发现喜欢_"+ cate +"_"+tag +"_食美特，爱美食爱生活"
             </div>
 
         </div>-->
-
   <div class="goods-wall s1024" id="J_GoodsWall">
     <div class="section">
 
-        @for((goods,i)<-page.items.view.zipWithIndex) {
+        @for((((commissionRate,goodsId,goodsName,goodsPic,goodsLoveNum,goodsPrice,goodsPromotionPrice,goodsIntro),comments),i)<-page.items.view.zipWithIndex) {
 
         <div class="goods small @if((i+1)%4==0){last} ">
             <div class="goods-pic">
-                <a class="pic-link" href="@controllers.routes.Goods.view(goods.id.get)" title="@goods.name" target="_blank">
-                    <img src='@(goods.pic+"_210x210.jpg")' width="210" height="210" title="@goods.name" alt="@goods.name" />
+                <a class="pic-link" href="@controllers.routes.Goods.view(goodsId)" title="@goodsName" target="_blank">
+                    <img src='@(goodsPic+"_210x210.jpg")' width="210" height="210" title="@goodsName" alt="@goodsName" />
                 </a>
-                <a  class="ilike-m" href="javascript:;" data-proimgsrc="@goods.pic" data-prourl="@controllers.routes.Goods.view(goods.id.get)" data-proname="@goods.name" data-type="0" data-proid="@goods.id.get">
+                <a  class="ilike-m" href="javascript:;" data-proimgsrc="@goodsPic" data-prourl="@controllers.routes.Goods.view(goodsId)" data-proname="@goodsName" data-type="0" data-proid="@goodsId">
                     <i></i>
-                    <span class="ilikeCount" data-val="@goods.loveNum">喜欢(@goods.loveNum)</span>
+                    <span class="ilikeCount" data-val="@goodsLoveNum">喜欢(@goodsLoveNum)</span>
                 </a>
             </div>
             <div class="goods-title ofh">
-                @goods.name
+                @goodsName
             </div>
             <div class="goods-stat">
-                <span class="mr10 like-count">@goods.loveNum</span>
+                <span class="mr10 like-count">@goodsLoveNum</span>
 
-                @if(goods.promotionPrice.isEmpty){
-                <span>￥@goods.price</span>
+                @if(goodsPromotionPrice.isEmpty){
+                <span>￥@goodsPrice</span>
                 }else{
-                @if(goods.price!=goods.promotionPrice.get){
-                <span style="text-decoration: line-through">￥@goods.price</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <span>￥@goods.promotionPrice</span>
-                }else{  <span>￥@goods.price</span> }
+                @if(goodsPrice!=goodsPromotionPrice.get){
+                <span style="text-decoration: line-through">￥@goodsPrice</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span>￥@goodsPromotionPrice</span>
+                }else{  <span>￥@goodsPrice</span> }
                 }
             </div>
             <p class="goods-des">
-                @goods.intro
+                @goodsIntro
             </p>
+            <div class="comment">
 
+                @for(((uid,uname,upic,content),i)<-comments.view.zipWithIndex) {
+                    @if(!uid.isEmpty){
+
+                <div class="comment-item @if(i>0) {comment-item-more }">
+                    <div class="user-pic">
+                        <a class="a-img"  href="@controllers.users.routes.Users.home(uid.getOrElse(1))" title="@uname" target="_blank">
+                            <img src="@upic" width="30" height="30" alt="@uname"/>
+                        </a>
+                    </div>
+                    <div class="content">
+                        <a class="user-name"  href="@controllers.users.routes.Users.home(uid.getOrElse(0))" title="@uname" target="_blank">@uname</a>
+                        <span>@content</span>
+                    </div>
+                </div>
+                }
+            }
+            </div>
         </div>
 
         }
@@ -101,7 +118,7 @@ title =  "发现喜欢_"+ cate +"_"+tag +"_食美特，爱美食爱生活"
 }{
 <script type="text/javascript">
     seajs.use('app/init', function (init) {
-        init.load('app/goods/goods.find,app/goods/goods.favor');
+        init.load('app/goods/goods.faxian,app/goods/goods.favor');
     });
 </script>
 }

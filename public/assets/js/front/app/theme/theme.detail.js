@@ -438,7 +438,6 @@ var UserTheme = {
 
 		/*保存设置*/
 		$("#J_ThemeStyleSave").click(function(){
-
 			UserTheme.userThemeStyleSave($(this));
 		});
 		
@@ -540,16 +539,45 @@ var UserTheme = {
 		});
 	}
 }
-UserTheme.init();
-
-    /* 排列商品*/
-    //画报
-    $.smeite.goods.conf.colArray = [0,0,0,$(".side").outerHeight()+13];
-	$.smeite.goods.conf.justFlow = true;
-    $.smeite.goods.init();
-    /*  分享 */
 
 
+    $(function(){
+        UserTheme.init();
+        $('.goods').on("mouseover mouseout",function(event){
+            var $this = $(this);
+            if(event.type == "mouseover"){
+                $this.addClass('cur-goods');
+                if($this.find(".ilike-m")[0]){
+                    $this.find(".ilike-m").show();
+                }
+                if($this.find(".ilike-del")[0]){
+                    $this.find(".ilike-del").show();
+                }
+                if($this.find(".ilike-topic")[0]){
+                    $this.find(".ilike-topic").show();
+                }
+            }else{
+                $this.removeClass('cur-goods');
+                if($this.find(".ilike-m")[0]){
+                    $this.find(".ilike-m").hide();
+                }
+                if($this.find(".ilike-del")[0]){
+                    $this.find(".ilike-del").hide();
+                }
+                if($this.find(".ilike-topic")[0]){
+                    $this.find(".ilike-topic").hide();
+                }
+            }
+        });
+        /* 排列商品*/
+        if($(".goods-wall")[0]){
+            //画报
+              $.smeite.goods.conf.colArray = [0,0,0,$(".side").outerHeight()+13];
+            $.smeite.goods.conf.justFlow =true;
+            $.smeite.goods.init();
+        }
+        /*  分享 */
+        $(".btn-share").shareBtn()
+    })
 
-    $(".btn-share").shareBtn()
 });

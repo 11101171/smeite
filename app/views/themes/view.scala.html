@@ -119,7 +119,7 @@ description =  theme.intro.getOrElse("食美特，爱美食爱生活")
         <div id="J_GoodsContent" class="goods-container">
           @for(goods<-goodses){
             <div class="goods">
-                <div class="goods-pic" style=" width:210px">
+                <div class="goods-pic" style="height: 210px">
                     <a class="pic-link" href="@controllers.routes.Goods.view(goods.id.get)" target="_blank" title="@goods.name">
                         <img src='@(goods.pic+"_210x210.jpg")'  width="210"  alt="@goods.name" />
                     </a>
