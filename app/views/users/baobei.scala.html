@@ -17,7 +17,7 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
             <li><a href="@controllers.users.routes.Users.forum(author.id.get)">@(authorStatic.postTopicNum+authorStatic.loveTopicNum)<br>讨论</a></li>
             <li ><a href="@controllers.users.routes.Users.fans(author.id.get)">@authorStatic.fansNum<br>粉丝</a></li>
             <li class="last"><a href="@controllers.users.routes.Users.follow(author.id.get)">@(authorStatic.followNum)<br>我关注的</a></li>
-          <!--  <li class="last"><a href="@controllers.users.routes.Users.appraisal(author.id.get)">N+<br>求鉴定</a></li>-->
+
         </ul>
     </div>
     <!--nav  end -->
@@ -42,9 +42,9 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                                 <a class="pic-link" target="_blank" href="@controllers.routes.Goods.view(goods.id.get)">
                                     <img src='@(goods.pic+"_210x210.jpg")' alt="@goods.name">
                                 </a>
-                                @if(!user.isEmpty && user.get.id==author.id){
+                              <!--  @if(!user.isEmpty && user.get.id==author.id){
                                 <a class="ilike-del" href="javascript:;" data-type="@t" data-proid="@goods.id.get">喜欢-1</a>
-                               }
+                                }-->
                             </div>
                             <div class="goods-title ofh inlineblock">
                                 @goods.name

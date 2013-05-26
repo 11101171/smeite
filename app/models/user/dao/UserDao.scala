@@ -78,6 +78,13 @@ object UserDao {
   def countUser:Int = database.withSession{  implicit session:Session =>
        Query(Users.length).first
   }
+  def countUser(days:Int):Int = database.withSession{  implicit session:Session =>
+    val now = new Timestamp(System.currentTimeMillis())
+    val before = new Timestamp(now.getTime-1000*60*60*24*days)
+
+    Query(Users.filter(_.modifyTime between(before,now)).length).first
+
+  }
   /* 统计用户的粉丝数*/
   def countUserFans(uid:Long)  = database.withSession{  implicit session:Session =>
     Query(UserFollows.filter(_.uid === uid).length).first

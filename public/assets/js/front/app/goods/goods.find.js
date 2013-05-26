@@ -13,28 +13,7 @@
 
 define(function (require, exports) {
     var $ = jQuery = require("jquery");
-    require('module/lazyload')($);
 
-    if(location.href.indexOf("find")!=-1){
-        $(".goods-pic img").lazyload({
-            effect:"fadeIn",
-            threshold : 200,
-            load:function(img){
-                var h = img.height;
-                var w = img.width;
-                var small = 210;
-                $(this).parent().css({
-                    position:'absolute',
-                    height:h,
-                    width:w,
-                    top:(small-h)/2,
-                    left:(small-w)/2
-                })
-            }
-        });
-    }else{
-        $(".goods-pic img").lazyload({effect:"fadeIn"});
-    }
 
 
 
