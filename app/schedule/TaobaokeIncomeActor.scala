@@ -88,7 +88,7 @@ class TaobaokeIncomeActor extends Actor {
 
 
   def receive = {
-    case "start" => incomes(Utils.timestampFormat(new Timestamp(System.currentTimeMillis())))
+    case "start" => incomes(Utils.timestampFormat(new Timestamp3(System.currentTimeMillis())))
     case _ => println("schedule invite prize got something wrong")
   }
 }

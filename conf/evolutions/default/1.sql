@@ -1427,5 +1427,4 @@ alter table user_profile change alipay qq varchar(64);
 alter table user_rebate add column rebate_type tinyint(4) default '1';
 alter table user_rebate change column  handle_result handle_result tinyint(4) default '0';
 alter table user_invite_prize change column  handle_result handle_result tinyint(4) default '0';
-alter table user_invite_prize change column  num  num smallint(10);
 alter table user_exchange_shiDou change column  handle_result  handle_result tinyint(4) default '0';
