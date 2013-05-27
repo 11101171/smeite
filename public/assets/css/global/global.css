@@ -1675,7 +1675,7 @@ font-size: 18px;
     padding: 0 2px;
 }
 #nav .channel li span {
-    padding: 0 3px;
+    padding-right: 3px;
     color: #999;
 }
 #nav .channel li a {
@@ -1696,9 +1696,16 @@ font-size: 18px;
     padding-right: 10px;
     background: url(images/new.gif) no-repeat right 1px;
 }
+#nav .channel li.china {
+    padding-right: 25px;
+    background: url(images/hot.png) no-repeat right 1px;
+}
 
 #nav .channel .on a{
     color: #5c6f09;
+}
+#nav .channel li.china a{
+
 }
 
 /* channel end */

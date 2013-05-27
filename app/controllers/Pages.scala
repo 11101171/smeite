@@ -124,5 +124,14 @@ import java.util.Calendar
     Ok(views.html.pages.gallery(user,page,cid,s))
   }
 
+  /* 主题 */
+  def themes(s:String,cid:Int,p:Int) =  Users.UserAction { user => implicit request =>
 
+     Ok("theme")
+  }
+
+  /*  特色中国  */
+  def china =  Users.UserAction { user => implicit request =>
+      Ok(" tese china ")
+  }
 }
