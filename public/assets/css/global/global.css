@@ -1704,8 +1704,8 @@ font-size: 18px;
 #nav .channel .on a{
     color: #5c6f09;
 }
-#nav .channel li.china a{
-
+#nav .channel li.china a.on{
+      color:#ff0000;
 }
 
 /* channel end */

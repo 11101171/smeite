@@ -129,6 +129,22 @@ object ThemeDao {
     Page[((Long,String,String,Int),List[String])](themes,currentPage,totalPages)
   }
 
+  def findThemes(sortBy:String,currentPage: Int , pageSize: Int ): Page[((Long,String,String,Int),List[String])] = database.withSession {  implicit session:Session =>
+    val totalRows=Query(Themes.filter(_.isRecommend===true).length).first
+    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    /*联合查询*/
+    var query =(for{
+      t<-Themes.filter(_.isRecommend===true).drop(startRow).take(pageSize)
+      g<-ThemeGoodses
+      if t.id === g.themeId
+    } yield(t.id,t.name,t.intro,t.loveNum,t.modifyTime,g.goodsPic))
+    if(sortBy=="new") query =query.sortBy(_._5 desc)
+    if(sortBy=="hot") query = query.sortBy(_._4 desc)
+    //println("query id = "+query.selectStatement)
+    val themes:List[((Long,String,String,Int),List[String])] =query.list().groupBy(x=>(x._1,x._2,x._3,x._4)).map(x=>(x._1,x._2.take(5).map(y=>y._6))).toList
+    Page[((Long,String,String,Int),List[String])](themes,currentPage,totalPages)
+  }
 
   /* 随机推荐  1.s首选寻找最值得推荐的theme 前20个，然后在随机从中挑选数量nums */
   def recommendTheme(hotIndex:Int,nums:Int):List[Theme] = database.withSession {  implicit session:Session =>

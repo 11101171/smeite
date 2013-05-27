@@ -126,12 +126,17 @@ import java.util.Calendar
 
   /* 主题 */
   def themes(s:String,cid:Int,p:Int) =  Users.UserAction { user => implicit request =>
-
-     Ok("theme")
+    var page:Page[((Long,String,String,Int),List[String])] =null
+    if (cid <0){
+      page = ThemeDao.findThemes(s,p,24)
+    }else {
+      page = ThemeDao.findCateThemes(cid,s,p,24)
+    }
+     Ok(views.html.pages.themes(user,page,cid,s))
   }
 
   /*  特色中国  */
   def china =  Users.UserAction { user => implicit request =>
-      Ok(" tese china ")
+      Ok(views.html.pages.china(user))
   }
 }

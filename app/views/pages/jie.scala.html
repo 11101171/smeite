@@ -1,13 +1,14 @@
 @(user:Option[models.user.User],page:models.Page[((Long,String,String,Int),List[String])],cid:Int,sortBy:String)
 @views.html.template(
 user,
-nav="jie",
+nav="/themes",
 title = " 美食街_食美特，爱美食爱生活"
 )(css="/assets/css/template/themes.css") {
 
 <div class="container clearfix" id="themes">
     <div class="tag-book clearfix">
     <div class="hd">
+        <span class="prev"><a href="/themes">&lt;主题</a></span>
         <h2><a href="/jie">美食街，香味飘来～</a></h2>
         <span class="next"><a href="/miss">创意馆&gt;</a></span>
     </div>
