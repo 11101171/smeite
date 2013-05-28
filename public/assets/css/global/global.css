@@ -1639,7 +1639,7 @@ font-size: 18px;
     font-size: 14px;
     font-weight: bolder;
     line-height: 30px;
-    color: #E26;
+    color: #E60000;
 
 }
 
@@ -1659,7 +1659,6 @@ font-size: 18px;
 }
 #nav{
     height: 40px;
-    margin-bottom: 20px;
     background-color: #fff;
     border-bottom: 2px solid #666;
     position: relative;
@@ -1705,7 +1704,7 @@ font-size: 18px;
     color: #5c6f09;
 }
 #nav .channel li.china a.on{
-      color:#ff0000;
+      color:#e60000;
 }
 
 /* channel end */

@@ -5,7 +5,7 @@
  * Time: 下午8:50
  * 维护：zuosanshao@qq.com
 */
-.main-box{width:950px;margin:0 auto 25px;background:#fff;padding:15px; }
+.main-box{width:950px;margin:20px auto 25px;background:#fff;padding:15px; }
 .flash {width:735px;height:270px;background-color:#fff;overflow:hidden;position:relative;z-index: 99}
 .flash .scrollable { width:720px;height:270px;background-color:#fff;overflow:hidden;position:relative; }
 .flash .scrollable .items { width:20000em;position:absolute;z-index:1; }

@@ -689,6 +689,7 @@
 }
 
 .nav-wrap {
+    margin-top: 20px;
     height: auto;
     position: relative
 }

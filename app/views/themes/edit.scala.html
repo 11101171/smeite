@@ -38,7 +38,7 @@ title = "创建主题 _ 食美特，爱美食爱生活"
                         <div class="fm-item">
                             <select id="J_SelCag" name="cid">
                                 <option value="">选择分类</option>
-                                @for(c<-models.Cate.values){
+                                @for(c<-models.Cate.values.toList.sortBy(x=>x.id)){
                                 <option value="@c.id" @(if(form("cid").value.getOrElse("0") == c.id.toString) {"selected"})>@c</option>
 
 

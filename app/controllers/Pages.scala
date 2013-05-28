@@ -136,7 +136,10 @@ import java.util.Calendar
   }
 
   /*  特色中国  */
-  def china =  Users.UserAction { user => implicit request =>
-      Ok(views.html.pages.china(user))
+  def china(tag:String,p:Int) =  Users.UserAction { user => implicit request =>
+    var page:models.Page[((Int,Long,String,String,Int,String,Option[String],String),List[(Option[Long],Option[String],Option[String],Option[String])])] = null
+    if (tag =="tag")  page = TagDao.findCateGoodses(0,p,48);
+    else   page = TagDao.findTagGoodses(tag,p,48)
+      Ok(views.html.pages.china(user,page,tag))
   }
 }

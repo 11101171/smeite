@@ -46,7 +46,7 @@
     <div class="controls">
     <select name="cid" id="J_cid">
     <option value=""   >所有分类</option>
-@for(cate<-models.Cate.values){
+@for(cate<-models.Cate.values.toList.sortBy(x=>x.id)){
     <option value="@cate.id">@cate</option>
 
 }

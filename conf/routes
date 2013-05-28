@@ -14,7 +14,7 @@ GET      /jie                             controllers.Pages.jie(s:String ?="hot"
 GET      /miss                             controllers.Pages.miss(s:String ?="hot",cid:Int ?=-1,p:Int ?=1)
 GET      /gallery/:cid                      controllers.Pages.gallery(cid:Int,s:String ?="hot",p:Int ?=1)
 GET      /themes                            controllers.Pages.themes(s:String ?="hot",cid:Int ?=-1,p:Int ?=1)
-GET      /china                             controllers.Pages.china
+GET      /china                             controllers.Pages.china(tag:String ?="tag",p:Int ?=1)
 
 
 GET     /choice                            controllers.Pages.choice

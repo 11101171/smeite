@@ -42,7 +42,7 @@
     <div class="controls">
     <select name="cid" id="J_cid">
     <option value=""  @if(form("cid").value.getOrElse("none")=="none"){ selected="true" } >所有分类</option>
-@for(cate<-models.Cate.values){
+@for(cate<-models.Cate.values.toList.sortBy(x=>x.id)){
     <option value="@cate.id" @if(form("cid").value.getOrElse("none")==cate.id.toString){ selected="true" }>@cate</option>
             }
 </select>
