@@ -135,14 +135,14 @@ object ThemeDao {
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     /*联合查询*/
     var query =(for{
-      t<-Themes.filter(_.isRecommend===true).drop(startRow).take(pageSize)
+      t<-Themes.filter(_.isRecommend === true).drop(startRow).take(pageSize)
       g<-ThemeGoodses
       if t.id === g.themeId
-    } yield(t.id,t.name,t.intro,t.loveNum,t.modifyTime,g.goodsPic))
+    } yield(t.id,t.name,t.intro,t.loveNum,t.modifyTime,g.sortNum,g.goodsPic))
     if(sortBy=="new") query =query.sortBy(_._5 desc)
     if(sortBy=="hot") query = query.sortBy(_._4 desc)
-    //println("query id = "+query.selectStatement)
-    val themes:List[((Long,String,String,Int),List[String])] =query.list().groupBy(x=>(x._1,x._2,x._3,x._4)).map(x=>(x._1,x._2.take(5).map(y=>y._6))).toList
+     println(query.list().length)
+    val themes:List[((Long,String,String,Int),List[String])] =query.list().groupBy(x=>(x._1,x._2,x._3,x._4)).map(x=>(x._1,x._2.sortBy(x=>x._6).take(5).map(y=>y._7))).toList
     Page[((Long,String,String,Int),List[String])](themes,currentPage,totalPages)
   }
 
@@ -275,7 +275,7 @@ object ThemeDao {
 
   /* find themeGoodses*/
   def findThemeGoodses(themeId:Long):List[ThemeGoods] = database.withSession {  implicit session:Session =>
-     (for(c<- ThemeGoodses.sortBy(_.sortNum desc) if c.themeId === themeId)yield c).list()
+     (for(c<- ThemeGoodses.sortBy(_.sortNum asc) if c.themeId === themeId)yield c).list()
   }
 
   def modifyThemeGoods(id:Long,sortNum:Int) = database.withSession {  implicit session:Session =>

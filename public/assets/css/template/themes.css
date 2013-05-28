@@ -51,32 +51,25 @@
     z-index: 1;
     position: absolute;
     right: 20px;
-    bottom: 0;
+    bottom: 5px;
     overflow:hidden; }
 
 .flash .navi li {
     position: relative;
-    width: 7px;
+    width: 15px;
+    height: 15px;
     margin-right: 5px;
     float: right;
     display: inline;
-    padding-top: 15px;
+    background-color: #ddd;
+    -moz-border-radius: 15px;
+    -khtml-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px
 }
 
-
-
-.flash .navi li span {
-    z-index: 10;
-    position: absolute;
-    top: 5px;
-    width: 7px;
-    height: 7px;
-    overflow: hidden;
-    background: url(images/navi.png) repeat-x -13px 0;
-}
-
-.flash .navi li.active span {
-    background-position: 0 0
+.flash .navi li.active  {
+   background: #e26;
 }
 
 .bulletin {
@@ -124,154 +117,80 @@
     background: #86b835 url(images/button.png) -5px -641px;
 }
 
-/* themes -tops end */
-.tag-book {
-    margin-top: 20px;
-    background-color: #fff;
-    padding: 20px
-}
 
-.tag-book .hd {
-    position: relative;
-    height: 30px;
-    padding-bottom: 10px;
-    border-bottom: 1px dotted #dedede
-}
+.category {width:950px;margin:0 auto;background:#fff;padding:15px;}
+.category .group{overflow: hidden;}
+.category .hd{ margin-bottom:6px;overflow:hidden;padding: 0 10px}
+.category .hd h2{ font-size:16px;height:28px;line-height:28px;float:left;color:#666;}
+.category .hd h2 a, .hd h2 a{color:#666;text-decoration:none}
+.category .hd h3{font-size: 14px;height:28px;line-height:28px;float:left;color:#e26;}
+.category .hd .more{float:right;display:block;font-size:12px;font-weight:700;line-height:28px;}
+.category .hd .more a{color:#333;text-decoration:none;}
+.category .hd .more a.on{display:block;}
+.category .group{padding-left: 10px;overflow: hidden;}
 
-.tag-book .hd h2 {
-    font-size: 20px;
-    font-family: 'Microsoft YaHei', '黑体';
-    font-weight: normal;
-    height: 30px;
-    line-height: 30px;
-    text-align: center
-}
-.tag-book .hd h2 a{
-    color: #333;
-}
-
-.tag-book .hd .prev {
-    position: absolute;
-    top: 8px;
-    left: 0
-}
-
-.tag-book .hd .next {
-    position: absolute;
-    top: 8px;
-    right: 0
-}
-
-.tag-book .hd .next a, .tag-book .hd .prev a {
-    color: #666
-}
-.theme-main {
-    float: left;
-    width: 690px;
-    overflow: hidden
-}
-
-.theme-main .last-item {
-    margin-right: 0 !important
-}
-
-.theme-main .theme-nav {
-    border-bottom: 1px dotted #d1d1d1;
-    height: 39px
-}
-
-.theme-main .theme-nav li {
-    height: 20px;
-    line-height: 20px;
-    float: left;
-    padding: 10px 0;
-    font-size: 12px;
-    color: #666
-}
-.theme-main .theme-nav li.cur{
-background: url(images/on.png) repeat-x top;
-    }
-
-.theme-main .theme-nav li a {
-    color: #666;
-    text-decoration: none;
-    padding: 0 13px
-}
-
-.theme-main .theme-nav li.on {
-    background: url(images/topic-nav-on.gif) no-repeat center bottom;
-    font-weight: 700
-}
-.theme-main .theme-nav li.on a{
-    color: #F82B6A;
-}
-
-.theme-main .category-nav {
-    width: 716px;
-    border-bottom: 2px solid #eaeae1\9
-}
-
-.theme-list .theme-item {
+.category .group .item {
     float: left;
     *display: inline;
     width: 210px;
     margin-right: 30px;
-    padding: 20px 0 10px 0;
+    padding: 0 0 10px 0;
     background-color: #fff;
     overflow: hidden
 }
 
-.theme-item .pic {
+.category  .item  .pic {
     display: block;
     width: 210px;
     overflow: hidden
 }
 
-.theme-item a.pic:hover {
+.category  .item  a.pic:hover {
     text-decoration: none
 }
 
-.theme-item .pic .b-img {
+.category  .item  .pic .b-img {
     width: 210px;
     height: 210px;
-
     float: left
 }
 
-.theme-item .pic .s-img {
+.category  .item  .pic .s-img {
     width: 50px;
     height: 50px;
     float: left;
     margin: 1px;
+    opacity: 0.8;
+    filter: alpha(opacity =0.8)
     background: #ccc
 }
-.theme-item .pic .hover {
+.category  .item  .pic .hover {
     opacity: 1;
     filter: alpha(opacity = 100)
 }
-.theme-item h3 {
+.category  .item  h3 {
     padding-top: 15px;
     font-size: 16px;
     line-height: 1.1;
     color: #666
 }
 
-.theme-item h3 a, .theme-item h3 a:hover {
+.category  .item  h3 a, .category  .item  h3 a:hover {
     text-decoration: none;
     color: #666
 }
 
-.theme-item .title {
+.category  .item  .title {
     color: #333
 }
 
-.theme-item .title a {
+.category  .item  .title a {
     text-decoration: none;
     color: #333 !important
 }
 
 
-.theme-item .info .editor-link, .theme-item .info .editor-link:hover {
+.category  .item  .info .editor-link, .category  .item  .info .editor-link:hover {
     color: #666
 }
 
@@ -283,7 +202,7 @@ background: url(images/on.png) repeat-x top;
     background: url(images/like-icon2.png) 1px -14px no-repeat
 }
 
-.theme-item .info {
+.category  .item  .info {
     width: 210px;
     line-height: 24px;
     margin: 10px 0;
@@ -292,7 +211,7 @@ background: url(images/on.png) repeat-x top;
     overflow: hidden
 }
 
-.theme-item .follow {
+.category  .item  .follow {
     height: 24px;
     width: 53px;
     border-radius: 2px;
@@ -303,7 +222,7 @@ background: url(images/on.png) repeat-x top;
     background-color:#86b835;
     border: 0;
 }
-.theme-item .followed {
+.category  .item  .followed {
     height: 24px;
     width: 53px;
     border-radius: 2px;
@@ -316,7 +235,7 @@ background: url(images/on.png) repeat-x top;
 }
 
 
-.theme-item a.on {
+.category  .item  a.on {
     height: 24px;
     width: 53px;
     border-radius: 2px;
@@ -331,7 +250,7 @@ background: url(images/on.png) repeat-x top;
 
 
 
-.theme-item .followed-btn {
+.category  .item  .followed-btn {
     cursor: default;
     height: 24px;
     float: left;
@@ -344,26 +263,28 @@ background: url(images/on.png) repeat-x top;
     border: 0
 }
 
-.theme-item .follow-likes {
+.category  .item  .follow-likes {
     color: #666;
     text-decoration: none
 }
 
-.theme-item:hover .follow-likes {
+.category  .item :hover .follow-likes {
     color: #86b835;
     text-decoration: none
 }
 
-.theme-item .followed-btn a {
+.category  .item  .followed-btn a {
     color: #666;
     text-decoration: none
 }
 
-.theme-item span.mete {
+.category  .item  span.mete {
     color: #999;
     padding-top: 5px;
     display: inline-block
 }
-
+.category .last {
+    margin-right: 0 !important
+}
 
 

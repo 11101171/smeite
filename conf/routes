@@ -13,7 +13,8 @@ GET       /faxian/:cate/:tag        controllers.Pages.faxian(cate:String,tag:Str
 GET      /jie                             controllers.Pages.jie(s:String ?="hot",cid:Int ?=-1,p:Int ?=1)
 GET      /miss                             controllers.Pages.miss(s:String ?="hot",cid:Int ?=-1,p:Int ?=1)
 GET      /gallery/:cid                      controllers.Pages.gallery(cid:Int,s:String ?="hot",p:Int ?=1)
-GET      /themes                            controllers.Pages.themes(s:String ?="hot",cid:Int ?=-1,p:Int ?=1)
+GET      /themes                            controllers.Pages.themes
+GET      /themes/:cid                           controllers.Pages.gallery(cid:Int,s:String ?="new",p:Int ?=1)
 GET      /china                             controllers.Pages.china(tag:String ?="tag",p:Int ?=1)
 
 

@@ -125,10 +125,17 @@ import java.util.Calendar
   }
 
   /* 主题 */
+  def themes =  Users.UserAction { user => implicit request =>
+    var page:Page[((Long,String,String,Int),List[String])] =null
+
+      page = ThemeDao.findThemes("new",1,4)
+
+    Ok(views.html.pages.themes(user,page,0,"sss"))
+  }
   def themes(s:String,cid:Int,p:Int) =  Users.UserAction { user => implicit request =>
     var page:Page[((Long,String,String,Int),List[String])] =null
     if (cid <0){
-      page = ThemeDao.findThemes(s,p,24)
+      page = ThemeDao.findThemes(s,p,4)
     }else {
       page = ThemeDao.findCateThemes(cid,s,p,24)
     }

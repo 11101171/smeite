@@ -18,19 +18,9 @@
     left: 0;
     bottom: 0;
     overflow:hidden; }
-.flash .navi li { position:relative;width:144px;float:left;display:inline;padding-top:11px}
+.flash .navi li { position:relative;width:144px;height: 4px;float:left;display:inline;background: url(images/navi-bg.png) repeat-x 0 -8px}
 .flash .navi li.last{margin-right:0}
-.flash .navi li span {
-    z-index: 10;
-    position: absolute;
-    top: 7px;
-    width: 140px;
-    height: 4px;
-    overflow: hidden;
-    background: url(images/navi-bg.png) repeat-x 0 -8px
-}
-
-.flash .navi li.active span {
+.flash .navi li.active {
     background-position: 0 0
 }
 
