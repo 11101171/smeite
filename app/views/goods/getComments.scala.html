@@ -4,12 +4,12 @@
     @for((user,assess)<-page.items){
     <div class="cmt clearfix cmt-noworth" data-cmtid="@assess.id" data-proid="@assess.goodsId">
         <div class="user-pic">
-            <img src="@user.pic" alt="@user.name" />
+            <img src="@user.pic" alt="@user.name" width="80" height="80" />
         </div>
         <div class="cmt-doc">
             <div class="cmt-info clearfix">
                 <span class="fl t">@user.name</span>
-                <span class="fl gc">（@if(assess.isBought){ 买过}，@if(assess.isWorth){认为值得}）</span>
+                <span class="fl gc">@if(assess.isBought){ 买过}，@if(assess.isWorth){认为值得}</span>
                 <span class="fr gc">来自 @models.user.ComeFrom(user.comeFrom) </span>
                 <span class="fr gc mr5">@assess.addTime </span>
             </div>

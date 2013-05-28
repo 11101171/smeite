@@ -4,6 +4,127 @@
  * Time: 下午3:02
  * 维护人员:zuosanshao@qq.com
  */
+
+.main-box {
+    width: 950px;
+    margin: 20px auto 25px;
+    background: #fff;
+    padding: 15px;
+}
+
+.flash {
+    width: 700px;
+    height: 250px;
+    background-color: #fff;
+    overflow: hidden;
+    position: relative;
+    z-index: 99
+}
+
+.flash .scrollable {
+    width: 685px;
+    height: 250px;
+    background-color: #fff;
+    overflow: hidden;
+    position: relative;
+}
+
+.flash .scrollable .items {
+    width: 20000em;
+    position: absolute;
+    z-index: 1;
+}
+
+.flash .scrollable .items .item {
+    width: 685px;
+    height: 250px;
+    position: relative;
+    float: left;
+}
+
+.flash .scrollable .items .item a {
+    cursor: pointer;
+    color: #333;
+}
+
+.flash .navi {
+    z-index: 1;
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+    overflow:hidden; }
+
+.flash .navi li {
+    position: relative;
+    width: 7px;
+    margin-right: 5px;
+    float: right;
+    display: inline;
+    padding-top: 15px;
+}
+
+
+
+.flash .navi li span {
+    z-index: 10;
+    position: absolute;
+    top: 5px;
+    width: 7px;
+    height: 7px;
+    overflow: hidden;
+    background: url(images/navi.png) repeat-x -13px 0;
+}
+
+.flash .navi li.active span {
+    background-position: 0 0
+}
+
+.bulletin {
+     padding-left: 20px;
+     width:230px;
+     height:250px;
+     background-color: #f9f9f9;
+ }
+.bulletin h3{
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+}
+.bulletin p{
+    padding: 10px 0;
+    text-align: center;
+}
+.bulletin .edit{
+    font-size: 20px;
+    color: #E26;
+    font-weight: bolder;
+}
+
+.bulletin .create-theme {
+    display: inline-block;
+    width:100px;
+    height: 30px;
+    border: 1px solid #7ab121;
+    background-color: #86b835;
+    border-radius: 3px;
+    text-align: center;
+    line-height:30px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.bulletin .create-theme:hover {
+    text-decoration: none;
+    background: #86b835 url(images/button.png) -5px -611px;
+}
+
+.bulletin .create-theme:active {
+    text-decoration: none;
+    background: #86b835 url(images/button.png) -5px -641px;
+}
+
+/* themes -tops end */
 .tag-book {
     margin-top: 20px;
     background-color: #fff;
