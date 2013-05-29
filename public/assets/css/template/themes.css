@@ -118,7 +118,7 @@
 }
 
 
-.category {width:950px;margin:0 auto;background:#fff;padding:15px;}
+.category {width:950px;background:#fff;padding:15px; margin: 0 auto 20px;}
 .category .group{overflow: hidden;}
 .category .hd{ margin-bottom:6px;overflow:hidden;padding: 0 10px}
 .category .hd h2{ font-size:16px;height:28px;line-height:28px;float:left;color:#666;}

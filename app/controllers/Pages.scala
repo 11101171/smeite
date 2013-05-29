@@ -100,8 +100,9 @@ import java.util.Calendar
 
   /* 主题街下的 主题分类 */
   def gallery(cid:Int,s:String,p:Int)= Users.UserAction { user => implicit request =>
+    val  flashes:List[models.advert.Advert] =AdvertDao.findAdverts("miss_flash")
     val page = ThemeDao.findCateThemes(cid,s,p,24)
-    Ok(views.html.pages.gallery(user,page,cid,s))
+    Ok(views.html.pages.gallery(user,flashes,page,cid,s))
   }
 
   /* 主题 */

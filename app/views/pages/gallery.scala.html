@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],page:models.Page[((Long,String,String,Int),List[String])],cid:Int,sortBy:String)
+@(user:Option[models.user.User],flashes:List[models.advert.Advert],page:models.Page[((Long,String,String,Int),List[String])],cid:Int,sortBy:String)
 @views.html.template(
 user,
 nav="miss",
@@ -14,35 +14,13 @@ title = "美食街,特色馆_食美特，爱美食爱生活"
                 <div class="items">
 
 
+                    @for(flash <- flashes) {
                     <div class="item">
-                        <a href="http://smeite.com/find/美食/菌类" title="春困时节巧养生" target="_blank">
-                            <img src="/images/adv/0407chunkun.jpg" alt="春困时节巧养生" width="720" height="270">
+                        <a href="@flash.link" title="@flash.title" target="_blank">
+                            <img src="@flash.pic" alt="@flash.title" width="720" height="270">
                         </a>
                     </div>
-
-                    <div class="item">
-                        <a href="http://smeite.com/find/美食/进口食品" title="进口食品集结号" target="_blank">
-                            <img src="/images/adv/0407jinkou.jpg" alt="进口食品集结号" width="720" height="270">
-                        </a>
-                    </div>
-
-                    <div class="item">
-                        <a href="http://smeite.com/find/居家/收纳" title="我的幸福小家" target="_blank">
-                            <img src="/images/adv/0407shouna.jpg" alt="我的幸福小家" width="720" height="270">
-                        </a>
-                    </div>
-
-                    <div class="item">
-                        <a href="http://smeite.com/forum/view/2" title="我们上线啦" target="_blank">
-                            <img src="/images/adv/720.jpg" alt="我们上线啦" width="720" height="270">
-                        </a>
-                    </div>
-
-                    <div class="item">
-                        <a href="http://smeite.com/find/好玩意/生日礼物" title="生日礼物" target="_blank">
-                            <img src="/images/adv/0704liwu.jpg" alt="生日礼物" width="720" height="270">
-                        </a>
-                    </div>
+                    }
 
                 </div>
 
