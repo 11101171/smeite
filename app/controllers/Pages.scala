@@ -97,27 +97,7 @@ import java.util.Calendar
   }
 
 
-  /* 美食街*/
-  def jie(s:String,cid:Int,p:Int) = Users.UserAction { user => implicit request =>
-    var page:Page[((Long,String,String,Int),List[String])] =null
-    if (cid <0|| cid >3){
-      page = ThemeDao.findCatesThemes(0,2,s,p,24)
-    }else {
-      page = ThemeDao.findCateThemes(cid,s,p,24)
-    }
 
-    Ok(views.html.pages.jie(user,page,cid,s))
-  }
-  /* 创意主题街  特色馆*/
-  def miss(s:String,cid:Int,p:Int)  = Users.UserAction { user => implicit request =>
-    var page:Page[((Long,String,String,Int),List[String])] =null
-    if (cid <3 || cid >5){
-      page = ThemeDao.findCatesThemes(3,5,s,p,24)
-    }else {
-      page = ThemeDao.findCateThemes(cid,s,p,24)
-    }
-    Ok(views.html.pages.miss(user,page,cid,s))
-  }
   /* 主题街下的 主题分类 */
   def gallery(cid:Int,s:String,p:Int)= Users.UserAction { user => implicit request =>
     val page = ThemeDao.findCateThemes(cid,s,p,24)
@@ -125,22 +105,16 @@ import java.util.Calendar
   }
 
   /* 主题 */
-  def themes =  Users.UserAction { user => implicit request =>
-    var page:Page[((Long,String,String,Int),List[String])] =null
-
-      page = ThemeDao.findThemes("new",1,4)
-
-    Ok(views.html.pages.themes(user,page,0,"sss"))
+  def miss =  Users.UserAction { user => implicit request =>
+    val  flashes:List[models.advert.Advert] =AdvertDao.findAdverts("miss_flash")
+    val meishiThemes:List[((Long,String,String,Int),List[String])]=AdvertDao.getThemes("miss_meishi_theme",4)
+    val techanThemes:List[((Long,String,String,Int),List[String])]=AdvertDao.getThemes("miss_techan_theme",4)
+    val zibuThemes:List[((Long,String,String,Int),List[String])]=AdvertDao.getThemes("miss_zibu_theme",4)
+    val jujiaThemes:List[((Long,String,String,Int),List[String])]=AdvertDao.getThemes("miss_jujia_theme",4)
+    val haowanyiThemes:List[((Long,String,String,Int),List[String])]=AdvertDao.getThemes("miss_haowanyi_theme",4)
+    Ok(views.html.pages.miss(user,flashes,meishiThemes,techanThemes,zibuThemes,jujiaThemes,haowanyiThemes))
   }
-  def themes(s:String,cid:Int,p:Int) =  Users.UserAction { user => implicit request =>
-    var page:Page[((Long,String,String,Int),List[String])] =null
-    if (cid <0){
-      page = ThemeDao.findThemes(s,p,4)
-    }else {
-      page = ThemeDao.findCateThemes(cid,s,p,24)
-    }
-     Ok(views.html.pages.themes(user,page,cid,s))
-  }
+
 
   /*  特色中国  */
   def china(tag:String,p:Int) =  Users.UserAction { user => implicit request =>

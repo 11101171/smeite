@@ -4,7 +4,7 @@ import scala.slick.driver.MySQLDriver.simple._
 import play.api.Play.current
 import models.goods.{Goodses, Goods}
 import models.user.{Users, User}
-import models.theme.{Themes, Theme}
+import models.theme.{ThemeGoodses, Themes, Theme}
 import models.advert._
 import models.forum.{Topic, Topics}
 
@@ -68,14 +68,23 @@ object AdvertDao {
   }
   /* 获取主题*/
   def getThemes(positionCode:String):List[Theme] = database.withSession {  implicit session:Session =>
-    (for{
-      c<-Adverts;
-      t<-Themes;
-      if c.positionCode === positionCode;
+      (for{
+      c<-Adverts
+      t<-Themes
+      if c.positionCode === positionCode
       if c.thirdId === t.id
     }yield(t) ).list()
   }
-
+  /* 获取主题 */
+  def getThemes(positionCode:String,num:Int):List[((Long,String,String,Int),List[String])] = database.withSession {  implicit session:Session =>
+    (for{
+      c<-Adverts.filter(_.positionCode === positionCode).take(num)
+      t<-Themes
+      g<-ThemeGoodses
+      if c.thirdId === t.id
+      if t.id === g.themeId
+  } yield(t.id,t.name,t.intro,t.loveNum,t.modifyTime,g.sortNum,g.goodsPic)).list().groupBy(x=>(x._1,x._2,x._3,x._4)).map(x=>(x._1,x._2.sortBy(x=>x._6).take(5).map(y=>y._7))).toList
+  }
   /*
   *
   *   u<-Users

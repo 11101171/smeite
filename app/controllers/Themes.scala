@@ -87,7 +87,7 @@ object Themes extends Controller {
   * */
   def view(id:Long) = Users.UserAction { user => implicit request =>
      val theme=ThemeDao.findById(id)
-     if (theme.isEmpty) Redirect(controllers.routes.Pages.jie("hot",1))
+     if (theme.isEmpty) Redirect(controllers.routes.Pages.miss)
      else {
        val themeStyle=ThemeDao.findStyle(id)
       val goodses =ThemeDao.findGoodses(id);
@@ -113,7 +113,7 @@ object Themes extends Controller {
   /*显示该主题下的讨论*/
   def board(id:Long,currentPage:Int)= Users.UserAction { user => implicit request =>
     val theme=ThemeDao.findById(id)
-    if (theme.isEmpty) Redirect(controllers.routes.Pages.jie("new",1))
+    if (theme.isEmpty) Redirect(controllers.routes.Pages.miss)
     else {
       /*1 判定当前用户是否存在 不存在则查询*/
       /*2 判定theme的uid 与当前的用户是否一致，不一致则需要查询theme的作者，传到前台页面，一致，则把当前用户直接传到前台页面*/
@@ -137,7 +137,7 @@ object Themes extends Controller {
   /*显示该主题下的喜欢的人*/
   def likes(id:Long,currentPage:Int)= Users.UserAction { user => implicit request =>
     val theme=ThemeDao.findById(id)
-    if (theme.isEmpty) Redirect(controllers.routes.Pages.jie("hot",1))
+    if (theme.isEmpty) Redirect(controllers.routes.Pages.miss)
     else {
       val themeStyle=ThemeDao.findStyle(id)
       val page=UserDao.findThemeUsers(id,currentPage)

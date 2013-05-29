@@ -313,3 +313,72 @@ insert into advert(position_code,name)value("index-bottom","新-首页-底部-�
  insert into advert(position_code,name)value("hot_knowledge","精华知识2") ;
  insert into advert(position_code,name)value("hot_knowledge","精华知识3") ;
  insert into advert(position_code,name)value("hot_knowledge","精华知识4") ;
+
+
+ #5月29日
+ insert into advert_position(position,name,code,advert_type)values("miss","顶部切换广告","miss_flash",0);
+ insert into advert(position_code,name)value("miss_flash","图片广告1") ;
+ insert into advert(position_code,name)value("miss_flash","图片广告2") ;
+ insert into advert(position_code,name)value("miss_flash","图片广告3") ;
+ insert into advert(position_code,name)value("miss_flash","图片广告4") ;
+ insert into advert(position_code,name)value("miss_flash","图片广告5") ;
+
+  insert into advert_position(position,name,code,advert_type)values("miss","美食主题","miss_meishi_theme",4);
+ insert into advert(position_code,name)value("miss_meishi_theme","美食主题1") ;
+ insert into advert(position_code,name)value("miss_meishi_theme","美食主题2") ;
+ insert into advert(position_code,name)value("miss_meishi_theme","美食主题3") ;
+ insert into advert(position_code,name)value("miss_meishi_theme","美食主题4") ;
+ insert into advert(position_code,name)value("miss_meishi_theme","美食主题5") ;
+ insert into advert(position_code,name)value("miss_meishi_theme","美食主题6") ;
+ insert into advert(position_code,name)value("miss_meishi_theme","美食主题7") ;
+ insert into advert(position_code,name)value("miss_meishi_theme","美食主题8") ;
+
+ insert into advert_position(position,name,code,advert_type)values("miss","特产主题","miss_techan_theme",4);
+ insert into advert(position_code,name)value("miss_techan_theme","特产主题1");
+ insert into advert(position_code,name)value("miss_techan_theme","特产主题2");
+ insert into advert(position_code,name)value("miss_techan_theme","特产主题3");
+ insert into advert(position_code,name)value("miss_techan_theme","特产主题4");
+ insert into advert(position_code,name)value("miss_techan_theme","特产主题5");
+ insert into advert(position_code,name)value("miss_techan_theme","特产主题6");
+ insert into advert(position_code,name)value("miss_techan_theme","特产主题7");
+ insert into advert(position_code,name)value("miss_techan_theme","特产主题8");
+
+  insert into advert_position(position,name,code,advert_type)values("miss","滋补主题","miss_zibu_theme",4);
+ insert into advert(position_code,name)value("miss_zibu_theme","滋补主题1");
+ insert into advert(position_code,name)value("miss_zibu_theme","滋补主题2");
+ insert into advert(position_code,name)value("miss_zibu_theme","滋补主题3");
+ insert into advert(position_code,name)value("miss_zibu_theme","滋补主题4");
+ insert into advert(position_code,name)value("miss_zibu_theme","滋补主题5");
+ insert into advert(position_code,name)value("miss_zibu_theme","滋补主题6");
+ insert into advert(position_code,name)value("miss_zibu_theme","滋补主题7");
+ insert into advert(position_code,name)value("miss_zibu_theme","滋补主题8");
+
+  insert into advert_position(position,name,code,advert_type)values("miss","居家主题","miss_jujia_theme",4);
+ insert into advert(position_code,name)value("miss_jujia_theme","居家主题1");
+ insert into advert(position_code,name)value("miss_jujia_theme","居家主题2");
+ insert into advert(position_code,name)value("miss_jujia_theme","居家主题3");
+ insert into advert(position_code,name)value("miss_jujia_theme","居家主题4");
+ insert into advert(position_code,name)value("miss_jujia_theme","居家主题5");
+ insert into advert(position_code,name)value("miss_jujia_theme","居家主题6");
+ insert into advert(position_code,name)value("miss_jujia_theme","居家主题7");
+ insert into advert(position_code,name)value("miss_jujia_theme","居家主题8");
+
+   insert into advert_position(position,name,code,advert_type)values("miss","中国风主题","miss_china_theme",4);
+ insert into advert(position_code,name)value("miss_china_theme","中国风主题1");
+ insert into advert(position_code,name)value("miss_china_theme","中国风主题2");
+ insert into advert(position_code,name)value("miss_china_theme","中国风主题3");
+ insert into advert(position_code,name)value("miss_china_theme","中国风主题4");
+ insert into advert(position_code,name)value("miss_china_theme","中国风主题5");
+ insert into advert(position_code,name)value("miss_china_theme","中国风主题6");
+ insert into advert(position_code,name)value("miss_china_theme","中国风主题7");
+ insert into advert(position_code,name)value("miss_china_theme","中国风主题8");
+
+  insert into advert_position(position,name,code,advert_type)values("miss","好玩意主题","miss_haowanyi_theme",4);
+ insert into advert(position_code,name)value("miss_haowanyi_theme","好玩意主题1");
+ insert into advert(position_code,name)value("miss_haowanyi_theme","好玩意主题2");
+ insert into advert(position_code,name)value("miss_haowanyi_theme","好玩意主题3");
+ insert into advert(position_code,name)value("miss_haowanyi_theme","好玩意主题4");
+ insert into advert(position_code,name)value("miss_haowanyi_theme","好玩意主题5");
+ insert into advert(position_code,name)value("miss_haowanyi_theme","好玩意主题6");
+ insert into advert(position_code,name)value("miss_haowanyi_theme","好玩意主题7");
+ insert into advert(position_code,name)value("miss_haowanyi_theme","好玩意主题8");

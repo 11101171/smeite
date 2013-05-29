@@ -27,8 +27,8 @@ object Global extends GlobalSettings {
      if(schedule=="on"){
 
        /* 邀请有奖，每天夜里3点-4点统计 发布的时候注意修改时间 */
-      val invitePrizeActor = Akka.system.actorOf(Props[InvitePrizeActor], name = "invitePrizeActor")
-     Akka.system.scheduler.schedule(5 minutes, 8 hours, invitePrizeActor, "start")
+   //   val invitePrizeActor = Akka.system.actorOf(Props[InvitePrizeActor], name = "invitePrizeActor")
+ //    Akka.system.scheduler.schedule(5 minutes, 8 hours, invitePrizeActor, "start")
        /* 淘宝客收入 每天晚上11:30左右统计 发布的时候注意修改时间 */
    //     val taobaokeIncomeActor = Akka.system.actorOf(Props[TaobaokeIncomeActor], name = "taobaokeIncomeActor")
     //      Akka.system.scheduler.schedule(5 minutes, 3 hours, taobaokeIncomeActor, "start")
@@ -43,7 +43,7 @@ object Global extends GlobalSettings {
      }
 
   }
-//  When an exception occurs in your application, the onError operation will be called
+/*//  When an exception occurs in your application, the onError operation will be called
  override def onError(request: RequestHeader, ex: Throwable) = {
     InternalServerError(
       views.html.common.global.error()
@@ -63,7 +63,7 @@ object Global extends GlobalSettings {
     //  views.html.common.global.badRequest()
       views.html.common.global.error()
     )
-  }
+  }*/
 
 
 }

@@ -123,7 +123,10 @@
 .category .hd{ margin-bottom:6px;overflow:hidden;padding: 0 10px}
 .category .hd h2{ font-size:16px;height:28px;line-height:28px;float:left;color:#666;}
 .category .hd h2 a, .hd h2 a{color:#666;text-decoration:none}
-.category .hd h3{font-size: 14px;height:28px;line-height:28px;float:left;color:#e26;}
+.category .hd h3{font-size: 12px;height:28px;line-height:28px;float:left;color:#e26;}
+.category .hd h3 a{ font-weight: normal}
+.category .hd h3 a:hover{ color:#e26}
+.category .hd h3 span{font-weight: normal}
 .category .hd .more{float:right;display:block;font-size:12px;font-weight:700;line-height:28px;}
 .category .hd .more a{color:#333;text-decoration:none;}
 .category .hd .more a.on{display:block;}

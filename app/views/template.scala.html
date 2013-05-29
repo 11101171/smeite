@@ -62,9 +62,8 @@
                 <li><span>-</span></li>
                 <li class='@("on".when(nav == "forum"))'><a href="@controllers.routes.Forums.forum(1)" >讨论吧</a></li>
                 <li><span>-</span></li>
-                <!--<li class='@("on".when(nav == "jie"))'><a href="/jie" >美食街</a></li>
-                <li class='@("on".when(nav == "miss"))'>  <a href="/miss" >生活馆</a> </li>-->
-                <li class='@("on".when(nav == "themes"))'>  <a href="/themes" >主题</a> </li>
+
+                <li class='@("on".when(nav == "miss"))'>  <a href="@controllers.routes.Pages.miss" >主题</a> </li>
                 <li><span>-</span></li>
                 <li class= 'china'>  <a class='@("on".when(nav == "china"))' href="/china" >特色中国</a> </li>
             </ul>
