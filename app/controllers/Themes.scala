@@ -110,6 +110,32 @@ object Themes extends Controller {
        }
      }
   }
+  def view2(id:Long) = Users.UserAction { user => implicit request =>
+    val theme=ThemeDao.findById(id)
+    if (theme.isEmpty) Redirect(controllers.routes.Pages.miss)
+    else {
+      val themeStyle=ThemeDao.findStyle(id)
+      val goodses =ThemeDao.findGoodses(id);
+
+      /*1 判定当前用户是否存在 不存在则查询*/
+      /*2 判定theme的uid 与当前的用户是否一致，不一致则需要查询theme的作者，传到前台页面，一致，则把当前用户直接传到前台页面*/
+      if (user.isEmpty){
+        val author =  UserDao.findById(theme.get.uid)
+        val themes = UserDao.findSimplePostThemes(author.id.get)
+        Ok(views.html.themes.view2(user,author,theme.get,themeStyle.get,goodses,themes))
+      }else{
+        if (user.get.id.get == theme.get.uid){
+          val themes = UserDao.findSimplePostThemes(user.get.id.get)
+          Ok(views.html.themes.view2(user,user.get,theme.get,themeStyle.get,goodses,themes))
+        } else {
+          val author =  UserDao.findById(theme.get.uid)
+          val themes = UserDao.findSimplePostThemes(author.id.get)
+          Ok(views.html.themes.view2(user,author,theme.get,themeStyle.get,goodses,themes))
+        }
+      }
+    }
+  }
+
   /*显示该主题下的讨论*/
   def board(id:Long,currentPage:Int)= Users.UserAction { user => implicit request =>
     val theme=ThemeDao.findById(id)

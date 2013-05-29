@@ -4,7 +4,7 @@ user,
 title = theme.name+"  _ 食美特，爱美食爱生活",
 keywords =   theme.tags.getOrElse("食美特"),
 description =  theme.intro.getOrElse("食美特，爱美食爱生活")
-)(css="/assets/css/template/theme.detail.css") {
+)(css="/assets/css/template/theme2.detail.css") {
 <style>
     body{
         background-color:@style.pageBgColor;
@@ -84,33 +84,27 @@ description =  theme.intro.getOrElse("食美特，爱美食爱生活")
                     }else{
                     <a rel="followTheme" href="javascript:;" class="follow  mt5 mr10" data-type="1" data-themeid="@theme.id.get" title="关注">+ 关注</a>
                     }
-                    <a class="btn-share mt5" href="javascript:;" data-sharetxt="我在食美特发现了这个主题，我很喜欢，分享给大家 :@theme.name  " data-sharelink="@controllers.routes.Themes.view(theme.id.get)" data-sharepic="@theme.pic" title="分享">分享</a>
 
                 </div>
             </li>
             <li>
                 <div class="nav-item">
-                    <a class="trait" href="@controllers.routes.Themes.view(theme.id.get)" title="宝贝"><em>@theme.goodsNum</em><br>宝贝</a>
+                    <a class="trait" href="#" title="宝贝"><em>@theme.goodsNum</em><br>宝贝</a>
                 </div>
             </li>
             <li>
                 <div class="nav-item">
-                    <a href="@controllers.routes.Themes.board(theme.id.get,1)">@theme.replyNum<br>讨论</a>
+                    <a href="#J_themeInfo">@theme.replyNum<br>讨论</a>
                 </div>
             </li>
             <li>
                 <div class="nav-item">
-                    <a href="@controllers.routes.Themes.likes(theme.id.get,1)"><em id="J_LikeCount">@theme.loveNum</em><br>关注</a>
+                    <a href="#J_themeInfo"><em id="J_LikeCount">@theme.loveNum</em><br>关注</a>
                 </div>
             </li>
-            <i></i>
+
         </ul>
-			<span class="pos-l-txt gc6">返回：
-    	    	        <a href='@controllers.routes.Pages.miss'>美食街</a>
-    	    	        <span class="ml5 mr5">/</span>
-                      <a href='@controllers.routes.Pages.gallery(theme.cid,"new",1)'>@models.Cate(theme.cid)</a>
-
-                        </span>
+			<span class="pos-l-txt gc6">返回： <a href='@controllers.routes.Pages.miss'>主题</a><span class="ml5 mr5">/</span> <a href='@controllers.routes.Pages.gallery(theme.cid,"new",1)'>@models.Cate(theme.cid)</a> </span>
     </div>
 
 </div>
@@ -179,73 +173,81 @@ description =  theme.intro.getOrElse("食美特，爱美食爱生活")
             </ul>
         </div>
         }
-        <div class="comments box-shadow plr15">
-            <div class="title">
-                <a href="@controllers.routes.Themes.board(theme.id.get,1)" class="all-follows">进入&gt;</a>
-                讨论板
-            </div>
-            <div class="comment-wrap clearfix">
-                <textarea class="b-textarea" id="J_SideCmtContent" name="commentContent"
-                          id="J_CommentContent"></textarea>
-                <a class="sbl-btn" id="J_SideCmt" href="javascript:;" data-name="amYRbi">发表</a>
-            </div>
-            <ul id="J_CmtList">
-            </ul>
-        </div>
-
-        <div class="recommend-theme box-shadow">
-            <div class="title">
-                <a href="@controllers.users.routes.Users.theme(author.id.get)" class="rw" target="_blank">更多&gt;</a>
-                @if(!user.isEmpty && user.get.id.get == author.id.get){
-                <h3>我的更多主题</h3>
-                }else{
-                <h3>Ta的更多主题</h3>
-                }
-
-            </div>
-            <ul class="recomm-follow-theme">
-                @for(theme <- themes){
-                <li>
-                    <a href="@controllers.routes.Themes.view(theme.id.get)" target="_blank">@theme.name<span>@theme.goodsNum</span></a>
-                </li>
-                }
-
-            </ul>
-        </div>
-
 
     </div>
 </div>
+<div class="theme-info box-shadow clearfix" id="J_themeInfo">
+    <div class="discusses">
+        <h3 class="title">我很想对这个主题说</h3>
+        <div class="discusses-wrap clearfix">
+            <textarea class="b-textarea" id="J_SideCmtContent" name="commentContent" id="J_CommentContent">你也可以顺便说点什么 O(∩_∩)O</textarea>
+            <a class="bbl-btn" id="J_SideCmt" href="javascript:;">确定</a>
+        </div>
 
-<div class="theme_share clearfix box-shadow">
-    <span class="theme_tip">看完啦？别忘了关注一下~</span>
-    <a rel="followTheme" class="ifollow" data-type="0" data-themeid="@theme.id.get" href="javascript:;" title="关注">+ 关注</a>
-    <a class="icomment" href="@controllers.routes.Themes.board(theme.id.get,1)#cmtlist" title="讨论">讨论</a>
+            <div class="cmt clearfix cmt-noworth" data-cmtid="1" data-proid="23">
+                <div class="user-pic">
+                    <img src="/images/user/1363011053560.jpg" alt="怡然" width="50" height="50">
+                </div>
+                <div class="cmt-doc">
+                    <div class="cmt-info clearfix">
+                        <span class="fl t">怡然</span>
+                        <span class="fr gc">来自 腾讯QQ </span>
+                        <span class="fr gc mr5">2013-01-07 13:58:09.0 </span>
+                    </div>
+                    <p class="cmt-content clearfix"><span>各种美味坚果都在里面了，并且包装精美，送亲人朋友都很合适哦！ </span> </p>
+                </div>
+            </div>
 
-    <div class="share fr">
-        <span class="fl l20">叫上好友一起来：</span>
-        <a class="s-sina"
-           href="javascript:void((function(){var title=encodeURIComponent('《@theme.name》－ 食美特，发现生活之美');var link=window.location.href;var pic='';window.open('http://service.t.sina.com.cn/share/share.php?appkey=1464940004&title='+title+'&pic='+pic+'&url='+link);})())"
-           alt="分享到新浪微博"></a>
-        <a class="s-qzone"
-           href="javascript:void((function(){var title=encodeURIComponent('《@theme.name》－ 食美特，发现生活之美');var link=window.location.href;window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+link);})())"
-           alt="分享到QQ空间"></a>
-        <a class="s-tencent"
-           href="javascript:void((function(){var title=encodeURIComponent('《@theme.name》－ 食美特，发现生活之美');var link=window.location.href;var pic='';window.open('http://v.t.qq.com/share/share.php?appkey=100344510&url='+link+'&title='+title+'&pic=&site='+link);})())"
-           alt="分享到腾讯微博"></a>
-        <a class="s-douban"
-           href="javascript:void((function(){var title=encodeURIComponent('《@theme.name》－ 食美特，发现生活之美');var link=window.location.href;window.open('http://www.douban.com/recommend/?url='+link+'&title='+title);})())"
-           alt="分享到豆瓣"></a>
-        <a class="s-renren"
-           href="javascript:void((function(){var title=encodeURIComponent('《@theme.name》－ 食美特，发现生活之美');var link=window.location.href;window.open('http://share.renren.com/share/buttonshare.do?link='+link+'&title='+title);})())"
-           alt="分享到人人网"></a>
-        <a class="s-163"
-           href="javascript:void((function(){var title=encodeURIComponent('《@theme.name》－ 食美特，发现生活之美');var link=window.location.href;var pic='';window.open('http://t.163.com/article/user/checkLogin.do?link='+link+'&source=食美特&info='+title+link+'&images='+pic+'&togImg=true');})());"
-           alt="分享到网易微博"></a>
+        </div>
+    <div class="loves">
+        <h3 class="title mb20">我喜欢这个主题</h3>
+        <div class="theme-follow">
+            @if(!user.isEmpty && user.get.id.get == author.id.get){
+            <a href="javascript:;" class="follow  mt5 mr10"  title="我的主题">我的主题</a>
+            }else{
+            <a rel="followTheme" href="javascript:;" class="follow  mt5 mr10" data-type="1" data-themeid="@theme.id.get" title="关注">+ 关&nbsp;注</a>
+            } 36人
+        </div>
+        <div class="theme-share share32  clearfix">
+            <h3 class="title mt10">分享到：</h3>
+
+                <a class="sh_sina fl" href="javascript:;" alt="分享到新浪微博">新浪微博</a>
+                <a class="sh_qzone fl" href="javascript:;" alt="分享到QQ空间">QQ空间</a>
+                <a class="sh_tencent fl" href="javascript:;" alt="分享到腾讯微博">腾讯微博</a>
+                <a class="sh_renren fl" href="javascript:;" alt="分享到人人网">人人网</a>
+
+        </div>
+         <div class="theme-lovers">
+             <h3 class="title mt10">最近喜欢的人：</h3>
+             <ul>
+                 <li>
+                     <div class="user-pic">
+                         <a href="/user/39" title="明月渺">
+                             <img src="/images/user/default.jpg" width="50" height="50" alt="明月渺" title="明月渺">
+                         </a>
+                     </div>
+                 </li>
+                 <li>
+                     <div class="user-pic">
+                         <a href="/user/65" title="为新市民子女服务">
+                             <img src="http://qzapp.qlogo.cn/qzapp/100344510/92257A13BA96C52062B1F18F68715F9F/50" width="50" height="50" alt="为新市民子女服务" title="为新市民子女服务">
+                         </a>
+                     </div>
+                 </li>
+             </ul>
+         </div>
+
     </div>
-</div>
+    <div class="guess">
+       <h3 class="title"><a class="more fr">查看全部&gt;&gt;</a> 你可能还喜欢</h3>
+
+
+
+    </div>
 
 </div>
+
+
 
 
 <input id="J_ThemeId" type="hidden" value="@theme.id.get">

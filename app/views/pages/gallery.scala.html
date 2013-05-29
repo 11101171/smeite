@@ -53,8 +53,11 @@ title = "美食街,特色馆_食美特，爱美食爱生活"
 
     <div class="category clearfix">
         <div class="hd clearfix">
-            <h2 class="fl"><a>美食</a></h2>
-            <h3 class="fl"><span> -- </span> <span>最新</span> <a>最热</a> </h3>
+            <h2 class="fl"><a href='@controllers.routes.Pages.gallery(cid,"new",1)'>@models.Cate(cid)</a></h2>
+            <h3 class="fl"><span> -- </span>
+              @if(sortBy == "new"){<span>最新</span>}else{ <a href='@controllers.routes.Pages.gallery(cid,"new",1)'>最新</a> }
+                @if(sortBy == "hot"){<span>最热</span>}else{ <a href='@controllers.routes.Pages.gallery(cid,"hot",1)'>最热</a> }
+            </h3>
 
         </div>
         <div class="group clearfix">
@@ -74,7 +77,7 @@ title = "美食街,特色馆_食美特，爱美食爱生活"
                     <a href="@controllers.routes.Themes.view(themeId)" target="_blank">@themeName</a>
                 </h3>
 
-                <div class="info" style="color: rgb(153, 153, 153); ">@themeIntro</div>
+                <div class="info">@themeIntro</div>
                 <a rel="followTheme" href="javascript:;" class="follow" data-type="0" data-themeid="@themeId">+ 关注</a>
 					<span class="mete pl15">
                     <a href="@controllers.routes.Themes.likes(themeId)" class="follow-likes" target="_blank">

@@ -104,7 +104,7 @@ object ThemeDao {
       g<-ThemeGoodses
       if t.id === g.themeId
     } yield(t.id,t.name,t.intro,t.loveNum,t.modifyTime,g.sortNum,g.goodsPic))
-    if(sortBy=="new") query =query.sortBy(_._5 desc)
+    if(sortBy=="new") query =query.sortBy(_._5 asc)
     if(sortBy=="hot") query = query.sortBy(_._4 desc)
     val themes:List[((Long,String,String,Int),List[String])] =query.list().groupBy(x=>(x._1,x._2,x._3,x._4)).map(x=>(x._1,x._2.sortBy(x=>x._6).take(5).map(y=>y._7))).toList
     Page[((Long,String,String,Int),List[String])](themes,currentPage,totalPages)

@@ -91,7 +91,7 @@ import java.util.Calendar
     }
     val tags = TagDao.findCateTags(cid,30)
     var page:models.Page[models.goods.Goods] = null
-    if (tag =="tag")  page = TagDao.findSimpleCateGoodses(cid,p,48);
+    if (tag =="tag")  page = TagDao.findSimpleCateGoodses(cid,p,48)
     else   page = TagDao.findSimpleTagGoodses(tag,p,48)
     Ok(views.html.pages.faxian(user,page,cate,tag,tags))
   }

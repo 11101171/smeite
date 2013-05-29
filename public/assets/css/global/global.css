@@ -853,6 +853,75 @@ input:-moz-placeholder { font-size:12px; }
 .l-sina { background:url(images/l-sina.png); }
 .l-qq { background:url(images/l-qq.png); }
 .l-tao { background:url(images/l-tao.png); }
+
+.share32 a {
+    background: url(images/share_32.png) no-repeat;
+    width: 37px;
+    height: 37px;
+    display: block;
+    float: left;
+    margin-right: 3px;
+    text-indent: -100em;
+    cursor: pointer;
+}
+
+.sh_qzone {
+    background-position: 0 -75px !important;
+}
+
+.sh_sina {
+    background-position: 0 -115px !important;
+}
+
+.sh_bdhome {
+    background-position: 0 -155px !important;
+}
+
+.sh_renren {
+    background-position: 0 -195px !important;
+}
+
+.sh_tencent {
+    background-position: 0 -235px !important;
+}
+
+.sh_kaixin001 {
+    background-position: 0 -275px !important;
+}
+
+.sh_tqf {
+    background-position: 0 -315px !important;
+}
+
+.sh_hi {
+    background-position: 0 -355px !important;
+}
+
+.sh_douban {
+    background-position: 0 -395px !important;
+}
+
+.sh_tsohu {
+    background-position: 0 -435px !important;
+}
+
+.sh_msn {
+    background-position: 0 -475px !important;
+}
+
+.sh_qq {
+    background-position: 0 -515px !important;
+}
+
+.sh_taobao {
+    background-position: 0 -555px !important;
+}
+
+.sh_tieba {
+    background-position: 0 -595px !important;
+}
+
+
 /* 分享开关 */
 .share-switch {background-image:url(images/share-icon-gray.png);background-repeat:no-repeat;}
 .ss-sina-btnclick-on{background-position:0 -417px;}
@@ -871,6 +940,7 @@ input:-moz-placeholder { font-size:12px; }
 .sns-sync span { float:left; }
 .sns-sync ul { float:left;height:16px; }
 .sns-sync ul li { float:left;width:16px;height:16px;cursor:pointer;margin-right:5px; }
+
 /* 分页 */
 .page-box { display:none;margin-top:20px;text-align:center; }
 .page-box .pagin { position:relative;height:28px;margin:0 auto;padding:70px 70px 0 0; }
