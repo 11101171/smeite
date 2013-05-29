@@ -1420,7 +1420,41 @@ define(function(require, exports) {
                 isLocation: true
             });
         });
+    };
+
+    $.fn.shareToThird=function(){
+        var $this = $(".share-link");
+      var  shareTxt = encodeURIComponent($this.data("sharetxt")),
+            shareLink = $this.data("sharelink"),
+            sharePic = encodeURIComponent($this.data("sharepic"));
+        if(shareLink.indexOf("http://smeite.com")==-1){
+            shareLink = encodeURIComponent("http://smeite.com" + shareLink);
+        }
+        $(".share-link a").click(function(){
+            var type = $(this).data("type");
+            switch(type){
+                case "s-sina":
+                    window.open('http://service.t.sina.com.cn/share/share.php?appkey=1464940004&title='+shareTxt+'&pic='+sharePic+'&url='+shareLink);
+                    break;
+                case "s-tencent":
+                    window.open('http://v.t.qq.com/share/share.php?appkey=100344510&url='+shareLink+'&title='+shareTxt+'&pic='+sharePic+'&site='+shareLink);
+                    break;
+                case "s-douban":
+                    window.open('http://www.douban.com/recommend/?url='+shareLink+'&title='+shareTxt);
+                    break;
+                case "s-qzone":
+                    window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+shareLink);
+                    break;
+                case "s-renren":
+                    window.open('http://share.renren.com/share/buttonshare.do?link='+shareLink+'&title='+shareTxt);
+                    break;
+                case "s-163":
+                    window.open('http://t.163.com/article/user/checkLogin.do?link='+shareLink+'&source=&info='+shareTxt+'&images='+sharePic);
+            }
+        })
     }
+
+
 
     //广告位点击数
     $.fn.countAdNum=function(obj){
