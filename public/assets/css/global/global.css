@@ -1519,7 +1519,68 @@ input:-moz-placeholder { font-size:12px; }
 .guang-editor .baobeiWrap .sg-form .url-sub { margin-top:2px;cursor:pointer;*visibility:visible;width:56px\9; }
 .guang-editor .baobeiWrap .sg-form .text-tip { display:none;padding:5px 0;line-height:1.1; }
 .guang-editor .baobeiWrap .manual-upload { line-height:1.1;padding:5px 0 0 0;border-top:1px dotted #d1d1d1; }
+ /* simple editor*/
+#J_FaceBtn {
+    margin-left: 10px;
+    position: relative;
+    margin-top: 1px;
+    height: 24px;
+    float: left;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px
+}
 
+#J_FaceBtn a.faceBtn {
+    height: 24px;
+    line-height: 24px;
+    padding: 0 5px 0 26px;
+    float: left;
+    color: #666;
+    background: #f9f9f9 url(images/edit_toolbar.gif) no-repeat 4px 4px
+}
+
+#J_FaceBtn a:hover {
+    text-decoration: none;
+    background-color: #fff
+}
+
+#J_FaceBtn .faceWrap {
+    position: absolute;
+    z-index: 50;
+    padding: 4px;
+    top: -1px;
+    *top: -170px;
+    left: 60px;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px
+}
+
+#J_FaceBtn .faceWrap a {
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    float: left;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-indent: -2000px;
+    overflow: hidden;
+    position: relative
+}
+
+#J_FaceBtn .faceWrap a:hover {
+    text-decoration: none
+}
+
+#J_FaceBtn .faceWrapBorder {
+    border-left: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    width: 372px
+}
 /*gridGoods*/
 .goods-wall-news{/*overflow: hidden;*/width:960px;background:url(images/goods-wall-news.png) repeat-y;margin:10px auto;}
 .goods-wall-news1{/*overflow: hidden;*/width:716px;background:url(images/goods-wall-news.png) repeat-y;margin:10px auto;}

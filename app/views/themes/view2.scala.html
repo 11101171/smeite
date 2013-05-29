@@ -180,9 +180,14 @@ description =  theme.intro.getOrElse("食美特，爱美食爱生活")
     <div class="discusses">
         <h3 class="title">我很想对这个主题说</h3>
         <div class="discusses-wrap clearfix">
-            <textarea class="b-textarea" id="J_cmtContent" name="commentContent">你也可以顺便说点什么吧 O(∩_∩)O</textarea>
+            <form id="J_cmtForm">
+            <textarea class="b-textarea" id="J_Content" name="commentContent" placeholder="你也可以顺便说点什么吧 O(∩_∩)O"></textarea>
             <input type="button" class="bbl-btn" id="J_cmtSubmit" value="确定">
-        </div>
+                <div id="J_FaceBtn">
+                    <a class="faceBtn" href="javascript:;" unselectable="on" facebtn="faceBtn">表情</a>
+                </div>
+            </form>
+       </div>
 
             <div class="cmt clearfix cmt-noworth" data-cmtid="1" data-proid="23">
                 <div class="user-pic">
@@ -248,14 +253,15 @@ description =  theme.intro.getOrElse("食美特，爱美食爱生活")
 </div>
 
 
-
+</div>
 
 <input id="J_ThemeId" type="hidden" value="@theme.id.get">
 
 }{
 <script type="text/javascript">
     seajs.use('app/init', function (init) {
-        init.load('app/theme/theme.detail2,app/theme/theme.favor,app/goods/goods.favor');
+
+        init.load('app/theme/theme.detail2,app/smeite.simpleEditor,app/theme/theme.favor,app/goods/goods.favor');
 
     });
 </script>

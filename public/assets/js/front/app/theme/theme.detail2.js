@@ -556,25 +556,9 @@ var UserTheme = {
             $.smeite.goods.conf.justFlow =true;
             $.smeite.goods.init();
         }
-        $("#J_cmtContent").bind("blur",function(){
-            var self=$(this);
-            var inputVal=$.smeite.util.trim(self.val());
-            if(inputVal==""){
-                self.val("你也可以顺便说点什么吧 O(∩_∩)O");
-            }
-        });
-        $("#J_cmtContent").bind("click",function(){
-            if($.smeite.dialog.isLogin()){
-                var self=$(this);
-                var inputVal=$.smeite.util.trim(self.val());
-                if(inputVal=="你也可以顺便说点什么吧 O(∩_∩)O"){
-                    self.val("");
-                }
 
-            }
 
-        });
-        $("#J_cmtContent").bind("keydown",function(event){
+        $("#J_Content").bind("keydown",function(event){
             var keycode=event.which;
             var self=$(this);
             var inputVal=$.smeite.util.trim(self.val());
@@ -592,11 +576,7 @@ var UserTheme = {
             var input=$("#J_cmtContent");
             var inputVal=input.val();
             inputVal=$.smeite.util.trim(inputVal);
-            if(inputVal=="你也可以顺便说点什么吧 O(∩_∩)O"){
-                input.val("");
-                input.focus();
-                return false;
-            }
+
             if(inputVal==""){
                 input.focus();
                 return false;

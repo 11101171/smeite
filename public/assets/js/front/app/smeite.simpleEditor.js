@@ -94,8 +94,7 @@
 	var faceIsShow = false;
 	var toggleFaceBtns = function(){
 		if(!faceBtnWrapDom){
-			var html = '\
-				<div class="faceWrap"><div class="faceWrapBorder clearfix">'
+			var html = '<div class="faceWrap"><div class="faceWrapBorder clearfix">'
 				for(var i=0;i<FACEJSON.length;i++){
 					html += '<a faceval="'+FACEJSON[i].key+'" style="background:#fff url(/assets/emotion/'+FACEJSON[i].val+') 4px 4px no-repeat;" href="javascript:;" title="'+FACEJSON[i].key+'" unselectable="on">'+FACEJSON[i].key+'</a>'
 				}
