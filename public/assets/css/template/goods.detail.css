@@ -33,7 +33,11 @@
     overflow: hidden;
     position: relative
 }
-
+/*.pic-box .like-common{
+    position: absolute;
+    right: 30px;
+    top: 25px;
+}*/
  .pic-box .pic-link {
     width: 460px;
     height: 460px;
@@ -51,23 +55,22 @@
     padding-bottom: 20px;
     vertical-align: middle
 }
-
+.main .bbl-btn{
+    margin-left: 150px;
+}
 
 
 /*side */
 .side {
     float: right;
-    width: 430px;
+    width: 470px;
     position: relative;
-    background: white;
-    padding: 20px;
-    border: 1px solid #DDD;
 }
 
 
 .side .arrow-left{
     position: absolute;
-    top: 60px;
+    top: 120px;
     left: -12px;
     width: 12px;
     height: 17px;
@@ -75,91 +78,101 @@
     background: url(images/ico_common.png) no-repeat -152px -5144px;
 }
 
-.user-recommend .intro  {
+ /* user info */
+.buy-info {
+    position: relative;
+    margin: 0 0 20px;
+    background-color: #fff;
+    border: 1px solid #DDD;
+    padding: 18px;
+}
+.buy-info .title {
+    color:#555;
+    font-size: 16px;
+    font-weight: bolder;
+    padding: 10px 0 20px;
+}
+.buy-info .user-recommend .pic{
+    width: 60px;
+}
+.buy-info .user-recommend .intro  {
     position: relative;
     text-indent: 30px;
-    padding: 10px;
-    font: 14px/24px SimSun;
-    color: #333;
+    padding: 0 10px;
+    font-size: 16px;
+    color: #555;
     word-wrap: break-word;
     word-break: break-all;
-    zoom: 1;
+    width:350px;
+    line-height: 20px;
+
+
 }
-.user-recommend .intro-quot {
+.buy-info .user-recommend .intro-quot {
     position: absolute;
-    top: 8px;
+    top: 0;
     left: 15px;
     width: 20px;
     height: 20px;
-background: url(images/ico-quotation.png) no-repeat
+    background: url(images/ico-quotation.png) no-repeat
 }
- /* user info */
 
-
-
-
-.side .buy-info {
-    position: relative;
-    margin: 0 0 20px;
-}
-.buy-info .title {
-    font-size: 16px;
-    font-weight: bolder;
-    padding: 10px 0;
-}
 .buy-info .buy-box {
     padding: 10px 0;
     position: relative;
 }
-
-.buy-info .buy-box .buy-meta {
-    margin-bottom: 15px;
-    overflow: hidden
-}
-
-
-.buy-info .buy-box  dd {
+.buy-box  dd {
     font-size: 14px;
     font-family:"微软雅黑";
-    padding: 10px;
+    padding: 10px 0;
     color: #000;
 }
-.buy-info .buy-box  dd a{
-    /*color: #5AD;*/
-}
-.buy-info .buy-box  dd  a:hover{
-    color: #ff7f00;
-    text-decoration: underline;
-}
-.buy-info .buy-box .price,.buy-info .buy-box .volume{
-    float: left;
-    height: 35px;
-    line-height: 35px;
-}
-.buy-info .buy-box .price{
-    width: 250px;
-}
-.buy-info .buy-box .volume{
-
-}
-.buy-info .buy-box  dd span{
+.buy-box  dd span{
     color: #e26;
     font-weight: bold;
 }
-.buy-info .buy-box  .price-normal {
+.buy-box .tags li{
+    margin: 5px 3px;
+}
+.buy-box .tags .label{
+    color: #333;
+    height: 25px;
+    line-height: 25px;
+    background: none;
+    float: left;
+    font-weight: normal;
+}
+.buy-box .go-to-buy{
+    height: 35px;
+    background: url(images/bg_go_to_buy.png) repeat 0 0;
+    margin-bottom: 15px;
+}
+
+ .buy-box  dd  a:hover{
+    text-decoration: underline;
+}
+ .buy-box .price{
+    float: left;
+    height: 35px;
+    line-height: 35px;
+     width: 200px;
+     padding-left: 45px;
+}
+
+.buy-box  .price-normal {
     font-size: 14px;
     text-decoration: line-through;
     color: #555;
 }
 
-.buy-info .buy-box  .price-promotion {
-    font-size: 20px;
+ .buy-box  .price-promotion {
+    font-size: 25px;
     font-weight: bolder;
     color: #e26;
 }
 
 
-.buy-info .buy-btn {
+.buy-box .buy-btn {
     float:left;
     margin-left:30px;
     width: 100px;
@@ -176,32 +189,32 @@ background: url(images/ico-quotation.png) no-repeat
     text-decoration: none;
 }
 
-.buy-info .buy-btn2 {
+.buy-box .buy-btn2 {
     float:right;
     height: 34px;
     line-height: 34px;
     text-align: center;
     font-size: 12px;
     color:#555;
-
-
 }
 
- .buy-info .operate {
-    padding: 15px 5px;
-    background: #FFFDF7;
-    border-radius: 0 0 5px 5px;
+.buy-box .shareTips {
+     border-top: 1px dashed #ddd;
+    padding-top: 15px;
     height: 16px;
     line-height: 16px;
 }
 
- .buy-info .info-wrong {
+.buy-box .info-wrong {
     float: right;
 }
 
 /* comment */
 .comment-list {
     margin-top: 30px;
+    background-color: #fff;
+    border: 1px solid #DDD;
+    padding: 18px;
 }
 
 .comment .cmt {
@@ -245,13 +258,10 @@ background: url(images/ico-quotation.png) no-repeat
 .comment-publish {
     overflow: hidden;
     margin-bottom: 10px;
-    padding: 10px 0;
-    border-bottom: 1px dotted #ccc
 }
 
 .comment-publish .cmt-doc {
     float: right;
-    width: 360px;
     overflow: hidden
 }
 
@@ -263,11 +273,11 @@ background: url(images/ico-quotation.png) no-repeat
     float: left;
     width: 80px;
     height: 80px;
-    overflow: hidden
+    overflow: hidden;
 }
 
 .comment-publish .cmt-txa {
-    width: 350px;
+    width: 330px;
     height: 80px;
     line-height: 18px;
     padding: 0;

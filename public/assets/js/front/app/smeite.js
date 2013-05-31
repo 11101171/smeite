@@ -529,7 +529,7 @@ define(function(require, exports) {
                 var html = "";
                 html += '<div id="loginDialog" class="g-dialog">';
                 html += '<div class="dialog-content">';
-                html += '<div class="hd"><h3 class="rc fl">登录购买之后，可以获得返利哦~</h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/ugc/api/gotoTaobao/'+numIid+"?goodsId="+goodsId+"&rate="+rate +'" target="_blank" >您也可以直接去购买&gt;&gt;</a></div>';
+                html += '<div class="hd"><h3 class="rc fl">登录购买之后，可以获得赠送的集分宝哦~</h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/ugc/api/gotoTaobao/'+numIid+"?goodsId="+goodsId+"&rate="+rate +'" target="_blank" >您也可以直接去购买&gt;&gt;</a></div>';
                 html += '<div class="bd clearfix"><div class="bd-l">';
                 html += '<form id="J_LoginDForm" action="/user/dialogEmailLogin" method="POST">';
                 html += '<div class="error-row"><p class="error"></p></div>';
@@ -2001,6 +2001,30 @@ define(function(require, exports) {
 
         /* 返回顶部 */
         $("#returnTop").returntop();
+
+        $('.like-common .like').hover(function(){
+            $(this).parent().children('.like-num').find('.J_scrollUp').animate({ top:"-24" }, 600)
+        },function(){
+            $(this).parent().children('.like-num').find('.J_scrollUp').animate({  top:"0" },  600)
+
+        })
+   /*     $('.like-common .like').live('mouseenter',function(){
+            $(this).parent().children('.like-num').find('.J_scrollUp').animate({
+                    top:"-24"
+                },
+                600,
+                function() {
+                })
+        });
+
+        $('.like-common .like').live('mouseleave',function(){
+            $(this).parent().children('.like-num').find('.J_scrollUp').animate({
+                    top:"0"
+                },
+                600,
+                function() {
+                })
+        });*/
     });
 
 

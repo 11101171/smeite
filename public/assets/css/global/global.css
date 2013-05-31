@@ -1267,19 +1267,16 @@ input:-moz-placeholder { font-size:12px; }
 .goods .comments-top{height: 20px;line-height: 20px;padding-top: 10px;}
 .goods-gray{filter:alpha(opacity=20);opacity:.2;}
 /*画报流小图标*/
+/*
 .like-num { float:left;padding:0 5px 0 17px;color:#ee2266;background:url(images/like-icon.png) no-repeat left center; }
 .like-comments {float: left;padding: 0 5px 0 17px;color: #BBB;background: url(images/like-icon2.png) no-repeat -1px -12px;line-height: 20px;font-size: 12px;}
 .like-merit { float:left; padding:0 5px 0 17px; color: #bbbbbb; background: url(images/like-icon2.png) no-repeat -1px -80px;line-height: 20px;font-size:12px; }
 .like-price{float: right; color: #999; line-height: 20px;font-size:12px;}
-/* 交互提示 */
+*/
+/* 交互提示 *//*
+
 .tip-success{color:#88bb33;padding:10px;text-align:center;font-size:18px;font-weight:bold;}
-/*画报流小图标*/
-.like-num { float:left;padding:0 5px 0 17px;color:#ee2266;background:url(images/like-icon.png) no-repeat left center; }
-.like-comments {float: left;padding: 0 5px 0 17px;color: #BBB;background: url(images/like-icon2.png) no-repeat -1px -12px;line-height: 20px;font-size: 12px;}
-.like-merit { float:left; padding:0 5px 0 17px; color: #bbbbbb; background: url(images/like-icon2.png) no-repeat -1px -80px;line-height: 20px;font-size:12px; }
-.like-price{float: right; color: #999; line-height: 20px;font-size:12px;}
-/* 交互提示 */
-.tip-success{color:#88bb33;padding:10px;text-align:center;font-size:18px;font-weight:bold;}
+*/
 
 /* 提示框 */
 .tipbox { display:none;position:absolute;z-index:999999;padding:10px 15px;width:200px;color:#fff;text-align:left;font-size:12px;background:#000;border:1px solid #fff;-moz-box-shadow:0 0 10px #000;-webkit-box-shadow:0 0 10px #000;box-shadow:0 0 10px #000; }
@@ -1660,6 +1657,154 @@ font-size: 18px;
 #J_LikeDialog .content .close { position: absolute; top: 10px; right: 10px; width: 16px; height: 16px; background: url(images/close.png) no-repeat;  color: #999; font: 11px "Comic Sans MS"}
 #J_LikeDialog .content .close:hover {color: #5ad;text-decoration: none; background-position: 0 -16px}
 
+.like-common {
+    position: absolute;
+    right: 30px;
+    top: 25px;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    vertical-align: middle;
+    width: 80px;
+    height: 34px;
+    z-index: 3020;
+    overflow: hidden
+}
+
+.like-common a.like {
+    float: left;
+    width: 34px;
+    height: 34px;
+    background: url(images/ico.png) no-repeat -23px -831px
+}
+
+.like-common .ico-likes {
+    margin-right: 10px
+}
+
+.like-common a.like i {
+    float: left;
+    height: 34px;
+    width: 34px;
+    background: url(images/ico.png) no-repeat 6px -62px;
+    _background: url(images/ico_common.png) no-repeat 4px -3326px;
+    text-indent: -9999em
+}
+
+.like-common a:hover.like i {
+    background: url(images/ico.png) no-repeat 6px -103px;
+    _background: url(images/ico_common.png) no-repeat 4px -3366px
+}
+
+.like-common .like-num {
+    height: 24px;
+    overflow: hidden;
+    margin-top: 8px;
+    text-align: left;
+    padding-left: 5px;
+    position: relative
+}
+
+.like-common dl {
+    position: relative
+}
+
+.like-common dl dd {
+    height: 24px;
+    float: none
+}
+
+.like-common a.liked {
+    float: left;
+    width: 34px;
+    height: 34px;
+    background: url(images/ico.png) no-repeat -23px -831px
+}
+
+.like-common a.liked i {
+    float: left;
+    height: 34px;
+    width: 34px;
+    background: url(images/ico.png) no-repeat 6px -15px;
+    _background: url(images/ico_common.png) no-repeat -73px -3326px;
+    text-indent: -9999em
+}
+
+.like-common a.liked-men, .like-common a.liked-women, .like-common a.liked-life {
+    float: left;
+    width: 34px;
+    height: 34px;
+    background: url(images/ico.png) no-repeat -23px -831px
+}
+
+.like-common a.liked-men i, .like-common a.liked-women i, .like-common a.liked-life i {
+    float: left;
+    height: 34px;
+    width: 34px;
+    background: url(images/ico.png) no-repeat -57px -15px;
+    _background: url(images/ico_common.png) no-repeat -137px -3326px;
+    text-indent: -9999em
+}
+
+.like-common a.liked-women i {
+    background-position: -121px -15px;
+    _background-position: -201px -3326px
+}
+
+.like-common a.liked-life i {
+    background-position: -186px -15px;
+    _background-position: -266px -3326px
+}
+
+.like-common-s {
+    background: url(images/ico.png) no-repeat -24px -897px;
+    width: 64px
+}
+
+.like-common-s a.like {
+    background: 0
+}
+
+.like-common-s .like-num {
+    padding: 0 3px 0 0;
+    text-align: center
+}
+
+.like-common-s a.liked, .like-common-s a.liked-men, .like-common-s a.liked-women, .like-common-s a.liked-life {
+    background: 0
+}
+
+.like-common-hover {
+    background-position: -216px -896px
+}
+
+.like-common-gray {
+    background: url(images/ico_common.png) no-repeat 0 -6135px;
+    width: 60px
+}
+
+.like-common-gray a.like {
+    background: 0;
+    width: 30px;
+    height: 30px
+}
+
+.like-common-gray a.like i {
+    width: 30px;
+    height: 30px
+}
+
+.like-common-gray .like-num {
+    padding: 0 3px 0 0;
+    margin-top: 7px;
+    text-align: center
+}
+
+.like-common-gray a.liked, .like-common-gray a.liked-men, .like-common-gray a.liked-women, .like-common-gray a.liked-life {
+    background: 0;
+    width: 30px;
+    height: 30px
+}
 /* 全局 头部样式*/
 /*
  * 样式文件

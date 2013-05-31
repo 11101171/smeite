@@ -31,7 +31,18 @@ description = goods.intro
                         }
                     </a>
                     }
+                    <div class="like-common like-common-s" id="J_likeCommon156391"><a type="detail_faver" class="like"
+                                                                                      href="javascript:void(0);"
+                                                                                      parentid="3" value="156391"
+                                                                                      title="喜欢"><i>喜欢</i></a>
 
+                        <div class="like-num">
+                            <dl class="J_scrollUp">
+                                <dd id="J_scrollFavNum156391">3</dd>
+                                <dd>+1</dd>
+                            </dl>
+                        </div>
+                    </div>
 
                     <a rel="nofollow" class="ilike-m" href="javascript:;" data-type="0" data-proimgsrc="@goods.pic" data-proid="@goods.id" title="喜欢 +1">
                         <i></i>
@@ -51,8 +62,10 @@ description = goods.intro
         </div>
         <!-- aside begin -->
         <div class="side">
-            <span class="arrow-left"></span>
 
+            <div class="buy-info">
+                <span class="arrow-left"></span>
+            <h3 class="title"> @goods.name</h3>
 
                  <div class="user-recommend clearfix">
                      <div class="pic fl">
@@ -67,16 +80,23 @@ description = goods.intro
                          }
                      </div>
                  </div>
-            <div class="buy-info">
-                 <div class="buy-box  clearfix">
-                     <dl class="buy-meta">
-                         <dt><h3 class="title"> @goods.name</h3></dt>
 
+                 <dl class="buy-box  clearfix">
+                         <dd class="tags clearfix">
+                             <span class="label">标签：</span>
+                                 @for(tag <-tags){
+                                 <a href="">@tag.tagName</a>
+                                 }
 
-
-                         <dd class="clearfix">
+                         </dd>
+                         @if(!goods.commissionRate.isEmpty && goods.commissionRate.get!=0){
+                         @defining( if(goods.promotionPrice.isEmpty){ ((goods.price.toDouble*goods.commissionRate.get*goods.rate*0.0001).toInt) }else{ ((goods.promotionPrice.get.toDouble*goods.commissionRate.get*goods.rate*0.0001).toInt) } ){ credits=>
+                         <dd>赠送:<span> @credits</span>&nbsp;个集分宝，奖励：<span>1</span>个食豆 </dd>
+                         }
+                         }
+                         <dd class="go-to-buy">
                              <div class="price">
-                                 价格：
+
                                  @if(goods.promotionPrice.isEmpty){
                                  <span class="price-normal"> ¥@goods.price</span>
                                  }else{
@@ -84,35 +104,28 @@ description = goods.intro
                                  <span class="price-normal"> ¥@goods.price </span>
                                  }
                              </div>
-                         <div class="volume">30天已售 @goods.volume</div>
-                           </dd>
-                         @if(!goods.commissionRate.isEmpty && goods.commissionRate.get!=0){
-                         @defining( if(goods.promotionPrice.isEmpty){ ((goods.price.toDouble*goods.commissionRate.get*goods.rate*0.0001).toInt) }else{ ((goods.promotionPrice.get.toDouble*goods.commissionRate.get*goods.rate*0.0001).toInt) } ){ credits=>
-                         <dd>返利:&nbsp;<span> @credits</span>&nbsp;<a href="/jifenbao">个集分宝</a>，值<span>@(credits/100.0)</span>元( 返利比例:<span>@(goods.commissionRate.get*goods.rate*0.01*0.01)</span>%,奖励<a href="/shiDou">食豆</a>：<span>1</span>个 )</dd>
-                        }
-
-                         }
-                     </dl>
                          @if(user.isEmpty){
-                         <a class="buy-btn" rel="loginD2" data-numiid="@goods.numIid" data-goodsid="@goods.id.get" data-rate="@goods.rate"  target="_blank" rel="nofollow">去看看 &gt; </a>
+                         <a class="buy-btn" rel="loginD2" data-numiid="@goods.numIid" data-goodsid="@goods.id.get" data-rate="@goods.rate"  target="_blank" rel="nofollow">去看看 &gt;&gt; </a>
                           }else{
-                          <a class="buy-btn"  href="@controllers.ugc.routes.API.gotoTaobao(goods.numIid,goods.id.get,goods.rate)" target="_blank" rel="nofollow">去看看 &gt; </a>
-                     }
-
-                 </div>
-                 <div class="operate">
+                          <a class="buy-btn"  href="@controllers.ugc.routes.API.gotoTaobao(goods.numIid,goods.id.get,goods.rate)" target="_blank" rel="nofollow">去看看 &gt;&gt; </a>
+                          }
+                         </dd>
+                     <dd class="shareTips">
 
                          <a rel="nofollow" class="info-wrong" href="javascript:;" id="J_JiuCuo" data-proid="488">信息有误？</a>
-                     <div class="share-link" data-sharetxt="@goods.name" data-sharepic="@goods.pic" data-sharelink="@controllers.routes.Goods.view(goods.id.get)">
-                         <label class="fl l20 gc">分享到：</label>
-                         <a class="s-sina fl" href="javascript:;" data-type="s-sina" alt="分享到新浪微博"></a>
-                         <a class="s-qzone fl" href="javascript:;" data-type="s-qzone" alt="分享到QQ空间"></a>
-                         <a class="s-tencent fl" href="javascript:;" data-type="s-tencent" alt="分享到腾讯微博"></a>
-                         <a class="s-douban fl" href="javascript:;" data-type="s-douban" alt="分享到豆瓣"></a>
-                         <a class="s-renren fl" href="javascript:;"  data-type="s-renren" alt="分享到人人网"></a>
+                         <div class="share-link" data-sharetxt="@goods.name" data-sharepic="@goods.pic" data-sharelink="@controllers.routes.Goods.view(goods.id.get)">
+                             <label class="fl l20 gc">分享到：</label>
+                             <a class="s-sina fl" href="javascript:;" data-type="s-sina" alt="分享到新浪微博"></a>
+                             <a class="s-qzone fl" href="javascript:;" data-type="s-qzone" alt="分享到QQ空间"></a>
+                             <a class="s-tencent fl" href="javascript:;" data-type="s-tencent" alt="分享到腾讯微博"></a>
+                             <a class="s-douban fl" href="javascript:;" data-type="s-douban" alt="分享到豆瓣"></a>
+                             <a class="s-renren fl" href="javascript:;"  data-type="s-renren" alt="分享到人人网"></a>
 
-                     </div>
-                 </div>
+                         </div>
+                     </dd>
+                 </dl>
+
+
              </div>
             <!-- first share end  -->
                <div class="comment-list">
