@@ -6,6 +6,41 @@ title =  "特色中国_食美特，爱美食爱生活"
 )(css="/assets/css/template/china.css") {
 
 <div class="container clearfix" id="china">
+
+    <div class="tag-list clearfix" id="J_tags">
+        <ul class="switch">
+            <li>
+                   <dl class="tag-logo tag-logo-dress">
+                       <dt class="default"></dt>
+                       <dd class="on"></dd>
+                   </dl>
+            </li>
+            <li>
+                    <dl class="tag-logo tag-logo-acc">
+                        <dt class="default"></dt>
+                        <dd class="on"></dd>
+                    </dl>
+            </li>
+            <li>
+                    <dl class="tag-logo tag-logo-decorate">
+                        <dt class="default"></dt>
+                        <dd class="on"></dd>
+                    </dl>
+            </li>
+            <li>
+                    <dl class="tag-logo tag-logo-cate">
+                        <dt class="default"></dt>
+                        <dd class="on"></dd>
+                    </dl>
+            </li>
+        </ul>
+
+
+
+    </div>
+
+
+
     <div class="goods-wall s1024" id="J_GoodsWall">
         <div class="section">
 
@@ -72,6 +107,15 @@ title =  "特色中国_食美特，爱美食爱生活"
         }{
 <script type="text/javascript">
     seajs.use('app/init', function (init) {
+        var $ = jQuery;
+        $(".tag-logo").hover(function(){
+
+            $(this).children("dt").hide();
+            $(this).children("dd").show() ;
+        },function(){
+            $(this).children("dt").show() ;
+            $(this).children("dd").hide();
+        })
       init.load('app/goods/goods.find,app/goods/goods.favor');
     });
 </script>

@@ -9,101 +9,77 @@
 * http://www.smeite.com/
 *
 */
- #china{
- background-color: white;
-     padding: 20px;
- }
+
 .tag-list {
     position: relative;
-    border-bottom: 1px solid #d9d9d9;
+    margin-top: 20px;
+    padding: 20px 0;
+    background-color: #fff;
 
 }
- .tag-list dl{
-     width: 960px;
-     margin: 0 auto;
-     padding: 10px;
-
- }
- .tag-list dl dt, .tag-list dl dd{
-     float: left;
- }
- .tag-list dl dt.title{
-     width: 100px;
-     line-height:70px;
-     color: #333;
-     font-weight: bold;
-     font-family: "Microsoft YaHei";
-
- }
-.tag-list-fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    width: 100%;
-    background-color: #f3f3f3;
-}
-.tag-list dl dd{
-    width: 830px;
-    padding-left: 10px;
-    border-left: 2px solid #9b9b9b;
-}
-
-.tag-list .tag, .tag-list .tag:link, .tag-list .tag:visited {
-    float: left;
-    height: 22px;
-    padding: 0 10px;
-    margin: 0 5px 8px 0;
-    border: 1px solid #d3d3d3;
-    border-radius: 12px;
-    line-height: 22px;
-    color: #666;
-    white-space: nowrap;
-    background-color: #fff
-}
-
-.tag-list .tag:hover, .tag-list .tag:focus {
-    border-color: #588C0E;
-    color: #fff;
-    background-color: #588C0E
-}
-
-.tag-list .curr:link, .tag-list .curr:visited, .tag-list .curr:hover {
-    border-color: #588C0E;
-    color: #fff;
-    background-color: #588C0E
-}
-
-.goods-title {
-    height: 28px;
-    line-height: 28px;
+.tag-list .switch{
+    list-style: none;
+    position: relative;
+    margin: 0;
     padding: 0;
-    padding-top: 15px
 }
-
-.goods-title h2 {
-    color: #333;
-    font-size: 20px;
+.tag-list .switch li{
+    overflow: hidden;
+    padding: 0;
+    cursor: pointer;
     float: left;
-    font-weight: 400;
-    font-family: 'Microsoft YaHei', '榛戜綋'
+    height: 135px;
+    width: 245px;
 }
 
-.goods-title h2 i {
-    margin: 0 10px
+ .tag-logo{
+    float: left;
+    margin-left:55px ;
+    height: 135px;
+    width: 135px;
+}
+.tag-logo dt, .tag-logo dd{
+    background-image: url(images/bg-china.jpg);
+    background-repeat: no-repeat;
+    height: 135px;
+    width: 135px;
+    float: left;
+}
+.tag-logo .default{
+    display: block;
+}
+.tag-logo .hover{
+    display: none;
 }
 
-.goods-title a.gallery-title {
-    color: #0095bc
+ .tag-logo-dress .default {
+    background-position: 0 0
 }
 
-.goods-title a.gallery-title:hover {
-    text-decoration: none
+ .tag-logo-acc .default {
+    background-position: 0 -135px
 }
 
-span.tag-title {
-    font-weight: normal;
-    font-size: 14px
+ .tag-logo-decorate .default {
+    background-position: 0 -270px
+}
+ .tag-logo-cate .default {
+    background-position: 0 -405px
+}
+
+ .tag-logo-dress .on {
+    background-position: -135px 0
+}
+
+ .tag-logo-acc .on {
+    background-position: -135px -135px
+}
+
+.tag-logo-decorate .on {
+    background-position: -135px -270px
+}
+ .tag-logo-cate .on {
+    background-position: -135px -405px
 }
 
 
@@ -196,7 +172,7 @@ span.tag-title {
     padding-top: 6px;
     height: 20px;
     line-height: 20px;
-    color: #999
+    color: #333
 }
 
 .goods .goods-11-title {
