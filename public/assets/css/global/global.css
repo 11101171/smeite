@@ -839,7 +839,13 @@ input:-moz-placeholder { font-size:12px; }
 
 /* 分享 */
 .share a { float:left;width:16px;height:16px;margin-left:5px;background-image:url(images/icons-share.png);background-repeat:no-repeat; }
-.share-link a { display:block;line-height:16px;padding-left:20px;background-image:url(images/icons-share.png);background-repeat:no-repeat; }
+.share-link a {
+    width: 16px;
+    height: 16px;
+    padding-left: 5px;
+    display: block;
+    background-image:url(images/icons-share.png);
+    background-repeat:no-repeat; }
 .s-sina { background-position:0 -417px; }
 .s-renren { background-position:0 -80px; }
 .s-tencent { background-position:0 -280px; }

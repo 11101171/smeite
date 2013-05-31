@@ -59,13 +59,14 @@
                 <li  class='@("on".when(nav == "好玩意"))'><a href='@controllers.routes.Pages.find("好玩意","tag",1)'>好玩意</a></li>
                 <li><span>-</span></li>
                 <li  class='choice @("on".when(nav == "choice"))'><a href='@controllers.routes.Pages.choice'>天天特价</a></li>
+                <li class= 'china'>  <a class='@("on".when(nav == "china"))' href="/china" >中国风</a> </li>
                 <li><span>-</span></li>
                 <li class='@("on".when(nav == "forum"))'><a href="@controllers.routes.Forums.forum(1)" >讨论吧</a></li>
                 <li><span>-</span></li>
 
                 <li class='@("on".when(nav == "miss"))'>  <a href="@controllers.routes.Pages.miss" >主题</a> </li>
-                <li><span>-</span></li>
-                <li class= 'china'>  <a class='@("on".when(nav == "china"))' href="/china" >特色中国</a> </li>
+
+
             </ul>
             <!-- 签到 -->
                 <a class="btn-checkIn fr" href="javascript:;" rel="checkIn">签到</a>

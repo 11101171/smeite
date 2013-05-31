@@ -25,7 +25,7 @@ define(function(require, exports){
         } else return $.smeite.tip.conf.tipClass = "tipmodal tipmodal-general", $.smeite.tip.show(a, ">_< 你的评论太短啦，再多说几句吧！"), !1;
         return!0
     }
-    /*图片显示*/
+   /* *//*图片显示*//*
     $(".thumb-list li").mouseover(function () {
         if (!$(this).hasClass("cur")) {
             var a = $(this).find("img").attr("data-src");
@@ -33,7 +33,7 @@ define(function(require, exports){
             $(".thumb-list li.cur").removeClass("cur");
             $(this).addClass("cur")
         }
-    });
+    });*/
 
     /*  分享 */
     $(".btn-share").shareToThird()
@@ -206,7 +206,7 @@ define(function(require, exports){
     })
  //   }
   /* 获取用户可能喜欢的商品*/
-    var goodsId =$("#J_productId").val();
+   /* var goodsId =$("#J_productId").val();
     if($(".goods-wall")[0]){
         //画报
         $.smeite.goods.conf.ajaxUrl='/goods/findRelativeGoodses?goodsId='+goodsId
@@ -216,6 +216,6 @@ define(function(require, exports){
         $.smeite.goods.init();
 
     }
-
+*/
 
 });
