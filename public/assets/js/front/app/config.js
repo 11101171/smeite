@@ -18,6 +18,10 @@ seajs.config({
     alias: {
        'jquery' :'jquery.js',
         'smeite': 'app/smeite',
+        'jquery.masonry': {
+            src: 'module/jquery.masonry.min.js',
+            deps: ['jquery']
+        },
         'json' : 'module/json'
     },
     //预加载基础文件

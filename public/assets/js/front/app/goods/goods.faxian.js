@@ -13,7 +13,7 @@
 
 define(function (require, exports) {
     var $ = jQuery = require("jquery");
-
+    require("jquery.masonry")
 
 
 
@@ -41,6 +41,8 @@ define(function (require, exports) {
                 $(".pagin4faxian ul").fadeOut()
             }, 200)
         });
+
+
 
     });
 

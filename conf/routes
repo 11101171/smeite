@@ -8,8 +8,8 @@
 GET       /                             controllers.Pages.index
 GET       /find/:cate             controllers.Pages.find(cate:String,tag="tag",p:Int ?=1)
 GET       /find/:cate/:tag        controllers.Pages.find(cate:String,tag:String,p:Int ?=1)
-GET       /faxian/:cate             controllers.Pages.faxian(cate:String,tag="tag",p:Int ?=1)
-GET       /faxian/:cate/:tag        controllers.Pages.faxian(cate:String,tag:String,p:Int ?=1)
+GET       /faxian/:cate             controllers.Pages.faxian(cate:String,tag="tag",s:Int ?=1,p:Int ?=1)
+GET       /faxian/:cate/:tag        controllers.Pages.faxian(cate:String,tag:String,s:Int ?=1,p:Int ?=1)
 GET      /miss                            controllers.Pages.miss
 GET      /gallery/:cid                      controllers.Pages.gallery(cid:Int,s:String ?="hot",p:Int ?=1)
 

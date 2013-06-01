@@ -23,7 +23,7 @@ import java.sql.{ Timestamp}
 case class Goods(
                   id: Option[Long],
                   numIid:Long,
-                  trackIid:Option[String],
+                  hwRate:Float,
                   name: String,
                   intro: String,
                   price:String,
@@ -38,7 +38,7 @@ case class Goods(
                   isMember: Boolean,
                   rate:Int,
                   commissionRate: Option[Int],
-                  comeFrom:Int,
+                  uid:Long,
                   collectTime:Option[Timestamp],
                   addTime:Option[Timestamp]
                   )
@@ -46,7 +46,7 @@ case class Goods(
 object Goodses extends Table[Goods]("goods") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def numIid = column[Long]("num_iid")
-  def trackIid = column[String]("track_iid")
+  def hwRate = column[Float]("hw_rate")
   def name = column[String]("name")
   def intro = column[String]("intro")
   def price =column[String]("price")
@@ -61,11 +61,11 @@ object Goodses extends Table[Goods]("goods") {
   def isMember = column[Boolean]("is_member")
   def rate     = column[Int]("rate")
   def commissionRate = column[Int]("commission_rate")
-  def comeFrom = column[Int]("come_from")
+  def uid = column[Long]("uid")
   def collectTime=column[Timestamp]("collect_time")
   def addTime=column[Timestamp]("add_time")
-  def * = id.? ~ numIid ~ trackIid.? ~ name ~ intro ~ price ~ pic ~ itemPics ~ nick ~ promotionPrice.? ~ detailUrl ~ loveNum ~ volume ~ status ~ isMember ~ rate ~ commissionRate.? ~ comeFrom ~ collectTime.? ~ addTime.? <>(Goods, Goods.unapply _)
-  def autoInc = numIid  ~ name ~ intro ~ price ~ pic ~ itemPics ~ nick  ~ detailUrl  returning id
+  def * = id.? ~ numIid ~ hwRate ~ name ~ intro ~ price ~ pic ~ itemPics ~ nick ~ promotionPrice.? ~ detailUrl ~ loveNum ~ volume ~ status ~ isMember ~ rate ~ commissionRate.? ~ uid ~ collectTime.? ~ addTime.? <>(Goods, Goods.unapply _)
+  def autoInc = uid ~ numIid  ~ name ~ intro ~ price ~ pic ~ itemPics ~ nick  ~ detailUrl  returning id
 
 
 }

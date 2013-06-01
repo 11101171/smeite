@@ -21,8 +21,8 @@ import java.sql.Timestamp
 object GoodsDao {
   lazy val database = Database.forDataSource(DB.getDataSource())
   /*保存*/
-  def addGoods(numIid:Long,name: String,intro: String,price:String,pic: String,itemPics: String,nick:String,detailUrl:String):Long=database.withSession {  implicit session:Session =>
-    Goodses.autoInc.insert(numIid,name,intro,price,pic,itemPics,nick,detailUrl)
+  def addGoods(uid:Long,numIid:Long,name: String,intro: String,price:String,pic: String,itemPics: String,nick:String,detailUrl:String):Long=database.withSession {  implicit session:Session =>
+    Goodses.autoInc.insert(uid,numIid,name,intro,price,pic,itemPics,nick,detailUrl)
 
   }
   /* delete 删除goods 需要把相关的信息删除 */
@@ -48,8 +48,8 @@ object GoodsDao {
     (for (c<-Goodses if c.id === goodsId)yield c.name~c.isMember~c.loveNum~c.intro~c.promotionPrice ).update((goodsName,isMember,loveNum,intro,promotionPrice.getOrElse("")))
   }
   /* 修改价格*/
-  def updateTaobaoke(numIid:Long,name:String,volume:Int,price:String,promotionPrice:String,commissionRate:Int) = database.withSession {  implicit session:Session =>
-    (for (c<-Goodses if c.numIid === numIid )yield c.name~c.volume ~ c.price ~c.promotionPrice ~ c.commissionRate~ c.collectTime).update((name,volume,price,promotionPrice,commissionRate,new Timestamp(System.currentTimeMillis())))
+  def updateTaobaoke(numIid:Long,name:String,volume:Int,price:String,promotionPrice:String,commissionRate:Int,hwRate:Float) = database.withSession {  implicit session:Session =>
+    (for (c<-Goodses if c.numIid === numIid )yield c.name~c.volume ~ c.price ~c.promotionPrice ~ c.commissionRate ~ c.hwRate ~ c.collectTime).update((name,volume,price,promotionPrice,commissionRate,hwRate,new Timestamp(System.currentTimeMillis())))
   }
 
 

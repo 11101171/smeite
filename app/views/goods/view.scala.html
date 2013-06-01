@@ -31,14 +31,11 @@ description = goods.intro
                         }
                     </a>
                     }
-                    <div class="like-common like-common-s" id="J_likeCommon156391"><a type="detail_faver" class="like"
-                                                                                      href="javascript:void(0);"
-                                                                                      parentid="3" value="156391"
-                                                                                      title="喜欢"><i>喜欢</i></a>
-
+                    <div class="like-common like-common-s" id="J_likeCommon156391">
+                        <a  class="like" rel="followGoods" href="javascript:void(0)" data-proid="@goods.id.get" title="喜欢"><i>喜欢</i></a>
                         <div class="like-num">
                             <dl class="J_scrollUp">
-                                <dd id="J_scrollFavNum156391">3</dd>
+                                <dd class="J_FavorNum" data-val="@goods.loveNum">@goods.loveNum</dd>
                                 <dd>+1</dd>
                             </dl>
                         </div>
@@ -204,7 +201,7 @@ description = goods.intro
 <script type="text/javascript">
 
     seajs.use('app/init', function(init) {
-        init.load('app/goods/goods.detail,app/goods/goods.favor');
+        init.load('app/goods/goods.detail,app/goods/goods.favor.new');
     })
 </script>
 }

@@ -41,6 +41,7 @@ title =  "发现喜欢_"+ cate +"_"+tag +"_食美特，爱美食爱生活"
                 <a class="pic-link" href="@controllers.routes.Goods.view(goodsId)" title="@goodsName" target="_blank">
                     <img src='@(goodsPic+"_210x210.jpg")' width="210" height="210" title="@goodsName" alt="@goodsName" />
                 </a>
+
                 <a  class="ilike-m" href="javascript:;" data-proimgsrc="@goodsPic" data-prourl="@controllers.routes.Goods.view(goodsId)" data-proname="@goodsName" data-type="0" data-proid="@goodsId">
                     <i></i>
                     <span class="ilikeCount" data-val="@goodsLoveNum">喜欢(@goodsLoveNum)</span>

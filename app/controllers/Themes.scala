@@ -290,9 +290,7 @@ object Themes extends Controller {
   }
   
   def removeFollow = Action(parse.json) {implicit request =>
-    val user:Option[User] =request.session.get("user").map(u=>Cache.getOrElse[User](u){
-      UserDao.findById(u.toLong)
-    })
+    val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
     if(user.isEmpty)Ok(Json.obj("code" -> "200", "message" ->"你还没有登录"))
     else {
       val themeId = (request.body \ "themeId").asOpt[Long]
@@ -307,9 +305,7 @@ object Themes extends Controller {
   }
   /* 添加主题下的商品*/
   def addGoods =Action(parse.json) { implicit request =>
-    val user:Option[User] =request.session.get("user").map(u=>Cache.getOrElse[User](u){
-      UserDao.findById(u.toLong)
-    })
+    val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
     if(user.isEmpty) Ok(Json.obj("code" -> "200", "message" -> "你还没有登录"))
     else {
       val themeId = (request.body \ "themeId").as[Long]
@@ -330,9 +326,7 @@ object Themes extends Controller {
   *
   * */
   def removeGoods= Action(parse.json) { implicit request =>
-    val user:Option[User] =request.session.get("user").map(u=>Cache.getOrElse[User](u){
-      UserDao.findById(u.toLong)
-    })
+    val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
     if(user.isEmpty) Ok(Json.obj("code" -> "200", "message" -> "你还没有登录"))
     else {
       val themeId = (request.body \ "themeId").as[Long]

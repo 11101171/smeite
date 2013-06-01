@@ -72,342 +72,236 @@
     background-color: #588C0E
 }
 
-.goods-title {
-    height: 28px;
-    line-height: 28px;
+
+
+
+ /* sort  */
+.filter-wrap {
+    margin: 20px 0;
     padding: 0;
-    padding-top: 15px
+    position: relative;
 }
 
-.goods-title h2 {
-    color: #333;
-    font-size: 20px;
+.filter-wrap h2 {
     float: left;
-    font-weight: 400;
-    font-family: 'Microsoft YaHei', '榛戜綋'
+    font-size: 18px;
+    border-left: 5px solid #333;
+    background-color: #588c0e;
+    border-right: 5px solid #333;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 7px;
+    color: #fff;
+    display: inline;
 }
 
-.goods-title h2 i {
-    margin: 0 10px
+.filter-wrap i {
+    width: 980px;
+    height: 20px;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    background: url(images/site_dotted.png) repeat-x center
 }
 
-.goods-title a.gallery-title {
-    color: #0095bc
+.goods-filter {
+    float: left;
+    padding-left: 15px
 }
 
-.goods-title a.gallery-title:hover {
-    text-decoration: none
+.goods-filter a {
+    float: left;
+    margin: 0 10px 0 0;
+    background: #ececec;
+    height: 20px;
+    padding: 0 10px;
+    line-height: 20px;
+    white-space: nowrap;
+    color: #808285;
+    -moz-border-radius: 30px;
+    -webkit-border-radius: 30px;
+    border-radius: 30px
 }
 
-span.tag-title {
-    font-weight: normal;
-    font-size: 14px
+.goods-filter a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: #588C0E
+}
+
+.goods-filter a.current {
+    background: #588C0E;
+    color: #fff
+}
+
+.filter-wrap #bdshare {
+    position: absolute;
+    right: 0;
+    top: -5px;
+    background-color: #fff
+}
+
+/* end */
+ .goods-contents{
+
+     clear: both;
+     margin: 0 auto 50px auto;
+     text-align: center;
+ }
+ .goods-item{
+     float: left;
+     border: 1px #fff solid;
+     display: inline;
+     text-align: left;
+     position: relative;
+     width: 210px;
+     padding: 9px;
+     background: #fff;
+     margin-right: 20px;
+     height: 380px;
+     overflow: hidden;
+ }
+ .goods-item .pic{
+     width: 210px;
+     overflow: hidden;
+     text-align: center;
+     position: relative;
+     background: 0;
+ }
+.goods-item .pic img {
+    vertical-align: top;
+}
+.goods-item .goods_title {
+    display: block;
+    text-indent: -9999em;
+    height: 0;
+}
+.goods-item .goods-wrap {
+
+}
+.goods-item .price {
+    position: relative;
+    color: #000;
+    background-color: #fff;
+    margin: 10px auto;
+    width: 120px;
+    height: 24px;
+    line-height: 24px;
+    overflow: hidden;
+}
+.goods-item .price span {
+    float: left;
+    margin-left: 10px;
+    overflow: hidden;
+    width: 57px;
+}
+.goods-item .price .like-state {
+    width: 50px;
+    float: right;
+}
+.goods-item .price a {
+    color: #000;
+    float: left;
+}
+.goods-item .price .like-state .like-num {
+    height: 24px;
+    overflow: hidden;
+    text-align: left;
+    padding-left: 5px;
+    position: relative;
+}
+.goods-item .price .like-state .like-num dl {
+    position: relative;
+}
+.goods-item .price .like-state .like-num dl dd {
+    width: 21px;
+    height: 24px;
+}
+.goods-item .price .like-state .like-num dl dd {
+    width: 21px;
+    height: 24px;
 }
 
 
+.goods-item .user-comment {
+    background: #fff;
+}
 
 
-.goods-wall {
+.goods-item a:hover{
+    text-decoration: none;
+}
+
+.goods-item .comment {
+    margin-top: -5px
+}
+
+
+.goods-item .comment .user-list {
+    margin-bottom: 0;
     margin-top: 10px
 }
-
-
-
-.box-shadow {
-    box-shadow: 0 1px 3px rgba(34, 25, 25, 0.2);
-    -moz-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.2);
-    -webkit-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.2);
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px
+.goods-item .comment .user-list .like-user {
+    margin-top: 12px;
+    margin-bottom: 10px;
+    background: url(images/dot2.png) repeat-x bottom
 }
-
-.sort {
-    color: #dedede;
-    line-height: 20px;
-    height: 20px;
-    padding-top: 7px
+.goods-item .comment .user-list .like-user .fl {
+    margin-top: 4px;
 }
-
-.sort span {
-    color: #999
+.goods-item .comment .user-list .like-user .info {
+    min-height: 21px;
+    padding: 5px 10px 20px 10px;
+    margin: 0 0 0 38px;
 }
-
-.sort a {
-    padding: 0 6px;
+.goods-item  .comment .user-list .like-user .info .go-to-comment {
+    float: right;
+    padding-right: 8px;
+    padding-left: 12px;
+   /* color: #588C0E;*/
+    color: #e0bca5;
+    cursor: pointer;
+}
+.goods-item .comment .user-list .like-user p {
     color: #666;
-    text-decoration: none
-}
-
-.sort .on {
-    color: #333
-}
-
-
-.goods-wall {
-    position: relative;
-    min-height: 500px;
-    margin-top: 20px
-}
-
-.goods-wall .section .left {
-    float: left
-}
-
-.goods-wall .section .right {
-    float: right
-}
-
-.goods-wall .section .col-l {
-    float: left
-}
-
-.goods-wall .section .col-c {
-    float: left;
-    width: 230px
-}
-
-.goods-wall .section .col-r {
-    float: right
-}
-
-.goods {
-    position: relative;
-    float: left;
-    width: 210px;
-    height: 290px;
-    padding: 9px;
-    border: 1px #fff solid;
-    color: #999;
-    background-color: white;
-    box-shadow: 0 0 0 rgba(34, 25, 25, 0.2);
-    -moz-box-shadow: 0 0 0 rgba(34, 25, 25, 0.2);
-    -webkit-box-shadow: 0 0 0 rgba(34, 25, 25, 0.2);
-    transition: 0s;
-    -webkit-transition: 0s;
-    -moz-transition: 0s;
-    -o-transition: 0s
-}
-
-.goods .goods-title {
-    width: 210px;
-    padding-top: 6px;
-    height: 20px;
-    line-height: 20px;
-    color: #999
-}
-
-.goods .goods-11-title {
-    width: 210px
-}
-
-.goods .goods-11-title .goods-title {
-    float: left;
-    width: 170px
-}
-
-.goods .goods-11-title .goods-title-11-mark {
-    float: left;
-    background: #e26;
-    color: #fff;
-    font-size: 12px;
-    padding: 0 2px;
-    margin-top: 8px
-}
-
-.goods .goods-pic {
-    width: 210px;
-    height: 210px;
-    overflow: hidden;
-    background: #fff url(images/bg-photo.gif) repeat-y;
-    position: relative;
-}
-
-.goods .goods-pic img {
-    filter: alpha(opacity = 95);
-    opacity: .95
-}
-
-.goods .goods-stat {
-    color: #999;
-    height: 20px;
-    line-height: 20px;
-    padding: 0 0 3px 10px;
-    background: url(images/grayHeart2.png) 0 5px no-repeat;
-    font-family: 'Microsoft YaHei', '黑体'
-}
-
-.goods .goods-stat del {
-    margin-right: 5px
-}
-
-.goods .goods-stat .price-discount {
-    padding-right: 43px;
-    background: url(images/detail-sprite.png) right -103px no-repeat
-}
-
-.goods .goods-des {
-    display: none
-}
-
-.goods .comment {
-    position: relative;
-    background: #fff;
-    overflow: hidden
-}
-
-.goods .comment .user-pic {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    height: 20px;
-    width: 20px;
-    overflow: hidden
-}
-
-.goods .comment .user-pic img {
-    height: 20px;
-    width: 20px
-}
-
-.goods .comment .content {
-    margin-left: 30px;
-    line-height: 20px;
-    height: 20px;
-    overflow: hidden;
-    word-wrap: break-word;
     word-break: break-all;
-    width: 180px
+    height: 58px;
+    overflow: hidden;
+}
+.goods-item .comment .msg-success {
+    margin: 0 0 5px 0;
+    color: #484848
 }
 
-.goods .comment .content span {
-    color: #999
+.goods-item .comment .msg-error {
+    margin: 0 0 5px 0
 }
 
-.goods .comment .content span em {
-    color: #999;
-    margin: 0 5px
+.goods-item .comment textarea {
+    height: 50px;
+    margin: 0 0 10px 0;
+    width: 164px;
+    color: #222;
+    border: 1px #929497 solid;
+    padding: 4px 7px
 }
 
-.goods .comment .content span a {
-    color: #999
+.goods-item .comment a {
+    color: #444
 }
 
-.goods .comment .content span a:hover {
-    text-decoration: none;
-    color: #333
-}
-
-.goods .comment .user-name {
-    color: #999
-}
-
-.goods .comment .user-name:hover {
-    text-decoration: none
-}
-
-.goods .comment .comment-item {
-    padding: 10px 0;
-    position: relative;
-    border-top: 1px dotted #dedede
-}
-
-.goods .ilike-topic {
-    padding-left: 26px;
-    left: 80px;
-    top: 10px
-}
-
-.small .comment {
-    height: 41px
-}
-
-.s1024 {
-    margin-top: 0
-}
-.s1024 .section {
-    position: relative;
-}
-
-.s1024 .goods {
-    margin-top: 20px;
-    margin-right: 20px
-}
-.s1024 .last{
-    margin-right: 0;
-}
-.cur-goods {
-    z-index: 100
-}
-
-.cur-goods .goods-pic img {
-    filter: alpha(opacity = 100);
-    opacity: 1
-}
-
-.cur-goods .goods-title {
-    color: #333
-}
-
-.cur-goods .goods-stat {
-    color: #333
-}
-
-.cur-goods .goods-des {
-    color: #333
-}
-
-.cur-goods .comment .content span {
-    color: #333
-}
-
-.cur-goods .comment .user-name {
-    color: #333
-}
-
-.cur-goods .comment .content span a {
-    color: #333
-}
-
-.s1024 .section .cur-goods .goods-title {
-    color: #333
-}
-
-.goods-clone {
-    position: absolute;
-    z-index: 100;
-    top: -1px;
-    left: -1px;
-    border: 1px #fff solid;
-    padding: 0 9px;
-    background: #fff;
-    box-shadow: rgba(0, 0, 0, 0.2) 1px 2px 8px
-}
-
-.goods .goods-clone .goods-pic {
-    margin-top: 9px
-}
-
-.goods .goods-clone .comment {
-    overflow: visible;
-    height: auto
-}
-
-.goods .goods-clone .comment .content {
+.goods-item .comment .user-list .share-user p {
+    color: #777;
     height: auto;
     overflow: visible
 }
-
-.small .goods-clone {
-    min-height: 290px;
-    width: 210px;
-
-
+.last{
+    margin-right: 0;
 }
 
-.small .goods-clone .comment {
-    min-height: 41px
-}
+
 
 .pagin4faxian {
     position: relative;
@@ -471,20 +365,4 @@ span.tag-title {
 
 .pagin4faxian .next:hover {
     text-decoration: none
-}
-.n-s-no-result {
-height: 40px;
-line-height: 40px;
-background: #FEFBEA;
-border: 1px solid #E8E4CC;
-margin-top: 20px;
-}
-.n-s-no-result-des {
-margin-left: 10px;
-}
-.n-s-product-relative {
-font-size: 16px;
-font-weigh: bold;
-margin-right: 10px;
-font-family: 'Microsoft YaHei','黑体';
 }

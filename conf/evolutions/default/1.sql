@@ -1428,3 +1428,23 @@ alter table user_rebate add column rebate_type tinyint(4) default '1';
 alter table user_rebate change column  handle_result handle_result tinyint(4) default '0';
 alter table user_invite_prize change column  handle_result handle_result tinyint(4) default '0';
 alter table user_exchange_shiDou change column  handle_result  handle_result tinyint(4) default '0';
+
+
+#20130601
+alter table goods change track_iid hw_rate decimal(4,2) default '1.0';
+alter table goods change come_from uid int(10);
+update goods set uid =1 where id in(select goods_id from user_share_goods where uid=1);
+update goods set uid =5 where id in(select goods_id from user_share_goods where uid=5);
+update goods set uid =10 where id in(select goods_id from user_share_goods where uid=10);
+update goods set uid =15 where id in(select goods_id from user_share_goods where uid=15);
+update goods set uid =28 where id in(select goods_id from user_share_goods where uid=28);
+update goods set uid =29 where id in(select goods_id from user_share_goods where uid=29);
+update goods set uid =43 where id in(select goods_id from user_share_goods where uid=43);
+update goods set uid =46 where id in(select goods_id from user_share_goods where uid=46);
+update goods set uid =2 where id in(select goods_id from user_share_goods where uid=2);
+update goods set uid =55 where id in(select goods_id from user_share_goods where uid=55);
+update goods set uid =6 where id in(select goods_id from user_share_goods where uid=6);
+update goods set uid =9 where id in(select goods_id from user_share_goods where uid=9);
+update goods set uid =85 where id in(select goods_id from user_share_goods where uid=85);
+
+

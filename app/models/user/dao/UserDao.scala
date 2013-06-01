@@ -103,7 +103,7 @@ object UserDao {
   }
   /* 统计用户分享宝贝数 */
   def countUserShareGoods(uid:Long)  = database.withSession{  implicit session:Session =>
-      Query(UserShareGoodses.filter(_.uid === uid).length).first
+      Query(Goodses.filter(_.uid === uid).length).first
     }
   /* 统计用户喜欢主题数 */
   def countUserLoveTheme(uid:Long)  = database.withSession{  implicit session:Session =>

@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],page:models.Page[models.goods.Goods],tag:String )
+@(user:Option[models.user.User],tag:String )
 @views.html.template(
 user,
 nav="china",
@@ -44,60 +44,16 @@ title =  "特色中国_食美特，爱美食爱生活"
     <div class="china-wall r10 clearfix" >
         <ul class="section clearfix">
 
-            @for((goods,i)<-page.items.view.zipWithIndex) {
-           <li @if((i)%2==0){class="left"}else{ class="right" } >
-               <div class="baobei">
-                   <div class="baobei-pic">
-                       <a class="pic-link" href="@controllers.routes.Goods.view(goods.id.get)" title="@goods.name" target="_blank">
-                           <img src='@(goods.pic+"_360x360.jpg")' width="360" height="360" title="@goods.name" alt="@goods.name" />
-                       </a>
-                   </div>
-                   <p class="baobei-des">
-                       @goods.intro
-                   </p>
-                   <div class="baobei-stat">
-                       <span class="mr10 like-count">@goods.loveNum</span>
-
-                       @if(goods.promotionPrice.isEmpty){
-                       <span>￥@goods.price</span>
-                       }else{
-                       @if(goods.price!=goods.promotionPrice.get){
-                       <span style="text-decoration: line-through">￥@goods.price</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                       <span>￥@goods.promotionPrice</span>
-                       }else{  <span>￥@goods.price</span> }
-                       }
-                   </div>
 
 
-               </div>
 
-           </li>
-
-            }
         </ul>
 
     </div>
 
     <!--宝贝展示 end-->
     <div class="clear"></div>
-    <div class="pt30 pb20 clearfix">
-        <div class="pagin4faxian tac">
-            <ul>
-                @for(num <-page.nums){
-                @if(num==page.currentPage){
-                <li><span>第 @num 页</span></li>
-                }else {
-                <li><a href="@controllers.routes.Pages.china(tag,num)">第@num 页</a></li>
-                }
-                }
-            </ul>
 
-            <span class="current">第 @page.currentPage 页</span>
-            @if(page.currentPage != page.totalPages){
-            <a title="翻翻下一页" href="@controllers.routes.Pages.china(tag,page.currentPage+1)" class="next">翻翻下一页&gt;</a>
-            }
-        </div>
-    </div>
 </div>
 
         }{

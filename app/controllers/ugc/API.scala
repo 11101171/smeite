@@ -31,6 +31,7 @@ import models.goods.GoodsAssess
 import play.api.mvc.Cookie
 import dao. UserDao
 import utils.{TaobaoConfig, Utils}
+import play.api.cache.Cache
 
 /**
  * Created by zuosanshao.
@@ -188,31 +189,33 @@ object API extends Controller {
   * 
   * */ 
   def  saveProduct = Action(parse.json) {  implicit request =>
-        val product =Json.fromJson[Product](request.body).get
-        /* 处理图片*/
-        val mainPic =product.itemPics.head
-        val images:StringBuffer= new StringBuffer();
+    val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
+    if(user.isEmpty) Ok(Json.obj("code" -> "200", "message" -> "你还没有登录"))
+  else{
+      val product =Json.fromJson[Product](request.body).get
+      /* 处理图片*/
+      val mainPic =product.itemPics.head
+      val images:StringBuffer= new StringBuffer();
 
-        // 直接采用淘宝上的图片
-        for (img <-product.itemPics){
-            images.append(img+"&")
-        }
-        /*保存goods*/
-       val goodsId= GoodsDao.addGoods(product.numIid,product.name,product.proComment.getOrElse("none"),product.price,mainPic,images.toString,product.nick,product.detailUrl)
-       /*保存tags 首先查看tags 是否存在，不存在则保存*/
-         for(name<-product.tags){
-           /*处理tag*/
-          val tag= TagDao.findByName(name)
-           if (tag.isEmpty)TagDao.addTag(name)
-           else TagDao.modifyTag(tag.get.id.get,tag.get.addNum+1)
-           /*处理 tag goods*/
-           TagDao.addGoods(name,goodsId)
-         }
-        /*处理 user share goods*/
-        val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
-        UserDao.addShareGoods(user.get.id.get,goodsId)
+      // 直接采用淘宝上的图片
+      for (img <-product.itemPics){
+        images.append(img+"&")
+      }
+      /*保存goods*/
+      val goodsId= GoodsDao.addGoods(user.get.id.get,product.numIid,product.name,product.proComment.getOrElse("none"),product.price,mainPic,images.toString,product.nick,product.detailUrl)
+      /*保存tags 首先查看tags 是否存在，不存在则保存*/
+      for(name<-product.tags){
+        /*处理tag*/
+        val tag= TagDao.findByName(name)
+        if (tag.isEmpty)TagDao.addTag(name)
+        else TagDao.modifyTag(tag.get.id.get,tag.get.addNum+1)
+        /*处理 tag goods*/
+        TagDao.addGoods(name,goodsId)
+      }
+      UserDao.addShareGoods(user.get.id.get,goodsId)
+      Ok(Json.obj("code"->"100","productId"->goodsId ,"pic"->product.pic , "message"->"success"))
+    }
 
-    Ok(Json.obj("code"->"100","productId"->goodsId ,"pic"->product.pic , "message"->"success"))
   }
 
   /*对于已经存在的product，则需要update*/

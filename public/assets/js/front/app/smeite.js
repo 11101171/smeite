@@ -2008,6 +2008,13 @@ define(function(require, exports) {
             $(this).parent().children('.like-num').find('.J_scrollUp').animate({  top:"0" },  600)
 
         })
+        //鼠标enter,leave到item上显示可点击的喜欢,喜欢数
+        $('.like-state .ico-likes').hover(function(){
+            $(this).closest(".like-state").find(".J_scrollUp").animate({top:'-24'},600)
+        },function(){
+            $(this).closest(".like-state").find(".J_scrollUp").animate({top:'0'},600)
+        })
+
    /*     $('.like-common .like').live('mouseenter',function(){
             $(this).parent().children('.like-num').find('.J_scrollUp').animate({
                     top:"-24"

@@ -1659,8 +1659,8 @@ font-size: 18px;
 
 .like-common {
     position: absolute;
-    right: 30px;
-    top: 25px;
+    right: 10px;
+    top: 10px;
     display: inline-block;
     *display: inline;
     zoom: 1;
@@ -1804,6 +1804,35 @@ font-size: 18px;
     background: 0;
     width: 30px;
     height: 30px
+}
+.ico-likes{
+    height: 12px;
+    line-height: 12px;
+    padding: 0 0 0 20px;
+    margin: 0 0 0 10px;
+    overflow: hidden;
+    display: inline-block;
+    *display: inline;
+    vertical-align: middle;
+    zoom: 1;
+    background: url(images/ico_common.png) no-repeat 0 -136px
+}
+.ico-likes {
+    background: url(images/like.png) no-repeat;
+    _background: url(images/ico_common.png) no-repeat -3px -3336px;
+    height: 15px;
+    margin: 0
+}
+
+.ico-liked {
+    background: url(images/liked.png) no-repeat;
+    _background: url(images/ico_common.png) no-repeat -80px -3336px;
+    height: 15px;
+    margin: 0
+}
+a:hover i.ico-likes {
+    background: url(images/like_h.png) no-repeat;
+    _background: url(images/ico_common.png) no-repeat -3px -3376px
 }
 /* 全局 头部样式*/
 /*

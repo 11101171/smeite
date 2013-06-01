@@ -78,7 +78,7 @@ import java.util.Calendar
     Ok(views.html.pages.find(user,page,cate,tag,tags))
   }
 
-  def faxian(cate:String,tag:String,p:Int) = Users.UserAction{ user => implicit request =>
+  def faxian(cate:String,tag:String,s:Int,p:Int) = Users.UserAction{ user => implicit request =>
     val cid:Int = cate match {
       case "美食" => 0
       case "特产" => 1
@@ -90,10 +90,10 @@ import java.util.Calendar
       case _ => 0
     }
     val tags = TagDao.findCateTags(cid,30)
-    var page:models.Page[models.goods.Goods] = null
-    if (tag =="tag")  page = TagDao.findSimpleCateGoodses(cid,p,48)
-    else   page = TagDao.findSimpleTagGoodses(tag,p,48)
-    Ok(views.html.pages.faxian(user,page,cate,tag,tags))
+    var page:models.Page[(models.user.User,models.goods.Goods)] = null
+    if (tag =="tag")  page = TagDao.findSimpleCateGoodses(cid,s,p,48)
+    else   page = TagDao.findSimpleTagGoodses(tag,s,p,48)
+    Ok(views.html.pages.faxian(user,page,cate,tag,tags,s))
   }
 
 
@@ -119,9 +119,8 @@ import java.util.Calendar
 
   /*  特色中国  */
   def china(tag:String,p:Int) =  Users.UserAction { user => implicit request =>
-    var page:models.Page[models.goods.Goods] = null
-    if (tag =="tag")  page = TagDao.findSimpleCateGoodses(0,p,48);
-    else   page = TagDao.findSimpleTagGoodses(tag,p,48)
-      Ok(views.html.pages.china(user,page,tag))
+
+
+      Ok(views.html.pages.china(user,tag))
   }
 }

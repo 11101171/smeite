@@ -8,6 +8,8 @@ import play.api.db.DB
 import scala.slick.driver.MySQLDriver.simple._
 import play.api.Play.current
 import models.Page
+import  models.user.User
+import java.sql.Timestamp
 
 /**
 * Created by zuosanshao.
@@ -110,41 +112,55 @@ object TagDao {
   }
 
   /* 查找tag下的所有审核过的商品 */
-  def findSimpleTagGoodses(tagName:String,currentPage:Int,pageSize: Int ):Page[Goods] = database.withSession{ implicit session:Session =>
+  def findSimpleTagGoodses(tagName:String,s:Int,currentPage:Int,pageSize: Int ):Page[(User,Goods)] = database.withSession{ implicit session:Session =>
     val totalRows = Query(TagGoodses.filter(_.tagName === tagName ).filter(_.checkState ===1).length).first()
-    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val totalPages=((totalRows + pageSize - 1) / pageSize)
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
-    val q = for{
-      t <- TagGoodses.filter(_.tagName === tagName).sortBy(_.sortNum asc); g <- Goodses;  if t.goodsId === g.id
-    }yield(g)
-    val list:List[Goods] = q.drop(startRow).take(pageSize).list()
-    for(item <- list){
-      //println(item.id.get)
-    }
-    Page(list,currentPage,totalPages)
+    var q = for{
+      t <- TagGoodses
+      g <- Goodses
+      u <- Users
+      if t.tagName === tagName
+      if t.goodsId === g.id
+      if g.uid === u.id
+    }yield(u,g,t.sortNum)
+    if(s == 1) q = q.sortBy(x=>x._2.isMember.desc)
+    if(s == 2) q = q.sortBy(x=>x._2.collectTime.desc)
+    if(s == 3 )q = q.sortBy(x=>x._2.loveNum.desc)
+    q=q.sortBy(x=>x._3.desc)
+    val ug=q.list().distinct.drop(startRow).take(pageSize).map(x =>(x._1,x._2))
+    Page(ug,currentPage,totalPages)
   }
-
-  def findSimpleCateGoodses(cid:Int,currentPage:Int,pageSize:Int ):Page[Goods] = database.withSession{ implicit session:Session =>
+   /*
+   * 1 推荐
+   * 2 最新
+   * 3 最热
+   * */
+  def findSimpleCateGoodses(cid:Int,s:Int,currentPage:Int,pageSize:Int ):Page[(User,Goods)] = database.withSession{ implicit session:Session =>
     val totalRows = Query(TagGoodses.filter(_.cid === cid ).filter(_.checkState ===1).length).first()
     val totalPages=((totalRows + pageSize - 1) / pageSize);
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
-    val q = for{
+    var q = for{
       t <- TagGoodses
       g <- Goodses
+      u <- Users
       if  t.cid === cid
       if  t.goodsId === g.id
-    }yield(g,t.sortNum)
-    val list:List[Goods] = q.drop(startRow).take(pageSize).list().sortBy(x=>x._2).map(x => x._1)
-    for(item <- list){
-      //println(item.id.get)
-    }
-    Page(list,currentPage,totalPages)
+      if g.uid === u.id
+    }yield(u,g,t.sortNum)
+
+    if(s == 1) q = q.sortBy(x=>x._2.isMember.desc)
+    if(s == 2) q = q.sortBy(x=>x._2.collectTime.desc)
+    if(s == 3 )q = q.sortBy(x=>x._2.loveNum.desc)
+     q=q.sortBy(x=>x._3.desc)
+    val ug=q.list().distinct.drop(startRow).take(pageSize).map(x =>(x._1,x._2))
+    Page(ug,currentPage,totalPages)
   }
 
   /* 显示所有的商品*/
   def findAllGoodses(currentPage:Int ,pageSize: Int):Page[((Long,String,String,Int,String,Option[String],String),List[(Option[Long],Option[String],Option[String],Option[String])])] = database.withSession{ implicit session:Session =>
     val totalRows =Query(Goodses.length).first
-    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val totalPages=((totalRows + pageSize - 1) / pageSize)
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
 
     val q =for {
