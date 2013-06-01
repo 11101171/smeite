@@ -54,6 +54,18 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                        <!-- @if(!user.isEmpty && user.get.id==author.id){
                         <a class="ilike-del"  href="javascript:;" data-type="share" data-proid="@goods.id.get">喜欢-1</a>
                          }-->
+                        @(user.isEmpty || user.get.id != author.id){
+                        <div class="like-common like-common-s" id="J_likeCommon156391">
+                            <a  class="like" rel="followGoods" href="javascript:void(0)" data-proid="@goods.id.get" title="喜欢"><i>喜欢</i></a>
+                            <div class="like-num">
+                                <dl class="J_scrollUp">
+                                    <dd class="J_FavorNum" data-val="@goods.loveNum">@goods.loveNum</dd>
+                                    <dd>+1</dd>
+                                </dl>
+                            </div>
+                        </div>
+                        }
+
                     </div>
                     <div class="goods-title ofh inlineblock">
                         @goods.name
@@ -121,7 +133,7 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
 
 </div>
 <div class="user-side">
-
+ <!-- 用户动态 -->
 
 <div class="user-tags box-shadow plr15 ss">
     <div class="title">跟@if(!user.isEmpty && user.get.id==author.id){我}else{Ta}相关的标签</div>
@@ -162,7 +174,7 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
 }{
 <script type="text/javascript">
     seajs.use('app/init', function(init) {
-        init.load('app/user/user.profile');
+        init.load('app/user/user.profile,app/goods/goods.favor.new');
     })
 </script>
 }

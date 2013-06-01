@@ -1266,17 +1266,7 @@ input:-moz-placeholder { font-size:12px; }
 .goods-container { opacity:0;filter:alpha(opacity=0); }
 .goods .comments-top{height: 20px;line-height: 20px;padding-top: 10px;}
 .goods-gray{filter:alpha(opacity=20);opacity:.2;}
-/*画报流小图标*/
-/*
-.like-num { float:left;padding:0 5px 0 17px;color:#ee2266;background:url(images/like-icon.png) no-repeat left center; }
-.like-comments {float: left;padding: 0 5px 0 17px;color: #BBB;background: url(images/like-icon2.png) no-repeat -1px -12px;line-height: 20px;font-size: 12px;}
-.like-merit { float:left; padding:0 5px 0 17px; color: #bbbbbb; background: url(images/like-icon2.png) no-repeat -1px -80px;line-height: 20px;font-size:12px; }
-.like-price{float: right; color: #999; line-height: 20px;font-size:12px;}
-*/
-/* 交互提示 *//*
 
-.tip-success{color:#88bb33;padding:10px;text-align:center;font-size:18px;font-weight:bold;}
-*/
 
 /* 提示框 */
 .tipbox { display:none;position:absolute;z-index:999999;padding:10px 15px;width:200px;color:#fff;text-align:left;font-size:12px;background:#000;border:1px solid #fff;-moz-box-shadow:0 0 10px #000;-webkit-box-shadow:0 0 10px #000;box-shadow:0 0 10px #000; }
@@ -1675,7 +1665,7 @@ font-size: 18px;
     float: left;
     width: 34px;
     height: 34px;
-    background: url(images/ico.png) no-repeat -23px -831px
+    background: url(images/ico-like-common.png) no-repeat -23px 0px
 }
 
 .like-common .ico-likes {
@@ -1686,14 +1676,14 @@ font-size: 18px;
     float: left;
     height: 34px;
     width: 34px;
-    background: url(images/ico.png) no-repeat 6px -62px;
-    _background: url(images/ico_common.png) no-repeat 4px -3326px;
+    background: url(images/ico_ilike.png) no-repeat 3px -31px;
+    _background: url(images/ico_common.png) no-repeat 4px 0px;
     text-indent: -9999em
 }
 
 .like-common a:hover.like i {
-    background: url(images/ico.png) no-repeat 6px -103px;
-    _background: url(images/ico_common.png) no-repeat 4px -3366px
+    background: url(images/ico_ilike.png) no-repeat 2px -103px;
+    _background: url(images/ico-like-common.png) no-repeat 4px -40px
 }
 
 .like-common .like-num {
@@ -1718,47 +1708,21 @@ font-size: 18px;
     float: left;
     width: 34px;
     height: 34px;
-    background: url(images/ico.png) no-repeat -23px -831px
+    background: url(images/ico-like-common.png) no-repeat -23px -0px
 }
 
 .like-common a.liked i {
     float: left;
     height: 34px;
     width: 34px;
-    background: url(images/ico.png) no-repeat 6px -15px;
-    _background: url(images/ico_common.png) no-repeat -73px -3326px;
+    background: url(images/ico_ilike.png) no-repeat 6px -15px;
+    _background: url(images/ico_ilike.png) no-repeat -73px 0px;
     text-indent: -9999em
-}
-
-.like-common a.liked-men, .like-common a.liked-women, .like-common a.liked-life {
-    float: left;
-    width: 34px;
-    height: 34px;
-    background: url(images/ico.png) no-repeat -23px -831px
-}
-
-.like-common a.liked-men i, .like-common a.liked-women i, .like-common a.liked-life i {
-    float: left;
-    height: 34px;
-    width: 34px;
-    background: url(images/ico.png) no-repeat -57px -15px;
-    _background: url(images/ico_common.png) no-repeat -137px -3326px;
-    text-indent: -9999em
-}
-
-.like-common a.liked-women i {
-    background-position: -121px -15px;
-    _background-position: -201px -3326px
-}
-
-.like-common a.liked-life i {
-    background-position: -186px -15px;
-    _background-position: -266px -3326px
 }
 
 .like-common-s {
-    background: url(images/ico.png) no-repeat -24px -897px;
-    width: 64px
+    background: url(images/ico-like-common.png) no-repeat -24px -66px;
+    width: 64px;
 }
 
 .like-common-s a.like {
@@ -1770,41 +1734,13 @@ font-size: 18px;
     text-align: center
 }
 
-.like-common-s a.liked, .like-common-s a.liked-men, .like-common-s a.liked-women, .like-common-s a.liked-life {
+.like-common-s a.liked{
     background: 0
 }
 
-.like-common-hover {
-    background-position: -216px -896px
-}
 
-.like-common-gray {
-    background: url(images/ico_common.png) no-repeat 0 -6135px;
-    width: 60px
-}
 
-.like-common-gray a.like {
-    background: 0;
-    width: 30px;
-    height: 30px
-}
 
-.like-common-gray a.like i {
-    width: 30px;
-    height: 30px
-}
-
-.like-common-gray .like-num {
-    padding: 0 3px 0 0;
-    margin-top: 7px;
-    text-align: center
-}
-
-.like-common-gray a.liked, .like-common-gray a.liked-men, .like-common-gray a.liked-women, .like-common-gray a.liked-life {
-    background: 0;
-    width: 30px;
-    height: 30px
-}
 .ico-likes{
     height: 12px;
     line-height: 12px;
@@ -1815,24 +1751,21 @@ font-size: 18px;
     *display: inline;
     vertical-align: middle;
     zoom: 1;
-    background: url(images/ico_common.png) no-repeat 0 -136px
-}
-.ico-likes {
     background: url(images/like.png) no-repeat;
-    _background: url(images/ico_common.png) no-repeat -3px -3336px;
+    _background: url(images/ico_ilike.png) no-repeat -3px 0px;
     height: 15px;
     margin: 0
 }
 
 .ico-liked {
     background: url(images/liked.png) no-repeat;
-    _background: url(images/ico_common.png) no-repeat -80px -3336px;
+    _background: url(images/ico_ilike.png) no-repeat -80px -0px;
     height: 15px;
     margin: 0
 }
 a:hover i.ico-likes {
     background: url(images/like_h.png) no-repeat;
-    _background: url(images/ico_common.png) no-repeat -3px -3376px
+    _background: url(images/ico_ilike.png) no-repeat -3px -40px
 }
 /* 全局 头部样式*/
 /*
