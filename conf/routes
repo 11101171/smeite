@@ -129,7 +129,7 @@ POST     /theme/save                      controllers.Themes.save
 GET      /theme/$id<[0-9]+>               controllers.Themes.view(id:Long)
 GET      /theme/$id<[0-9]+>/board         controllers.Themes.board(id:Long,currentPage:Int ?=1)
 GET      /theme/$id<[0-9]+>/likes         controllers.Themes.likes(id:Long,currentPage:Int ?=1)
-GET      /t/$id<[0-9]+>                    controllers.Themes.view2(id:Long)
+GET       /sub/$id<[0-9]+>                    controllers.Themes.subject(id:Long)
 POST      /theme/delete                    controllers.Themes.delete
 POST     /theme/editStyle                controllers.Themes.editStyle
 POST      /theme/quickReply               controllers.Themes.quickReply

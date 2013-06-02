@@ -13,11 +13,7 @@
 
 define(function(require, exports) {
 	var $ = require("jquery");
-	require("module/jquery.colorpicker")($);
-   require("app/smeite.goods")
 var UserTheme = {
-	page : $("#J_Page"),
-	themeBanner : $("#J_ThemeBanner"),
 	themeId : $("#J_ThemeId").val(),
 	//删除主题
 	deleteUserTheme : function(){
@@ -128,275 +124,9 @@ var UserTheme = {
 				}
 			});		
 	},
-	removeProduct : function($this){
-			
-	},
-	//通用选择底色功能
-	bgColor : function($this, type, clk){
-		var defaultColor = $this.data("colorval");
-		if(!$("#J_" + type + "ColorPickerD")[0]){
-			var html = "";
-			html += '<div id="J_' + type + 'ColorPickerD" class="g-dialog sg-dialog tip-dialog cp-dialog">';
-			html += '<div class="content">';
-			html += '<input id="J_' + type + 'ColorVal" type="text" class="base-input" value="' + defaultColor  + '" style="background-color:' + defaultColor + '"/>';
-			html += '<div id="J_' + type + 'ColorPicker">';
-			html += '</div>';
-			html += '<div class="tipbox-up"><em>◆</em><span>◆</span></div>';
-			html += '<a class="close" href="javascript:;"></a>';
-			html += '</div>';
-			html += '</div>';
-			$("body").append(html);
-		}
-		$(".tip-dialog").css("display", "none");
-		var $dialog = $("#J_" + type + "ColorPickerD");
-		$dialog.css({
-			"left" : $this.offset().left - 30,
-			"top" : $this.offset().top + $this.outerHeight() + 10
-		}).fadeIn("fast");
-		$dialog.find(".close").click(function(){
-			$dialog.fadeOut("fast");
-		});
-		//取色器
-		var $inputColor = $dialog.find("#J_" + type + "ColorVal");
-		var picker = $.farbtastic("#J_" + type + "ColorPicker");  //picker variable
-		picker.setColor(defaultColor);
-		picker.linkTo(onColorChange); //link to callback
-		function onColorChange(color) {
-			clk(color);
-			$inputColor.val(color).css("backgroundColor",color);
-		}
-		$inputColor.blur(function(){
-			var color = $(this).val();
-			picker.setColor(color);
-			clk(color);
-			$(this).css("backgroundColor",color);
-		});
-		//点击非选框区可直接关闭选框
-		document.onclick = function (event) {
-			var $box  = $("#J_" + type + "ColorPickerD");
-			var e = event || window.event; //兼容ie和非ie的event
-			var aim = e.srcElement || e.target; //兼容ie和非ie的事件源
-			if (e.srcElement) {
-		        var aim = e.srcElement;
-		        if (($(aim).closest("#J_" + type + "ColorPickerD").length == 0) && (aim.tagName != "I") && (aim.id != "J_" + type + "Color")) {
-		            $box.hide();
-		        }
-		    } else {
-		        var aim = e.target;
-		        if (($(aim).closest("#J_" + type + "ColorPickerD").length == 0) && (aim.tagName != "I") && (aim.id != "J_" + type + "Color")) {
-		            $box.hide();
-		        }
-		    }	
-		}
-	},
-	//通用上传图片功能
-	picUpload: function($this, type){
-    	var picFileVal = "";
-    	if(!$("#J_" + type + "PicUploadD")[0]){
-			var html = "";
-			html += '<div id="J_' + type + 'PicUploadD" class="g-dialog sg-dialog tip-dialog upload-dialog">';
-			html += '<div class="content">';
-			html += $("#J_" + type + "PicUploadCon").html();
-			html += '<div class="tipbox-up"><em>◆</em><span>◆</span></div>';
-			html += '<a class="close" href="javascript:;"></a>';
-			html += '</div>';
-			html += '</div>';
-			$("body").append(html);
-		}
-		$(".tip-dialog").css("display", "none");
-		var $dialog = $("#J_" + type + "PicUploadD");
-		$dialog.css({
-			"left" : $this.offset().left - 4,
-			"top" : $this.offset().top + $this.outerHeight() + 10,
-			"height" : "120px"
-		}).fadeIn("fast");
-		$dialog.find(".close").click(function(){
-			$dialog.fadeOut("fast");
-		});
-
-        function validata(){
-            if (!/\.(gif|jpg|png|jpeg|bmp)$/i.test(picFileVal)) {
-                alert('请上传标准图片文件,支持gif,jpg,png,jpeg.');
-                return false;
-            }
-            return true;
-        }
-        //返回提交成功后的操作
-		window.publishPicSuccess =  function(code, picType, picSrc){
-
-			switch(code){
-				case "100" : //成功
-					//图片获取成功
-					switch(picType){
-						case "themeBanner" :
-							UserTheme.themeBanner.css("backgroundImage", 'url("' + picSrc + '")');
-							$("#J_HeaderPicBtn").data("src", picSrc);
-							break;
-						case "themeBg" :
-							UserTheme.page.css("backgroundImage", 'url("' + picSrc + '")');
-							$("#J_PagePicBtn").data("src", picSrc);
-							break;
-					}
-					$("#J_" + type + "PicUploadD").fadeOut("fast");
-					break;
-				case "101" : //程序异常
-					alert("亲,上传失败了, 重新提交试试！");
-					break;
-			}
-		}
-        window.submitPic = function(obj, rangeType){
-    		if ($(obj).data("isSubmit") != 1){
-    			submitRun();
-    		}
-    		function submitRun(){
-    			$(obj).data("isSubmit", 1);
-    			var $picUploadTarget = $("#" + rangeType + "picUploadTarget");
-    	        picFileVal = $(obj).val();
-    			$(obj).closest('form').submit();
-    			
-    	        if (validata()) {
-    	            $(obj).closest('form').submit();
-    	        }
-    	        $(obj).data("isSubmit", 0);
-    	        return false;		
-    		}
-    	}
-	},
-	bgRepeat : function($this,$clkObj){
-		if($this.val() == "1"){
-			$clkObj.css("backgroundRepeat","repeat");
-			$this.val("0");
-		}else{
-			$clkObj.css("backgroundRepeat","no-repeat");
-			$this.val("1");
-		}
-	},
-	bgPosition : function($this, $clkObj){
-		$clkObj.css("backgroundPosition","center " + $this.val());
-		$this.data("val", $this.val());
-	},
-	photoDel : function($this, $clkObj, $picBtn){
-		$clkObj.css('backgroundImage', 'url("/assets/ui/placeholder.png")');
-		$picBtn.data("src","");
-	},
-	style : {
-		pageBgColor : function(){
-			$("#J_PageBgColor").click(function(){
-				var $this = $(this);
-				UserTheme.bgColor($(this),"PageBg",function(color){
-					UserTheme.page.css("backgroundColor",color);
-					$this.data("colorval",color);
-					$this.find("i").css("backgroundColor", color);
-				});
-			});
-		},
-		pageBgRepeat : function(){
-			$("#J_PageBgRepeat").click(function(){
-				UserTheme.bgRepeat($(this), UserTheme.page);
-			});
-		},
-		pageBgAttachment : function(){
-			$("#J_PageBgAttachment").click(function(){
-				var $this = $(this);
-				if($this.val() == "1"){
-					UserTheme.page.css("backgroundAttachment","fixed");
-					$this.val("0");
-				}else{
-					UserTheme.page.css("backgroundRepeat","scroll");
-					$this.val("1");
-				}
-			});
-		},
-		pageBgPosition : function(){
-			var $pageBgPosition = $("#J_PageBgPosition");
-			$pageBgPosition.val($pageBgPosition.data("val"));
-			$pageBgPosition.change(function(){
-				UserTheme.bgPosition($(this), UserTheme.page);
-			});
-		},
-		pagePhotoDel : function(){
-			$("#J_PagePhotoDel").click(function(){
-				UserTheme.photoDel($(this), UserTheme.page, $("#J_PagePicBtn"));
-			});
-		},
-		init : function(){
-
-			UserTheme.style.pageBgColor();
-			UserTheme.style.pageBgRepeat();
-			UserTheme.style.pageBgAttachment();
-			UserTheme.style.pageBgPosition();
-			UserTheme.style.pagePhotoDel();
-		}
-	},
-	//保存theme 美化设置
-	userThemeStyleSave : function($this){
-		var styleData = {
-			"themeId" : parseInt(UserTheme.themeId),
-            "pageBgColor" : $("#J_PageBgColor").data("colorval"), //背景颜色
-            "pageBgImage" : $("#J_PagePicBtn").data("src"),//背景图片 移除空值"",第一次是/tmp/topic/xxx.jpg
-            "pageBgRepeat" : ($("#J_PageBgRepeat").val() == 1) ? "no-repeat" : "repeat", //
-            "pageBgAttachment" : ($("#J_PageBgAttachment").val() == 1) ? "scroll" : "fixed", //"scroll" || "fixed" 页面背景锁定
-            "pageBgPosition" : $("#J_PageBgPosition").val()	//"left" || "center" || "right" 页面背景位置
-
-		}
-		//console.log(styleData)
-		//console.log(JSON.stringify(styleData))
-		$.ajax({
-			url :"/theme/editStyle",
-            type : "post",
-            contentType:"application/json; charset=utf-8",
-            dataType: "json",
-            data: JSON.stringify(styleData),
-			success : function(data){
-				switch(data.code){
-					case "100" :
-						$.smeite.tip.conf.tipClass = "tipmodal tipmodal-ok";
-						$.smeite.tip.show($this,"保存成功！");
-					//	$("#J_HeaderPicBtn").data("src", data.headerPic);
-						$("#J_PagePicBtn").data("src", data.pagePic);
-						break;
-					case "101" :
-						$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
-						$.smeite.tip.show($this,"保存不成功，重新提交试试！");
-						break;
-					case "102" :
-						$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
-						$.smeite.tip.show($this,"参数错误！");
-						break;
-					case "105" :
-						$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
-						$.smeite.tip.show($this,"亲，您没权限哦！");
-				}
-				
-			},
-			error : function(){
-				$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
-				$.smeite.tip.show($this,"服务器欧巴乘凉去了，重新提交试试！");
-			}
-		});
-	},
-	//美化页面关闭与打开
-	userThemeStyleClose : function(){
-		var $style = $("#J_UserThemeStyle");
-		$("#J_UserThemeStyleOpenBtn").click(function(event){
-
-			event.preventDefault();
-			if($style.css("display") == "block"){
-				$style.slideUp();
-			}else{
-				$style.slideDown();
-			}
-			
-		});
-		$("#J_UserThemeStyleCloseBtn").click(function(event){
-			event.preventDefault();
-			$style.slideUp();
-		});
-	},
 	//初始化
 	init : function(){
-		$("#J_SubTitle").html($.trim($("#J_SubTitle").html()).replace(/\[br\]/g,"<br/>"));
-		
+
 		//删除主题
 		$("#J_UserThemeDel").click(function(event){
 			event.preventDefault();
@@ -432,20 +162,7 @@ var UserTheme = {
 				   }
 			});
 		});
-		
-		UserTheme.userThemeStyleClose();
-		
-		$("#J_PagePicBtn").click(function(){
-			UserTheme.picUpload($(this), "Page");
-		});
-		
-		/*页面美化*/
-		UserTheme.style.init();
 
-		/*保存设置*/
-		$("#J_ThemeStyleSave").click(function(){
-			UserTheme.userThemeStyleSave($(this));
-		});
 		
 		//分享外站商品
 		$("#J_UserProductUrl").focus(function(){
@@ -549,13 +266,7 @@ var UserTheme = {
 
     $(function(){
         UserTheme.init();
-        /* 排列商品*/
-        if($(".goods-wall")[0]){
-            //画报
-            $.smeite.goods.conf.colArray = [0,0,0,$(".side").outerHeight()+13];
-            $.smeite.goods.conf.justFlow =true;
-            $.smeite.goods.init();
-        }
+
 
 
         $("#J_Content").bind("keydown",function(event){
@@ -588,28 +299,7 @@ var UserTheme = {
 
 
 
-        $('.goods').on("mouseover mouseout",function(event){
-            var $this = $(this);
-            if(event.type == "mouseover"){
-                $this.addClass('cur-goods');
-                if($this.find(".ilike-m")[0]){
-                    $this.find(".ilike-m").show();
-                }
-                if($this.find(".ilike-del")[0]){
-                    $this.find(".ilike-del").show();
-                }
 
-            }else{
-                $this.removeClass('cur-goods');
-                if($this.find(".ilike-m")[0]){
-                    $this.find(".ilike-m").hide();
-                }
-                if($this.find(".ilike-del")[0]){
-                    $this.find(".ilike-del").hide();
-                }
-
-            }
-        });
 
         /*  分享 */
         $(".btn-share").shareToThird()

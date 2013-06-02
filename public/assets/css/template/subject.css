@@ -1,4 +1,6 @@
-
+ #J_Page{
+     background-color: #F9F9EF;
+ }
 .box-shadow {
     box-shadow: 0 1px 3px rgba(34, 25, 25, 0.2);
     -moz-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.2);
@@ -13,6 +15,7 @@
 }
 
 .brand-nav {
+    margin-bottom: 10px;
     position: relative;
     width: 100%;
     z-index: 9;
@@ -468,160 +471,8 @@
 }
 
 /*side tags*/
-.side {
-    margin-top: 20px
-}
-
-.side .title {
-    font-weight: bold;
-    padding: 10px 0;
-    line-height: 16px;
-    height: 16px
-}
-
-.side .title h2 {
-    height: 16px;
-    line-height: 16px;
-    display: inline-block
-}
-
-.side .title a {
-    float: right;
-    font-weight: normal;
-    color: #333;
-    text-decoration: none
-}
 
 
-.side .last {
-    margin-right: 0
-}
-
-
-
-.side .author {
-    background: #fff;
-    padding: 10px;
-    margin-bottom: 12px
-}
-
-.side .author .pic {
-    float: left;
-    width: 50px;
-    height: 50px;
-    overflow: hidden
-}
-
-.side .author .info {
-    line-height: 22px;
-    border-top: 1px dotted #ececec;
-    padding-top: 5px;
-    overflow: hidden
-}
-
-.side .author .info .pic-text {
-    float: left;
-    padding-left: 8px;
-    width: 150px;
-    height: 50px;
-    overflow: hidden
-}
-
-.side .author .info .txt-title {
-    padding: 3px 0;
-    line-height: 16px;
-    height: 16px;
-    overflow: hidden
-}
-
-.side .author .info em {
-    max-width: 80px;
-    font-size: 14px
-}
-
-.side .author .info a {
-    color: #5ad;
-    display: block;
-    float: left;
-    max-width: 100px
-}
-
-.side .author .info a:hover {
-    color: #5ad;
-    text-decoration: underline
-}
-
-.side .author .info p {
-    line-height: 26px
-}
-
-.side .author .message {
-    line-height: 26px;
-    display: block
-}
-
-.side .author .message p {
-    line-height: 26px
-}
-.side .tags {
-    padding-bottom: 5px;
-    background: white
-}
-
-.side .tags ul {
-    width: 208px
-}
-
-.side .tags li {
-    float: left;
-    display: inline;
-    margin: 8px 8px 0 0;
-    white-space: nowrap
-}
-
-.side .tags li a {
-    float: left;
-    display: block;
-    color: #666;
-    height: 20px;
-    line-height: 20px;
-    padding: 0 3px;
-    background: #fff;
-    border: 1px solid #e8e8e8;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    max-width: 150px;
-    overflow: hidden
-}
-
-.side .tags li.focus a {
-    background: #ffefd1;
-    color: #666;
-    border: 1px solid #e8e8e8
-}
-
-.side .tags li.on a {
-    background: #5089b9;
-    color: #fff
-}
-
-.side .tags li a:hover {
-    text-decoration: none;
-    border: 1px solid #ccc
-}
-
-.side .tags li.focus a:hover {
-    border: 1px solid #ccc
-}
-
-.side .tags a.tag {
-    color: #666;
-    margin-right: 5px;
-    float: none;
-    background: #fff;
-    padding: 0
-}
 
 /*  theme info */
 .theme-info {
@@ -785,14 +636,121 @@
     float: left;
 }
 
-.theme-info .guess{
+.theme-info .author{
     width: 218px;
     padding-left: 20px;
     float: left;
 }
-
-.guess .more{
+.author .title span{
     font-size: 12px;
-    color: #999;
+    font-weight: normal;
 }
+ .author .pic {
+    float: left;
+    width: 50px;
+    height: 50px;
+    overflow: hidden
+}
+ .author .info {
+    line-height: 22px;
+    padding-top: 10px;
+    overflow: hidden
+}
+ .author .info .pic-text {
+    float: left;
+    padding-left: 8px;
+    width: 150px;
+    height: 50px;
+    overflow: hidden
+}
+ .author .info .txt-title {
+    padding: 3px 0;
+    line-height: 16px;
+    height: 16px;
+    overflow: hidden
+}
+ .author .info em {
+    max-width: 80px;
+    font-size: 14px
+}
+ .author .info a {
+    color: #5ad;
+    display: block;
+    float: left;
+    max-width: 100px
+}
+ .author .info a:hover {
+    color: #5ad;
+    text-decoration: underline
+}
+
+.author .info p {
+    line-height: 26px
+}
+ .author .message {
+    line-height: 26px;
+    display: block
+}
+
+.author .message p {
+    line-height: 26px
+}
+.author .tags {
+    margin-bottom: 5px;
+    margin-top: 20px;
+}
+.author .tags ul {
+    width: 208px
+}
+.author .tags li {
+    float: left;
+    display: inline;
+    margin: 8px 8px 0 0;
+    white-space: nowrap
+}
+
+.author  .tags li a {
+    float: left;
+    display: block;
+    color: #666;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 3px;
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    max-width: 150px;
+    overflow: hidden
+}
+
+.author .tags li.focus a {
+    background: #ffefd1;
+    color: #666;
+    border: 1px solid #e8e8e8
+}
+
+.author .tags li.on a {
+    background: #5089b9;
+    color: #fff
+}
+
+.author .tags li a:hover {
+    text-decoration: none;
+    border: 1px solid #ccc
+}
+
+.author .tags li.focus a:hover {
+    border: 1px solid #ccc
+}
+
+.author .tags a.tag {
+    color: #666;
+    margin-right: 5px;
+    float: none;
+    background: #fff;
+    padding: 0
+}
+
 

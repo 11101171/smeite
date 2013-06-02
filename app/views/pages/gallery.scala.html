@@ -63,7 +63,7 @@ title = "美食街,特色馆_食美特，爱美食爱生活"
         <div class="group clearfix">
             @for((((themeId,themeName,themeIntro,themeLoveNum),pics),i)<-page.items.view.zipWithIndex){
             <div class="item @if((i+1)%4==0){last}">
-                <a href="@controllers.routes.Themes.view(themeId)" title="@themeName" class="pic" target="_blank">
+                <a href="@controllers.routes.Themes.subject(themeId)" title="@themeName" class="pic" target="_blank">
                     @for((pic,i)<-pics.view.zipWithIndex){
                     @if(i==0){
                     <img class="b-img" width="210" height="210" src='@(pic+"_210x210.jpg")' alt="@themeName">
@@ -74,7 +74,7 @@ title = "美食街,特色馆_食美特，爱美食爱生活"
 
                 </a>
                 <h3 class="ofh">
-                    <a href="@controllers.routes.Themes.view(themeId)" target="_blank">@themeName</a>
+                    <a href="@controllers.routes.Themes.subject(themeId)" target="_blank">@themeName</a>
                 </h3>
 
                 <div class="info">@themeIntro</div>
