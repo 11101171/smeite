@@ -1447,4 +1447,7 @@ update goods set uid =6 where id in(select goods_id from user_share_goods where 
 update goods set uid =9 where id in(select goods_id from user_share_goods where uid=9);
 update goods set uid =85 where id in(select goods_id from user_share_goods where uid=85);
 
+alter table goods  change add_time click_url varchar(250);
+update goods set click_url ="";
+
 

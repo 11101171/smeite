@@ -268,7 +268,7 @@ object Goods extends Controller {
     val height = image.getHeight
     val width = image.getWidth
     val hwRate:Float = height.toFloat/width
-    println("height: "+height + ",width "+ width+" : " + hwRate)
+ //   println("height: "+height + ",width "+ width+" : " + hwRate)
     GoodsDao.updateTaobaoke(item.numIid,item.title,item.volume,item.price,item.promotionPrice,item.commissionRate.toFloat.toInt,hwRate)
   }
      Ok(Json.obj("code"->"100","msg"->items.length))

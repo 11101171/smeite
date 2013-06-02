@@ -32,6 +32,9 @@ import play.api.mvc.Cookie
 import dao. UserDao
 import utils.{TaobaoConfig, Utils}
 import play.api.cache.Cache
+import java.awt.image.BufferedImage
+import javax.imageio.ImageIO
+import java.net.URL
 
 /**
  * Created by zuosanshao.
@@ -195,14 +198,18 @@ object API extends Controller {
       val product =Json.fromJson[Product](request.body).get
       /* 处理图片*/
       val mainPic =product.itemPics.head
-      val images:StringBuffer= new StringBuffer();
+      val image:BufferedImage = ImageIO.read(new URL(mainPic))
+      val height = image.getHeight
+      val width = image.getWidth
+      val hwRate:Float = height.toFloat/width
+      val images:StringBuffer= new StringBuffer()
 
       // 直接采用淘宝上的图片
       for (img <-product.itemPics){
         images.append(img+"&")
       }
       /*保存goods*/
-      val goodsId= GoodsDao.addGoods(user.get.id.get,product.numIid,product.name,product.proComment.getOrElse("none"),product.price,mainPic,images.toString,product.nick,product.detailUrl)
+      val goodsId= GoodsDao.addGoods(user.get.id.get,product.numIid,product.name,product.proComment.getOrElse("none"),product.price,mainPic,images.toString,product.nick,product.detailUrl,hwRate)
       /*保存tags 首先查看tags 是否存在，不存在则保存*/
       for(name<-product.tags){
         /*处理tag*/

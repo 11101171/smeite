@@ -118,7 +118,18 @@ POST      /goods/addComment              controllers.Goods.addComment
 GET       /goods/getComments            controllers.Goods.getComments(goodsId:Long,p:Int ?=1)
 GET      /goods/guessUserLikes          controllers.Goods.guessUserLikes
 GET      /goods/findRelativeGoodses     controllers.Goods.findRelativeGoodses(goodsId:Long)
-GET       /goods/:id                     controllers.Goods.view(id:Long)
+GET       /goods/$id<[0-9]+>            controllers.Goods.view(id:Long)
+
+GET       /baobei/offSell             controllers.Baobei.offSell
+POST       /baobei/favor                  controllers.Baobei.favor
+GET       /baobei/getUserThemes          controllers.Baobei.getUserThemes
+POST       /baobei/createTheme            controllers.Baobei.createTheme
+POST      /baobei/addAssess               controllers.Baobei.addAssess
+POST      /baobei/addComment              controllers.Baobei.addComment
+GET       /baobei/getComments            controllers.Baobei.getComments(goodsId:Long,p:Int ?=1)
+GET      /baobei/guessUserLikes          controllers.Baobei.guessUserLikes
+GET      /baobei/findRelativeGoodses     controllers.Baobei.findRelativeBaobeis(goodsId:Long)
+GET       /baobei/$id<[0-9]+>            controllers.Baobei.view(id:Long)
 
 
 
@@ -163,6 +174,7 @@ GET   /xtaoAuth.html                                   controllers.Infos.xtaoAut
 GET   /wb_59dcb1f27fb8d6af.txt                         controllers.Infos.weiboAuth
 GET   /686d2b12a3c8fa6430c6f32b51d504ca.txt            controllers.Infos.qzone
 GET   /bdsitemap.txt                                   controllers.Infos.baiduSiteMap
+GET   /root.txt                                        controllers.Infos.alimama
 
 
 

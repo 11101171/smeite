@@ -29,8 +29,8 @@ import models.advert.dao.AdvertDao
  * description:用于类的说明
  */
 /*simple theme for json*/
-case class SimpleTheme(id:Long,name:String)
-object Goods extends Controller {
+
+object Baobei extends Controller {
   /*json*/
   implicit  object SimpleThemeFormat extends Format[SimpleTheme]{
     def writes(o: SimpleTheme): JsValue = JsObject(
@@ -50,7 +50,7 @@ object Goods extends Controller {
   /*宝贝下架*/
   def offSell = Users.UserAction {
     user => implicit request =>
-      Ok(views.html.goods.offSell(user))
+      Ok(views.html.baobei.offSell(user))
   }
 
   /*宝贝喜欢*/
@@ -155,7 +155,7 @@ object Goods extends Controller {
   /* 获取goods的评论*/
   def getComments(goodsId:Long,p:Int)=Action{    implicit  request =>
       val page = GoodsDao.findGoodsAssesses(goodsId,p,10)
-    Ok(views.html.goods.getComments(page,goodsId))
+    Ok(views.html.baobei.getComments(page,goodsId))
   }
 
   /*  获取你可能喜欢的商品
@@ -163,26 +163,26 @@ object Goods extends Controller {
   * */
   def guessUserLikes = Action{    implicit  request =>
     val page=GoodsDao.guessUserLikes(1,24);
-    Ok(views.html.goods.guessUserLikes(page))
+    Ok(views.html.baobei.guessUserLikes(page))
   }
 
   /* 获取跟本商品相关的标签商品*/
-  def findRelativeGoodses(goodsId:Long) =Action{    implicit  request =>
+  def findRelativeBaobeis(goodsId:Long) =Action{    implicit  request =>
      val page =TagDao.findRelativeTagGoodses(goodsId)
-     Ok(views.html.goods.guessUserLikes(page))
+     Ok(views.html.baobei.guessUserLikes(page))
   }
 
 
   def view(id:Long) = Users.UserAction {user => implicit request =>
     val goods=GoodsDao.findById(id)
-    if (goods.isEmpty)Ok(views.html.goods.nofound())
+    if (goods.isEmpty)Ok(views.html.baobei.nofound())
     else{
       if(goods.get.status==0){
-        Ok(views.html.goods.nofound())
+        Ok(views.html.baobei.nofound())
       }else{
         val firstShareUser=UserDao.findFirstShareUser(id)
         val tags = TagDao.findGoodsTags(goods.get.id.get)
-        Ok(views.html.goods.view(user,goods.get,firstShareUser,tags))
+        Ok(views.html.baobei.view(user,goods.get,firstShareUser,tags))
       }
 
     }

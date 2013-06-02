@@ -40,7 +40,7 @@ case class Goods(
                   commissionRate: Option[Int],
                   uid:Long,
                   collectTime:Option[Timestamp],
-                  addTime:Option[Timestamp]
+                  clickUrl:Option[String]
                   )
 
 object Goodses extends Table[Goods]("goods") {
@@ -63,9 +63,9 @@ object Goodses extends Table[Goods]("goods") {
   def commissionRate = column[Int]("commission_rate")
   def uid = column[Long]("uid")
   def collectTime=column[Timestamp]("collect_time")
-  def addTime=column[Timestamp]("add_time")
-  def * = id.? ~ numIid ~ hwRate ~ name ~ intro ~ price ~ pic ~ itemPics ~ nick ~ promotionPrice.? ~ detailUrl ~ loveNum ~ volume ~ status ~ isMember ~ rate ~ commissionRate.? ~ uid ~ collectTime.? ~ addTime.? <>(Goods, Goods.unapply _)
-  def autoInc = uid ~ numIid  ~ name ~ intro ~ price ~ pic ~ itemPics ~ nick  ~ detailUrl  returning id
+  def clickUrl=column[String]("click_url")
+  def * = id.? ~ numIid ~ hwRate ~ name ~ intro ~ price ~ pic ~ itemPics ~ nick ~ promotionPrice.? ~ detailUrl ~ loveNum ~ volume ~ status ~ isMember ~ rate ~ commissionRate.? ~ uid ~ collectTime.? ~ clickUrl.? <>(Goods, Goods.unapply _)
+  def autoInc = uid ~ numIid  ~ name ~ intro ~ price ~ pic ~ itemPics ~ nick  ~ detailUrl ~ hwRate  returning id
 
 
 }

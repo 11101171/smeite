@@ -1,0 +1,39 @@
+@(page:models.Page[(models.user.User,models.goods.GoodsAssess)],goodsId:Long)
+
+<div id="J_ShowResult">
+    @for((user,assess)<-page.items){
+    <div class="cmt clearfix cmt-noworth" data-cmtid="@assess.id" data-proid="@assess.goodsId">
+        <div class="user-pic">
+            <img src="@user.pic" alt="@user.name" width="80" height="80" />
+        </div>
+        <div class="cmt-doc">
+            <div class="cmt-info clearfix">
+                <span class="fl t">@user.name</span>
+                <span class="fl gc">@if(assess.isBought){ 买过}，@if(assess.isWorth){认为值得}</span>
+                <span class="fr gc">来自 @models.user.ComeFrom(user.comeFrom) </span>
+                <span class="fr gc mr5">@assess.addTime </span>
+            </div>
+            <p class="cmt-content clearfix"><span>@assess.content </span>
+              <!--  <a class="J_CmtReplyBtn btn">回复<em class="J_ReplyCount" data-count="0"></em></a>
+                <a class="usefulBtn ">有用<em class="usefulCount" data-count="0"></em></a>-->
+            </p>
+        </div>
+    </div>
+    }
+
+</div>
+<!--J_ShowResult end--->
+<div class="clearfix " style="height:30px;">
+    <div class="pagin inlineblock clearfix" id="goodsComments" >
+
+        @for(num <-page.nums){
+        @if(num==page.currentPage){
+        <span  class="current" >@page.currentPage</span>
+        }else {
+        @if(num!=0){
+        <a class="commentPage" href="javascript:void(0)" data-goodsid="@goodsId" data-page="@num">@num</a>
+       }
+        }
+        }
+    </div>
+</div>

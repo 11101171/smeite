@@ -95,4 +95,8 @@ object Infos extends Controller {
     Ok(views.html.infos.baiduSiteMap())
   }
 
+  def alimama=Action{
+    Ok(views.html.infos.alimama())
+  }
+
 }
