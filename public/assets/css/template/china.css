@@ -10,134 +10,75 @@
 *
 */
 
-.tag-list {
-    position: relative;
-    margin-top: 20px;
-    padding: 20px 0;
-    background-color: #fff;
-
-}
-.tag-list .switch{
-    list-style: none;
-    position: relative;
-    margin: 0;
+ /* filter */
+.filter-wrap {
+    margin: 20px 0;
     padding: 0;
+    position: relative;
 }
-.tag-list .switch li{
-    overflow: hidden;
-    padding: 0;
-    cursor: pointer;
+
+.filter-wrap h2 {
     float: left;
-    height: 135px;
-    width: 245px;
-}
-
- .tag-logo{
-    float: left;
-    margin-left:55px ;
-    height: 135px;
-    width: 135px;
-}
-.tag-logo dt, .tag-logo dd{
-    background-image: url(images/bg-china.jpg);
-    background-repeat: no-repeat;
-    height: 135px;
-    width: 135px;
-    float: left;
-}
-.tag-logo .default{
-    display: block;
-}
-.tag-logo .hover{
-    display: none;
-}
-
- .tag-logo-dress .default {
-    background-position: 0 0
-}
-
- .tag-logo-acc .default {
-    background-position: 0 -135px
-}
-
- .tag-logo-decorate .default {
-    background-position: 0 -270px
-}
- .tag-logo-cate .default {
-    background-position: 0 -405px
-}
-
- .tag-logo-dress .on {
-    background-position: -135px 0
-}
-
- .tag-logo-acc .on {
-    background-position: -135px -135px
-}
-
-.tag-logo-decorate .on {
-    background-position: -135px -270px
-}
- .tag-logo-cate .on {
-    background-position: -135px -405px
-}
-
-
-
-
-.sort {
-    color: #dedede;
-    line-height: 20px;
+    font-size: 18px;
+    border-left: 5px solid #5c6f09;
+    background-color: #588c0e;
+    border-right: 5px solid #5c6f09;
     height: 20px;
-    padding-top: 7px
+    line-height: 20px;
+    padding: 0 7px;
+    color: #fff;
+    display: inline;
 }
 
-.sort span {
-    color: #999
+.filter-wrap i {
+    width: 980px;
+    height: 20px;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    background: url(images/site_dotted.png) repeat-x center
 }
 
-.sort a {
-    padding: 0 6px;
-    color: #666;
-    text-decoration: none
-}
-
-.sort .on {
-    color: #333
-}
-
-
-.china-wall {
-    position: relative;
-    min-height: 500px;
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #fff;
-
-}
-.china-wall li{
-   padding-bottom: 20px;
-    border-bottom: 1px dotted #DDD;
-}
-.china-wall .left{
+.theme-filter {
     float: left;
-    width:460px ;
-    padding-right: 14px;
-    border-right: 1px dotted #DDD;
+    padding-left: 15px
 }
-.china-wall .right{
-    float: right;
-    width: 460px;
-    padding-left: 15px;
-}
-.baobei {
-    position: relative;
+
+.theme-filter a {
     float: left;
-    padding: 30px;
-    border: 1px #fff solid;
-    color: #999;
-    background-color: white;
+    margin: 0 10px 0 0;
+    background: #ececec;
+    height: 20px;
+    padding: 0 10px;
+    line-height: 20px;
+    white-space: nowrap;
+    color: #808285;
+    -moz-border-radius: 30px;
+    -webkit-border-radius: 30px;
+    border-radius: 30px
 }
+
+.theme-filter a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: #588C0E
+}
+
+.theme-filter a.current {
+    background: #588C0E;
+    color: #fff
+}
+
+.filter-wrap #bdshare {
+    position: absolute;
+    right: 0;
+    top: -5px;
+    background-color: #fff
+}
+
+/* end */
 
 
 .pagin4faxian {
@@ -188,7 +129,7 @@
 
 .pagin4faxian .next {
     float: left;
-    background: #e26;
+    background: #588C0E;
     height: 32px;
     line-height: 32px;
     padding: 0 20px;
@@ -202,20 +143,4 @@
 
 .pagin4faxian .next:hover {
     text-decoration: none
-}
-.n-s-no-result {
-height: 40px;
-line-height: 40px;
-background: #FEFBEA;
-border: 1px solid #E8E4CC;
-margin-top: 20px;
-}
-.n-s-no-result-des {
-margin-left: 10px;
-}
-.n-s-product-relative {
-font-size: 16px;
-font-weigh: bold;
-margin-right: 10px;
-font-family: 'Microsoft YaHei','黑体';
 }

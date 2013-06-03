@@ -277,7 +277,7 @@ object UserDao {
     UserSQLDao.updateFansNum(followId,-1)
 	 val follower =findById(followId)
    /*保存用户动作*/
-    addTrend(UserTrend(None,uid,"取消关注",follower.id.get,"/user/"+follower.id.get,follower.name,None))
+//    addTrend(UserTrend(None,uid,"取消关注",follower.id.get,"/user/"+follower.id.get,follower.name,None))
      UserFollows.delete(followId,uid)
 
   }
@@ -336,7 +336,7 @@ object UserDao {
     UserSQLDao.updateLoveBaobeiNum(uid,-1)
     val goods =GoodsDao.findById(goodsId)
     /*保存用户动作*/
-    addTrend(UserTrend(None,uid,"取消了喜欢的宝贝",goods.get.id.get,"/goods/"+goods.get.id.get,goods.get.name,None))
+  //  addTrend(UserTrend(None,uid,"取消了喜欢的宝贝",goods.get.id.get,"/goods/"+goods.get.id.get,goods.get.name,None))
 
     UserLoveGoodses.delete(uid,goodsId)
 
@@ -378,7 +378,7 @@ object UserDao {
     ThemeSQLDao.updateLoveNum(themeId,-1)
     val theme =ThemeDao.findById(themeId)
     /*保存用户动作*/
-    addTrend(UserTrend(None,uid,"取消了喜欢的主题",theme.get.id.get,"/theme/"+theme.get.id.get,theme.get.name,None))
+ //   addTrend(UserTrend(None,uid,"取消了喜欢的主题",theme.get.id.get,"/theme/"+theme.get.id.get,theme.get.name,None))
    UserLoveThemes.delete(uid,themeId)
 
   }
@@ -441,7 +441,7 @@ object UserDao {
     UserSQLDao.updateLoveTopicNum(uid,-1)
     val topic =TopicDao.findById(topicId)
     /*保存用户动作*/
-    addTrend(UserTrend(None,uid,"取消了喜欢的话题",topic.get.id.get,"/forum/view/"+topic.get.id.get,topic.get.title,None))
+   // addTrend(UserTrend(None,uid,"取消了喜欢的话题",topic.get.id.get,"/forum/view/"+topic.get.id.get,topic.get.title,None))
     UserLoveTopics.delete(uid,topicId)
 
   }
@@ -479,7 +479,7 @@ object UserDao {
     UserSQLDao.updatePostBaobeiNum(uid,-1)
     val goods =GoodsDao.findById(goodsId)
     /*保存用户动作*/
-    addTrend(UserTrend(None,uid,"取消了发布的宝贝",goods.get.id.get,"/goods/"+goods.get.id.get,goods.get.name,None))
+ //   addTrend(UserTrend(None,uid,"取消了发布的宝贝",goods.get.id.get,"/goods/"+goods.get.id.get,goods.get.name,None))
     UserShareGoodses.delete(uid,goodsId)
 
   }

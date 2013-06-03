@@ -93,8 +93,10 @@ object ThemeDao {
     Page[Theme](themes,currentPage,totalPages);
   }
 
-  /* 显示某个类型下的主题 */
-  def findCateThemes(cid:Int,sortBy:String,currentPage: Int, pageSize: Int ): Page[((Long,String,String,Int),List[String])] = database.withSession {  implicit session:Session =>
+  /* 显示某个类型下的主题
+   *  s:1 最新  2 最热
+    * */
+  def findCateThemes(cid:Int,sortBy:Int,currentPage: Int, pageSize: Int ): Page[((Long,String,String,Int),List[String])] = database.withSession {  implicit session:Session =>
     val totalRows=Query(Themes.filter(_.cid === cid).length).first
     val totalPages=((totalRows + pageSize - 1) / pageSize);
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
@@ -104,8 +106,8 @@ object ThemeDao {
       g<-ThemeGoodses
       if t.id === g.themeId
     } yield(t.id,t.name,t.intro,t.loveNum,t.modifyTime,g.sortNum,g.goodsPic))
-    if(sortBy=="new") query =query.sortBy(_._5 asc)
-    if(sortBy=="hot") query = query.sortBy(_._4 desc)
+    if(sortBy== 1) query =query.sortBy(_._5 asc)
+    if(sortBy== 2) query = query.sortBy(_._4 desc)
     val themes:List[((Long,String,String,Int),List[String])] =query.list().groupBy(x=>(x._1,x._2,x._3,x._4)).map(x=>(x._1,x._2.sortBy(x=>x._6).take(5).map(y=>y._7))).toList
     Page[((Long,String,String,Int),List[String])](themes,currentPage,totalPages)
   }

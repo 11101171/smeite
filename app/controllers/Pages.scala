@@ -99,7 +99,7 @@ import java.util.Calendar
 
 
   /* 主题街下的 主题分类 */
-  def gallery(cid:Int,s:String,p:Int)= Users.UserAction { user => implicit request =>
+  def gallery(cid:Int,s:Int,p:Int)= Users.UserAction { user => implicit request =>
     val  flashes:List[models.advert.Advert] =AdvertDao.findAdverts("miss_flash")
     val page = ThemeDao.findCateThemes(cid,s,p,24)
     Ok(views.html.pages.gallery(user,flashes,page,cid,s))
@@ -118,9 +118,8 @@ import java.util.Calendar
 
 
   /*  特色中国  */
-  def china(tag:String,p:Int) =  Users.UserAction { user => implicit request =>
-
-
-      Ok(views.html.pages.china(user,tag))
+  def china(s:Int,p:Int) =  Users.UserAction { user => implicit request =>
+   val page = TagDao.findSimpleTagGoodses("中国风",s,p,48)
+      Ok(views.html.pages.china(user,page,s))
   }
 }

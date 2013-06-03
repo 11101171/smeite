@@ -11,7 +11,7 @@
 */
 
 .tag-list {
-
+    margin-top:15px;
     position: relative;
     border-bottom: 1px solid #d9d9d9;
 
@@ -193,7 +193,7 @@
 
 .pagin4faxian .next {
     float: left;
-    background: #e26;
+    background: #588C0E;
     height: 32px;
     line-height: 32px;
     padding: 0 20px;
