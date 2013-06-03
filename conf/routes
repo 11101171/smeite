@@ -15,7 +15,6 @@ GET      /gallery/:cid                      controllers.Pages.gallery(cid:Int,s:
 
 GET      /china                             controllers.Pages.china(tag:String ?="tag",p:Int ?=1)
 
-
 GET     /choice                            controllers.Pages.choice
 
 
@@ -80,7 +79,8 @@ POST  /user/account/modifyPayment      controllers.users.UsersAccount.modifyPaym
 POST  /user/giveUpGift                 controllers.users.UsersAccount.giveUpGift
 POST  /user/giveGift                   controllers.users.UsersAccount.giveGift
 #user 用户返利
-GET   /user/account/myCredits           controllers.users.UsersCommission.myCredits(p:Int ?=1)
+GET   /user/account/myOrders           controllers.users.UsersCommission.myOrders(p:Int ?=1,s:Int ?=1)
+GET   /user/account/myCredits          controllers.users.UsersCommission.myCredits(p:Int ?=1)
 GET   /user/account/myShiDou          controllers.users.UsersCommission.myShiDou(p:Int ?=1)
 GET   /user/account/myAward           controllers.users.UsersCommission.myAward
 GET   /user/account/invite           controllers.users.UsersCommission.invite(p:Int ?=1)

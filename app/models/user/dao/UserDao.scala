@@ -549,11 +549,9 @@ object UserDao {
     UserOrders.autoInc2.insert(uid,Some(goodsId),numIid,nick,title,location,pic,price,withdrawRate,credits,volume,new Timestamp(System.currentTimeMillis()))
   }
   /*查找某个用户的购物记录*/
-  def findUserOrders(uid:Long,status:Int,currentPage:Int,pageSize:Int): Page[(String,List[(Timestamp,Long,Long,String,String,String,String,String,Int,Int,Int,String)])] =  database.withSession {  implicit session:Session =>
+  def findUserOrdersByTime(uid:Long,status:Int,currentPage:Int,pageSize:Int): Page[(String,List[(Timestamp,Long,Long,String,String,String,String,String,Int,Int,Int,String)])] =  database.withSession {  implicit session:Session =>
   // val totalRows=Query(UserOrders.filter(_.uid === uid).length)
-    var countQuery =(for(c<-UserOrders if c.uid === uid if c.status === status) yield c)
-
-     val totalRows= Query(countQuery.length).first()
+    val totalRows = Query(UserOrders.filter(_.uid === uid).filter(_.status === status).length).first()
     val totalPages=((totalRows + pageSize - 1) / pageSize);
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     var query=for(c<- UserOrders if c.uid===uid if c.status === status )yield (c.createTime,c.uid,c.numIid,c.nick,c.title,c.location,c.pic,c.price,c.withdrawRate,c.credits,c.status,c.volume)
@@ -561,6 +559,16 @@ object UserDao {
 
     Page[(String,List[(Timestamp,Long,Long,String,String,String,String,String,Int,Int,Int,String)])](list,currentPage,totalPages)
   }
+
+  def findUserOrders(uid:Long,status:Int,currentPage:Int,pageSize:Int):Page[models.user.UserOrder] =  database.withSession {  implicit session:Session =>
+
+    val totalRows = Query(UserOrders.filter(_.uid === uid).filter(_.status === status).length).first()
+    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val list=(for(c<- UserOrders if c.uid===uid if c.status === status )yield c).drop(startRow).take(pageSize).list()
+       Page[models.user.UserOrder](list,currentPage,totalPages)
+  }
+
 
   def findUserOrders(currentPage:Int,pageSize:Int)=  database.withSession {  implicit session:Session =>
     val totalRows = Query(UserOrders.length).first()

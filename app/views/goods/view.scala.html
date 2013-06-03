@@ -17,12 +17,10 @@ description = goods.intro
                 <div class="pic-box">
                     @if(user.isEmpty){
                     <a  rel="loginD2" data-numiid="@goods.numIid" data-goodsid="@goods.id.get" data-rate="@goods.rate"  target="_blank" rel="nofollow">
-
                         @for(img<-goods.itemPics.split("&")){
                         <img  src='@(img+"_460x460.jpg")' alt="@goods.name" width="460" />
                         }
                     </a>
-
                     }else{
                     <a class="pic-link"  href="@controllers.ugc.routes.API.gotoTaobao(goods.numIid,goods.id.get,goods.rate)" target="_blank"  rel="nofollow">
 
@@ -41,17 +39,18 @@ description = goods.intro
                         </div>
                     </div>
 
-
-
-
-                        <a class="bbl-btn pic-more">查看更多图片&gt;&gt;</a>
+                    @if(user.isEmpty){
+                    <a  rel="loginD2" data-numiid="@goods.numIid" data-goodsid="@goods.id.get" data-rate="@goods.rate"  target="_blank" rel="nofollow" class="bbl-btn pic-more">
+                        查看更多图片&gt;&gt;
+                    </a>
+                    }else{
+                    <a class="bbl-btn pic-more"  href="@controllers.ugc.routes.API.gotoTaobao(goods.numIid,goods.id.get,goods.rate)" target="_blank"  rel="nofollow">
+                        查看更多图片&gt;&gt;
+                    </a>
+                    }
 
                 </div>
-
-
             <!--pic show end-->
-
-
 
         </div>
         <!-- aside begin -->

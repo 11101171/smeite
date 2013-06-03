@@ -19,7 +19,14 @@ object UsersCommission  extends Controller {
       (__ \ "handleResult").format[String]
     )(InvitePrize.apply,unlift(InvitePrize.unapply))
 
-
+  /* 我的购买记录 */
+  def  myOrders(p:Int,s:Int)= Users.UserAction {user => implicit request =>
+    if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)
+    else {
+      val page = UserDao.findUserOrders(user.get.id.get,s,p,10)
+      Ok(views.html.users.commission.myOrders(user,page,s))
+    }
+  }
 /*我的返利*/
  def myCredits(p:Int)= Users.UserAction {user => implicit request =>
     if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)

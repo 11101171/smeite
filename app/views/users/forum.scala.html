@@ -12,7 +12,7 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                             <img src="@author.pic" alt="@author">@author.name
                         </a>
                     </li>
-                    <li><a href="@controllers.users.routes.Users.credits(author.id.get)">N+<br>集分宝</a></li>
+
                     <li><a href="@controllers.users.routes.Users.baobei(author.id.get)">@(authorStatic.postBaobeiNum+authorStatic.loveBaobeiNum)<br>宝贝</a></li>
                     <li><a href="@controllers.users.routes.Users.theme(author.id.get)">@(authorStatic.postThemeNum+authorStatic.loveThemeNum)<br>主题</a></li>
                     <li class="cur"><a href="@controllers.users.routes.Users.forum(author.id.get)">@(authorStatic.postTopicNum+authorStatic.loveTopicNum)<br>讨论</a></li>

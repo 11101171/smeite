@@ -43,32 +43,33 @@ object Users extends Controller {
   /*user 首页*/
   def home(id:Long) =UserAction { user => implicit request =>
     val author=UserDao.findById(id)
-    val authorStatic=UserDao.findStatic(id);
-    val goodses =UserDao.findShareGoodses(id,1,9);
+    val authorStatic=UserDao.findStatic(id)
+    val goodses =UserDao.findShareGoodses(id,1,9)
     val  page =UserDao.findPostThemes(author.id.get,1,9)
-    Ok(views.html.users.home(user,author,goodses,page,authorStatic) )
+    val orders=UserDao.recommendUserOrders(10)
+    Ok(views.html.users.home(user,author,goodses,page,authorStatic,orders) )
   }
 
 
   /*user baobei  喜欢的宝贝*/
   def baobei(id:Long,t:String,p:Int) = UserAction{ user => implicit request =>
     val  author=UserDao.findById(id)
-    val authorStatic=UserDao.findStatic(id);
+    val authorStatic=UserDao.findStatic(id)
     if(t=="share"){
-     val page =UserDao.findShareGoodses(id,p,16);
+     val page =UserDao.findShareGoodses(id,p,16)
       Ok(views.html.users.baobei(user,author,page,t,authorStatic))
     }else{
-      val page =UserDao.findLoveGoodses(id,p,16);
+      val page =UserDao.findLoveGoodses(id,p,16)
       Ok(views.html.users.baobei(user,author,page,t,authorStatic))
     }
 
 
   }
-  /*user   square 广场 */
+  /*user   讨论吧 广场 */
   def forum(id:Long,t:String,p:Int) = UserAction{ user => implicit request =>
 
     val  author=UserDao.findById(id)
-    val authorStatic=UserDao.findStatic(id);
+    val authorStatic=UserDao.findStatic(id)
     val   topics:List[(Long, String, String, Long, String, Int, Int, Int)]=TopicDao.recommendTopics(8)
      if (t=="love"){
          val page =UserDao.findLoveTopics(id,p)
@@ -84,7 +85,7 @@ object Users extends Controller {
   /*user theme 主题*/
   def theme(id:Long,t:String,p:Int) = UserAction{ user => implicit request =>
     val  author=UserDao.findById(id)
-    val authorStatic=UserDao.findStatic(id);
+    val authorStatic=UserDao.findStatic(id)
     if(t=="my"){
       val  page =UserDao.findPostThemes(author.id.get,p,12)
       Ok(views.html.users.theme(user,author,page,t,authorStatic))
@@ -97,8 +98,8 @@ object Users extends Controller {
   /*user fans 粉丝*/
   def fans(id:Long,p:Int) = UserAction{ user => implicit request =>
     val num:Int=8;   //默认是查找大于0的推荐用户
-    val credtis=0;
-    val authorStatic=UserDao.findStatic(id);
+    val credtis=0
+    val authorStatic=UserDao.findStatic(id)
     val  author=UserDao.findById(id)
     val page=UserDao.findFans(id,p,10)
     val users:List[User]= if(user.isEmpty)UserDao.recommendUser(credtis,num)else UserDao.findInterestedUser(user.get.id.get,num);
@@ -110,9 +111,9 @@ object Users extends Controller {
   * @cate： 类型 主题 话题 人
   * */
   def follow(id:Long,p:Int) = UserAction{ user => implicit request =>
-    val num:Int =8;
+    val num:Int =8
     val  author=UserDao.findById(id)
-    val authorStatic=UserDao.findStatic(id);
+    val authorStatic=UserDao.findStatic(id)
     val page=UserDao.findFollows(id,p,10)
     val users:List[User]= if(user.isEmpty)UserDao.recommendUser(0,num)else UserDao.findInterestedUser(user.get.id.get,num);
     Ok(views.html.users.follow(user,author,page,users,authorStatic))
@@ -185,8 +186,8 @@ object Users extends Controller {
   /*我的求鉴定*/
   def appraisal(id:Long,p:Int) = UserAction{ user => implicit request =>
     val  author=UserDao.findById(id)
-    val authorStatic=UserDao.findStatic(id);
-    val page =Page[Goods](Nil,p,1);
+    val authorStatic=UserDao.findStatic(id)
+    val page =Page[Goods](Nil,p,1)
     val userLoveGoods =UserDao.findLoveGoodses(id,1,6)
     Ok(views.html.users.appraisal(user,author,page,userLoveGoods,authorStatic))
   }
@@ -194,8 +195,8 @@ object Users extends Controller {
   /*用户的集分宝 动态*/
   def credits(id:Long,s:Int,p:Int) = UserAction{ user => implicit request =>
     val  author=UserDao.findById(id)
-    val authorStatic=UserDao.findStatic(id);
-    val page = UserDao.findUserOrders(id,s,p,10)
+    val authorStatic=UserDao.findStatic(id)
+    val page = UserDao.findUserOrdersByTime(id,s,p,10)
     val orders=UserDao.recommendUserOrders(10)
     Ok(views.html.users.credits(user,author,authorStatic,page,orders,s))
   }

@@ -7,7 +7,8 @@ user
         <div class="side-nav">
             <h2>我的返利</h2>
             <ul>
-                <li> <a class="on"  href="@controllers.users.routes.UsersCommission.myCredits(1)">我的集分宝</a> </li>
+                <li> <a  href="@controllers.users.routes.UsersCommission.myOrders(1,1)">购买记录</a> </li>
+                <li> <a  class="on"  href="@controllers.users.routes.UsersCommission.myCredits(1)">我的集分宝</a> </li>
                 <li> <a  href="@controllers.users.routes.UsersCommission.myShiDou(1)">我的食豆</a>  </li>
                 <li> <a  href="@controllers.users.routes.UsersCommission.myAward">我的奖品</a>  </li>
                 <li> <a href="@controllers.users.routes.UsersCommission.invite(1)">邀请有奖</a> </li>
@@ -37,7 +38,7 @@ user
                             <span>新人见面礼</span>
                             }
                             @if(item.rebateType == 1){
-                            <span>购物返利,<a href="@controllers.users.routes.Users.credits(user.get.id.get,1,1)">去看看购买的订单</a></span>
+                            <span>购物返利,<a href="@controllers.users.routes.UsersCommission.myOrders(1,1)">去看看购买的订单</a></span>
                             }
                         </td>
                         <td>

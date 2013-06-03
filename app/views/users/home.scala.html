@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],author:models.user.User,goodses:models.Page[models.goods.Goods],page:Page[((Long, String, String,Int),List[Option[String]])],authorStatic:models.user.UserStatic)
+@(user:Option[models.user.User],author:models.user.User,goodses:models.Page[models.goods.Goods],page:Page[((Long, String, String,Int),List[Option[String]])],authorStatic:models.user.UserStatic,orders:List[models.user.UserOrder])
 @views.html.template(
 user,
 title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生活"
@@ -7,7 +7,7 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
 <div class="u-nav box-shadow">
     <ul class="clearfix">
         <li class="cur user bigfs"> <a href="@controllers.users.routes.Users.home(author.id.get)"><img src="@author.pic" alt="@author.name">@author.name </a></li>
-        <li><a href="@controllers.users.routes.Users.credits(author.id.get)">N+<br>集分宝</a></li>
+
         <li><a href="@controllers.users.routes.Users.baobei(author.id.get)">@(authorStatic.postBaobeiNum+authorStatic.loveBaobeiNum)<br>宝贝</a></li>
         <li><a href="@controllers.users.routes.Users.theme(author.id.get)">@(authorStatic.postThemeNum+authorStatic.loveThemeNum)<br>主题</a></li>
         <li><a href="@controllers.users.routes.Users.forum(author.id.get)">@(authorStatic.postTopicNum+authorStatic.loveTopicNum)<br>讨论</a></li>
@@ -68,7 +68,23 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                             </div>
                         </div>
                     </div>
+                    <div class="user-comment">
+                        <div class="comment clearfix">
+                            <!-- 用户评论 -->
+                            <div class="user-list">
 
+                                <div class="share-user">
+
+                                    <div class="info">
+                                        <a class="go-to-comment" href="@controllers.routes.Goods.view(goods.id.get)#J_CommentTxa" style="display: none" target="_blank">评论</a>
+
+                                        <a href="@controllers.routes.Goods.view(goods.id.get)" target="_blank"><p>@goods.intro</p></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 用户评论 end -->
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -128,7 +144,41 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
 </div>
 <div class="user-side">
  <!-- 用户动态 -->
+    <div class="interest box-shadow plr15 ss">
+        <div class="title">最近想购买的宝贝 </div>
+        <ul class="interGoods" id="J_InterGoods">
+            @for(item<-orders){
+            <li>
+                <div class="goods-pic">
+                    @if(user.isEmpty){
+                    <a rel="loginD2" data-numiid="@item.numIid" data-goodsid="0" data-rate="70" title="@item.title" target="_blank">
+                        <img src='@(item.pic+"_80x80.jpg")' width="80" height="80" alt="@item.title" title="@item.title">
+                    </a>
+                    }else{
+                    <a href="@controllers.ugc.routes.API.gotoTaobao(item.numIid,0,70)" title="@item.title" target="_blank">
+                        <img src='@(item.pic+"_80x80.jpg")' width="80" height="80" alt="@item.title" title="@item.title">
+                    </a>
+                    }
 
+                </div>
+                <div class="goods-info">
+                    @if(user.isEmpty){
+                    <a rel="loginD2" data-numiid="@item.numIid" data-goodsid="0" data-rate="70" class="name ofh"  title="@item.title">@item.title </a>
+                    }else{
+                    <a class="name ofh" href="@controllers.ugc.routes.API.gotoTaobao(item.numIid,0,70)" title="@item.title">@item.title </a>
+                    }
+
+                    <p>价格：￥<span>@item.price</span></p>
+                    <p>返利：<span>@item.credits</span>个集分宝</p>
+                    <p>返利比例:<span>@(item.withdrawRate/100.0)%</span></p>
+                </div>
+            </li>
+            }
+
+
+
+        </ul>
+    </div>
 <div class="user-tags box-shadow plr15 ss">
     <div class="title">跟@if(!user.isEmpty && user.get.id==author.id){我}else{Ta}相关的标签</div>
     <ul class="clearfix">

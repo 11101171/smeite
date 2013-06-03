@@ -99,14 +99,12 @@
     position: relative;
     text-indent: 30px;
     padding: 0 10px;
-    font-size: 16px;
-    color: #555;
+    font-size: 14px;
+    color: #333;
     word-wrap: break-word;
     word-break: break-all;
-    width:350px;
-    line-height: 20px;
-
-
+    width: 350px;
+    line-height: 25px;
 }
 .buy-info .user-recommend .intro-quot {
     position: absolute;
