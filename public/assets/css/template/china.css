@@ -9,7 +9,9 @@
 * http://www.smeite.com/
 *
 */
-
+#J_Page{
+    background-color: #F9F9EF;
+}
  /* filter */
 .filter-wrap {
     margin: 20px 0;
