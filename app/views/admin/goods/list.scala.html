@@ -148,12 +148,11 @@
                     <th><input type="checkbox"  name="title-table-checkbox" /></th>
                     <th>ID</th>
                     <th>numIid</th>
-                    <th>月销售量</th>
-                    <th>价格</th>
-                    <th>促销价</th>
+                    <th>价格/促销价/月销售量</th>
                     <th>佣金比例</th>
                     <th>返还比例</th>
                     <th>图片</th>
+                    <th>淘宝客链接</th>
                     <th>是否推荐</th>
                     <th>状态</th>
                     <th>采集时间</th>
@@ -166,12 +165,11 @@
                     <td><input type="checkbox" class="checkbox" data-numiid="@item.numIid" name="ids[@i]" value="@item.id.get" /></td>
                     <td>@item.id</td>
                     <td>@item.numIid</td>
-                    <td>@item.volume</td>
-                    <td>@item.price</td>
-                    <td>@item.promotionPrice</td>
+                    <td>@item.price / @item.promotionPrice / @item.volume </td>
                     <td>@(item.commissionRate.getOrElse(0)*0.01)%</td>
                     <td><input type="number" name="rates[@i]" value="@item.rate"></td>
                     <td><a href="@controllers.routes.Goods.view(item.id.get)" target="_blank"><img src='@(item.pic+"_80x80.jpg")' width="80" height="80"></a></td>
+                    <td><input type="text" name="clickUrl[@i]" value="@item.clickUrl" /> </td>
                     <td>@if(item.isMember){<span class="label label-success">YES</span>}else{<span class="label">NO</span>} </td>
                     <td>@if(item.status==1){<span class="label label-success">上架</span>}else{<span class="label">下架</span>}</td>
                     <td>@item.collectTime</td>
@@ -266,7 +264,7 @@
             method:'taobao.taobaoke.widget.items.convert',
             num_iids:str,
             outer_code:'smeite',
-            fields:'title,num_iid,volume,price,promotion_price,commission_rate'
+            fields:'title,num_iid,volume,price,promotion_price,commission_rate,click_url'
         },function(resp){
             if(resp.error_response){
                 alert('taobao.taobaoke.widget.items.convert接口获取商信息品失败!'+resp.error_response.msg);

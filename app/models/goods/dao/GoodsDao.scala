@@ -48,8 +48,8 @@ object GoodsDao {
     (for (c<-Goodses if c.id === goodsId)yield c.name~c.isMember~c.loveNum~c.intro~c.promotionPrice ).update((goodsName,isMember,loveNum,intro,promotionPrice.getOrElse("")))
   }
   /* 修改价格*/
-  def updateTaobaoke(numIid:Long,name:String,volume:Int,price:String,promotionPrice:String,commissionRate:Int,hwRate:Float) = database.withSession {  implicit session:Session =>
-    (for (c<-Goodses if c.numIid === numIid )yield c.name~c.volume ~ c.price ~c.promotionPrice ~ c.commissionRate ~ c.hwRate ~ c.collectTime).update((name,volume,price,promotionPrice,commissionRate,hwRate,new Timestamp(System.currentTimeMillis())))
+  def updateTaobaoke(numIid:Long,name:String,volume:Int,price:String,promotionPrice:String,commissionRate:Int,hwRate:Float,clickUrl:String) = database.withSession {  implicit session:Session =>
+    (for (c<-Goodses if c.numIid === numIid )yield c.name~c.volume ~ c.price ~c.promotionPrice ~ c.commissionRate ~ c.hwRate ~ clickUrl ~ c.collectTime).update((name,volume,price,promotionPrice,commissionRate,hwRate,clickUrl,new Timestamp(System.currentTimeMillis())))
   }
 
 

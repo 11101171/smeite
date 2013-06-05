@@ -33,7 +33,8 @@ picUrl:String,
  volume:Int,
  price:String,
  promotionPrice:String,
- commissionRate:String
+ commissionRate:String,
+clickUrl:String
                          )
 
 object Goods extends Controller {
@@ -96,7 +97,8 @@ object Goods extends Controller {
         "volume" -> JsNumber(o.volume),
         "price" -> JsString(o.price),
         "promotionPrice" ->JsString(o.promotionPrice),
-        "commissionRate" -> JsString(o.commissionRate)
+        "commissionRate" -> JsString(o.commissionRate),
+        "clickUrl" -> JsString(o.clickUrl)
       )
     )
     def reads(json: JsValue): JsResult[TaobaokeItem] = JsSuccess(TaobaokeItem(
@@ -106,7 +108,8 @@ object Goods extends Controller {
       (json \ "volume").as[Int],
       (json \ "price").as[String],
       (json \ "promotion_price").as[String],
-      (json \ "commission_rate").as[String]
+      (json \ "commission_rate").as[String],
+      (json \ "click_url").as[String]
     )
     )
   }
@@ -269,7 +272,7 @@ object Goods extends Controller {
     val width = image.getWidth
     val hwRate:Float = height.toFloat/width
  //   println("height: "+height + ",width "+ width+" : " + hwRate)
-    GoodsDao.updateTaobaoke(item.numIid,item.title,item.volume,item.price,item.promotionPrice,item.commissionRate.toFloat.toInt,hwRate)
+    GoodsDao.updateTaobaoke(item.numIid,item.title,item.volume,item.price,item.promotionPrice,item.commissionRate.toFloat.toInt,hwRate,item.clickUrl)
   }
      Ok(Json.obj("code"->"100","msg"->items.length))
   }
