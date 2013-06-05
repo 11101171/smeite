@@ -417,8 +417,6 @@ define(function (require, exports) {
             textareaID:"J_ForumPostCon",
             formId:"J_ForumPostEditForm",
             toolbarId:"J_GuangEditorToolbar",
-            mediaDate:{},
-            mediaDateTypes:[],
 
             //按钮参数配置
             btnFontSize:{
@@ -909,13 +907,87 @@ define(function (require, exports) {
                 },
                 html:"<div class='media-btns img'><a href='javascript:;' btntype='btnImg' title='图片' unselectable='on'>图片</a></div>"
             },
-
+            btnVideo:{
+                visible:true,
+                exec:function (self) {
+                    if (!self.VideoWrapDom || self.VideoWrapDom.length == 0) {
+                        var html = '<div class="videoWrap sg-dialog"><div class="content"><p class="title">输入视频播放页网址：</p><form class="sg-form" name="shareGoods" action=""><div class="clearfix"><input class="base-input sg-input" id="J_InsertVideoInput" name="url" value="" placeholder="http://" autocomplete="off"><input type="button" id="J_InsertVideo" class="bbl-btn" value="确定"></div></form><div class="sg-source"><p>已支持网站：</p><div class="source-list clearfix"><a class="icon-youku" href="http://www.youku.com/" target="_blank">优酷网</a><a class="icon-tudou" href="http://www.tudou.com/" target="_blank">土豆网</a><a class="icon-sinavideo" href="http://video.sina.com.cn/" target="_blank">新浪视频</a></div></div><div class="tipbox-up"><em>◆</em><span>◆</span></div></div></div>';
+                        $('#' + self.config.toolbarId).append(html);
+                        self.insertVideoSubmitDom = $('#J_InsertVideo');
+                        self.VideoInputDom = $('#J_InsertVideoInput');
+                        self.insertVideoSubmitDom.bind("click", function () {
+                            var videoUrl = $.trim(self.VideoInputDom.val());
+                            var reg_url = /^https?\:\/\//i;
+                            var reg_youku = /^https?\:\/\/v\.youku\.com\//i;
+                            var reg_sinavideo = /^https?\:\/\/[^\/]+sina\.com\.cn\//i;
+                            var reg_tudou = /^https?\:\/\/[^\/]+tudou\.com\//i;
+                            if (reg_url.test(videoUrl)) {
+                                if (reg_youku.test(videoUrl) || reg_sinavideo.test(videoUrl) || reg_tudou.test(videoUrl)) {
+                                    self.VideoInputDom.val("");
+                                    $.ajax({
+                                        url:"/editor/getVideo",
+                                        type:"post",
+                                        dataType:"json",
+                                        data:{
+                                            url:videoUrl
+                                        },
+                                        success:function (json) {
+                                            switch (json.code) {
+                                                case 100:
+                                                {
+                                                    self.curVisiableDom.hide();
+                                                    self.curVisiableDom = null;
+                                                    json.id = json.swf;
+                                                    json.name = json.title;
+                                                 //   self.insertMedia(json, "video");
+                                                    alert("提示输入video")
+                                                }
+                                                    break;
+                                                case 101:
+                                                {
+                                                    $.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
+                                                    $.smeite.tip.show(self.btnBaobei, json.msg);
+                                                    self.curVisiableDom.hide();
+                                                    self.curVisiableDom = null;
+                                                }
+                                                    break;
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    $.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
+                                    $.smeite.tip.show(self.insertVideoSubmitDom, "不支持该站视频");
+                                }
+                            } else {
+                                $.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
+                                $.smeite.tip.show(self.insertVideoSubmitDom, "请输入一个正确的视频网页地址(带http://)");
+                            }
+                        });
+                        self.VideoWrapDom = $('#' + self.config.toolbarId + ' .videoWrap');
+                        if (self.curVisiableDom) {
+                            self.curVisiableDom.hide();
+                        }
+                        self.curVisiableDom = self.VideoWrapDom;
+                    } else {
+                        if (self.curVisiableDom == self.VideoWrapDom) {
+                            self.VideoWrapDom.hide();
+                            self.curVisiableDom = null;
+                        } else {
+                            if (self.curVisiableDom)
+                                self.curVisiableDom.hide();
+                            self.VideoWrapDom.show();
+                            self.curVisiableDom = self.VideoWrapDom;
+                        }
+                    }
+                },
+                html:"<div class='media-btns video'><a href='javascript:;' btntype='btnVideo' title='视频' unselectable='on'>视频</a></div>"
+            },
             btnSplit:{
                 visible:true,
                 html:"<span class='split'></span>"
             },
             //按钮按顺序加载
-            btnsLoadOrder:['btnFontSize', 'btnFontBold', 'btnFontColo', 'btnSplit', 'btnFace', 'btnBaobei', 'btnImg']
+            btnsLoadOrder:['btnFontSize', 'btnFontBold', 'btnFontColo', 'btnSplit', 'btnFace', 'btnBaobei', 'btnImg','btnVideo']
         },
         isIE678:!+"\v1",
         iframe:null,
@@ -930,9 +1002,7 @@ define(function (require, exports) {
             //加载Editor
             this.insertEditor();
             this.setEditor();
-           /* if (this.config.mediaDateTypes.length !== 0) {
-                this.reflowMedia();
-            }*/
+
             this.id = 0;
         },
         insertEditor:function () {
