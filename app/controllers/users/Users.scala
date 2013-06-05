@@ -231,6 +231,12 @@ object Users extends Controller {
     }
   }
 
+  def sites(id:Long,p:Int) = UserAction{ user => implicit request =>
+    val  author=UserDao.findById(id)
+    val authorStatic=UserDao.findStatic(id)
+    Ok(views.html.users.sites(user,author,authorStatic))
+  }
+
 
 
 

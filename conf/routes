@@ -17,6 +17,8 @@ GET      /china                             controllers.Pages.china(s:Int ?=1,p:
 
 GET     /choice                            controllers.Pages.choice
 
+GET     /site                             controllers.Pages.site
+
 
 # Search
 GET    /search                            controllers.Search.search(item:String,p:Int ?=1)
@@ -58,6 +60,7 @@ GET    /user/$id<[0-9]+>/forum                   controllers.users.Users.forum(i
 GET    /user/$id<[0-9]+>/fans                    controllers.users.Users.fans(id:Long,p:Int ?=1)
 GET    /user/$id<[0-9]+>/follow                  controllers.users.Users.follow(id:Long,p:Int ?=1)
 GET    /user/$id<[0-9]+>/appraisal                  controllers.users.Users.appraisal(id:Long,p:Int ?=1)
+GET    /user/$id<[0-9]+>/site                     controllers.users.Users.sites(id:Long,p:Int ?=1)
 
 
 #user 添加关注
@@ -152,6 +155,10 @@ POST     /theme/removeGoods                   controllers.Themes.removeGoods
 POST    /theme/checkThemeLoveState            controllers.Themes.checkThemeLoveState
 
 
+
+#小站页面
+GET    /site/$id<[0-9]+>                        controllers.Sites.view(id:Long)
+GET    /site/$sid<[0-9]+>/post/$pid<[0-9]+>     controllers.Sites.post(sid:Long,pid:Long)
 
 
 #info 信息页面 新年 公告，帮助中心

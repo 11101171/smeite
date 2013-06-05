@@ -122,4 +122,15 @@ import java.util.Calendar
    val page = TagDao.findSimpleTagGoodses("中国风",s,p,48)
       Ok(views.html.pages.china(user,page,s))
   }
+
+  /* 导航小站  */
+  def site =  Users.UserAction { user => implicit request =>
+      Ok(views.html.pages.site(user))
+  }
+ /* 导航小站  发现精彩小站 */
+  def findSite = Users.UserAction { user => implicit request =>
+   Ok("todo")
+ }
+
+
 }

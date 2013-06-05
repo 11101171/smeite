@@ -1451,3 +1451,17 @@ alter table goods  change add_time click_url varchar(250);
 update goods set click_url ="";
 
 
+
+#2013年6月5日
+/*
+*  创建    site   table             小站表
+*  创建    site_style table         小站样式表
+*  创建    site_post                小站帖子
+*  创建   site_post_reply           小站帖子回复
+* 创建    site_user                 小站用户
+*  创建   site_album               小站-相册
+* 创建   site_video                小站视频
+* 创建   site_baobei               小站宝贝
+*/
+
+
