@@ -21,6 +21,7 @@ $("a[rel=followGoods]").live("click",function(){
     var $likeCount = $this.next(".like-num").find(".J_FavorNum");
 
     $.smeite.favor.repeatLoveBaobeiClk = function (b) {
+        $("#cmtDialog")[0] && (clearTimeout(e), $("#cmtDialog").remove());
         var html='<div id="cmtDialog" class="c-dialog" style="width:150px;">' +
             '<p class="title clearfix">' +
             '<a class="cmtclose fr" href="javascript:;">x</a>' +
@@ -31,14 +32,14 @@ $("a[rel=followGoods]").live("click",function(){
       var  c = $("#cmtDialog").outerWidth();
         var f = $("#cmtDialog").outerHeight();
         $("#cmtDialog").css({left:b.x - c / 2 + "px", top:b.y - f  + "px"}).fadeIn();
-       setTimeout(function () {
+      e= setTimeout(function () {
             $("#cmtDialog").fadeOut()
         }, 3E3);
 
     };
     $.smeite.favor.loveBaobeiCallback = function (b) {
 
-        $("#J_LikeDialog")[0] && (clearTimeout(e), $("#J_LikeDialog").remove());
+       $("#J_LikeDialog")[0] && (clearTimeout(e), $("#J_LikeDialog").remove());
             var  html = ('<div id="J_LikeDialog" class="c-dialog" style="width:150px;">' +
                 '<p class="title clearfix">' +
                 '<a class="cmtclose fr" href="javascript:;">x</a>' +

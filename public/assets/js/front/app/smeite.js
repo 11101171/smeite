@@ -1253,7 +1253,7 @@ define(function(require, exports) {
                             $.smeite.favor.repeatLoveBaobeiClk(o);
                             break;
                         case 666 : //中奖了！
-                            $.smeite.favor.awardClk(o);
+                          //  $.smeite.favor.awardClk(o);
                             break;
                     }
                 }
@@ -2015,23 +2015,7 @@ define(function(require, exports) {
             $(this).closest(".like-state").find(".J_scrollUp").animate({top:'0'},600)
         })
 
-   /*     $('.like-common .like').live('mouseenter',function(){
-            $(this).parent().children('.like-num').find('.J_scrollUp').animate({
-                    top:"-24"
-                },
-                600,
-                function() {
-                })
-        });
 
-        $('.like-common .like').live('mouseleave',function(){
-            $(this).parent().children('.like-num').find('.J_scrollUp').animate({
-                    top:"0"
-                },
-                600,
-                function() {
-                })
-        });*/
     });
 
 

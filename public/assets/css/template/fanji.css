@@ -34,7 +34,7 @@
 }
 .goods-item .price .price-normal{
     text-decoration: line-through;
-    width: 40px;
+/*    width: 40px;*/
 }
 .last{
     margin-right: 0;
@@ -49,57 +49,11 @@
     _display: inline;
     margin-left: 30px;
     margin-top: 19px;
-    background: url('/assets/ui/fanji/tag-logo.png') no-repeat;
-    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/assets/ui/fanji/tag-logo.png');
     _background-image: none;
     width: 251px;
     height: 39px;
 }
-.tag-nav{
-    height: 33px;
-    margin-top: 15px;
-    position: relative;
-}
-.mask {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 760px;
-    height: 33px;
-    background: #3E0000;
-    opacity: .4;
-    filter: alpha(opacity=40);
-}
 
-.tag-nav  li {
-    float: left;
-    _display: inline;
-    padding-right: 2px;
-    background-color: #BD361B;
-    position: relative;
-    width: 84px;
-    height: 33px;
-    overflow: hidden;
-}
-.tag-nav li a{
-    height: 33px;
-    font-size: 14px;
-    font-weight: bold;
-    color: white;
-    text-align: center;
-    line-height: 33px;
-    padding: 0 28px;
-    _padding: 0 14px;
-    display: block;
-    position: relative;
-}
-.tag-nav li.current{
-    padding-right: 0;
-    background: #FBD43B;;
-}
-.tag-nav ul li.current a, .tag-nav ul li.current a:hover {
-    color: #DC442F;
-}
 
 .tag-banner {
     margin: 20px 136px 0;
@@ -470,6 +424,71 @@
     background-color: #fff;
     border: 1px solid #DDD;
     padding: 18px;
+}
+
+.comment .cmt {
+    padding: 0 0 12px 0;
+    border-bottom: 1px dashed #D1D1D1;
+}
+
+.comment .cmt .bg-gray {
+    background: #fff
+}
+
+.comment .cmt .user-pic {
+    float: left;
+    width: 80px;
+    height: 80px;
+    overflow: hidden
+}
+
+.comment .cmt .user-pic img {
+    width: 80px;
+    height: 80px
+}
+
+.comment .cmt .cmt-doc {
+    float: right;
+    width: 350px
+}
+
+.comment .cmt-doc .cmt-info {
+    height: 18px;
+    line-height: 18px;
+    padding: 0 10px 10px 10px
+}
+
+.comment .cmt-doc p {
+    line-height: 150%;
+    color: #666;
+    word-wrap: break-word
+}
+.comment .cmt-doc p.cmt-content {
+    padding: 0 10px 10px 10px
+}
+
+.comment .cmt-doc p.cmt-content span {
+    float: left;
+}
+
+.comment .cmt-doc p.cmt-content a.btn {
+    float: right
+}
+
+.comment .cmt-doc a {
+    cursor: pointer
+}
+
+.comment .cmt-doc a.g-daren em {
+    margin-left: 0;
+    color: #333
+}
+
+.comment .cmt-doc .open {
+    display: block
+}
+.comment-list pic-more{
+    float: right;
 }
 
 

@@ -215,43 +215,6 @@
     padding: 18px;
 }
 
-.comment .cmt {
-    margin: 0 0 12px 0;
-    border-bottom: 1px dotted #d1d1d1
-}
-
-.comment .cmt .bg-gray {
-    background: #fff
-}
-
-.comment .cmt .user-pic {
-    float: left;
-    width: 80px;
-    height: 80px;
-    overflow: hidden
-}
-
-.comment .cmt .user-pic img {
-    width: 80px;
-    height: 80px
-}
-
-.comment .cmt .cmt-doc {
-    float: right;
-    width: 360px
-}
-
-.comment .cmt-doc .cmt-info {
-    height: 18px;
-    line-height: 18px;
-    padding: 0 10px 10px 10px
-}
-
-.comment .cmt-doc p {
-    line-height: 150%;
-    color: #666;
-    word-wrap: break-word
-}
 
 .comment-publish {
     overflow: hidden;
@@ -466,6 +429,43 @@
     float: left;
     line-height: 22px;
     margin-right: 10px
+}
+.comment .cmt {
+    margin: 0 0 12px 0;
+    border-bottom: 1px dotted #d1d1d1
+}
+
+.comment .cmt .bg-gray {
+    background: #fff
+}
+
+.comment .cmt .user-pic {
+    float: left;
+    width: 80px;
+    height: 80px;
+    overflow: hidden
+}
+
+.comment .cmt .user-pic img {
+    width: 80px;
+    height: 80px
+}
+
+.comment .cmt .cmt-doc {
+    float: right;
+    width: 350px
+}
+
+.comment .cmt-doc .cmt-info {
+    height: 18px;
+    line-height: 18px;
+    padding: 0 10px 10px 10px
+}
+
+.comment .cmt-doc p {
+    line-height: 150%;
+    color: #666;
+    word-wrap: break-word
 }
 
 .comment .cmt-doc p.cmt-content {

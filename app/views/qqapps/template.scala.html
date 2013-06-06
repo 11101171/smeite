@@ -1,4 +1,4 @@
-@(title: String = "食美特，爱美食爱生活",keywords:String = "食美特,美食,创意,特产,礼物,居家,导购,smeite,坚果,巧克力,zakka,简约",description:String = "Smeite.com致力于发现绿色安全、健康美味的食品，推荐美观实用、简约实惠的家居用品以及充满创意的好玩意。我们严格把控商品的品质，用心创造一个值得信赖的购物分享社区。我们所做的一切，就是通过我们的努力，为更多的消费者提供更有效、更有价值的购物决策建议")(css:String)(content: Html)(js:Html)
+@(title: String = "食美特，爱美食爱生活",keywords:String = "食美特,美食,创意,特产,礼物,居家,导购,smeite,坚果,巧克力,zakka,简约",description:String = "Smeite.com致力于发现绿色安全、健康美味的食品，推荐美观实用、简约实惠的家居用品以及充满创意的好玩意。我们严格把控商品的品质，用心创造一个值得信赖的购物分享社区。我们所做的一切，就是通过我们的努力，为更多的消费者提供更有效、更有价值的购物决策建议")(css:String)(content: Html)
 <!doctype html>
 <html>
 <head>
@@ -11,10 +11,15 @@
     <link rel="shortcut icon" type="image/png" href="/assets/favicon.png">
     <link rel="stylesheet" href="/assets/css/global/global.css?v=2013052601">
     <link rel="stylesheet" href="@css?v=2013052601">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="/assets/js/html5.js" type="text/javascript"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/assets/js/front/jquery.tools.min.js" ></script>
+    <script type="text/javascript" src="/assets/js/front/qqapps/fanji.js"></script>
     <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21136607"></script>
 </head>
 <body id="J_Page">
-
 
 <div id="page">
     <div id="top">
@@ -22,17 +27,7 @@
             <div class="tag-header clearfix">
                 <div class="tag-logo"></div>
                 <div class="clear"></div>
-                <div class="tag-nav">
-
-                    <ul>
-                        <li class="current"><a>女装</a></li>
-                        <li><a>男装</a></li>
-                        <li><a>品牌</a></li>
-                    </ul>
-                </div>
             </div>
-
-
         </div>
     </div>
 
@@ -73,13 +68,7 @@
 </div>
 
 
-<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-<script src="/assets/js/html5.js" type="text/javascript"></script>
-<![endif]-->
-<script type="text/javascript" src="/assets/js/front/seajs/2.0/sea.js?v=2013052601" data-config="/assets/js/front/app/config.js" id="seajsnode"></script>
 
-@js
 
 <div class="baidu">
     <script type="text/javascript">
@@ -89,6 +78,11 @@
 </div>
 
 </div>
+
+
+
+ </div>
+
 </body>
 </html>
 

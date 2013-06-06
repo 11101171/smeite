@@ -3,8 +3,9 @@ package controllers
 import play.api.mvc.{Action, Controller}
 import controllers.users.Users
 import models.tag.dao.TagDao
-import models.goods.dao.GoodsDao
-import models.user.dao.UserDao
+import models.goods.dao.{GoodsSQLDao, GoodsDao}
+import models.user.dao.{UserSQLDao, UserDao}
+import play.api.libs.json.Json
 
 /**
  * Created by zuosanshao.
@@ -30,10 +31,18 @@ object QQApps extends Controller {
       if(goods.get.status==0){
         Ok(views.html.baobei.nofound())
       }else{
+      val comments = GoodsDao.findGoodsAssesses(id,1,10)
         val firstShareUser=UserDao.findFirstShareUser(id)
-        Ok(views.html.qqapps.fanjiView(goods.get,firstShareUser))
+        Ok(views.html.qqapps.fanjiView(goods.get,firstShareUser,comments))
       }
 
     }
+  }
+
+  /*  增加喜欢数 */
+  def  addLoveNum =  Action(parse.json) {  implicit request =>
+    val goodsId = (request.body \ "goodsId").as[Long]
+         GoodsSQLDao.updateLoveNum(goodsId,1)
+    Ok(Json.obj( "code" -> "100", "msg" ->"成功"))
   }
 }

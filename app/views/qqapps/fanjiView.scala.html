@@ -1,4 +1,4 @@
-@(goods:models.goods.Goods,firstShareUser:models.user.User)
+@(goods:models.goods.Goods,firstShareUser:models.user.User,comments:models.Page[(models.user.User,models.goods.GoodsAssess)])
 @views.html.qqapps.template(title="反季节")(css="/assets/css/template/fanji.css") {
 
 <div class="container clearfix">
@@ -15,6 +15,15 @@
                         <img  src='@(img+"_460x460.jpg")' alt="@goods.name" width="430" />
                         }
                     </a>
+                    <div class="like-common like-common-s">
+                        <a  class="like" rel="followGoods" href="javascript:void(0)" data-proid="@goods.id.get" title="喜欢"><i>喜欢</i></a>
+                        <div class="like-num">
+                            <dl class="J_scrollUp">
+                                <dd class="J_FavorNum" data-val="@goods.loveNum">@goods.loveNum</dd>
+                                <dd>+1</dd>
+                            </dl>
+                        </div>
+                    </div>
                     <a class="bbl-btn pic-more" href='@if(goods.clickUrl.isEmpty || goods.clickUrl.get.trim==""){@goods.detailUrl}else{@goods.clickUrl.get}' >查看更多图片&gt;&gt;</a>
                 </div>
 
@@ -83,10 +92,27 @@
                <div class="comment-list">
 
                         <div class="comment" id="J_comment">
+                            @for((user,assess)<-comments.items){
+                            <div class="cmt clearfix cmt-noworth" data-cmtid="@assess.id" data-proid="@assess.goodsId">
+                                <div class="user-pic">
+                                    <img src="@user.pic" alt="@user.name" width="80" height="80" />
+                                </div>
+                                <div class="cmt-doc">
+                                    <div class="cmt-info clearfix">
+                                        <span class="fl t">@user.name</span>
+                                        <span class="fl gc">@if(assess.isBought){ 买过}，@if(assess.isWorth){认为值得}</span>
+                                        <span class="fr gc">来自 @models.user.ComeFrom(user.comeFrom) </span>
+                                        <span class="fr gc mr5">@assess.addTime </span>
+                                    </div>
+                                    <p class="cmt-content clearfix"><span>@assess.content </span>
 
+                                    </p>
+                                </div>
+                            </div>
+                            }
                         </div>
                         <!--comment end-->
-
+                   <a class=" pic-more" href='@if(goods.clickUrl.isEmpty || goods.clickUrl.get.trim==""){@goods.detailUrl}else{@goods.clickUrl.get}' >查看更多评论&gt;&gt;</a>
                     </div>
              <!--comment-list end-->
         </div>
@@ -106,11 +132,4 @@
 
 
 
-        }{
-<script type="text/javascript">
-
-    seajs.use('app/init', function(init) {
-        init.load('app/goods/goods.detail,app/goods/goods.favor.new');
-    })
-</script>
-}
+        }

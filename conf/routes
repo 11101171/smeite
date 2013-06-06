@@ -22,7 +22,7 @@ GET     /site                             controllers.Pages.site
 #qq app
 GET     /fanji/:tag                          controllers.QQApps.fanji(tag:String,s:Int ?=1,p:Int ?=1)
 GET     /fanji/view/$id<[0-9]+>                         controllers.QQApps.fanjiView(id:Long)
-
+POST    /fanji/addLoveNum                       controllers.QQApps.addLoveNum
 
 # Search
 GET    /search                            controllers.Search.search(item:String,p:Int ?=1)
