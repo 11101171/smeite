@@ -1,0 +1,455 @@
+/**
+* Created by zuosanshao.
+* Email:zuosanshao@qq.com
+* @contain: 
+* @depends: 
+* Since:13-1-1上午9:32
+* ModifyTime :
+* ModifyContent:
+* http://www.smeite.com/
+*
+*/
+ #J_Page{
+     background: #f9f9ef;
+ }
+.container{
+    width: 950px;
+}
+.goods-item{
+    margin-right: 10px;
+}
+.goods-item .price{
+    width: 180px;
+}
+.goods-item .price span {
+    float: left;
+    margin-left: 0;
+    overflow: hidden;
+    width: 65px;
+}
+.goods-item .price .price-promotion{
+    font-size: 16px;
+    color: #E26;
+    font-weight: bold;
+}
+.goods-item .price .price-normal{
+    text-decoration: line-through;
+    width: 40px;
+}
+.last{
+    margin-right: 0;
+}
+/* tag header */
+.tag-header{
+    background: url("/assets/ui/fanji/header.png") repeat-x 0 0 transparent;
+    height: 112px;
+}
+.tag-logo{
+    float: left;
+    _display: inline;
+    margin-left: 30px;
+    margin-top: 19px;
+    background: url('/assets/ui/fanji/tag-logo.png') no-repeat;
+    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/assets/ui/fanji/tag-logo.png');
+    _background-image: none;
+    width: 251px;
+    height: 39px;
+}
+.tag-nav{
+    height: 33px;
+    margin-top: 15px;
+    position: relative;
+}
+.mask {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 760px;
+    height: 33px;
+    background: #3E0000;
+    opacity: .4;
+    filter: alpha(opacity=40);
+}
+
+.tag-nav  li {
+float: left;
+    _display: inline;
+    padding-right: 2px;
+    position: relative;
+    width: 84px;
+    height: 33px;
+    overflow: hidden;
+}
+
+.tag-banner {
+    margin: 20px 41px 0px;
+}
+
+ /* sort  */
+.filter-wrap {
+    margin: 20px 0;
+    padding: 0;
+    position: relative;
+}
+
+.filter-wrap h2 {
+    float: left;
+    font-size: 18px;
+    border-left: 5px solid #5c6f09;
+    background-color: #588c0e;
+    border-right: 5px solid #5c6f09;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 7px;
+    color: #fff;
+    display: inline;
+}
+
+.filter-wrap i {
+    width: 980px;
+    height: 20px;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    background: url(images/site_dotted.png) repeat-x center
+}
+
+.goods-filter {
+    float: left;
+    padding-left: 15px
+}
+
+.goods-filter a {
+    float: left;
+    margin: 0 10px 0 0;
+    background: #ececec;
+    height: 20px;
+    padding: 0 10px;
+    line-height: 20px;
+    white-space: nowrap;
+    color: #808285;
+    -moz-border-radius: 30px;
+    -webkit-border-radius: 30px;
+    border-radius: 30px
+}
+
+.goods-filter a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: #588C0E
+}
+
+.goods-filter a.current {
+    background: #588C0E;
+    color: #fff
+}
+
+.filter-wrap #bdshare {
+    position: absolute;
+    right: 0;
+    top: -5px;
+    background-color: #fff
+}
+
+/* end */
+#footer .global-footer-inner, #footer .friend-links-inner{
+    width: 950px;
+}
+ .global-footer-inner .more{
+     margin-left: 35px;
+     font: 500 18px/24px "Microsoft YaHei";
+     color: #EB6900;
+ }
+ .footer-nav li{
+     float: none;
+     display: inline-block;
+     width: 60px;
+     padding: 0 30px;
+ }
+ .footer-nav li a{
+     display: block;
+     font: 500 18px/30px "Microsoft YaHei";
+     color: #666;
+ }
+ .footer-nav li a span{
+ display: block;
+     cursor: pointer;
+     height: 80px;
+     margin-top: 5px;
+     background: url(/assets/ui/fanji/more-sort-ico.png) no-repeat;
+ }
+.footer-nav li .peishi{background-position:0 -80px;}
+.footer-nav li .xiebao{background-position:0 -160px;}
+.footer-nav li .jiaju{background-position:0 -240px;}
+.footer-nav li .zahuo{background-position:0 -320px;}
+.footer-nav li .muying{background-position:0 -400px;}
+.footer-nav li .shuma{background-position:0 -480px;}
+.footer-nav li .zhaomi{background-position:0 -560px;}
+
+.pagin4faxian {
+    position: relative;
+    height: 32px;
+    margin-left: 362px;
+    float: left
+}
+
+.pagin4faxian ul {
+    display: none;
+    border: 1px solid #ececec;
+    padding: 1px;
+    position: absolute;
+    background: #fff;
+    bottom: 34px;
+    left: 0;
+    width: 60px
+}
+
+.pagin4faxian li a {
+    display: block;
+    height: 25px;
+    line-height: 25px;
+    color: #333
+}
+
+.pagin4faxian li span {
+    color: #999;
+    height: 25px;
+    line-height: 25px
+}
+
+.pagin4faxian li a:hover {
+    color: #666;
+    background: #ececec;
+    text-decoration: none
+}
+
+.pagin4faxian .current {
+    float: left;
+    width: 62px;
+    line-height: 32px;
+    height: 32px;
+    margin-right: 10px;
+    color: #666
+}
+
+.pagin4faxian .next {
+    float: left;
+    background: #588C0E;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 20px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px
+}
+
+.pagin4faxian .next:hover {
+    text-decoration: none
+}
+
+/* goods view */
+.product-main {
+    margin: 20px auto 25px;
+}
+
+.main {
+    border: 1px solid #ddd;
+    background: white;
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 15px ;
+    width: 430px;
+    float: left;
+}
+
+.pic-box {
+    width: 430px;
+    float: left;
+    overflow: hidden;
+    position: relative
+}
+
+.pic-box .pic-link {
+    width: 430px;
+    height: 430px;
+    display: table-cell;
+    *display: block;
+    vertical-align: middle;
+    text-align: center;
+    *font-size: 412px;
+    *line-height: 1;
+    outline: 0
+}
+
+.pic-box img {
+    max-width: 430px;
+    padding-bottom: 20px;
+    vertical-align: middle
+}
+.main .bbl-btn{
+    margin-left: 150px;
+}
+
+
+/*side */
+.side {
+    float: right;
+    width: 470px;
+    position: relative;
+}
+
+
+.side .arrow-left{
+    position: absolute;
+    top: 120px;
+    left: -12px;
+    width: 12px;
+    height: 17px;
+    overflow: hidden;
+    background: url(images/ico_common.png) no-repeat -152px -5144px;
+}
+
+/* user info */
+.buy-info {
+    position: relative;
+    margin: 0 0 20px;
+    background-color: #fff;
+    border: 1px solid #DDD;
+    padding: 18px;
+}
+.buy-info .title {
+    color:#555;
+    font-size: 16px;
+    font-weight: bolder;
+    padding: 10px 0 20px;
+}
+.buy-info .user-recommend .pic{
+    width: 60px;
+}
+.buy-info .user-recommend .intro  {
+    position: relative;
+    text-indent: 30px;
+    padding: 0 10px;
+    font-size: 14px;
+    color: #333;
+    word-wrap: break-word;
+    word-break: break-all;
+    width: 350px;
+    line-height: 25px;
+}
+.buy-info .user-recommend .intro-quot {
+    position: absolute;
+    top: 0;
+    left: 15px;
+    width: 20px;
+    height: 20px;
+    background: url(images/ico-quotation.png) no-repeat
+}
+
+.buy-info .buy-box {
+    padding: 10px 0;
+    position: relative;
+}
+.buy-box  dd {
+    font-size: 14px;
+    font-family:"微软雅黑";
+    padding: 10px 0;
+    color: #000;
+}
+.buy-box  dd span{
+    color: #e26;
+    font-weight: bold;
+}
+.buy-box .tags li{
+    margin: 5px 3px;
+}
+.buy-box .tags .label{
+    color: #333;
+    height: 25px;
+    line-height: 25px;
+    background: none;
+    float: left;
+    font-weight: normal;
+}
+.buy-box .go-to-buy{
+    height: 35px;
+    background: url(images/bg_go_to_buy.png) repeat 0 0;
+    margin-bottom: 15px;
+}
+
+.buy-box  dd  a:hover{
+    text-decoration: underline;
+}
+.buy-box .price{
+    float: left;
+    height: 35px;
+    line-height: 35px;
+    width: 200px;
+    padding-left: 45px;
+}
+
+.buy-box  .price-normal {
+    font-size: 14px;
+    text-decoration: line-through;
+    color: #555;
+}
+
+.buy-box  .price-promotion {
+    font-size: 25px;
+    font-weight: bolder;
+    color: #e26;
+}
+
+
+.buy-box .buy-btn {
+    float:left;
+    margin-left:30px;
+    width: 100px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    font-size: 14px;
+    color: white;
+    background: #FF7F00;
+    border: 1px solid #E67300;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    text-decoration: none;
+}
+
+.buy-box .buy-btn2 {
+    float:right;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    font-size: 12px;
+    color:#555;
+}
+
+.buy-box .shareTips {
+    border-top: 1px dashed #ddd;
+    padding-top: 15px;
+    height: 16px;
+    line-height: 16px;
+}
+
+.buy-box .info-wrong {
+    float: right;
+}
+
+/* comment */
+.comment-list {
+    margin-top: 30px;
+    background-color: #fff;
+    border: 1px solid #DDD;
+    padding: 18px;
+}
+
+
+

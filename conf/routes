@@ -20,7 +20,7 @@ GET     /choice                            controllers.Pages.choice
 GET     /site                             controllers.Pages.site
 
 #qq app
-GET     /fanji                          controllers.QQApps.fanji(tag:String,s:Int ?=1,p:Int ?=1)
+GET     /fanji/:tag                          controllers.QQApps.fanji(tag:String,s:Int ?=1,p:Int ?=1)
 GET     /fanji/view/$id<[0-9]+>                         controllers.QQApps.fanjiView(id:Long)
 
 

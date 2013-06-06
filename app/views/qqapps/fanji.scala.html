@@ -1,12 +1,6 @@
-@(user:Option[models.user.User],page:models.Page[(models.user.User,models.goods.Goods)],t:String,s:Int)
-@views.html.template(
-user,
-title =  "发现喜欢__食美特，爱美食爱生活"
-)(css="/assets/css/template/faxian.css") {
+@(page:models.Page[(models.user.User,models.goods.Goods)],t:String,s:Int)
+@views.html.qqapps.template(title="反季节")(css="/assets/css/template/fanji.css") {
 <div class="container" id="fanji">
-    <div class="tag-list clearfix" id="J_tags">
-
-    </div>
 
     <section class="filter-wrap clearfix">
         <h2>@t</h2>
@@ -23,15 +17,20 @@ title =  "发现喜欢__食美特，爱美食爱生活"
             @for(((user,goods),i)<-page.items.view.zipWithIndex) {
             <div class="goods-item @if((i+1)%4==0){last}">
                 <div class="pic" style='height:210px '>
-                    <a href="@controllers.routes.Goods.view(goods.id.get)" target="_blank">
+                    <a href="@controllers.routes.QQApps.fanjiView(goods.id.get)" target="_blank">
                         <img width="210px" alt="@goods.name" title="@goods.name" src="@goods.pic" >
                     </a>
-                    <a  href="@controllers.routes.Goods.view(goods.id.get)" class="goods_title">@goods.name</a>
+                    <a  href="@controllers.routes.QQApps.fanjiView(goods.id.get)" class="goods_title">@goods.name</a>
 
                 </div>
                 <div class="goods-wrap">
                      <div class="price">
-                         <span>￥@goods.price</span>
+                         @if(goods.promotionPrice.isEmpty){
+                         <span class="price-normal"> ¥@goods.price</span>
+                         }else{
+                         <span class="price-promotion"> ¥@goods.promotionPrice.get </span>
+                         <span class="price-normal"> ¥@goods.price </span>
+                         }
                          <div class="like-state">
                              <a rel="followGoods" href="javascript:void(0)" data-proid="@goods.id.get">
                                  <i class="ico-likes"  title="喜欢"></i>
@@ -52,7 +51,7 @@ title =  "发现喜欢__食美特，爱美食爱生活"
                                     <div class="share-user">
                                         <a class="fl" href="#"><img class="avt32 fl" src="@user.pic" alt="@user.name" width="30" height="30"></a>
                                         <div class="info">
-                                            <a class="go-to-comment" href="@controllers.routes.QQApps.fanjiView(goods.id.get)#J_CommentTxa" target="_blank">评论</a>
+
                                             <h3><a href="#" target="_blank">@user.name</a></h3>
                                             <a href="@controllers.routes.QQApps.fanjiView(goods.id.get)" target="_blank"><p>@goods.intro</p></a>
                                         </div>
