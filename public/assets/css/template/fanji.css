@@ -77,6 +77,13 @@
     padding: 0 7px;
     color: white;
     display: inline;
+    margin-right:10px;
+}
+.filter-wrap h2 a {
+    color: #fff;
+}
+.filter-wrap h2.on{
+    background: #EB6900
 }
 
 .filter-wrap i {
