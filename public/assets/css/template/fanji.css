@@ -72,17 +72,37 @@
 }
 
 .tag-nav  li {
-float: left;
+    float: left;
     _display: inline;
     padding-right: 2px;
+    background-color: #BD361B;
     position: relative;
     width: 84px;
     height: 33px;
     overflow: hidden;
 }
+.tag-nav li a{
+    height: 33px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    line-height: 33px;
+    padding: 0 28px;
+    _padding: 0 14px;
+    display: block;
+    position: relative;
+}
+.tag-nav li.current{
+    padding-right: 0;
+    background: #FBD43B;;
+}
+.tag-nav ul li.current a, .tag-nav ul li.current a:hover {
+    color: #DC442F;
+}
 
 .tag-banner {
-    margin: 20px 41px 0px;
+    margin: 20px 136px 0;
 }
 
  /* sort  */
@@ -95,18 +115,18 @@ float: left;
 .filter-wrap h2 {
     float: left;
     font-size: 18px;
-    border-left: 5px solid #5c6f09;
-    background-color: #588c0e;
-    border-right: 5px solid #5c6f09;
-    height: 20px;
-    line-height: 20px;
+    border-left: 5px solid #BD361B;
+    background-color: #EB6900;
+    border-right: 5px solid #BD361B;
+    height: 30px;
+    line-height: 30px;
     padding: 0 7px;
-    color: #fff;
+    color: white;
     display: inline;
 }
 
 .filter-wrap i {
-    width: 980px;
+    width: 950px;
     height: 20px;
     display: inline-block;
     position: absolute;
@@ -125,9 +145,9 @@ float: left;
     float: left;
     margin: 0 10px 0 0;
     background: #ececec;
-    height: 20px;
-    padding: 0 10px;
-    line-height: 20px;
+    height: 30px;
+    padding: 0 20px;
+    line-height: 30px;
     white-space: nowrap;
     color: #808285;
     -moz-border-radius: 30px;
@@ -138,11 +158,11 @@ float: left;
 .goods-filter a:hover {
     text-decoration: none;
     color: #fff;
-    background: #588C0E
+    background: #EB6900
 }
 
 .goods-filter a.current {
-    background: #588C0E;
+    background: #EB6900;
     color: #fff
 }
 
@@ -169,6 +189,7 @@ float: left;
      padding: 0 30px;
  }
  .footer-nav li a{
+     text-align: center;
      display: block;
      font: 500 18px/30px "Microsoft YaHei";
      color: #666;
