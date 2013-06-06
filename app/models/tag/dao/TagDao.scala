@@ -112,6 +112,11 @@ object TagDao {
   }
 
   /* 查找tag下的所有审核过的商品 */
+  /*
+  * 1 推荐
+  * 2 最新
+  * 3 最热
+  * */
   def findSimpleTagGoodses(tagName:String,s:Int,currentPage:Int,pageSize: Int ):Page[(User,Goods)] = database.withSession{ implicit session:Session =>
     val totalRows = Query(TagGoodses.filter(_.tagName === tagName ).filter(_.checkState ===1).length).first()
     val totalPages=((totalRows + pageSize - 1) / pageSize)
@@ -129,6 +134,28 @@ object TagDao {
     if(s == 3 )q = q.sortBy(x=>x._2.loveNum.desc)
     q=q.sortBy(x=>x._3.desc)
     val ug=q.list().distinct.drop(startRow).take(pageSize).map(x =>(x._1,x._2))
+    Page(ug,currentPage,totalPages)
+  }
+  /*
+  * 1 推荐
+  * 2 最新
+  * 3 最热
+  * */
+  def  findGoodsesByTagName(tagName:String,s:Int,currentPage:Int,pageSize: Int):Page[Goods] = database.withSession{ implicit session:Session =>
+    val totalRows = Query(TagGoodses.filter(_.tagName === tagName ).filter(_.checkState ===1).length).first()
+    val totalPages=((totalRows + pageSize - 1) / pageSize)
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    var q = for{
+      t <- TagGoodses
+      g <- Goodses
+      if t.tagName === tagName
+      if t.goodsId === g.id
+    }yield(g,t.sortNum)
+    if(s == 1) q = q.sortBy(x=>x._1.isMember.desc)
+    if(s == 2) q = q.sortBy(x=>x._1.collectTime.desc)
+    if(s == 3 )q = q.sortBy(x=>x._1.loveNum.desc)
+    q=q.sortBy(x=>x._2.desc)
+    val ug=q.list().distinct.drop(startRow).take(pageSize).map(x =>x._1)
     Page(ug,currentPage,totalPages)
   }
    /*

@@ -22,7 +22,7 @@
             @for(((user,goods),i)<-page.items.view.zipWithIndex) {
             <div class="goods-item @if((i+1)%4==0){last}">
                 <div class="pic" style='height:210px '>
-                    <a href="@controllers.routes.QQApps.fanjiView(goods.id.get)" target="_blank">
+                    <a href="@controllers.routes.QQApps.fanjiView(goods.id.get)">
                         <img width="210px" alt="@goods.name" title="@goods.name" src="@goods.pic" >
                     </a>
                     <a  href="@controllers.routes.QQApps.fanjiView(goods.id.get)" class="goods_title">@goods.name</a>
@@ -57,8 +57,8 @@
                                         <a class="fl" href="#"><img class="avt32 fl" src="@user.pic" alt="@user.name" width="30" height="30"></a>
                                         <div class="info">
 
-                                            <h3><a href="#" target="_blank">@user.name</a></h3>
-                                            <a href="@controllers.routes.QQApps.fanjiView(goods.id.get)" target="_blank"><p>@goods.intro</p></a>
+                                            <h3><a href="#">@user.name</a></h3>
+                                            <a href="@controllers.routes.QQApps.fanjiView(goods.id.get)"><p>@goods.intro</p></a>
                                         </div>
                                     </div>
                             </div>

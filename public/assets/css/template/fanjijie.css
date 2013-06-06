@@ -1,0 +1,397 @@
+/**
+* Created by zuosanshao.
+* Email:zuosanshao@qq.com
+* @contain: 
+* @depends: 
+* Since:13-6-6下午10:51
+* ModifyTime :
+* ModifyContent:
+* http://www.smeite.com/
+*
+*/
+/**
+* Created by zuosanshao.
+* Email:zuosanshao@qq.com
+* @contain: 天天特价
+* @depends:
+* Since:13-3-22下午7:19
+* ModifyTime :
+* ModifyContent:
+* http://www.smeite.com/
+*
+*/
+#J_Page{
+    background: #fff6d7;
+}
+.container{
+    width: 760px;
+}
+
+/* tag header */
+.tag-header{
+    background: url("/assets/ui/fanji/header.png") repeat-x 0 0 transparent;
+    height: 112px;
+}
+.tag-logo{
+    float: left;
+    _display: inline;
+    margin-left: 30px;
+    margin-top: 19px;
+    _background-image: none;
+    width: 251px;
+    height: 39px;
+}
+
+
+.tag-banner {
+    margin: 20px 40px;
+}
+
+.day-option {
+    width: 737px;
+    background: #fff;
+    height: 25px;
+    margin-left: 11px;
+    line-height: 25px;
+    font-size: 14px;
+    border-bottom: 1px solid #FBC0C0;
+    z-index: 2;
+    margin-bottom: 10px;
+}
+.day-option h2 {
+    float: left;
+    padding: 0 10px;
+}
+.day-option ul {
+    float: left;
+    position: relative;
+    top: 0;
+    _top: 1px;
+    height: 25px;
+}
+.day-option ul li {
+    float: left;
+    width: 55px;
+    height: 25px;
+    text-align: center;
+    font-weight: bold;
+}
+.day-option ul li a {
+    background: #fff;
+    color: #CF2D2D;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.day-option ul li.c a {
+    background: #CF2D2D;
+    color: #fff;
+    border-bottom: 1px solid #CF2D2D;
+    position: relative;
+}
+.day-option ul li.c a i {
+    position: absolute;
+    left: 50%;
+    margin-left: -5px;
+    bottom: -9px;
+    z-index: 5;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    overflow: hidden;
+    font-size: 0;
+    display: inline-block;
+    border-width: 4px;
+    border-color: #CF2D2D transparent transparent transparent;
+    border-style: solid dashed dashed dashed;
+}
+
+
+
+
+
+.today-wrap {
+
+}
+
+
+.today-goods-list {
+    width: 737px;
+    margin: 0 auto;
+    font-family: "\5FAE\8F6F\96C5\9ED1";
+    overflow: hidden;
+}
+.today-goods-item{
+    width: 735px;
+    border: 1px solid #EDDFB3;
+    background: #fff;
+    position: relative;
+    margin-bottom: 19px;
+    padding: 20px 0;
+}
+
+.today-goods-item .goods-item-img {
+    float: left;
+    width: 300px;
+    height: 300px;
+    padding-left: 14px;
+    padding-right: 16px;
+}
+
+.today-goods-item .goods-item-info {
+    float: left;
+    width: 391px;
+}
+
+.today-goods-item .goods-item-title {
+    width: 391px;
+    font: bold 18px/24px "Microsoft YaHei";
+    color: #333;
+    word-wrap: break-word;
+    word-break: break-all
+}
+
+.today-goods-item .goods-item-desc {
+    _position: static;
+    position: relative;
+    width: 371px;
+    margin-top: 20px;
+    padding: 30px 10px;
+    border-top: 1px dashed #e6d8cd;
+    background-color: #f6f1ec;
+    font: 14px/22px SimSun;
+    color: #333;
+    word-wrap: break-word;
+    word-break: break-all
+}
+
+.today-goods-item .goods-item-desc .desc-txt {
+    display: block;
+    padding: 0 25px
+}
+
+
+.today-goods-item .quotation-marks {
+    position: absolute;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url(images/quotation-marks.png) no-repeat
+}
+
+.goods-item-buy {
+    margin-top: 25px
+}
+
+.goods-item-buy .goods-item-buy-btn {
+    float: left;
+    display: inline-block;
+    height: 52px;
+    line-height: 52px;
+    padding-left: 35px;
+    background: url(images/buy-btn.png) no-repeat 0 0
+}
+
+.goods-item-buy .go-to-buy {
+    float: left;
+    cursor: pointer;
+    padding: 0 8px 0 28px;
+    font: 14px/52px SimSun;
+    color: #fff;
+    background: url(images/buy-btn.png) no-repeat 100% 0
+}
+
+.goods-item-buy .goods-item-buy-btn:hover {
+    background-position: 0 -70px
+}
+
+.goods-item-buy .goods-item-buy-btn:hover .go-to-buy {
+    background-position: 100% -70px
+}
+
+.goods-item-buy .goods-item-buy-btn:focus {
+    background-position: 0 -140px
+}
+
+.goods-item-buy .goods-item-buy-btn:focus .go-to-buy {
+    background-position: 100% -140px
+}
+
+.goods-item-buy .current-price {
+    float: left;
+    cursor: pointer;
+    font: bold 24px/52px "Microsoft YaHei";
+    color: #fff
+}
+
+.goods-item-buy .original-price {
+    float: left;
+    cursor: pointer;
+    text-decoration: line-through;
+    text-indent: 15px;
+    font: bold 14px/52px Arial;
+    color: #fff
+}
+
+.goods-item-buy .others-wrap {
+    float: right;
+    width: 240px;
+    text-align: right
+}
+
+.goods-item-buy .want-to-buy {
+    display: block;
+    padding-top: 5px;
+    font: bold 12px/16px SimSun;
+    color: #666;
+    word-wrap: break-word
+}
+
+.goods-item-buy .want-to-buy i {
+    color: #f00;
+    font-family: Arial;
+    font-weight: bold
+}
+
+.goods-item-buy .others-say {
+    display: block;
+    margin-top: 10px;
+    font: bold 12px/16px SimSun;
+    color: #666;
+    text-decoration: underline
+}
+
+.today-bottom-banner {
+    margin-top: 10px
+}
+
+
+.no-pro {
+    text-align: center;
+    padding-bottom: 20px;
+    padding-top: 30px;
+    font-family: "\5FAE\8F6F\96C5\9ED1";
+}
+.no-pro h2 {
+    font-size: 24px;
+    color: #ff5757;
+    line-height: 1.2em;
+    padding-bottom: 5px;
+    font-weight: normal;
+}
+.bt-logo {
+    padding-left: 103px;
+    padding-bottom: 50px
+}
+
+.bt-logo ul {
+    overflow: hidden
+}
+
+.bt-logo li {
+    float: left;
+    text-align: center;
+    width: 99px;
+    margin-right: 17px;
+    font-family: "\5FAE\8F6F\96C5\9ED1"
+}
+
+.bt-logo li a {
+    color: #ff5757;
+    line-height: 1.4em
+}
+
+.bt-logo li a:hover {
+    text-decoration: none;
+    _zoom: 1
+}
+
+.bt-logo li a i {
+    display: block;
+    width: 99px;
+    height: 99px;
+    cursor: pointer;
+    margin-top: 5px;
+    background: url(/assets/ui/fanji/bg_app.png) no-repeat
+}
+
+li.item-1 a i {
+    background-position: 0 -8px
+}
+
+li.item-2 a i {
+    background-position: -116px -8px
+}
+
+li.item-3 a i {
+    background-position: -231px -8px
+}
+
+li.item-4 a i {
+    background-position: -347px -8px
+}
+
+li.item-5 a i {
+    background-position: -462px -8px
+}
+
+li.item-1 a:hover i {
+    background-position: 0 -107px
+}
+
+li.item-2 a:hover i {
+    background-position: -116px -107px
+}
+
+li.item-3 a:hover i {
+    background-position: -231px -107px
+}
+
+li.item-4 a:hover i {
+    background-position: -347px -107px
+}
+
+li.item-5 a:hover i {
+    background-position: -462px -107px
+}
+
+
+#footer .global-footer-inner, #footer .friend-links-inner{
+    width: 950px;
+}
+.global-footer-inner .more{
+    margin-left: 35px;
+    font: 500 18px/24px "Microsoft YaHei";
+    color: #EB6900;
+}
+.footer-nav li{
+    float: none;
+    display: inline-block;
+    width: 60px;
+    padding: 0 30px;
+}
+.footer-nav li a{
+    text-align: center;
+    display: block;
+    font: 500 18px/30px "Microsoft YaHei";
+    color: #666;
+}
+.footer-nav li a span{
+    display: block;
+    cursor: pointer;
+    height: 80px;
+    margin-top: 5px;
+    background: url(/assets/ui/fanji/more-sort-ico.png) no-repeat;
+}
+.footer-nav li .peishi{background-position:0 -80px;}
+.footer-nav li .xiebao{background-position:0 -160px;}
+.footer-nav li .jiaju{background-position:0 -240px;}
+.footer-nav li .zahuo{background-position:0 -320px;}
+.footer-nav li .muying{background-position:0 -400px;}
+.footer-nav li .shuma{background-position:0 -480px;}
+.footer-nav li .zhaomi{background-position:0 -560px;}
+
+
+
+
+

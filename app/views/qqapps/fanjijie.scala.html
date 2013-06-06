@@ -1,0 +1,106 @@
+@(page:models.Page[models.goods.Goods],tag:String,s:Int)
+@views.html.qqapps.template(title="反季节")(css="/assets/css/template/fanjijie.css") {
+<div class="container" class="clearfix">
+    <div class="tag-banner">
+        <img src="/assets/ui/fanji/topbanner2.png">
+    </div>
+<!--商品列表 start-->
+    <div class="day-option" id="adTypeDiv">
+        <h2>爆款<span id="adTotalNum">（30）</span></h2>
+       <ul id="adTypeList">
+        <li class="c"><a href="#nolink" data-typeid="0" data-cpcpos="4,6,7,9,20,29,30" loaded="1"><i></i>全部</a></li>
+        <li class=""><a href="#nolink" data-typeid="1" data-cpcpos="2,8;12;13;14" loaded="1"><i></i>衣服</a></li>
+        <li class=""><a href="#nolink" data-typeid="2" data-cpcpos="6;7;8" loaded="1"><i></i>包包</a></li>
+        <li class=""><a href="#nolink" data-typeid="3" data-cpcpos="6;7;8" loaded="1"><i></i>鞋子</a></li>
+        <li class=""><a href="#nolink" data-typeid="4" data-cpcpos="6;7;8" loaded="1"><i></i>配饰</a></li>
+
+    </ul>
+    </div>
+
+
+
+<div class="today-goods-list">
+<!--单个商品 start-->
+    @for(goods<-page.items){
+<div class="today-goods-item clearfix">
+    <a href='@if(goods.clickUrl.isEmpty || goods.clickUrl.get.trim==""){@goods.detailUrl}else{@goods.clickUrl.get}' target="_blank">
+        <img class="goods-item-img" src='@(goods.pic+"_310x310.jpg")' alt="@goods.name" width="300" height="300"></a>
+    <div class="goods-item-info">
+        <h2 class="goods-item-title">
+              @goods.name
+            </a>
+        </h2>
+        <div class="goods-item-desc">
+            <i class="quotation-marks"></i>
+            <a href='@if(goods.clickUrl.isEmpty || goods.clickUrl.get.trim==""){@goods.detailUrl}else{@goods.clickUrl.get}' target="_blank" class="desc-txt">
+                @goods.intro
+            </a>
+
+        </div>
+        <div class="goods-item-buy clearfix">
+            <a href='@if(goods.clickUrl.isEmpty || goods.clickUrl.get.trim==""){@goods.detailUrl}else{@goods.clickUrl.get}' class="goods-item-buy-btn clearfix" target="_blank">
+
+                @if(goods.promotionPrice.isEmpty){
+                <span class="current-price"> ¥@goods.price</span>
+                }else{
+                @if(goods.price!=goods.promotionPrice.get){
+                <span class="current-price"> ¥@goods.promotionPrice.get </span>
+                <span class="original-price"> ¥@goods.price </span>
+
+                }else{
+                <span class="current-price"> ¥@goods.price</span>
+                }
+                }
+
+                <span class="go-to-buy">去抢购 &gt;</span>
+
+            </a>
+            <div class="others-wrap">
+                <span class="want-to-buy">有<i>@goods.loveNum</i>人想买</span>
+                <a href='@if(goods.clickUrl.isEmpty || goods.clickUrl.get.trim==""){@goods.detailUrl}else{@goods.clickUrl.get}' class="others-say" target="_blank">看看买过的人怎么说&gt;&gt;</a>
+            </div>
+        </div>
+    </div>
+</div>
+    }
+<!--单个商品 end-->
+
+</div>
+    <div class="clearfix pt20 pb20">
+        <div class="pagin fr pagination" id="J_Pagination">
+            @if(page.nums.length>1){
+            @page.prev.map { page =>
+            <a class="prev" href="@controllers.routes.QQApps.fanjijie(tag,s,page)"> 上一页</a>
+            }
+            @for(num <-page.nums){
+            @if(num==page.currentPage){
+            <span class="current">@num</span>
+            }else {
+            <a href="@@controllers.routes.QQApps.fanjijie(tag,s,num)">@num</a>
+            }
+            }
+            @page.next.map { page =>
+            <a class="next" href="@controllers.routes.QQApps.fanjijie(tag,s,page)">下一页 </a>
+            }
+            }
+        </div>
+    </div>
+
+    <div class="no-pro">
+        <h2>去看看还有什么值得买</h2>
+        <p></p>
+    </div>
+    <div class="bt-logo" style="padding-bottom:20px;">
+       <ul id="imgLinks">
+        <li class="item-1"><a href="http://buy.qq.com/promote/2013/66_lady.shtml?PTAG=12365.1.1" target="_blank">衣服<i></i></a></li>
+        <li class="item-2"><a href="http://buy.qq.com/tiao/bag.shtml?PTAG=12365.1.2" target="_blank">包包<i></i></a></li>
+        <li class="item-3"><a href="http://buy.qq.com/tiao/ladies.shtml#totab_d?PTAG=12365.1.3" target="_blank">美鞋<i></i></a></li>
+        <li class="item-5"><a href="http://buy.qq.com/tiao/shine.shtml?PTAG=12365.1.5" target="_blank">配饰<i></i></a></li>
+    </ul>
+    </div>
+
+</div>
+
+
+
+}

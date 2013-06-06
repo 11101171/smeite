@@ -45,4 +45,10 @@ object QQApps extends Controller {
          GoodsSQLDao.updateLoveNum(goodsId,1)
     Ok(Json.obj( "code" -> "100", "msg" ->"成功"))
   }
+
+  def  fanjijie(tag:String,s:Int,p:Int) = Action{ implicit request =>
+    var page = TagDao.findGoodsesByTagName(tag,s,p,10)
+    Ok(views.html.qqapps.fanjijie(page,tag,s))
+  }
+
 }
