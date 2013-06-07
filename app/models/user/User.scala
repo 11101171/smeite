@@ -33,6 +33,7 @@ case class User(
                  withdrawShiDou:Int,
                  tags:Option[String],
                  alipay:Option[String],
+                 intro: Option[String],
                  modifyTime:Option[Timestamp]
                  )
 
@@ -53,10 +54,11 @@ object Users extends Table[User]("user") {
   def withdrawShiDou = column[Int]("withdraw_shi_dou")
   def tags     = column[String]("tags")
   def alipay     = column[String]("alipay")
+  def intro     = column[String]("intro")
   def modifyTime = column[Timestamp]("modify_time")
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ name ~ passwd ~ email.? ~ credits ~ pic  ~ daren  ~ status ~ comeFrom ~ openId.? ~ shiDou~ withdrawCredits~ withdrawShiDou ~ tags.? ~ alipay.? ~ modifyTime.?  <>(User, User.unapply _)
-  def autoInc = id.? ~ name ~ passwd ~ email.? ~ credits ~ pic  ~ daren  ~ status ~ comeFrom ~ openId.? ~ shiDou~ withdrawCredits~ withdrawShiDou ~ tags.? ~ alipay.? ~ modifyTime.? <>(User, User.unapply _) returning id
+  def * = id.? ~ name ~ passwd ~ email.? ~ credits ~ pic  ~ daren  ~ status ~ comeFrom ~ openId.? ~ shiDou~ withdrawCredits~ withdrawShiDou ~ tags.? ~ alipay.? ~ intro.? ~ modifyTime.?  <>(User, User.unapply _)
+  def autoInc = id.? ~ name ~ passwd ~ email.? ~ credits ~ pic  ~ daren  ~ status ~ comeFrom ~ openId.? ~ shiDou~ withdrawCredits~ withdrawShiDou ~ tags.? ~ alipay.? ~ intro.? ~ modifyTime.? <>(User, User.unapply _) returning id
   def autoInc2 = name ~ passwd ~ email returning id
   def autoInc3 = name ~ comeFrom ~ openId ~ pic returning id
   /* count  */

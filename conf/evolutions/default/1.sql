@@ -1451,6 +1451,11 @@ alter table goods  change add_time click_url varchar(250);
 update goods set click_url ="";
 
 
+#2013年6月7日
+
+alter table user add intro varchar(200) ;
+
+alter table user_profile drop column  intro;
 
 #2013年6月5日
 /*
@@ -1462,6 +1467,7 @@ update goods set click_url ="";
 *  创建   site_album               小站-相册
 * 创建   site_video                小站视频
 * 创建   site_baobei               小站宝贝
+* 创建  site_theme                  小站主题
 */
 
 

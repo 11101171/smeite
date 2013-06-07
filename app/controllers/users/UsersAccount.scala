@@ -83,7 +83,7 @@ object UsersAccount  extends Controller {
     if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)
      else {
       val profile =UserDao.findProfile(user.get.id.get)
-      Ok(views.html.users.account.base(user,baseForm.fill(BaseFormData(user.get.name,user.get.email,profile.gender,profile.birth,None,None,profile.blog,profile.qq,profile.intro))))
+      Ok(views.html.users.account.base(user,baseForm.fill(BaseFormData(user.get.name,user.get.email,profile.gender,profile.birth,None,None,profile.blog,profile.qq,user.get.intro))))
     }
 
   }

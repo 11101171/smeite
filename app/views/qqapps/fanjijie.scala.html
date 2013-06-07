@@ -56,7 +56,7 @@
     @for(goods<-page.items){
 <div class="today-goods-item clearfix">
     <a href='@if(goods.clickUrl.isEmpty || goods.clickUrl.get.trim==""){@goods.detailUrl}else{@goods.clickUrl.get}' target="_blank">
-        <img class="goods-item-img" src='@(goods.pic+"_310x310.jpg")' alt="@goods.name" width="300" height="300"></a>
+        <img class="goods-item-img" src='@(goods.pic+"_310x310.jpg")' alt="@goods.name" width="300" height="@(goods.hwRate*300)"></a>
     <div class="goods-item-info">
         <h2 class="goods-item-title">
               @goods.name

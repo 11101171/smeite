@@ -180,8 +180,8 @@ object UserDao {
   /*保存基本信息*/
   def modifyBase(uid:Long,name:String,email:String,intro:String,gender:Int, birth:String,blog:String,qq:String)  = database.withSession{  implicit session:Session =>
     Cache.remove("user_"+uid)
-    (for(c <-Users if c.id === uid)yield c.name~c.email ).update((name,email))
-    (for(c<-UserProfiles if c.uid === uid)yield c.intro ~ c.birth ~ c.gender ~ c.blog ~ c.qq).update((intro,birth,gender,blog,qq))
+    (for(c <-Users if c.id === uid)yield c.name ~ c.email ~ c.intro ).update((name,email,intro))
+    (for(c<-UserProfiles if c.uid === uid)yield c.birth ~ c.gender ~ c.blog ~ c.qq).update((birth,gender,blog,qq))
   }
   /* 修改用户状态 */
   def modifyStatus(uid:Long,status:Int)= database.withSession {  implicit session:Session =>
