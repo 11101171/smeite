@@ -1,20 +1,52 @@
 @(page:models.Page[models.goods.Goods],tag:String,s:Int)
-@views.html.qqapps.template(title="反季节")(css="/assets/css/template/fanjijie.css") {
+<!doctype html>
+<html>
+<head>
+    <title>食美特，爱美食爱生活</title>
+    <meta property="wb:webmaster" content="59dcb1f27fb8d6af" />
+    <meta property="qc:admins" content="10213762651456375" />
+    <meta charset="utf-8"/>
+    <meta name="keywords" content="食美特,美食,创意,特产,礼物,居家,导购,smeite,坚果,巧克力,zakka,简约">
+    <meta name="description" content="Smeite.com致力于发现绿色安全、健康美味的食品，推荐美观实用、简约实惠的家居用品以及充满创意的好玩意。我们严格把控商品的品质，用心创造一个值得信赖的购物分享社区。我们所做的一切，就是通过我们的努力，为更多的消费者提供更有效、更有价值的购物决策建议">
+    <link rel="shortcut icon" type="image/png" href="/assets/favicon.png">
+    <link rel="stylesheet" href="/assets/css/global/global.css?v=2013052601">
+    <link rel="stylesheet" href="/assets/css/template/fanjijie.css?v=2013052601">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="/assets/js/html5.js" type="text/javascript"></script>
+    <![endif]-->
+</head>
+<body id="J_Page">
+
+<div id="page">
+    <div id="top">
+        <div class="container">
+            <div class="tag-header clearfix">
+                <div class="tag-logo"></div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="content">
 <div class="container" class="clearfix">
     <div class="tag-banner">
         <img src="/assets/ui/fanji/topbanner2.png">
     </div>
 <!--商品列表 start-->
-    <div class="day-option" id="adTypeDiv">
-        <h2>爆款<span id="adTotalNum">（30）</span></h2>
-       <ul id="adTypeList">
-        <li class="c"><a href="#nolink" data-typeid="0" data-cpcpos="4,6,7,9,20,29,30" loaded="1"><i></i>全部</a></li>
-        <li class=""><a href="#nolink" data-typeid="1" data-cpcpos="2,8;12;13;14" loaded="1"><i></i>衣服</a></li>
-        <li class=""><a href="#nolink" data-typeid="2" data-cpcpos="6;7;8" loaded="1"><i></i>包包</a></li>
-        <li class=""><a href="#nolink" data-typeid="3" data-cpcpos="6;7;8" loaded="1"><i></i>鞋子</a></li>
-        <li class=""><a href="#nolink" data-typeid="4" data-cpcpos="6;7;8" loaded="1"><i></i>配饰</a></li>
-
+    <div class="day-option">
+       <ul >
+        <li @if(tag=="反季"){class="c"}><a href='@controllers.routes.QQApps.fanjijie("反季",1,1)'><i></i>全部</a></li>
+        <li @if(tag=="反季女装"){class="c"}><a href='@controllers.routes.QQApps.fanjijie("反季女装",1,1)'><i></i>女装</a></li>
+        <li @if(tag=="反季男装"){class="c"}><a href='@controllers.routes.QQApps.fanjijie("反季男装",1,1)'><i></i>男装</a></li>
+        <li @if(tag=="反季鞋子"){class="c"}><a href='@controllers.routes.QQApps.fanjijie("反季鞋子",1,1)'><i></i>鞋子</a></li>
+        <li @if(tag=="反季品牌"){class="c"}><a href='@controllers.routes.QQApps.fanjijie("反季品牌",1,1)'><i></i>品牌</a></li>
     </ul>
+        <ul class="filter">
+            <li @if(s==1){class="c"}><a href='@controllers.routes.QQApps.fanjijie(tag,s,1)'>爆款</a></li>
+            <li @if(s==2){class="c"}><a href='@controllers.routes.QQApps.fanjijie(tag,s,1)'>最新</a></li>
+            <li @if(s==3){class="c"}><a href='@controllers.routes.QQApps.fanjijie(tag,s,1)'>最热</a></li>
+        </ul>
     </div>
 
 
@@ -92,15 +124,24 @@
     </div>
     <div class="bt-logo" style="padding-bottom:20px;">
        <ul id="imgLinks">
-        <li class="item-1"><a href="http://buy.qq.com/promote/2013/66_lady.shtml?PTAG=12365.1.1" target="_blank">衣服<i></i></a></li>
-        <li class="item-2"><a href="http://buy.qq.com/tiao/bag.shtml?PTAG=12365.1.2" target="_blank">包包<i></i></a></li>
-        <li class="item-3"><a href="http://buy.qq.com/tiao/ladies.shtml#totab_d?PTAG=12365.1.3" target="_blank">美鞋<i></i></a></li>
-        <li class="item-5"><a href="http://buy.qq.com/tiao/shine.shtml?PTAG=12365.1.5" target="_blank">配饰<i></i></a></li>
+        <li class="item-1"><a href="http://s.click.taobao.com/t?e=zGU34CA7K%2BPkqB05%2Bm7rfGGjlY60oHcc7bkKOQnNEhj6rQAFeQY%2BZRJiORaoWPYsbF2g7OUNUzw2b5r9bjTtX6NlVD8Vy4UPnYXqRLKOf51E9wXOmJgnGJxDlfUS3GoIZY%2FBqJkpPtPjoDUV4RzfBR1gp5N7Xu0rwLEsNSBqY4fmSkx0u8pukmSVQYmw%2BVh16NmTddvtEmdfLv5Tz0aHeC9B48GlsQ3R3ONtaHf857ixIr6Jj14mhw4CIrvIwvXfdMYcemtsRjNyZIcBfO9mr0ZazjN%2FQwZKNjWKPsxf6hwfNF2rL%2B2bUFqRyAiEhmd8E4uH0BNTKJnl8LHHovTKz%2BpRjAUQW6OJjt%2BLNV8kCQ%3D%3D" target="_blank">衣服<i></i></a></li>
+        <li class="item-2"><a href="http://s.click.taobao.com/t?e=zGU34CA7K%2BPkqB05%2Bm7rfGGjlY60oHcc7bkKOQnNEhj6oGdeCa8QWB40nychA6CWWoSYeqAQIqZAI%2B6HUrP3FVih9scPLbEOdg8JgLnkrxiPpRIpq4g%2BLYUEostBdZ8k2F4DNIPNj%2BU3DcgDitDg7unkHcEgSMX6sD20dltsf2wvqnlRCaa1lWDL2E2SNZmAV1n3R0P45S11gdraaUizNHxnLA6ETfn5l3zl8HWGWmPZ3JOllbgfUXej29sTN7mghpbB1rNGL5Cx%2FVuKmQp24Z6EsO%2BSVsVdcsyOt37LT%2F71c%2FLyoGsL54xp4PvzO4wMsrkcwTrP6hsJFVbgQP1ts%2BHqr50%3D" target="_blank">包包<i></i></a></li>
+        <li class="item-3"><a href="http://s.click.taobao.com/t?e=zGU34CA7K%2BPkqB05%2Bm7rfGGjlY60oHcc7bkKOQnNEhj6oaOEDsNxjCDCov7AtbwizSASNxwHc%2BStnpTEvw4otusXOprSoDZVsuHPOdowty2iQ%2FmXl%2F75To0HmF2wPeMGyeC1jfyBVgicDhEgzf6VNO0djZQb3FYDSa%2BpkopHGKBM86JJAmAW5u3U93x4LUtPdB24xs6V%2BSWutA3lRYIgRi7LqqdeI6cO3OAjabbtCGHEMK9rOkWH5EIhbq6%2Fx1KK%2B1EH0ZVjp6FLmCQqxUOYV5mkh5PCcohNsyGgd99ZJFnALWCYPgHqMEPleJdsxM4799PDWBeTeAHa0Q%3D%3D" target="_blank">美鞋<i></i></a></li>
+        <li class="item-5"><a href="http://s.click.taobao.com/t?e=zGU34CA7K%2BPkqB05%2Bm7rfGGjlY60oHcc7bkKOQnNEhj6oad1exFQ0z7zVKe38IYOPfT6w78dn%2BxzZ%2BtuKZhRnal8z%2FKTRYyjftfd5719QKVnKbuYxl4zJWLKLErSL21aTZsgVAl9chUstHH%2F89I%2FBl7hFDNapKOmqr%2FGh8XOwOxJsvliLg5e6xWJvxSZOdXqi4BDT4HotrsKKp%2Bt%2BpTVMfnw9MQ%3D" target="_blank">配饰<i></i></a></li>
     </ul>
     </div>
 
 </div>
 
 
+    </div>
 
-}
+
+
+
+
+</div>
+
+</body>
+</html>
+

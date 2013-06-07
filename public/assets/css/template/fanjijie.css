@@ -9,17 +9,7 @@
 * http://www.smeite.com/
 *
 */
-/**
-* Created by zuosanshao.
-* Email:zuosanshao@qq.com
-* @contain: 天天特价
-* @depends:
-* Since:13-3-22下午7:19
-* ModifyTime :
-* ModifyContent:
-* http://www.smeite.com/
-*
-*/
+
 #J_Page{
     background: #fff6d7;
 }
@@ -29,8 +19,8 @@
 
 /* tag header */
 .tag-header{
-    background: url("/assets/ui/fanji/header.png") repeat-x 0 0 transparent;
-    height: 112px;
+    background: url("/assets/ui/fanji/header2.png") repeat-x 0 0 transparent;
+    height: 107px;
 }
 .tag-logo{
     float: left;
@@ -68,6 +58,9 @@
     top: 0;
     _top: 1px;
     height: 25px;
+}
+.day-option .filter{
+    margin-left: 100px;
 }
 .day-option ul li {
     float: left;

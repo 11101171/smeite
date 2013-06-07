@@ -15,6 +15,8 @@ import play.api.libs.json.Json
  * ModifyContent:
  * http://www.smeite.com/
  *
+ *
+ *
  */
 object QQApps extends Controller {
 
@@ -46,8 +48,15 @@ object QQApps extends Controller {
     Ok(Json.obj( "code" -> "100", "msg" ->"成功"))
   }
 
+  /* 名称   tag
+  * 全部  反季
+  * 女装  反季女装
+  * 男装  反季男装
+  * 鞋子  反季鞋子
+  * 品牌  反季品牌
+  * */
   def  fanjijie(tag:String,s:Int,p:Int) = Action{ implicit request =>
-    var page = TagDao.findGoodsesByTagName(tag,s,p,10)
+    val page = TagDao.findGoodsesByTagName(tag,s,p,10)
     Ok(views.html.qqapps.fanjijie(page,tag,s))
   }
 
