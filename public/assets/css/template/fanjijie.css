@@ -349,42 +349,7 @@ li.item-5 a:hover i {
 }
 
 
-#footer .global-footer-inner, #footer .friend-links-inner{
-    width: 950px;
+.pagin span.current{
+    background: #CF2D2D;
+    color: white;
 }
-.global-footer-inner .more{
-    margin-left: 35px;
-    font: 500 18px/24px "Microsoft YaHei";
-    color: #EB6900;
-}
-.footer-nav li{
-    float: none;
-    display: inline-block;
-    width: 60px;
-    padding: 0 30px;
-}
-.footer-nav li a{
-    text-align: center;
-    display: block;
-    font: 500 18px/30px "Microsoft YaHei";
-    color: #666;
-}
-.footer-nav li a span{
-    display: block;
-    cursor: pointer;
-    height: 80px;
-    margin-top: 5px;
-    background: url(/assets/ui/fanji/more-sort-ico.png) no-repeat;
-}
-.footer-nav li .peishi{background-position:0 -80px;}
-.footer-nav li .xiebao{background-position:0 -160px;}
-.footer-nav li .jiaju{background-position:0 -240px;}
-.footer-nav li .zahuo{background-position:0 -320px;}
-.footer-nav li .muying{background-position:0 -400px;}
-.footer-nav li .shuma{background-position:0 -480px;}
-.footer-nav li .zhaomi{background-position:0 -560px;}
-
-
-
-
-

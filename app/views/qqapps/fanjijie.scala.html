@@ -108,7 +108,7 @@
             @if(num==page.currentPage){
             <span class="current">@num</span>
             }else {
-            <a href="@@controllers.routes.QQApps.fanjijie(tag,s,num)">@num</a>
+            <a href="@controllers.routes.QQApps.fanjijie(tag,s,num)">@num</a>
             }
             }
             @page.next.map { page =>
