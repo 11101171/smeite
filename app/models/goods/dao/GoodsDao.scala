@@ -41,11 +41,14 @@ object GoodsDao {
   def modifyRate(goodsId:Long,rate:Int) = database.withSession {  implicit session:Session =>
     (for (c<-Goodses if c.id === goodsId)yield c.rate ).update(rate)
   }
+  def modifyClickUrl(goodsId:Long,clickUrl:String)= database.withSession {  implicit session:Session =>
+    (for (c<-Goodses if c.id === goodsId)yield c.clickUrl ).update(clickUrl)
+  }
  def modifyIsMember(goodsId:Long,isMember:Boolean) =  database.withSession {  implicit session:Session =>
    (for (c<-Goodses if c.id === goodsId)yield c.isMember ).update(isMember)
  }
-  def modifyGoods(goodsId:Long,goodsName:String,isMember:Boolean,loveNum:Int,intro:String,promotionPrice:Option[String]) = database.withSession {  implicit session:Session =>
-    (for (c<-Goodses if c.id === goodsId)yield c.name~c.isMember~c.loveNum~c.intro~c.promotionPrice ).update((goodsName,isMember,loveNum,intro,promotionPrice.getOrElse("")))
+  def modifyGoods(goodsId:Long,goodsName:String,isMember:Boolean,loveNum:Int,intro:String,promotionPrice:Option[String],clickUrl:String) = database.withSession {  implicit session:Session =>
+    (for (c<-Goodses if c.id === goodsId)yield c.name~c.isMember~c.loveNum~c.intro~c.promotionPrice~c.clickUrl ).update((goodsName,isMember,loveNum,intro,promotionPrice.getOrElse(""),clickUrl))
   }
   /* 修改价格*/
   def updateTaobaoke(numIid:Long,name:String,volume:Int,price:String,promotionPrice:String,commissionRate:Int,hwRate:Float,clickUrl:String) = database.withSession {  implicit session:Session =>
