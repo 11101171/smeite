@@ -1,32 +1,20 @@
 package controllers.admin
 
-import play.api.mvc.Controller
 import play.api.mvc._
 import play.api.data.Forms._
 import play.api.data.Form
-import models.Page
 import play.api.libs.json._
-import models.goods.{ShopDao}
 import  models.goods.dao.GoodsDao
 import utils.TaobaoConfig
-import java.sql.Timestamp
-import play.api.mvc.Cookie
-import play.api.libs.json.JsArray
+
 import play.api.libs.json.JsString
 import play.api.libs.json.JsNumber
 import play.api.libs.json.JsObject
-import play.api.mvc.Cookie
 import javax.imageio.ImageIO
 import java.net.URL
 import java.awt.image.BufferedImage
-import play.api.libs.functional.syntax._
-import controllers.admin.GoodsFilterFormData
-import controllers.admin.AssessFilterFormData
-import controllers.admin.GoodsFormData
-import controllers.admin.GoodsCollectFormData
-import controllers.admin.TaobaokeItem
 import play.api.mvc.Cookie
-import controllers.admin.GoodsBatchFormData
+import models.goods.ShopDao
 
 
 case class GoodsFormData(id:Long,isMember:Boolean,loveNum:Int,intro:String,promotionPrice:Option[String],name:String,pic:String,clickUrl:String)
