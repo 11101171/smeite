@@ -19,6 +19,14 @@ import play.api.mvc.Cookie
 import javax.imageio.ImageIO
 import java.net.URL
 import java.awt.image.BufferedImage
+import play.api.libs.functional.syntax._
+import controllers.admin.GoodsFilterFormData
+import controllers.admin.AssessFilterFormData
+import controllers.admin.GoodsFormData
+import controllers.admin.GoodsCollectFormData
+import controllers.admin.TaobaokeItem
+import play.api.mvc.Cookie
+import controllers.admin.GoodsBatchFormData
 
 
 case class GoodsFormData(id:Long,isMember:Boolean,loveNum:Int,intro:String,promotionPrice:Option[String],name:String,pic:String,clickUrl:String)
@@ -28,7 +36,7 @@ case  class GoodsCollectFormData(title:String,numIid:Long,price:String,volume:In
 case  class AssessFilterFormData(checkState:Option[Int],currentPage:Option[Int])
 case class TaobaokeItem(
  title:String,
-picUrl:String,
+ picUrl:String,
  numIid:Long,
  volume:Int,
  price:String,
@@ -93,7 +101,7 @@ object Goods extends Controller {
     def writes(o:TaobaokeItem): JsValue = JsObject(
       List(
         "title" -> JsString(o.title),
-        "title" -> JsString(o.picUrl),
+        "picUrl" -> JsString(o.picUrl),
         "numIid"->JsNumber(o.numIid),
         "volume" -> JsNumber(o.volume),
         "price" -> JsString(o.price),
@@ -277,7 +285,7 @@ object Goods extends Controller {
     val width = image.getWidth
     val hwRate:Float = height.toFloat/width
  //   println("height: "+height + ",width "+ width+" : " + hwRate)
-    GoodsDao.updateTaobaoke(item.numIid,item.title,item.volume,item.price,item.promotionPrice,item.commissionRate.toFloat.toInt,hwRate,item.clickUrl)
+    GoodsDao.updateTaobaoke(item.numIid,item.title,item.picUrl,item.volume,item.price,item.promotionPrice,item.commissionRate.toFloat.toInt,hwRate,item.clickUrl)
   }
      Ok(Json.obj("code"->"100","msg"->items.length))
   }

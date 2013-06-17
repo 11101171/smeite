@@ -1457,6 +1457,8 @@ alter table user add intro varchar(200) ;
 
 alter table user_profile drop column  intro;
 
+alter table goods change click_url click_url varchar(500);
+
 #2013年6月5日
 /*
 *  创建    site   table             小站表
