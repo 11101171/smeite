@@ -1,0 +1,23 @@
+一 调整  宝贝分类
+1、调整主要分类：只分为3大类 零食 食材 居家
+2、修改 tag_group, 新增 code，根据cate，生成code。例如 零食 表示100，零食下的tag_group code 依次分为 101 102 等等，每个cate 下可以有99个tag_group
+3、修改 tag ，新增code，根据tag_group 的code，生成 tag的 code,每个 tag_group下的code 有999个tag的tag code
+
+二 调整  讨论吧功能
+
+
+
+三 新增  小站功能
+
+
+
+四 新增  食谱功能
+
+
+五 调整 导航及首页
+
+
+
+
+
+
