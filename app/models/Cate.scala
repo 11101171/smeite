@@ -12,7 +12,7 @@ package models
  */
 
 object Cate extends Enumeration {
-  val relaxFood = Value("美食")
+  val relaxFood = Value("零食")
   val localFood = Value("特产")
   val drinkFood = Value("滋补")
   val JuJia = Value("居家")
