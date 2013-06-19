@@ -16,7 +16,7 @@ import models.tag.dao.TagDao
  * ***********************
  * description:用于类的说明
  */
-case class TagGroupFormData(id:Option[Long],name:String,pic:String,cid:Int,hotIndex:Int,isVisible:Boolean, seoTitle:Option[String], seoKeywords:Option[String], seoDesc:Option[String],intro:Option[String])
+case class TagGroupFormData(id:Option[Long],name:String,pic:String,cid:Option[Int],hotIndex:Int,isVisible:Boolean, seoTitle:Option[String], seoKeywords:Option[String], seoDesc:Option[String],intro:Option[String])
 case class TagFormData(id:Option[Long],name:String,cid:Option[Int],groupId:Option[Long],groupName:Option[String],hotIndex:Int,isTop:Boolean,isHighlight:Boolean,sortNum:Int,checkState:Int, seoTitle:Option[String], seoKeywords:Option[String], seoDesc:Option[String])
 case class BatchFormData(action:Int,ids:Seq[Long],nums:Seq[Int],url:Option[String])
 case class GroupFilterFormData(name:Option[String],cid:Option[Int],isVisible:Option[Boolean],currentPage:Option[Int])
@@ -31,7 +31,7 @@ object  Tags extends Controller {
       "id"->optional(longNumber),
       "name" -> nonEmptyText,
       "pic" -> nonEmptyText,
-      "cid" -> number ,
+      "cid" -> optional(number) ,
       "hotIndex" ->number,
       "isVisible"->boolean,
       "seoTitle" -> optional(text),

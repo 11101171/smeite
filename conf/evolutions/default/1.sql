@@ -935,7 +935,7 @@ CREATE TABLE IF NOT EXISTS `tag`(
 CREATE TABLE IF NOT EXISTS `tag_group`(
        `id`                     int(10) NOT NULL AUTO_INCREMENT,
       `name`                    varchar(32) not null default '',
-  `pic`                       varchar(128) not null default '/assets/ui/tag.jpg',
+      `pic`                     varchar(128) not null default '/assets/ui/tag.jpg',
       `intro`                   varchar(128) not null default '',
       `cid`                     smallint(10) NOT NULL,
       `hot_index`               smallint(10) NOT NULL default '0',
@@ -1459,17 +1459,11 @@ alter table user_profile drop column  intro;
 
 alter table goods change click_url click_url varchar(500);
 
-#2013年6月5日
+#2013年6月19日
 /*
-*  创建    site   table             小站表
-*  创建    site_style table         小站样式表
-*  创建    site_post                小站帖子
-*  创建   site_post_reply           小站帖子回复
-* 创建    site_user                 小站用户
-*  创建   site_album               小站-相册
-* 创建   site_video                小站视频
-* 创建   site_baobei               小站宝贝
-* 创建  site_theme                  小站主题
+  `cid`                     smallint(10) NOT NULL,
+      `hot_index`               smallint(10) NOT NULL default '0',
 */
-
+alter table  tag_group change cid cid smallint(10) unsigned ;
+alter table tag_group change hot_index  code int unsigned not null default '0';
 
