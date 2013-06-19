@@ -9,9 +9,9 @@ haowanyiThemes:List[((Long,String,String,Int),List[String])]
 )
 @views.html.template(
 user,
-nav="miss",
+nav="themes",
 title = " 美食街_食美特，爱美食爱生活"
-)(css="/assets/css/template/miss.css") {
+)(css="/assets/css/template/themes.css") {
 
 <div class="container clearfix" id="themes">
 
@@ -70,7 +70,7 @@ title = " 美食街_食美特，爱美食爱生活"
     <div class="group clearfix">
         @for((((themeId,themeName,themeIntro,themeLoveNum),pics),i)<-meishiThemes.view.zipWithIndex){
         <div class="item @if((i+1)%4==0){last}">
-            <a href="@controllers.routes.Themes.subject(themeId)" title="@themeName" class="pic" target="_blank">
+            <a href="@controllers.routes.Themes.view(themeId)" title="@themeName" class="pic" target="_blank">
                 @for((pic,i)<-pics.view.zipWithIndex){
                 @if(i==0){
                 <img class="b-img" width="210" height="210" src='@(pic+"_210x210.jpg")' alt="@themeName">
@@ -81,15 +81,15 @@ title = " 美食街_食美特，爱美食爱生活"
 
             </a>
             <h3 class="ofh">
-                <a href="@controllers.routes.Themes.subject(themeId)" target="_blank">@themeName</a>
+                <a href="@controllers.routes.Themes.view(themeId)" target="_blank">@themeName</a>
             </h3>
 
             <div class="info" >@themeIntro</div>
             <a rel="followTheme" href="javascript:;" class="follow" data-type="0" data-themeid="@themeId">+ 关注</a>
 					<span class="mete pl15">
-                    <a href="@controllers.routes.Themes.likes(themeId)" class="follow-likes" target="_blank">
+
                         <em class="J_LikeCount">@themeLoveNum</em> 人关注
-                    </a>
+
                     </span>
         </div>
         }
@@ -105,7 +105,7 @@ title = " 美食街_食美特，爱美食爱生活"
         <div class="group clearfix">
             @for((((themeId,themeName,themeIntro,themeLoveNum),pics),i)<-techanThemes.view.zipWithIndex){
             <div class="item @if((i+1)%4==0){last}">
-                <a href="@controllers.routes.Themes.subject(themeId)" title="@themeName" class="pic" target="_blank">
+                <a href="@controllers.routes.Themes.view(themeId)" title="@themeName" class="pic" target="_blank">
                     @for((pic,i)<-pics.view.zipWithIndex){
                     @if(i==0){
                     <img class="b-img" width="210" height="210" src='@(pic+"_210x210.jpg")' alt="@themeName">
@@ -116,15 +116,15 @@ title = " 美食街_食美特，爱美食爱生活"
 
                 </a>
                 <h3 class="ofh">
-                    <a href="@controllers.routes.Themes.subject(themeId)" target="_blank">@themeName</a>
+                    <a href="@controllers.routes.Themes.view(themeId)" target="_blank">@themeName</a>
                 </h3>
 
                 <div class="info" >@themeIntro</div>
                 <a rel="followTheme" href="javascript:;" class="follow" data-type="0" data-themeid="@themeId">+ 关注</a>
 					<span class="mete pl15">
-                    <a href="@controllers.routes.Themes.likes(themeId)" class="follow-likes" target="_blank">
+
                         <em class="J_LikeCount">@themeLoveNum</em> 人关注
-                    </a>
+
                     </span>
             </div>
             }
@@ -141,7 +141,7 @@ title = " 美食街_食美特，爱美食爱生活"
         <div class="group clearfix">
             @for((((themeId,themeName,themeIntro,themeLoveNum),pics),i)<- zibuThemes.view.zipWithIndex){
             <div class="item @if((i+1)%4==0){last}">
-                <a href="@controllers.routes.Themes.subject(themeId)" title="@themeName" class="pic" target="_blank">
+                <a href="@controllers.routes.Themes.view(themeId)" title="@themeName" class="pic" target="_blank">
                     @for((pic,i)<-pics.view.zipWithIndex){
                     @if(i==0){
                     <img class="b-img" width="210" height="210" src='@(pic+"_210x210.jpg")' alt="@themeName">
@@ -152,15 +152,15 @@ title = " 美食街_食美特，爱美食爱生活"
 
                 </a>
                 <h3 class="ofh">
-                    <a href="@controllers.routes.Themes.subject(themeId)" target="_blank">@themeName</a>
+                    <a href="@controllers.routes.Themes.view(themeId)" target="_blank">@themeName</a>
                 </h3>
 
                 <div class="info" >@themeIntro</div>
                 <a rel="followTheme" href="javascript:;" class="follow" data-type="0" data-themeid="@themeId">+ 关注</a>
 					<span class="mete pl15">
-                    <a href="@controllers.routes.Themes.likes(themeId)" class="follow-likes" target="_blank">
+
                         <em class="J_LikeCount">@themeLoveNum</em> 人关注
-                    </a>
+
                     </span>
             </div>
             }
@@ -176,7 +176,7 @@ title = " 美食街_食美特，爱美食爱生活"
         <div class="group clearfix">
             @for((((themeId,themeName,themeIntro,themeLoveNum),pics),i)<- jujiaThemes.view.zipWithIndex){
             <div class="item @if((i+1)%4==0){last}">
-                <a href="@controllers.routes.Themes.subject(themeId)" title="@themeName" class="pic" target="_blank">
+                <a href="@controllers.routes.Themes.view(themeId)" title="@themeName" class="pic" target="_blank">
                     @for((pic,i)<-pics.view.zipWithIndex){
                     @if(i==0){
                     <img class="b-img" width="210" height="210" src='@(pic+"_210x210.jpg")' alt="@themeName">
@@ -187,15 +187,15 @@ title = " 美食街_食美特，爱美食爱生活"
 
                 </a>
                 <h3 class="ofh">
-                    <a href="@controllers.routes.Themes.subject(themeId)" target="_blank">@themeName</a>
+                    <a href="@controllers.routes.Themes.view(themeId)" target="_blank">@themeName</a>
                 </h3>
 
                 <div class="info" >@themeIntro</div>
                 <a rel="followTheme" href="javascript:;" class="follow" data-type="0" data-themeid="@themeId">+ 关注</a>
 					<span class="mete pl15">
-                    <a href="@controllers.routes.Themes.likes(themeId)" class="follow-likes" target="_blank">
+
                         <em class="J_LikeCount">@themeLoveNum</em> 人关注
-                    </a>
+
                     </span>
             </div>
             }
@@ -211,7 +211,7 @@ title = " 美食街_食美特，爱美食爱生活"
     <div class="group clearfix">
         @for((((themeId,themeName,themeIntro,themeLoveNum),pics),i)<-haowanyiThemes.view.zipWithIndex){
         <div class="item @if((i+1)%4==0){last}">
-            <a href="@controllers.routes.Themes.subject(themeId)" title="@themeName" class="pic" target="_blank">
+            <a href="@controllers.routes.Themes.view(themeId)" title="@themeName" class="pic" target="_blank">
                 @for((pic,i)<-pics.view.zipWithIndex){
                 @if(i==0){
                 <img class="b-img" width="210" height="210" src='@(pic+"_210x210.jpg")' alt="@themeName">
@@ -222,15 +222,15 @@ title = " 美食街_食美特，爱美食爱生活"
 
             </a>
             <h3 class="ofh">
-                <a href="@controllers.routes.Themes.subject(themeId)" target="_blank">@themeName</a>
+                <a href="@controllers.routes.Themes.view(themeId)" target="_blank">@themeName</a>
             </h3>
 
             <div class="info" >@themeIntro</div>
             <a rel="followTheme" href="javascript:;" class="follow" data-type="0" data-themeid="@themeId">+ 关注</a>
 					<span class="mete pl15">
-                    <a href="@controllers.routes.Themes.likes(themeId)" class="follow-likes" target="_blank">
+
                         <em class="J_LikeCount">@themeLoveNum</em> 人关注
-                    </a>
+
                     </span>
         </div>
         }
@@ -244,7 +244,7 @@ title = " 美食街_食美特，爱美食爱生活"
 }{
 <script type="text/javascript">
     seajs.use('app/init', function (init) {
-        init.load('app/miss,app/theme/theme.favor');
+        init.load('app/themes,app/theme/theme.favor');
     });
 </script>
         }

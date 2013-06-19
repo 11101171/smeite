@@ -29,7 +29,7 @@ import models.advert.dao.AdvertDao
  * description:用于类的说明
  */
 /*simple theme for json*/
-
+case class SimpleTheme(id:Long,name:String)
 object Baobei extends Controller {
   /*json*/
   implicit  object SimpleThemeFormat extends Format[SimpleTheme]{

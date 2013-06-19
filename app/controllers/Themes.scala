@@ -71,10 +71,10 @@ object Themes extends Controller {
           }
           if(theme._1.isEmpty){
            val id= ThemeDao.addTheme(theme._2,theme._3,user.get.id.get,user.get.name,theme._4.getOrElse(5),theme._5)
-            Redirect(controllers.routes.Themes.subject(id))
+            Redirect(controllers.routes.Themes.view(id))
           }else{
             ThemeDao.modifyTheme(theme._1.get,theme._2,theme._3.getOrElse("none"),theme._4.getOrElse(5),theme._5.getOrElse("none"))
-            Redirect(controllers.routes.Themes.subject(theme._1.get))
+            Redirect(controllers.routes.Themes.view(theme._1.get))
           }
 
         }
@@ -85,95 +85,25 @@ object Themes extends Controller {
   /*查看主题
   * 需要判断主题是否存在，如果不存在，则跳转到theme list页面
   * */
+
   def view(id:Long) = Users.UserAction { user => implicit request =>
-     val theme=ThemeDao.findById(id)
-     if (theme.isEmpty) Redirect(controllers.routes.Pages.miss)
-     else {
-       val themeStyle=ThemeDao.findStyle(id)
-      val goodses =ThemeDao.findGoodses(id);
-
-       /*1 判定当前用户是否存在 不存在则查询*/
-       /*2 判定theme的uid 与当前的用户是否一致，不一致则需要查询theme的作者，传到前台页面，一致，则把当前用户直接传到前台页面*/
-       if (user.isEmpty){
-          val author =  UserDao.findById(theme.get.uid)
-         val themes = UserDao.findSimplePostThemes(author.id.get)
-         Ok(views.html.themes.view(user,author,theme.get,themeStyle.get,goodses,themes))
-       }else{
-         if (user.get.id.get == theme.get.uid){
-           val themes = UserDao.findSimplePostThemes(user.get.id.get)
-           Ok(views.html.themes.view(user,user.get,theme.get,themeStyle.get,goodses,themes))
-         } else {
-           val author =  UserDao.findById(theme.get.uid)
-           val themes = UserDao.findSimplePostThemes(author.id.get)
-           Ok(views.html.themes.view(user,author,theme.get,themeStyle.get,goodses,themes))
-         }
-       }
-     }
-  }
-  def subject(id:Long) = Users.UserAction { user => implicit request =>
     val theme=ThemeDao.findById(id)
-    if (theme.isEmpty) Redirect(controllers.routes.Pages.miss)
+    if (theme.isEmpty) Redirect(controllers.routes.Pages.themes)
     else {
       val goodses =ThemeDao.findGoodses(id);
       /*1 判定当前用户是否存在 不存在则查询*/
       /*2 判定theme的uid 与当前的用户是否一致，不一致则需要查询theme的作者，传到前台页面，一致，则把当前用户直接传到前台页面*/
       if (user.isEmpty){
         val author =  UserDao.findById(theme.get.uid)
-        Ok(views.html.themes.subject(user,author,theme.get,goodses))
+        Ok(views.html.themes.view(user,author,theme.get,goodses))
       }else{
         if (user.get.id.get == theme.get.uid){
-          Ok(views.html.themes.subject(user,user.get,theme.get,goodses))
+          Ok(views.html.themes.view(user,user.get,theme.get,goodses))
         } else {
           val author =  UserDao.findById(theme.get.uid)
-          Ok(views.html.themes.subject(user,author,theme.get,goodses))
+          Ok(views.html.themes.view(user,author,theme.get,goodses))
         }
       }
-    }
-  }
-
-  /*显示该主题下的讨论*/
-  def board(id:Long,currentPage:Int)= Users.UserAction { user => implicit request =>
-    val theme=ThemeDao.findById(id)
-    if (theme.isEmpty) Redirect(controllers.routes.Pages.miss)
-    else {
-      /*1 判定当前用户是否存在 不存在则查询*/
-      /*2 判定theme的uid 与当前的用户是否一致，不一致则需要查询theme的作者，传到前台页面，一致，则把当前用户直接传到前台页面*/
-      val themeStyle=ThemeDao.findStyle(id)
-      val list=ThemeDao.findDiscusses(id,currentPage,10);
-      val users=UserDao.findThemeUsers(id,1,16);
-      if (user.isEmpty){
-        val author =  UserDao.findById(theme.get.uid)
-        Ok(views.html.themes.board(user,author,theme.get,themeStyle.get,list,users))
-      }else{
-        if (user.get.id.get == theme.get.uid){
-          Ok(views.html.themes.board(user,user.get,theme.get,themeStyle.get,list,users))
-        } else {
-          val author =  UserDao.findById(theme.get.uid)
-          Ok(views.html.themes.board(user,author,theme.get,themeStyle.get,list,users))
-        }
-      }
-
-    }
-  }
-  /*显示该主题下的喜欢的人*/
-  def likes(id:Long,currentPage:Int)= Users.UserAction { user => implicit request =>
-    val theme=ThemeDao.findById(id)
-    if (theme.isEmpty) Redirect(controllers.routes.Pages.miss)
-    else {
-      val themeStyle=ThemeDao.findStyle(id)
-      val page=UserDao.findThemeUsers(id,currentPage)
-      if (user.isEmpty){
-        val author =  UserDao.findById(theme.get.uid)
-        Ok(views.html.themes.likes(user,author,theme.get,themeStyle.get,page))
-      }else{
-        if (user.get.id.get == theme.get.uid){
-          Ok(views.html.themes.likes(user,user.get,theme.get,themeStyle.get,page))
-        } else {
-          val author =  UserDao.findById(theme.get.uid)
-          Ok(views.html.themes.likes(user,author,theme.get,themeStyle.get,page))
-        }
-      }
-
     }
   }
 

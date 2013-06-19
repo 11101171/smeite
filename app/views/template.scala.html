@@ -48,17 +48,19 @@
             <ul class="channel clearfix">
                 <li class=' @("on".when(nav == "index")) '><a href="/">首页</a></li>
                 <li><span>-</span></li>
-                <li class='@("on".when(nav == "美食"))'><a href='@controllers.routes.Pages.faxian("美食","tag",1,1)'>零食</a></li>
-                <li class='@("on".when(nav == "特产"))'><a href='@controllers.routes.Pages.faxian("特产","tag",1,1)'>食材</a></li>
+                <li class='@("on".when(nav == "零食"))'><a href='@controllers.routes.Pages.faxian("零食","tag",1,1)'>零食</a></li>
+                <li class='@("on".when(nav == "食材"))'><a href='@controllers.routes.Pages.faxian("食材","tag",1,1)'>食材</a></li>
                 <li  class='@("on".when(nav == "居家"))'><a href='@controllers.routes.Pages.faxian("居家","tag",1,1)'>居家</a></li>
-                <li><span>-</span></li>
-                <li  class='choice @("on".when(nav == "choice"))'><a href='@controllers.routes.Pages.choice'>食谱</a></li>
-                <li><span>-</span></li>
 
-                <li class='@("on".when(nav == "miss"))'>  <a href="@controllers.routes.Pages.miss" >主题</a> </li>
                 <li><span>-</span></li>
-                <li class='@("on".when(nav == "forum"))'><a href="@controllers.routes.Forums.forum(1)" >小站</a></li>
-
+                <li class="choice "><a href="/worth">今天值得买</a></li>
+				 <li class="choice "><a href="/presell">生鲜预售</a></li>
+                <li><span>-</span></li>
+                <li class='@("on".when(nav == "themes"))'>  <a href="/themes" >主题</a> </li>
+                <li><span>-</span></li>
+               <li class='@("on".when(nav == "cookbook"))'><a href="/cookbook" >食谱</a></li>
+                <li class='@("on".when(nav == "site"))'><a href="/site" >小站</a></li>
+                
             </ul>
             <!-- 签到 -->
                 <a class="btn-checkIn fr" href="javascript:;" rel="checkIn">签到</a>
@@ -101,8 +103,6 @@
                         <li class="last"><a href="@controllers.users.routes.UsersRegLogin.logout">退出</a></li>
                     </ul>
                 </div>
-
-
             }
 
 
@@ -141,8 +141,8 @@
                         </dl>
                         <dl class="how">
                             <dt>爱上食美特</dt>
-                            <dd><a href="/jie" target="_blank">爱上美食</a></dd>
-                            <dd><a href="/miss" target="_blank">爱上生活</a></dd>
+                            <dd><a href="/themes" target="_blank">爱上美食</a></dd>
+                            <dd><a href="/themes" target="_blank">爱上生活</a></dd>
                             <dd><a href="/forum/view/1" target="_blank">提建议</a></dd>
                         </dl>
                         <dl class="service">

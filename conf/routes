@@ -6,23 +6,17 @@
 
 # Home page
 GET       /                             controllers.Pages.index
-GET       /find/:cate             controllers.Pages.find(cate:String,tag="tag",p:Int ?=1)
-GET       /find/:cate/:tag        controllers.Pages.find(cate:String,tag:String,p:Int ?=1)
 GET       /faxian/:cate             controllers.Pages.faxian(cate:String,tag="tag",s:Int ?=1,p:Int ?=1)
 GET       /faxian/:cate/:tag        controllers.Pages.faxian(cate:String,tag:String,s:Int ?=1,p:Int ?=1)
-GET      /miss                            controllers.Pages.miss
-GET      /gallery/:cid                      controllers.Pages.gallery(cid:Int,s:Int ?=1,p:Int ?=1)
-
-GET      /china                             controllers.Pages.china(s:Int ?=1,p:Int ?=1)
-
-GET     /choice                            controllers.Pages.choice
-
+GET      /themes                            controllers.Pages.themes
+GET      /themes/:cid                      controllers.Pages.gallery(cid:Int,s:Int ?=1,p:Int ?=1)
+GET     /worth                            controllers.Pages.worth
+GET     /cookbook                         controllers.Pages.cookbook
 GET     /site                             controllers.Pages.site
 
+
 #qq app
-GET     /fanji/:tag                          controllers.QQApps.fanji(tag:String,s:Int ?=1,p:Int ?=1)
-GET     /fanji/view/$id<[0-9]+>                         controllers.QQApps.fanjiView(id:Long)
-POST    /fanji/addLoveNum                       controllers.QQApps.addLoveNum
+
 GET    /fanjijie/:tag                            controllers.QQApps.fanjijie(tag:String,s:Int ?=1,p:Int ?=1)
 
 # Search
@@ -121,16 +115,7 @@ GET     /user/msg/at          controllers.users.UsersMsg.at
 
 
 #goods  页面
-GET       /goods/offSell             controllers.Goods.offSell
-POST       /goods/favor                  controllers.Goods.favor
-GET       /goods/getUserThemes          controllers.Goods.getUserThemes
-POST       /goods/createTheme            controllers.Goods.createTheme
-POST      /goods/addAssess               controllers.Goods.addAssess
-POST      /goods/addComment              controllers.Goods.addComment
-GET       /goods/getComments            controllers.Goods.getComments(goodsId:Long,p:Int ?=1)
-GET      /goods/guessUserLikes          controllers.Goods.guessUserLikes
-GET      /goods/findRelativeGoodses     controllers.Goods.findRelativeGoodses(goodsId:Long)
-GET       /goods/$id<[0-9]+>            controllers.Goods.view(id:Long)
+
 
 GET       /baobei/offSell             controllers.Baobei.offSell
 POST       /baobei/favor                  controllers.Baobei.favor
@@ -150,9 +135,6 @@ GET       /baobei/$id<[0-9]+>            controllers.Baobei.view(id:Long)
 GET      /theme/edit                      controllers.Themes.edit(id:Long ?=0L)
 POST     /theme/save                      controllers.Themes.save
 GET      /theme/$id<[0-9]+>               controllers.Themes.view(id:Long)
-GET      /theme/$id<[0-9]+>/board         controllers.Themes.board(id:Long,currentPage:Int ?=1)
-GET      /theme/$id<[0-9]+>/likes         controllers.Themes.likes(id:Long,currentPage:Int ?=1)
-GET       /sub/$id<[0-9]+>                    controllers.Themes.subject(id:Long)
 POST      /theme/delete                    controllers.Themes.delete
 POST     /theme/editStyle                controllers.Themes.editStyle
 POST      /theme/quickReply               controllers.Themes.quickReply

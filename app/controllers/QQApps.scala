@@ -20,33 +20,7 @@ import play.api.libs.json.Json
  */
 object QQApps extends Controller {
 
-  def fanji(tag:String,s:Int,p:Int) = Action{ implicit request =>
-    var page:models.Page[(models.user.User,models.goods.Goods)] = null
-   page = TagDao.findSimpleTagGoodses(tag,s,p,48)
-    Ok(views.html.qqapps.fanji(page,tag,s))
-  }
 
-  def fanjiView(id:Long) = Action { implicit request =>
-    val goods=GoodsDao.findById(id)
-    if (goods.isEmpty)Ok(views.html.baobei.nofound())
-    else{
-      if(goods.get.status==0){
-        Ok(views.html.baobei.nofound())
-      }else{
-      val comments = GoodsDao.findGoodsAssesses(id,1,10)
-        val firstShareUser=UserDao.findFirstShareUser(id)
-        Ok(views.html.qqapps.fanjiView(goods.get,firstShareUser,comments))
-      }
-
-    }
-  }
-
-  /*  增加喜欢数 */
-  def  addLoveNum =  Action(parse.json) {  implicit request =>
-    val goodsId = (request.body \ "goodsId").as[Long]
-         GoodsSQLDao.updateLoveNum(goodsId,1)
-    Ok(Json.obj( "code" -> "100", "msg" ->"成功"))
-  }
 
   /* 名称   tag
   * 全部  反季

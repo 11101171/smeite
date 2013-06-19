@@ -47,36 +47,18 @@ import java.util.Calendar
 
 
   /*天天特价*/
-  def choice  = Users.UserAction {    user => implicit request =>
+  def worth  = Users.UserAction {    user => implicit request =>
      val list= AdvertDao.getGoods("tejia")
-     val cl:Calendar = Calendar.getInstance();
+     val cl:Calendar = Calendar.getInstance()
      val month=cl.get(Calendar.MONTH)
       val day =cl.get(Calendar.DAY_OF_MONTH)
-
-      Ok(views.html.pages.choice(user,month,day,list))
+      Ok(views.html.pages.worth(user,month,day,list))
   }
 
 
   /*发现
   * 1.首先判断 cate tag 是否存在，不存在，则返回到/find 页面    滋补保健 特产的标签放在美食中
   * */
-  def find(cate:String,tag:String,p:Int) = Users.UserAction{ user => implicit request =>
-    val cid:Int = cate match {
-      case "美食" => 0
-      case "特产" => 1
-      case "滋补" => 2
-      case "居家" =>3
-      case "礼物" => 4
-      case "好玩意" => 5
-      case "其他" =>6
-      case _ => 0
-    }
-    val tags = TagDao.findCateTags(cid,30)
-     var page:models.Page[((Int,Long,String,String,Int,String,Option[String],String),List[(Option[Long],Option[String],Option[String],Option[String])])] = null
-      if (tag =="tag")  page = TagDao.findCateGoodses(cid,p,48);
-      else   page = TagDao.findTagGoodses(tag,p,48)
-    Ok(views.html.pages.find(user,page,cate,tag,tags))
-  }
 
   def faxian(cate:String,tag:String,s:Int,p:Int) = Users.UserAction{ user => implicit request =>
     val cid:Int = cate match {
@@ -106,22 +88,17 @@ import java.util.Calendar
   }
 
   /* 主题 */
-  def miss =  Users.UserAction { user => implicit request =>
+  def themes =  Users.UserAction { user => implicit request =>
     val  flashes:List[models.advert.Advert] =AdvertDao.findAdverts("miss_flash")
     val meishiThemes:List[((Long,String,String,Int),List[String])]=AdvertDao.getThemes("miss_meishi_theme",4)
     val techanThemes:List[((Long,String,String,Int),List[String])]=AdvertDao.getThemes("miss_techan_theme",4)
     val zibuThemes:List[((Long,String,String,Int),List[String])]=AdvertDao.getThemes("miss_zibu_theme",4)
     val jujiaThemes:List[((Long,String,String,Int),List[String])]=AdvertDao.getThemes("miss_jujia_theme",4)
     val haowanyiThemes:List[((Long,String,String,Int),List[String])]=AdvertDao.getThemes("miss_haowanyi_theme",4)
-    Ok(views.html.pages.miss(user,flashes,meishiThemes,techanThemes,zibuThemes,jujiaThemes,haowanyiThemes))
+    Ok(views.html.pages.themes(user,flashes,meishiThemes,techanThemes,zibuThemes,jujiaThemes,haowanyiThemes))
   }
 
 
-  /*  特色中国  */
-  def china(s:Int,p:Int) =  Users.UserAction { user => implicit request =>
-   val page = TagDao.findSimpleTagGoodses("中国风",s,p,48)
-      Ok(views.html.pages.china(user,page,s))
-  }
 
   /* 导航小站  */
   def site =  Users.UserAction { user => implicit request =>
@@ -131,6 +108,11 @@ import java.util.Calendar
   def findSite = Users.UserAction { user => implicit request =>
    Ok("todo")
  }
+
+  /* 食谱  */
+  def cookbook =  Users.UserAction { user => implicit request =>
+    Ok(views.html.pages.cookbook(user))
+  }
 
 
 }

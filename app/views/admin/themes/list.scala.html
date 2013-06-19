@@ -117,7 +117,7 @@
                  <tr id="@theme.id">
                      <td><input type="checkbox" name="ids[@i]" value="@theme.id" /></td>
                      <td>@theme.id</td>
-                     <td><a href='@controllers.routes.Themes.subject(theme.id.get)'>@theme.name</a></td>
+                     <td><a href='@controllers.routes.Themes.view(theme.id.get)'>@theme.name</a></td>
                      <td>@theme.intro.getOrElse("")</td>
                      <td><a href='@controllers.users.routes.Users.home(theme.uid)'>@theme.uname</a> </td>
                      <td>@models.Cate(theme.cid)</td>

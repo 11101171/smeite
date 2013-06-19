@@ -33,10 +33,10 @@ title =  "发现喜欢_"+ cate +"_"+tag +"_食美特，爱美食爱生活"
             @for(((user,goods),i)<-page.items.view.zipWithIndex) {
             <div class="goods-item @if((i+1)%4==0){last}">
                 <div class="pic" style='height:210px '>
-                    <a href="@controllers.routes.Goods.view(goods.id.get)" target="_blank">
+                    <a href="@controllers.routes.Baobei.view(goods.id.get)" target="_blank">
                         <img width="210px" alt="@goods.name" title="@goods.name" src="@goods.pic" >
                     </a>
-                    <a  href="@controllers.routes.Goods.view(goods.id.get)" class="goods_title">@goods.name</a>
+                    <a  href="@controllers.routes.Baobei.view(goods.id.get)" class="goods_title">@goods.name</a>
 
                 </div>
                 <div class="goods-wrap">
@@ -62,9 +62,9 @@ title =  "发现喜欢_"+ cate +"_"+tag +"_食美特，爱美食爱生活"
                                     <div class="share-user">
                                         <a class="fl" href="@controllers.users.routes.Users.home(user.id.get)"><img class="avt32 fl" src="@user.pic" alt="@user.name" width="30" height="30"></a>
                                         <div class="info">
-                                            <a class="go-to-comment" href="@controllers.routes.Goods.view(goods.id.get)#J_CommentTxa" target="_blank">评论</a>
+                                            <a class="go-to-comment" href="@controllers.routes.Baobei.view(goods.id.get)#J_CommentTxa" target="_blank">评论</a>
                                             <h3><a href="@controllers.users.routes.Users.home(user.id.get)" target="_blank">@user.name</a></h3>
-                                            <a href="@controllers.routes.Goods.view(goods.id.get)" target="_blank"><p>@goods.intro</p></a>
+                                            <a href="@controllers.routes.Baobei.view(goods.id.get)" target="_blank"><p>@goods.intro</p></a>
                                         </div>
                                     </div>
                             </div>

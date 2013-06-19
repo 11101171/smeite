@@ -59,8 +59,8 @@ define(function (require,exports) {
                 event: 'mouseover'
             })
 
-        SMEITER.userId.length ? ($("#J_legend").hide(), $("#J_welcome").html('<div class="welcome"><a class="xihuan" href="http://smeite.com/find" title="发现.喜欢"></a><a class="zhuti" href="http://smeite.com/jie" title="逛美食"></a><a class="pingpai" href="http://smeite.com/miss" title="享特色"></a><a class="fenxiang" href="http://smeite.com/square" title="分享,收获"></a><a class="home" href="http://smeite.com/user/' +
-            SMEITER.userId + '" title="我的小窝~"></a></div>')) : $(".thirdLogin a").click(function () {
+        /* 这里需要调整todo  */
+        SMEITER.userId.length ? ($("#J_legend").hide(), $("#J_welcome").html('<div class="welcome"><a class="xihuan" href="http://smeite.com/find" title="发现.喜欢"></a><a class="zhuti" href="http://smeite.com/jie" title="逛美食"></a><a class="pingpai" href="http://smeite.com/miss" title="享特色"></a><a class="fenxiang" href="http://smeite.com/square" title="分享,收获"></a><a class="home" href="http://smeite.com/user/'+SMEITER.userId+'" title="我的小窝~"></a></div>')) : $(".thirdLogin a").click(function () {
             var c = $(this).attr("href");
             jQuery.smeite.util.openWin(c);
             return!1
