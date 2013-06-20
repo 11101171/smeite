@@ -2527,11 +2527,11 @@ a:hover i.ico-likes {
 }
 
 #nav .channel li.worth {
-    padding-right: 10px;
+    padding-right:20px;
     background: url(images/hot.png) no-repeat right 1px;
 }
 #nav .channel li.presell{
-    padding-right: 25px;
+    padding-right:15px;
     background: url(images/new.gif) no-repeat right 1px;
 }
 

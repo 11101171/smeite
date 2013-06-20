@@ -66,18 +66,8 @@ import java.util.Calendar
     var page:models.Page[(models.user.User,models.goods.Goods)] = null
     if (tagCode == 0 )  page = TagDao.findSimpleCateGoodses(ccid,s,p,48)
     else   page = TagDao.findSimpleTagGoodses(tagCode,s,p,48)
-    Ok(views.html.pages.faxian(user,page,ccid,tagCode,tags,s))
+    Ok(views.html.pages.faxian(user,page,cid,tagCode,tags,s))
   }
-  def faxianTag(cid:Int,tagCode:Int,s:Int,p:Int) = Users.UserAction{ user => implicit request =>
-    val ccid = cid -1
-    val tags = TagDao.findCateTags(ccid,30)
-    var page:models.Page[(models.user.User,models.goods.Goods)] = null
-    if (tagCode == 0 )  page = TagDao.findSimpleCateGoodses(ccid,s,p,48)
-    else   page = TagDao.findSimpleTagGoodses(tagCode,s,p,48)
-    Ok(views.html.pages.faxian(user,page,ccid,tagCode,tags,s))
-  }
-
-
 
   /* 主题街下的 主题分类 */
   def gallery(cid:Int,s:Int,p:Int)= Users.UserAction { user => implicit request =>
@@ -111,6 +101,11 @@ import java.util.Calendar
   /* 食谱  */
   def cookbook =  Users.UserAction { user => implicit request =>
     Ok(views.html.pages.cookbook(user))
+  }
+
+  /* 生鲜预售 */
+  def presell =  Users.UserAction { user => implicit request =>
+    Ok(views.html.pages.presell(user))
   }
 
 

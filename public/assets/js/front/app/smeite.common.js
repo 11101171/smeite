@@ -259,7 +259,7 @@ window.refresh=function(){
   //          }
    //     });
  //   }else{
-        $(window).bind("scroll",function(){
+    /*    $(window).bind("scroll",function(){
             var docScrollTop = $(document).scrollTop();
             //IOS平台如iphone、ipad、ipod不执行导航滚动
             if(!$.smeite.util.isIOS()){
@@ -267,9 +267,9 @@ window.refresh=function(){
                     $("#J_tags").addClass("tag-list-fixed")
                 }else{
                     $("#J_tags").removeClass("tag-list-fixed");
-                };
+                }
             }
-        });
+        });*/
   //  }
 
 
