@@ -63,7 +63,7 @@ GET    /user/$id<[0-9]+>/forum                   controllers.users.Users.forum(i
 GET    /user/$id<[0-9]+>/fans                    controllers.users.Users.fans(id:Long,p:Int ?=1)
 GET    /user/$id<[0-9]+>/follow                  controllers.users.Users.follow(id:Long,p:Int ?=1)
 GET    /user/$id<[0-9]+>/appraisal                  controllers.users.Users.appraisal(id:Long,p:Int ?=1)
-GET    /user/$id<[0-9]+>/site                     controllers.users.Users.sites(id:Long,p:Int ?=1)
+GET    /user/$id<[0-9]+>/site                     controllers.users.Users.site(id:Long,p:Int ?=1)
 
 
 #user 添加关注
