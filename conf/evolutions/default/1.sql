@@ -1470,3 +1470,21 @@ alter table tag_group change hot_index  code int unsigned not null default '0';
 #2013年6月20日
 alter table tag change hot_index code int unsigned not null default '0';
 alter table tag_goods add  tag_code int unsigned  not null default '0';
+/*
+
+
+1、新增数据表            小站表 site （分为几类：生活  品牌站 其他）
+2、新增数据表            小站样式表 site_style                                 (暂时不做)
+3、新增数据表            小站用户 site_user  (班长 学委 同学等)
+4、新增数据表            小站-相册 site_album 
+5、新增数据表            小站视频 site_video
+6、新增数据表            小站宝贝 site_baobei
+7、新增数据表            小站主题 site_theme
+8、新增数据表            小站帖子 site_post 
+9、新增数据表             帖子 post  （分为几个类型：食谱、普通）
+10、新增数据表            小站帖子回复 post_reply（秀厨艺，随意吐槽、提问求解）
+11、新增数据库            用户喜欢帖子 user——love-post 关系表
+
+*/
+
+
