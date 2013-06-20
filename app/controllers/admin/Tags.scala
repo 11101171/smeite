@@ -297,7 +297,7 @@ object  Tags extends Controller {
             val count = TagDao.countTag(tag.groupId.get)
             val  group= TagDao.findGroup(tag.groupId.get).get
             code = group.code*100+count+1
-            println("count "+ count +" group " + group.code)
+
           }
 
           if(tag.id.isEmpty){
@@ -305,6 +305,8 @@ object  Tags extends Controller {
           }else{
             TagDao.modifyTag(Tag(tag.id,tag.name,tag.cid,tag.groupId,tag.groupName,code,1,tag.isTop,tag.isHighlight,tag.sortNum,tag.checkState,tag.seoTitle,tag.seoKeywords,tag.seoDesc,None,None))
           }
+          /* 修改 tag 的 cid 或者 group id 后，修改 tag goods 的 cid 和 tag_code */
+          TagDao.modifyGoods(tag.name,tag.cid.getOrElse(-1),code)
           Redirect(controllers.admin.routes.Tags.list(1))
         }
       )

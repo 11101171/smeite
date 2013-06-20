@@ -60,22 +60,21 @@ import java.util.Calendar
   * 1.首先判断 cate tag 是否存在，不存在，则返回到/find 页面    滋补保健 特产的标签放在美食中
   * */
 
-  def faxian(cate:String,tag:String,s:Int,p:Int) = Users.UserAction{ user => implicit request =>
-    val cid:Int = cate match {
-      case "美食" => 0
-      case "特产" => 1
-      case "滋补" => 2
-      case "居家" =>3
-      case "礼物" => 4
-      case "好玩意" => 5
-      case "其他" =>6
-      case _ => 0
-    }
-    val tags = TagDao.findCateTags(cid,30)
+  def faxian(cid:Int,tagCode:Int,s:Int,p:Int) = Users.UserAction{ user => implicit request =>
+    val ccid = cid -1
+    val tags = TagDao.findCateTags(ccid,30)
     var page:models.Page[(models.user.User,models.goods.Goods)] = null
-    if (tag =="tag")  page = TagDao.findSimpleCateGoodses(cid,s,p,48)
-    else   page = TagDao.findSimpleTagGoodses(tag,s,p,48)
-    Ok(views.html.pages.faxian(user,page,cate,tag,tags,s))
+    if (tagCode == 0 )  page = TagDao.findSimpleCateGoodses(ccid,s,p,48)
+    else   page = TagDao.findSimpleTagGoodses(tagCode,s,p,48)
+    Ok(views.html.pages.faxian(user,page,ccid,tagCode,tags,s))
+  }
+  def faxianTag(cid:Int,tagCode:Int,s:Int,p:Int) = Users.UserAction{ user => implicit request =>
+    val ccid = cid -1
+    val tags = TagDao.findCateTags(ccid,30)
+    var page:models.Page[(models.user.User,models.goods.Goods)] = null
+    if (tagCode == 0 )  page = TagDao.findSimpleCateGoodses(ccid,s,p,48)
+    else   page = TagDao.findSimpleTagGoodses(tagCode,s,p,48)
+    Ok(views.html.pages.faxian(user,page,ccid,tagCode,tags,s))
   }
 
 

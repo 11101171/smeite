@@ -75,15 +75,15 @@ nav="index"
 </div>
 <!--main box end-->
 
-<!-- 美食 start-->
+<!-- 零食 start-->
 
 <div class="category-main clearfix">
     <div class="category">
         <dl class="first">
             <dt>
             <div class="title-wrap clearfix">
-                <h2 class="title clearfix"><a href='@controllers.routes.Pages.faxian("美食","tag",1,1)' target="_blank">美食</a></h2>
-                <div class="title-desc"><a href='@controllers.routes.Pages.faxian("美食","tag",1,1)' target="_blank">&nbsp;•&nbsp;每日精选</a></div>
+                <h2 class="title clearfix"><a href='@controllers.routes.Pages.faxian(1,0,1,1)' target="_blank">美食</a></h2>
+                <div class="title-desc"><a href='@controllers.routes.Pages.faxian(1,0,1,1)' target="_blank">&nbsp;•&nbsp;每日精选</a></div>
             </div>
             <div class="tag-wrap clearfix">
                 @Html(meishiTags.content.getOrElse(""))
@@ -155,17 +155,17 @@ nav="index"
 
 
 </div>
-<!-- 美食  end -->
+<!-- 零食  end -->
 
-<!-- 特产 start-->
+<!-- 食材 start-->
 
 <div class="category-main clearfix">
     <div class="category">
         <dl class="first">
             <dt>
             <div class="title-wrap clearfix">
-                <h2 class="title clearfix"><a href='@controllers.routes.Pages.faxian("特产","tag",1,1)' target="_blank">特产</a></h2>
-                <div class="title-desc"><a href='@controllers.routes.Pages.faxian("特产","tag",1,1)' target="_blank">&nbsp;•&nbsp;每日精选</a></div>
+                <h2 class="title clearfix"><a href='@controllers.routes.Pages.faxian(2,0,1,1)' target="_blank">食材</a></h2>
+                <div class="title-desc"><a href='@controllers.routes.Pages.faxian(2,0,1,1)' target="_blank">&nbsp;•&nbsp;每日精选</a></div>
             </div>
             <div class="tag-wrap clearfix">
                 @Html(techanTags.content.getOrElse(""))
@@ -237,7 +237,7 @@ nav="index"
 
 
 </div>
-<!-- 特产  end -->
+<!-- 食材  end -->
 
 <!-- 居家 start-->
 
@@ -246,8 +246,8 @@ nav="index"
         <dl class="first">
             <dt>
             <div class="title-wrap clearfix">
-                <h2 class="title clearfix"><a href='@controllers.routes.Pages.faxian("居家","tag",1,1)' target="_blank">居家</a></h2>
-                <div class="title-desc"><a href='@controllers.routes.Pages.faxian("居家","tag",1,1)' target="_blank">&nbsp;•&nbsp;每日精选</a></div>
+                <h2 class="title clearfix"><a href='@controllers.routes.Pages.faxian(3,0,1,1)' target="_blank">居家</a></h2>
+                <div class="title-desc"><a href='@controllers.routes.Pages.faxian(3,0,1,1)' target="_blank">&nbsp;•&nbsp;每日精选</a></div>
             </div>
             <div class="tag-wrap clearfix">
                 @Html(jujiaTags.content.getOrElse(""))
@@ -321,87 +321,7 @@ nav="index"
 </div>
 <!-- 居家  end -->
 
-<!-- 好玩意 start-->
 
-<div class="category-main clearfix">
-    <div class="category">
-        <dl class="first">
-            <dt>
-            <div class="title-wrap clearfix">
-                <h2 class="title clearfix" style="font-size: 30px"><a href='@controllers.routes.Pages.faxian("好玩意","tag",1,1)' target="_blank">好玩意</a></h2>
-                <div class="title-desc"><a href='@controllers.routes.Pages.faxian("好玩意","tag",1,1)' target="_blank">&nbsp;•&nbsp;每日精选</a></div>
-            </div>
-            <div class="tag-wrap clearfix">
-                @Html(haowanyiTags.content.getOrElse(""))
-            </div>
-            </dt>
-            @for((advert,i)<-haowanyi.view.zipWithIndex){
-            @if(i==0){
-            <dd>
-                <a href="@advert.link" title="@advert.title" target="_blank">
-                    <img src="@advert.pic" width="240" height="150" alt="@advert.title">
-                </a>
-                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span> </a> </div>
-            </dd>
-            }
-            }
-        </dl>
-
-        <dl class="second">
-            @for((advert,i)<-haowanyi.view.zipWithIndex){
-            @if(i>0 && i<4){
-            <dd>
-                <a href="@advert.link" title="@advert.title" target="_blank">
-                    <img src="@advert.pic" width="150" height="150" alt="@advert.title">
-                </a>
-                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span> </a> </div>
-            </dd>
-            }
-            }
-        </dl>
-        <dl class="third">
-            @for((advert,i)<-haowanyi.view.zipWithIndex){
-            @if(i==4){
-            <dd>
-                <a href="@advert.link" title="@advert.title" target="_blank">
-                    <img src="@advert.pic" width="310" height="310" alt="@advert.title">
-                </a>
-                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span> </a> </div>
-            </dd>
-            }
-            @if(i>4 && i<7){
-            <dd @if(i==5){class="mr10"}>
-                <a href="@advert.link" title="@advert.title" target="_blank">
-                    <img src="@advert.pic" width="150" height="150" alt="@advert.title">
-                </a>
-                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span> </a> </div>
-            </dd>
-            }
-            }
-        </dl>
-
-        <dl class="fourth last">
-            @for((advert,i)<-haowanyi.view.zipWithIndex){
-            @if(i>=7){
-
-            <dd>
-                <a href="@advert.link" title="@advert.title" target="_blank">
-                    <img src="@advert.pic" width="220" height="150" alt="@advert.title">
-                </a>
-                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span></a></div>
-            </dd>
-
-            }
-            }
-
-        </dl>
-
-    </div>
-
-
-
-</div>
-<!-- 好玩意  end -->
 
 <!-- 底部广告-->
 <div class="adv">

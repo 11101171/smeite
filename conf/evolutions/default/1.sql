@@ -1469,3 +1469,4 @@ alter table tag_group change hot_index  code int unsigned not null default '0';
 
 #2013年6月20日
 alter table tag change hot_index code int unsigned not null default '0';
+alter table tag_goods add  tag_code int unsigned  not null default '0';

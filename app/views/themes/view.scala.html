@@ -210,7 +210,7 @@ description =  theme.intro.getOrElse("食美特，爱美食爱生活")
             <h3 class="title">相关标签</h3>
             <ul class="clearfix">
                 @for(tag<-theme.tags.get.split(",")){
-                <li><a href='@controllers.routes.Pages.faxian("tag",tag,1,1)' target="_blank">@tag</a></li>
+                <li><a href='@controllers.routes.Search.search(tag,1)' target="_blank">@tag</a></li>
                 }
 
             </ul>

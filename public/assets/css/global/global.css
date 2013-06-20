@@ -2526,13 +2526,13 @@ a:hover i.ico-likes {
     /*  color: #333;*/
 }
 
-#nav .channel li.choice {
+#nav .channel li.worth {
     padding-right: 10px;
-    background: url(images/new.gif) no-repeat right 1px;
-}
-#nav .channel li.china {
-    padding-right: 25px;
     background: url(images/hot.png) no-repeat right 1px;
+}
+#nav .channel li.presell{
+    padding-right: 25px;
+    background: url(images/new.gif) no-repeat right 1px;
 }
 
 #nav .channel .on a{

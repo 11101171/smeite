@@ -48,13 +48,13 @@
             <ul class="channel clearfix">
                 <li class=' @("on".when(nav == "index")) '><a href="/">首页</a></li>
                 <li><span>-</span></li>
-                <li class='@("on".when(nav == "零食"))'><a href='@controllers.routes.Pages.faxian("零食","tag",1,1)'>零食</a></li>
-                <li class='@("on".when(nav == "食材"))'><a href='@controllers.routes.Pages.faxian("食材","tag",1,1)'>食材</a></li>
-                <li  class='@("on".when(nav == "居家"))'><a href='@controllers.routes.Pages.faxian("居家","tag",1,1)'>居家</a></li>
+                <li class='@("on".when(nav == 1))'><a href='@controllers.routes.Pages.faxian(1,0,1,1)'>零食</a></li>
+                <li class='@("on".when(nav == 2))'><a href='@controllers.routes.Pages.faxian(2,0,1,1)'>食材</a></li>
+                <li  class='@("on".when(nav == 3))'><a href='@controllers.routes.Pages.faxian(3,0,1,1)'>居家</a></li>
 
                 <li><span>-</span></li>
-                <li class="choice "><a href="/worth">今天值得买</a></li>
-				 <li class="choice "><a href="/presell">生鲜预售</a></li>
+                <li class="worth"><a href="/worth">今天值得买</a></li>
+				 <li class="presell"><a href="/presell">生鲜预售</a></li>
                 <li><span>-</span></li>
                 <li class='@("on".when(nav == "themes"))'>  <a href="/themes" >主题</a> </li>
                 <li><span>-</span></li>

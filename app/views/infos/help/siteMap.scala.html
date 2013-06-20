@@ -16,25 +16,22 @@ title = "网站地图_食美特，爱美食爱生活"
         </div>
         <div class="site-nav">
             <h3>简约生活</h3>
-            <a href="/find/美食">美食</a>
-            <a href="/find/居家">居家</a>
-            <a href="/find/礼物">礼物</a>
-            <a href="/find/好玩意">好玩意</a>
+            <a href="/faxian/1">零食</a>
+            <a href="/faxian/2">食材</a>
+            <a href="/faxian/3">居家</a>
         </div>
         <div class="site-nav">
             <h3>主题</h3>
-            <a href="/themes/0">健康美食主题</a>
-            <a href="/themes/0">特产乡情主题</a>
-            <a href="/themes/0">滋补保健主题</a>
-            <a href="/themes/0">居家生活主题</a>
-            <a href="/themes/0">礼物主题</a>
-            <a href="/themes/0">好玩意主题</a>
+            <a href="/themes/0">零食主题</a>
+            <a href="/themes/1">食材主题</a>
+            <a href="/themes/2">居家主题</a>
+
         </div>
          <div class="tags-smeite clearfix">
          <h3>所有标签</h3>
          <ul>
               @for(tag <- tags.items ){
-             <li><a class="ofh" href='@controllers.routes.Pages.faxian("tags",tag.name,1,1)'>@tag.name</a></li>
+             <li><a class="ofh" href='@controllers.routes.Pages.faxian(-1,tag.code,1,1)'>@tag.name</a></li>
              }
          </ul>
          </div>
