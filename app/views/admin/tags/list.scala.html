@@ -152,9 +152,10 @@
                     <th>ID</th>
                     <th>主分类/主题组</th>
                     <th>名称</th>
+                    <th>编码code</th>
                     <th>是否置顶</th>
                     <th>是否强调</th>
-                  <!--  <th>排序</th>-->
+
                     <th>审核状态</th>
                     <th>时间</th>
                     <th style="width: 60px;">操作</th>
@@ -167,6 +168,7 @@
                      <td>@tag.id</td>
                      <td>@if(!tag.cid.isEmpty){@models.Cate(tag.cid.get)}/@tag.groupName</td>
                      <td>@tag.name</td>
+                     <td><input type="number" name="codes[@i]" value="@tag.code"></td>
                      <td>@if(tag.isTop){<span class="label label-success">yes</span>}else{<span class="label">no</span>}</td>
                      <td>@if(tag.isHighlight){<span class="label label-success">yes</span>}else{<span class="label">no</span>}</td>
                    <!--  <td><input name="nums[@i]" value="@tag.sortNum" > </td>-->
@@ -226,24 +228,20 @@
 </div>
 
         <script type="text/javascript">
+
                          /*  选择主分类 后 显示次分类 */
                          $("#J_cid").change(function(){
-                         var cid =$(this).val()
-
-                         if(cid ==""){
-                         $("#J_groupId_opt").html(" ")
-                         }else{
-                         $.ajax({
-                         url:"/admin/tags/getSimpleGroups?cid="+cid,
-                         type:'get',
-                         dataType:'html',
-                         success:function(data){
-                         $("#J_groupId_").html(data)
-                         }
+                             var cid =$(this).val()
+                             $.ajax({
+                                 url:"/admin/tags/getSimpleGroups?cid="+cid,
+                                 type:'get',
+                                 dataType:'html',
+                                 success:function(data){
+                                     $("#J_groupId").html(data)
+                                 }
+                             })
                          })
-                         }
 
-                         })
 
               $(document).on("click",".remove",function(){
                   var tagId=$(this).data('id');

@@ -25,7 +25,7 @@ case class Tag(
                 cid:Option[Int],
                 groupId:Option[Long],
                 groupName: Option[String],
-                hotIndex:Int,
+                code:Int,
                 addNum:Int,
                 isTop:Boolean,
                 isHighlight:Boolean,
@@ -45,7 +45,7 @@ object Tags extends Table[Tag]("tag") {
   def cid = column[Int]("cid")
   def groupId = column[Long]("group_id")
   def groupName = column[String]("group_name")
-  def hotIndex     =column[Int]("hot_index")
+  def code     =column[Int]("code")
   def addNum    =column[Int]("add_num")
   def isTop = column[Boolean]("is_top")
   def isHighlight = column[Boolean]("is_highlight")
@@ -58,8 +58,8 @@ object Tags extends Table[Tag]("tag") {
   def addTime=column[Timestamp]("add_time")
 
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ name ~ cid.?  ~ groupId.? ~ groupName.? ~ hotIndex ~ addNum ~ isTop ~ isHighlight ~ sortNum ~ checkState  ~ seoTitle.? ~ seoKeywords.? ~seoDesc.?  ~ modifyTime.? ~addTime.? <>(Tag, Tag.unapply _)
-  def autoInc = id.? ~ name ~ cid.? ~ groupId.? ~ groupName.? ~ hotIndex ~ addNum ~ isTop ~ isHighlight ~ sortNum ~ checkState  ~ seoTitle.? ~ seoKeywords.? ~seoDesc.?  ~ modifyTime.? ~addTime.? <>(Tag, Tag.unapply _) returning id
+  def * = id.? ~ name ~ cid.?  ~ groupId.? ~ groupName.? ~ code ~ addNum ~ isTop ~ isHighlight ~ sortNum ~ checkState  ~ seoTitle.? ~ seoKeywords.? ~seoDesc.?  ~ modifyTime.? ~addTime.? <>(Tag, Tag.unapply _)
+  def autoInc = id.? ~ name ~ cid.? ~ groupId.? ~ groupName.? ~  code ~ addNum ~ isTop ~ isHighlight ~ sortNum ~ checkState  ~ seoTitle.? ~ seoKeywords.? ~seoDesc.?  ~ modifyTime.? ~addTime.? <>(Tag, Tag.unapply _) returning id
 
   def delete(id:Long)(implicit  session:Session)={
     (for(c<-Tags if c.id === id)yield c).delete

@@ -23,6 +23,10 @@ import java.sql.Timestamp
 object TagDao {
   lazy val database = Database.forDataSource(DB.getDataSource())
 
+  def countTag(groupId:Long) =database.withSession {  implicit session:Session =>
+    Query(Tags.filter(_.groupId === groupId).length).first
+  }
+
   def addTag(name:String) =database.withSession {  implicit session:Session =>
     (Tags.name).insert(name)
   }
@@ -48,6 +52,9 @@ object TagDao {
   }
   def modifyTagSortNum(id:Long,num:Int)=database.withSession{ implicit session:Session =>
     (for(c<-Tags if c.id === id)yield(c.sortNum)).update(num)
+  }
+  def modifyTagCode(id:Long,code:Int)=database.withSession{ implicit session:Session =>
+    (for(c<-Tags if c.id === id)yield(c.code)).update(code)
   }
   def modifyTagTopState(id:Long,isTop:Boolean)=database.withSession{ implicit session:Session =>
     (for(c<-Tags if c.id === id)yield(c.isTop)).update(isTop)
@@ -250,6 +257,9 @@ def findRelativeTagGoodses(goodsId:Long) = database.withSession{ implicit  sessi
    Page(q.take(36).list().distinct,1,1)
   }
   /* tag group */
+  def countTagGroup(cid:Int)=database.withSession {  implicit session:Session =>
+    Query(TagGroups.filter(_.cid === cid).length).first()
+  }
   def addGroup(group:TagGroup) =database.withSession {  implicit session:Session =>
     TagGroups.insert(group)
   }
@@ -279,7 +289,12 @@ def findRelativeTagGoodses(goodsId:Long) = database.withSession{ implicit  sessi
   }
 
   def findSimpleGroups(cid:Int):List[(Long, String)]=database.withSession{  implicit session:Session =>
-    ( for(c<-TagGroups  if c.cid === cid)yield(c.id~c.name)).list()
+    if(cid == -1){
+      ( for(c<-TagGroups)yield(c.id~c.name)).list()
+    }else{
+      ( for(c<-TagGroups  if c.cid === cid)yield(c.id~c.name)).list()
+    }
+
   }
 
   /*分页*/

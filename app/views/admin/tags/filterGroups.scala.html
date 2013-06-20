@@ -46,9 +46,7 @@
     <option value="@cate.id" @if(form("cid").value.getOrElse("none")==cate.id.toString){ selected="true" }>@cate</option>
             }
 </select>
-<select name="groupId" id="J_groupId">
-    <option value='@form("groupId").value'>@form("groupName").value</option>
-</select>
+
                 </div>
             </div>
 
@@ -94,6 +92,7 @@
             <option value="0">批量更新排序</option>
             <option value="1">批量可见</option>
             <option value="2">批量不可见</option>
+            <option value="3">批量更新编码</option>
         </select>
         <button  class="btn btn-info" id="J_batchAction" data-toggle="modal" data-target="#J_batchModal" >批量处理 </button>
 
