@@ -48,6 +48,7 @@
                 <label class="control-label">主题分类</label>
                 <div class="controls">
                     <select name="cid" id="cid">
+                        <option>无 </option>
                           @for(cate<-models.Cate.values.toList.sortBy(x=>x.id)){
                         <option value="@cate.id" @(if(form("cid").value.getOrElse(-1) == cate.id.toString) {"selected"})>@cate</option>
 
@@ -56,9 +57,9 @@
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="hotIndex">Hot指数</label>
+                <label class="control-label" >编码code</label>
                 <div class="controls">
-                    <input type="text" class="input-xlarge" id="hotIndex" name="hotIndex" value='@form("hotIndex").value' placeholder="hot index" required="required">
+                    <input type="text" class="input-xlarge" id="code" name="code" value='@form("code").value' placeholder="code" required="required">
                 </div>
             </div>
             <div class="control-group">

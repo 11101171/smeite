@@ -105,6 +105,7 @@
                     <th>主题分类</th>
                     <th>ID</th>
                     <th>名称</th>
+                    <th>编码code</th>
                     <th>图片</th>
                     <th>排序</th>
                     <th>状态</th>
@@ -116,11 +117,12 @@
                  @for((group,i)<- page.items.view.zipWithIndex){
                  <tr id="@group.id.get">
                      <td><input type="checkbox" name="ids[@i]" value="@group.id.get" /></td>
-                     <td>@models.Cate(group.cid)</td>
+                     <td>@if(!group.cid.isEmpty){@models.Cate(group.cid.get)}</td>
                      <td>@group.id</td>
                      <td>@group.name</td>
+                     <td><input type="number" name="codes[@i]" value="@group.code"></td>
                      <td><img src="@group.pic"></td>
-                     <td><input class="sortNum"  name="nums[@i]" value="@group.sortNum"></td>
+                     <td><input type="number" class="sortNum"  name="nums[@i]" value="@group.sortNum"></td>
                      <td>@if(group.isVisible){<span class="label label-success">yes</span>}else{<span class="label">no</span>}</td>
                      <td>@group.addTime</td>
                      <td>

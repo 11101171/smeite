@@ -16,9 +16,9 @@ import models.tag.dao.TagDao
  * ***********************
  * description:用于类的说明
  */
-case class TagGroupFormData(id:Option[Long],name:String,pic:String,cid:Option[Int],hotIndex:Int,isVisible:Boolean, seoTitle:Option[String], seoKeywords:Option[String], seoDesc:Option[String],intro:Option[String])
+case class TagGroupFormData(id:Option[Long],name:String,pic:String,cid:Option[Int],code:Int,isVisible:Boolean, seoTitle:Option[String], seoKeywords:Option[String], seoDesc:Option[String],intro:Option[String])
 case class TagFormData(id:Option[Long],name:String,cid:Option[Int],groupId:Option[Long],groupName:Option[String],hotIndex:Int,isTop:Boolean,isHighlight:Boolean,sortNum:Int,checkState:Int, seoTitle:Option[String], seoKeywords:Option[String], seoDesc:Option[String])
-case class BatchFormData(action:Int,ids:Seq[Long],nums:Seq[Int],url:Option[String])
+case class BatchFormData(action:Int,ids:Seq[Long],nums:Seq[Int],codes:Seq[Int],url:Option[String])
 case class GroupFilterFormData(name:Option[String],cid:Option[Int],isVisible:Option[Boolean],currentPage:Option[Int])
 case  class TagFilterFormData(name:Option[String],cid:Option[Int],groupId:Option[Long],checkState:Option[Int],isTop:Option[Boolean],isHighlight:Option[Boolean],currentPage:Option[Int])
 case class TagGoodsFilterFormData(name:Option[String],cid:Option[Int],checkState:Option[Int],currentPage:Option[Int])
@@ -32,7 +32,7 @@ object  Tags extends Controller {
       "name" -> nonEmptyText,
       "pic" -> nonEmptyText,
       "cid" -> optional(number) ,
-      "hotIndex" ->number,
+      "code" ->number,
       "isVisible"->boolean,
       "seoTitle" -> optional(text),
       "seoKeywords" -> optional(text),
@@ -64,6 +64,7 @@ object  Tags extends Controller {
       "action"->number,
       "ids"->seq(longNumber),
       "nums"->seq(number) ,
+      "codes"->seq(number) ,
       "url"->optional(text)
     )(BatchFormData.apply)(BatchFormData.unapply)
   )
@@ -139,6 +140,10 @@ object  Tags extends Controller {
              for(id<-group.ids){
                TagDao.modifyGroup(id,false)
              }
+           }else if(group.action == 3){
+             for((id,i)<-group.ids.view.zipWithIndex){
+               TagDao.modifyGroupCode(id,group.codes(i))
+             }
            }
           Redirect(group.url.getOrElse("/admin/tags/groupList"))
       }
@@ -158,7 +163,7 @@ object  Tags extends Controller {
         val tagGroup=TagDao.findGroup(gid);
         if(tagGroup.isEmpty) Ok(views.html.admin.tags.editGroup(manager,groupForm))
 
-        else  Ok(views.html.admin.tags.editGroup(manager,groupForm.fill(TagGroupFormData(tagGroup.get.id,tagGroup.get.name,tagGroup.get.pic,tagGroup.get.cid,tagGroup.get.hotIndex,tagGroup.get.isVisible,tagGroup.get.seoTitle,tagGroup.get.seoKeywords,tagGroup.get.seoDesc,tagGroup.get.intro))))
+        else  Ok(views.html.admin.tags.editGroup(manager,groupForm.fill(TagGroupFormData(tagGroup.get.id,tagGroup.get.name,tagGroup.get.pic,tagGroup.get.cid,tagGroup.get.code,tagGroup.get.isVisible,tagGroup.get.seoTitle,tagGroup.get.seoKeywords,tagGroup.get.seoDesc,tagGroup.get.intro))))
       }
   }
   /*保存标签组*/
@@ -168,9 +173,9 @@ object  Tags extends Controller {
     group => {
       /*如果group id 为空，则保存数据 ，否则，则update数据*/
       if(group.id.isEmpty){
-        TagDao.addGroup(TagGroup(None,group.name,group.pic,group.intro,group.cid,group.hotIndex,group.isVisible,0,group.seoTitle,group.seoKeywords,group.seoDesc,None,None))
+        TagDao.addGroup(TagGroup(None,group.name,group.pic,group.intro,group.cid,group.code,group.isVisible,0,group.seoTitle,group.seoKeywords,group.seoDesc,None,None))
       }else{
-        TagDao.modifyGroup(TagGroup(group.id,group.name,group.pic,group.intro,group.cid,group.hotIndex,group.isVisible,0,group.seoTitle,group.seoKeywords,group.seoDesc,None,None))
+        TagDao.modifyGroup(TagGroup(group.id,group.name,group.pic,group.intro,group.cid,group.code,group.isVisible,0,group.seoTitle,group.seoKeywords,group.seoDesc,None,None))
       }
       Redirect(controllers.admin.routes.Tags.groupList(1))
     }
@@ -196,7 +201,7 @@ object  Tags extends Controller {
   /*标签管理*/
   def list(currentPage:Int)=Managers.AdminAction{
     manager => implicit request =>
-      val page=TagDao.findAll(currentPage,50);
+      val page=TagDao.findAll(currentPage,50)
       Ok(views.html.admin.tags.list(manager,page))
   }
 

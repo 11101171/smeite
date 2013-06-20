@@ -267,7 +267,9 @@ def findRelativeTagGoodses(goodsId:Long) = database.withSession{ implicit  sessi
   def modifyGroup(gid:Long,visible:Boolean)= database.withSession{ implicit session:Session =>
     (for(c<-TagGroups if c.id === gid)yield(c.isVisible)).update(visible)
   }
-
+  def modifyGroupCode(gid:Long,code:Int)= database.withSession{ implicit session:Session =>
+    (for(c<-TagGroups if c.id === gid)yield(c.code)).update(code)
+  }
 
   def findGroup(id:Long):Option[TagGroup] =  database.withSession {  implicit session:Session =>
     (for(c<-TagGroups if c.id ===id)yield(c)).firstOption
