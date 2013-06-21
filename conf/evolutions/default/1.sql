@@ -1475,16 +1475,225 @@ alter table tag_goods add  tag_code int unsigned  not null default '0';
 
 1、新增数据表            小站表 site （分为几类：生活  品牌站 其他）
 2、新增数据表            小站样式表 site_style                                 (暂时不做)
-3、新增数据表            小站用户 site_user  (班长 学委 同学等)
-4、新增数据表            小站-相册 site_album 
-5、新增数据表            小站视频 site_video
-6、新增数据表            小站宝贝 site_baobei
-7、新增数据表            小站主题 site_theme
-8、新增数据表            小站帖子 site_post 
+3、新增数据表            小站用户 site_member  (班长 学委 同学等)
+4、新增数据表            小站-相册 site_album
+5、新增数据表            相册-图片  album-pic
+6、新增数据表            小站视频 site_video
+7、新增数据表            小站宝贝 site_baobei
+8、新增数据表            小站主题 site_theme                                   暂时不做
 9、新增数据表             帖子 post  （分为几个类型：食谱、普通）
 10、新增数据表            小站帖子回复 post_reply（秀厨艺，随意吐槽、提问求解）
 11、新增数据库            用户喜欢帖子 user——love-post 关系表
 
 */
 
+/*
+*  site  小站
+   创建者      uid
+   名称  name
+   站牌  logo
+   简介  intro
+   标签  tags
+   分类  cid  0 生活  1 品牌站 2 其他
+   状态  status 0 未审核  1 通过审核 2 优质
+   成员数量    member_num
+   创建时间   add_time
+*/
+DROP TABLE IF EXISTS `site`;
+CREATE TABLE `site` (
+  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `uid`                 int(10) ,
+  `title`                  varchar(64) not null,
+  `pic`                 varchar(250) not null ,
+  `intro`             varchar(200) ,
+  `tags`             varchar(200) ,
+  `cid`             tinyint  not null default  '0',
+  `status`            tinyint  not null default  '0',
+  `member_num`        smallint unsigned not null default  '1',
+  `add_time`           timestamp,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
+  /*
+   site_member         小站成员
+     sid               小站
+     uid               成员
+     member_duty        成员职务  0 普通居民 1 管理员  2 创办者
+     add_time           加入时间
+  */
+DROP TABLE IF EXISTS `site_member`;
+CREATE TABLE `site_member` (
+  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `sid`                 int(10) ,
+  `uid`                 int(10) ,
+  `member_duty`       tinyint  not null default  '0',
+  `add_time`           timestamp,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+/*
+  site_member         小站相册
+    sid               小站
+    title             相册名称
+    is_top             置顶
+    add_time           加入时间
+ */
+DROP TABLE IF EXISTS `site_album`;
+CREATE TABLE `site_album` (
+  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `sid`                 int(10) ,
+  `title`               varchar(32) ,
+  `is_top`            tinyint  not null default  '0',
+  `add_time`           timestamp,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+/*
+  site_album_pic         相册-图片
+    sid               小站
+    aid               相册
+    intro             图片说明
+    pic
+    is_top             置顶
+    add_time           加入时间
+ */
+DROP TABLE IF EXISTS `site_album_pic`;
+CREATE TABLE `site_album_pic` (
+  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `sid`                 int(10) ,
+  `aid`                 int(10) ,
+  `intro`               varchar(200) ,
+  `pic`               varchar(250) ,
+  `is_top`            tinyint  not null default  '0',
+  `add_time`           timestamp,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+/*
+  site_video         相册-图片
+    sid                   小站
+    intro                 图片说明
+    url                 视频网址
+    is_top             置顶
+    add_time           加入时间
+ */
+DROP TABLE IF EXISTS `site_video`;
+CREATE TABLE `site_video` (
+  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `sid`                 int(10) ,
+  `intro`               varchar(200) ,
+  `url`               varchar(250) ,
+  `is_top`            tinyint  not null default  '0',
+  `add_time`           timestamp,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+/*
+  site_baobei         小站-宝贝
+    sid                   小站
+    goodsId               宝贝
+    is_top               置顶
+    add_time           加入时间
+ */
+DROP TABLE IF EXISTS `site_baobei`;
+CREATE TABLE `site_baobei` (
+  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `sid`                 int(10) ,
+  `goods_id`                 int(10) ,
+  `is_top`            tinyint  not null default  '0',
+  `add_time`           timestamp,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+/*
+*  帖子  post
+   创建者      uid
+   所属小站     sid
+   分类   0 生活  1 品牌站 2 其他
+   名称  name
+   主图  logo
+   简介  intro
+   内容 content
+   标签  tags
+   额外标签  extra_tags
+   状态  status 0 草稿  1 发布
+   置顶  isTop
+   浏览次数 view_num
+   额外属性1 extra_attr1
+   额外属性2 extra_attr2
+   额外属性3 extra_attr3
+   额外属性4 extra_attr4
+   额外属性5 extra_attr5
+   额外属性6 extra_attr6
+
+   创建时间   add_time
+*/
+DROP TABLE IF EXISTS `post`;
+CREATE TABLE `post` (
+  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `uid`                 int(10) ,
+  `sid`                 int(10) ,
+  `cid`             tinyint  not null default  '0',
+  `title`                  varchar(64) not null,
+  `pic`                 varchar(250) not null ,
+  `intro`             varchar(200) ,
+  `content`             text ,
+  `tags`             varchar(200) ,
+  `extra_tags`             varchar(200) ,
+  `status`            tinyint  not null default  '0',
+  `is_top`            tinyint  not null default  '0',
+  `view_num`          int unsigned  not null default  '1',
+  `extra_attr1`             varchar(200) ,
+  `extra_attr2`             varchar(200) ,
+  `extra_attr3`             varchar(200) ,
+  `extra_attr4`             varchar(200) ,
+  `extra_attr5`             varchar(200) ,
+  `extra_attr6`             varchar(200) ,
+  `add_time`           timestamp,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+
+-- --------------------------------------------------------
+/*
+  -- 表的结构 `post_reply 帖子回复`
+     id                  表的ID
+     uid                  用户的id
+     pid                  帖子
+     quote_reply          引用的内容
+     content             回复的内容
+     check_state        审核状态
+     add_time           添加时间
+--
+*/
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `post_reply`;
+CREATE TABLE IF NOT EXISTS `post_reply`(
+  `id`                     int(10) NOT NULL AUTO_INCREMENT,
+  `uid`                    int(10) NOT NULL ,
+  `pid`                 int(10) NOT NULL ,
+  `quote_reply`             text,
+  `content`                  text ,
+  `check_state`          tinyint NOT NULL DEFAULT '0',
+  `add_time`               timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- --------------------------------------------------------
+/*
+  -- 表的结构 `user_love_post`
+     id 表的ID
+     uid 用户的id
+     pid 帖子Id
+     add_time  添加时间
+--
+*/
+
+-- --------------------------------------------------------
+DROP TABLE IF EXISTS `user_love_post`;
+CREATE TABLE `user_love_post` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `uid` int(10) NOT NULL ,
+  `pid` int(10) NOT NULL ,
+  `add_time` timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
