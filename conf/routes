@@ -148,8 +148,12 @@ POST    /theme/checkThemeLoveState            controllers.Themes.checkThemeLoveS
 
 
 #小站页面
-GET    /site/$id<[0-9]+>                        controllers.Sites.view(id:Long)
+GET    /site/edit                       controllers.Sites.editSite(id:Long ?=0)
+GET    /site/$id<[0-9]+>                        controllers.Sites.site(id:Long)
+
+GET     /site/post/edit                           controllers.Sites.editPost(id:Long ?=0)
 GET    /site/$sid<[0-9]+>/post/$pid<[0-9]+>     controllers.Sites.post(sid:Long,pid:Long)
+
 
 
 #info 信息页面 新年 公告，帮助中心
