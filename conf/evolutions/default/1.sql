@@ -1607,7 +1607,7 @@ CREATE TABLE `site_baobei` (
 *  帖子  post
    创建者      uid
    所属小站     sid
-   分类   0 生活  1 品牌站 2 其他
+   分类   0 食谱  1 食材 2 其他
    名称  name
    主图  logo
    简介  intro
