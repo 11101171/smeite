@@ -104,9 +104,8 @@
     height:180px;
  }
 .manager .owner{
-    float: left;
     padding-left: 8px;
-    width: 50px;
+
 }
 .manager .more,.recommend .more{
     float: right;
@@ -120,16 +119,16 @@
 .manager .owner li {
     float: left;
     width: 45px;
-    height:45px;
+    height: 45px;
     overflow: hidden;
     margin-bottom: 6px;
+    margin-right: 10px;
 }
 .manager li.last{
     margin-bottom: 0;
 }
 .manager .join{
     float: left;
-    width: 160px;
     margin-top: 15px;
 }
 .manager .join .love-num{
@@ -141,6 +140,8 @@
 .manager .join .follow ,.manager .join .invite {
     text-align: center;
     margin-bottom: 15px;
+    float: left;
+    margin-right: 15px;
 }
 .manager .join .follow-btn{
     width: 80px;
@@ -177,6 +178,76 @@
  .recommend li.last{
      padding-bottom: 0;
  }
+ /*site nav end*/
+/* site media start */
+.site-media{
+    background-color: #fff;
+    height: 260px;
+    padding: 20px 15px;
+}
+.site-media  a.add{
+    display: block;
+}
+.site-media .site-baobei,.site-media .site-pic{
+    float: left;
+     width: 275px;
+    margin-right: 20px;
+
+}
+.site-media .site-baobei a.add{
+    border: 1px dashed #ccc;
+    width:273px ;
+    height: 258px;
+    background: #fff;
+}
+.site-media .site-pic{
+    float: left;
+    width: 275px;
+    margin-right: 20px;
+
+}
+.site-media .site-pic a.add{
+    border: 1px dashed #ccc;
+    width:273px ;
+    height: 258px;
+    background: #fff;
+}
+.site-media  a.add:hover{
+    border: 1px dashed #333;
+}
+.site-media .site-video{
+    float: left;
+    width: 360px;
+}
+.site-media .site-video a.add{
+    border: 1px dashed #ccc;
+    float: left;
+    width: 358px;
+    height: 258px;
+}
+.site-media .ico-baobei,.site-media .ico-pic,.site-media .ico-video{
+    height: 22px;
+    line-height: 22px;
+    padding: 0 0 0 22px;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+    zoom: 1;
+    background: url(images/widget_site.png) no-repeat -2222px -136px;
+    margin-right: 5px;
+}
+.site-media .ico-baobei,.site-media .ico-pic{
+    height: 58px;
+    line-height: 58px;
+    padding-left: 64px;
+    background-position: 7px -998px;
+}
+.site-media .site-video .ico-video{
+    height: 58px;
+    line-height: 58px;
+    padding-left: 64px;
+    background-position: -105px -995px;
+}
 
 /*site-posts  site-filter*/
 .site-filter{
@@ -193,12 +264,13 @@
     border-right: 5px solid #5c6f09;
     height: 20px;
     line-height: 20px;
+    margin-right: 15px;
     padding: 0 7px;
     color: #fff;
     display: inline;
 }
 
-.site-filter i {
+.site-filter i{
     width: 980px;
     height: 20px;
     display: inline-block;
