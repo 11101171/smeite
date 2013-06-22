@@ -55,8 +55,8 @@ title = "美食街,特色馆_食美特，爱美食爱生活"
         <div class="filter-wrap clearfix">
             <h2>@models.Cate(cid)</h2>
             <div class="theme-filter">
-                <a type="list_new_most" href='@controllers.routes.Pages.gallery(cid,1,1)'  @if(s==1){class=" current"}><span>最新</span></a>
-                <a type="list_hot_most"  href='@controllers.routes.Pages.gallery(cid,2,1)'  @if(s==2){class=" current"}><span>最热</span></a>
+                <a  href='@controllers.routes.Pages.gallery(cid,1,1)'  @if(s==1){class=" current"}><span>最新</span></a>
+                <a   href='@controllers.routes.Pages.gallery(cid,2,1)'  @if(s==2){class=" current"}><span>最热</span></a>
             </div>
             <i></i>
         </div>

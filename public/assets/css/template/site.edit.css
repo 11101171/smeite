@@ -1,0 +1,57 @@
+/**
+ * Created by zuosanshao.
+ * User: smeite.com
+ * Email:zuosanshao@qq.com
+ * @description: 
+ * @depends: 
+ * Includes:
+ * Since: 13-6-22  上午9:40
+ * ModifyTime : 
+ * ModifyContent:   for siteEdit.scala.html
+ * http://www.smeite.com/
+ *
+ */
+.site-edit{
+    min-height: 500px;
+    padding: 30px;
+    background: white;
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.site-edit h2 {
+    margin-bottom: 20px;
+    padding: 0 0 20px 0;
+    border-bottom: 1px dotted #D1D1D1;
+    font-size: 18px;
+    line-height: 1.2;
+}
+.fm-item {
+    float: left
+}
+
+.fm-item p {
+    padding: 5px 0 0 0;
+    color: #999
+}
+
+.fm-item .b-input, .intro-txa {
+    width: 360px
+}
+
+.intro-txa {
+    height: 100px
+}
+
+.fm-item select {
+    width: 180px;
+    margin-right: 12px
+}
+.fm-item .uploadImg{position:relative;height:28px;/*padding-bottom:12px;border-bottom:1px dotted #ddd;*/}
+.fm-item .upload-cover{width:105px;}
+.fm-item .upload-btn{ position:absolute;top:0px;left:0px;filter:alpha(opacity=0);opacity:0;z-index:698;display:block;width:105px;height:28px; cursor:pointer;}
+
+ .fm-item p.fl{
+     padding-left: 15px;
+ }

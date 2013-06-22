@@ -3,22 +3,86 @@
 user,
 nav="site",
 title =  "食美特，不一样的生活"
-)(css="/assets/css/template/china.css") {
+)(css="/assets/css/template/site.edit.css") {
 
-<div class="container clearfix" id="china">
-
-
+<div class="container clearfix" id="home">
 
 
+    <!--nav  end -->
 
-</div>
+        <div class="site-edit clearfix">
+            <h2>申请小站</h2>
+            <div  >
+                <form id="J_TopicEditFm" class="edit-form" method="post" action="@controllers.routes.Themes.save">
+                    <input type="hidden" name="id" value=''>
+
+                    <div class="form-row clearfix">
+                        <label><span class="rc">*</span>标题：</label>
+                        <div class="fm-item">
+                            <input id="J_TopicTitle" name="name" class="b-input" type="text" value='' required="required">
+                            <p>还可以输入<em id="J_TitleNum"></em>字</p>
+                        </div>
+                    </div>
+                    <div class="form-row clearfix">
+                        <label>介绍：</label>
+                        <div class="fm-item">
+                            <textarea id="J_TopicIntro" class="b-textarea intro-txa" name="intro"></textarea>
+                            <p>还可以输入<em id="J_IntroNum"></em>字</p>
+                        </div>
+                    </div>
+                    <div class="form-row clearfix">
+                        <label>分类：</label>
+                        <div class="fm-item">
+                            <select id="J_SelCag" name="cid">
+                                <option value="">选择分类</option>
+                                @for(c<-models.site.SiteCate.values.toList.sortBy(x=>x.id)){
+                                <option value="@c.id" >@c</option>
+
+
+                                }
+
+                            </select>
+
+                            <p>选择相应的分类，让大家更容易找到你的小站</p>
+
+                        </div>
+                    </div>
+
+                    <div class="form-row clearfix">
+                        <label>上传图片：</label>
+                        <div class="fm-item">
+                                    <input type="button" value="上传本地图片" class="bbl-btn upload-cover">
+                                    <input type="file" class="upload-btn" id="J_LocalImgFormSubmit" name="filedata">
+                                    <p  class="fl">支持GIF、JPG、PNG,大小不超过2M</p>
+                        </div>
+                    </div>
+
+                    <div class="form-row clearfix">
+                        <label>标签：</label>
+                        <div class="fm-item">
+                            <input type="text" class="b-input" name="tags" id="J_TopicTags"  value=''>
+                            <p>多个标签用逗号隔开</p>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label>&nbsp;</label>
+                        <input type="submit" class="bbl-btn submit" value="提交申请">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
 
         }{
 <script type="text/javascript">
     seajs.use('app/init', function (init) {
-        var $ = jQuery;
 
-      init.load('app/goods/goods.find,app/goods/goods.favor');
+        init.load("app/site/site.edit");
+
     });
 </script>
 }
