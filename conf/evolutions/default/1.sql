@@ -1610,20 +1610,18 @@ CREATE TABLE `site_baobei` (
    分类   0 食谱  1 食材 2 其他
    名称  name
    主图  logo
-   简介  intro
    内容 content
    标签  tags
    额外标签  extra_tags
    状态  status 0 草稿  1 发布
    置顶  isTop
    浏览次数 view_num
-   额外属性1 extra_attr1
+   额外属性1 extra_attr1    工艺 口味  难度  主料  辅料  调料
    额外属性2 extra_attr2
    额外属性3 extra_attr3
    额外属性4 extra_attr4
    额外属性5 extra_attr5
    额外属性6 extra_attr6
-
    创建时间   add_time
 */
 DROP TABLE IF EXISTS `post`;
@@ -1631,10 +1629,9 @@ CREATE TABLE `post` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `uid`                 int(10) ,
   `sid`                 int(10) ,
-  `cid`             tinyint  not null default  '0',
-  `title`                  varchar(64) not null,
+  `cid`                tinyint  not null default  '0',
+  `title`              varchar(64) not null,
   `pic`                 varchar(250) not null ,
-  `intro`             varchar(200) ,
   `content`             text ,
   `tags`             varchar(200) ,
   `extra_tags`             varchar(200) ,

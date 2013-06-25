@@ -22,6 +22,7 @@ object Sites extends Controller {
   /* 小站帖子 */
   def post(pid:Long)= Users.UserAction { user => implicit request =>
     Ok(views.html.sites.post(user))
+  //  Ok(views.html.sites.menu(user))
   }
 
 }

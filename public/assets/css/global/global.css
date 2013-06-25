@@ -2137,7 +2137,7 @@ font-size: 18px;
     height: 34px;
     width: 34px;
     background: url(images/ico_ilike.png) no-repeat 3px -31px;
-    _background: url(images/ico_common.png) no-repeat 4px 0px;
+    _background: url(images/ico-like-common.png) no-repeat 4px 0px;
     text-indent: -9999em
 }
 
@@ -2908,6 +2908,8 @@ a.f-tencent {
 #returnTop:hover {
     background-position: 0 -65px;
 }
+
+
 
 
 
