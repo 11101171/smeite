@@ -151,8 +151,8 @@ POST    /theme/checkThemeLoveState            controllers.Themes.checkThemeLoveS
 GET    /site/edit                       controllers.Sites.editSite(id:Long ?=0)
 GET    /site/$id<[0-9]+>                        controllers.Sites.site(id:Long)
 
-GET     /site/post/edit                           controllers.Sites.editPost(id:Long ?=0)
-GET    /site/$sid<[0-9]+>/post/$pid<[0-9]+>     controllers.Sites.post(sid:Long,pid:Long)
+GET     /post/edit                           controllers.Sites.editPost(id:Long ?=0)
+GET     /post/$pid<[0-9]+>                    controllers.Sites.post(pid:Long)
 
 
 

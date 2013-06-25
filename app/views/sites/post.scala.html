@@ -3,22 +3,53 @@
 user,
 nav="site",
 title =  "食美特，不一样的生活"
-)(css="/assets/css/template/china.css") {
+)(css="/assets/css/template/site.post.css") {
 
-<div class="container clearfix" id="china">
+<div class="container clearfix" id="post">
 
 
+<!-- site 帖子 -->
+
+    <div class="post">
+        <!--  post left  about post admin -->
+        <div class="post-left">
+                   <div class="site-logo">
+                       <a><img width="180" height="180" src="/assets/temp/site.jpg"></a>
+                   </div>
+                   <h3 class="site-title"><a> xxxx xxxxx 小站</a></h3>
+
+            <div class="follow clearfix">
+                <a class="follow-btn"> + 加入小站</a>
+                <!-- <div class="followed-btn-big">已关注<span class="mr5 ml5">|</span><a rel="removefollow" data-followtype="5" data-usernick="duanyu200888" data-userid="3" href="javascript:;">取消</a></div>-->
+            </div>
+        </div>
+        <!-- post main content-->
+        <div class="post-main">
+              <h3 class="post-title"> 器世界 手工柴烧侧把壶 原创设计 品质生活 </h3>
+              <div class="post-author">
+                 <dl class="author">
+                     <dt><a><img src="/images/user/default.jpg" width="50" height="50"> </a> </dt>
+                     <dd><a>zuosanshao</a></dd>
+                     <dd>发表于<em>2013/06/24</em><em class="mr10">11:11:51</em>22人看过</dd>
+                 </dl>
+                  <a class="follow-btn">+关注</a>
+              </div>
+            <div class="post-content"></div>
+        </div>
+        <!-- post right a  -->
+        <div class="post-right">
+                sss
+        </div>
+    </div>
 
 
 
 </div>
 
-        }{
+}{
 <script type="text/javascript">
     seajs.use('app/init', function (init) {
-        var $ = jQuery;
-
-      init.load('app/goods/goods.find,app/goods/goods.favor');
+        init.load('app/site/site.post');
     });
 </script>
 }

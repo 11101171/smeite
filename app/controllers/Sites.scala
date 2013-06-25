@@ -20,7 +20,7 @@ object Sites extends Controller {
     Ok(views.html.sites.editPost(user))
   }
   /* 小站帖子 */
-  def post(sid:Long,pid:Long)= Users.UserAction { user => implicit request =>
+  def post(pid:Long)= Users.UserAction { user => implicit request =>
     Ok(views.html.sites.post(user))
   }
 
