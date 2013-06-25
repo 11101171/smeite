@@ -30,24 +30,29 @@
 .processing_nd14{background-position:0px -280px;}
 .processing_nd15{background-position:0px -300px;}
 .processing_nd16{background-position:0px -320px;}
-
+.bl1{
+    border-left:1px solid #eee;
+}
+.bt1{
+    border-top:1px solid #eee;
+}
 .post{
  margin-top: 20px;
 }
-.post .post-left{
-    float: left;
-    width: 160px;
-    margin-right:20px ;
-}
-
-.post-left .follow{
+.post .follow{
     text-align: center;
     margin: 15px auto;
 }
-.post-left .follow-btn{
+.post .follow-btn{
     width: 80px;
     text-align: center;
     float: none;
+}
+
+.post .post-left{
+    float: left;
+    width: 180px;
+    margin-right:20px ;
 }
 
 .post-left .poster{
@@ -58,12 +63,12 @@
 
 .post-left .poster a.pic{
     display: block;
-    padding: 10px 15px 0;
+    padding: 10px 0;
 }
 .post-left .poster a.pic img{
-    -moz-border-radius: 100px;
-    -webkit-border-radius: 100px;
-    border-radius: 100px;
+    -moz-border-radius: 150px;
+    -webkit-border-radius: 150px;
+    border-radius: 150px;
     behavior: url(images/PIE.htc);
 }
 .post-left .poster span{
@@ -71,27 +76,44 @@
     display: block;
     margin: 5px auto;
 }
-.post-left .post-site{
-    width: 160px;
+
+.post-left .poster-others{
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #EEE;
+    border-top:2px;
+    background: #fff;
+}
+.poster-others .posts{
+    margin-bottom: 25px;
+}
+.poster-others dt{
+    font-size: 14px;
+    margin: 0 0 10px 0;
+}
+.poster-others .posts dd{
+    padding: 0 0 0 17px;
+    height: 26px;
+    line-height: 26px;
     overflow: hidden;
-    background-color: #fff;
+    background: url(images/scene-bg.png)  no-repeat center left;
 }
-
-.post-site h3{
-    margin: 10px auto;
-    text-align: center;
+.poster-others .site dd {
+    margin: 0 0 10px 0;
+    height: 32px;
+    overflow: hidden;
 }
-.post-site .back-site{
-    margin: 10px auto;
-    text-align: center;
+.poster-others .site dd a {
+    display: block;
+    height: 32px;
+    line-height: 32px;
 }
-
-
-
-
-
-
-
+.poster-others .site dd img {
+    width: 32px;
+    height: 32px;
+    margin: 0 5px 0 0;
+}
+ /*post left end*/
 
 .post .post-main{
     float: left;
@@ -115,7 +137,7 @@
     float: left;
     height: 48px;
     border-right: 1px solid #EEE;
-    padding: 18px 0 18px 19px;
+    padding: 18px 0 18px 18px;
     border-bottom: 1px solid #EEE;
 }
 .post .menu  li strong {
@@ -153,40 +175,57 @@
 }
 .post .post-right{
     float: left;
-    width: 200px;
+    width: 180px;
 }
-.post-right .poster-others{
+
+.post-right .post-site{
+    width: 180px;
+    overflow: hidden;
+    background-color: #fff;
+    padding-bottom: 10px;
+}
+
+.post-site h3{
+    margin: 10px auto;
+    text-align: center;
+}
+.post-site .back-site{
+    margin: 10px auto;
+    text-align: center;
+}
+.post-right .site-others{
     padding: 10px 15px;
     margin-bottom: 20px;
     border: 1px solid #EEE;
     border-top:2px;
     background: #fff;
 }
-.poster-others .post{
+
+.site-others .posts{
     margin-bottom: 25px;
 }
-.poster-others dt{
+.site-others dt{
     font-size: 14px;
     margin: 0 0 10px 0;
 }
-.poster-others .post dd{
+.site-others .posts dd{
     padding: 0 0 0 17px;
     height: 26px;
     line-height: 26px;
     overflow: hidden;
     background: url(images/scene-bg.png)  no-repeat center left;
 }
-.poster-others .site dd {
+.site-others .members dd {
     margin: 0 0 10px 0;
     height: 32px;
     overflow: hidden;
 }
-.poster-others .site dd a {
+.site-others .members dd a {
     display: block;
     height: 32px;
     line-height: 32px;
 }
-.poster-others .site dd img {
+.site-others .members dd img {
     width: 32px;
     height: 32px;
     margin: 0 5px 0 0;
