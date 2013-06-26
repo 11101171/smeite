@@ -1692,7 +1692,7 @@ CREATE TABLE IF NOT EXISTS `post_extra_tag`(
   `id`                     int(10) NOT NULL AUTO_INCREMENT,
   `pid`                 int(10) NOT NULL ,
   `tag_name`             varchar(32),
-  `tag_code`              int unsigned not null default '0' ,
+  `group_name`             varchar(32),
   `group_id`              int(10) NOT NULL default '0' ,
   `check_state`          tinyint NOT NULL DEFAULT '0',
   `add_time`               timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',

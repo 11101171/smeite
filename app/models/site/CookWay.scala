@@ -27,7 +27,6 @@ object CookWay extends Enumeration {
   val   Lu =Value("卤")
   val   Jiang =Value("酱")
   val   Hui =Value("烩")
-  val   Bao =Value("爆")
   val   Qiang =Value("炝")
   val   Liu =Value("熘")
   val   Xun =Value("熏")

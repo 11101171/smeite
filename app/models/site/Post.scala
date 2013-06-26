@@ -2,13 +2,7 @@ package models.site
 
 import java.sql.Timestamp
 import scala.slick.driver.MySQLDriver.simple._
-/**
- * Created with IntelliJ IDEA.
- * User: Administrator
- * Date: 13-6-26
- * Time: 下午3:19
- * To change this template use File | Settings | File Templates.
- */
+
 case  class Post(
                   id: Option[Long],
                   uid:Long,
@@ -42,12 +36,12 @@ object Posts extends Table[Post]("post") {
   def status = column[Int]("status")
   def isTop = column[Int]("is_top")
   def viewNum = column[Int]("view_num")
-  def extraAttr1 = column[Int]("extra_attr1")
-  def extraAttr2 = column[Int]("extra_attr2")
-  def extraAttr3 = column[Int]("extra_attr3")
-  def extraAttr4 = column[Int]("extra_attr4")
-  def extraAttr5 = column[Int]("extra_attr5")
-  def extraAttr6 = column[Int]("extra_attr6")
+  def extraAttr1 = column[String]("extra_attr1")
+  def extraAttr2 = column[String]("extra_attr2")
+  def extraAttr3 = column[String]("extra_attr3")
+  def extraAttr4 = column[String]("extra_attr4")
+  def extraAttr5 = column[String]("extra_attr5")
+  def extraAttr6 = column[String]("extra_attr6")
   def addTime=column[Timestamp]("add_time")
 
   // Every table needs a * projection with the same type as the table's type parameter
