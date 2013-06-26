@@ -27,6 +27,10 @@
     font-size: 18px;
     line-height: 1.2;
 }
+.col-left{
+    float:left;
+    width: 520px;
+}
 .fm-item {
     float: left
 }
@@ -55,3 +59,46 @@
  .fm-item p.fl{
      padding-left: 15px;
  }
+
+ .fm-item .type {
+     font-size: 14px;
+     display: inline-block;
+     padding: 2px 10px;
+     margin:5px 15px 5px auto;
+     background: #ddd;
+     -moz-border-radius: 15px;
+     -webkit-border-radius: 15px;
+     border-radius: 15px;
+     behavior: url(PIE.htc);
+ }
+.fm-item  .type.active {
+    background: #449acd;
+    color: #fff;
+    border-radius: 15px;
+    behavior: url(../js/PIE.htc);
+}
+.fm-item .type:hover{
+text-decoration: none;
+    background: #1c82bf;
+    color: #fff;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    behavior: url(PIE.htc);
+
+}
+ .col-right{
+     width: 300px;
+    float: right;
+ }
+ .col-right .about {
+     border-top: 4px solid #000;
+     padding: 20px;
+     border-right:1px solid #eee;
+     border-left:1px solid #eee;
+     border-bottom: 1px solid #eee;
+ }
+.col-right .about .bd {
+    color: #aaa;
+    margin-top: 20px;
+}
