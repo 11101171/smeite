@@ -1634,7 +1634,6 @@ CREATE TABLE `post` (
   `pic`                 varchar(250) not null ,
   `content`             text ,
   `tags`             varchar(200) ,
-  `extra_tags`             varchar(200) ,
   `status`            tinyint  not null default  '0',
   `is_top`            tinyint  not null default  '0',
   `view_num`          int unsigned  not null default  '1',
@@ -1674,6 +1673,31 @@ CREATE TABLE IF NOT EXISTS `post_reply`(
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+-- --------------------------------------------------------
+/*
+  -- 表的结构 `post_extra_tag 帖子标签`
+     id                  表的ID
+	  pid                  帖子
+     tag_name            标签
+     tag_code            
+     group_id         标签组 id
+     check_state        审核状态
+     add_time           添加时间
+--
+*/
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `post_extra_tag`;
+CREATE TABLE IF NOT EXISTS `post_extra_tag`(
+  `id`                     int(10) NOT NULL AUTO_INCREMENT,
+  `pid`                 int(10) NOT NULL ,
+  `tag_name`             varchar(32),
+  `tag_code`              int unsigned not null default '0' ,
+  `group_id`              int(10) NOT NULL default '0' ,
+  `check_state`          tinyint NOT NULL DEFAULT '0',
+  `add_time`               timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 /*
