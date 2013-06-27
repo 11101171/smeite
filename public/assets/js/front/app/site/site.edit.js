@@ -13,9 +13,8 @@
 
 define(function(require, exports) {
     var $ = jQuery = require("jquery");
-
-
-
+  var Uploader = require("module/upload")
+    var picFileVal = "";
         function validata(){
             if (!/\.(gif|jpg|png|jpeg|bmp)$/i.test(picFileVal)) {
                 alert('请上传标准图片文件,支持gif,jpg,png,jpeg.');
@@ -25,26 +24,12 @@ define(function(require, exports) {
         }
         //返回提交成功后的操作
         window.publishPicSuccess =  function(code, picType, picSrc){
+                      if(code =="100") {
+                          $("#J_LocalImg").val(picSrc)
+                      }else{
+                          alert("亲,上传失败了, 重新提交试试！");
+                      }
 
-            switch(code){
-                case "100" : //成功
-                    //图片获取成功
-                    switch(picType){
-                        case "themeBanner" :
-                            UserTheme.themeBanner.css("backgroundImage", 'url("' + picSrc + '")');
-                            $("#J_HeaderPicBtn").data("src", picSrc);
-                            break;
-                        case "themeBg" :
-                            UserTheme.page.css("backgroundImage", 'url("' + picSrc + '")');
-                            $("#J_PagePicBtn").data("src", picSrc);
-                            break;
-                    }
-
-                    break;
-                case "101" : //程序异常
-                    alert("亲,上传失败了, 重新提交试试！");
-                    break;
-            }
         }
         window.submitPic = function(obj, rangeType){
             if ($(obj).data("isSubmit") != 1){
@@ -52,10 +37,9 @@ define(function(require, exports) {
             }
             function submitRun(){
                 $(obj).data("isSubmit", 1);
-                var $picUploadTarget = $("#" + rangeType + "picUploadTarget");
+              //  var $picUploadTarget = $("#" + rangeType + "picUploadTarget");
                 picFileVal = $(obj).val();
                 $(obj).closest('form').submit();
-
                 if (validata()) {
                     $(obj).closest('form').submit();
                 }
@@ -65,6 +49,26 @@ define(function(require, exports) {
         }
 
     $(function(){
+        /* 上传图片*/
+        var uploader = new Uploader({
+            trigger: '#J_uploadImage',
+            name: 'fileData',
+            action: '/ajaxImage',
+            accept: 'image/*',
+            data: {'xsrf': 'hash'},
+            error: function(file) {
+                alert(file);
+            },
+            success: function(data) {
+                if(data.code="100"){
+                    $("#J_uploadImg").val(data.src)
+                    $("#J_uploadImgShow").attr("src",data.src)
+                    alert(data.src)
+                }else{
+                    alert(data.message)
+                }
+            }
+        });
         //限制输入字数
         $.smeite.wordCount.init($("#J_TopicTitle"),$("#J_TitleNum"),32);
         $.smeite.wordCount.init($("#J_TopicIntro"),$("#J_IntroNum"),200);
