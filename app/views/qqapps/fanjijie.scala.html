@@ -58,7 +58,7 @@
 <div class="today-goods-item clearfix">
 
 
-    <a  href="javascript:void(0);" onclick="fusion2.nav.open({url : '@goods.clickUrl.get'}); return false;">
+    <a  href="javascript:void(0);" onclick="fusion2.nav.open({url : '@goods.clickUrl.getOrElse(goods.detailUrl)'}); return false;">
         <img class="goods-item-img" src='@(goods.pic+"_310x310.jpg")' alt="@goods.name" width="300" height="@(goods.hwRate*300)"></a>
     <div class="goods-item-info">
         <h2 class="goods-item-title">
@@ -67,13 +67,13 @@
         </h2>
         <div class="goods-item-desc">
             <i class="quotation-marks"></i>
-            <a   class="desc-txt" href="javascript:void(0);" onclick="fusion2.nav.open({url : '@goods.clickUrl.get'}); return false;">
+            <a   class="desc-txt" href="javascript:void(0);" onclick="fusion2.nav.open({url : '@goods.clickUrl.getOrElse(goods.detailUrl)'}); return false;">
                 @goods.intro
             </a>
 
         </div>
         <div class="goods-item-buy clearfix">
-            <a  class="goods-item-buy-btn clearfix"  href="javascript:void(0);" onclick="fusion2.nav.open({url : '@goods.clickUrl.get'}); return false;">
+            <a  class="goods-item-buy-btn clearfix"  href="javascript:void(0);" onclick="fusion2.nav.open({url : '@goods.clickUrl.getOrElse(goods.detailUrl)'}); return false;">
 
                 @if(goods.promotionPrice.isEmpty){
                 <span class="current-price"> ¥@goods.price</span>
@@ -92,7 +92,7 @@
             </a>
             <div class="others-wrap">
                 <span class="want-to-buy">有<i>@goods.loveNum</i>人想买</span>
-                <a  class="others-say"  href="javascript:void(0);" onclick="fusion2.nav.open({url : '@goods.clickUrl.get'}); return false;">看看买过的人怎么说&gt;&gt;</a>
+                <a  class="others-say"  href="javascript:void(0);" onclick="fusion2.nav.open({url : '@goods.clickUrl.getOrElse(goods.detailUrl)'}); return false;">看看买过的人怎么说&gt;&gt;</a>
             </div>
         </div>
     </div>
@@ -132,6 +132,10 @@
         <li class="item-3"><a href="javascript:void(0);" onclick="fusion2.nav.open({url : 'http://s.click.taobao.com/t?e=zGU34CA7K%2BPkqB05%2Bm7rfGGjlY60oHcc7bkKOQnNEhj6oaOEDsNxjCDCov7AtbwizSASNxwHc%2BStnpTEvw4otusXOprSoDZVsuHPOdowty2iQ%2FmXl%2F75To0HmF2wPeMGyeC1jfyBVgicDhEgzf6VNO0djZQb3FYDSa%2BpkopHGKBM86JJAmAW5u3U93x4LUtPdB24xs6V%2BSWutA3lRYIgRi7LqqdeI6cO3OAjabbtCGHEMK9rOkWH5EIhbq6%2Fx1KK%2B1EH0ZVjp6FLmCQqxUOYV5mkh5PCcohNsyGgd99ZJFnALWCYPgHqMEPleJdsxM4799PDWBeTeAHa0Q%3D%3D'}); return false;" >美鞋<i></i></a></li>
         <li class="item-5"><a href="javascript:void(0);" onclick="fusion2.nav.open({url : 'http://s.click.taobao.com/t?e=zGU34CA7K%2BPkqB05%2Bm7rfGGjlY60oHcc7bkKOQnNEhj6oad1exFQ0z7zVKe38IYOPfT6w78dn%2BxzZ%2BtuKZhRnal8z%2FKTRYyjftfd5719QKVnKbuYxl4zJWLKLErSL21aTZsgVAl9chUstHH%2F89I%2FBl7hFDNapKOmqr%2FGh8XOwOxJsvliLg5e6xWJvxSZOdXqi4BDT4HotrsKKp%2Bt%2BpTVMfnw9MQ%3D'}); return false;">配饰<i></i></a></li>
     </ul>
+    </div>
+
+    <div class="footer">
+        商务合作 QQ：1469909930  客服邮箱：smeite@@qq.com 用户讨论群：319962802
     </div>
 
 </div>
