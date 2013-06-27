@@ -13,10 +13,75 @@
 
 define(function(require, exports) {
     var $ = jQuery = require("jquery");
+
+
+
+        function validata(){
+            if (!/\.(gif|jpg|png|jpeg|bmp)$/i.test(picFileVal)) {
+                alert('请上传标准图片文件,支持gif,jpg,png,jpeg.');
+                return false;
+            }
+            return true;
+        }
+        //返回提交成功后的操作
+        window.publishPicSuccess =  function(code, picType, picSrc){
+
+            switch(code){
+                case "100" : //成功
+                    //图片获取成功
+                    switch(picType){
+                        case "themeBanner" :
+                            UserTheme.themeBanner.css("backgroundImage", 'url("' + picSrc + '")');
+                            $("#J_HeaderPicBtn").data("src", picSrc);
+                            break;
+                        case "themeBg" :
+                            UserTheme.page.css("backgroundImage", 'url("' + picSrc + '")');
+                            $("#J_PagePicBtn").data("src", picSrc);
+                            break;
+                    }
+
+                    break;
+                case "101" : //程序异常
+                    alert("亲,上传失败了, 重新提交试试！");
+                    break;
+            }
+        }
+        window.submitPic = function(obj, rangeType){
+            if ($(obj).data("isSubmit") != 1){
+                submitRun();
+            }
+            function submitRun(){
+                $(obj).data("isSubmit", 1);
+                var $picUploadTarget = $("#" + rangeType + "picUploadTarget");
+                picFileVal = $(obj).val();
+                $(obj).closest('form').submit();
+
+                if (validata()) {
+                    $(obj).closest('form').submit();
+                }
+                $(obj).data("isSubmit", 0);
+                return false;
+            }
+        }
+
     $(function(){
         //限制输入字数
         $.smeite.wordCount.init($("#J_TopicTitle"),$("#J_TitleNum"),32);
         $.smeite.wordCount.init($("#J_TopicIntro"),$("#J_IntroNum"),200);
+
+        /* select 选择*/
+        $(".type").click(function(){
+            var $this =$(this)
+            $(this).siblings().removeClass("active")
+            $(this).addClass("active")
+            $("#J_cid").val($(this).data("id"))
+            if($this.data("type")=="sifangcai"){
+                $this.siblings(".sub-item").show()
+            }else{
+                $this.siblings(".sub-item").hide()
+            }
+        })
+
         //表单校验
         var $topicTitle = $("#J_TopicTitle"),
             $topicIntro = $("#J_TopicIntro");

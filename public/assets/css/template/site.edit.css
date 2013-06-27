@@ -63,6 +63,7 @@
      padding-left: 15px;
  }
  .fm-item .sub-item{
+    display: none;
      width: 520px;
      padding: 10px 0;
      background-color: #f5f5f5;
@@ -110,6 +111,7 @@ text-decoration: none;
 
 }
  .col-right{
+     margin-right: 50px;
      width: 300px;
     float: right;
  }
@@ -125,5 +127,5 @@ text-decoration: none;
     margin-top: 20px;
 }
 #J_GuangEditorIframe{
-    height: 350px;
+    height: 250px;
 }
