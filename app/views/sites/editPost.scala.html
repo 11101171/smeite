@@ -16,7 +16,7 @@ title =  "食美特，不一样的生活"
                 <div class="form-row clearfix">
                     <label><span class="rc">*</span>标题：</label>
                     <div class="fm-item">
-                        <input id="J_TopicTitle" name="name" class="b-input" type="text" value='' required="required">
+                        <input id="J_TopicTitle" name="name" class="b-input big" type="text" value='' required="required">
                         <p>还可以输入<em id="J_TitleNum"></em>字</p>
                     </div>
                 </div>
@@ -28,37 +28,69 @@ title =  "食美特，不一样的生活"
                             @for(c<-models.site.PostCate.values.toList.sortBy(x=>x.id)){
                             <a href="javascript:void(0)" class="type" data-id="@c.id">@c</a>
                             }
-                         <div class="sub-item">
+                         <div class="sub-item clearfix">
                            <dl>
                              <dt>
                                  <label>工艺：</label>
                              </dt>
                              <dd>
                                  <select>
-                                     <option>dddddd</option>
+                                     @for(c<-models.site.CookWay.values.toList.sortBy(x=>x.id)){
+                                     <option value="@c.id">@c</option>
+                                     }
                                  </select>
                              </dd>
                          </dl>
                              <dl>
                                  <dt>
+                                     <label>口味：</label>
+                                 </dt>
+                                 <dd>
+                                     <select>
+                                         @for(c<-models.site.CookTaste.values.toList.sortBy(x=>x.id)){
+                                         <option value="@c.id">@c</option>
+                                         }
+                                     </select>
+                                 </dd>
+                             </dl>
+                            <dl>
+                                 <dt>
                                      <label>难度：</label>
                                  </dt>
                                  <dd>
                                      <select>
-                                         <option>dddddd</option>
+                                         @for(c<-models.site.CookGrade.values.toList.sortBy(x=>x.id)){
+                                         <option value="@c.id">@c</option>
+                                         }
                                      </select>
+                                 </dd>
+                             </dl>
+
+                             <dl>
+                                 <dt>
+                                     <label>原料：</label>
+                                 </dt>
+                                 <dd>
+                                         <input  name="name" class="b-input" type="text" value='' required="required">
                                  </dd>
                              </dl>
                              <dl>
                                  <dt>
-                                     <label>工艺：</label>
+                                     <label>辅料：</label>
                                  </dt>
                                  <dd>
-                                     <select>
-                                         <option>dddddd</option>
-                                     </select>
+                                     <input  name="name" class="b-input" type="text" value='' required="required">
                                  </dd>
                              </dl>
+                             <dl>
+                                 <dt>
+                                     <label>配料：</label>
+                                 </dt>
+                                 <dd>
+                                     <input  name="name" class="b-input" type="text" value='' required="required">
+                                 </dd>
+                             </dl>
+
                          </div>
                         <p>选择相应的分类，让大家更容易找到你的小站</p>
 
@@ -71,6 +103,16 @@ title =  "食美特，不一样的生活"
                         <input type="button" value="上传本地图片" class="bbl-btn upload-cover">
                         <input type="file" class="upload-btn" id="J_LocalImgFormSubmit" name="filedata">
                         <p  class="fl">支持GIF、JPG、PNG,大小不超过2M</p>
+                    </div>
+                </div>
+
+                <div class="form-row clearfix">
+                    <label>详细内容：</label>
+                    <div class="fm-item">
+                        <textarea id="J_ForumPostCon" name="content" class="b-textarea" placeholder="请输入帖子内容">
+
+                        </textarea>
+                        <p>内容越详细越好哦</p>
                     </div>
                 </div>
 
@@ -95,7 +137,12 @@ title =  "食美特，不一样的生活"
 
         }{
 <script type="text/javascript">
-    seajs.use('app/init', function (init) {
+    seajs.use(["app/init", "app/smeite.editor"], function(init){
+        var $ = jQuery;
+        if(SMEITER.userId == ""){
+            $.smeite.dialog.isLogin();
+        }
+        $.smeite.editor = $.smeite.Editor();
         init.load("app/site/site.edit");
     });
 </script>

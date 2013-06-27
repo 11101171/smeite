@@ -41,9 +41,12 @@
 }
 
 .fm-item .b-input, .intro-txa {
-    width: 360px
+    width: 360px ;
+    padding: 2px 12px;
 }
-
+.fm-item .big{
+    width: 580px;
+}
 .intro-txa {
     height: 100px
 }
@@ -59,6 +62,25 @@
  .fm-item p.fl{
      padding-left: 15px;
  }
+ .fm-item .sub-item{
+     width: 520px;
+     padding: 10px 0;
+     background-color: #f5f5f5;
+ }
+ .sub-item dl {
+     float: left;
+ }
+ .sub-item dl dt{
+     float: left;
+ }
+ .sub-item dl dd{
+     margin-top: 5px;
+     float: left;
+ }
+ .sub-item select{
+     width: 80px;
+ }
+
 
  .fm-item .type {
      font-size: 14px;
@@ -101,4 +123,7 @@ text-decoration: none;
 .col-right .about .bd {
     color: #aaa;
     margin-top: 20px;
+}
+#J_GuangEditorIframe{
+    height: 350px;
 }
