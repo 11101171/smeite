@@ -2,7 +2,7 @@
  * Created by zuosanshao.
  * User: Administrator
  * Email:zuosanshao@qq.com
- * @contain: 用户创造小站页面js
+ * @contain: 用户创造小镇页面js
  * @depends: jquery.js
  * Since: 12-10-22    下午8:58
  * ModifyTime :
@@ -14,6 +14,7 @@
 define(function(require, exports) {
     var $ = jQuery = require("jquery");
     require("module/imgareaselect");
+  var Uploader = require("module/upload")
     $.smeite.photoarea = null;
     $.smeite.rotate = null;
     $.smeite.setting = {
@@ -145,10 +146,20 @@ define(function(require, exports) {
                     closeOnClick: false,
                     load: true
                 });
+              /*  new Uploader({
+                    trigger: '#J_FilePath',
+                    name: 'fileData',
+                    action: '/site/uploadPic',
+                    data: {'xsrf': 'hash'}
+                }).success(function(data) {
+                        $.smeite.setting.setAvatar.setPhoto(data.src)
+                      //  alert(response);
+                    }).error(function(file) {
+                        alert(file);
+                    });*/
                 $("#J_FilePath").change(function(){
                     $("#faceUpload").submit();
                     $('#photo').attr("src","/assets/ui/loading1.gif");
-
                 });
                 $("#faceUpload2").submit(function(){
                     $this = $(this);
@@ -160,15 +171,14 @@ define(function(require, exports) {
                         $("#faceUpload2 input[type=submit]")[0].disabled = "";
                         $("#faceUpload2 input[type=submit]").removeClass("disabled").addClass("bbl-btn");
                         if(data.code=="100"){
+                            $("#J_uploadImgShow").attr("src",data.src)
+                            $(".site-logo").show()
                             $("#faceUpload")[0].reset();
                             $("#faceUpload2")[0].reset();
                             $("#J_uploadImg").val(data.src)
-                            $("#J_uploadImgShow").attr("src",data.src)
                             $("#faceUpload2 .face-submit").hide();
-                            $(".site-logo").show()
-                            $.smeite.photoarea.cancelSelection();
-                            $("#photoDialog").overlay().close();
-                            $("#thePhoto").attr("src",data.src);
+                             $("#photoDialog").overlay().close();
+
                         }
                     });
                     return false;
@@ -178,9 +188,7 @@ define(function(require, exports) {
                     $("#faceUpload2")[0].reset();
                     $('#photo').attr("src","");
                     $("#faceUpload2 .face-submit").hide();
-                    if($.smeite.photoarea!=null){
-                        $.smeite.photoarea.cancelSelection();
-                    }
+
                     $("#photoDialog").overlay().close();
                 });
             }else{
@@ -188,8 +196,8 @@ define(function(require, exports) {
             }
         });
         //限制输入字数
-        $.smeite.wordCount.init($("#J_TopicTitle"),$("#J_TitleNum"),32);
-        $.smeite.wordCount.init($("#J_TopicIntro"),$("#J_IntroNum"),200);
+        $.smeite.wordCount.init($("#J_title"),$("#J_titleNum"),32);
+        $.smeite.wordCount.init($("#J_intro"),$("#J_introNum"),200);
 
         /* select 选择*/
         $(".type").click(function(){

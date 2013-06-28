@@ -6,7 +6,7 @@ package models.site
  * Date: 12-9-20
  * Time: 上午11:17
  * ***********************
- * description:网站的小站的分类
+ * description:网站的小镇的分类
 
  * 新分类 1、生活  2 品牌站 3 其他
  */

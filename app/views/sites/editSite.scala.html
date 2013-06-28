@@ -11,7 +11,7 @@ title =  "食美特，不一样的生活"
     <!--nav  end -->
 
         <div class="site-edit clearfix">
-            <h2>申请小站</h2>
+            <h2>申请小镇</h2>
             <div class="col-left">
                 <form id="J_editForm" class="edit-form" method="post" action="@controllers.routes.Sites.saveSite">
                     <input type="hidden" name="sid" >
@@ -36,7 +36,7 @@ title =  "食美特，不一样的生活"
                               @for(c<-models.site.SiteCate.values.toList.sortBy(x=>x.id)){
                             <a href="javascript:void(0)" class="type" data-id="@c.id">@c</a>
                                 }
-                            <p>选择相应的分类，让大家更容易找到你的小站</p>
+                            <p>选择相应的分类，让大家更容易找到你的小镇</p>
 
                         </div>
                     </div>
@@ -72,9 +72,9 @@ title =  "食美特，不一样的生活"
             </div>
             <div class="col-right">
                 <div class="about">
-                    <h5>关于小站申请：</h5>
+                    <h5>关于小镇申请：</h5>
                     <div class="bd">
-                        小站总舵主正在对你的小站进行审核，审核周期为一个工作日。审核结果会通过想去网的私信，或者你留下的联系方式通知到你。希望能够带给你惊喜，请耐心等待。
+                        小镇大镇长正在对你的小镇进行审核，审核周期为一个工作日。审核结果会通过想去网的私信，或者你留下的联系方式通知到你。希望能够带给你惊喜，请耐心等待。
                     </div>
                 </div>
             </div>

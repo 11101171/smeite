@@ -2,7 +2,7 @@
  * Created by zuosanshao.
  * User: Administrator
  * Email:zuosanshao@qq.com
- * @contain: 用户创造小站页面js
+ * @contain: 用户创造小镇页面js
  * @depends: jquery.js
  * Since: 12-10-22    下午8:58
  * ModifyTime :

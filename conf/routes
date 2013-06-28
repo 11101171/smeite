@@ -147,7 +147,7 @@ POST    /theme/checkThemeLoveState            controllers.Themes.checkThemeLoveS
 
 
 
-#小站页面
+#小镇页面
 GET    /site/edit                       controllers.Sites.editSite(id:Long ?=0)
 POST   /site/save                       controllers.Sites.saveSite
 GET    /site/$id<[0-9]+>                        controllers.Sites.site(id:Long)
@@ -201,6 +201,7 @@ POST   /editor/uploadPic                  controllers.Upload.uploadEditorPic
 POST   /uploadPic/select                  controllers.Upload.uploadImageSelectPic
 POST   /user/account/doUploadPic          controllers.Upload.doUploadUserPic
 POST   /site/doUploadPic                  controllers.Upload.doUploadSitePic
+POST  /site/uploadPic                     controllers.Upload.uploadSitePic
 
 #管理后台 管理员管理
 GET   /admin/login                controllers.admin.Managers.login

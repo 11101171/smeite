@@ -89,11 +89,11 @@ import java.util.Calendar
 
 
 
-  /* 导航小站  */
+  /* 导航小镇  */
   def site =  Users.UserAction { user => implicit request =>
       Ok(views.html.pages.site(user))
   }
- /* 导航小站  发现精彩小站 */
+ /* 导航小镇  发现精彩小镇 */
   def findSite = Users.UserAction { user => implicit request =>
    Ok("todo")
  }

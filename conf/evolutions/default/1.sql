@@ -984,48 +984,87 @@ CREATE TABLE IF NOT EXISTS `tag_goods`(
      content           内容
      sender_id          发信者名称
      sender_name        发信者名称
-     check_state        是否审核
+     status        未读  已读 删除
      add_time           添加时间
 --
 */
 -- ------------------------------------------------------------
-      DROP TABLE IF EXISTS `msg`;
-CREATE TABLE IF NOT EXISTS `msg`(
+      DROP TABLE IF EXISTS `at_msg`;
+CREATE TABLE IF NOT EXISTS `at_msg`(
        `id` int(10) NOT NULL AUTO_INCREMENT,
-  `title`                varchar(64) not null default '',
+         `sender_id`                int(10) not null default '0',
+  `sender_name`                varchar(32) not null default 'smeite',
   `content`                varchar(255) not null default '',
-  `sender_id`                int(10) not null default '0',
-  `sender_name`                varchar(32) not null default '',
-  `check_state`               tinyint not null default '1',
+  `receiver_id`                int(10) not null default '0',
+  `receiver_name`             varchar(32) not null default '',
+  `status`               tinyint not null default '1',
   `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
    -- --------------------------------------------------------
 /*
-  -- 表的结构 `msg_receiver `
+  -- 表的结构 `system_msg_receiver `
      id                 表的ID
      receiver_id          发信者名称
      receiver_name        发信者名称
-     is_delete        是否删除
-     is_read          是否已读
      msg_id
      add_time           添加时间
 --
 */
 -- ------------------------------------------------------------
-DROP TABLE IF EXISTS `msg_receiver`;
-CREATE TABLE IF NOT EXISTS `msg_receiver`(
+
+   DROP TABLE IF EXISTS `system_msg`;
+CREATE TABLE IF NOT EXISTS `system_msg`(
+       `id` int(10) NOT NULL AUTO_INCREMENT,
+  `title`                varchar(32) not null default 'smeite',
+  `content`                varchar(255) not null default '',
+  `status`               tinyint not null default '1',
+  `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `system_msg_receiver`;
+CREATE TABLE IF NOT EXISTS `system_msg_receiver`(
         `id`                       int(10) NOT NULL AUTO_INCREMENT,
        `msg_id`                    int(10) not null default '1',
        `receiver_id`                int(10) not null default '0',
        `receiver_name`             varchar(32) not null default '',
-      `is_delete`                tinyint(1) not null default '0',
-     `is_read`                    tinyint(1) not null default '0',
-      `add_time`                     timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+      `status`                tinyint not null default '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+
+  DROP TABLE IF EXISTS `favor_msg`;
+CREATE TABLE IF NOT EXISTS `favor_msg`(
+       `id`                          int(10)          NOT NULL AUTO_INCREMENT,
+        `lover_id`                    int(10) not null ,
+       `lover_name`                varchar(32) not null ,
+        `love_action`                varchar(32) not null ,
+       `favor_type`               tinyint not null default '0',
+       `third_id`               int(10) not null ,
+        `content`                varchar(200) not null,
+       `loved_id`               int(10) not null,
+        `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+   /*
+   reply type 0 帖子回复 1 宝贝回复 2 主题回复
+   */
+ DROP TABLE IF EXISTS `reply_msg`;
+CREATE TABLE IF NOT EXISTS `reply_msg`(
+       `id`                          int(10)          NOT NULL AUTO_INCREMENT,
+        `replier_id`                    int(10) not null ,
+       `replier_name`                varchar(32) not null ,
+        `reply_action`                varchar(32) not null ,
+       `reply_type`               tinyint not null default '0',
+       `third_id`               int(10) not null ,
+        `content`                varchar(200) not null,
+       `owner_id`               int(10) not null,
+        `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
    /************************************************************
  * 管理员
@@ -1473,22 +1512,22 @@ alter table tag_goods add  tag_code int unsigned  not null default '0';
 /*
 
 
-1、新增数据表            小站表 site （分为几类：生活  品牌站 其他）
-2、新增数据表            小站样式表 site_style                                 (暂时不做)
-3、新增数据表            小站用户 site_member  (班长 学委 同学等)
-4、新增数据表            小站-相册 site_album
+1、新增数据表            小镇表 site （分为几类：生活  品牌站 其他）
+2、新增数据表            小镇样式表 site_style                                 (暂时不做)
+3、新增数据表            小镇用户 site_member  (班长 学委 同学等)
+4、新增数据表            小镇-相册 site_album
 5、新增数据表            相册-图片  album-pic
-6、新增数据表            小站视频 site_video
-7、新增数据表            小站宝贝 site_baobei
-8、新增数据表            小站主题 site_theme                                   暂时不做
+6、新增数据表            小镇视频 site_video
+7、新增数据表            小镇宝贝 site_baobei
+8、新增数据表            小镇主题 site_theme                                   暂时不做
 9、新增数据表             帖子 post  （分为几个类型：食谱、普通）
-10、新增数据表            小站帖子回复 post_reply（秀厨艺，随意吐槽、提问求解）
+10、新增数据表            小镇帖子回复 post_reply（秀厨艺，随意吐槽、提问求解）
 11、新增数据库            用户喜欢帖子 user——love-post 关系表
 
 */
 
 /*
-*  site  小站
+*  site  小镇
    创建者      uid
    名称  name
    站牌  logo
@@ -1515,8 +1554,8 @@ CREATE TABLE `site` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
   /*
-   site_member         小站成员
-     sid               小站
+   site_member         小镇成员
+     sid               小镇
      uid               成员
      member_duty        成员职务  0 普通居民 1 管理员  2 创办者
      add_time           加入时间
@@ -1531,8 +1570,8 @@ CREATE TABLE `site_member` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 /*
-  site_member         小站相册
-    sid               小站
+  site_member         小镇相册
+    sid               小镇
     title             相册名称
     is_top             置顶
     add_time           加入时间
@@ -1549,7 +1588,7 @@ CREATE TABLE `site_album` (
 
 /*
   site_album_pic         相册-图片
-    sid               小站
+    sid               小镇
     aid               相册
     intro             图片说明
     pic
@@ -1570,7 +1609,7 @@ CREATE TABLE `site_album_pic` (
 
 /*
   site_video         相册-图片
-    sid                   小站
+    sid                   小镇
     intro                 图片说明
     url                 视频网址
     is_top             置顶
@@ -1588,8 +1627,8 @@ CREATE TABLE `site_video` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 /*
-  site_baobei         小站-宝贝
-    sid                   小站
+  site_baobei         小镇-宝贝
+    sid                   小镇
     goodsId               宝贝
     is_top               置顶
     add_time           加入时间
@@ -1606,7 +1645,7 @@ CREATE TABLE `site_baobei` (
 /*
 *  帖子  post
    创建者      uid
-   所属小站     sid
+   所属小镇     sid
    分类   0 食谱  1 食材 2 其他
    名称  name
    主图  logo

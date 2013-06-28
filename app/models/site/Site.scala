@@ -10,7 +10,7 @@ import scala.slick.driver.MySQLDriver.simple._
  * Date: 12-9-20
  * Time: 上午11:19
  * ***********************
- * description: 小站
+ * description: 小镇
  */
 
 case class Site(

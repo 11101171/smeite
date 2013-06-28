@@ -19,7 +19,7 @@ object Sites extends Controller {
       "tags" -> text
     )(SiteFormData.apply)(SiteFormData.unapply)
   )
-  /* 小站编辑创建 */
+  /* 小镇编辑创建 */
   def editSite(sid:Long) = Users.UserAction { user => implicit request =>
     if (sid==0) Ok(views.html.sites.editSite(user,siteFormData))
     else {
@@ -45,16 +45,16 @@ object Sites extends Controller {
 
   }
 
-  /* 小站  */
+  /* 小镇  */
   def site(id:Long) = Users.UserAction { user => implicit request =>
     Ok(views.html.sites.site(user))
   }
 
-  /* 小站 帖子 编辑创建 */
+  /* 小镇 帖子 编辑创建 */
   def editPost(id:Long) = Users.UserAction { user => implicit request =>
     Ok(views.html.sites.editPost(user))
   }
-  /* 小站帖子 */
+  /* 小镇帖子 */
   def post(pid:Long)= Users.UserAction { user => implicit request =>
     Ok(views.html.sites.post(user))
   //  Ok(views.html.sites.menu(user))
