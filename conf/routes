@@ -194,12 +194,12 @@ GET    /ugc/api/rebateProduct                     controllers.ugc.API.rebateProd
 
 
 #常用的upload
-POST   /ajaxImage                      controllers.Upload.ajaxImage
-POST   /theme/uploadPic                controllers.Upload.uploadThemeStylePic
-POST   /editor/uploadPic                controllers.Upload.uploadEditorPic
-POST   /user/account/uploadPic          controllers.Upload.uploadUserPic
-POST   /user/account/doUploadPic        controllers.Upload.doUploadUserPic
-POST   /site/uploadPic                  controllers.Upload.uploadSitePic
+POST   /ajaxImage                         controllers.Upload.ajaxImage
+POST   /theme/uploadPic                   controllers.Upload.uploadThemeStylePic
+POST   /editor/uploadPic                  controllers.Upload.uploadEditorPic
+POST   /uploadPic/select                  controllers.Upload.uploadImageSelectPic
+POST   /user/account/doUploadPic          controllers.Upload.doUploadUserPic
+POST   /site/doUploadPic                  controllers.Upload.doUploadSitePic
 
 #管理后台 管理员管理
 GET   /admin/login                controllers.admin.Managers.login

@@ -15,7 +15,7 @@ define(function(require, exports) {
     require("app/common/validator")($);
 	var DateSelector = require("app/common/dateselect");
 	require("module/imgareaselect");
-//(function($) { 
+
 $.smeite.photoarea = null;
 $.smeite.rotate = null;
 $.smeite.setting = {
@@ -94,7 +94,7 @@ $.smeite.setting = {
 
 	}
 }	
-//})(jQuery);
+
 
 $(function(){
 	$("#J_SetBasic").validator();
@@ -126,7 +126,7 @@ $(function(){
 				html += '<div class="dialog-content">';
 				html += '<div class="hd"><h3>修改头像</h3></div>';
 				html += '<div class="bd clearfix">';
-				html += '<form id="faceUpload" name="faceUpload" enctype="multipart/form-data" method="post" target="photo-frame" action="/user/account/uploadPic">';
+				html += '<form id="faceUpload" name="faceUpload" enctype="multipart/form-data" method="post" target="photo-frame" action="/uploadPic/select">';
                 html += '<div class="photo-row clearfix">';
 				html += '<input type="button" value="上传新头像" class="bbl-btn upload-cover" />'; 
 				html += '<input type="file" class="upload-btn" name="filedata" id="J_FilePath" />';

@@ -34,7 +34,11 @@
 .fm-item {
     float: left
 }
-
+.fm-item .site-logo{
+    clear: both;
+    margin-bottom: 5px;
+   display: none;
+}
 .fm-item p {
     padding: 5px 0 0 0;
     color: #999
@@ -128,4 +132,96 @@ text-decoration: none;
 }
 #J_GuangEditorIframe{
     height: 250px;
+}
+
+/* 主题图片上传 */
+/* 头像上传*/
+.imgareaselect-border1 {
+    background: url(images/border-v.gif) repeat-y left top
+}
+
+.imgareaselect-border2 {
+    background: url(images/border-h.gif) repeat-x left top
+}
+
+.imgareaselect-border3 {
+    background: url(images/border-v.gif) repeat-y right top
+}
+
+.imgareaselect-border4 {
+    background: url(images/border-h.gif) repeat-x left bottom
+}
+
+.imgareaselect-border1, .imgareaselect-border2, .imgareaselect-border3, .imgareaselect-border4 {
+    filter: alpha(opacity = 50);
+    opacity: .5
+}
+
+.imgareaselect-handle {
+    background-color: #fff;
+    border: solid 1px #000;
+    filter: alpha(opacity = 50);
+    opacity: .5
+}
+
+.imgareaselect-outer {
+    background-color: #000;
+    filter: alpha(opacity = 50);
+    opacity: .5
+}
+
+.photo-row {
+    margin: 0 auto;
+    width: 520px;
+    position: relative
+}
+
+.photo-row .upload-cover {
+    width: 92px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer
+}
+
+.photo-row .upload-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    filter: alpha(opacity = 0);
+    opacity: 0;
+    z-index: 698;
+    display: block;
+    width: 92px;
+    height: 28px;
+    cursor: pointer
+}
+
+.photo-box {
+    width: 300px;
+    height: 300px;
+    line-height: 300px;
+    text-align: center;
+    border: 1px solid #DDD;
+    overflow: hidden
+}
+
+.photo-box span {
+    _height: 100%;
+    _writing-mode: tb-rl;
+    _vertical-align: middle
+}
+
+.photo-box img {
+    vertical-align: middle;
+    cursor: pointer
+}
+
+.photo-dialog {
+    width: 450px
+}
+
+.photo-dialog form {
+    margin-left: 40px
 }
