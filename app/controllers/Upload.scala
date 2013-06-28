@@ -40,7 +40,7 @@ object Upload extends Controller{
       //println(filename)
       if(Utils.isImage(filename)){
         picture.ref.moveTo(new File("/opt/static/images/adv/"+filename),true)
-        val src ="/images/adv/"+filename;
+        val src ="/images/adv/"+filename
         Ok(Json.obj("code"->"100","message"->"success","src"->src))
 
       }else{
@@ -125,6 +125,23 @@ object Upload extends Controller{
     )
   }
 
+  /* upload site image  todo  需要在上线时 修改图片路径   */
+  def uploadSitePic=Action(parse.multipartFormData) { request =>
+    request.body.file("fileData").map { picture =>
+    //  val filename = picture.filename
+      val filename =System.currentTimeMillis()+(picture.filename.substring(picture.filename.lastIndexOf(".")))
+      //println(filename)
+      if(Utils.isImage(filename)){
+        picture.ref.moveTo(new File("public/images/site/"+filename),true)
+        val src ="/images/site/"+filename
+        Ok(Json.obj("code"->"100","msg"->"success","src"->src))
 
+      }else{
+        Ok(Json.obj("code"->"104","msg"->"fail"))
+      }
 
+    }.getOrElse {
+      Ok("File uploaded error")
+    }
+  }
 }

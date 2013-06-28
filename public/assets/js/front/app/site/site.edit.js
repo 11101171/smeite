@@ -13,47 +13,14 @@
 
 define(function(require, exports) {
     var $ = jQuery = require("jquery");
-  var Uploader = require("module/upload")
-    var picFileVal = "";
-        function validata(){
-            if (!/\.(gif|jpg|png|jpeg|bmp)$/i.test(picFileVal)) {
-                alert('请上传标准图片文件,支持gif,jpg,png,jpeg.');
-                return false;
-            }
-            return true;
-        }
-        //返回提交成功后的操作
-        window.publishPicSuccess =  function(code, picType, picSrc){
-                      if(code =="100") {
-                          $("#J_LocalImg").val(picSrc)
-                      }else{
-                          alert("亲,上传失败了, 重新提交试试！");
-                      }
-
-        }
-        window.submitPic = function(obj, rangeType){
-            if ($(obj).data("isSubmit") != 1){
-                submitRun();
-            }
-            function submitRun(){
-                $(obj).data("isSubmit", 1);
-              //  var $picUploadTarget = $("#" + rangeType + "picUploadTarget");
-                picFileVal = $(obj).val();
-                $(obj).closest('form').submit();
-                if (validata()) {
-                    $(obj).closest('form').submit();
-                }
-                $(obj).data("isSubmit", 0);
-                return false;
-            }
-        }
+  var Uploader = require("module/upload") ;
 
     $(function(){
         /* 上传图片*/
         var uploader = new Uploader({
             trigger: '#J_uploadImage',
             name: 'fileData',
-            action: '/ajaxImage',
+            action: '/site/uploadPic',
             accept: 'image/*',
             data: {'xsrf': 'hash'},
             error: function(file) {
