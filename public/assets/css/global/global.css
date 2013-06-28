@@ -2477,13 +2477,10 @@ a:hover i.ico-likes {
 .header  .search input {
     display: block;
     width: 315px;
-    padding: 5px 0 3px 10px;
-    height: 14px;
-    height: 13 px\9;
-    _height: 12px;
+    padding: 2px 0 3px 10px;
     font-size: 12px;
     color: #999;
-    border: 0
+    border: 0;
 }
 
 .header  .typing input {

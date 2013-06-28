@@ -205,28 +205,28 @@ define(function(require, exports) {
         })
 
         //表单校验
-        var $topicTitle = $("#J_TopicTitle"),
-            $topicIntro = $("#J_TopicIntro");
-        $("#J_TopicEditFm").submit(function(){
+        var $title = $("#J_title"),
+            $intro = $("#J_intro");
+        $("#J_editForm").submit(function(){
 
-            var topicIntro = $topicIntro.val();
-            if($.trim($topicTitle.val())==""){
+            var topicIntro = $intro.val();
+            if($.trim($title.val())==""){
                 $.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
-                $.smeite.tip.show($topicTitle,"标题不能为空~");
+                $.smeite.tip.show($title,"标题不能为空~");
                 return false;
-            }else if($.smeite.util.getStrLength($topicTitle.val())>15){
+            }else if($.smeite.util.getStrLength($title.val())>15){
                 $.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
-                $.smeite.tip.show($topicTitle,"字数不能超过32字！");
+                $.smeite.tip.show($title,"字数不能超过32字！");
                 return false;
-            }else if($.smeite.util.getStrLength($topicTitle.val())>200){
+            }else if($.smeite.util.getStrLength($title.val())>200){
                 $.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
-                $.smeite.tip.show($topicTitle,"字数不能超过200字！");
+                $.smeite.tip.show($title,"字数不能超过200字！");
                 return false;
             }
         });
 
         //标签操作
-        $("#J_TopicTags").keyup(function(e){
+        $("#J_tags").keyup(function(e){
             //限制每个标签的中文长度
             var MaxSingleTagLength = 14,
                 MaxAllTagsLength = 64,

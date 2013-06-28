@@ -1,4 +1,4 @@
-@(user:Option[models.user.User])
+@(user:Option[models.user.User],form: Form[controllers.SiteFormData]))
 @views.html.template(
 user,
 nav="site",
@@ -13,36 +13,29 @@ title =  "食美特，不一样的生活"
         <div class="site-edit clearfix">
             <h2>申请小站</h2>
             <div class="col-left">
-                <form id="J_TopicEditFm" class="edit-form" method="post" action="@controllers.routes.Themes.save">
-                    <input type="hidden" name="id" value=''>
-                    <input type="hidden" name="cid" id="J_cid" value="">
+                <form id="J_editForm" class="edit-form" method="post" action="@controllers.routes.Sites.saveSite">
+                    <input type="hidden" name="sid" >
+                    <input type="hidden" name="cid" id="J_cid">
                     <div class="form-row clearfix">
                         <label><span class="rc">*</span>标题：</label>
                         <div class="fm-item">
-                            <input id="J_TopicTitle" name="name" class="b-input" type="text" value='' required="required">
-                            <p>还可以输入<em id="J_TitleNum"></em>字</p>
+                            <input id="J_title" name="title" class="b-input" type="text" value='@form("title").value' required="required">
+                            <p>还可以输入<em id="J_titleNum"></em>字</p>
                         </div>
                     </div>
                     <div class="form-row clearfix">
                         <label>介绍：</label>
                         <div class="fm-item">
-                            <textarea id="J_TopicIntro" class="b-textarea intro-txa" name="intro"></textarea>
-                            <p>还可以输入<em id="J_IntroNum"></em>字</p>
+                            <textarea id="J_intro" class="b-textarea intro-txa" name="intro">@form("intro").value</textarea>
+                            <p>还可以输入<em id="J_introNum"></em>字</p>
                         </div>
                     </div>
                     <div class="form-row clearfix">
                         <label>分类：</label>
                         <div class="fm-item">
-
-
-                                @for(c<-models.site.SiteCate.values.toList.sortBy(x=>x.id)){
-
+                              @for(c<-models.site.SiteCate.values.toList.sortBy(x=>x.id)){
                             <a href="javascript:void(0)" class="type" data-id="@c.id">@c</a>
-
                                 }
-
-
-
                             <p>选择相应的分类，让大家更容易找到你的小站</p>
 
                         </div>
@@ -56,7 +49,7 @@ title =  "食美特，不一样的生活"
                             </div>
 
                                     <input type="button" value="上传本地图片" id="J_uploadImage" class="bbl-btn upload-cover">
-                                    <input type="hidden" id="J_uploadImg" name="pic">
+                                    <input type="hidden" id="J_uploadImg" name="pic" value='@form("pic").value'>
                                     <p  class="fl">支持GIF、JPG、PNG,大小不超过2M</p>
 
 
@@ -66,7 +59,7 @@ title =  "食美特，不一样的生活"
                     <div class="form-row clearfix">
                         <label>标签：</label>
                         <div class="fm-item">
-                            <input type="text" class="b-input" name="tags" id="J_TopicTags"  value=''>
+                            <input type="text" class="b-input" name="tags" id="J_tags"  value='@form("tags").value'>
                             <p>多个标签用逗号隔开</p>
                         </div>
                     </div>
@@ -94,7 +87,10 @@ title =  "食美特，不一样的生活"
         }{
 <script type="text/javascript">
     seajs.use('app/init', function (init) {
-
+        var $ = jQuery;
+        if(SMEITER.userId == ""){
+            $.smeite.dialog.isLogin();
+        }
         init.load("app/site/site.edit");
 
     });

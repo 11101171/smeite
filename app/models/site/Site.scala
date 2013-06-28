@@ -41,7 +41,7 @@ object Sites extends Table[Site]("site") {
 
   // Every table needs a * projection with the same type as the table's type parameter
   def * = id.? ~ uid ~ cid ~ title ~ pic ~ intro ~ tags ~ status ~ memberNum  ~addTime.? <>(Site, Site.unapply _)
-  def autoInc = id.? ~ uid ~ cid ~ title ~ pic ~ intro ~ tags ~ status ~ memberNum  ~addTime.? <>(Site, Site.unapply _) returning id
+  def autoInc =  uid ~ cid ~ title ~ pic ~ intro ~ tags   returning id
 
 
 
