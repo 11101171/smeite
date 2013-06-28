@@ -14,8 +14,8 @@ object SiteDao {
          Sites.autoInc.insert(uid,cid,title,pic,intro,tags)
   }
 
-  def updateSite(sid:Long,title:String,pic:String,intro:String,tags:String) = database.withSession {  implicit session:Session =>
-    (for(s <- Sites if s.id === sid )yield s.title~s.pic~s.intro~s.tags).update((title,pic,intro,tags))
+  def updateSite(sid:Long,cid:Int,title:String,pic:String,intro:String,tags:String) = database.withSession {  implicit session:Session =>
+    (for(s <- Sites if s.id === sid )yield s.cid~s.title~s.pic~s.intro~s.tags).update((cid,title,pic,intro,tags))
   }
 
   def modifySite(sid:Long,status:Int) = database.withSession {  implicit session:Session =>
