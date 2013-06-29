@@ -43,7 +43,7 @@ case class EditorGoods(
                            pic:String,
                            loveNum:Int,
                            volume:Int,
-                           rate:Int,
+                           location:String,
                            jifenbao:String,
                            jifenbaoValue:String
                            )
@@ -84,7 +84,7 @@ object Forums extends Controller {
       (__ \ "pic").format[String] and
       (__ \ "loveNum").format[Int] and
       (__ \ "volume").format[Int] and
-      (__ \ "rate").format[Int] and
+      (__ \ "location").format[String] and
       (__ \ "jifenbao").format[String] and
       (__ \ "jifenbaoValue").format[String]
     )(EditorGoods.apply,unlift(EditorGoods.unapply))
@@ -229,10 +229,10 @@ object Forums extends Controller {
     if(goods.isEmpty){
       Ok(Json.obj("code"->104,"msg" -> "宝贝不存在" ))
     }else {
-      val jifenbao=(goods.get.promotionPrice.getOrElse("0").toDouble*goods.get.commissionRate.getOrElse(0)*goods.get.rate*0.0001).toInt
+      val jifenbao=(goods.get.promotionPrice.getOrElse("0").toDouble*goods.get.commissionRate.getOrElse(0)*70*0.0001).toInt
       val jifenbaoValue = jifenbao/100.0
-      val rate = (goods.get.commissionRate.getOrElse(0)*goods.get.rate*0.0001).toInt
-      val baobei = EditorGoods(goods.get.id.get,goods.get.numIid,goods.get.name,goods.get.intro,goods.get.price,goods.get.promotionPrice.getOrElse(goods.get.price),goods.get.pic,goods.get.loveNum,goods.get.volume,rate,jifenbao.toString,jifenbaoValue.toString)
+
+      val baobei = EditorGoods(goods.get.id.get,goods.get.numIid,goods.get.name,goods.get.intro,goods.get.price,goods.get.promotionPrice.getOrElse(goods.get.price),goods.get.pic,goods.get.loveNum,goods.get.volume,goods.get.location,jifenbao.toString,jifenbaoValue.toString)
       Ok(Json.obj("code"->100,"baobei"->Json.toJson(baobei),"msg"->"success" ))
     }
 

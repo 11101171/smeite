@@ -238,7 +238,7 @@ object Themes extends Controller {
       val pic = (request.body \ "pic").as[String]
       val themeGoods = ThemeDao.checkGoods(themeId,goodsId);
       val goods =GoodsDao.findById(goodsId)
-      val product=Product(goods.get.id,goods.get.numIid,goods.get.nick,goods.get.name,None,goods.get.price,goods.get.pic+"_210x210.jpg",Nil,goods.get.detailUrl,Nil)
+      val product=Product(goods.get.id,goods.get.numIid,goods.get.nick,goods.get.name,None,goods.get.price,goods.get.pic+"_210x210.jpg",Nil,goods.get.clickUrl,Nil)
       if (themeGoods.isEmpty){
         ThemeDao.addGoods(themeId,goodsId,pic)
         Ok(Json.obj("code" -> "100","product"->Json.toJson(product), "message" ->"成功"))

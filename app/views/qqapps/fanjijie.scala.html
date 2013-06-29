@@ -58,7 +58,7 @@
 <div class="today-goods-item clearfix">
 
 
-    <a  href="javascript:void(0);" onclick="fusion2.nav.open({url:'@goods.clickUrl.get'}); return false;">
+    <a  href="javascript:void(0);" onclick="fusion2.nav.open({url:'@goods.clickUrl'}); return false;">
         <img class="goods-item-img" src='@(goods.pic+"_310x310.jpg")' alt="@goods.name" width="300" height="@(goods.hwRate*300)">
     </a>
 
@@ -69,13 +69,13 @@
         </h2>
         <div class="goods-item-desc">
             <i class="quotation-marks"></i>
-            <a   class="desc-txt" href="javascript:void(0);" onclick="fusion2.nav.open({url : '@goods.clickUrl.get'}); return false;">
+            <a   class="desc-txt" href="javascript:void(0);" onclick="fusion2.nav.open({url : '@goods.clickUrl'}); return false;">
                 @goods.intro
             </a>
 
         </div>
         <div class="goods-item-buy clearfix">
-            <a  class="goods-item-buy-btn clearfix"  href="javascript:void(0);" onclick="fusion2.nav.open({url : '@goods.clickUrl.get'}); return false;">
+            <a  class="goods-item-buy-btn clearfix"  href="javascript:void(0);" onclick="fusion2.nav.open({url : '@goods.clickUrl'}); return false;">
 
                 @if(goods.promotionPrice.isEmpty){
                 <span class="current-price"> ¥@goods.price</span>
@@ -94,7 +94,7 @@
             </a>
             <div class="others-wrap">
                 <span class="want-to-buy">有<i>@goods.loveNum</i>人想买</span>
-                <a  class="others-say"  href="javascript:void(0);" onclick="fusion2.nav.open({url : '@goods.clickUrl.get'}); return false;">看看买过的人怎么说&gt;&gt;</a>
+                <a  class="others-say"  href="javascript:void(0);" onclick="fusion2.nav.open({url : '@goods.clickUrl'}); return false;">看看买过的人怎么说&gt;&gt;</a>
             </div>
         </div>
     </div>

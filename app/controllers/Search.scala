@@ -22,12 +22,10 @@ object Search extends Controller {
   * cate :分类：宝贝 、主题、人
   * */
   def search(keyword: String, p: Int) = Users.UserAction { user => implicit request =>
-      if (Utils.isNumber(keyword)) {
-        Redirect(controllers.ugc.routes.API.convertProduct(keyword.toLong))
-      } else {
+
         val page = TagDao.findTagGoodses(keyword, p, 54)
         Ok(views.html.search.baobei(user, page, keyword))
-      }
+
   }
 
 

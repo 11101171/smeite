@@ -20,7 +20,7 @@ title = "小编精挑细选、严格控制品质的宝贝_食美特，爱美食�
 <!--单个商品 start-->
     @for(goods<-list){
 <div class="today-goods-item clearfix">
-    <a href="@controllers.ugc.routes.API.gotoTaobao(goods.numIid,goods.id.get,goods.rate)" target="_blank">
+    <a href="@controllers.ugc.routes.API.gotoTaobao(goods.numIid,goods.id.get)" target="_blank">
         <img class="goods-item-img" src='@(goods.pic+"_310x310.jpg")' alt="@goods.name" width="300" height="300"></a>
     <div class="goods-item-info">
         <h2 class="goods-item-title">
@@ -29,13 +29,13 @@ title = "小编精挑细选、严格控制品质的宝贝_食美特，爱美食�
         </h2>
         <div class="goods-item-desc">
             <i class="quotation-marks"></i>
-            <a href="@controllers.ugc.routes.API.gotoTaobao(goods.numIid,goods.id.get,goods.rate)" target="_blank" class="desc-txt">
+            <a href="@controllers.ugc.routes.API.gotoTaobao(goods.numIid,goods.id.get)" target="_blank" class="desc-txt">
                 @goods.intro
             </a>
 
         </div>
         <div class="goods-item-buy clearfix">
-            <a href="@controllers.ugc.routes.API.gotoTaobao(goods.numIid,goods.id.get,goods.rate)" class="goods-item-buy-btn clearfix" target="_blank">
+            <a href="@controllers.ugc.routes.API.gotoTaobao(goods.numIid,goods.id.get)" class="goods-item-buy-btn clearfix" target="_blank">
 
                 @if(goods.promotionPrice.isEmpty){
                 <span class="current-price"> ¥@goods.price</span>
@@ -54,7 +54,7 @@ title = "小编精挑细选、严格控制品质的宝贝_食美特，爱美食�
             </a>
             <div class="others-wrap">
                 <span class="want-to-buy">有<i>@goods.loveNum</i>人想买</span>
-                <a href="@controllers.ugc.routes.API.gotoTaobao(goods.numIid,goods.id.get,goods.rate)" class="others-say" target="_blank">看看买过的人怎么说&gt;&gt;</a>
+                <a href="@controllers.ugc.routes.API.gotoTaobao(goods.numIid,goods.id.get)" class="others-say" target="_blank">看看买过的人怎么说&gt;&gt;</a>
             </div>
         </div>
     </div>

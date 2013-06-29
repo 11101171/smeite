@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],page:Page[models.user.UserRebate],prizes:Page[models.user.UserInvitePrize])
+@(user:Option[models.user.User],prizes:Page[models.user.UserInvitePrize])
 @views.html.template(
 user
 )(css="/assets/css/template/user.setting.css") {
@@ -7,7 +7,7 @@ user
         <div class="side-nav">
             <h2>我的返利</h2>
             <ul>
-                <li> <a  href="@controllers.users.routes.UsersCommission.myOrders(1,1)">购买记录</a> </li>
+
                 <li> <a  class="on"  href="@controllers.users.routes.UsersCommission.myCredits(1)">我的集分宝</a> </li>
                 <li> <a  href="@controllers.users.routes.UsersCommission.myShiDou(1)">我的食豆</a>  </li>
                 <li> <a  href="@controllers.users.routes.UsersCommission.myAward">我的奖品</a>  </li>
@@ -17,73 +17,8 @@ user
         <div class="main-content">
             <div class="credits mb20">
                 <div class="credits_info">您已经获得<span>@user.get.credits</span>个集分宝，值<span>￥@(user.get.credits/100.0)</span>元， 已成功发放<span>@user.get.withdrawCredits</span>个集分宝 </div>
-                <div class="title">集分宝 - 淘宝购物发放记录</div>
-            <table class="table">
-                <thead>
-                <tr  height="35">
-                    <th  width="110">发放原因</th>
-                    <th  width="80">发放数量</th>
-                    <th  width="100">发放时间</th>
-                    <th  width="80">处理状态</th>
-                    <th  width="100">处理时间</th>
-                    <th  width="272">处理结果</th>
-                </tr>
-                </thead>
-                <tbody>
-                @if(page.items.length !=0){
-                   @for(item <- page.items){
-                    <tr>
-                        <td>
-                            @if(item.rebateType == 0){
-                            <span>新人见面礼</span>
-                            }
-                            @if(item.rebateType == 1){
-                            <span>购物返利,<a href="@controllers.users.routes.UsersCommission.myOrders(1,1)">去看看购买的订单</a></span>
-                            }
-                        </td>
-                        <td>
-                            @item.num
-                        </td>
-                        <td>
-                        @item.withdrawTime
-                    </td>
-                        <td>
-                            @models.user.HandleStatus(item.handleStatus)
-                        </td>
-                        <td>
-                            @item.handleTime
-                        </td>
-                        <td>
-                            @models.user.HandleResult(item.handleResult)
-                        </td>
-                    </tr>
-                }
-                }else{
-                <tr>
-                    <td colspan="6" class="table_one">您还没有集分宝发放记录，<a href="/">去挑选心动的商品吧</a> </td>
-                </tr>
-                  }
-                </tbody>
-            </table>
-                <div class="clearfix pt20 pb20">
-                    <div class="pagin fr pagination" id="J_Pagination">
-                        @if(page.nums.length>1){
-                        @page.prev.map { page =>
-                        <a class="prev" href="@controllers.users.routes.UsersCommission.myCredits(page)">上一页</a>
-                        }
-                        @for(num <-page.nums){
-                        @if(num==page.currentPage){
-                        <span class="current">@num</span>
-                        }else {
-                        <a href="@controllers.users.routes.UsersCommission.myCredits(num)">@num</a>
-                        }
-                        }
-                        @page.next.map { page =>
-                        <a class="next" href="@controllers.users.routes.UsersCommission.myCredits(page)">下一页</a>
-                        }
-                        }
-                    </div>
-                </div>
+
+
            <!-- 邀请有奖发放情况 -->
                 <div class="title">集分宝-邀请有奖发放记录</div>
                 <table class="table">

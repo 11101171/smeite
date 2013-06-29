@@ -53,7 +53,7 @@ case class Product(
                   price:String,
                   pic: String,
                   itemPics: List[String],
-                  detailUrl:String,
+                  clickUrl:String,
                  tags:List[String]
                   )
 
@@ -90,7 +90,7 @@ object API extends Controller {
         "price" -> JsString(o.price),
         "pic" -> JsString(o.pic),
         "itemPics" -> JsArray(o.itemPics.map(JsString(_))),
-        "detailUrl" -> JsString(o.detailUrl),
+        "clickUrl" -> JsString(o.clickUrl),
         "tags" -> JsArray(o.tags.map(JsString(_)))
       )
     )
@@ -103,7 +103,7 @@ object API extends Controller {
       (json \ "price").as[String],
       (json \ "pic").as[String],
       (json \ "itemPics").as[List[String]],
-      (json \ "detailUrl").as[String],
+      (json \ "clickUrl").as[String],
       (json \ "tags").as[List[String]]
     )
     )
@@ -145,11 +145,11 @@ object API extends Controller {
   *  442  频繁分享
   *  445  禁止分享
   * */
-  def  findProduct(detailUrl:String)=Users.UserAction {  user => implicit request =>
+  def  findProduct(clickUrl:String)=Users.UserAction {  user => implicit request =>
          if(user.isEmpty) Ok(Json.obj("code"->"400","message"->"你还没有登陆"))
          else if(user.get.status==4)Ok(Json.obj("code"->"444","message"->"禁止登陆"))
          else{
-           val idStr =Utils.getURLParam(detailUrl,"id");
+           val idStr =Utils.getURLParam(clickUrl,"id");
            if(idStr.isEmpty)Ok(Json.obj("code"->"104","message"->"不能获取商品的ID"))
              // 下面可能需要判断id.get.toLong 是否为long 的问题
            else {
@@ -157,13 +157,13 @@ object API extends Controller {
              val goods =GoodsDao.find(numIid)
 
              if(!goods.isEmpty){
-               val product=Product(goods.get.id,goods.get.numIid,goods.get.nick,goods.get.name,None,goods.get.price,goods.get.pic,Nil,goods.get.detailUrl,Nil)
+               val product=Product(goods.get.id,goods.get.numIid,goods.get.nick,goods.get.name,None,goods.get.price,goods.get.pic,Nil,goods.get.clickUrl,Nil)
                Ok(Json.obj("code"->"105","product"->Json.toJson(product) ,"message"->"该商品已存在"))
              }
              else{
                val client=new DefaultTaobaoClient(url, appkey, secret);
                val  req=new ItemGetRequest();
-               req.setFields("num_iid,nick,title,price,pic_url,detail_url,item_img.url");
+               req.setFields("num_iid,nick,title,price,pic_url,detail_url,item_img.url")
                req.setNumIid(numIid);
                val respItem = client.execute(req ).getItem
                val itemImgs= for(i<-respItem.getItemImgs)yield(i.getUrl)
@@ -209,7 +209,7 @@ object API extends Controller {
         images.append(img+"&")
       }
       /*保存goods*/
-      val goodsId= GoodsDao.addGoods(user.get.id.get,product.numIid,product.name,product.proComment.getOrElse("none"),product.price,mainPic,images.toString,product.nick,product.detailUrl,hwRate)
+      val goodsId= GoodsDao.addGoods(user.get.id.get,product.numIid,product.name,product.proComment.getOrElse("none"),product.price,mainPic,images.toString,product.nick,product.clickUrl,hwRate)
       /*保存tags 首先查看tags 是否存在，不存在则保存*/
       for(name<-product.tags){
         /*处理tag*/
@@ -249,11 +249,11 @@ object API extends Controller {
 
 
   /* 淘宝客 go to taobao */
-  def gotoTaobao(numIid:Long,goodsId:Long,rate:Int) =Users.UserAction { user => implicit request =>
+  def gotoTaobao(numIid:Long,goodsId:Long) =Users.UserAction { user => implicit request =>
       val uid:Long = if(!user.isEmpty){ user.get.id.get }else{ 0 }
       val timestamp= String.valueOf(System.currentTimeMillis)
       val sign=TaobaoConfig.getSign(timestamp)
-      Ok(views.html.ugc.api.gotoTaobao(numIid,uid,goodsId,rate)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
+      Ok(views.html.ugc.api.gotoTaobao(numIid,uid,goodsId,70)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
   }
   /*
   * uid:Long,goodsId:Long,numIid:Long,nick:String,title:String,location:String,pic:String,price:String,withdrawRate:Int,credits:Int
@@ -272,44 +272,5 @@ object API extends Controller {
   Ok(Json.obj("code"->"100","message"->"success"))
   }
 
-  /* 查询淘宝客返利
-   * 先使用
-   * */
-  def rebateProduct(detailUrl:String) = Users.UserAction { user => implicit request =>
-    val id= if(!user.isEmpty) user.get.id.get else 0
-    val numIid = Utils.getURLParam(detailUrl,"id").get.toLong
-    val client=new DefaultTaobaoClient(url, appkey, secret);
-    val  req=new ItemGetRequest();
-    req.setFields("num_iid,title,price,pic_url,location");
-    req.setNumIid(numIid);
-    val respItem = client.execute(req ).getItem
-
-    val timestamp= String.valueOf(System.currentTimeMillis)
-    val sign=TaobaoConfig.getSign(timestamp)
-    Ok(views.html.search.convertProduct(user,numIid,id,respItem.getTitle,respItem.getPicUrl,respItem.getPrice,respItem.getLocation.getState+"/"+respItem.getLocation.getCity)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
-
-
-  }
-
-  /* 淘宝返利 convert*/
-  def convertProduct(numIid:Long) = Users.UserAction { user => implicit request =>
-    val id= if(!user.isEmpty) user.get.id.get else 0
-
-  /* 从 淘宝上 查询*/
-    val client=new DefaultTaobaoClient(url, appkey, secret);
-    val  req=new ItemGetRequest();
-    req.setFields("num_iid,title,price,pic_url,location");
-    req.setNumIid(numIid);
-    val respItem = client.execute(req ).getItem
-
-    val timestamp= String.valueOf(System.currentTimeMillis)
-    val sign=TaobaoConfig.getSign(timestamp)
-    Ok(views.html.search.convertProduct(user,numIid,id,respItem.getTitle,respItem.getPicUrl,respItem.getPrice,respItem.getLocation.getState+"/"+respItem.getLocation.getCity)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
-  }
-
-  /* 调用淘宝客接口失败*/
-  def convertError(error:String)  = Users.UserAction { user => implicit request =>
-    Ok(views.html.search.convertError(user))
-  }
 
 }

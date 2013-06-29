@@ -524,7 +524,7 @@ define(function(require, exports) {
             }
         },
         /* 返利登陆*/
-        login2: function(numIid,goodsId,rate){
+       /* login2: function(numIid,goodsId,rate){
             if(!$("#loginDialog")[0]){
                 var html = "";
                 html += '<div id="loginDialog" class="g-dialog">';
@@ -557,7 +557,7 @@ define(function(require, exports) {
                 html += '</div>';
                 html += '</div>';
                 html += '<div class="clear"></div>';
-                html += '<div class="nofanli">无须登录获得返利，<a href="/ugc/api/gotoTaobao/'+numIid+"?goodsId="+goodsId+"&rate="+rate +'" target="_blank" >直接去购买&gt;&gt;</a></div>';
+                html += '<div class="nofanli">无须登录获得返利，<a href="/ugc/api/gotoTaobao/'+numIid+"?goodsId="+goodsId+"&rate="+70 +'" target="_blank" >直接去购买&gt;&gt;</a></div>';
                 html += '</div>';
                 html += '<a class="close" href="javascript:;"></a>';
                 html += '</div>';
@@ -579,7 +579,7 @@ define(function(require, exports) {
                         if(data.code==100){
                             $("#loginDialog").overlay().close();
                             //SMEITER.userId = data.userId;
-                            var sellUrl="/ugc/api/gotoTaobao/"+numIid+"?goodsId="+goodsId+"&rate="+rate
+                            var sellUrl="/ugc/api/gotoTaobao/"+numIid+"?goodsId="+goodsId+"&rate="+70
                            window.location=sellUrl;
                          //   window.open(sellUrl)
                         }else if(data.code==101){
@@ -602,7 +602,7 @@ define(function(require, exports) {
             }else{
                 $("#loginDialog").data("overlay").load();
             }
-        },
+        },*/
         /* 判断是否为新用户 */
         isNew:function(){
             if(SMEITER.status == "0" && SMEITER.userId !=""){
@@ -930,8 +930,7 @@ define(function(require, exports) {
                 "price": jsonObj.price,
                 "pic": jsonObj.pic,
                 "itemPics":[],
-                "foodSecurity": jsonObj.foodSecurity,
-                "detailUrl":jsonObj.detailUrl,
+                "clickUrl":jsonObj.clickUrl,
                 "tags": null
             };
             //判断商品图片
@@ -1053,8 +1052,7 @@ define(function(require, exports) {
                 "price": jsonObj.price,
                 "pic": jsonObj.pic,
                 "itemPics":[],
-                "foodSecurity": jsonObj.foodSecurity,
-                "detailUrl":jsonObj.detailUrl,
+                "clickUrl":jsonObj.clickUrl,
                 "tags": null
             };
 
@@ -1606,14 +1604,14 @@ define(function(require, exports) {
         recommendProcess:function(data){
             var html = "";
             html +='<div class="goods-area clearfix">';
-            html +='<div class="goods-pic fl"><a href="/ugc/api/gotoTaobao/'+data.numIid+"?goodsId="+data.goodsId+"&rate="+data.rate +'"> <img src="'+data.pic+'" width="150" height="150" ></a> </div>';
+            html +='<div class="goods-pic fl"><a href="/ugc/api/gotoTaobao/'+data.numIid+"?goodsId="+data.goodsId+'"> <img src="'+data.pic+'" width="150" height="150" ></a> </div>';
             html +='<div class="buy-box clearfix fl">';
             html +='<dl class="buy-meta">';
             html +='<dt>'+data.title+'</dt>';
             html +='<dd class="clearfix"> <div class="price">价格：<span class="price-promotion"> '+data.price+'</span></div></dd>';
             html +='<dd>返利:&nbsp;<span> '+data.jifenbao+'</span>&nbsp;个集分宝</a>，值<span>'+data.jifenbaoValue+'</span>元</dd>';
             html +="</dl>";
-            html +='<a class="buy-btn" href="/ugc/api/gotoTaobao/'+data.numIid+"?goodsId="+data.goodsId+"&rate="+data.rate +'"> 去看看&gt; </a>';
+            html +='<a class="buy-btn" href="/ugc/api/gotoTaobao/'+data.numIid+"?goodsId="+data.goodsId+'"> 去看看&gt; </a>';
             html += '</div>';
             html += '</div>';
             $("#J_checkIn").html(html);
@@ -1633,7 +1631,7 @@ define(function(require, exports) {
                 $.smeite.dialog.login();
             });
         }
-        if($("a[rel=loginD2]")[0]){
+       /* if($("a[rel=loginD2]")[0]){
             $("a[rel=loginD2]").click(function(event){
                 event.preventDefault();
                 var numIid =$(this).data("numiid")
@@ -1641,7 +1639,7 @@ define(function(require, exports) {
                 var rate=$(this).data("rate")
                 $.smeite.dialog.login2(numIid,goodsId,rate);
             });
-        }
+        }*/
         /*分享网络商品*/
         if($("a[rel=shareGoods]")[0]){
             $("a[rel=shareGoods]").click(function(){
@@ -1764,81 +1762,7 @@ define(function(require, exports) {
             });
         }
 
-        /* 查询返利 */
-        if($("a[rel=rebateGoods]")[0]){
-            $("a[rel=rebateGoods]").click(function(){
-                /*if(!$.smeite.dialog.isLogin()){
-                    return false;
-                }*/
-                var $this = $(this);
-                if(!$("#J_RebateGoodsD")[0]){
-                    var html = "";
-                    html += '<div id="J_RebateGoodsD" class="g-dialog sg-dialog" >';
-                    html += '<div class="content">';
-                    html += '<p class="title">将宝贝网址粘贴到下面框中：</p>';
-                    html += '<form class="sg-form" id="J_rebateForm" name="rebateGoods" action="/ugc/api/rebateProduct">';
-                    html += '<div class="clearfix"><input class="base-input sg-input" id="J_rebateInput" name="url" value="" placeholder="http://" autocomplete="off" />';
-                    html += '<input type="submit" id="J_GoodsUrlSubmit" class="bbl-btn url-sub" value="确定" /></div>';
-                    html += '<div class="text-tip"></div>';
-                    html += '</form>';
-                    html += '<div class="sg-source">';
-                    html += '<p class="pt5 pb5 fl">已支持的返利网站：</p>';
-                    html += '<div class="source-list fl">';
-                    html += '<a class="icon-source icon-taobao" href="http://www.taobao.com/" target="_blank">淘宝网</a>';
-                    html += '<a class="icon-source icon-tmall" href="http://www.tmall.com/" target="_blank">天猫商城</a>';
-                    html += '</div>';
-                    html += '<div class="clear"></div>';
-                    html += '<p class="contact rc">为了确保您返利成功，请立即下单购买、一气呵成的完成购买，否则，有可能出现丢单的情况</p>';
-                    html += '</div>';
-                    html += '<div class="tipbox-up"><em>◆</em><span>◆</span></div>';
-                    html += '<a class="close" href="javascript:;"></a>';
-                    html += '</div>';
-                    html += '</div>';
-                    $(".btn-rebate").after(html)
-                    var position = $.smeite.util.getPosition($this).leftBottom();
-                    var W = $("#J_RebateGoodsD").outerWidth(),
-                        H = $("#J_RebateGoodsD").outerHeight(),
-                        btnW = $this.outerWidth(),
-                        dLeft = position.x,
-                        tipLeft = btnW/2 -70;
-                    if((position.x + W) > 960){
-                        dLeft = position.x - (W - btnW);
-                        tipLeft = W - btnW/2 -70;
-                    }
-                    $("#J_RebateGoodsD .tipbox-up").css({
-                        left: tipLeft + "px"
-                    });
-                    $("#J_rebateInput").focus();
-                    $("#J_rebateForm").submit(function(){
-                        var $this = $(this);
-                        var flag=true
-                        var url = $.smeite.util.trim($("#J_rebateInput").val());
-                        if(url==""){
-                            $(".text-tip").html('<span class="errc">宝贝网址不能为空~</span>').show();
-                            flag = false
-                        }else if(!$.smeite.util.validSite(url)){
-                            $(".text-tip").html('<span class="errc">暂时还不支持这个网站呢~</span>').show();
-                            flag = false
-                        }else{
-                            $(".text-tip").html('<span class="gc6">宝贝信息抓取中…</span>').show();
-                            $("#J_GoodsUrlSubmit").disableBtn("bbl-btn");
-                        }
-                        return flag
 
-                    });
-                }else{
-                    $("#J_rebateInput").val("");
-                    $(".text-tip").html("");
-                    $("#J_RebateGoodsD").show()
-
-                }
-                $("#J_RebateGoodsD").find(".close").click(function(){
-                    $("#J_GoodsUrlSubmit").enableBtn("bbl-btn");
-                    $("#J_RebateGoodsD").hide()
-                });
-
-            });
-        }
 
         //标签输入框自动转换“,”
         $("input[rel=tagsInput]").live("keyup",function(){
@@ -1927,7 +1851,7 @@ define(function(require, exports) {
             var input=$(".search-input-keyword");
             var inputVal=input.val();
             inputVal=$.smeite.util.trim(inputVal);
-            if(inputVal=="请输入您想要搜索的淘宝商品网址或者关键词"){
+            if(inputVal=="请输入您想要搜索关键词"){
                 input.val("");
                 input.focus();
                 return false;
@@ -1936,28 +1860,14 @@ define(function(require, exports) {
                 input.focus();
                 return false;
             }
-
-            if($.smeite.util.isUrl(inputVal) && !$.smeite.util.validSite(inputVal)){
-                $.smeite.tip.conf.tipClass = "tipmodal tipmodal-ok";
-                $.smeite.tip.show($this,"暂时还不支持这个网站呢~");
-                input.focus();
-                return false;
-            }
-
-
-            form.submit(function(){
-                    if($.smeite.util.validSite(inputVal)){
-                        var numIid= $.smeite.util.getUrlParam(inputVal,'id');
-                        $("#J_keyword").val(numIid)
-                    }
-                });
+            form.submit(function(){});
         });
 
         $(".search-input-keyword").bind("click",function(){
             $("#search").addClass("typing")
             var self=$(this);
             var inputVal=$.smeite.util.trim(self.val());
-            if(inputVal=="请输入您想要搜索的淘宝商品网址或者关键词"){
+            if(inputVal=="请输入您想要搜索关键词"){
                 self.val("");
             }
         });
@@ -1965,7 +1875,6 @@ define(function(require, exports) {
         $(".search-input-keyword").bind("keydown",function(event){
             var keycode=event.which;
             var self=$(this);
-
             var form=self.closest("form");
             var inputVal=self.val();
             inputVal=$.smeite.util.trim(inputVal);
@@ -1974,19 +1883,8 @@ define(function(require, exports) {
                     self.focus();
                     return false;
                 }
-                if($.smeite.util.isUrl(inputVal) && !$.smeite.util.validSite(inputVal)){
-                    $.smeite.tip.conf.tipClass = "tipmodal tipmodal-ok";
-                    $.smeite.tip.show($this,"暂时还不支持这个网站呢~");
-                    input.focus();
-                    return false;
-                }
 
-                form.submit(function(){
-                    if($.smeite.util.validSite(inputVal)){
-                        var numIid= $.smeite.util.getUrlParam(inputVal,'id');
-                        $("#J_keyword").val(numIid)
-                    }
-                });
+                form.submit(function(){});
             }
         });
 
@@ -1995,7 +1893,7 @@ define(function(require, exports) {
             var self=$(this);
             var inputVal=$.smeite.util.trim(self.val());
             if(inputVal==""){
-                self.val("请输入您想要搜索的淘宝商品网址或者关键词");
+                self.val("请输入您想要搜索关键词");
             }
         });
 

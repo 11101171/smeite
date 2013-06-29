@@ -47,7 +47,7 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                                                     <img src='@(pic+"_120x120.jpg")' width="80" height="80" alt="@title" title="@title">
                                                 </a>
                                                 }else{
-                                                <a href="@controllers.ugc.routes.API.gotoTaobao(numIid,0,70)" title="@title" target="_blank">
+                                                <a href="@controllers.ugc.routes.API.gotoTaobao(numIid,0)" title="@title" target="_blank">
                                                     <img src='@(pic+"_120x120.jpg")' width="80" height="80" alt="@title" title="@title">
                                                 </a>
                                                 }
@@ -59,7 +59,7 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                                                 @if(user.isEmpty){
                                                 <a rel="loginD2" data-numiid="@numIid" data-goodsid="0" data-rate="70" class="name ofh"  title="@title">@title </a>
                                                 }else{
-                                                <a class="name ofh" href="@controllers.ugc.routes.API.gotoTaobao(numIid,0,70)" title="@title">@title </a>
+                                                <a class="name ofh" href="@controllers.ugc.routes.API.gotoTaobao(numIid,0)" title="@title">@title </a>
                                                 }
                                             </h3>
                                                 </dt>
@@ -126,7 +126,7 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                                         <img src='@(item.pic+"_80x80.jpg")' width="80" height="80" alt="@item.title" title="@item.title">
                                     </a>
                                     }else{
-                                    <a href="@controllers.ugc.routes.API.gotoTaobao(item.numIid,0,70)" title="@item.title" target="_blank">
+                                    <a href="@controllers.ugc.routes.API.gotoTaobao(item.numIid,0)" title="@item.title" target="_blank">
                                         <img src='@(item.pic+"_80x80.jpg")' width="80" height="80" alt="@item.title" title="@item.title">
                                     </a>
                                     }
@@ -136,7 +136,7 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                                     @if(user.isEmpty){
                                     <a rel="loginD2" data-numiid="@item.numIid" data-goodsid="0" data-rate="70" class="name ofh"  title="@item.title">@item.title </a>
                                     }else{
-                                    <a class="name ofh" href="@controllers.ugc.routes.API.gotoTaobao(item.numIid,0,70)" title="@item.title">@item.title </a>
+                                    <a class="name ofh" href="@controllers.ugc.routes.API.gotoTaobao(item.numIid,0)" title="@item.title">@item.title </a>
                                     }
 
                                     <p>价格：￥<span>@item.price</span></p>

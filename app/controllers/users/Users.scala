@@ -46,8 +46,8 @@ object Users extends Controller {
     val authorStatic=UserDao.findStatic(id)
     val goodses =UserDao.findShareGoodses(id,1,9)
     val  page =UserDao.findPostThemes(author.id.get,1,9)
-    val orders=UserDao.recommendUserOrders(10)
-    Ok(views.html.users.home(user,author,goodses,page,authorStatic,orders) )
+  //  val orders=UserDao.recommendUserOrders(10)
+    Ok(views.html.users.home(user,author,goodses,page,authorStatic) )
   }
 
 

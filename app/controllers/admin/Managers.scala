@@ -108,7 +108,7 @@ object Managers extends Controller {
   }
    /* 每个页面显示40个 然后 淘宝客  在然后 更新商品管理 */
   def getNumIids(p:Int) =AdminAction{    manager => implicit request =>
-    val page:Page[Long] = GoodsDao.getNumiids(p,40);
+    val page:Page[Long] = GoodsDao.getNumiids(p,40)
       Ok(Json.obj("code"->"100","totalPages"->page.totalPages,"nums"->page.items.mkString(",")))
 
   }

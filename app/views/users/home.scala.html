@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],author:models.user.User,goodses:models.Page[models.goods.Goods],page:Page[((Long, String, String,Int),List[Option[String]])],authorStatic:models.user.UserStatic,orders:List[models.user.UserOrder])
+@(user:Option[models.user.User],author:models.user.User,goodses:models.Page[models.goods.Goods],page:Page[((Long, String, String,Int),List[Option[String]])],authorStatic:models.user.UserStatic)
 @views.html.template(
 user,
 title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生活"
@@ -147,33 +147,7 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
     <div class="interest box-shadow plr15 ss">
         <div class="title">最近想购买的宝贝 </div>
         <ul class="interGoods" id="J_InterGoods">
-            @for(item<-orders){
-            <li>
-                <div class="goods-pic">
-                    @if(user.isEmpty){
-                    <a rel="loginD2" data-numiid="@item.numIid" data-goodsid="0" data-rate="70" title="@item.title" target="_blank">
-                        <img src='@(item.pic+"_80x80.jpg")' width="80" height="80" alt="@item.title" title="@item.title">
-                    </a>
-                    }else{
-                    <a href="@controllers.ugc.routes.API.gotoTaobao(item.numIid,0,70)" title="@item.title" target="_blank">
-                        <img src='@(item.pic+"_80x80.jpg")' width="80" height="80" alt="@item.title" title="@item.title">
-                    </a>
-                    }
 
-                </div>
-                <div class="goods-info">
-                    @if(user.isEmpty){
-                    <a rel="loginD2" data-numiid="@item.numIid" data-goodsid="0" data-rate="70" class="name ofh"  title="@item.title">@item.title </a>
-                    }else{
-                    <a class="name ofh" href="@controllers.ugc.routes.API.gotoTaobao(item.numIid,0,70)" title="@item.title">@item.title </a>
-                    }
-
-                    <p>价格：￥<span>@item.price</span></p>
-                    <p>返利：<span>@item.credits</span>个集分宝</p>
-                    <p>返利比例:<span>@(item.withdrawRate/100.0)%</span></p>
-                </div>
-            </li>
-            }
 
 
 

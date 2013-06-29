@@ -1757,3 +1757,11 @@ CREATE TABLE `user_love_post` (
   `add_time` timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+/*
+ 20130629
+*/
+alter table goods change detail_url content text;
+update goods set content ="";
+alter table goods change rate location varchar(32);

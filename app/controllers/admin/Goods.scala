@@ -18,7 +18,7 @@ import models.goods.ShopDao
 
 
 case class GoodsFormData(id:Long,isMember:Boolean,loveNum:Int,intro:String,promotionPrice:Option[String],name:String,pic:String,clickUrl:String)
-case class GoodsBatchFormData(action:Int,ids:Seq[Long],rates:Seq[Int],url:Option[String])
+case class GoodsBatchFormData(action:Int,ids:Seq[Long],url:Option[String])
 case  class GoodsFilterFormData(goodsId:Option[Long],status:Option[Int],isMember:Option[Boolean],idOrder:Option[String],collectTimeOrder:Option[String],loveNumOrder:Option[String],currentPage:Option[Int])
 case  class GoodsCollectFormData(title:String,numIid:Long,price:String,volume:Int,promotionPrice:Option[String])
 case  class AssessFilterFormData(checkState:Option[Int],currentPage:Option[Int])
@@ -52,7 +52,6 @@ object Goods extends Controller {
     mapping(
       "action"->number,
       "ids"->seq(longNumber),
-      "rates"->seq(number),
       "url"->optional(text)
     )(GoodsBatchFormData.apply)(GoodsBatchFormData.unapply)
   )
@@ -127,7 +126,7 @@ object Goods extends Controller {
   /* edit goods */
   def edit(id:Long)  = Managers.AdminAction{manager => implicit request =>
      val  goods =GoodsDao.findById(id)
-     Ok(views.html.admin.goods.editGoods(manager,goodsForm.fill(GoodsFormData(goods.get.id.get,goods.get.isMember,goods.get.loveNum,goods.get.intro,goods.get.promotionPrice,goods.get.name,goods.get.pic,goods.get.clickUrl.getOrElse("")))))
+     Ok(views.html.admin.goods.editGoods(manager,goodsForm.fill(GoodsFormData(goods.get.id.get,goods.get.isMember,goods.get.loveNum,goods.get.intro,goods.get.promotionPrice,goods.get.name,goods.get.pic,goods.get.clickUrl))))
   }
 
   /* save goods*/
@@ -209,14 +208,6 @@ object Goods extends Controller {
           }else if (batch.action ==4){
             for(id<-batch.ids){
               GoodsDao.deleteGoods(id)
-            }
-          } else if(batch.action ==5){
-            for((id,i)<-batch.ids.view.zipWithIndex){
-              GoodsDao.modifyRate(id,batch.rates(i))
-            }
-          } else if(batch.action ==6){
-            for((id,i)<-batch.ids.view.zipWithIndex){
-              GoodsDao.modifyRate(id,batch.rates(i))
             }
           }
           Redirect(batch.url.getOrElse("/admin/goods/list"))

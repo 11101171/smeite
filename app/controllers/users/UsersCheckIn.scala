@@ -73,9 +73,9 @@ object UsersCheckIn extends Controller {
       var checkInDays=0
       /* todo 以后根据用户的喜好推荐 */
       val goods = AdvertDao.getGoods("checkIn").head
-      val jifenbao=(goods.promotionPrice.getOrElse("0").toDouble*goods.commissionRate.getOrElse(0)*goods.rate*0.0001).toInt
+      val jifenbao=(goods.promotionPrice.getOrElse("0").toDouble*goods.commissionRate.getOrElse(0)*70*0.0001).toInt
       val jifenbaoValue = jifenbao/100.0
-      val recommendGoods = new RecommendGoods(goods.id.get,goods.numIid,goods.rate,goods.pic+"_160x160.jpg",goods.name,goods.promotionPrice.get,jifenbao.toString,jifenbaoValue.toString)
+      val recommendGoods = new RecommendGoods(goods.id.get,goods.numIid,70,goods.pic+"_160x160.jpg",goods.name,goods.promotionPrice.get,jifenbao.toString,jifenbaoValue.toString)
       /*
       * 首先判断checkIn 是否存在，不存在 在添加（用户第一次签到）
       *  如果存在

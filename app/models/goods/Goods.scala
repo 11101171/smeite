@@ -31,16 +31,16 @@ case class Goods(
                   itemPics: String,
                   nick: String,
                   promotionPrice:Option[String],
-                  detailUrl:String,
+                  content:Option[String],
                   loveNum: Int,
                   volume: Int,
                   status: Int,
                   isMember: Boolean,
-                  rate:Int,
+                  location:String,
                   commissionRate: Option[Int],
                   uid:Long,
                   collectTime:Option[Timestamp],
-                  clickUrl:Option[String]
+                  clickUrl:String
                   )
 
 object Goodses extends Table[Goods]("goods") {
@@ -54,18 +54,18 @@ object Goodses extends Table[Goods]("goods") {
   def itemPics = column[String]("item_pics")
   def nick = column[String]("nick")
   def promotionPrice = column[String]("promotion_price")
-  def detailUrl = column[String]("detail_url")
+  def content = column[String]("content")
   def loveNum = column[Int]("love_num")
   def volume = column[Int]("volume")
   def status = column[Int]("status")
   def isMember = column[Boolean]("is_member")
-  def rate     = column[Int]("rate")
+  def location     = column[String]("location")
   def commissionRate = column[Int]("commission_rate")
   def uid = column[Long]("uid")
   def collectTime=column[Timestamp]("collect_time")
   def clickUrl=column[String]("click_url")
-  def * = id.? ~ numIid ~ hwRate ~ name ~ intro ~ price ~ pic ~ itemPics ~ nick ~ promotionPrice.? ~ detailUrl ~ loveNum ~ volume ~ status ~ isMember ~ rate ~ commissionRate.? ~ uid ~ collectTime.? ~ clickUrl.? <>(Goods, Goods.unapply _)
-  def autoInc = uid ~ numIid  ~ name ~ intro ~ price ~ pic ~ itemPics ~ nick  ~ detailUrl ~ hwRate  returning id
+  def * = id.? ~ numIid ~ hwRate ~ name ~ intro ~ price ~ pic ~ itemPics ~ nick ~ promotionPrice.? ~ content.? ~ loveNum ~ volume ~ status ~ isMember ~ location ~ commissionRate.? ~ uid ~ collectTime.? ~ clickUrl <>(Goods, Goods.unapply _)
+  def autoInc = uid ~ numIid  ~ name ~ intro ~ price ~ pic ~ itemPics ~ nick  ~ clickUrl ~ hwRate  returning id
 
 
 }

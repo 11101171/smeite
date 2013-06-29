@@ -153,7 +153,7 @@
                     <th>numIid</th>
                     <th>价格/促销价/月销售量</th>
                     <th>佣金比例</th>
-                    <th>返还比例</th>
+
                     <th>图片</th>
                     <th>淘宝客链接</th>
                     <th>是否推荐</th>
@@ -170,7 +170,7 @@
                     <td>@item.numIid</td>
                     <td>@item.price / @item.promotionPrice / @item.volume </td>
                     <td>@(item.commissionRate.getOrElse(0)*0.01)%</td>
-                    <td><input type="number" name="rates[@i]" value="@item.rate"></td>
+
                     <td><a href="@controllers.routes.Baobei.view(item.id.get)" target="_blank"><img src='@(item.pic+"_80x80.jpg")' width="80" height="80"></a></td>
                     <td><input type="text" name="clickUrl[@i]" value="@item.clickUrl" /> </td>
                     <td>@if(item.isMember){<span class="label label-success">YES</span>}else{<span class="label">NO</span>} </td>

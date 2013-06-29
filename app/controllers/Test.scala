@@ -1,7 +1,7 @@
 package controllers
 
 import play.api.mvc.{Action, Controller}
-import models.msg.{Msg, MsgDao}
+
 
 import play.api.Play.current
 import models.tag.dao.TagDao

@@ -85,7 +85,6 @@ POST  /user/account/modifyPayment      controllers.users.UsersAccount.modifyPaym
 POST  /user/giveUpGift                 controllers.users.UsersAccount.giveUpGift
 POST  /user/giveGift                   controllers.users.UsersAccount.giveGift
 #user 用户返利
-GET   /user/account/myOrders           controllers.users.UsersCommission.myOrders(p:Int ?=1,s:Int ?=1)
 GET   /user/account/myCredits          controllers.users.UsersCommission.myCredits(p:Int ?=1)
 GET   /user/account/myShiDou          controllers.users.UsersCommission.myShiDou(p:Int ?=1)
 GET   /user/account/myAward           controllers.users.UsersCommission.myAward
@@ -184,13 +183,10 @@ GET   /root.txt                                        controllers.Infos.alimama
 #用户生成的ugc
 GET     /ugc/api/findProduct                       controllers.ugc.API.findProduct(url:String)
 POST    /ugc/api/saveProduct                       controllers.ugc.API.saveProduct
-GET     /ugc/api/convertProduct/$id<[0-9]+>        controllers.ugc.API.convertProduct(id:Long)
-GET     /ugc/api/convertError                      controllers.ugc.API.convertError(error:String ?="")
-GET     /ugc/api/gotoTaobao/$numIid<[0-9]+>        controllers.ugc.API.gotoTaobao(numIid:Long,goodsId:Long ?=0,rate:Int ?=70)
+GET     /ugc/api/gotoTaobao/$numIid<[0-9]+>        controllers.ugc.API.gotoTaobao(numIid:Long,goodsId:Long ?=0)
 POST    /ugc/api/updateProduct                     controllers.ugc.API.updateProduct
 POST    /ugc/api/ajaxRecord                        controllers.ugc.API.ajaxRecord
 
-GET    /ugc/api/rebateProduct                     controllers.ugc.API.rebateProduct(url:String)
 
 
 
