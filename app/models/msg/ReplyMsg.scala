@@ -24,6 +24,6 @@ object ReplyMsgs extends Table[ReplyMsg]("reply_msg") {
   def ownerId = column[Long]("owner_id")
   def addTime = column[Timestamp]("add_time")
   def * = id.? ~ replierId ~ replierName ~ replyType ~ thirdId  ~ content ~ ownerId   ~ addTime.? <>(ReplyMsg, ReplyMsg.unapply _)
-  def autoId =id.? ~ replierId ~ replierName ~ replyType ~ thirdId  ~ content ~ ownerId   ~ addTime.? <>(ReplyMsg, ReplyMsg.unapply _) returning id
-  def autoId2 =replierId ~ replierName ~ replyType ~ thirdId  ~ content ~ ownerId   returning id
+  def autoInc =id.? ~ replierId ~ replierName ~ replyType ~ thirdId  ~ content ~ ownerId   ~ addTime.? <>(ReplyMsg, ReplyMsg.unapply _) returning id
+  def autoInc2 =replierId ~ replierName ~ replyType ~ thirdId  ~ content ~ ownerId   returning id
 }

@@ -68,13 +68,13 @@ object GoodsDao {
   /*分页显示*/
   def findAll(currentPage: Int, pageSize: Int): Page[Goods] = database.withSession {  implicit session:Session =>
     val totalRows=Query(Goodses.length).first()
-    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val totalPages=((totalRows + pageSize - 1) / pageSize)
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for(c<-Goodses.sortBy(_.id desc).drop(startRow).take(pageSize)  ) yield(c)
     //println(" q sql "+q.selectStatement)
     val goodses:List[Goods]=  q.list()
-    Page[Goods](goodses,currentPage,totalPages);
+    Page[Goods](goodses,currentPage,totalPages)
   }
 
   /*  goods assess */

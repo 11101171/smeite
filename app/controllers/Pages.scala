@@ -61,10 +61,10 @@ import java.util.Calendar
   * */
 
   def faxian(cid:Int,tagCode:Int,s:Int,p:Int) = Users.UserAction{ user => implicit request =>
-    val ccid = cid -1
-    val tags = TagDao.findCateTags(ccid,30)
+
+    val tags = TagDao.findCateTags(cid,30)
     var page:models.Page[(models.user.User,models.goods.Goods)] = null
-    if (tagCode == 0 )  page = TagDao.findSimpleCateGoodses(ccid,s,p,48)
+    if (tagCode == 0 )  page = TagDao.findSimpleCateGoodses(cid,s,p,48)
     else   page = TagDao.findSimpleTagGoodses(tagCode,s,p,48)
     Ok(views.html.pages.faxian(user,page,cid,tagCode,tags,s))
   }

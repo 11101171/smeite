@@ -2799,7 +2799,7 @@ a:hover i.ico-likes {
     float: left;
     display: inline;
     width: 150px;
-    margin-right:30px;
+    margin-right:10px;
 }
 
 #footer .footer-nav dt {
@@ -2850,11 +2850,11 @@ a.f-tencent {
 #footer .footer-erweima {
     position: absolute;
     right: 0;
-    top: 30px;
-    width: 85px;
+    top: 10px;
+    width:200px;
     height: 36px;
-    padding-top: 87px;
-    background: url(images/footer-erweima-ico.png) no-repeat center top
+    padding-top:205px;
+    background: url(images/erweima200.png) no-repeat center top
 }
 
 #footer .footer-erweima p {
@@ -2878,7 +2878,7 @@ a.f-tencent {
     float: left;
     overflow: hidden;
     height: 22px;
-    width: 820px
+    width:700px
 }
 
 #footer .global-friend-links .friend-links-item  a {

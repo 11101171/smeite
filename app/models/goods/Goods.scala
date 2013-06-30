@@ -17,7 +17,6 @@ import java.sql.{ Timestamp}
  * Time: 上午11:11
  * ***********************
  * description: 宝贝
- * rate  是在commission——rate 的基础上的折扣
  */
 
 case class Goods(

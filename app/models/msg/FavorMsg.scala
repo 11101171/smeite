@@ -25,6 +25,5 @@ object FavorMsgs extends Table[FavorMsg]("favor_msg") {
   def lovedId = column[Long]("loved_id")
   def addTime = column[Timestamp]("add_time")
   def * = id.? ~ loverId ~ loverName ~ favorType ~ thirdId  ~ content ~ lovedId   ~ addTime.? <>(FavorMsg, FavorMsg.unapply _)
-  def autoId =id.? ~ loverId ~ loverName ~ favorType ~ thirdId  ~ content ~ lovedId   ~ addTime.? <>(FavorMsg, FavorMsg.unapply _) returning id
-  def autoId2 = loverId ~ loverName ~ favorType ~ thirdId  ~ content ~ lovedId   returning id
+  def autoInc = loverId ~ loverName ~ favorType ~ thirdId ~ content ~ lovedId   returning id
 }
