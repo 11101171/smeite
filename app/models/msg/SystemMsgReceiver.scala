@@ -27,5 +27,5 @@ object SystemMsgReceivers extends Table[SystemMsgReceiver]("system_msg_receiver"
   def status = column[Int]("status")
   def * = id.? ~ msgId ~ receiverId ~ receiverName  ~ status <>(SystemMsgReceiver, SystemMsgReceiver.unapply _)
   def autoId =id.? ~ msgId ~ receiverId ~ receiverName ~ status  <>(SystemMsgReceiver, SystemMsgReceiver.unapply _) returning id
-  def autoId2 =msgId ~ receiverId ~ receiverName ~ status  returning id
+  def autoId2 =msgId ~ receiverId ~ receiverName  returning id
 }

@@ -1015,11 +1015,11 @@ CREATE TABLE IF NOT EXISTS `at_msg`(
 
    DROP TABLE IF EXISTS `system_msg`;
 CREATE TABLE IF NOT EXISTS `system_msg`(
-       `id` int(10) NOT NULL AUTO_INCREMENT,
-  `title`                varchar(32) not null default 'smeite',
-  `content`                varchar(255) not null default '',
-  `status`               tinyint not null default '1',
-  `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+       `id`                 int(10) NOT NULL AUTO_INCREMENT,
+       `title`                varchar(32) not null default 'smeite',
+       `content`                varchar(255) not null default '',
+       `status`               tinyint not null default '1',
+       `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -1029,7 +1029,7 @@ CREATE TABLE IF NOT EXISTS `system_msg_receiver`(
        `msg_id`                    int(10) not null default '1',
        `receiver_id`                int(10) not null default '0',
        `receiver_name`             varchar(32) not null default '',
-      `status`                tinyint not null default '0',
+       `status`                tinyint not null default '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
