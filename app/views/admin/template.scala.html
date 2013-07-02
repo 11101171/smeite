@@ -40,7 +40,7 @@
         <div id="sidebar">
             <a href="#" class="visible-phone"><i class="icon icon-home"></i>smeite.com</a>
             <ul>
-                <li class="submenu @if(nav=="home"){active open} ">
+                <li class='submenu @if(nav=="home"){active open} '>
                     <a href="#"><i class="icon icon-home"></i> <span>控制面板</span></a>
                     <ul>
                         <li><a href="@controllers.admin.routes.Managers.index">后台首页</a></li>
@@ -48,14 +48,14 @@
                         <li><a>缓存管理</a></li>
                     </ul>
                 </li>
-                <li class="submenu @if(nav=="theme"){active open} ">
+                <li class='submenu @if(nav=="theme"){active open}'>
                     <a href="#"><i class="icon icon-th-list"></i> <span>主题管理</span></a>
                     <ul>
                         <li><a href="@controllers.admin.routes.Themes.list(1)">主题管理</a></li>
                         <li><a href="@controllers.admin.routes.Themes.discusses(1)">主题评论管理</a></li>
                     </ul>
                 </li>
-                <li class="submenu @if(nav=="goods"){active open}">
+                <li class='submenu @if(nav=="goods"){active open}'>
                     <a href="#"><i class="icon icon-th-list"></i> <span>宝贝管理</span></a>
                     <ul>
                         <li><a href="@controllers.admin.routes.Goods.list(1)">宝贝管理</a></li>
@@ -64,7 +64,7 @@
                     </ul>
                 </li>
 
-                <li class="submenu @if(nav=="tag"){active open}">
+                <li class='submenu @if(nav=="tag"){active open}'>
                     <a href="#"><i class="icon icon-th-list"></i> <span>标签管理</span></a>
                     <ul>
                         <li><a href="@controllers.admin.routes.Tags.groupList(1)">标签组管理</a></li>
@@ -73,7 +73,7 @@
                     </ul>
                 </li>
 
-                <li class="submenu @if(nav=="user"){active open}">
+                <li class='submenu @if(nav=="user"){active open}'>
                     <a href="#"><i class="icon icon-th-list"></i> <span>用户管理</span></a>
                     <ul>
                         <li><a href="@controllers.admin.routes.Users.list(1)">用户管理</a></li>
@@ -85,14 +85,14 @@
                     </ul>
                 </li>
 
-                <li class="submenu @if(nav=="topic"){active open}">
+                <li class='submenu @if(nav=="topic"){active open}'>
                 <a href="#"><i class="icon icon-th-list"></i> <span>讨论吧管理</span></a>
                 <ul>
                     <li><a href="@controllers.admin.routes.Forums.list(1)">话题管理</a></li>
                     <li><a href="@controllers.admin.routes.Forums.replies(1)">评论管理</a></li>
                 </ul>
             </li>
-                <li class="submenu @if(nav=="channel"){active open}">
+                <li class='submenu @if(nav=="channel"){active open}'>
                     <a href="#"><i class="icon icon-th-list"></i> <span>频道管理</span></a>
                     <ul>
                         <li><a href='@controllers.admin.routes.Adverts.channel("index")'>首页频道管理</a></li>
@@ -102,14 +102,21 @@
                         <li><a href='@controllers.admin.routes.Adverts.channel("miss")'>主题频道管理</a></li>
                     </ul>
                 </li>
-                <li class="submenu @if(nav=="vote"){active open}">
+                <li class='submenu @if(nav=="msg"){active open}'>
+                <a href="#"><i class="icon icon-th-list"></i> <span>站内信</span></a>
+                <ul>
+                    <li><a href='@controllers.admin.routes.Msgs.system(1)'>系统站内信</a></li>
+                </ul>
+                </li>
+
+                <!--  站内信 -->
+                <li class='submenu @if(nav=="vote"){active open}'>
                 <a href="#"><i class="icon icon-th-list"></i> <span>调查投票管理</span></a>
                 <ul>
                     <li><a href='@controllers.admin.routes.Votes.votes(1)'>调查投票管理</a></li>
 
                 </ul>
                 </li>
-
             </ul>
 
         </div>

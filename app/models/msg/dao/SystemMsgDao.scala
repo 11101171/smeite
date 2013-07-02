@@ -55,4 +55,6 @@ object SystemMsgDao {
     (for( c<-SystemMsgReceivers.filter(_.msgId === msgId ).filter(_.receiverId === receiverId ) )yield c ).delete
   }
 
+
+
 }
