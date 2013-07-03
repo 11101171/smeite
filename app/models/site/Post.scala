@@ -3,7 +3,7 @@ package models.site
 import java.sql.Timestamp
 import scala.slick.driver.MySQLDriver.simple._
 
-case  class Post(
+case  class  Post(
                   id: Option[Long],
                   uid:Long,
                   sid:Long,
@@ -47,6 +47,6 @@ object Posts extends Table[Post]("post") {
   // Every table needs a * projection with the same type as the table's type parameter
   def * = id.? ~ uid ~ sid ~ cid ~ title ~ pic ~ content ~ tags.? ~ status ~ isTop ~ viewNum ~ extraAttr1.? ~ extraAttr2.? ~ extraAttr3.? ~ extraAttr4.? ~ extraAttr5.? ~ extraAttr6.?  ~addTime.? <>(Post, Post.unapply _)
   def autoInc = id.? ~ uid ~ sid ~ cid ~ title ~ pic ~ content ~ tags.? ~ status ~ isTop ~ viewNum ~ extraAttr1.? ~ extraAttr2.? ~ extraAttr3.? ~ extraAttr4.? ~ extraAttr5.? ~ extraAttr6.?  ~addTime.? <>(Post, Post.unapply _) returning id
-
+  def autoInc2 = uid ~ sid ~ cid ~ title ~ pic ~ content ~ tags ~ extraAttr1 ~ extraAttr2 ~ extraAttr3 ~ extraAttr4 ~ extraAttr5 ~ extraAttr6  returning id
 
 }
