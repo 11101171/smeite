@@ -24,8 +24,8 @@ case class TagGroup(
                      name: String,
                      pic:String,
                      intro:Option[String],
-                     cid:Int,
-                     hotIndex:Int,
+                     cid:Option[Int],
+                     code:Int,
                      isVisible:Boolean,
                      sortNum:Int,
                      seoTitle:Option[String],
@@ -41,8 +41,8 @@ object TagGroups extends Table[TagGroup]("tag_group") {
   def name = column[String]("name")
   def pic = column[String]("pic")
   def intro = column[String]("intro")
-  def cid = column[Int]("cid")
-  def hotIndex     =column[Int]("hot_index")
+  def cid     =column[Int]("cid")
+  def code     =column[Int]("code")
   def isVisible = column[Boolean]("is_visible")
   def sortNum = column[Int]("sort_num")
   def seoTitle = column[String]("seo_title")
@@ -52,7 +52,7 @@ object TagGroups extends Table[TagGroup]("tag_group") {
   def addTime=column[Timestamp]("add_time")
 
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ name ~ pic ~ intro.? ~ cid  ~ hotIndex ~ isVisible ~ sortNum ~ seoTitle.? ~ seoKeywords.? ~ seoDesc.?  ~ modifyTime.? ~addTime.? <>(TagGroup, TagGroup.unapply _)
+  def * = id.? ~ name ~ pic ~ intro.? ~ cid.?  ~ code ~ isVisible ~ sortNum ~ seoTitle.? ~ seoKeywords.? ~ seoDesc.?  ~ modifyTime.? ~addTime.? <>(TagGroup, TagGroup.unapply _)
 }
 
 

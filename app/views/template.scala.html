@@ -11,7 +11,6 @@
     <link rel="shortcut icon" type="image/png" href="/assets/favicon.png">
     <link rel="stylesheet" href="/assets/css/global/global.css?v=2013052601">
     <link rel="stylesheet" href="@css?v=2013052601">
-    <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21136607"></script>
 </head>
 <body id="J_Page">
 
@@ -22,8 +21,7 @@
         <div class="container clearfix">
             <div class="hd-left">
                 <a href="/" class="logo">
-                    <span class="logo-img"> <img src="/assets/ui/logo.png"></span>
-                    <span class="logo-intro">美食&nbsp;生活&nbsp;社区</span>
+                    <span class="logo-img"> <img src="/assets/ui/logo2.png"></span>
                 </a>
 
             </div>
@@ -49,26 +47,27 @@
             <ul class="channel clearfix">
                 <li class=' @("on".when(nav == "index")) '><a href="/">首页</a></li>
                 <li><span>-</span></li>
-                <li class='@("on".when(nav == "美食"))'><a href='@controllers.routes.Pages.faxian("美食","tag",1,1)'>美食</a></li>
-                <li class='@("on".when(nav == "特产"))'><a href='@controllers.routes.Pages.faxian("特产","tag",1,1)'>特产</a></li>
-                <li  class='@("on".when(nav == "居家"))'><a href='@controllers.routes.Pages.faxian("居家","tag",1,1)'>居家</a></li>
-                <li  class='@("on".when(nav == "好玩意"))'><a href='@controllers.routes.Pages.faxian("好玩意","tag",1,1)'>好玩意</a></li>
-                <li><span>-</span></li>
-                <li  class='choice @("on".when(nav == "choice"))'><a href='@controllers.routes.Pages.choice'>天天特价</a></li>
-                <li><span>-</span></li>
+                <li class='@("on".when(nav == "零食"))'><a href='@controllers.routes.Pages.faxian(1,0,1,1)'>零食</a></li>
+                <li class='@("on".when(nav == "食材"))'><a href='@controllers.routes.Pages.faxian(2,0,1,1)'>食材</a></li>
+                <li  class='@("on".when(nav == "居家"))'><a href='@controllers.routes.Pages.faxian(3,0,1,1)'>居家</a></li>
 
-                <li class='@("on".when(nav == "miss"))'>  <a href="@controllers.routes.Pages.miss" >主题</a> </li>
                 <li><span>-</span></li>
-                <li class='@("on".when(nav == "forum"))'><a href="@controllers.routes.Forums.forum(1)" >讨论吧</a></li>
+                <li class='presell @("on".when(nav == "presell"))  '><a href="/presell">生鲜预售</a></li>
+                <li class='worth @("on".when(nav == "worth"))  '><a href="/worth">今天值得买</a></li>
 
+                <li><span>-</span></li>
+                <li class='@("on".when(nav == "themes"))'>  <a href="/themes" >主题</a> </li>
+                <li><span>-</span></li>
+               <li class='@("on".when(nav == "cookbook"))'><a href="/cookbook" >私房菜</a></li>
+                <li class='@("on".when(nav == "site"))'><a href="/site" >小镇</a></li>
+                
             </ul>
             <!-- 签到 -->
                 <a class="btn-checkIn fr" href="javascript:;" rel="checkIn">签到</a>
-            <!-- 查询返利 -->
-            <a class="btn-rebate fr" href="javascript:;" rel="rebateGoods">查返利</a>
+
             <!--分享宝贝-->
             <div class="shareIt fr">
-                <a  class="btn-sg" href="javascript:;">分享好东西<span class="arrow-dn"></span></a>
+                <a  class="btn-sg btn-rebate" href="javascript:;">分享好东西</a>
                 <ul class="dropdown shareit-dropdown" >
                     <li class="sg-li"><a rel="shareGoods" href="javascript:;" class="hd-share-goods">发布宝贝</a></li>
                     <li><a href="@controllers.routes.Themes.edit(0)" rel="createTheme" class="hd-create-topic">创作主题</a></li>
@@ -100,12 +99,10 @@
                     <ul class="dropdown set-dropdown" >
                         <li><a href="@controllers.users.routes.Users.home(user.get.id.get)">我的主页</a></li>
                         <li><a href="@controllers.users.routes.UsersAccount.base">帐号设置</a></li>
-                        <li><a href="@controllers.users.routes.UsersCommission.myCredits(1)"><span class="rc">我的返利</span></a></li>
+                        <li><a href="@controllers.users.routes.UsersCommission.myShiDou(1)"><span class="rc">我的食豆</span></a></li>
                         <li class="last"><a href="@controllers.users.routes.UsersRegLogin.logout">退出</a></li>
                     </ul>
                 </div>
-
-
             }
 
 
@@ -144,8 +141,8 @@
                         </dl>
                         <dl class="how">
                             <dt>爱上食美特</dt>
-                            <dd><a href="/jie" target="_blank">爱上美食</a></dd>
-                            <dd><a href="/miss" target="_blank">爱上生活</a></dd>
+                            <dd><a href="/themes" target="_blank">爱上美食</a></dd>
+                            <dd><a href="/themes" target="_blank">爱上生活</a></dd>
                             <dd><a href="/forum/view/1" target="_blank">提建议</a></dd>
                         </dl>
                         <dl class="service">
@@ -157,8 +154,8 @@
                     </div>
 
                     <div class="footer-erweima">
-                        <p>扫微信二维码</p>
-                        <p>每天有奖问答</p>
+                        <p>扫微信二维码,每天有奖问答</p>
+
                     </div>
                 </div>
             </div>
@@ -227,6 +224,12 @@
 @js
 
 <div class="baidu">
+    <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=759372" ></script>
+    <script type="text/javascript" id="bdshell_js"></script>
+    <script type="text/javascript">
+        var bds_config={"snsKey":{'tsina':'1464940004','tqq':'100344510','t163':'','tsohu':''}}
+        document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+    </script>
     <script type="text/javascript">
         var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
         document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F6cba5098cc3632d97fa135fcba29a93e' type='text/javascript'%3E%3C/script%3E"));

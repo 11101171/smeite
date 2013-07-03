@@ -21,8 +21,8 @@ import java.sql.Timestamp
 object GoodsDao {
   lazy val database = Database.forDataSource(DB.getDataSource())
   /*保存*/
-  def addGoods(uid:Long,numIid:Long,name: String,intro: String,price:String,pic: String,itemPics: String,nick:String,detailUrl:String,hwRate:Float):Long=database.withSession {  implicit session:Session =>
-    Goodses.autoInc.insert(uid,numIid,name,intro,price,pic,itemPics,nick,detailUrl,hwRate)
+  def addGoods(uid:Long,numIid:Long,name: String,intro: String,price:String,pic: String,itemPics: String,nick:String,clickUrl:String,hwRate:Float):Long=database.withSession {  implicit session:Session =>
+    Goodses.autoInc.insert(uid,numIid,name,intro,price,pic,itemPics,nick,clickUrl,hwRate)
 
   }
   /* delete 删除goods 需要把相关的信息删除 */
@@ -38,9 +38,7 @@ object GoodsDao {
   def modifyStatus(goodsId:Long,status:Int) = database.withSession {  implicit session:Session =>
     (for (c<-Goodses if c.id === goodsId)yield c.status ).update(status)
   }
-  def modifyRate(goodsId:Long,rate:Int) = database.withSession {  implicit session:Session =>
-    (for (c<-Goodses if c.id === goodsId)yield c.rate ).update(rate)
-  }
+
   def modifyClickUrl(goodsId:Long,clickUrl:String)= database.withSession {  implicit session:Session =>
     (for (c<-Goodses if c.id === goodsId)yield c.clickUrl ).update(clickUrl)
   }
@@ -70,13 +68,13 @@ object GoodsDao {
   /*分页显示*/
   def findAll(currentPage: Int, pageSize: Int): Page[Goods] = database.withSession {  implicit session:Session =>
     val totalRows=Query(Goodses.length).first()
-    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val totalPages=((totalRows + pageSize - 1) / pageSize)
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for(c<-Goodses.sortBy(_.id desc).drop(startRow).take(pageSize)  ) yield(c)
     //println(" q sql "+q.selectStatement)
     val goodses:List[Goods]=  q.list()
-    Page[Goods](goodses,currentPage,totalPages);
+    Page[Goods](goodses,currentPage,totalPages)
   }
 
   /*  goods assess */

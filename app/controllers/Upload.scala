@@ -40,7 +40,7 @@ object Upload extends Controller{
       //println(filename)
       if(Utils.isImage(filename)){
         picture.ref.moveTo(new File("/opt/static/images/adv/"+filename),true)
-        val src ="/images/adv/"+filename;
+        val src ="/images/adv/"+filename
         Ok(Json.obj("code"->"100","message"->"success","src"->src))
 
       }else{
@@ -90,41 +90,81 @@ object Upload extends Controller{
     }
   }
 
-  /*上传 用户头像图片*/
-  def uploadUserPic =Action(parse.multipartFormData)  {   request =>
+  /*上传 用户头像图片 todo  需要在上线时 修改图片路径  */
+  def uploadImageSelectPic =Action(parse.multipartFormData)  {   request =>
     request.body.file("filedata").map { picture =>
     //  val filename = picture.filename
       val filename =System.currentTimeMillis()+(picture.filename.substring(picture.filename.lastIndexOf(".")))
       if(Utils.isImage(filename)){
-
-        picture.ref.moveTo(new File("/opt/static/images/temp/"+filename),true)
-        Thumbnails.of(new File("/opt/static/images/temp/"+filename)).size(300,300).toFile(new File("/opt/static/images/temp/"+filename))
+    //    picture.ref.moveTo(new File("/opt/static/images/temp/"+filename),true)
+        picture.ref.moveTo(new File("public/images/temp/"+filename),true)
+   //     Thumbnails.of(new File("/opt/static/images/temp/"+filename)).size(300,300).toFile(new File("/opt/static/images/temp/"+filename))
+        Thumbnails.of(new File("public/images/temp/"+filename)).size(300,300).toFile(new File("public/images/temp/"+filename))
         val picSrc ="/images/temp/"+filename
-        Ok(views.html.common.uploadUserPicSuccess(true,picSrc))
+        Ok(views.html.common.uploadImageSelectSuccess(true,picSrc))
       }else{
-        Ok(views.html.common.uploadUserPicSuccess(false,"亲，服务器欧巴桑了，请重试"))
+        Ok(views.html.common.uploadImageSelectSuccess(false,"亲，服务器欧巴桑了，请重试"))
       }
 
     }.getOrElse {
-      Ok(views.html.common.uploadUserPicSuccess(false,"亲，服务器欧巴桑了，请重试"))
+      Ok(views.html.common.uploadImageSelectSuccess(false,"亲，服务器欧巴桑了，请重试"))
     }
   }
 
-  /*上传图片，用户截取图片*/
+  /*上传图片，用户截取图片  todo  需要在上线时 修改图片路径    */
   def doUploadUserPic =Users.UserAction {   user => implicit request =>
     picForm.bindFromRequest.fold(
       formWithErrors => BadRequest("something is wrong")  ,
       fields =>{
-        val   picName:String=System.currentTimeMillis()+".jpg";
-        val src ="/opt/static"+fields._1
-        Thumbnails.of(src).sourceRegion(fields._2,fields._3,(fields._4-fields._2),(fields._5-fields._3)).size((fields._4-fields._2),(fields._5-fields._3)).toFile("/opt/static/images/user/"+picName)
+        val   picName:String=fields._1.substring(fields._1.lastIndexOf("/"))
+     //   val src ="/opt/static"+fields._1
+        val src = "public"+fields._1
+    //    Thumbnails.of(src).sourceRegion(fields._2,fields._3,(fields._4-fields._2),(fields._5-fields._3)).size((fields._4-fields._2),(fields._5-fields._3)).toFile("/opt/static/images/user/"+picName)
+        Thumbnails.of(src).sourceRegion(fields._2,fields._3,(fields._4-fields._2),(fields._5-fields._3)).size((fields._4-fields._2),(fields._5-fields._3)).toFile("public/images/user/"+picName)
         val picSrc:String= "/images/user/"+picName
-        UserDao.modifyPic(user.get.id.get,picSrc);
+        UserDao.modifyPic(user.get.id.get,picSrc)
         Ok(Json.obj("code"->"100","src"->picSrc))
       }
     )
   }
 
+  /*上传图片，用户截取图片  todo  需要在上线时 修改图片路径    */
+  def uploadSitePic=Action(parse.multipartFormData) { request =>
+    request.body.file("fileData").map { picture =>
+    //  val filename = picture.filename
+      val filename =System.currentTimeMillis()+(picture.filename.substring(picture.filename.lastIndexOf(".")))
+      //println(filename)
+      if(Utils.isImage(filename)){
+        picture.ref.moveTo(new File("public/images/temp/"+filename),true)
+        Thumbnails.of(new File("public/images/temp/"+filename)).size(300,300).toFile(new File("public/images/site/"+filename))
+        val src ="/images/site/"+filename
+        Ok(Json.obj("code"->"100","msg"->"success","src"->src))
 
+      }else{
+        Ok(Json.obj("code"->"104","msg"->"fail"))
+      }
+
+    }.getOrElse {
+      Ok("File uploaded error")
+    }
+  }
+
+
+  /*上传图片，用户截取图片  todo  需要在上线时 修改图片路径    */
+  def doUploadSitePic =Users.UserAction {   user => implicit request =>
+    picForm.bindFromRequest.fold(
+      formWithErrors => BadRequest("something is wrong")  ,
+      fields =>{
+        val   picName:String=fields._1.substring(fields._1.lastIndexOf("/"))
+        //   val src ="/opt/static"+fields._1
+        val src = "public"+fields._1
+        //    Thumbnails.of(src).sourceRegion(fields._2,fields._3,(fields._4-fields._2),(fields._5-fields._3)).size((fields._4-fields._2),(fields._5-fields._3)).toFile("/opt/static/images/site/"+picName)
+        Thumbnails.of(src).sourceRegion(fields._2,fields._3,(fields._4-fields._2),(fields._5-fields._3)).size((fields._4-fields._2),(fields._5-fields._3)).toFile("public/images/site/"+picName)
+        val picSrc:String= "/images/site/"+picName
+      //  UserDao.modifyPic(user.get.id.get,picSrc)
+        Ok(Json.obj("code"->"100","src"->picSrc))
+      }
+    )
+  }
 
 }

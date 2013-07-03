@@ -1,0 +1,211 @@
+/**
+* Created by zuosanshao.
+* Email:zuosanshao@qq.com
+* @contain: 天天特价
+* @depends:
+* Since:13-3-22下午7:19
+* ModifyTime :
+* ModifyContent:   for worth.scala.html
+* http://www.smeite.com/
+*
+*/
+.today-wrap {
+
+}
+
+.today-seller-apply {
+    position: relative;
+    width: 980px;
+    height: 210px
+}
+
+.today-seller-apply .apply-btn {
+    display: block;
+    position: absolute;
+    top: 150px;
+    right: 30px;
+    width: 108px;
+    height: 35px;
+    text-align: center;
+    font: 14px/35px SimSun;
+    color: #fff;
+    _color: #fff !important;
+    background-color: #9f8672;
+    box-shadow: 2px 2px #cbbeb1
+}
+
+.today-seller-apply .apply-btn:hover {
+    background-color: #b99e88;
+    color: #fff
+}
+
+.today-seller-apply .apply-btn:active {
+    background-color: #8c735e;
+    color: #fff
+}
+
+.today-seller-apply .calendar {
+    position: absolute;
+    top: 0;
+    left: 30px;
+    width: 142px;
+    height: 160px;
+    padding: 20px 0 0 35px;
+    background: url(images/bg-calendar.png) no-repeat;
+    _background: 0;
+    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src = "images/bg-calendar.png")
+}
+
+.today-seller-apply .month {
+    display: block;
+    height: 52px;
+    font: bold 36px/52px "Microsoft YaHei";
+    color: #917965
+}
+
+.today-seller-apply .date {
+    display: block;
+    height: 80px;
+    font: bold 48px/80px "Microsoft YaHei";
+    color: #e97a00
+}
+
+.today-goods-item {
+    width: 900px;
+    margin-top: 10px;
+    padding: 30px 50px 30px 30px;
+    background-color: #fff;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3)
+}
+
+.today-goods-item .goods-item-img {
+    float: left
+}
+
+.today-goods-item .goods-item-info {
+    float: right;
+    width: 552px
+}
+
+.today-goods-item .goods-item-title {
+    width: 552px;
+    font: bold 18px/24px "Microsoft YaHei";
+    color: #333;
+    word-wrap: break-word;
+    word-break: break-all
+}
+
+.today-goods-item .goods-item-desc {
+    _position: static;
+    position: relative;
+    width: 532px;
+    margin-top: 20px;
+    padding: 30px 10px;
+    border-top: 1px dashed #e6d8cd;
+    background-color: #f6f1ec;
+    font: 14px/22px SimSun;
+    color: #333;
+    word-wrap: break-word;
+    word-break: break-all
+}
+
+.today-goods-item .goods-item-desc .desc-txt {
+    display: block;
+    padding: 0 25px
+}
+
+
+.today-goods-item .quotation-marks {
+    position: absolute;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url(images/quotation-marks.png) no-repeat
+}
+
+.goods-item-buy {
+    margin-top: 25px
+}
+
+.goods-item-buy .goods-item-buy-btn {
+    float: left;
+    display: inline-block;
+    height: 52px;
+    line-height: 52px;
+    padding-left: 35px;
+    background: url(images/buy-btn.png) no-repeat 0 0
+}
+
+.goods-item-buy .go-to-buy {
+    float: left;
+    cursor: pointer;
+    padding: 0 8px 0 28px;
+    font: 14px/52px SimSun;
+    color: #fff;
+    background: url(images/buy-btn.png) no-repeat 100% 0
+}
+
+.goods-item-buy .goods-item-buy-btn:hover {
+    background-position: 0 -70px
+}
+
+.goods-item-buy .goods-item-buy-btn:hover .go-to-buy {
+    background-position: 100% -70px
+}
+
+.goods-item-buy .goods-item-buy-btn:focus {
+    background-position: 0 -140px
+}
+
+.goods-item-buy .goods-item-buy-btn:focus .go-to-buy {
+    background-position: 100% -140px
+}
+
+.goods-item-buy .current-price {
+    float: left;
+    cursor: pointer;
+    font: bold 24px/52px "Microsoft YaHei";
+    color: #fff
+}
+
+.goods-item-buy .original-price {
+    float: left;
+    cursor: pointer;
+    text-decoration: line-through;
+    text-indent: 15px;
+    font: bold 14px/52px Arial;
+    color: #fff
+}
+
+.goods-item-buy .others-wrap {
+    float: right;
+    width: 240px;
+    text-align: right
+}
+
+.goods-item-buy .want-to-buy {
+    display: block;
+    padding-top: 5px;
+    font: bold 12px/16px SimSun;
+    color: #666;
+    word-wrap: break-word
+}
+
+.goods-item-buy .want-to-buy i {
+    color: #f00;
+    font-family: Arial;
+    font-weight: bold
+}
+
+.goods-item-buy .others-say {
+    display: block;
+    margin-top: 10px;
+    font: bold 12px/16px SimSun;
+    color: #666;
+    text-decoration: underline
+}
+
+.today-bottom-banner {
+    margin-top: 10px
+}
+

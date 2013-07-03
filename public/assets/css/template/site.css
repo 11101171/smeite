@@ -1,0 +1,476 @@
+/**
+ * Created by zuosanshao.
+ * User: smeite.com
+ * Email:zuosanshao@qq.com
+ * @description: 
+ * @depends: 
+ * Includes:
+ * Since: 13-6-22  上午10:23
+ * ModifyTime : 
+ * ModifyContent: 
+ * http://www.smeite.com/
+ *
+ */
+#J_Page {
+    background-color: #F9F9EF;
+}
+/* site nav */
+ .site-nav{
+    background-color: #fff;
+ margin: 20px 0;
+     position: relative;
+     width: 100%;
+     height: 200px;
+     z-index: 9;
+     box-shadow: 0 1px 1px rgba(34, 25, 25, 0.2);
+     -moz-box-shadow: 0 1px 1px rgba(34, 25, 25, 0.2);
+     -webkit-box-shadow: 0 1px 1px rgba(34, 25, 25, 0.2);
+ }
+ .site-nav .logo,.site-nav .site-info ,.site-nav .manager ,.site-nav .recommend{
+     float: left;
+     overflow: hidden;
+ }
+ .site-nav .logo{
+      width: 200px;
+     margin-right:10px;
+ }
+ .site-nav .site-info{
+     padding: 10px 0 10px 10px;
+     width:320px ;
+     height: 180px;
+ }
+ .site-nav .site-info h3{
+     font-family: 'MicroSoft Yahei';
+     font-size: 18px;
+     color: #666;
+     line-height: 28px;
+     padding-bottom: 5px;
+ }
+
+.site-nav .site-info .tags {
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+.site-info .tags label{
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+.site-info .tags li {
+    float: left;
+    display: inline;
+    margin:0 8px 0 0;
+    white-space: nowrap
+}
+.site-info  .tags li a {
+    float: left;
+    display: block;
+    color: #666;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 5px;
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    max-width: 150px;
+    overflow: hidden
+}
+.site-info .tags li.focus a {
+    background: #ffefd1;
+    color: #666;
+    border: 1px solid #e8e8e8
+}
+.site-info .tags li.on a {
+    background: #5089b9;
+    color: #fff
+}
+.site-info .tags li a:hover {
+    text-decoration: none;
+    border: 1px solid #ccc
+}
+.site-info .tags li.focus a:hover {
+    border: 1px solid #ccc
+}
+
+.site-nav .manager{
+    border-left: 1px dashed #EFEFEF;
+    border-right: 1px dashed #EFEFEF;
+     margin: 10px ;
+    padding:0 10px;
+     width: 218px;
+    height:180px;
+ }
+.manager .owner{
+    padding-left: 8px;
+
+}
+.manager .more,.recommend .more{
+    float: right;
+    color: #999;
+}
+.manager h3,.recommend h3{
+    font-weight: normal;
+    padding-bottom: 5px;
+
+}
+.manager .owner li {
+    float: left;
+    width: 45px;
+    height: 45px;
+    overflow: hidden;
+    margin-bottom: 6px;
+    margin-right: 10px;
+}
+.manager li.last{
+    margin-bottom: 0;
+}
+.manager .join{
+    float: left;
+    margin-top: 15px;
+}
+.manager .join .love-num{
+    text-align: center;
+    font-size: 16px;
+    font-weight: bolder;
+    margin-bottom: 15px;
+}
+.manager .join .follow ,.manager .join .invite {
+    text-align: center;
+    margin-bottom: 15px;
+    float: left;
+    margin-right: 15px;
+}
+.manager .join .follow-btn{
+    width: 80px;
+    float: none;
+}
+ .site-nav .recommend{
+     padding: 10px ;
+     width: 160px;
+     height:180px;
+ }
+ .recommend li{
+     padding-bottom: 5px;
+ }
+ .recommend li a{
+     height: 50px;
+     display: block;
+ }
+ .recommend li img{
+     float: left;
+     width: 50px;
+     height: 50px;
+     margin-right: 10px;
+ }
+ .recommend li div {
+     float: left;
+     width: 100px;
+ }
+ .recommend li p{
+     height: 25px;
+     width: 100px;
+     float: left;
+     line-height: 25px;
+ }
+ .recommend li.last{
+     padding-bottom: 0;
+ }
+ /*site nav end*/
+/* site media start */
+.site-media{
+    background-color: #fff;
+    height: 260px;
+    padding: 20px 15px;
+}
+.site-media  a.add{
+    display: block;
+}
+.site-media .site-baobei,.site-media .site-pic{
+    float: left;
+     width: 275px;
+    margin-right: 20px;
+
+}
+.site-media .site-baobei a.add{
+    border: 1px dashed #ccc;
+    width:273px ;
+    height: 258px;
+    background: #fff;
+}
+.site-media .site-pic{
+    float: left;
+    width: 275px;
+    margin-right: 20px;
+
+}
+.site-media .site-pic a.add{
+    border: 1px dashed #ccc;
+    width:273px ;
+    height: 258px;
+    background: #fff;
+}
+.site-media  a.add:hover{
+    border: 1px dashed #333;
+}
+.site-media .site-video{
+    float: left;
+    width: 360px;
+}
+.site-media .site-video a.add{
+    border: 1px dashed #ccc;
+    float: left;
+    width: 358px;
+    height: 258px;
+}
+.site-media .ico-baobei,.site-media .ico-pic,.site-media .ico-video{
+    height: 22px;
+    line-height: 22px;
+    padding: 0 0 0 22px;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+    zoom: 1;
+    background: url(images/widget_site.png) no-repeat -2222px -136px;
+    margin-right: 5px;
+}
+.site-media .ico-baobei,.site-media .ico-pic{
+    height: 58px;
+    line-height: 58px;
+    padding-left: 64px;
+    background-position: 7px -998px;
+}
+.site-media .site-video .ico-video{
+    height: 58px;
+    line-height: 58px;
+    padding-left: 64px;
+    background-position: -105px -995px;
+}
+
+/*site-posts  site-filter*/
+.site-filter{
+    margin: 20px 0;
+    padding: 0;
+    position: relative;
+}
+
+.site-filter h2 {
+    float: left;
+    font-size: 18px;
+    border-left: 5px solid #5c6f09;
+    background-color: #588c0e;
+    border-right: 5px solid #5c6f09;
+    height: 20px;
+    line-height: 20px;
+    margin-right: 15px;
+    padding: 0 7px;
+    color: #fff;
+    display: inline;
+}
+
+.site-filter i{
+    width: 980px;
+    height: 20px;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    background: url(images/site_dotted.png) repeat-x center
+}
+
+.site-filter a {
+    float: left;
+    margin: 0 10px 0 0;
+    background: #ececec;
+    height: 20px;
+    padding: 0 10px;
+    line-height: 20px;
+    white-space: nowrap;
+    color: #808285;
+    -moz-border-radius: 30px;
+    -webkit-border-radius: 30px;
+    border-radius: 30px
+}
+
+.site-filter a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: #588C0E
+}
+
+.site-filter a.current {
+    background: #588C0E;
+    color: #fff
+}
+
+.filter {
+    float: left;
+}
+.edit{
+    float: right;
+    padding-right: 15px;
+}
+
+/* site-post post list*/
+.site-post .bd{
+    clear: both;
+    margin: 0 auto 50px auto;
+    text-align: center;
+}
+.post-item{
+    float: left;
+    border: 1px #fff solid;
+    display: inline;
+    text-align: left;
+    position: relative;
+    width: 210px;
+    padding: 9px;
+    background: #fff;
+    margin-right: 20px;
+    height: 380px;
+    overflow: hidden;
+}
+.post-item .pic{
+    width: 210px;
+    overflow: hidden;
+    text-align: center;
+    position: relative;
+    background: 0;
+}
+.post-item .pic img {
+    vertical-align: top;
+}
+.post-item .goods_title {
+    display: block;
+    text-indent: -9999em;
+    height: 0;
+}
+.post-item .goods-wrap {
+
+}
+.post-item .price {
+    position: relative;
+    color: #000;
+    background-color: #fff;
+    margin: 10px auto;
+    width: 120px;
+    height: 24px;
+    line-height: 24px;
+    overflow: hidden;
+}
+.post-item .price span {
+    float: left;
+    margin-left: 10px;
+    overflow: hidden;
+    width: 57px;
+}
+.post-item .price .like-state {
+    width: 50px;
+    float: right;
+}
+.post-item .price a {
+    color: #000;
+    float: left;
+}
+.post-item .price .like-state .like-num {
+    height: 24px;
+    overflow: hidden;
+    text-align: left;
+    padding-left: 5px;
+    position: relative;
+}
+.post-item .price .like-state .like-num dl {
+    position: relative;
+}
+.post-item .price .like-state .like-num dl dd {
+    width: 21px;
+    height: 24px;
+}
+.post-item .price .like-state .like-num dl dd {
+    width: 21px;
+    height: 24px;
+}
+
+
+.post-item .user-comment {
+    background: #fff;
+}
+
+
+.post-item a:hover{
+    text-decoration: none;
+}
+
+.post-item .comment {
+    margin-top: -5px
+}
+
+
+.post-item .comment .user-list {
+    margin-bottom: 0;
+    margin-top: 10px
+}
+.post-item .comment .user-list .share-user {
+    margin-top: 12px;
+    margin-bottom: 10px;
+    background: url(images/dot2.png) repeat-x bottom
+}
+.post-item .comment .user-list .share-user .fl {
+    margin-top: 4px;
+}
+.post-item .comment .user-list .share-user .info {
+    min-height: 21px;
+    padding: 5px 10px 20px 10px;
+    margin: 0 0 0 38px;
+}
+.post-item  .comment .user-list .share-user .info .go-to-comment {
+    float: right;
+    padding-right: 8px;
+    padding-left: 12px;
+    /* color: #588C0E;*/
+    color: #e0bca5;
+    cursor: pointer;
+}
+.post-item .comment .user-list .share-user p {
+    color: #666;
+    word-break: break-all;
+    height: 58px;
+    overflow: hidden;
+}
+
+.post-item .comment a {
+    color: #444
+}
+
+.last{
+    margin-right: 0;
+}
+
+
+
+
+/* post  content*/
+.post{
+
+}
+.post .post-left{
+    float: left;
+    width: 180px;
+    background-color: #fff;
+    margin-right:20px ;
+}
+.post .post-main{
+    float: left;
+    width: 578px;
+    background-color: #fff;
+    padding: 15px 19px;
+    border: 1px solid #eee;
+    margin-right: 20px;
+}
+.post .post-right{
+    float: left;
+    width: 180px;
+}

@@ -34,7 +34,7 @@ define(function(require, exports) {
             '<p>' + baobeiIntro + '</p>' +
             '</div>' +
             '<div class="price">价格：￥<span class="normalPrice">'+baobeiPrice+'</span><span class="promotionPrice">'+baobeiPromotionPrice+'</span><span class="volume">30天已售 '+baobeiVolume+'</span></div>'+
-            '<div class="credits">返利:&nbsp;<span>'+baobeiJifenbao+'</span>&nbsp;个集分宝，值<span>'+baobeiJifenbaoValue+'</span>元</div>'+
+        //    '<div class="credits">返利:&nbsp;<span>'+baobeiJifenbao+'</span>&nbsp;个集分宝，值<span>'+baobeiJifenbaoValue+'</span>元</div>'+
             '<div class="clearfix mt15">' +
             '<a class="ilike-n" data-prourl="' + baobeiUrl + '" data-proimgsrc="' + baobeiPhoto + '" data-proname="' + baobeiName + '" data-type="0" data-proid="' + baobeiId + '" href="javascript:;">喜欢</a>' +
             '<div class="stat-box fr"><span class="mr5 ml5"><a href="'+baobeiUrl+'">去看看&gt;</a></span></div>' +

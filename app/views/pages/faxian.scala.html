@@ -1,29 +1,29 @@
-@(user:Option[models.user.User],page:models.Page[(models.user.User,models.goods.Goods)],cate:String,tag:String,tags:List[models.tag.Tag],s:Int)
+@(user:Option[models.user.User],page:models.Page[(models.user.User,models.goods.Goods)],cid:Int,tagCode:Int,tags:List[models.tag.Tag],s:Int)
 @views.html.template(
 user,
-nav=cate,
-title =  "发现喜欢_"+ cate +"_"+tag +"_食美特，爱美食爱生活"
+nav=models.Cate(cid).toString,
+title =  "发现喜欢_食美特，爱美食爱生活"
 )(css="/assets/css/template/faxian.css") {
 <div class="container" id="faxian">
     <div class="tag-list clearfix" id="J_tags">
              <dl class="clearfix">
-                 <dt class='title @if(cate=="好玩意"){fs30}else{fs40} '>
-                     <a href='@controllers.routes.Pages.faxian(cate,"tag",1,1)'>@cate</a>
+                 <dt class='title fs40 '>
+                     <a href='@controllers.routes.Pages.faxian(cid,tagCode,1,1)'>@models.Cate(cid)</a>
                  </dt>
                  <dd>
                      @for(t<-tags){
-                     <a class='tag @if(t.name==tag){curr}' href='@controllers.routes.Pages.faxian(cate,t.name,1,1)'>@t.name</a>
+                     <a class='tag @if(t.code==tagCode){curr}' href='@controllers.routes.Pages.faxian(cid,t.code,1,1)'>@t.name</a>
                      }
                  </dd>
              </dl>
     </div>
 
     <section class="filter-wrap clearfix">
-        <h2>@cate @if(tag != "tag"){&nbsp;•&nbsp;@tag}</h2>
+        <h2>@models.Cate(cid)</h2>
         <div class="goods-filter">
-            <a type="list_default"   href='@controllers.routes.Pages.faxian(cate,tag,1,1)' @if(s==1){ class="current" } ><span>推荐</span></a>
-            <a type="list_new_most" href='@controllers.routes.Pages.faxian(cate,tag,2,1)'  @if(s==2){class=" current"}><span>最新</span></a>
-            <a type="list_hot_most"  href='@controllers.routes.Pages.faxian(cate,tag,3,1)'  @if(s==3){class=" current"}><span>最热</span></a>
+            <a type="list_default"   href='@controllers.routes.Pages.faxian(cid,tagCode,1,1)' @if(s==1){ class="current" } ><span>推荐</span></a>
+            <a type="list_new_most" href='@controllers.routes.Pages.faxian(cid,tagCode,2,1)'  @if(s==2){class=" current"}><span>最新</span></a>
+            <a type="list_hot_most"  href='@controllers.routes.Pages.faxian(cid,tagCode,3,1)'  @if(s==3){class=" current"}><span>最热</span></a>
         </div>
         <i></i>
     </section>
@@ -33,10 +33,10 @@ title =  "发现喜欢_"+ cate +"_"+tag +"_食美特，爱美食爱生活"
             @for(((user,goods),i)<-page.items.view.zipWithIndex) {
             <div class="goods-item @if((i+1)%4==0){last}">
                 <div class="pic" style='height:210px '>
-                    <a href="@controllers.routes.Goods.view(goods.id.get)" target="_blank">
+                    <a href="@controllers.routes.Baobei.view(goods.id.get)" target="_blank">
                         <img width="210px" alt="@goods.name" title="@goods.name" src="@goods.pic" >
                     </a>
-                    <a  href="@controllers.routes.Goods.view(goods.id.get)" class="goods_title">@goods.name</a>
+                    <a  href="@controllers.routes.Baobei.view(goods.id.get)" class="goods_title">@goods.name</a>
 
                 </div>
                 <div class="goods-wrap">
@@ -62,9 +62,9 @@ title =  "发现喜欢_"+ cate +"_"+tag +"_食美特，爱美食爱生活"
                                     <div class="share-user">
                                         <a class="fl" href="@controllers.users.routes.Users.home(user.id.get)"><img class="avt32 fl" src="@user.pic" alt="@user.name" width="30" height="30"></a>
                                         <div class="info">
-                                            <a class="go-to-comment" href="@controllers.routes.Goods.view(goods.id.get)#J_CommentTxa" target="_blank">评论</a>
+                                            <a class="go-to-comment" href="@controllers.routes.Baobei.view(goods.id.get)#J_CommentTxa" target="_blank">评论</a>
                                             <h3><a href="@controllers.users.routes.Users.home(user.id.get)" target="_blank">@user.name</a></h3>
-                                            <a href="@controllers.routes.Goods.view(goods.id.get)" target="_blank"><p>@goods.intro</p></a>
+                                            <a href="@controllers.routes.Baobei.view(goods.id.get)" target="_blank"><p>@goods.intro</p></a>
                                         </div>
                                     </div>
                             </div>
@@ -88,14 +88,14 @@ title =  "发现喜欢_"+ cate +"_"+tag +"_食美特，爱美食爱生活"
                 @if(num==page.currentPage){
                 <li><span>第 @num 页</span></li>
                 }else {
-                <li><a href='@controllers.routes.Pages.faxian(cate,tag,s,num)'>第@num 页</a></li>
+                <li><a href='@controllers.routes.Pages.faxian(cid,tagCode,s,num)'>第@num 页</a></li>
                 }
                 }
             </ul>
 
             <span class="current">第 @page.currentPage 页</span>
             @if(page.currentPage != page.totalPages){
-            <a title="翻翻下一页" href='@controllers.routes.Pages.faxian(cate,tag,s,page.currentPage+1)' class="next">翻翻下一页&gt;</a>
+            <a title="翻翻下一页" href='@controllers.routes.Pages.faxian(cid,tagCode,s,page.currentPage+1)' class="next">翻翻下一页&gt;</a>
               }
         </div>
     </div>

@@ -14,10 +14,9 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
 
         <li><a href="@controllers.users.routes.Users.baobei(author.id.get)">@(authorStatic.postBaobeiNum+authorStatic.loveBaobeiNum)<br>宝贝</a></li>
         <li><a href="@controllers.users.routes.Users.theme(author.id.get)">@(authorStatic.postThemeNum+authorStatic.loveThemeNum)<br>主题</a></li>
-        <li><a href="@controllers.users.routes.Users.forum(author.id.get)">@(authorStatic.postTopicNum+authorStatic.loveTopicNum)<br>讨论</a></li>
-        <li><a href="@controllers.users.routes.Users.sites(author.id.get)">N+<br>小站</a></li>
+        <li><a href="@controllers.users.routes.Users.site(author.id.get)">N+<br>小镇</a></li>
         <li ><a href="@controllers.users.routes.Users.fans(author.id.get)">@authorStatic.fansNum<br>粉丝</a></li>
-        <li class="last"><a href="@controllers.users.routes.Users.follow(author.id.get)">@(authorStatic.followNum)<br>我关注的</a></li>
+        <li class="last"><a href="@controllers.users.routes.Users.follow(author.id.get)">@(authorStatic.followNum)<br>关注</a></li>
 
     </ul>
 </div>
@@ -42,7 +41,7 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                     <li class="clearfix @if((i+1)%3==0){last}" >
                         <div class="baobei-wrap">
                             <div class="baobei-pic">
-                                <a class="pic-link" target="_blank" href="@controllers.routes.Goods.view(goods.id.get)">
+                                <a class="pic-link" target="_blank" href="@controllers.routes.Baobei.view(goods.id.get)">
                                     <img src='@(goods.pic+"_210x210.jpg")' alt="@goods.name">
                                 </a>
                             </div>
@@ -68,13 +67,13 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                     @for(goods<-userLoveGoods.items) {
                     <li class="clearfix ">
                         <div class="news-pic">
-                            <a href="@controllers.routes.Goods.view(goods.id.get)" target="_blank">
+                            <a href="@controllers.routes.Baobei.view(goods.id.get)" target="_blank">
                                 <img src='@(goods.pic+"_80x80.jpg")' width="80" alt="@goods.name">
                             </a>
 
                         </div>
                         <div class="news-text">
-                            <p> <a href="@controllers.routes.Goods.view(goods.id.get)" target="_blank">@goods.name</a></p>
+                            <p> <a href="@controllers.routes.Baobei.view(goods.id.get)" target="_blank">@goods.name</a></p>
 
                             <a class="jd-btn sbl-btn J_InviteFellowJudge" href="javascript:;" data-proid="@goods.id">求鉴定</a>
                         </div>

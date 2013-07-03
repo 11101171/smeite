@@ -23,6 +23,10 @@ import java.sql.Timestamp
 object TagDao {
   lazy val database = Database.forDataSource(DB.getDataSource())
 
+  def countTag(groupId:Long) =database.withSession {  implicit session:Session =>
+    Query(Tags.filter(_.groupId === groupId).length).first
+  }
+
   def addTag(name:String) =database.withSession {  implicit session:Session =>
     (Tags.name).insert(name)
   }
@@ -48,6 +52,9 @@ object TagDao {
   }
   def modifyTagSortNum(id:Long,num:Int)=database.withSession{ implicit session:Session =>
     (for(c<-Tags if c.id === id)yield(c.sortNum)).update(num)
+  }
+  def modifyTagCode(id:Long,code:Int)=database.withSession{ implicit session:Session =>
+    (for(c<-Tags if c.id === id)yield(c.code)).update(code)
   }
   def modifyTagTopState(id:Long,isTop:Boolean)=database.withSession{ implicit session:Session =>
     (for(c<-Tags if c.id === id)yield(c.isTop)).update(isTop)
@@ -117,15 +124,15 @@ object TagDao {
   * 2 最新
   * 3 最热
   * */
-  def findSimpleTagGoodses(tagName:String,s:Int,currentPage:Int,pageSize: Int ):Page[(User,Goods)] = database.withSession{ implicit session:Session =>
-    val totalRows = Query(TagGoodses.filter(_.tagName === tagName ).filter(_.checkState ===1).length).first()
+  def findSimpleTagGoodses(tagCode:Int,s:Int,currentPage:Int,pageSize: Int ):Page[(User,Goods)] = database.withSession{ implicit session:Session =>
+    val totalRows = Query(TagGoodses.filter(_.tagCode === tagCode ).filter(_.checkState ===1).length).first()
     val totalPages=((totalRows + pageSize - 1) / pageSize)
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     var q = for{
       t <- TagGoodses
       g <- Goodses
       u <- Users
-      if t.tagName === tagName
+      if t.tagCode === tagCode
       if t.goodsId === g.id
       if g.uid === u.id
     }yield(u,g,t.sortNum)
@@ -203,22 +210,25 @@ object TagDao {
   def checkGoods(tagName:String,goodsId:Long):Option[TagGoods] = database.withSession {  implicit session:Session =>
     TagGoodses.find(tagName,goodsId)
   }
-  /*保存*/
+  /*保存tag goods 时，查找 tag 的 cid */
   def addGoods(tagName:String,goodsId:Long)=database.withSession {  implicit session:Session =>
-    val cid =( for( c<- Tags if c.name === tagName ) yield c.cid ).first()
-    TagGoodses.insert(tagName,goodsId,cid)
+    val (cid,tagCode) =( for( c<- Tags if c.name === tagName ) yield c.cid ~ c.code ).first()
+    TagGoodses.insert(tagName,goodsId,cid,tagCode)
   }
   def modifyGoods(tagName:String,goodsId:Long,addNum:Int)=database.withSession {  implicit session:Session =>
-    (for(c<-TagGoodses if c.tagName===tagName if c.goodsId===goodsId)yield(c.addNum) ).update(addNum)
+    (for(c<-TagGoodses if c.tagName===tagName if c.goodsId===goodsId)yield c.addNum ).update(addNum)
   }
   def modifyGoods(goodsId:Long,tagName:String) =  database.withSession {  implicit session:Session =>
-    (for (c<-TagGoodses if c.id === goodsId) yield(c.tagName)).update(tagName)
+    (for (c<-TagGoodses if c.id === goodsId) yield c.tagName ).update(tagName)
+  }
+  def modifyGoods(tagName:String,cid:Int,tagCode:Int) =  database.withSession {  implicit session:Session =>
+    (for (c<-TagGoodses if c.tagName === tagName) yield c.cid ~ c.tagCode ).update((cid,tagCode))
   }
   def modifyGoods(id:Long,checkState:Int) =  database.withSession {  implicit session:Session =>
-    (for (c<-TagGoodses if c.id === id) yield(c.checkState)).update(checkState)
+    (for (c<-TagGoodses if c.id === id) yield c.checkState).update(checkState)
   }
   def modifyTagGoods(id:Long,sortNum:Int) = database.withSession {  implicit session:Session =>
-    (for (c<-TagGoodses if c.id === id) yield(c.sortNum)).update(sortNum)
+    (for (c<-TagGoodses if c.id === id) yield c.sortNum).update(sortNum)
   }
   def deleteGoods(id:Long) = database.withSession {  implicit session:Session =>
     TagGoodses.delete(id)
@@ -250,6 +260,9 @@ def findRelativeTagGoodses(goodsId:Long) = database.withSession{ implicit  sessi
    Page(q.take(36).list().distinct,1,1)
   }
   /* tag group */
+  def countTagGroup(cid:Int)=database.withSession {  implicit session:Session =>
+    Query(TagGroups.filter(_.cid === cid).length).first()
+  }
   def addGroup(group:TagGroup) =database.withSession {  implicit session:Session =>
     TagGroups.insert(group)
   }
@@ -267,7 +280,9 @@ def findRelativeTagGoodses(goodsId:Long) = database.withSession{ implicit  sessi
   def modifyGroup(gid:Long,visible:Boolean)= database.withSession{ implicit session:Session =>
     (for(c<-TagGroups if c.id === gid)yield(c.isVisible)).update(visible)
   }
-
+  def modifyGroupCode(gid:Long,code:Int)= database.withSession{ implicit session:Session =>
+    (for(c<-TagGroups if c.id === gid)yield(c.code)).update(code)
+  }
 
   def findGroup(id:Long):Option[TagGroup] =  database.withSession {  implicit session:Session =>
     (for(c<-TagGroups if c.id ===id)yield(c)).firstOption
@@ -277,7 +292,12 @@ def findRelativeTagGoodses(goodsId:Long) = database.withSession{ implicit  sessi
   }
 
   def findSimpleGroups(cid:Int):List[(Long, String)]=database.withSession{  implicit session:Session =>
-    ( for(c<-TagGroups  if c.cid === cid)yield(c.id~c.name)).list()
+    if(cid == -1){
+      ( for(c<-TagGroups)yield(c.id~c.name)).list()
+    }else{
+      ( for(c<-TagGroups  if c.cid === cid)yield(c.id~c.name)).list()
+    }
+
   }
 
   /*分页*/

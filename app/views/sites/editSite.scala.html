@@ -1,0 +1,98 @@
+@(user:Option[models.user.User],form: Form[controllers.SiteFormData])
+@views.html.template(
+user,
+nav="site",
+title =  "食美特，不一样的生活"
+)(css="/assets/css/template/site.edit.css") {
+
+<div class="container clearfix" id="site">
+
+
+    <!--nav  end -->
+
+        <div class="site-edit clearfix">
+            <h2>申请小镇</h2>
+            <div class="col-left">
+                <form id="J_editForm" class="edit-form" method="post" action="@controllers.routes.Sites.saveSite">
+                    <input type="hidden" name="sid" >
+                    <input type="hidden" name="cid" id="J_cid">
+                    <div class="form-row clearfix">
+                        <label><span class="rc">*</span>标题：</label>
+                        <div class="fm-item">
+                            <input id="J_title" name="title" class="b-input" type="text" value='@form("title").value' required="required">
+                            <p>还可以输入<em id="J_titleNum"></em>字</p>
+                        </div>
+                    </div>
+                    <div class="form-row clearfix">
+                        <label>介绍：</label>
+                        <div class="fm-item">
+                            <textarea id="J_intro" class="b-textarea intro-txa" name="intro">@form("intro").value</textarea>
+                            <p>还可以输入<em id="J_introNum"></em>字</p>
+                        </div>
+                    </div>
+                    <div class="form-row clearfix">
+                        <label>分类：</label>
+                        <div class="fm-item">
+                              @for(c<-models.site.SiteCate.values.toList.sortBy(x=>x.id)){
+                            <a href="javascript:void(0)" class="type" data-id="@c.id">@c</a>
+                                }
+                            <p>选择相应的分类，让大家更容易找到你的小镇</p>
+
+                        </div>
+                    </div>
+
+                    <div class="form-row clearfix">
+                        <label>上传站牌：</label>
+                        <div class="fm-item">
+                            <div class="site-logo">
+                                <img id="J_uploadImgShow" />
+                            </div>
+
+                                    <input type="button" value="上传本地图片" id="J_uploadImage" class="bbl-btn upload-cover">
+                                    <input type="hidden" id="J_uploadImg" name="pic" value='@form("pic").value'>
+                                    <p  class="fl">支持GIF、JPG、PNG,大小不超过2M</p>
+
+
+                        </div>
+                    </div>
+
+                    <div class="form-row clearfix">
+                        <label>标签：</label>
+                        <div class="fm-item">
+                            <input type="text" class="b-input" name="tags" id="J_tags"  value='@form("tags").value'>
+                            <p>多个标签用逗号隔开</p>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label>&nbsp;</label>
+                        <input type="submit" class="bbl-btn submit" value="提交申请">
+                    </div>
+                </form>
+            </div>
+            <div class="col-right">
+                <div class="about">
+                    <h5>关于小镇申请：</h5>
+                    <div class="bd">
+                        小镇大镇长正在对你的小镇进行审核，审核周期为一个工作日。审核结果会通过想去网的私信，或者你留下的联系方式通知到你。希望能够带给你惊喜，请耐心等待。
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+        }{
+<script type="text/javascript">
+    seajs.use('app/init', function (init) {
+        var $ = jQuery;
+        if(SMEITER.userId == ""){
+            $.smeite.dialog.isLogin();
+        }
+        init.load("app/site/site.edit");
+
+    });
+</script>
+}

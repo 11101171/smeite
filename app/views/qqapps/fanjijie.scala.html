@@ -76,14 +76,14 @@
             <a  class="goods-item-buy-btn clearfix"  href="javascript:void(0);" onclick="fusion2.nav.open({url : '@goods.clickUrl.getOrElse(goods.detailUrl)'}); return false;">
 
                 @if(goods.promotionPrice.isEmpty){
-                <span class="current-price"> ¥@goods.price</span>
+                <span class="current-price"> ?@goods.price</span>
                 }else{
                 @if(goods.price!=goods.promotionPrice.get){
-                <span class="current-price"> ¥@goods.promotionPrice.get </span>
-                <span class="original-price"> ¥@goods.price </span>
+                <span class="current-price"> ?@goods.promotionPrice.get </span>
+                <span class="original-price"> ?@goods.price </span>
 
                 }else{
-                <span class="current-price"> ¥@goods.price</span>
+                <span class="current-price"> ?@goods.price</span>
                 }
                 }
 

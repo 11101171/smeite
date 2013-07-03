@@ -1498,6 +1498,39 @@ input:-moz-placeholder { font-size:12px; }
 .guang-editor .imgWrap .netImg .bbl-btn{width:60px;margin-top:2px;float:right;}
 .guang-editor .imgWrap .tipbox-up{left:285px;}
 .guang-editor .base-input{width:290px;float:left;}
+.guang-editor .videoWrap {
+    top: 36px;
+    left: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px
+}
+
+.guang-editor .videoWrap #J_InsertVideo {
+    width: 60px;
+    margin-top: 2px;
+    float: right
+}
+
+.guang-editor .videoWrap .content .tipbox-up {
+    left: 340px
+}
+
+.guang-editor .videoWrap .content .title {
+    padding-bottom: 10px;
+    font-weight: normal
+}
+
+.guang-editor .videoWrap .content .sg-source p {
+    height: 20px;
+    line-height: 20px;
+    padding: 8px 0 5px 0
+}
+
+.guang-editor .videoWrap .sg-form .sg-input {
+    margin-right: 0
+}
 
 .icon-youku{height:20px;color:#666;line-height:20px;padding-left:22px;padding-right:6px;float:left;background:transparent url(images/edit_toolbar.gif) 0px -123px no-repeat;}
 .icon-tudou{height:20px;color:#666;line-height:20px;padding-left:22px;padding-right:6px;float:left;background:transparent url(images/edit_toolbar.gif) 0px -148px no-repeat;}
@@ -2137,7 +2170,7 @@ font-size: 18px;
     height: 34px;
     width: 34px;
     background: url(images/ico_ilike.png) no-repeat 3px -31px;
-    _background: url(images/ico_common.png) no-repeat 4px 0px;
+    _background: url(images/ico-like-common.png) no-repeat 4px 0px;
     text-indent: -9999em
 }
 
@@ -2230,7 +2263,6 @@ a:hover i.ico-likes {
 
 /*  goods view */
 .goods-contents{
-
     clear: both;
     margin: 0 auto 50px auto;
     text-align: center;
@@ -2381,7 +2413,7 @@ a:hover i.ico-likes {
 .header .hd-left {
     float: left;
     width: 235px;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 .header .hd-right{
     float: right;
@@ -2390,9 +2422,9 @@ a:hover i.ico-likes {
 }
 #header .logo{
     display: block;
-    height: 50px;
+    height:35px;
     cursor: pointer;
-    line-height:50px;
+    line-height:35px;
     font-size: 17px;
     font-weight: bolder;
     color: #999;
@@ -2401,17 +2433,11 @@ a:hover i.ico-likes {
 #header .logo-img {
     display: block;
     float: left;
-    width: 87px;
-    height: 50px;
+    width: 200px;
+    height:35px;
 }
 
-#header .logo-intro{
-    display: block;
-    float: left;
-    color: #999;
-    height: 50px;
-    line-height: 50px;
-}
+
 
 
 
@@ -2451,13 +2477,10 @@ a:hover i.ico-likes {
 .header  .search input {
     display: block;
     width: 315px;
-    padding: 5px 0 3px 10px;
-    height: 14px;
-    height: 13 px\9;
-    _height: 12px;
+    padding: 2px 0 3px 10px;
     font-size: 12px;
     color: #999;
-    border: 0
+    border: 0;
 }
 
 .header  .typing input {
@@ -2532,21 +2555,19 @@ a:hover i.ico-likes {
     /*  color: #333;*/
 }
 
-#nav .channel li.choice {
-    padding-right: 10px;
-    background: url(images/new.gif) no-repeat right 1px;
-}
-#nav .channel li.china {
-    padding-right: 25px;
+#nav .channel li.worth {
+    padding-right:20px;
     background: url(images/hot.png) no-repeat right 1px;
+}
+#nav .channel li.presell{
+    padding-right:15px;
+    background: url(images/new.gif) no-repeat right 1px;
 }
 
 #nav .channel .on a{
-    color: #5c6f09;
+    color: #688400;
 }
-#nav .channel li.china a.on{
-      color:#e60000;
-}
+
 
 /* channel end */
 #nav a.btn-checkIn {
@@ -2571,27 +2592,7 @@ a:hover i.ico-likes {
     _background: #92b03b url(images/checkIn-status-ie6.png) 07px -23px no-repeat;
 }
 
-#nav a.btn-rebate {
-    display: block;
-    margin: 8px 0 0 5px;
-    height: 24px;
-    overflow: hidden;
-    line-height: 24px;
-    padding: 0 12px 0 26px;
-    color: #fff;
-    background: #5ad url(images/checkIn-status.png) 07px 2px no-repeat;
-    _background: #5ad url(images/checkIn-status-ie6.png) 07px 2px no-repeat;
-}
 
-#nav a.btn-rebate:hover {
-    text-decoration: none;
-    background: #5ad url(images/checkIn-status.png) 07px -23px no-repeat;
-    transition: bottom 0.3s;
-    -webkit-transition: bottom 0.3s;
-    -moz-transition: bottom 0.3s;
-    -o-transition: bottom 0.3s;
-    _background: #5ad url(images/checkIn-status-ie6.png) 07px -23px no-repeat;
-}
 
 
 #nav a.checked {
@@ -2680,14 +2681,13 @@ a:hover i.ico-likes {
 #nav .person, #nav .regLogin a{color:#333}
 #nav .person .userPhoto { position:absolute;top:2px;left:2px; }
 #nav .person .userPhoto img { width:20px;height:20px; }
-#nav .person .arrow-dn, #nav .xiaoxi .arrow-dn ,#nav .btn-sg .arrow-dn{ position:absolute;width:24px;height:20px;top:2px;right:2px;background:url(images/arrow-d-x1.png) no-repeat center; }
+#nav .person .arrow-dn, #nav .xiaoxi .arrow-dn { position:absolute;width:24px;height:20px;top:2px;right:2px;background:url(images/arrow-d-x1.png) no-repeat center; }
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
     #nav .person .arrow-dn, #nav .xiaoxi .arrow-dn { position:absolute;width:24px;height:20px;top:2px;right:2px;background:url(images/arrow-d-x2.png) no-repeat center;background-size: 6px 6px;}
 }
 #nav .person a.gohome { float:left;height:20px;line-height:20px;padding:0 24px 0 28px;max-width:100px;white-space:nowrap;word-wrap:normal;word-break:normal;text-overflow:ellipsis;-o-text-overflow:ellipsis;overflow:hidden; color:#333;}
-#nav .person a.gohome:hover, #nav .person .set-dropdown li a:hover, #nav .regLogin a:hover, #nav a.xiaoxi:hover,#nav a.btn-sg:hover, .dropdown li a:hover { color:#55aadd;text-decoration:none; }
+#nav .person a.gohome:hover, #nav .person .set-dropdown li a:hover, #nav .regLogin a:hover, #nav a.xiaoxi:hover, .dropdown li a:hover { color:#55aadd;text-decoration:none; }
 #nav .set-dropdown{ width: 86px}
-
 /* end */
 /*登陆后的消息*/
 #nav .xiaoxi-box { margin:8px 0 0 0;position:relative;height:20px;padding:2px 0;background:#fff;border:none;}
@@ -2720,8 +2720,10 @@ a:hover i.ico-likes {
 /*登录 注册 end*/
 /*分享宝贝*/
 #nav .shareIt { margin:8px 0 0 0;position:relative; }
+/*
 #nav a.btn-sg { display:block;height:24px;overflow:hidden;background:#fff;line-height:24px; text-align:center;position:relative;padding:0 26px 0 0;border:none;color:#333;text-decoration:none; width:61px}
-#nav .shareit-dropdown { width:86px; }
+*/
+#nav .shareit-dropdown { width:96px; }
 #nav .shareit-dropdown li { margin:0 10px;padding:6px 0; }
 #nav .shareit-dropdown .sg-li { border-bottom:1px solid #F3F3F3; }
 #nav .shareit-dropdown li a { padding:0 0 0 16px;height:16px;color:#333;line-height:16px;background-image:url(images/nav-act.png);background-repeat:no-repeat; }
@@ -2731,12 +2733,31 @@ a:hover i.ico-likes {
 #nav .shareit-dropdown .hd-create-topic:hover { background-position:-90px -16px; }
 /* 分享好东西 end*/
 /* 下拉菜单 */
-.dropdown { display:none;position:absolute;top:30px;right:0;z-index:9996;margin:0;padding:2px 0;background:#fff;border:1px solid #e5e5e5;border-top: none }
+.dropdown { display:none;position:absolute;top:27px;right:0;z-index:9996;margin:0;padding:2px 0;background:#fff;border:1px solid #e5e5e5;border-top: none }
 .dropdown li { padding:0 10px;_height:29px; }
 .dropdown li a { display:block;padding:7px 0;line-height:1.2;color:#666;border-bottom:1px solid #F3F3F3; }
 .dropdown li.last a { border:none; }
 
+#nav a.btn-rebate {
+    display: block;
+    height: 24px;
+    overflow: hidden;
+    line-height: 24px;
+    padding: 0 12px 0 26px;
+    color: #fff;
+    background: #5ad url(images/checkIn-status.png) 07px 2px no-repeat;
+    _background: #5ad url(images/checkIn-status-ie6.png) 07px 2px no-repeat;
+}
 
+#nav a.btn-rebate:hover {
+    text-decoration: none;
+    background: #5ad url(images/checkIn-status.png) 07px -23px no-repeat;
+    transition: bottom 0.3s;
+    -webkit-transition: bottom 0.3s;
+    -moz-transition: bottom 0.3s;
+    -o-transition: bottom 0.3s;
+    _background: #5ad url(images/checkIn-status-ie6.png) 07px -23px no-repeat;
+}
 
 /*全局 底部样式*/
 /*
@@ -2829,11 +2850,11 @@ a.f-tencent {
 #footer .footer-erweima {
     position: absolute;
     right: 0;
-    top: 30px;
-    width: 85px;
+    top: 10px;
+    width:150px;
     height: 36px;
-    padding-top: 87px;
-    background: url(images/footer-erweima-ico.png) no-repeat center top
+    padding-top:155px;
+    background: url(images/erweima.png) no-repeat center top
 }
 
 #footer .footer-erweima p {
@@ -2857,7 +2878,7 @@ a.f-tencent {
     float: left;
     overflow: hidden;
     height: 22px;
-    width: 820px
+    width:700px
 }
 
 #footer .global-friend-links .friend-links-item  a {
@@ -2917,6 +2938,10 @@ a.f-tencent {
 #returnTop:hover {
     background-position: 0 -65px;
 }
+
+
+
+
 
 
 

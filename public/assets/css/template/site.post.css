@@ -1,0 +1,232 @@
+/**
+ * Created by zuosanshao.
+ * User: smeite.com
+ * Email:zuosanshao@qq.com
+ * @description: 
+ * @depends: 
+ * Includes:
+ * Since: 13-6-25  上午10:38
+ * ModifyTime : 
+ * ModifyContent: 
+ * http://www.smeite.com/
+ *
+ */
+/* post  content*/
+.processing{height:20px;width:140px;background:url(images/processing.gif) no-repeat;overflow:hidden;display:block;position:relative;top:7px;margin-left:5px;float:left;_display:inline;}
+.processing_nd0{background-position:0px 0px;}
+.processing_nd1{background-position:0px -20px;}
+.processing_nd2{background-position:0px -40px;}
+.processing_nd3{background-position:0px -60px;}
+.processing_nd4{background-position:0px -80px;}
+.processing_nd5{background-position:0px -100px;}
+.processing_nd6{background-position:0px -120px;}
+.processing_nd7{background-position:0px -140px;}
+.processing_nd8{background-position:0px -160px;}
+.processing_nd9{background-position:0px -180px;}
+.processing_nd10{background-position:0px -200px;}
+.processing_nd11{background-position:0px -220px;}
+.processing_nd12{background-position:0px -240px;}
+.processing_nd13{background-position:0px -260px;}
+.processing_nd14{background-position:0px -280px;}
+.processing_nd15{background-position:0px -300px;}
+.processing_nd16{background-position:0px -320px;}
+.bl1{
+    border-left:1px solid #eee;
+}
+.bt1{
+    border-top:1px solid #eee;
+}
+.post{
+ margin-top: 20px;
+}
+.post .follow{
+    text-align: center;
+    margin: 15px auto;
+}
+.post .follow-btn{
+    width: 80px;
+    text-align: center;
+    float: none;
+}
+
+.post .post-left{
+    float: left;
+    width: 180px;
+    margin-right:20px ;
+}
+
+.post-left .poster{
+    background-color: #fff;
+    margin-bottom: 15px;
+    padding: 10px 15px;
+}
+
+.post-left .poster a.pic{
+    display: block;
+    padding: 10px 0;
+}
+.post-left .poster a.pic img{
+    -moz-border-radius: 150px;
+    -webkit-border-radius: 150px;
+    border-radius: 150px;
+    behavior: url(images/PIE.htc);
+}
+.post-left .poster span{
+    text-align: center;
+    display: block;
+    margin: 5px auto;
+}
+
+.post-left .poster-others{
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #EEE;
+    border-top:2px;
+    background: #fff;
+}
+.poster-others .posts{
+    margin-bottom: 25px;
+}
+.poster-others dt{
+    font-size: 14px;
+    margin: 0 0 10px 0;
+}
+.poster-others .posts dd{
+    padding: 0 0 0 17px;
+    height: 26px;
+    line-height: 26px;
+    overflow: hidden;
+    background: url(images/scene-bg.png)  no-repeat center left;
+}
+.poster-others .site dd {
+    margin: 0 0 10px 0;
+    height: 32px;
+    overflow: hidden;
+}
+.poster-others .site dd a {
+    display: block;
+    height: 32px;
+    line-height: 32px;
+}
+.poster-others .site dd img {
+    width: 32px;
+    height: 32px;
+    margin: 0 5px 0 0;
+}
+ /*post left end*/
+
+.post .post-main{
+    float: left;
+    width: 540px;
+    background-color: #fff;
+    padding: 15px 19px;
+    border: 1px solid #eee;
+    margin-right: 20px;
+}
+
+.post-main .post-title{
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+.post .menu {
+
+}
+
+.post .menu li{
+    width: 160px;
+    float: left;
+    height: 48px;
+    border-right: 1px solid #EEE;
+    padding: 18px 0 18px 18px;
+    border-bottom: 1px solid #EEE;
+}
+.post .menu  li strong {
+    font-size: 12px;
+    color: #999;
+    line-height: 18px;
+    display: block;
+    height: 18px;
+}
+.post .menu li a.big {
+    display: block;
+    font-size: 24px;
+    color: #FF3232;
+    font-family: Microsoft Yahei;
+    line-height: 30px;
+    width: 100px;
+    cursor: default;
+}
+.post .menu li a.small {
+    color: #666;
+    line-height: 24px;
+    float: left;
+    padding-top: 6px;
+    _display: inline;
+    cursor: default;
+}
+.post .menu .br0{
+    border-right: 0;
+}
+.post-main .post-content{
+    font-size: 14px;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
+}
+.post .post-right{
+    float: left;
+    width: 180px;
+}
+
+.post-right .post-site{
+    width: 180px;
+    overflow: hidden;
+    background-color: #fff;
+    padding-bottom: 10px;
+}
+
+.post-site h3{
+    margin: 10px auto;
+    text-align: center;
+}
+.post-site .back-site{
+    margin: 10px auto;
+    text-align: center;
+}
+.post-right .site-others{
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #EEE;
+    border-top:2px;
+    background: #fff;
+}
+
+.site-others .posts{
+    margin-bottom: 25px;
+}
+.site-others dt{
+    font-size: 14px;
+    margin: 0 0 10px 0;
+}
+.site-others .posts dd{
+    padding: 0 0 0 17px;
+    height: 26px;
+    line-height: 26px;
+    overflow: hidden;
+    background: url(images/scene-bg.png)  no-repeat center left;
+}
+.site-others .members dd {
+    margin: 0 0 10px 0;
+    height: 32px;
+    overflow: hidden;
+}
+.site-others .members dd a {
+    display: block;
+    height: 32px;
+    line-height: 32px;
+}
+.site-others .members dd img {
+    width: 32px;
+    height: 32px;
+    margin: 0 5px 0 0;
+}

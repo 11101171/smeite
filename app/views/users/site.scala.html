@@ -1,0 +1,36 @@
+@(user:Option[models.user.User],author:models.user.User,authorStatic:models.user.UserStatic)
+@views.html.template(
+user,
+title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生活"
+)(css="/assets/css/template/user.css") {
+<div class="container clearfix">
+<div class="u-nav box-shadow">
+    <ul class="clearfix">
+        <li class=" user bigfs">
+            <a href="@controllers.users.routes.Users.home(author.id.get)">
+                <img src="@author.pic" alt="@author">@author.name
+            </a>
+        </li>
+
+        <li><a href="@controllers.users.routes.Users.baobei(author.id.get)">@(authorStatic.postBaobeiNum+authorStatic.loveBaobeiNum)<br>宝贝</a></li>
+        <li><a href="@controllers.users.routes.Users.theme(author.id.get)">@(authorStatic.postThemeNum+authorStatic.loveThemeNum)<br>主题</a></li>
+
+        <li><a href="@controllers.users.routes.Users.site(author.id.get)">N+<br>小镇</a></li>
+        <li ><a href="@controllers.users.routes.Users.fans(author.id.get)">@authorStatic.fansNum<br>粉丝</a></li>
+        <li class="last"><a href="@controllers.users.routes.Users.follow(author.id.get)">@(authorStatic.followNum)<br>关注</a></li>
+
+    </ul>
+</div>
+    <!-- end -->
+    <div class="user-bd clearfix">
+
+    </div>
+</div>
+
+        }{
+<script type="text/javascript">
+    seajs.use('app/init', function(init) {
+        init.load('app/user/user.profile');
+    })
+</script>
+}

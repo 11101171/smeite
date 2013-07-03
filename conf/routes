@@ -6,23 +6,17 @@
 
 # Home page
 GET       /                             controllers.Pages.index
-GET       /find/:cate             controllers.Pages.find(cate:String,tag="tag",p:Int ?=1)
-GET       /find/:cate/:tag        controllers.Pages.find(cate:String,tag:String,p:Int ?=1)
-GET       /faxian/:cate             controllers.Pages.faxian(cate:String,tag="tag",s:Int ?=1,p:Int ?=1)
-GET       /faxian/:cate/:tag        controllers.Pages.faxian(cate:String,tag:String,s:Int ?=1,p:Int ?=1)
-GET      /miss                            controllers.Pages.miss
-GET      /gallery/:cid                      controllers.Pages.gallery(cid:Int,s:Int ?=1,p:Int ?=1)
-
-GET      /china                             controllers.Pages.china(s:Int ?=1,p:Int ?=1)
-
-GET     /choice                            controllers.Pages.choice
-
+GET       /faxian/:cate             controllers.Pages.faxian(cate:Int,tag:Int ?=0,s:Int ?=1,p:Int ?=1)
+GET      /themes                            controllers.Pages.themes
+GET      /themes/:cid                      controllers.Pages.gallery(cid:Int,s:Int ?=1,p:Int ?=1)
+GET     /worth                            controllers.Pages.worth
+GET     /presell                          controllers.Pages.presell
+GET     /cookbook                         controllers.Pages.cookbook
 GET     /site                             controllers.Pages.site
 
+
 #qq app
-GET     /fanji/:tag                          controllers.QQApps.fanji(tag:String,s:Int ?=1,p:Int ?=1)
-GET     /fanji/view/$id<[0-9]+>                         controllers.QQApps.fanjiView(id:Long)
-POST    /fanji/addLoveNum                       controllers.QQApps.addLoveNum
+
 GET    /fanjijie/:tag                            controllers.QQApps.fanjijie(tag:String,s:Int ?=1,p:Int ?=1)
 
 # Search
@@ -69,7 +63,7 @@ GET    /user/$id<[0-9]+>/forum                   controllers.users.Users.forum(i
 GET    /user/$id<[0-9]+>/fans                    controllers.users.Users.fans(id:Long,p:Int ?=1)
 GET    /user/$id<[0-9]+>/follow                  controllers.users.Users.follow(id:Long,p:Int ?=1)
 GET    /user/$id<[0-9]+>/appraisal                  controllers.users.Users.appraisal(id:Long,p:Int ?=1)
-GET    /user/$id<[0-9]+>/site                     controllers.users.Users.sites(id:Long,p:Int ?=1)
+GET    /user/$id<[0-9]+>/site                     controllers.users.Users.site(id:Long,p:Int ?=1)
 
 
 #user 添加关注
@@ -91,7 +85,6 @@ POST  /user/account/modifyPayment      controllers.users.UsersAccount.modifyPaym
 POST  /user/giveUpGift                 controllers.users.UsersAccount.giveUpGift
 POST  /user/giveGift                   controllers.users.UsersAccount.giveGift
 #user 用户返利
-GET   /user/account/myOrders           controllers.users.UsersCommission.myOrders(p:Int ?=1,s:Int ?=1)
 GET   /user/account/myCredits          controllers.users.UsersCommission.myCredits(p:Int ?=1)
 GET   /user/account/myShiDou          controllers.users.UsersCommission.myShiDou(p:Int ?=1)
 GET   /user/account/myAward           controllers.users.UsersCommission.myAward
@@ -121,16 +114,7 @@ GET     /user/msg/at          controllers.users.UsersMsg.at
 
 
 #goods  页面
-GET       /goods/offSell             controllers.Goods.offSell
-POST       /goods/favor                  controllers.Goods.favor
-GET       /goods/getUserThemes          controllers.Goods.getUserThemes
-POST       /goods/createTheme            controllers.Goods.createTheme
-POST      /goods/addAssess               controllers.Goods.addAssess
-POST      /goods/addComment              controllers.Goods.addComment
-GET       /goods/getComments            controllers.Goods.getComments(goodsId:Long,p:Int ?=1)
-GET      /goods/guessUserLikes          controllers.Goods.guessUserLikes
-GET      /goods/findRelativeGoodses     controllers.Goods.findRelativeGoodses(goodsId:Long)
-GET       /goods/$id<[0-9]+>            controllers.Goods.view(id:Long)
+
 
 GET       /baobei/offSell             controllers.Baobei.offSell
 POST       /baobei/favor                  controllers.Baobei.favor
@@ -150,9 +134,6 @@ GET       /baobei/$id<[0-9]+>            controllers.Baobei.view(id:Long)
 GET      /theme/edit                      controllers.Themes.edit(id:Long ?=0L)
 POST     /theme/save                      controllers.Themes.save
 GET      /theme/$id<[0-9]+>               controllers.Themes.view(id:Long)
-GET      /theme/$id<[0-9]+>/board         controllers.Themes.board(id:Long,currentPage:Int ?=1)
-GET      /theme/$id<[0-9]+>/likes         controllers.Themes.likes(id:Long,currentPage:Int ?=1)
-GET       /sub/$id<[0-9]+>                    controllers.Themes.subject(id:Long)
 POST      /theme/delete                    controllers.Themes.delete
 POST     /theme/editStyle                controllers.Themes.editStyle
 POST      /theme/quickReply               controllers.Themes.quickReply
@@ -165,9 +146,14 @@ POST    /theme/checkThemeLoveState            controllers.Themes.checkThemeLoveS
 
 
 
-#小站页面
-GET    /site/$id<[0-9]+>                        controllers.Sites.view(id:Long)
-GET    /site/$sid<[0-9]+>/post/$pid<[0-9]+>     controllers.Sites.post(sid:Long,pid:Long)
+#小镇页面
+GET    /site/edit                       controllers.Sites.editSite(id:Long ?=0)
+POST   /site/save                       controllers.Sites.saveSite
+GET    /site/$id<[0-9]+>                        controllers.Sites.site(id:Long)
+
+GET     /post/edit                           controllers.Sites.editPost(id:Long ?=0)
+GET     /post/$pid<[0-9]+>                    controllers.Sites.post(pid:Long)
+
 
 
 #info 信息页面 新年 公告，帮助中心
@@ -197,22 +183,21 @@ GET   /root.txt                                        controllers.Infos.alimama
 #用户生成的ugc
 GET     /ugc/api/findProduct                       controllers.ugc.API.findProduct(url:String)
 POST    /ugc/api/saveProduct                       controllers.ugc.API.saveProduct
-GET     /ugc/api/convertProduct/$id<[0-9]+>        controllers.ugc.API.convertProduct(id:Long)
-GET     /ugc/api/convertError                      controllers.ugc.API.convertError(error:String ?="")
-GET     /ugc/api/gotoTaobao/$numIid<[0-9]+>        controllers.ugc.API.gotoTaobao(numIid:Long,goodsId:Long ?=0,rate:Int ?=70)
+GET     /ugc/api/gotoTaobao/$numIid<[0-9]+>        controllers.ugc.API.gotoTaobao(numIid:Long,goodsId:Long ?=0)
 POST    /ugc/api/updateProduct                     controllers.ugc.API.updateProduct
 POST    /ugc/api/ajaxRecord                        controllers.ugc.API.ajaxRecord
 
-GET    /ugc/api/rebateProduct                     controllers.ugc.API.rebateProduct(url:String)
 
 
 
 #常用的upload
-POST   /ajaxImage                      controllers.Upload.ajaxImage
-POST   /theme/uploadPic                controllers.Upload.uploadThemeStylePic
-POST   /editor/uploadPic                controllers.Upload.uploadEditorPic
-POST   /user/account/uploadPic          controllers.Upload.uploadUserPic
-POST   /user/account/doUploadPic        controllers.Upload.doUploadUserPic
+POST   /ajaxImage                         controllers.Upload.ajaxImage
+POST   /theme/uploadPic                   controllers.Upload.uploadThemeStylePic
+POST   /editor/uploadPic                  controllers.Upload.uploadEditorPic
+POST   /uploadPic/select                  controllers.Upload.uploadImageSelectPic
+POST   /user/account/doUploadPic          controllers.Upload.doUploadUserPic
+POST   /site/doUploadPic                  controllers.Upload.doUploadSitePic
+POST  /site/uploadPic                     controllers.Upload.uploadSitePic
 
 #管理后台 管理员管理
 GET   /admin/login                controllers.admin.Managers.login
@@ -357,6 +342,13 @@ POST  /admin/votes/save           controllers.admin.Votes.save
 GET  /admin/votes/delete             controllers.admin.Votes.delete(id:Long)
 GET  /admin/votes/batch             controllers.admin.Votes.batch
 GET  /admin/votes/filter             controllers.admin.Votes.filter
+
+
+#管理后台 站内信管理
+GET   /admin/msgs/systemMsgs          controllers.admin.Msgs.systemMsgs(p:Int ?=1)
+GET   /admin/msgs/atMsgs              controllers.admin.Msgs.atMsgs(p:Int ?=1)
+GET   /admin/msgs/favorMsgs              controllers.admin.Msgs.favorMsgs(p:Int ?=1)
+GET   /admin/msgs/replyMsgs              controllers.admin.Msgs.replyMsgs(p:Int ?=1)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public/assets", file)

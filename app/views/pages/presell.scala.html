@@ -1,0 +1,24 @@
+@(user:Option[models.user.User])
+@views.html.template(
+user,
+nav="presell",
+title =  "食美特，不一样的生活"
+)(css="/assets/css/template/china.css") {
+
+<div class="container clearfix" id="china">
+
+
+
+
+
+</div>
+
+        }{
+<script type="text/javascript">
+    seajs.use('app/init', function (init) {
+        var $ = jQuery;
+
+      init.load('app/goods/goods.find,app/goods/goods.favor');
+    });
+</script>
+}

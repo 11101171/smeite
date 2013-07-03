@@ -45,7 +45,7 @@
     <label class="control-label">分类</label>
     <div class="controls">
     <select name="cid" id="J_cid">
-    <option value=""  @if(form("cid").value.getOrElse("none")=="none"){ selected="true" } >所有分类</option>
+    <option value="-1"  @if(form("cid").value.getOrElse("none")=="none"){ selected="true" } >所有分类</option>
 @for(cate<-models.Cate.values.toList.sortBy(x=>x.id)){
     <option value="@cate.id" @if(form("cid").value.getOrElse("none")==cate.id.toString){ selected="true" }>@cate</option>
 
@@ -140,6 +140,7 @@
             <option value="5">批量强调</option>
             <option value="6">批量不强调</option>
             <option value="7">批量删除</option>
+            <option value="8">批量更新编码</option>
         </select>
 
         <button  class="btn btn-info" id="J_batchAction" data-toggle="modal" data-target="#J_batchModal" >批量处理 </button>
@@ -151,9 +152,9 @@
                     <th>ID</th>
                     <th>主分类/主题组</th>
                     <th>名称</th>
+                    <th>编码code</th>
                     <th>是否置顶</th>
                     <th>是否强调</th>
-                <!--    <th>排序</th>-->
                     <th>审核状态</th>
                     <th>时间</th>
                     <th style="width: 60px;">操作</th>
@@ -166,6 +167,7 @@
                      <td>@tag.id</td>
                      <td>@if(!tag.cid.isEmpty){@models.Cate(tag.cid.get)}/@tag.groupName</td>
                      <td>@tag.name</td>
+                     <td><input type="number" name="codes[@i]" value="@tag.code"></td>
                      <td>@if(tag.isTop){<span class="label label-success">yes</span>}else{<span class="label">no</span>}</td>
                      <td>@if(tag.isHighlight){<span class="label label-success">yes</span>}else{<span class="label">no</span>}</td>
                   <!--   <td><input name="nums[@i]" value="@tag.sortNum" > </td>-->
@@ -219,10 +221,6 @@
                         /*  选择主分类 后 显示次分类 */
                          $("#J_cid").change(function(){
                          var cid =$(this).val()
-
-                         if(cid ==""){
-                         $("#J_groupId").html(" ")
-                         }else{
                          $.ajax({
                          url:"/admin/tags/getSimpleGroups?cid="+cid,
                          type:'get',
@@ -231,8 +229,6 @@
                          $("#J_groupId").html(data)
                          }
                          })
-                         }
-
                          })
 
 
