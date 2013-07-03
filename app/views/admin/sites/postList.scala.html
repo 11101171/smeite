@@ -1,4 +1,4 @@
-@(manager:models.admin.Manager,page:models.Page[models.site.Site])
+@(manager:models.admin.Manager,page:models.Page[models.site.Post])
 @views.html.admin.template(manager,"site") {
 
 
@@ -9,7 +9,7 @@
 <div id="breadcrumb">
     <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
     <a href="#" class="current">小镇管理</a>
-    <a href="#" class="current">小镇管理</a>
+    <a href="#" class="current">帖子管理</a>
 </div>
 
 <div class="container-fluid">
@@ -27,7 +27,7 @@
         <span class="icon">
             <i class="icon-pencil"></i>
         </span>
-                <h5>小镇筛选</h5>
+                <h5>帖子筛选</h5>
             </div>
             <div class="widget-content nopadding">
                 <form class=" form-horizontal" id="J_filterForm"  method="get" action="@controllers.admin.routes.Tags.filterTags">
@@ -79,12 +79,13 @@
                     <th><input type="checkbox"  name="title-table-checkbox" /></th>
                     <th>ID</th>
                     <th>创建者ID</th>
-                    <th>小镇名称</th>
-                    <th>小镇类型</th>
-                    <th>小镇logo</th>
-                    <th>小镇简介</th>
-                    <th>小镇标签</th>
-                    <th>小镇状态</th>
+                    <th>小镇Id</th>
+                    <th>帖子类型</th>
+                    <th>帖子名称</th>
+                    <th>帖子主图</th>
+                    <th>置顶</th>
+                    <th>帖子状态</th>
+                    <th>浏览次数</th>
                     <th>时间</th>
                     <th style="width: 60px;">操作</th>
                 </tr>
@@ -95,12 +96,13 @@
                     <td><input type="checkbox" name="ids[@i]" value="@item.id.get" /></td>
                     <td>@item.id</td>
                     <td><a href="@controllers.users.routes.Users.home(item.uid)"> @item.uid </a> </td>
+                    <td><a href="@controllers.routes.Sites.site(item.sid)"> @item.sid </a> </td>
+                    <td>@models.site.PostCate(item.cid)</td>
                     <td>@item.title</td>
-                    <td>@models.site.SiteCate(item.cid)</td>
                     <td><img src="@item.pic" /></td>
-                    <td>@item.intro</td>
-                    <td>@item.tags </td>
+                    <td>@if(item.isTop == 0){<span class="label">否</span>}else {<span class="label label-success">是</span>}</td>
                     <td>@if(item.status==0){<span class="label label-warning">未审核</span>} @if(item.status ==1){<span class="label label-success">已审核</span>}</td>
+                    <td>@item.viewNum</td>
                     <td>@item.addTime</td>
                     <td>
                         <a href="#"><i class="icon-edit"></i></a>
@@ -119,7 +121,7 @@
 
             @page.prev.map { page =>
             <li class="prev">
-                <a href="controllers.admin.routes.Sites.siteList(page)">Prev</a>
+                <a href="controllers.admin.routes.Sites.postList(page)">Prev</a>
             </li>
             }.getOrElse {
             <li class="prev disabled">
@@ -128,14 +130,14 @@
             }
             @for(num <-page.nums){
             @if(num==page.currentPage){
-            <li class="active"><a href="@controllers.admin.routes.Sites.siteList(num)">@num</a></li>
+            <li class="active"><a href="@controllers.admin.routes.Sites.postList(num)">@num</a></li>
             }else {
-            <li><a href="@controllers.admin.routes.Sites.siteList(num)">@num</a></li>
+            <li><a href="@controllers.admin.routes.Sites.postList(num)">@num</a></li>
             }
             }
             @page.next.map { page =>
             <li class="next">
-                <a href="@controllers.admin.routes.Sites.siteList(page)">Next</a>
+                <a href="@controllers.admin.routes.Sites.postList(page)">Next</a>
             </li>
             }.getOrElse {
             <li class="next disabled">
@@ -152,6 +154,7 @@
 </div>
 
 <script type="text/javascript">
+
 
     $(document).on("click",".remove",function(){
         var tagId=$(this).data('id');

@@ -3,7 +3,7 @@ package models.site.dao
 import play.api.db.DB
 import scala.slick.driver.MySQLDriver.simple._
 import play.api.Play.current
-import models.site.{Posts, Sites, Site}
+import models.site.{Post, Posts, Sites, Site}
 import java.sql.Timestamp
 import models.Page
 
@@ -29,7 +29,7 @@ object SiteDao {
   }
 
   /* 查找 所有*/
-  def findAll(currentPage:Int,pageSize:Int):Page[Site] = database.withSession {  implicit session:Session =>
+  def findAllSites(currentPage:Int,pageSize:Int):Page[Site] = database.withSession {  implicit session:Session =>
     val totalRows=Query(Sites.length).first()
     val totalPages=(totalRows + pageSize - 1) / pageSize
     /*获取分页起始行*/
@@ -40,8 +40,34 @@ object SiteDao {
   }
 
     /*  添加新帖子 */
-      def addPost(uid:Long,sid:Long,cid:Int,title:String,pic:String,content:String,tags:String,extraAttr1:String,extraAttr2:String,extraAttr3:String,extraAttr4:String,extraAttr5:String,extraAttr6:String) =  database.withSession {  implicit session:Session =>
+   def addPost(uid:Long,sid:Long,cid:Int,title:String,pic:String,content:String,tags:String,extraAttr1:String,extraAttr2:String,extraAttr3:String,extraAttr4:String,extraAttr5:String,extraAttr6:String) =  database.withSession {  implicit session:Session =>
          Posts.autoInc2.insert(uid,sid,cid,title,pic,content,tags,extraAttr1,extraAttr2,extraAttr3,extraAttr4,extraAttr5,extraAttr6)
     }
+
+  def findPostById(id:Long) = database.withSession {  implicit session:Session =>
+    (for(c<-Posts if c.id === id ) yield c).firstOption
+  }
+
+
+   def findPostsById(uid:Long,currentPage:Int,pageSize:Int):Page[Post] = database.withSession {  implicit session:Session =>
+       val totalRows = Query(Posts.filter(_.uid === uid ).length).first()
+     val totalPages=(totalRows + pageSize - 1) / pageSize
+     /*获取分页起始行*/
+     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+     val q=  for(c<-Posts.filter(_.uid === uid ).sortBy(_.id desc).drop(startRow).take(pageSize)  )yield c
+     val msgs:List[Post]=  q.list()
+     Page[Post](msgs,currentPage,totalPages)
+   }
+
+  def findAllPosts(currentPage:Int,pageSize:Int):Page[Post] = database.withSession {  implicit session:Session =>
+    val totalRows = Query(Posts.length).first()
+    val totalPages=(totalRows + pageSize - 1) / pageSize
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val q=  for(c<-Posts.sortBy(_.id desc).drop(startRow).take(pageSize)  )yield c
+    val msgs:List[Post]=  q.list()
+    Page[Post](msgs,currentPage,totalPages)
+  }
+
+
 
 }

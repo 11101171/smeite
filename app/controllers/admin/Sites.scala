@@ -14,12 +14,12 @@ import models.site.dao.SiteDao
 object Sites extends Controller {
 
   def siteList(currentPage:Int)=Managers.AdminAction{ manager => implicit request =>
-    val page=SiteDao.findAll(currentPage,50)
+    val page=SiteDao.findAllSites(currentPage,50)
     Ok(views.html.admin.sites.siteList(manager,page))
   }
 
   def postList(currentPage:Int)=Managers.AdminAction{ manager => implicit request =>
-    val page=SiteDao.findAll(currentPage,50)
-    Ok(views.html.admin.sites.siteList(manager,page))
+    val page=SiteDao.findAllPosts(currentPage,50)
+    Ok(views.html.admin.sites.postList(manager,page))
   }
 }
