@@ -105,7 +105,10 @@
                 <li class='submenu @if(nav=="msg"){active open}'>
                 <a href="#"><i class="icon icon-th-list"></i> <span>站内信</span></a>
                 <ul>
-                    <li><a href='@controllers.admin.routes.Msgs.system(1)'>系统站内信</a></li>
+                    <li><a href='@controllers.admin.routes.Msgs.systemMsgs(1)'>系统站内信</a></li>
+                    <li><a href='@controllers.admin.routes.Msgs.atMsgs(1)'>私信</a></li>
+                    <li><a href='@controllers.admin.routes.Msgs.favorMsgs(1)'>喜欢站内信</a></li>
+                    <li><a href='@controllers.admin.routes.Msgs.replyMsgs(1)'>回复站内信</a></li>
                 </ul>
                 </li>
 

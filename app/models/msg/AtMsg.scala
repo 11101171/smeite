@@ -35,8 +35,8 @@ object AtMsgs extends Table[AtMsg]("at_msg") {
   def status = column[Int]("status")
   def addTime=column[Timestamp]("add_time")
   def * = id.? ~ senderId ~ senderName ~ content ~ receiverId ~ receiverName  ~ status  ~ addTime.? <>(AtMsg, AtMsg.unapply _)
-  def autoId =id.? ~ senderId ~ senderName  ~ content ~ receiverId ~ receiverName  ~ status  ~ addTime.? <>(AtMsg, AtMsg.unapply _) returning id
-  def autoId2 = senderId ~ senderName  ~ content ~ receiverId ~ receiverName  returning id
+  def autoInc =id.? ~ senderId ~ senderName  ~ content ~ receiverId ~ receiverName  ~ status  ~ addTime.? <>(AtMsg, AtMsg.unapply _) returning id
+  def autoInc2 = senderId ~ senderName  ~ content ~ receiverId ~ receiverName  returning id
 }
 
 

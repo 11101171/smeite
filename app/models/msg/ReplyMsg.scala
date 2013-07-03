@@ -2,7 +2,9 @@ package models.msg
 
 import java.sql.Timestamp
 import scala.slick.driver.MySQLDriver.simple._
-
+ /*
+ * reply type 0 帖子回复 1 宝贝回复 2 主题回复
+ * */
 case class ReplyMsg(
                      id: Option[Long],
                      replierId:Long,

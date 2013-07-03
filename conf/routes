@@ -345,7 +345,10 @@ GET  /admin/votes/filter             controllers.admin.Votes.filter
 
 
 #管理后台 站内信管理
-GET   /admin/msgs/system          controllers.admin.Msgs.system(p:Int ?=1)
+GET   /admin/msgs/systemMsgs          controllers.admin.Msgs.systemMsgs(p:Int ?=1)
+GET   /admin/msgs/atMsgs              controllers.admin.Msgs.atMsgs(p:Int ?=1)
+GET   /admin/msgs/favorMsgs              controllers.admin.Msgs.favorMsgs(p:Int ?=1)
+GET   /admin/msgs/replyMsgs              controllers.admin.Msgs.replyMsgs(p:Int ?=1)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public/assets", file)

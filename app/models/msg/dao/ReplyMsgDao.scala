@@ -23,10 +23,19 @@ object ReplyMsgDao {
     val totalPages=(totalRows + pageSize - 1) / pageSize
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val q=  for(c<-ReplyMsgs.filter(_.ownerId === ownerId).sortBy(_.id desc).drop(startRow).take(pageSize)  )yield c
+    //println(" q sql "+q.selectStatement)
+    val msgs:List[ReplyMsg]=  q.list()
+    Page[ReplyMsg](msgs,currentPage,totalPages)
+  }
+  def findAll(currentPage:Int,pageSize:Int):Page[ReplyMsg] = database.withSession {  implicit session:Session =>
+    val totalRows=Query(ReplyMsgs.length).first()
+    val totalPages=(totalRows + pageSize - 1) / pageSize
+    /*获取分页起始行*/
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for(c<-ReplyMsgs.sortBy(_.id desc).drop(startRow).take(pageSize)  )yield c
     //println(" q sql "+q.selectStatement)
     val msgs:List[ReplyMsg]=  q.list()
     Page[ReplyMsg](msgs,currentPage,totalPages)
   }
-
 }

@@ -1,0 +1,192 @@
+@(manager:models.admin.Manager,page:models.Page[models.msg.ReplyMsg])
+@views.html.admin.template(manager,"msg") {
+
+
+
+<div id="content-header">
+        <h1>站内信管理</h1>
+</div>
+<div id="breadcrumb">
+    <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+    <a href="#" class="current">系统站内信管理</a>
+    <a href="#" class="current">系统站内信管理</a>
+</div>
+
+<div class="container-fluid">
+<div class="row-fluid">
+
+    <div class="btn-toolbar">
+        <a class="btn btn-success" href="@controllers.admin.routes.Tags.editTag(0)"><i class="icon-plus"></i>添加标签</a>
+
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget-box clearfix">
+            <div class="widget-title">
+        <span class="icon">
+            <i class="icon-pencil"></i>
+        </span>
+                <h5>系统站内信筛选</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <form class=" form-horizontal" id="J_filterForm"  method="get" action="@controllers.admin.routes.Tags.filterTags">
+                    <input type="hidden" name="currentPage" id="J_currentPage" value="1">
+
+                    <div class="control-group">
+                        <label class="control-label">发件人</label>
+                        <div class="controls">
+                            <input type="text"  name="senderName" value=''  placeholder="发件人" >
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">收件人</label>
+                        <div class="controls">
+                            <input type="text"  name="receiverName" value=''  placeholder="标签名称" >
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+                    <div class="control-group">
+                        <div class="controls">
+
+                            <input type="submit" class="btn btn-info" value="筛选"/>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row-fluid">
+    <div class="well">
+        <form method="post" id="J_batchForm" action="@controllers.admin.routes.Tags.batchTags">
+            <input type="hidden" id="J_url" name="url" value="">
+            <div class="controls">
+                <select id="J_select" name="action">
+                    <option value="-1">批量动作</option>
+                    <option value="1">批量审核通过</option>
+                    <option value="2">批量审核不通过</option>
+                    <option value="3">批量删除</option>
+                </select>
+
+                <button  class="btn btn-info" id="J_batchAction" data-toggle="modal" data-target="#J_batchModal" >批量处理 </button>
+            </div>
+            <table class="table table-bordered table-striped with-check">
+                <thead>
+                <tr>
+                    <th><input type="checkbox"  name="title-table-checkbox" /></th>
+                    <th>ID</th>
+                    <th>回复的人</th>
+                    <th>回复对象类型</th>
+                    <th>内容</th>
+                    <th>被回复的人的ID</th>
+                    <th>时间</th>
+                    <th style="width: 60px;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                @for((item,i)<- page.items.view.zipWithIndex){
+                <tr id="@item.id.get">
+                    <td><input type="checkbox" name="ids[@i]" value="@item.id.get" /></td>
+                    <td>@item.id</td>
+                    <td><a href="@controllers.users.routes.Users.home(item.replierId)"> @item.replierName </a> </td>
+                    <td>
+                       @if(item.replyType == 1){ <a href="@controllers.routes.Sites.post(item.thirdId)"> @item.content </a>  }
+                        @if(item.replyType == 2){ <a href="@controllers.routes.Baobei.view(item.thirdId)"> @item.content </a>   }
+                        @if(item.replyType == 3) {<a href="@controllers.routes.Themes.view(item.thirdId)"> @item.content </a>    }
+                    </td>
+                    <td><a href="@controllers.users.routes.Users.home(item.ownerId)"> @item.ownerId </a> </td>
+
+                    <td>@item.addTime</td>
+                    <td>
+                        <a href="#"><i class="icon-edit"></i></a>
+                        <!--    <a href="#J_deleteModal"class="remove" data-id="@item.id" role="button" data-toggle="modal"><i class="icon-trash"></i></a>  -->
+                        <a href=""><i class="icon-th-list"></i></a>
+                    </td>
+                </tr>
+                }
+
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div class="pagination">
+        <ul>
+
+            @page.prev.map { page =>
+            <li class="prev">
+                <a href="controllers.admin.routes.Msgs.replyMsgs(page)">Prev</a>
+            </li>
+            }.getOrElse {
+            <li class="prev disabled">
+                <a>Prev</a>
+            </li>
+            }
+            @for(num <-page.nums){
+            @if(num==page.currentPage){
+            <li class="active"><a href="@controllers.admin.routes.Msgs.replyMsgs(num)">@num</a></li>
+            }else {
+
+            <li><a href="@controllers.admin.routes.Msgs.replyMsgs(num)">@num</a></li>
+            }
+
+            }
+
+            @page.next.map { page =>
+            <li class="next">
+                <a href="@controllers.admin.routes.Msgs.replyMsgs(page)">Next</a>
+            </li>
+            }.getOrElse {
+            <li class="next disabled">
+                <a>Next</a>
+            </li>
+            }
+
+        </ul>
+    </div>
+
+
+
+</div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).on("click",".remove",function(){
+        var tagId=$(this).data('id');
+        $("#J_deleteModal").modal('show');
+        $("#J_delete").click(function(){
+
+            $.ajax({
+                url:"/admin/tags/deleteTag?tid="+tagId,
+                type:'get',
+                dataType:'json',
+                success:function(data){
+                    if(data.code =='100'){
+
+                        $("#"+tagId).remove();
+                        $("#J_deleteModal").modal("hide")
+                    }else{
+                        alert(data.message)
+                    }
+                }
+            })
+
+        })
+    })
+</script>
+
+}
+
+
