@@ -5,6 +5,7 @@ import scala.slick.driver.MySQLDriver.simple._
 import play.api.Play.current
 import models.msg.{SystemMsgReceivers, SystemMsg, SystemMsgs}
 import models.Page
+import java.sql.Timestamp
 
 /**
  * Created with IntelliJ IDEA.
@@ -55,8 +56,8 @@ object SystemMsgDao {
 
 
   /* msg receiver */
-  def addMsgReceiver(msgId:Long,receiverId:Long,receiverName:String):Long = database.withSession {  implicit session:Session =>
-      SystemMsgReceivers.autoId2.insert(msgId,receiverId,receiverName)
+  def addMsgReceiver(msgId:Long,receiverId:Long):Long = database.withSession {  implicit session:Session =>
+      SystemMsgReceivers.autoId2.insert(msgId,receiverId)
   }
 
   def modifyMsgReceiverStatus(id:Long,status:Int) = database.withSession {  implicit session:Session =>
@@ -74,7 +75,34 @@ object SystemMsgDao {
   def deleteMsgReceiver(msgId:Long,receiverId:Long) = database.withSession {  implicit session:Session =>
     (for( c<-SystemMsgReceivers.filter(_.msgId === msgId ).filter(_.receiverId === receiverId ) )yield c ).delete
   }
+ /* 查找所有的 system msg receiver */
+  def findAllMsgReceivers(currentPage:Int,pageSize:Int):Page[(Long,Long,Int,String,String,Timestamp)] = database.withSession {  implicit session:Session =>
+    val totalRows=Query(SystemMsgReceivers.length).first()
+    val totalPages=(totalRows + pageSize - 1) / pageSize
+    /*获取分页起始行*/
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val q=  for{
+      c<-SystemMsgReceivers
+      sm <- SystemMsgs
+      if sm.id === c.msgId
+    }yield c.id ~ c.receiverId ~ c.status ~ sm.title ~ sm.content ~ c.addTime
+    val msgs:List[(Long,Long,Int,String,String,Timestamp)]=  q.sortBy(_._1 desc).drop(startRow).take(pageSize).list()
+    Page[(Long,Long,Int,String,String,Timestamp)](msgs,currentPage,totalPages)
+  }
 
-
-
+  /* 查找某个receiver 收到的 信息 */
+    def findReceiverMsgs(receiverId:Long,currentPage:Int,pageSize:Int):Page[(Long,Long,Int,String,String,Timestamp)] =  database.withSession {  implicit session:Session =>
+    val totalRows=Query(SystemMsgReceivers.filter(_.receiverId === receiverId).length).first()
+    val totalPages=(totalRows + pageSize - 1) / pageSize
+    /*获取分页起始行*/
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val q=  for{
+      c<-SystemMsgReceivers
+      sm <- SystemMsgs
+     if c.receiverId === receiverId
+      if sm.id === c.msgId
+    }yield c.id ~ c.receiverId ~ c.status ~ sm.title ~ sm.content ~c.addTime
+    val msgs:List[(Long,Long,Int,String,String,Timestamp)]=  q.sortBy(_._1 desc).drop(startRow).take(pageSize).list()
+    Page[(Long,Long,Int,String,String,Timestamp)](msgs,currentPage,totalPages)
+  }
 }

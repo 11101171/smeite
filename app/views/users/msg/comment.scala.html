@@ -1,7 +1,7 @@
 @(user:Option[models.user.User])
 @views.html.template(
 user
-)(css="/assets/css/template/user.setting.css") {
+)(css="/assets/css/template/user.msg.css") {
 <div class="container" id="home">
     <div class="setting clearfix">
         <div class="side-nav">
@@ -10,7 +10,7 @@ user
                 <li><a href="@controllers.users.routes.UsersMsg.at">@@我的</a></li>
                 <li><a href="@controllers.users.routes.UsersMsg.love">喜欢我的</a></li>
                 <li><a class="on" href="@controllers.users.routes.UsersMsg.comment">回复我的</a></li>
-                <li><a href="@controllers.users.routes.UsersMsg.system">系统通知</a></li>
+                <li><a href="@controllers.users.routes.UsersMsg.system(1)">系统通知</a></li>
 
             </ul>
         </div>				<div class="main-content">

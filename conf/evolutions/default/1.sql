@@ -1028,8 +1028,8 @@ CREATE TABLE IF NOT EXISTS `system_msg_receiver`(
         `id`                       int(10) NOT NULL AUTO_INCREMENT,
        `msg_id`                    int(10) not null default '1',
        `receiver_id`                int(10) not null default '0',
-       `receiver_name`             varchar(32) not null default '',
        `status`                tinyint not null default '0',
+       `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -107,6 +107,10 @@ object Msgs extends Controller {
     )
   }
 
+  def systemMsgReceivers(currentPage:Int) = Managers.AdminAction{ manager => implicit request =>
+    val page = SystemMsgDao.findAllMsgReceivers(currentPage,50)
+    Ok(views.html.admin.msgs.systemMsgReceivers(manager,page))
+  }
 
   def atMsgs(currentPage:Int)=Managers.AdminAction{ manager => implicit request =>
    val page = AtMsgDao.findAll(currentPage,50)

@@ -106,7 +106,7 @@ GET   /user/snsLogin                 controllers.users.UsersSnsLogin.snsLogin(sn
 GET   /user/:snsType/registered/:backType/:i    controllers.users.UsersSnsLogin.registered(snsType:String,code:String,backType:String,i:Long)
 
 #user   用户消息
-GET     /user/msg/system          controllers.users.UsersMsg.system
+GET     /user/msg/system          controllers.users.UsersMsg.system(p:Int)
 GET     /user/msg/comment          controllers.users.UsersMsg.comment
 GET     /user/msg/love          controllers.users.UsersMsg.love
 GET     /user/msg/at          controllers.users.UsersMsg.at
@@ -350,7 +350,7 @@ POST  /admin/msgs/saveSystemMsg       controllers.admin.Msgs.saveSystemMsg
 GET   /admin/msgs/filterSystemMsgs     controllers.admin.Msgs.filterSystemMsgs
 POST   /admin/msgs/batchSystemMsgs       controllers.admin.Msgs.batchSystemMsgs
 GET   /admin/msgs/systemMsgs          controllers.admin.Msgs.systemMsgs(p:Int ?=1)
-
+GET   /admin/msgs/systemMsgReceivers   controllers.admin.Msgs.systemMsgReceivers(p:Int ?=1)
 
 GET   /admin/msgs/atMsgs              controllers.admin.Msgs.atMsgs(p:Int ?=1)
 GET   /admin/msgs/favorMsgs              controllers.admin.Msgs.favorMsgs(p:Int ?=1)

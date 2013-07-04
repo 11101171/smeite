@@ -1,0 +1,104 @@
+@(manager:models.admin.Manager,page:models.Page[(Long,Long,Int,String,String,java.sql.Timestamp)])
+@views.html.admin.template(manager,"msg") {
+
+
+<div id="content-header">
+    <h1>系统站内信管理</h1>
+</div>
+<div id="breadcrumb">
+    <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+    <a href="#" class="current">系统站内信管理</a>
+    <a href="#" class="current">系统站内信收件人管理</a>
+</div>
+
+<div class="container-fluid">
+
+
+<div class="row-fluid">
+    <div class="well">
+        <form method="post" id="J_batchForm" action="#">
+
+            <div class="controls">
+                <select id="J_select" name="action">
+                    <option value="-1">批量动作</option>
+                    <option value="3">批量删除</option>
+                </select>
+
+                <button  class="btn btn-info" id="J_batchAction" data-toggle="modal" data-target="#J_batchModal" >批量处理 </button>
+            </div>
+            <table class="table table-bordered table-striped with-check">
+                <thead>
+                <tr>
+                    <th><input type="checkbox"  name="title-table-checkbox" /></th>
+                    <th>ID</th>
+                    <th>发件人</th>
+                    <th>发件内容</th>
+                    <th>收件人</th>
+                    <th>状态</th>
+                    <th>时间</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                @for((item,i)<- page.items.view.zipWithIndex){
+                <tr id="@item._1">
+                    <td><input type="checkbox" name="ids[@i]" value="@item._1" /></td>
+                    <td>@item._1</td>
+                    <td><a href="@controllers.users.routes.Users.home(item._2)"> @item._2</a> </td>
+                    <td>@item._4</td>
+                    <td>@item._5</td>
+
+                    <td>@if(item._3==0){<span class="label label-warning">未读</span>} @if(item._3 ==1){<span class="label label-success">已读</span>}</td>
+                    <td>@item._6</td>
+
+                </tr>
+                }
+
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div class="pagination">
+        <ul>
+
+            @page.prev.map { page =>
+            <li class="prev">
+                <a href="controllers.admin.routes.Msgs.systemMsgReceivers(page)">Prev</a>
+            </li>
+            }.getOrElse {
+            <li class="prev disabled">
+                <a>Prev</a>
+            </li>
+            }
+            @for(num <-page.nums){
+            @if(num==page.currentPage){
+            <li class="active"><a href="@controllers.admin.routes.Msgs.systemMsgReceivers(num)">@num</a></li>
+            }else {
+
+            <li><a href="@controllers.admin.routes.Msgs.systemMsgReceivers(num)">@num</a></li>
+            }
+
+            }
+
+            @page.next.map { page =>
+            <li class="next">
+                <a href="@controllers.admin.routes.Msgs.systemMsgReceivers(page)">Next</a>
+            </li>
+            }.getOrElse {
+            <li class="next disabled">
+                <a>Next</a>
+            </li>
+            }
+
+        </ul>
+    </div>
+
+
+
+</div>
+</div>
+
+
+}
+
+

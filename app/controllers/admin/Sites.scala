@@ -5,6 +5,7 @@ import play.api.data.Form
 import models.Page
 import models.site.dao.SiteDao
 import java.sql.{Date, Timestamp}
+import models.msg.dao.SystemMsgDao
 
 /**
  * Created with IntelliJ IDEA.
@@ -66,6 +67,7 @@ object Sites extends Controller {
         }else if (batch.action ==1){
           for(id<-batch.ids){
             SiteDao.modifySiteStatus(id,1)
+            SystemMsgDao.addMsgReceiver(id,SiteDao.findSiteById(id).get.uid)
           }
         }else if(batch.action==3){
           for(id<-batch.ids){
