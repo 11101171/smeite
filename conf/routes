@@ -350,6 +350,10 @@ GET   /admin/msgs/atMsgs              controllers.admin.Msgs.atMsgs(p:Int ?=1)
 GET   /admin/msgs/favorMsgs              controllers.admin.Msgs.favorMsgs(p:Int ?=1)
 GET   /admin/msgs/replyMsgs              controllers.admin.Msgs.replyMsgs(p:Int ?=1)
 
+#管理后台 小镇管理
+GET   /admin/sites/siteList               controllers.admin.Sites.siteList(p:Int ?=1)
+GET   /admin/sites/postList               controllers.admin.Sites.postList(p:Int ?=1)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public/assets", file)
 GET     /images/*file               controllers.Assets.at(path="/public/images", file)
