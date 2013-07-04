@@ -18,6 +18,20 @@ object SystemMsgDao {
    def addMsg(title:String,content:String):Long = database.withSession {  implicit session:Session =>
          SystemMsgs.autoId2.insert(title,content)
    }
+   def updateMsg(id:Long,title:String,content:String) = database.withSession {  implicit session:Session =>
+     (for(c <- SystemMsgs if c.id === id )yield c.title ~ c.content).update((title,content))
+   }
+  def deleteMsg(id:Long) = database.withSession {  implicit session:Session =>
+    (for(c <- SystemMsgs if c.id === id) yield  c).delete
+  }
+  def updateMsgStatus(id:Long,status:Int) = database.withSession {  implicit session:Session =>
+    (for(c <- SystemMsgs if c.id === id)yield c.status).update(status)
+  }
+
+  def findMsg(id:Long):Option[SystemMsg] = database.withSession {  implicit session:Session =>
+    (for(c <- SystemMsgs if c.id === id)yield c ).firstOption
+  }
+
   def findAll(currentPage:Int,pageSize:Int):Page[SystemMsg] = database.withSession {  implicit session:Session =>
     val totalRows=Query(SystemMsgs.length).first()
     val totalPages=(totalRows + pageSize - 1) / pageSize
@@ -28,13 +42,19 @@ object SystemMsgDao {
     val msgs:List[SystemMsg]=  q.list()
     Page[SystemMsg](msgs,currentPage,totalPages)
   }
-  def deleteMsg(id:Long) = database.withSession {  implicit session:Session =>
-    (for(c <- SystemMsgs if c.id === id) yield  c).delete
-  }
-  def updateMsgStatus(id:Long,status:Int) = database.withSession {  implicit session:Session =>
-    (for(c <- SystemMsgs if c.id === id)yield c.status).update(status)
+
+  def filterMsgs(title:Option[String],currentPage:Int,pageSize:Int):Page[SystemMsg] = database.withSession {  implicit session:Session =>
+    var query =for(c<-SystemMsgs)yield c
+    if(!title.isEmpty) query = query.filter(_.title like "%"+title.get+"%")
+    val totalRows=query.list().length
+    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val msgs:List[SystemMsg]=  query.drop(startRow).take(pageSize).list()
+    Page[SystemMsg](msgs,currentPage,totalPages);
   }
 
+
+  /* msg receiver */
   def addMsgReceiver(msgId:Long,receiverId:Long,receiverName:String):Long = database.withSession {  implicit session:Session =>
       SystemMsgReceivers.autoId2.insert(msgId,receiverId,receiverName)
   }

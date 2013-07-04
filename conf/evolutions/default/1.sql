@@ -1765,3 +1765,101 @@ CREATE TABLE `user_love_post` (
 alter table goods change detail_url content text;
 update goods set content ="";
 alter table goods change rate location varchar(32);
+
+/************************************************************
+* 站内信、短消息
+* msg 表               用户发的msg
+* msg_receiver 表      用户发的msg接受者
+**************************************************************/
+-- --------------------------------------------------------
+/*
+  -- 表的结构 `msg `
+     id                 表的ID
+     title              标题
+     content           内容
+     sender_id          发信者名称
+     sender_name        发信者名称
+     status        未读  已读 删除
+     add_time           添加时间
+--
+*/
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `at_msg`;
+CREATE TABLE IF NOT EXISTS `at_msg`(
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `sender_id`                int(10) not null default '0',
+  `sender_name`                varchar(32) not null default 'smeite',
+  `content`                varchar(255) not null default '',
+  `receiver_id`                int(10) not null default '0',
+  `receiver_name`             varchar(32) not null default '',
+  `status`               tinyint not null default '1',
+  `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- --------------------------------------------------------
+/*
+  -- 表的结构 `system_msg_receiver `
+     id                 表的ID
+     receiver_id          发信者名称
+     receiver_name        发信者名称
+     msg_id
+     add_time           添加时间
+--
+*/
+-- ------------------------------------------------------------
+   /*
+     status  0 未审核  1 审核
+   */
+DROP TABLE IF EXISTS `system_msg`;
+CREATE TABLE IF NOT EXISTS `system_msg`(
+  `id`                 int(10) NOT NULL AUTO_INCREMENT,
+  `title`                varchar(32) not null default 'smeite',
+  `content`                varchar(255) not null default '',
+  `status`               tinyint not null default '1',
+  `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*status 0 未读  1已读 2 删除 */
+DROP TABLE IF EXISTS `system_msg_receiver`;
+CREATE TABLE IF NOT EXISTS `system_msg_receiver`(
+  `id`                       int(10) NOT NULL AUTO_INCREMENT,
+  `msg_id`                    int(10) not null default '1',
+  `receiver_id`                int(10) not null default '0',
+  `receiver_name`             varchar(32) not null default '',
+  `status`                tinyint not null default '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+DROP TABLE IF EXISTS `favor_msg`;
+CREATE TABLE IF NOT EXISTS `favor_msg`(
+  `id`                          int(10)          NOT NULL AUTO_INCREMENT,
+  `lover_id`                    int(10) not null ,
+  `lover_name`                varchar(32) not null ,
+  `love_action`                varchar(32) not null ,
+  `favor_type`               tinyint not null default '0',
+  `third_id`               int(10) not null ,
+  `content`                varchar(200) not null,
+  `loved_id`               int(10) not null,
+  `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*
+reply type 0 帖子回复 1 宝贝回复 2 主题回复
+*/
+DROP TABLE IF EXISTS `reply_msg`;
+CREATE TABLE IF NOT EXISTS `reply_msg`(
+  `id`                          int(10)          NOT NULL AUTO_INCREMENT,
+  `replier_id`                    int(10) not null ,
+  `replier_name`                varchar(32) not null ,
+  `reply_action`                varchar(32) not null ,
+  `reply_type`               tinyint not null default '0',
+  `third_id`               int(10) not null ,
+  `content`                varchar(200) not null,
+  `owner_id`               int(10) not null,
+  `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

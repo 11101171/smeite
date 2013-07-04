@@ -345,7 +345,13 @@ GET  /admin/votes/filter             controllers.admin.Votes.filter
 
 
 #管理后台 站内信管理
+GET   /admin/msgs/editSystemMsg       controllers.admin.Msgs.editSystemMsg(id:Long ?=0)
+POST  /admin/msgs/saveSystemMsg       controllers.admin.Msgs.saveSystemMsg
+GET   /admin/msgs/filterSystemMsgs     controllers.admin.Msgs.filterSystemMsgs
+POST   /admin/msgs/batchSystemMsgs       controllers.admin.Msgs.batchSystemMsgs
 GET   /admin/msgs/systemMsgs          controllers.admin.Msgs.systemMsgs(p:Int ?=1)
+
+
 GET   /admin/msgs/atMsgs              controllers.admin.Msgs.atMsgs(p:Int ?=1)
 GET   /admin/msgs/favorMsgs              controllers.admin.Msgs.favorMsgs(p:Int ?=1)
 GET   /admin/msgs/replyMsgs              controllers.admin.Msgs.replyMsgs(p:Int ?=1)

@@ -382,3 +382,16 @@ insert into advert(position_code,name)value("index-bottom","新-首页-底部-�
  insert into advert(position_code,name)value("miss_haowanyi_theme","好玩意主题6");
  insert into advert(position_code,name)value("miss_haowanyi_theme","好玩意主题7");
  insert into advert(position_code,name)value("miss_haowanyi_theme","好玩意主题8");
+
+
+
+ /* 20130704 内置系统站内信 */
+ insert into system_msg(id,title,content)value(1,"小镇审核","小镇审核内容todo");
+ insert into system_msg(id,title,content)value(2,"未定2","未定2todo");
+ insert into system_msg(id,title,content)value(3,"未定3","未定3todo");
+ insert into system_msg(id,title,content)value(4,"未定4","未定4todo");
+ insert into system_msg(id,title,content)value(5,"未定5","未定5todo");
+ insert into system_msg(id,title,content)value(6,"未定6","未定6todo");
+ insert into system_msg(id,title,content)value(7,"未定7","未定7todo");
+ insert into system_msg(id,title,content)value(8,"未定8","未定8todo");
+ insert into system_msg(id,title,content)value(9,"未定9","未定9todo");
