@@ -36,7 +36,7 @@ object Sites extends Controller {
         if(site.sid.isEmpty){
           SiteDao.addSite(user.get.id.get,site.cid,site.title,site.pic,site.intro,site.tags)
         }else{
-          SiteDao.updateSite(site.sid.get,site.cid,site.title,site.pic,site.intro,site.tags)
+          SiteDao.modifySite(site.sid.get,site.cid,site.title,site.pic,site.intro,site.tags)
         }
 
          Ok(views.html.sites.addSuccess(user))

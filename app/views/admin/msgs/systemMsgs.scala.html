@@ -86,7 +86,7 @@
                     <td>@item.id</td>
                     <td>@item.title</td>
                     <td>@item.content</td>
-                    <td>@if(item.status==0){<span class="label label-warning">未发送</span>} @if(item.status ==1){<span class="label label-success">已发送</span>}</td>
+                    <td>@if(item.status==0){<span class="label label-warning">未审核</span>} @if(item.status ==1){<span class="label label-success">审核通过</span>}</td>
                     <td>@item.addTime</td>
                     <td>
                         <a href="@controllers.admin.routes.Msgs.editSystemMsg(item.id.get)"><i class="icon-edit"></i></a>

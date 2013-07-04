@@ -18,13 +18,13 @@ object SystemMsgDao {
    def addMsg(title:String,content:String):Long = database.withSession {  implicit session:Session =>
          SystemMsgs.autoId2.insert(title,content)
    }
-   def updateMsg(id:Long,title:String,content:String) = database.withSession {  implicit session:Session =>
+   def modifyMsg(id:Long,title:String,content:String) = database.withSession {  implicit session:Session =>
      (for(c <- SystemMsgs if c.id === id )yield c.title ~ c.content).update((title,content))
    }
   def deleteMsg(id:Long) = database.withSession {  implicit session:Session =>
     (for(c <- SystemMsgs if c.id === id) yield  c).delete
   }
-  def updateMsgStatus(id:Long,status:Int) = database.withSession {  implicit session:Session =>
+  def modifyMsgStatus(id:Long,status:Int) = database.withSession {  implicit session:Session =>
     (for(c <- SystemMsgs if c.id === id)yield c.status).update(status)
   }
 
@@ -59,11 +59,11 @@ object SystemMsgDao {
       SystemMsgReceivers.autoId2.insert(msgId,receiverId,receiverName)
   }
 
-  def updateMsgReceiverStatus(id:Long,status:Int) = database.withSession {  implicit session:Session =>
+  def modifyMsgReceiverStatus(id:Long,status:Int) = database.withSession {  implicit session:Session =>
     (for( c<-SystemMsgReceivers if c.id === id )yield c.status ).update(status)
   }
 
-  def updateMsgReceiverStatus(msgId:Long,receiverId:Long,status:Int) = database.withSession {  implicit session:Session =>
+  def modifyMsgReceiverStatus(msgId:Long,receiverId:Long,status:Int) = database.withSession {  implicit session:Session =>
     (for( c<-SystemMsgReceivers.filter(_.msgId === msgId ).filter(_.receiverId === receiverId ) )yield c.status ).update(status)
   }
 

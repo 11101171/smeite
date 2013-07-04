@@ -65,7 +65,7 @@ object Msgs extends Controller {
         if(systemMsg.id.isEmpty){
           SystemMsgDao.addMsg(systemMsg.title,systemMsg.content)
         }else{
-          SystemMsgDao.updateMsg(systemMsg.id.get,systemMsg.title,systemMsg.content)
+          SystemMsgDao.modifyMsg(systemMsg.id.get,systemMsg.title,systemMsg.content)
         }
    //     Redirect(request.headers.get("REFERER").getOrElse("/admin/msgs/systemMsgs"))
         Redirect("/admin/msgs/systemMsgs")
@@ -91,11 +91,11 @@ object Msgs extends Controller {
       batch => {
         if(batch.action == 0){
           for(id<-batch.ids){
-            SystemMsgDao.updateMsgStatus(id,0)
+            SystemMsgDao.modifyMsgStatus(id,0)
           }
         }else if (batch.action ==1){
           for(id<-batch.ids){
-            SystemMsgDao.updateMsgStatus(id,1)
+            SystemMsgDao.modifyMsgStatus(id,1)
           }
         }else if(batch.action==2){
           for(id<-batch.ids){

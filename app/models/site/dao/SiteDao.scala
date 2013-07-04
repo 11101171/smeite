@@ -4,7 +4,7 @@ import play.api.db.DB
 import scala.slick.driver.MySQLDriver.simple._
 import play.api.Play.current
 import models.site.{Post, Posts, Sites, Site}
-import java.sql.Timestamp
+import java.sql.{Date, Timestamp}
 import models.Page
 
 object SiteDao {
@@ -15,12 +15,16 @@ object SiteDao {
          Sites.autoInc.insert(uid,cid,title,pic,intro,tags)
   }
 
-  def updateSite(sid:Long,cid:Int,title:String,pic:String,intro:String,tags:String) = database.withSession {  implicit session:Session =>
+  def modifySite(sid:Long,cid:Int,title:String,pic:String,intro:String,tags:String) = database.withSession {  implicit session:Session =>
     (for(s <- Sites if s.id === sid )yield s.cid~s.title~s.pic~s.intro~s.tags).update((cid,title,pic,intro,tags))
   }
 
-  def modifySite(sid:Long,status:Int) = database.withSession {  implicit session:Session =>
+  def modifySiteStatus(sid:Long,status:Int) = database.withSession {  implicit session:Session =>
     ( for(s<-Sites if s.id === sid)yield s.status ).update(status)
+  }
+
+  def deleteSite(id:Long) = database.withSession {  implicit session:Session =>
+    ( for(s<-Sites if s.id === id)yield s ).delete
   }
 
   /* 查找 site by id */
@@ -28,7 +32,7 @@ object SiteDao {
     ( for(s<-Sites if s.id === sid)yield s ).firstOption
   }
 
-  /* 查找 所有*/
+  /* 查找 所有site */
   def findAllSites(currentPage:Int,pageSize:Int):Page[Site] = database.withSession {  implicit session:Session =>
     val totalRows=Query(Sites.length).first()
     val totalPages=(totalRows + pageSize - 1) / pageSize
@@ -37,6 +41,23 @@ object SiteDao {
     val q=  for(c<-Sites.sortBy(_.id desc).drop(startRow).take(pageSize)  )yield c
     val msgs:List[Site]=  q.list()
     Page[Site](msgs,currentPage,totalPages)
+  }
+
+  /* 筛选 sites */
+  def filterSites(uid:Option[Long],title:Option[String],cid:Option[Int],status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Int,pageSize:Int):Page[Site] =database.withSession {  implicit session:Session =>
+
+    var query =for(c<-Sites)yield c
+    if(!uid.isEmpty) query = query.filter(_.uid === uid)
+    if(!title.isEmpty) query = query.filter(_.title like "%"+title.get+"%")
+    if(!cid.isEmpty) query = query.filter(_.cid === cid)
+    if(!status.isEmpty) query = query.filter(_.status === status)
+    if(!startDate.isEmpty) query = query.filter(_.addTime > new Timestamp(startDate.get.getTime) )
+    if(!endDate.isEmpty) query = query.filter(_.addTime <  new Timestamp(endDate.get.getTime) )
+    val totalRows=query.list().length
+    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val msgs:List[Site]=  query.drop(startRow).take(pageSize).list()
+    Page[Site](msgs,currentPage,totalPages);
   }
 
     /*  添加新帖子 */
