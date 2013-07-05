@@ -146,17 +146,7 @@ define(function(require, exports) {
                     closeOnClick: false,
                     load: true
                 });
-              /*  new Uploader({
-                    trigger: '#J_FilePath',
-                    name: 'fileData',
-                    action: '/site/uploadPic',
-                    data: {'xsrf': 'hash'}
-                }).success(function(data) {
-                        $.smeite.setting.setAvatar.setPhoto(data.src)
-                      //  alert(response);
-                    }).error(function(file) {
-                        alert(file);
-                    });*/
+
                 $("#J_FilePath").change(function(){
                     $("#faceUpload").submit();
                     $('#photo').attr("src","/assets/ui/loading1.gif");
@@ -195,6 +185,20 @@ define(function(require, exports) {
                 $("#photoDialog").data("overlay").load();
             }
         });
+
+          new Uploader({
+         trigger: '#J_LocalImgFormSubmit',
+         name: 'fileData',
+         action: '/site/uploadPic',
+         data: {'xsrf': 'hash'}
+         }).success(function(data) {
+                  $("#J_uploadImgShow").attr("src",data.src)
+                  $(".site-logo").show()
+                  $("#J_uploadImg").val(data.src)
+         }).error(function(file) {
+         alert(file);
+         });
+
         //限制输入字数
         $.smeite.wordCount.init($("#J_title"),$("#J_titleNum"),32);
         $.smeite.wordCount.init($("#J_intro"),$("#J_introNum"),200);
