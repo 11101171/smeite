@@ -46,9 +46,17 @@ object Sites extends Controller {
   }
 
   /* 小镇  */
-  def site(id:Long) = Users.UserAction { user => implicit request =>
-    Ok(views.html.sites.site(user))
+  def site(id: Long) = Users.UserAction {
+    user => implicit request =>
+      val site = SiteDao.findSiteById(id)
+      if (site.isEmpty) {
+        Ok(" site is not existed  todo todo ")
+      } else {
+
+        Ok(views.html.sites.site(user, site.get))
+      }
   }
+
 
   /* 小镇 帖子 编辑创建 */
   def editPost(id:Long) = Users.UserAction { user => implicit request =>
