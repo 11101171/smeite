@@ -11,5 +11,11 @@
     "grunt-contrib-copy": "~0.4.1",
     "grunt-cmd-transport": "~0.2.9",
     "grunt-contrib-clean":"0.4.1"
-  }
+  } ,
+    "spm": {
+        "alias": {
+            "jquery": "assets/js/front/jquery/1.7.1/jquery.js",
+            "smeite":"assets/js/front/app/smeite.js"
+        }
+    }
 }

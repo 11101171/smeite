@@ -1,6 +1,7 @@
 module.exports = function (grunt) {
 // Project configuration.
     grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
         copy: {
             main: {
                 files: [
@@ -18,21 +19,28 @@ module.exports = function (grunt) {
                     ext: '.css'
                 }
 
+        },
+
+        transport: {
+            options: {
+                paths:['.'],
+                alias : '<%= pkg.spm.alias %>'
+            },
+            //模块整理
+            init : {
+                options : {
+                    idleading : 'dist/init/'
+                }
+                ,files : [
+                    {
+                        cwd : 'assets/js/front/'
+                        ,src : '**/*'
+                        ,filter : 'isFile'
+                        ,dest : 'dist/assets/js/'
+                    }
+                ]
+            }
         }
-   //     },
-
-
-   //     transport: {
-  //          target_name: {
-   ///             files: [
-   //                 {
-   //                     cwd: 'js/front',
-   //                     src: '**/*',
-    //                    dest: 'dist/assets'
-    //                }
-   //             ]
-   //         }
-   //     },
 
 
    //     uglify: {
@@ -59,10 +67,10 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-  //  grunt.loadNpmTasks('grunt-cmd-transport');
- //   grunt.loadNpmTasks('grunt-contrib-uglify');
- //   grunt.loadNpmTasks('grunt-contrib-clean')
+     grunt.loadNpmTasks('grunt-cmd-transport');
+   grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-clean')
 
-    grunt.registerTask('build', ['copy', 'cssmin']);
+    grunt.registerTask('build', ['copy', 'cssmin','transport']);
 
 };
