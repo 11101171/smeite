@@ -114,7 +114,7 @@ define(function(require, exports) {
                 html += '</div>';
                 html += '<div class="photo-row">';
                 html += '<div class="photo-box">';
-                html += '<span><img src="/assets/ui/blank.gif" id="photo" alt="" /> </span>';
+                html += '<span><img src="/assets/img/ui/blank.gif" id="photo" alt="" /> </span>';
                 html += '</div>';
                 html += '</div>';
                 html += '</form>';
@@ -126,7 +126,7 @@ define(function(require, exports) {
                 html += '<input type="hidden" value="" name="area-y2" id="area-y2" />';
                 html += '<div class="photo-row face-submit dn">';
                 html += '<input type="submit" class="bbl-btn submit" value="保存图片"/>';
-                html += '<span id="J_Waiting" class="ml10 gc6 dn"><img src="/assets/ui/loading16.gif">请耐心等待…</span>';
+                html += '<span id="J_Waiting" class="ml10 gc6 dn"><img src="/assets/img/ui/loading16.gif">请耐心等待…</span>';
                 html += '</div>';
                 html += '</form>';
                 html += '<iframe style="width:0px;height:0px;padding:0px;" src="" frameborder="0" name="photo-frame"></iframe>';
@@ -146,20 +146,10 @@ define(function(require, exports) {
                     closeOnClick: false,
                     load: true
                 });
-              /*  new Uploader({
-                    trigger: '#J_FilePath',
-                    name: 'fileData',
-                    action: '/site/uploadPic',
-                    data: {'xsrf': 'hash'}
-                }).success(function(data) {
-                        $.smeite.setting.setAvatar.setPhoto(data.src)
-                      //  alert(response);
-                    }).error(function(file) {
-                        alert(file);
-                    });*/
+
                 $("#J_FilePath").change(function(){
                     $("#faceUpload").submit();
-                    $('#photo').attr("src","/assets/ui/loading1.gif");
+                    $('#photo').attr("src","/assets/img/ui/loading1.gif");
                 });
                 $("#faceUpload2").submit(function(){
                     $this = $(this);
@@ -195,6 +185,20 @@ define(function(require, exports) {
                 $("#photoDialog").data("overlay").load();
             }
         });
+
+          new Uploader({
+         trigger: '#J_LocalImgFormSubmit',
+         name: 'fileData',
+         action: '/site/uploadPic',
+         data: {'xsrf': 'hash'}
+         }).success(function(data) {
+                  $("#J_uploadImgShow").attr("src",data.src)
+                  $(".site-logo").show()
+                  $("#J_uploadImg").val(data.src)
+         }).error(function(file) {
+         alert(file);
+         });
+
         //限制输入字数
         $.smeite.wordCount.init($("#J_title"),$("#J_titleNum"),32);
         $.smeite.wordCount.init($("#J_intro"),$("#J_introNum"),200);

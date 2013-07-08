@@ -1,27 +1,50 @@
-@(user:Option[models.user.User])
+@(user:Option[models.user.User],page:models.Page[(Long,Long,Int,String,String,java.sql.Timestamp)])
 @views.html.template(
 user
-)(css="/assets/css/template/user.setting.css") {
+)(css="/assets/css/template/userMsg.css") {
 <div class="container" id="home">
-    <div class="setting clearfix">
+    <div class="msg clearfix">
         <div class="side-nav">
             <h2>消息中心</h2>
             <ul class="nav_r">
                 <li><a href="@controllers.users.routes.UsersMsg.at">@@我的</a></li>
                 <li><a href="@controllers.users.routes.UsersMsg.love">喜欢我的</a></li>
                 <li><a href="@controllers.users.routes.UsersMsg.comment">回复我的</a></li>
-                <li><a class="on" href="@controllers.users.routes.UsersMsg.system">系统通知</a></li>
+                <li><a class="on" href="@controllers.users.routes.UsersMsg.system(1)">系统通知</a></li>
 
             </ul>
         </div>
         <div class="main-content">
-        <div class="my_comment">
-            <ul>
+        <div class="my-msg">
+            <ul class="list">
+                @for(item <- page.items){
+                <li>
+                    <strong>@item._4</strong><span>@item._6</span><br>
+                   @item._5
+                </li>
+                }
+
+
             </ul>
         </div>
         <!--分页-->
         <div class="tar mt30">
-            <div class="pagin inlineblock clearfix" id="J_Pagination">
+            <div class="pagin fr pagination" id="J_Pagination">
+
+                @page.prev.map { page =>
+                <a class="prev" href="@controllers.users.routes.UsersMsg.system(page)">上一页</a>
+                }
+                @for(num <-page.nums){
+                @if(num==page.currentPage){
+                <span class="current">@num</span>
+                }else {
+                <a href="@controllers.users.routes.UsersMsg.system(num)">@num</a>
+                }
+                }
+                @page.next.map { page =>
+                <a class="next" href="@controllers.users.routes.UsersMsg.system(page)">下一页</a>
+                }
+
             </div>
         </div>
     </div>

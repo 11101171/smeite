@@ -1,0 +1,74 @@
+@(manager:models.admin.Manager,form:Form[controllers.admin.SystemMsgFormData])
+@views.html.admin.template(manager,"msg") {
+    <div id="content-header">
+        <h1>站内信管理</h1>
+    </div>
+    <div id="breadcrumb">
+        <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+        <a href="#" class="current">系统站内信管理</a>
+        <a href="#" class="current">编辑系统站内信</a>
+    </div>
+
+    <div class="container-fluid">
+    <div class="row-fluid">
+    <div class="span12">
+    <div class="widget-box">
+    <div class="widget-title">
+        <span class="icon">
+            <i class="icon-pencil"></i>
+        </span>
+        <h5>编辑系统站内信</h5>
+    </div>
+    <div class="widget-content nopadding">
+        <form class=" form-horizontal" id="myForm"  method="post" action="@controllers.admin.routes.Msgs.saveSystemMsg">
+            <input type="hidden" name="id" value='@form("id").value'>
+
+            @form.globalError.map { error =>
+            <div class="error-row" style="display:block">
+                <p class="error"> @error.message</p>
+            </div>
+            }
+            <div class="control-group">
+                <label class="control-label">名称</label>
+                <div class="controls">
+                    <input type="text" class="input-xlarge"  name="title" value='@form("title").value' placeholder="名称" required="required">
+                </div>
+            </div>
+
+
+            <div class="control-group">
+                <label class="control-label" >内容</label>
+                <div class="controls">
+                    <textarea style="width:300px;height:200px;"   class="input-xlarge" id="xheditor" name="content"> @Html(form("content").value.getOrElse("none"))</textarea>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="controls">
+
+                    <input type="submit" class="btn" value="保存"/>
+                </div>
+            </div>
+        </form>
+
+
+                 </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        $('#xheditor').xheditor({tools:'Fontface,FontSize,Bold,Link,Unlink,|,Source,Preview' });
+
+
+    })
+</script>
+
+
+        }
+
+

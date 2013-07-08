@@ -1,5 +1,7 @@
 package controllers.users
 import play.api.mvc.{Action, Controller}
+import models.msg.dao.SystemMsgDao
+
 /**
  * Created by zuosanshao.
  * User: zuosanshao
@@ -10,9 +12,15 @@ import play.api.mvc.{Action, Controller}
 
 object UsersMsg extends Controller {
   /*系统通知*/
-       def system =Users.UserAction{  user => implicit request =>
-        Ok(views.html.users.msg.system(user))
-       }
+  def system(p:Int) = Users.UserAction {
+    user => implicit request =>
+      if (user.isEmpty) Redirect(controllers.users.routes.UsersRegLogin.login)
+      else {
+        val page = SystemMsgDao.findReceiverMsgs(user.get.id.get,p,10)
+        Ok(views.html.users.msg.system(user,page))
+      }
+
+  }
   /*评论 回复 我的*/
       def  comment =Users.UserAction{  user => implicit request =>
         Ok(views.html.users.msg.comment(user))

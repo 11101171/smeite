@@ -36,7 +36,7 @@ object Sites extends Controller {
         if(site.sid.isEmpty){
           SiteDao.addSite(user.get.id.get,site.cid,site.title,site.pic,site.intro,site.tags)
         }else{
-          SiteDao.updateSite(site.sid.get,site.cid,site.title,site.pic,site.intro,site.tags)
+          SiteDao.modifySite(site.sid.get,site.cid,site.title,site.pic,site.intro,site.tags)
         }
 
          Ok(views.html.sites.addSuccess(user))
@@ -46,9 +46,17 @@ object Sites extends Controller {
   }
 
   /* 小镇  */
-  def site(id:Long) = Users.UserAction { user => implicit request =>
-    Ok(views.html.sites.site(user))
+  def site(id: Long) = Users.UserAction {
+    user => implicit request =>
+      val site = SiteDao.findSiteById(id)
+      if (site.isEmpty) {
+        Ok(" site is not existed  todo todo ")
+      } else {
+
+        Ok(views.html.sites.site(user, site.get))
+      }
   }
+
 
   /* 小镇 帖子 编辑创建 */
   def editPost(id:Long) = Users.UserAction { user => implicit request =>

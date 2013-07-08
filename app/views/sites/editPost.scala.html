@@ -3,7 +3,7 @@
 user,
 nav="site",
 title =  "食美特，不一样的生活"
-)(css="/assets/css/template/site.edit.css") {
+)(css="/assets/css/template/siteEdit.css") {
 
 <div class="container clearfix" id="post">
     <div class="site-edit clearfix">
@@ -12,7 +12,7 @@ title =  "食美特，不一样的生活"
             <form id="J_TopicEditFm" class="edit-form" method="post" action="@controllers.routes.Themes.save">
                 <input type="hidden" name="id" value=''>
                 <input type="hidden" name="cid" id="J_cid" value=''>
-
+                <input type="hidden" name="pic" id="J_uploadImg">
                 <div class="form-row clearfix">
                     <label><span class="rc">*</span>标题：</label>
                     <div class="fm-item">
@@ -100,9 +100,10 @@ title =  "食美特，不一样的生活"
                 <div class="form-row clearfix">
                     <label>上传主图：</label>
                     <div class="fm-item">
-                        <input type="file" value="上传本地图片" class="bbl-btn upload-cover">
-                        <input type="file" class="upload-btn" id="J_LocalImgFormSubmit" name="filedata">
-                        <p  class="fl">支持GIF、JPG、PNG,大小不超过2M</p>
+                        <img id="J_uploadImgShow">
+                        <input type="button" value="上传本地图片"id="J_LocalImgFormSubmit" class="bbl-btn upload-cover">
+
+                        <p>支持GIF、JPG、PNG,大小不超过2M</p>
                     </div>
                 </div>
 

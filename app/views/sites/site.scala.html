@@ -1,4 +1,4 @@
-@(user:Option[models.user.User])
+@(user:Option[models.user.User],site:models.site.Site)
 @views.html.template(
 user,
 nav="site",
@@ -9,32 +9,22 @@ title =  "食美特，不一样的生活"
     <!-- site nav 包括logo intro  管理员-->
    <div class="site-nav">
       <div class="logo">
-          <img width="200" height="200" src="/assets/temp/site.jpg">
+          <img width="200" height="200" src="@site.pic">
       </div>
        <div class="site-info">
-           <h3>小镇小镇小镇小镇小镇 </h3>
-           <div class="intro">介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍</div>
+           <h3>@site.title </h3>
+           <p class="intro">@site.intro</p>
            <div class="tags clearfix">
                <label >相关标签：</label>
                <ul>
-                   <li> <a>小镇</a> </li>
-                   <li> <a>小镇</a> </li>
-                   <li> <a>小镇</a> </li>
-                   <li> <a>小镇</a> </li>
-                   <li> <a>小镇</a> </li>
-                   <li> <a>小镇</a> </li>
+                   @for(tag<-site.tags.split(",")){
+                   <li> <a href="@controllers.Search.search(tag,1)" >@tag</a> </li>
+                   }
+
+
                </ul>
            </div>
 
-
-               <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
-                   <span class="bds_more">分享到：</span>
-                   <a class="bds_tsina"></a>
-                   <a class="bds_qzone"></a>
-                   <a class="bds_tqq"></a>
-                   <a class="bds_renren"></a>
-                   <a class="bds_mshare"></a>
-               </div>
 
 
 
@@ -61,41 +51,18 @@ title =  "食美特，不一样的生活"
                    <a class="follow-btn"> 邀请好友</a>
                </div>
            </div>
-       </div>
-       <div class="recommend">
-                <h3>推荐小镇 <a class="more">查看更多</a></h3>
-                <ul>
-                    <li class="ofh" >
-                        <a class="clearfix">
-                            <img src="/assets/temp/site-style.jpg" width="50" height="50">
-                            <div>
-                                <p>xxxxx</p>
-                                <p>302 居民</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="ofh">
-                        <a class="clearfix">
-                            <img src="/assets/temp/site-style.jpg" width="50" height="50">
-                            <div>
-                                <p>xxxxx</p>
-                                <p>302 居民</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="ofh last">
-                        <a class="clearfix">
-                            <img src="/assets/temp/site-style.jpg" width="50" height="50">
-                            <div>
-                                <p>xxxxx</p>
-                                <p>302 居民</p>
-                            </div>
+           <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+               <span class="bds_more">分享到：</span>
+               <a class="bds_tsina"></a>
+               <a class="bds_qzone"></a>
+               <a class="bds_tqq"></a>
+               <a class="bds_renren"></a>
+               <a class="bds_mshare"></a>
+           </div>
 
-                        </a>
-                    </li>
-                </ul>
 
        </div>
+
    </div>
 
     <!-- site media 包括 宝贝  图片 视频-->
@@ -120,8 +87,31 @@ title =  "食美特，不一样的生活"
         </div>
     </div>
     <!-- site tools 包括 编辑 上传图片 上传视频-->
-    <div class="site-tools">
-
+    <div class="site-tools clearfix">
+        <div class="site-baobei">
+            <a class="add add-baobei">
+                <ins class="ico-baobei"></ins>
+                <p>添加宝贝</p>
+            </a>
+        </div>
+        <div class="site-pic">
+            <a class="add add-pic">
+                <ins class="ico-pic"></ins>
+                <p>添加图片</p>
+            </a>
+        </div>
+        <div class="site-video">
+            <a class="add add-video">
+                <ins class="ico-video"></ins>
+                <p>添加视频</p>
+            </a>
+        </div>
+        <div class="site-post last">
+            <a class="add add-post">
+                <ins class="ico-post"></ins>
+                <p>添加帖子</p>
+            </a>
+        </div>
     </div>
        <!-- site 帖子 -->
     <div class="site-posts">

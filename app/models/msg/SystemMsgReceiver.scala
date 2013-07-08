@@ -16,16 +16,16 @@ case class SystemMsgReceiver(
                         id: Option[Long],
                         msgId:Long,
                         receiverId:Long,
-                        receiverName:String,
-                        status:Int
+                        status:Int,
+                        addTime:Option[Timestamp]
                         )
 object SystemMsgReceivers extends Table[SystemMsgReceiver]("system_msg_receiver") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def msgId =column[Long]("msg_id")
   def receiverId =column[Long]("receiver_id")
-  def receiverName =column[String]("receiver_name")
   def status = column[Int]("status")
-  def * = id.? ~ msgId ~ receiverId ~ receiverName  ~ status <>(SystemMsgReceiver, SystemMsgReceiver.unapply _)
-  def autoId =id.? ~ msgId ~ receiverId ~ receiverName ~ status  <>(SystemMsgReceiver, SystemMsgReceiver.unapply _) returning id
-  def autoId2 =msgId ~ receiverId ~ receiverName  returning id
+  def addTime=column[Timestamp]("add_time")
+  def * = id.? ~ msgId ~ receiverId  ~ status ~ addTime.? <>(SystemMsgReceiver, SystemMsgReceiver.unapply _)
+  def autoId =id.? ~ msgId ~ receiverId  ~ status~ addTime.?  <>(SystemMsgReceiver, SystemMsgReceiver.unapply _) returning id
+  def autoId2 =msgId ~ receiverId   returning id
 }

@@ -32,7 +32,7 @@
     <div id="content">
 <div class="container" class="clearfix">
     <div class="tag-banner">
-        <img src="/assets/ui/fanji/topbanner2.png">
+        <img src="/assets/img/ui/fanji/topbanner2.png">
     </div>
 <!--商品列表 start-->
     <div class="day-option">
@@ -58,7 +58,7 @@
 <div class="today-goods-item clearfix">
 
 
-    <a  href="javascript:void(0);" onclick="fusion2.nav.open({url : '@goods.clickUrl.getOrElse(goods.detailUrl)'}); return false;">
+    <a  href="javascript:void(0);" onclick="fusion2.nav.open({url : '@goods.clickUrl'}); return false;">
         <img class="goods-item-img" src='@(goods.pic+"_310x310.jpg")' alt="@goods.name" width="300" height="@(goods.hwRate*300)"></a>
     <div class="goods-item-info">
         <h2 class="goods-item-title">
@@ -67,13 +67,13 @@
         </h2>
         <div class="goods-item-desc">
             <i class="quotation-marks"></i>
-            <a   class="desc-txt" href="javascript:void(0);" onclick="fusion2.nav.open({url : '@goods.clickUrl.getOrElse(goods.detailUrl)'}); return false;">
+            <a   class="desc-txt" href="javascript:void(0);" onclick="fusion2.nav.open({url : '@goods.clickUrl'}); return false;">
                 @goods.intro
             </a>
 
         </div>
         <div class="goods-item-buy clearfix">
-            <a  class="goods-item-buy-btn clearfix"  href="javascript:void(0);" onclick="fusion2.nav.open({url : '@goods.clickUrl.getOrElse(goods.detailUrl)'}); return false;">
+            <a  class="goods-item-buy-btn clearfix"  href="javascript:void(0);" onclick="fusion2.nav.open({url : '@goods.clickUrl'}); return false;">
 
                 @if(goods.promotionPrice.isEmpty){
                 <span class="current-price"> ?@goods.price</span>
@@ -120,7 +120,7 @@
 
             </div>
             <div class="clear"></div>
-            <a  class="others-say"  href="javascript:void(0);" onclick="fusion2.nav.open({url : '@goods.clickUrl.getOrElse(goods.detailUrl)'}); return false;">看看买过的人怎么说&gt;&gt;</a>
+            <a  class="others-say"  href="javascript:void(0);" onclick="fusion2.nav.open({url : '@goods.clickUrl'}); return false;">看看买过的人怎么说&gt;&gt;</a>
         </div>
     </div>
 </div>

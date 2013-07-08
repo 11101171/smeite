@@ -26,7 +26,7 @@
      -moz-box-shadow: 0 1px 1px rgba(34, 25, 25, 0.2);
      -webkit-box-shadow: 0 1px 1px rgba(34, 25, 25, 0.2);
  }
- .site-nav .logo,.site-nav .site-info ,.site-nav .manager ,.site-nav .recommend{
+ .site-nav .logo,.site-nav .site-info{
      float: left;
      overflow: hidden;
  }
@@ -35,14 +35,15 @@
      margin-right:10px;
  }
  .site-nav .site-info{
-     padding: 10px 0 10px 10px;
-     width:320px ;
+     padding: 10px 19px 10px 10px;
+     width: 530px;
      height: 180px;
  }
  .site-nav .site-info h3{
+     text-align: center;
      font-family: 'MicroSoft Yahei';
      font-size: 18px;
-     color: #666;
+     color: #333;
      line-height: 28px;
      padding-bottom: 5px;
  }
@@ -52,6 +53,7 @@
     margin-top: 10px;
 }
 .site-info .tags label{
+    float: left;
     display: block;
     font-size: 14px;
     font-weight: bold;
@@ -96,12 +98,12 @@
 }
 
 .site-nav .manager{
+    float: right;
     border-left: 1px dashed #EFEFEF;
-    border-right: 1px dashed #EFEFEF;
-     margin: 10px ;
-    padding:0 10px;
-     width: 218px;
+    padding:10px;
     height:180px;
+    width: 190px;
+    overflow: hidden;
  }
 .manager .owner{
     padding-left: 8px;
@@ -129,61 +131,33 @@
 }
 .manager .join{
     float: left;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 .manager .join .love-num{
     text-align: center;
     font-size: 16px;
     font-weight: bolder;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 .manager .join .follow ,.manager .join .invite {
-    text-align: center;
-    margin-bottom: 15px;
     float: left;
+    text-align: center;
+    margin-bottom: 10px;
     margin-right: 15px;
 }
 .manager .join .follow-btn{
     width: 80px;
     float: none;
 }
- .site-nav .recommend{
-     padding: 10px ;
-     width: 160px;
-     height:180px;
- }
- .recommend li{
-     padding-bottom: 5px;
- }
- .recommend li a{
-     height: 50px;
-     display: block;
- }
- .recommend li img{
-     float: left;
-     width: 50px;
-     height: 50px;
-     margin-right: 10px;
- }
- .recommend li div {
-     float: left;
-     width: 100px;
- }
- .recommend li p{
-     height: 25px;
-     width: 100px;
-     float: left;
-     line-height: 25px;
- }
- .recommend li.last{
-     padding-bottom: 0;
- }
- /*site nav end*/
+
 /* site media start */
 .site-media{
     background-color: #fff;
     height: 260px;
     padding: 20px 15px;
+}
+.site-media p{
+    text-align: center;
 }
 .site-media  a.add{
     display: block;
@@ -212,9 +186,7 @@
     height: 258px;
     background: #fff;
 }
-.site-media  a.add:hover{
-    border: 1px dashed #333;
-}
+
 .site-media .site-video{
     float: left;
     width: 360px;
@@ -225,7 +197,11 @@
     width: 358px;
     height: 258px;
 }
+.site-media  a.add:hover{
+    border: 1px dashed #333;
+}
 .site-media .ico-baobei,.site-media .ico-pic,.site-media .ico-video{
+    margin-top: 85px;
     height: 22px;
     line-height: 22px;
     padding: 0 0 0 22px;
@@ -233,22 +209,89 @@
     display: inline-block;
     vertical-align: middle;
     zoom: 1;
-    background: url(images/widget_site.png) no-repeat -2222px -136px;
+    background: url(images/widget_site.png) no-repeat;
     margin-right: 5px;
 }
-.site-media .ico-baobei,.site-media .ico-pic{
-    height: 58px;
-    line-height: 58px;
-    padding-left: 64px;
-    background-position: 7px -998px;
+.site-media .ico-baobei{
+    margin-left: 96px;
+    height:77px;
+    line-height:77px;
+    padding-left: 77px;
+    background-position: -223px 0px;
+}.site-media .ico-pic{
+     margin-left: 96px;
+    height:80px;
+    line-height:80px;
+    padding-left: 80px;
+    background-position: 0px 0px;
 }
-.site-media .site-video .ico-video{
-    height: 58px;
-    line-height: 58px;
+.site-media  .ico-video{
+    margin-left: 147px;
+    height: 65px;
+    line-height: 65px;
     padding-left: 64px;
-    background-position: -105px -995px;
+    background-position: -105px -96px;
+}
+  /* end */
+.site-tools{
+    background-color: #eee;
+    margin: 15px auto;
+    padding: 10px 20px;
+    height: 80px;
 }
 
+.site-tools p{
+    float: left;
+    line-height: 80px;
+    width: 60px;
+    text-align: left;
+}
+.site-tools  a.add{
+    display: block;
+    height:80px;
+    background: #fff;
+}
+.site-tools .site-baobei,.site-tools .site-pic,.site-tools .site-video,.site-tools .site-post{
+    float: left;
+    width:200px;
+    margin-right: 20px;
+}
+.site-tools .ico-baobei,.site-tools .ico-pic,.site-tools .ico-video,.site-tools .ico-post{
+    margin: 5px 10px;
+     float: left;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+    background: url(images/widget_site.png) no-repeat;
+}
+.site-tools .ico-baobei{
+    height:77px;
+    line-height:77px;
+    padding-left: 77px;
+    background-position: -223px 0px;
+}
+.site-tools .ico-pic{
+     height:80px;
+     line-height:80px;
+     padding-left: 80px;
+     background-position: 0px 0px;
+ }
+.site-tools  .ico-video{
+    margin-top: 15px;
+    height: 65px;
+    line-height: 65px;
+    padding-left: 64px;
+    background-position: -105px -96px;
+}
+.site-tools  .ico-post{
+    height: 77px;
+    line-height:77px;
+    padding-left:77px;
+    background-position: -109px 0px;
+}
+.site-tools .last{
+    margin-right: 0;
+}
 /*site-posts  site-filter*/
 .site-filter{
     margin: 20px 0;

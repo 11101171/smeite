@@ -6,17 +6,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="shortcut icon" type="image/png" href="/assets/favicon.png">
-    <link rel="stylesheet" href="/assets/admin/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/assets/admin/css/bootstrap-responsive.min.css" />
-    <link rel="stylesheet" href="/assets/admin/css/unicorn.main.css" />
-    <link rel="stylesheet" href="/assets/admin/css/unicorn.grey.css" class="skin-color" />
-    <link rel="stylesheet" type="text/css" href="/assets/admin/js/uploadify/uploadify.css" />
-    <script src="/assets/admin/js/jquery.min.js"></script>
-    <script src="/assets/admin/js/jquery.tools.min.js"></script>
-    <script src="/assets/admin/js/bootstrap.min.js"></script>
-    <script src="/assets/admin/js/jquery.admin.js"></script>
-    <script src="/assets/admin/js/uploadify/jquery.uploadify-3.1.js"></script>
-    <script src="/assets/admin/js/xheditor/xheditor-1.1.14-zh-cn.min.js"></script>
+    <link rel="stylesheet" href="/admin/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/admin/assets/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="/admin/assets/css/unicorn.main.css" />
+    <link rel="stylesheet" href="/admin/assets/css/unicorn.grey.css" class="skin-color" />
+    <link rel="stylesheet" type="text/css" href="/admin/assets/js/uploadify/uploadify.css" />
+    <script src="/admin/assets/js/jquery.min.js"></script>
+    <script src="/admin/assets/js/jquery.tools.min.js"></script>
+    <script src="/admin/assets/js/bootstrap.min.js"></script>
+    <script src="/admin/assets/js/jquery.admin.js"></script>
+    <script src="/admin/assets/js/uploadify/jquery.uploadify-3.1.js"></script>
+    <script src="/admin/assets/js/xheditor/xheditor-1.1.14-zh-cn.min.js"></script>
     <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21136607"></script>
 
     </head>
@@ -104,7 +104,7 @@
                 </li>
 
                 <li class='submenu @if(nav=="site"){active open}'>
-                    <a href="#"><i class="icon icon-th-list"></i> <span>小镇</span></a>
+                    <a href="#"><i class="icon icon-th-list"></i> <span>小镇管理</span></a>
                     <ul>
                         <li><a href='@controllers.admin.routes.Sites.siteList(1)'>小镇管理</a></li>
                         <li><a href='@controllers.admin.routes.Sites.postList(1)'>帖子管理</a></li>
@@ -113,9 +113,10 @@
                 </li>
 
                 <li class='submenu @if(nav=="msg"){active open}'>
-                <a href="#"><i class="icon icon-th-list"></i> <span>站内信</span></a>
+                <a href="#"><i class="icon icon-th-list"></i> <span>站内信管理</span></a>
                 <ul>
                     <li><a href='@controllers.admin.routes.Msgs.systemMsgs(1)'>系统站内信</a></li>
+                    <li><a href='@controllers.admin.routes.Msgs.systemMsgReceivers(1)'>系统站内信收件人</a></li>
                     <li><a href='@controllers.admin.routes.Msgs.atMsgs(1)'>私信</a></li>
                     <li><a href='@controllers.admin.routes.Msgs.favorMsgs(1)'>喜欢站内信</a></li>
                     <li><a href='@controllers.admin.routes.Msgs.replyMsgs(1)'>回复站内信</a></li>

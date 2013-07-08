@@ -96,7 +96,7 @@
 		if(!faceBtnWrapDom){
 			var html = '<div class="faceWrap"><div class="faceWrapBorder clearfix">'
 				for(var i=0;i<FACEJSON.length;i++){
-					html += '<a faceval="'+FACEJSON[i].key+'" style="background:#fff url(/assets/emotion/'+FACEJSON[i].val+') 4px 4px no-repeat;" href="javascript:;" title="'+FACEJSON[i].key+'" unselectable="on">'+FACEJSON[i].key+'</a>'
+					html += '<a faceval="'+FACEJSON[i].key+'" style="background:#fff url(/assets/img/emotion/'+FACEJSON[i].val+') 4px 4px no-repeat;" href="javascript:;" title="'+FACEJSON[i].key+'" unselectable="on">'+FACEJSON[i].key+'</a>'
 				}
 			html += '</div></div>';
 			faceBtn.append(html);
@@ -194,7 +194,7 @@
 		if(!data){
 			data = {};
 			for(var i = 0;i < length;i++){
-				data[FACEJSON[i].key] = '<img src="/assets/emotion/'+FACEJSON[i].val+'" unselectable="on" title="'+FACEJSON[i].key+'" alt="'+FACEJSON[i].key+'">';
+				data[FACEJSON[i].key] = '<img src="/assets/img/emotion/'+FACEJSON[i].val+'" unselectable="on" title="'+FACEJSON[i].key+'" alt="'+FACEJSON[i].key+'">';
 			}
 		}
 		html = html.replace(/\[[^\[\]]+\]/gi,function(tag){
