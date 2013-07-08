@@ -1014,7 +1014,7 @@ input:-moz-placeholder { font-size:12px; }
 #J_newGiftDialog .gift_area{
     position: relative;
     margin: 10px auto;
-    background: url(/assets/ui/new_gift_bg.png) no-repeat 0 0 transparent;
+    background: url(/assets/img/ui/new_gift_bg.png) no-repeat 0 0 transparent;
     width: 170px;
     height: 107px;
     overflow: hidden;
@@ -1078,7 +1078,7 @@ input:-moz-placeholder { font-size:12px; }
 #J_checkInDialog .checkIn_area{
     position: relative;
     margin: 10px auto;
-    background: url(/assets/ui/new_gift_bg.png) no-repeat 0 0 transparent;
+    background: url(/assets/img/ui/new_gift_bg.png) no-repeat 0 0 transparent;
     width: 170px;
     height: 107px;
     overflow: hidden;

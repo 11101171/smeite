@@ -116,9 +116,9 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                     <a href="@controllers.routes.Themes.view(item._1._1)" class="pic" target="_blank">
                         @for((img,i)<-item._2.view.zipWithIndex){
                         @if(i==0){
-                        <img class="b-img"  @if(!img.isEmpty){src='@(img.get+"_210x210.jpg")' width="210"height="210"}else {src="/assets/ui/blank.gif"} >
+                        <img class="b-img"  @if(!img.isEmpty){src='@(img.get+"_210x210.jpg")' width="210"height="210"}else {src="/assets/img/ui/blank.gif"} >
                         }else {
-                        <img class="s-img" @if(!img.isEmpty){src='@(img.get+"_60x60.jpg")' width="50" height="50"}else {src="/assets/ui/blank.gif"} >
+                        <img class="s-img" @if(!img.isEmpty){src='@(img.get+"_60x60.jpg")' width="50" height="50"}else {src="/assets/img/ui/blank.gif"} >
                         }
                         }
 

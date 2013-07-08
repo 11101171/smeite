@@ -935,7 +935,7 @@ CREATE TABLE IF NOT EXISTS `tag`(
 CREATE TABLE IF NOT EXISTS `tag_group`(
        `id`                     int(10) NOT NULL AUTO_INCREMENT,
       `name`                    varchar(32) not null default '',
-      `pic`                     varchar(128) not null default '/assets/ui/tag.jpg',
+      `pic`                     varchar(128) not null default '/assets/img/ui/tag.jpg',
       `intro`                   varchar(128) not null default '',
       `cid`                     smallint(10) NOT NULL,
       `hot_index`               smallint(10) NOT NULL default '0',

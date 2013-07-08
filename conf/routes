@@ -365,6 +365,7 @@ GET   /admin/sites/postList               controllers.admin.Sites.postList(p:Int
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public/assets", file)
 GET     /images/*file               controllers.Assets.at(path="/public/images", file)
+GET     /admin/assets/*file         controllers.Assets.at(path="/public/admin", file)
 
 
 
