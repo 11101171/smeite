@@ -1497,6 +1497,7 @@ define(function(require, exports) {
         if($("a[rel=loginD]")[0]){
             $("a[rel=loginD]").click(function(event){
                 event.preventDefault();
+                alert("hello")
                 $.smeite.dialog.login();
             });
         }
