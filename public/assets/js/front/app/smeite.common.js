@@ -22,8 +22,8 @@ define(function(require, exports) {
     if(refererUrl.indexOf("taobao")>0 || refererUrl.indexOf("tmall")>0)referer ="taobao"
     if(refererUrl.indexOf("weibo")>0) referer="weibo"
     function addToFav(o){
-        var url = "http://smeite.com";
-        var title = "食美特，爱美食爱生活";
+        var url = "http://smeite.cn";
+        var title = "食美特，不一样的生活";
         if (window.sidebar) { // Mozilla Firefox Bookmark
             window.sidebar.addPanel(title, url,"");
         } else if( window.external&&document.all) { // IE Favorite
@@ -243,7 +243,7 @@ window.refresh=function(){
 }
 
     /* 顶部固定： 如果是find 页面 则 fix tag nav，否则 显示 #nav fixed */
-    var href = window.location.href;
+ //   var href = window.location.href;
   //  if(href.indexOf("/find")==-1){
    //     $(window).bind("scroll",function(){
     //        var docScrollTop = $(document).scrollTop();

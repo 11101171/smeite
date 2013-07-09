@@ -14,9 +14,11 @@ seajs.config({
         'json': 'gallery/json/1.0.3/json',
          '$': 'jquery/jquery/1.10.1/jquery',
         'cookie': 'arale/cookie/1.0.2/cookie',
+        'mask': 'arale/overlay/1.1.2/mask',
+        'overlay': 'arale/overlay/1.1.2/overlay',
         'dialog': 'arale/dialog/1.1.2/dialog',
         'confirmbox':'arale/dialog/1.1.2/confirmbox',
-
+        'position': 'arale/position/1.0.1/position',
 
        'smeite':'smeite/smeite'
     },

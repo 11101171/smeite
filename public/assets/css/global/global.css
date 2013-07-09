@@ -744,7 +744,7 @@ input:-moz-placeholder { font-size:12px; }
 .errc { color:#bb0000; }
 .error { color:#bb0000;background:#ffe8e8;padding: 5px }
 .ajaxvali { background:#fff url(images/loading16.gif) left center no-repeat;height:16px; }
-.correct { background:#fff url(images/correct.png) left center no-repeat;height:16px; }
+.correct { background:#fff url(images/correct.png) left center no-repeat;height:16px; padding-left: 20px;}
 .empty { height:32px;line-height:32px;padding:0 10px; }
 /* 按钮 */
 .bbl-btn, .bgr-btn { float:left;height:28px;line-height:28px;padding:0 15px;font-size:12px;background-image:url(images/button.png);-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px; cursor:pointer;}
@@ -973,10 +973,30 @@ input:-moz-placeholder { font-size:12px; }
 .more-load { display:block;height:30px;line-height:30px;text-align:center;color:#666;font-size:12px;font-weight:bold;background-color:#ededed; }
 .more-load:hover { text-decoration:none; }
 /* 浮层 */
-.g-dialog { display:none;width:600px;border:5px solid #ccc;border:5px solid rgba(204, 204, 204, 0.8);-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px; }
+.g-dialog { /*display:none;*/width:600px;border:5px solid #ccc;border:5px solid rgba(0, 0, 0, 0.5);-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px; outline: none}
+.g-dialog .g-dialog-content { position:relative;min-height:120px;padding:1px;background:#fff;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px; }
 .g-dialog .dialog-content { position:relative;min-height:120px;padding:1px;background:#fff;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px; }
 .g-dialog .hd { height:20px;padding:10px 15px;background:#f7f7f7;border-bottom:1px solid #dedede;overflow:hidden; }
 .g-dialog .hd h3 { font-size:14px; }
+.g-dialog-close {
+    color: #999;
+    cursor: pointer;
+    display: block;
+    font-family: tahoma;
+    font-size: 24px;
+    font-weight: bold;
+    height: 18px;
+    line-height: 14px;
+    position: absolute;
+    right: 16px;
+    text-decoration: none;
+    top: 13px;
+    z-index: 10;
+}
+.g-dialog-close:hover {
+    color: #666;
+    text-shadow: 0 0 2px #aaa;
+}
 .g-dialog .close { position:absolute;top:12px;right:16px;width:16px;height:16px;background:url(images/close.png) no-repeat;color:#999;font:11px "Comic Sans MS"; }
 .g-dialog .close:hover { color:#55aadd;text-decoration:none;background-position:0 -16px; }
 .g-dialog .bd { padding:20px; }
@@ -1315,41 +1335,41 @@ input:-moz-placeholder { font-size:12px; }
 .icon-vancl { background-position:0 -99px; }
 .icon-paipai0 { background-position:0 -139px; }
 /* 分享的宝贝发布 */
-#J_GoodsPubD { width:517px; }
+#J_goodsPubDialog { width:517px; }
 .ugc-dialog .form-row { margin:0 0 15px 0; }
 .ugc-dialog .form-row label { width:60px;font-size:12px;color:#333; }
-#J_GoodsPubD .base-input { width:405px; }
-#J_GoodsPubD .base-txa { width:405px;height:55px; }
-#J_GoodsPubD .goodsNm { width:415px;line-height:18px;padding:6px 0;font-size:14px;display:inline-block;zoom:1;overflow:hidden; }
+#J_goodsPubDialog .base-input { width:405px; }
+#J_goodsPubDialog .base-txa { width:405px;height:55px; }
+#J_goodsPubDialog .goodsNm { width:415px;line-height:18px;padding:6px 0;font-size:14px;display:inline-block;zoom:1;overflow:hidden; }
 .ugc-dialog .goods-act { margin-top:15px;padding:15px 0 0 60px;border-top:1px dotted #d1d1d1; }
-#J_GoodsPubD .goods-gallery { float:left;width:415px;overflow:hidden; }
-#J_GoodsPubD .goods-gallery .gallery-bd { position:relative;width:415px;height:205px;overflow:hidden; }
-#J_GoodsPubD .goods-gallery .items { position:absolute;width:420px;height:2000em; }
-#J_GoodsPubD .goods-gallery .items ul { width:420px;height:205px;overflow:hidden; }
-#J_GoodsPubD .goods-gallery .items ul li { position:relative;float:left;_display:inline;width:94px;height:94px;margin:0 5px 5px 0;padding:2px;border:1px solid #dedede; }
-#J_GoodsPubD .goods-gallery .items ul li i { display:none; }
-#J_GoodsPubD .goods-gallery .items ul li a { display:table-cell;width:94px;height:94px;*font-size:83px;vertical-align:middle;overflow:hidden; }
-#J_GoodsPubD .goods-gallery .items ul li a img { max-width:94px;max-height:94px;_width:94px;_height:94px;vertical-align:middle;opacity:0.6;filter:alpha(opacity=60); }
-#J_GoodsPubD .goods-gallery .items ul li a:hover img, #J_GoodsPubD .goods-gallery .items ul li.selected a img { opacity:1;filter:alpha(opacity=100); }
-#J_GoodsPubD .goods-gallery .items ul li.selected i { display:block;position:absolute;top:-1px;left:-1px;width:100px;height:100px;background:url(images/selected.png) no-repeat;cursor:pointer; }
-#J_GoodsPubD .gallery-ft { padding:10px 0 0; }
-#J_GoodsPubD .gallery-ft .status { float:left;color:#666; }
-#J_GoodsPubD .gallery-ft .ap-btn { float:right;display:inline;margin-right:15px; }
-#J_GoodsPubD .gallery-ft .gallery-pagin { float:right; }
-#J_GoodsPubD .gallery-ft .gallery-pagin .num-box { float:left;height:18px;line-height:18px;margin:0 5px;padding:0 5px;color:#666;font-size:12px;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;border:1px solid #bbb; }
+#J_goodsPubDialog .goods-gallery { float:left;width:415px;overflow:hidden; }
+#J_goodsPubDialog .goods-gallery .gallery-bd { position:relative;width:415px;height:205px;overflow:hidden; }
+#J_goodsPubDialog .goods-gallery .items { position:absolute;width:420px;height:2000em; }
+#J_goodsPubDialog .goods-gallery .items ul { width:420px;height:205px;overflow:hidden; }
+#J_goodsPubDialog .goods-gallery .items ul li { position:relative;float:left;_display:inline;width:94px;height:94px;margin:0 5px 5px 0;padding:2px;border:1px solid #dedede; }
+#J_goodsPubDialog .goods-gallery .items ul li i { display:none; }
+#J_goodsPubDialog .goods-gallery .items ul li a { display:table-cell;width:94px;height:94px;*font-size:83px;vertical-align:middle;overflow:hidden; }
+#J_goodsPubDialog .goods-gallery .items ul li a img { max-width:94px;max-height:94px;_width:94px;_height:94px;vertical-align:middle;opacity:0.6;filter:alpha(opacity=60); }
+#J_goodsPubDialog .goods-gallery .items ul li a:hover img, #J_goodsPubDialog .goods-gallery .items ul li.selected a img { opacity:1;filter:alpha(opacity=100); }
+#J_goodsPubDialog .goods-gallery .items ul li.selected i { display:block;position:absolute;top:-1px;left:-1px;width:100px;height:100px;background:url(images/selected.png) no-repeat;cursor:pointer; }
+#J_goodsPubDialog .gallery-ft { padding:10px 0 0; }
+#J_goodsPubDialog .gallery-ft .status { float:left;color:#666; }
+#J_goodsPubDialog .gallery-ft .ap-btn { float:right;display:inline;margin-right:15px; }
+#J_goodsPubDialog .gallery-ft .gallery-pagin { float:right; }
+#J_goodsPubDialog .gallery-ft .gallery-pagin .num-box { float:left;height:18px;line-height:18px;margin:0 5px;padding:0 5px;color:#666;font-size:12px;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;border:1px solid #bbb; }
 .photo-file-row { margin:0 auto;width:520px;position:relative; }
 .photo-file-row .upload-cover{width:130px;height:28px;line-height:28px;text-align:center;color:#fff;cursor:pointer;z-index:697}
 .photo-file-row .upload-btn{ position:absolute;top:0px;left:0px;filter:alpha(opacity=0);opacity:0;z-index:698;display:block;width:130px;height:28px; cursor:pointer;}
 /* 分享的宝贝已存在 */
-#J_GoodsExistD { width:470px; }
-#J_GoodsExistD .goods-avatar { float:left;display:inline;margin-right:16px;width:80px;height:80px;border:1px solid #dedede;overflow:hidden; }
-#J_GoodsExistD .goods-avatar img { max-width:80px;_width:80px; }
-#J_GoodsExistD .goods-info { float:left;width:330px; }
-#J_GoodsExistD .goods-info .goodsNm { line-height:1.2;margin-bottom:15px;font-size:14px;color:#333; }
-#J_GoodsExistD .goods-info .goodsNm a{color:#333;}
-#J_GoodsExistD .goods-info .base-input { width:320px; }
-#J_GoodsExistD .goods-info .base-txa { width:320px;height:55px; }
-#J_GoodsExistD .goods-act { padding:15px 0 0 100px; }
+#J_goodsExistDialog { width:470px; }
+#J_goodsExistDialog .goods-avatar { float:left;display:inline;margin-right:16px;width:80px;height:80px;border:1px solid #dedede;overflow:hidden; }
+#J_goodsExistDialog .goods-avatar img { max-width:80px;_width:80px; }
+#J_goodsExistDialog .goods-info { float:left;width:330px; }
+#J_goodsExistDialog .goods-info .goodsNm { line-height:1.2;margin-bottom:15px;font-size:14px;color:#333; }
+#J_goodsExistDialog .goods-info .goodsNm a{color:#333;}
+#J_goodsExistDialog .goods-info .base-input { width:320px; }
+#J_goodsExistDialog .goods-info .base-txa { width:320px;height:55px; }
+#J_goodsExistDialog .goods-act { padding:15px 0 0 100px; }
 /* 添加其他图片 */
 /*.ap-dialog { position:absolute;z-index:10000;width:360px;background:#f3f3f3;border:1px solid #dedede; }
 .ap-dialog .content { position:relative;padding:8px 5px 5px; }
@@ -2938,6 +2958,122 @@ a.f-tencent {
 #returnTop:hover {
     background-position: 0 -65px;
 }
+
+/*! define arale/dialog/1.1.2/dialog-debug.css */
+.ui-dialog {
+ /*   background-color: rgba(0, 0, 0, 0.5);*/
+    border: none;
+    FILTER: progid:DXImageTransform.Microsoft.Gradient(startColorstr=#88000000, endColorstr=#88000000);
+padding: 6px;
+    }
+
+:root .ui-dialog {
+    FILTER: none\9;
+}
+
+.ui-dialog-close {
+    color: #999;
+    cursor: pointer;
+    display: block;
+    font-family: tahoma;
+    font-size: 24px;
+    font-weight: bold;
+    height: 18px;
+    line-height: 14px;
+    position: absolute;
+    right: 16px;
+    text-decoration: none;
+    top: 16px;
+    z-index: 10;
+}
+.ui-dialog-close:hover {
+    color: #666;
+    text-shadow: 0 0 2px #aaa;
+}
+
+.ui-dialog-title {
+    height:45px;
+    font-size:16px;
+    font-family:'微软雅黑', '黑体', Arial;
+    line-height:46px;
+    border-bottom:1px solid #E1E1E1;
+    color:#4d4d4d;
+    text-indent: 20px;
+
+    background: -webkit-gradient(linear, left top, left bottom, from(#fcfcfc), to(#f9f9f9));
+    background: -moz-linear-gradient(top, #fcfcfc, #f9f9f9);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfcfc', endColorstr='#f9f9f9');
+    background:-o-linear-gradient(top, #fcfcfc, #f9f9f9);
+    background: linear-gradient(top, #fcfcfc, #f9f9f9);
+}
+
+.ui-dialog-container {
+    padding:15px 20px 20px;
+    font-size: 12px;
+}
+
+.ui-dialog-message {
+    margin-bottom:15px;
+}
+
+.ui-dialog-operation {
+    zoom:1;
+}
+
+.ui-dialog-confirm, .ui-dialog-cancel {
+    display: inline;
+}
+
+.ui-dialog-operation .ui-dialog-confirm {
+    margin-right: 4px;
+}
+
+.ui-dialog-button-orange,
+.ui-dialog-button-white {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 2px;
+    padding: 0 12px;
+    line-height:23px;
+    height:23px;
+    *overflow: visible; /* for a ie6/7 bug http://blog.csdn.net/jyy_12/article/details/6636099 */
+    background-image: none;
+}
+
+a.ui-dialog-button-orange:hover,
+a.ui-dialog-button-white:hover {
+    text-decoration: none;
+}
+
+.ui-dialog-button-orange {
+    color: #fff;
+    border:1px solid #d66500;
+    background-color: #f57403;
+}
+
+.ui-dialog-button-orange:hover {
+    background-color: #fb8318;
+}
+
+.ui-dialog-button-white {
+    border:1px solid #afafaf;
+    background-color: #f3f3f3;
+    color: #777;
+}
+
+.ui-dialog-button-white:hover {
+    border: 1px solid #8e8e8e;
+    background-color: #fcfbfb;
+    color: #676d70;
+}
+
 
 
 

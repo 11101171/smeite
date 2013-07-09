@@ -6,11 +6,11 @@ import play.api.data.Form
 import models.tag.dao.TagDao
 import play.api.libs.json.Json
 import ugc.Product
-import ugc.API.ProductFormat
+import ugc.API.productFormat
 import play.api.mvc.{Action, Controller}
 import models.theme._
 import models.theme.dao.{ThemeSQLDao, ThemeDao}
-import models.user.{User,  UserStatus}
+import models.user.{User,UserStatus}
 import play.api.cache.Cache
 import play.api.Play.current
 import models.goods.dao.GoodsDao
@@ -238,7 +238,7 @@ object Themes extends Controller {
       val pic = (request.body \ "pic").as[String]
       val themeGoods = ThemeDao.checkGoods(themeId,goodsId);
       val goods =GoodsDao.findById(goodsId)
-      val product=Product(goods.get.id,goods.get.numIid,goods.get.nick,goods.get.name,None,goods.get.price,goods.get.pic+"_210x210.jpg",Nil,goods.get.clickUrl,Nil)
+      val product=Product(goods.get.id,goods.get.numIid,goods.get.nick,goods.get.name,None,goods.get.price,goods.get.pic+"_210x210.jpg",Nil,goods.get.clickUrl,Nil,goods.get.location)
       if (themeGoods.isEmpty){
         ThemeDao.addGoods(themeId,goodsId,pic)
         Ok(Json.obj("code" -> "100","product"->Json.toJson(product), "message" ->"成功"))

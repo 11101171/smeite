@@ -21,8 +21,8 @@ import java.sql.Timestamp
 object GoodsDao {
   lazy val database = Database.forDataSource(DB.getDataSource())
   /*保存*/
-  def addGoods(uid:Long,numIid:Long,name: String,intro: String,price:String,pic: String,itemPics: String,nick:String,clickUrl:String,hwRate:Float):Long=database.withSession {  implicit session:Session =>
-    Goodses.autoInc.insert(uid,numIid,name,intro,price,pic,itemPics,nick,clickUrl,hwRate)
+  def addGoods(uid:Long,numIid:Long,name: String,intro: String,price:String,pic: String,itemPics: String,nick:String,clickUrl:String,location:String,hwRate:Float):Long=database.withSession {  implicit session:Session =>
+    Goodses.autoInc.insert(uid,numIid,name,intro,price,pic,itemPics,nick,clickUrl,location,hwRate)
 
   }
   /* delete 删除goods 需要把相关的信息删除 */
