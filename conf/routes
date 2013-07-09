@@ -12,7 +12,7 @@ GET      /themes/:cid                      controllers.Pages.gallery(cid:Int,s:I
 GET     /worth                            controllers.Pages.worth
 GET     /presell                          controllers.Pages.presell
 GET     /cookbook                         controllers.Pages.cookbook
-GET     /site                             controllers.Pages.site
+GET     /sites                             controllers.Pages.sites
 
 
 #qq app

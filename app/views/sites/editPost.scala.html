@@ -137,15 +137,13 @@ title =  "食美特，不一样的生活"
 </div>
 
         }{
+
 <script type="text/javascript">
-    seajs.use(["app/init", "app/smeite.editor"], function(init){
-        var $ = jQuery;
+    seajs.use(['$','smeite/smeite.editor','smeite/site/edit'],function($,editor,edit){
         if(SMEITER.userId == ""){
             $.smeite.dialog.isLogin();
         }
         $.smeite.editor = $.smeite.Editor();
-
-        init.load("app/site/site.edit");
-    });
+    })
 </script>
 }

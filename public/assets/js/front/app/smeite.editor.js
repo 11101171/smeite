@@ -1,5 +1,5 @@
 define(function (require, exports) {
-    var $ = jQuery = require("jquery");
+    var $ = jQuery = require("$");
     require("smeite");
     /*
      * Copyright 2011-2012, Guang.com

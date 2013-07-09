@@ -19,7 +19,11 @@ seajs.config({
         'dialog': 'arale/dialog/1.1.2/dialog',
         'confirmbox':'arale/dialog/1.1.2/confirmbox',
         'position': 'arale/position/1.0.1/position',
-
+        'slide': 'arale/switchable/0.9.15/slide',
+        'tabs': 'arale/switchable/0.9.15/tabs',
+        'upload': 'arale/upload/1.0.0/upload',
+        'zeroclipboard': 'gallery/zeroclipboard/1.1.6/zeroclipboard',
+        'imgAreaSelect':'smeite/module/imgAreaSelect',
        'smeite':'smeite/smeite'
     },
 
