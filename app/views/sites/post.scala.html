@@ -10,7 +10,7 @@ title =  "食美特，不一样的生活"
 
 <!-- site 帖子 -->
 
-    <div class="post">
+    <div class="post clearfix">
         <!--  post left  about post admin -->
         <div class="post-left">
             <div class="poster clearfix">
@@ -50,7 +50,28 @@ title =  "食美特，不一样的生活"
         </div>
         <!-- post main content-->
         <div class="post-main">
-              <h3 class="post-title"> 器世界 手工柴烧侧把壶 原创设计 品质生活 </h3>
+               <div class="post-title-bar">
+                   <div class="post-title">
+                      <h3>器世界 手工柴烧侧把壶 原创设计 品质生活</h3>
+                       <ul class="post-relate clearfix">
+                           <li>浏览：<span class="view-num"> 1000</span> </li>
+                           <li class="blank">|</li>
+                           <li>更新：<span class="update-time">2013-07-10</span></li>
+                       </ul>
+                   </div>
+
+                       <div class="like-common like-common-s">
+                           <a class="like" rel="followGoods" href="javascript:void(0)" data-proid="219" title="喜欢"><i>喜欢</i></a>
+                           <div class="like-num">
+                               <dl class="J_scrollUp" style="top: 0px;">
+                                   <dd class="J_FavorNum" data-val="1">1</dd>
+                                   <dd>+1</dd>
+                               </dl>
+                           </div>
+                       </div>
+
+               </div>
+
 
             <ul class="menu clearfix">
                 <li class="bl1 bt1"><strong>工艺</strong><a href="####" title="橙皮辫子面的工艺" class="big">烘焙</a></li>
@@ -63,7 +84,7 @@ title =  "食美特，不一样的生活"
                     <div class="processing_w"><span class="processing processing_nd9"></span><a href="####" title="橙皮辫子面的准备时间" class="small">60分钟</a></div>
                 </li>
                 <li class="bl1" >
-                    <strong>主料</strong>
+                    <strong >主料</strong>
                     <a href="####" title="橙皮辫子面的口味" >甜味</a> <a href="####" title="橙皮辫子面的口味">甜味</a>
                 </li>
                 <li>
@@ -145,11 +166,6 @@ title =  "食美特，不一样的生活"
 }{
 
 <script type="text/javascript">
-    seajs.use(['$','smeite/smeite.editor','smeite/site/edit'],function($,editor,edit){
-        if(SMEITER.userId == ""){
-            $.smeite.dialog.isLogin();
-        }
-        $.smeite.editor = $.smeite.Editor();
-    })
+    seajs.use('smeite/site/post')
 </script>
 }

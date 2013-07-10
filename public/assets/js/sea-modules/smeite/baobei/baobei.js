@@ -25,18 +25,7 @@ define(function(require, exports){
         } else return $.smeite.tip.conf.tipClass = "tipmodal tipmodal-general", $.smeite.tip.show(a, ">_< 你的评论太短啦，再多说几句吧！"), !1;
         return!0
     }
-   /* *//*图片显示*//*
-    $(".thumb-list li").mouseover(function () {
-        if (!$(this).hasClass("cur")) {
-            var a = $(this).find("img").attr("data-src");
-            $(".pic-box img").attr("src", a);
-            $(".thumb-list li.cur").removeClass("cur");
-            $(this).addClass("cur")
-        }
-    });*/
 
-    /*  分享 */
-    $(".btn-share").shareToThird()
 
     $("#J_JiuCuo").click(function () {
         $(this).html("<span>已反馈，谢谢^_^</span>");
@@ -45,13 +34,7 @@ define(function(require, exports){
         })*/
     });
     /* product love*/
-  //  var x = $("#J_LikeCount"), t = {};
-   // var  w = commentParameter.productId;
-    $(".pic-box").hover(function () {
-        $(".ilike-m").show()
-    }, function () {
-        $(".ilike-m").hide()
-    });
+
 
     /* get comment 评论处理 */
     $("#J_CommentTxa").focus(function () {

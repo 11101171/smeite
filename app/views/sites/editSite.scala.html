@@ -44,7 +44,7 @@ title =  "食美特，不一样的生活"
                     <div class="form-row clearfix">
                         <label>上传站牌：</label>
                         <div class="fm-item">
-                            <div class="site-logo" @if(form("pic").value !=""){ style="display:block" }>
+                            <div class="site-logo" @if(form("pic").value.getOrElse("") !=""){ style="display:block" }>
                                 <img id="J_uploadImgShow" src='@form("pic").value' />
                             </div>
 
