@@ -1168,7 +1168,7 @@ define(function (require, exports) {
                 }
             });
             //IE下光标会丢失
-            if ($.browser.msie) {
+            if (/msie/.test(navigator.userAgent.toLowerCase())) {
                 var addEvent = function (el, type, fn) {
                     el['e' + type + fn] = fn;
                     el.attachEvent('on' + type, function () {

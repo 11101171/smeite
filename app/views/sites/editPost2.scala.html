@@ -110,7 +110,7 @@ title =  "食美特，不一样的生活"
                 <div class="form-row clearfix">
                     <label>详细内容：</label>
                     <div class="fm-item">
-                        <textarea id="J_forumPostCon" name="content" class="b-textarea" placeholder="请输入帖子内容">
+                        <textarea id="J_ForumPostCon" name="content" class="b-textarea" placeholder="请输入帖子内容">
 
                         </textarea>
                         <p>内容越详细越好哦</p>
@@ -137,16 +137,13 @@ title =  "食美特，不一样的生活"
 </div>
 
         }{
- <script src="/assets/js/ueditor/ueditor.config.js"></script>
-<script src="/assets/js/ueditor/ueditor.all.min.js"></script>
-<script>
-    UE.getEditor('J_forumPostCon')
-</script>
+
 <script type="text/javascript">
-    seajs.use(['$','smeite/site/edit'],function($,edit){
-   //  if(SMEITER.userId == ""){
-    //        $.smeite.dialog.isLogin();
-   //     }
+    seajs.use(['$','smeite/smeite.editor','smeite/site/edit'],function($,editor,edit){
+        if(SMEITER.userId == ""){
+            $.smeite.dialog.isLogin();
+        }
+        $.smeite.editor = $.smeite.Editor();
     })
 </script>
 }
