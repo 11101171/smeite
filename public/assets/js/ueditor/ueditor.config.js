@@ -196,14 +196,14 @@
 
         //主题配置项,默认是default。有需要的话也可以使用如下这样的方式来自动多主题切换，当然，前提条件是themes文件夹下存在对应的主题文件：
         //现有如下皮肤:default
-        //,theme:'default'
+        //,theme:'smeite'
         //,themePath:URL +"themes/"
 
         //若实例化编辑器的页面手动修改的domain，此处需要设置为true
         //,customDomain:false
 
         //针对getAllHtml方法，会在对应的head标签中增加该编码设置。
-        //,charset:"utf-8"
+        ,charset:"utf-8"
 
         //常用配置项目
         //,isShow : true    //默认显示编辑器
@@ -389,7 +389,7 @@
 
         //elementPathEnabled
         //是否启用元素路径，默认是显示
-        //,elementPathEnabled : true
+        ,elementPathEnabled : false
 
         //removeFormat
         //清除格式时可以删除的标签和属性

@@ -122,6 +122,7 @@ div.edui-box {
 
 .edui-default .edui-editor {
     /*border: 1px solid #ddd;*/
+    border-bottom: 1px solid #ddd;
     background-color: white;
     position: relative;
     overflow: visible;
