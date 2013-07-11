@@ -1,0 +1,42 @@
+# Generated pot
+# Translators:
+# surunzi <670785827@qq.com>, 2013
+# zxghl <zxghl767@163.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: TinyMCE\n"
+"Report-Msgid-Bugs-To: http://moxiecode.com\n"
+"POT-Creation-Date: 2013-03-21 16:18:52+00:00\n"
+"PO-Revision-Date: 2013-06-24 17:17+0000\n"
+"Last-Translator: zxghl <zxghl767@163.com>\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/projects/p/tinymce/language/zh_CN/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"\"#: i18n:\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Insert link"
+msgstr "插入链接"
+
+msgid "Insert/edit link"
+msgstr "插入/编辑链接"
+
+msgid "Text to display"
+msgstr "显示文字"
+
+msgid "Url"
+msgstr "地址"
+
+msgid "Target"
+msgstr "打开方式"
+
+msgid "None"
+msgstr "在当前窗口/框架打开"
+
+msgid "New window"
+msgstr "在新窗口打开"
+
+msgid "Remove link"
+msgstr "删除链接"
