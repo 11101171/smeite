@@ -173,12 +173,12 @@
         //,wordImageFieldName:"upfile"                     //word转存表单名若此处修改，需要在后台对应文件修改对应参数
 
         //获取视频数据的地址
-        ,getMovieUrl:URL+"jsp/getMovie.jsp"                   //视频数据获取地址
+        ,getMovieUrl:"/getVideo"                   //视频数据获取地址
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的从新定义
         , toolbars:[
             [ 'undo', 'redo', '|',
-                'bold', 'italic', '|',"insertorderedlist", "insertunorderedlist", "|", 'emotion', 'insertimage', 'insertvideo', "|", 'template'
+                'bold', 'italic', '|',"insertorderedlist", "insertunorderedlist", "|", 'horizontal', 'insertimage', 'insertvideo', "|", 'template'
             ]
         ]
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
@@ -406,7 +406,7 @@
 
         //autoHeightEnabled
         // 是否自动长高,默认true
-        //,autoHeightEnabled:true
+        ,autoHeightEnabled:true
 
         //scaleEnabled
         //是否可以拉伸长高,默认true(当开启时，自动长高失效)

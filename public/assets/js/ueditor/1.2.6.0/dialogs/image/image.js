@@ -17,7 +17,7 @@ var imageUploader = {},
     var flagImg = null, flashContainer;
     imageUploader.init = function (opt, callbacks) {
         switchTab("imageTab");
-        createAlignButton(["remoteFloat", "localFloat"]);
+
         createFlash(opt, callbacks);
         var srcImg = editor.selection.getRange().getClosedNode();
         if (srcImg) {
@@ -35,7 +35,7 @@ var imageUploader = {},
         }
         addUrlChangeListener();
         addOKListener();
-        addScrollListener();
+
 
         $focus(g("url"));
     };
@@ -59,24 +59,6 @@ var imageUploader = {},
 
 
 
-    /**
-     * 延迟加载
-     */
-    function addScrollListener() {
-
-        g("imageList").onscroll = function () {
-            var imgs = this.getElementsByTagName("img"),
-                top = Math.ceil(this.scrollTop / 100) - 1;
-            top = top < 0 ? 0 : top;
-            for (var i = top * 5; i < (top + 5) * 5; i++) {
-                var img = imgs[i];
-                if (img && !img.getAttribute("src")) {
-                    img.src = img.getAttribute("lazy_src");
-                    img.removeAttribute("lazy_src");
-                }
-            }
-        }
-    }
 
     /**
      * 绑定确认按钮
@@ -91,9 +73,7 @@ var imageUploader = {},
                 case "local":
                     return insertBatch();
                     break;
-                case "imgManager":
-                    return insertSearch("imageList");
-                    break;
+
 
             }
         };
@@ -108,26 +88,6 @@ var imageUploader = {},
     }
 
     /**
-     * 将元素id下的所有图片文件插入到编辑器中。
-     * @param id
-     * @param catchRemote  是否需要替换远程图片
-     */
-    function insertSearch(id, catchRemote) {
-        var imgs = $G(id).getElementsByTagName("img"), imgObjs = [];
-        for (var i = 0, ci; ci = imgs[i++];) {
-            if (ci.getAttribute("selected")) {
-                var url = ci.getAttribute("src", 2).replace(/(\s*$)/g, ""), img = {};
-                img.src = url;
-                img._src = url;
-                imgObjs.push(img);
-            }
-        }
-        insertImage(imgObjs);
-        catchRemote && editor.fireEvent("catchRemoteImage");
-        hideFlash();
-    }
-
-    /**
      * 插入单张图片
      */
     function insertSingle() {
@@ -137,7 +97,7 @@ var imageUploader = {},
             border = g("border"),
             vhSpace = g("vhSpace"),
             title = g("title"),
-            align = findFocus("remoteFloat", "name"),
+
             imgObj = {};
         if (!url.value) return;
         if (!flagImg) return;   //粘贴地址后如果没有生成对应的预览图，可以认为本次粘贴地址失败
@@ -147,7 +107,7 @@ var imageUploader = {},
         imgObj.width = width.value;
         imgObj.height = height.value;
         imgObj.border = border.value;
-        imgObj.floatStyle = align;
+
         imgObj.vspace = imgObj.hspace = vhSpace.value;
         imgObj.title = title.value;
         imgObj.style = "width:" + width.value + "px;height:" + height.value + "px;";
@@ -185,13 +145,13 @@ var imageUploader = {},
      */
     function insertBatch() {
         if (imageUrls.length < 1) return;
-        var imgObjs = [],
-            align = findFocus("localFloat", "name");
+        var imgObjs = [];
+
 
         for (var i = 0, ci; ci = imageUrls[i++];) {
             var tmpObj = {};
             tmpObj.title = ci.title;
-            tmpObj.floatStyle = align;
+
             //修正显示时候的地址数据,如果后台返回的是图片的绝对地址，那么此处无需修正
             tmpObj._src = tmpObj.src = editor.options.imagePath + ci.url;
             imgObjs.push(tmpObj);
@@ -314,8 +274,7 @@ var imageUploader = {},
         g("border").value = img.getAttribute("border") || 0;
         g("vhSpace").value = img.getAttribute("vspace") || 0;
         g("title").value = img.title || "";
-        var align = editor.queryCommandValue("imageFloat") || "none";
-        updateAlignButton(align);
+
 
         //保存原始比例，用于等比缩放
         var percent = (img.width / img.height).toFixed(2);
@@ -414,24 +373,7 @@ var imageUploader = {},
         flashObj = new baidu.flash.imageUploader(option);
     }
 
-    /**
-     * 依据传入的align值更新按钮信息
-     * @param align
-     */
-    function updateAlignButton(align) {
-        var aligns = g("remoteFloat").children;
-        for (var i = 0, ci; ci = aligns[i++];) {
-            if (ci.getAttribute("name") == align) {
-                if (ci.className != "focus") {
-                    ci.className = "focus";
-                }
-            } else {
-                if (ci.className == "focus") {
-                    ci.className = "";
-                }
-            }
-        }
-    }
+
 
     /**
      * 创建图片浮动选择按钮
@@ -496,50 +438,6 @@ var imageUploader = {},
                     toggleFlash(false);
                     maskIframe.style.display = "";
                     dialog.buttons[0].setDisabled(false);
-                }
-                var list = g("imageList");
-                list.style.display = "none";
-                //切换到图片管理时，ajax请求后台图片列表
-                if (id == "imgManager") {
-                    list.style.display = "";
-                    //已经初始化过时不再重复提交请求
-                    if (!list.children.length) {
-                        ajax.request(editor.options.imageManagerUrl, {
-                            timeout:100000,
-                            action:"get",
-                            onsuccess:function (xhr) {
-                                //去除空格
-                                var tmp = utils.trim(xhr.responseText),
-                                    imageUrls = !tmp ? [] : tmp.split("ue_separate_ue"),
-                                    length = imageUrls.length;
-                                g("imageList").innerHTML = !length ? "&nbsp;&nbsp;" + lang.noUploadImage : "";
-                                for (var k = 0, ci; ci = imageUrls[k++];) {
-                                    var img = document.createElement("img");
-
-                                    var div = document.createElement("div");
-                                    div.appendChild(img);
-                                    div.style.display = "none";
-                                    g("imageList").appendChild(div);
-                                    img.onclick = function () {
-                                        changeSelected(this);
-                                    };
-                                    img.onload = function () {
-                                        this.parentNode.style.display = "";
-                                        var w = this.width, h = this.height;
-                                        scale(this, 100, 120, 80);
-                                        this.title = lang.toggleSelect + w + "X" + h;
-                                        this.onload = null;
-                                    };
-                                    img.setAttribute(k < 35 ? "src" : "lazy_src", editor.options.imageManagerPath + ci.replace(/\s+|\s+/ig, ""));
-                                    img.setAttribute("_src", editor.options.imageManagerPath + ci.replace(/\s+|\s+/ig, ""));
-
-                                }
-                            },
-                            onerror:function () {
-                                g("imageList").innerHTML = lang.imageLoadError;
-                            }
-                        });
-                    }
                 }
 
                 if (id == "remote") {

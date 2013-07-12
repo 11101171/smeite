@@ -186,4 +186,9 @@ object Upload extends Controller{
     )
   }
 
+  /* 获得视频地址*/
+def  getVideo = Users.UserAction {   user => implicit request =>
+
+    Ok(Json.obj("code"->"100","src"->"sss"))
+  }
 }
