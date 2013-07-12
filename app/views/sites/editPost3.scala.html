@@ -143,10 +143,22 @@ title =  "食美特，不一样的生活"
 </div>
 
         }{
- <script src="/assets/js/ueditor/ueditor.config.js"></script>
-<script src="/assets/js/ueditor/ueditor.all.min.js"></script>
+ <script src="/assets/js/tinymce/4.0.1/full/tinymce.min.js"></script>
+
 <script>
-    UE.getEditor('J_forumPostCon')
+    tinymce.init({
+        selector: "textarea#J_forumPostCon",
+        plugins: [
+            "advlist autolink lists link image charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "insertdatetime media table contextmenu paste imageUpload"
+        ],
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image imageUpload",
+
+        image_advtab: true,
+        language : 'zh_CN'
+
+    });
 </script>
 <script type="text/javascript">
     seajs.use(['$','smeite/site/edit'],function($,edit){

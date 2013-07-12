@@ -36,7 +36,7 @@ var imageUploader = {},
         addUrlChangeListener();
         addOKListener();
         addScrollListener();
-        addSearchListener();
+
         $focus(g("url"));
     };
     imageUploader.setPostParams = function(obj,index){
@@ -54,94 +54,10 @@ var imageUploader = {},
         editor.execCommand("insertImage", imgObjs);
     }
 
-    function searchImage() {
-        var imgSearchInput = $G("imgSearchTxt");
-        if (!imgSearchInput.getAttribute("hasClick") || !imgSearchInput.value) {
-            selectTxt(imgSearchInput);
-            return;
-        }
-        g("searchList").innerHTML = "<p class='msg'>" + lang.imageLoading + "</p>";
-        var key = imgSearchInput.value,
-            type = $G("imgType").value,
-            url = "http://image.baidu.com/i?ct=201326592&cl=2&lm=-1&st=-1&tn=baiduimagejson&istype=2&rn=32&fm=index&pv=&word=" + encodeToGb2312(key) + type + "&" + +new Date;
-        var reqCallBack = function (data) {
-            try {
-                var imgObjs = data.data;
-            } catch (e) {
-                return;
-            }
-            var frg = document.createDocumentFragment();
-            if (imgObjs.length < 2) {
-                g("searchList").innerHTML = "<p class='msg'>" + lang.tryAgain + "</p>";
-                return;
-            }
-            for (var i = 0, len = imgObjs.length; i < len - 1; i++) {
-                var img = document.createElement("img"), obj = imgObjs[i], div = document.createElement("div");
-                img.src = obj.objURL; //obj.thumbURL 为缩略图，只能针对百度内部使用
-                img.setAttribute("sourceUrl", obj.objURL);
-                var title = obj.fromPageTitleEnc.replace(/^\.\.\./i, "");
-                img.setAttribute("title", lang.toggleSelect + obj.width + "X" + obj.height);
-                img.onclick = function () {
-                    changeSelected(this);
-                };
-                scale(img, 100, obj.width, obj.height);
-                div.appendChild(img);
-                var p = document.createElement("p");
-                p.innerHTML = "<a target='_blank' href='" + obj.fromURL + "'>" + title + "</a>";
-                div.appendChild(p);
-                //setTimeout(function(){
-                frg.appendChild(div);
-                //},0);
 
-            }
-            g("searchList").innerHTML = "";
-            g("searchList").appendChild(frg);
-        };
-        baidu.sio.callByServer(url, reqCallBack, {charset:"GB18030"});
-    }
 
-    function selectTxt(node) {
-        if (node.select) {
-            node.select();
-        } else {
-            var r = node.createTextRange && node.createTextRange();
-            r.select();
-        }
-    }
 
-    function addSearchListener() {
-        g("imgSearchTxt").onclick = function () {
-            selectTxt(this);
-            this.setAttribute("hasClick", true);
-            if (this.value == lang.searchInitInfo) {
-                this.value = "";
-            }
-        };
-        g("imgSearchTxt").onkeyup = function () {
-            this.setAttribute("hasClick", true);
-            //只触发一次
-            this.onkeyup = null;
-        };
 
-        g("imgSearchBtn").onclick = function () {
-            searchImage();
-        };
-        g("imgSearchReset").onclick = function () {
-            var txt = g("imgSearchTxt");
-            txt.value = "";
-            txt.focus();
-            g("searchList").innerHTML = "";
-        };
-        g("imgType").onchange = function () {
-            searchImage();
-        };
-        domUtils.on(g("imgSearchTxt"), "keyup", function (evt) {
-            if (evt.keyCode == 13) {
-                searchImage();
-            }
-        })
-
-    }
 
     /**
      * 延迟加载
@@ -178,9 +94,7 @@ var imageUploader = {},
                 case "imgManager":
                     return insertSearch("imageList");
                     break;
-                case "imgSearch":
-                    return insertSearch("searchList", true);
-                    break;
+
             }
         };
         dialog.oncancel = function () {
@@ -627,9 +541,7 @@ var imageUploader = {},
                         });
                     }
                 }
-                if (id == "imgSearch") {
-                    selectTxt(g("imgSearchTxt"));
-                }
+
                 if (id == "remote") {
                     $focus(g("url"));
                 }
