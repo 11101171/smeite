@@ -78,8 +78,8 @@ object Upload extends Controller{
       val filename =System.currentTimeMillis()+(picture.filename.substring(picture.filename.lastIndexOf(".")))
       //  val filename = picture.filename
       if(Utils.isImage(filename)){
-        picture.ref.moveTo(new File("/opt/static/images/editor/"+filename),true)
-        val picSrc ="/images/editor/"+filename
+        picture.ref.moveTo(new File("public/images/temp/"+filename),true)
+        val picSrc ="/images/temp/"+filename
         Ok(Json.obj("url"->picSrc,"title"->"食美特","state"->"SUCCESS"))
 
       }else{
@@ -147,7 +147,7 @@ object Upload extends Controller{
     )
   }
 
-  /*上传图片，用户截取图片     */
+  /*上传图片，用户截取图片  todo adjust path    */
   def uploadSitePic=Action(parse.multipartFormData) { request =>
     request.body.file("fileData").map { picture =>
     //  val filename = picture.filename

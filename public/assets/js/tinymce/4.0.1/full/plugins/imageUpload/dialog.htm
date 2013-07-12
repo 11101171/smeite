@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+	<title>Upload an image</title>
+	<script type="text/javascript" src="js/upload.js"></script>
+     <script type="text/javascript" src="js/jquery.js"></script>
+	<link href="css/dialog.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+
+
+		
+		<p id="upload_form_container">
+			<input id="J_uploader" name="fileData" type="button" class="jbFileBox" value="upload">
+		</p>
+
+
+     <script>
+         var uploader = new Uploader({
+             trigger: '#J_uploader',
+             name: 'fileData',
+             action: '/uploadUEditorPic',
+             accept: 'image/*',
+             data: {'xsrf': 'hash'},
+             error: function(file) {
+                 alert(file);
+             },
+             success: function(data) {
+                 ((!window.frameElement && window.dialogArguments) || opener || parent || top).tinymce.EditorManager.activeEditor.insertContent('<img src="' + data.url +'">');
+             }
+         });
+
+     </script>
+
+</body>
+</html>

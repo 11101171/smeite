@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+	<title>Upload an image</title>
+	<script type="text/javascript" src="js/swfupload.js"></script>
+	<link href="css/dialog.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+
+
+		
+		<p id="upload_form_container">
+			<input id="J_uploader" name="fileData" type="button" class="jbFileBox" value="upload">
+		</p>
+
+
+    <!-- <script>
+         var uploader = new Uploader({
+             trigger: '#J_uploader',
+             name: 'fileData',
+             action: '/uploadUEditorPic',
+             accept: 'image/*',
+             data: {'xsrf': 'hash'},
+             error: function(file) {
+                 alert(file);
+             },
+             success: function(data) {
+                 ((!window.frameElement && window.dialogArguments) || opener || parent || top).tinymce.EditorManager.activeEditor.insertContent('<img src="' + data.url +'">');
+             }
+         });
+
+     </script>-->
+
+         <script type="text/javascript">
+         var swfu;
+
+         window.onload = function() {
+             var settings = {
+
+            //     flash_url : "/assets/js/tinymce/4.0.1/full/plugins/imageUpload/js/expressInstall.swf",
+                 flash_url:"js/swfupload.swf",
+                 upload_url: "/uploadUEditorPic",
+                 file_post_name : "fileData",
+                 post_params: {"PHPSESSID" : ""},
+                 file_size_limit : "100 MB",
+                 file_types : "*.*",
+                 file_types_description : "All Files",
+                 file_upload_limit : 100,
+                 file_queue_limit : 0,
+
+                 debug: false,
+
+                 // Button settings
+
+                 button_width: "65",
+                 button_height: "29",
+                 button_placeholder_id: "J_uploader",
+                 button_text: '<span class="theFont">Hello</span>',
+                 button_text_style: ".theFont { font-size: 16; }",
+                 button_text_left_padding: 12,
+                 button_text_top_padding: 3,
+
+                 // The event handler functions are defined in handlers.js
+             //    file_queued_handler : fileQueued,
+           //      file_queue_error_handler : fileQueueError,
+           //      file_dialog_complete_handler : fileDialogComplete,
+           //      upload_start_handler : uploadStart,
+          //       upload_progress_handler : uploadProgress,
+          //       upload_error_handler : uploadError,
+                 upload_success_handler : uploadSuccess
+          //       upload_complete_handler : uploadComplete,
+           //      queue_complete_handler : queueComplete	// Queue plugin event
+             };
+             function uploadSuccess(data){
+                 alert(data.url)
+             }
+
+             swfu = new SWFUpload(settings);
+         };
+
+     </script>
+</body>
+</html>
