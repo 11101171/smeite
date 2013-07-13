@@ -98,14 +98,14 @@ object ThemeDao {
     * */
   def findCateThemes(cid:Int,sortBy:Int,currentPage: Int, pageSize: Int ): Page[((Long,String,String,Int),List[String])] = database.withSession {  implicit session:Session =>
     val totalRows=Query(Themes.filter(_.cid === cid).length).first
-    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val totalPages=(totalRows + pageSize - 1) / pageSize
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     /*联合查询*/
-    var query =(for{
+    var query =for{
       t<-Themes.filter(_.isRecommend===true).where(_.cid === cid).drop(startRow).take(pageSize)
       g<-ThemeGoodses
       if t.id === g.themeId
-    } yield(t.id,t.name,t.intro,t.loveNum,t.modifyTime,g.sortNum,g.goodsPic))
+    } yield(t.id,t.name,t.intro,t.loveNum,t.modifyTime,g.sortNum,g.goodsPic)
     if(sortBy== 1) query =query.sortBy(_._5 asc)
     if(sortBy== 2) query = query.sortBy(_._4 desc)
     val themes:List[((Long,String,String,Int),List[String])] =query.list().groupBy(x=>(x._1,x._2,x._3,x._4)).map(x=>(x._1,x._2.sortBy(x=>x._6).take(5).map(y=>y._7))).toList
@@ -115,14 +115,14 @@ object ThemeDao {
 
   def findThemes(sortBy:String,currentPage: Int , pageSize: Int ): Page[((Long,String,String,Int),List[String])] = database.withSession {  implicit session:Session =>
     val totalRows=Query(Themes.filter(_.isRecommend===true).length).first
-    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val totalPages=(totalRows + pageSize - 1) / pageSize
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     /*联合查询*/
-    var query =(for{
+    var query =for{
       t<-Themes.filter(_.isRecommend === true).drop(startRow).take(pageSize)
       g<-ThemeGoodses
       if t.id === g.themeId
-    } yield(t.id,t.name,t.intro,t.loveNum,t.modifyTime,g.sortNum,g.goodsPic))
+    } yield(t.id,t.name,t.intro,t.loveNum,t.modifyTime,g.sortNum,g.goodsPic)
     if(sortBy=="new") query =query.sortBy(_._5 desc)
     if(sortBy=="hot") query = query.sortBy(_._4 desc)
     val themes:List[((Long,String,String,Int),List[String])] =query.list().groupBy(x=>(x._1,x._2,x._3,x._4)).map(x=>(x._1,x._2.sortBy(x=>x._6).take(5).map(y=>y._7))).toList

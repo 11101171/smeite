@@ -7,7 +7,7 @@ import play.api.data.Forms._
 import models.site.dao.SiteDao
 
 case class SiteFormData(sid:Option[Long],cid:Int,title:String,pic:String,intro:String,tags:String)
-
+case  class PostFormData(pid:Option[Long],sid:Long,cid:Int,title:String,pic:Option[String],content:String,tags:Option[String],status:Int, extraAttr1:Option[String], extraAttr2:Option[String], extraAttr3:Option[String], extraAttr4:Option[String], extraAttr5:Option[String], extraAttr6:Option[String])
 object Sites extends Controller {
   val siteFormData =Form(
     mapping(
@@ -19,6 +19,25 @@ object Sites extends Controller {
       "tags" -> text
     )(SiteFormData.apply)(SiteFormData.unapply)
   )
+  val postFormData =Form(
+    mapping(
+      "pid"->optional(longNumber),
+      "sid"->longNumber,
+      "cid" ->number,
+      "title" -> nonEmptyText,
+      "pic" -> optional(text),
+      "content" -> nonEmptyText,
+      "tags" -> optional(text),
+      "status" ->number,
+      "extraAttr1" -> optional(text),
+      "extraAttr2" -> optional(text),
+      "extraAttr3" -> optional(text),
+      "extraAttr4" -> optional(text),
+      "extraAttr5" -> optional(text),
+      "extraAttr6" -> optional(text)
+    )(PostFormData.apply)(PostFormData.unapply)
+  )
+
   /* 小镇编辑创建 */
   def editSite(sid:Long) = Users.UserAction { user => implicit request =>
     if (sid==0) Ok(views.html.sites.editSite(user,siteFormData))
@@ -46,26 +65,49 @@ object Sites extends Controller {
   }
 
   /* 小镇  */
-  def site(id: Long) = Users.UserAction {
-    user => implicit request =>
+  def site(id: Long,s:Int,p:Int) = Users.UserAction {  user => implicit request =>
       val site = SiteDao.findSiteById(id)
       if (site.isEmpty) {
         Ok(" site is not existed  todo todo ")
       } else {
-
-        Ok(views.html.sites.site(user, site.get))
+       val posts = SiteDao.findPostsBySid(id,s,p,20)
+        Ok(views.html.sites.site(user, site.get,posts,id,s))
       }
   }
 
 
   /* 小镇 帖子 编辑创建 */
-  def editPost(id:Long) = Users.UserAction { user => implicit request =>
-    Ok(views.html.sites.editPost(user))
+  def editPost(pid:Long,sid:Long) = Users.UserAction { user => implicit request =>
+    if (pid==0) Ok(views.html.sites.editPost(user,postFormData.fill(PostFormData(None,sid,-1,"",None,"",None,0,None,None,None,None,None,None))))
+  else{
+      val post = SiteDao.findPostById(pid)
+      if(post.isEmpty)Ok(views.html.sites.editPost(user,postFormData.fill(PostFormData(None,sid,-1,"",None,"",None,0,None,None,None,None,None,None))))
+     else  Ok(views.html.sites.editPost(user,postFormData.fill(PostFormData(post.get.id,post.get.sid,post.get.cid,post.get.title,post.get.pic,post.get.content,post.get.tags,post.get.status,post.get.extraAttr1,post.get.extraAttr2,post.get.extraAttr3,post.get.extraAttr4,post.get.extraAttr5,post.get.extraAttr6))))
+    }
   }
+  /* 小镇 帖子 保存帖子 */
+  def savePost = Users.UserAction {user => implicit request =>
+    postFormData.bindFromRequest.fold(
+      formWithErrors => BadRequest(views.html.sites.editPost(user,formWithErrors)),
+      post => {
+        var id:Long=0L
+        if(post.pid.isEmpty){
+        id = SiteDao.addPost(user.get.id.get,post.sid,post.cid,post.title,post.pic,post.content,post.tags,post.status,post.extraAttr1,post.extraAttr2,post.extraAttr3,post.extraAttr4,post.extraAttr5,post.extraAttr6)
+        }else{
+          SiteDao.modifyPost(post.pid.get,post.cid,post.title,post.pic,post.content,post.tags,post.status,post.extraAttr1,post.extraAttr2,post.extraAttr3,post.extraAttr4,post.extraAttr5,post.extraAttr6)
+         id = post.pid.get
+        }
+
+        Redirect(controllers.routes.Sites.post(id))
+      }
+    )
+  }
+
   /* 小镇帖子 */
   def post(pid:Long)= Users.UserAction { user => implicit request =>
-    Ok(views.html.sites.post(user))
-  //  Ok(views.html.sites.menu(user))
+    val post = SiteDao.findPost(pid)
+      Ok(views.html.sites.post(user, post))
+
   }
 
 }

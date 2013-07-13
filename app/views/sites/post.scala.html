@@ -1,4 +1,4 @@
-@(user:Option[models.user.User])
+@(user:Option[models.user.User],post:(models.site.Post,models.user.User,models.site.Site))
 @views.html.template(
 user,
 nav="site",
@@ -15,16 +15,15 @@ title =  "食美特，不一样的生活"
         <div class="post-left">
             <div class="poster clearfix">
 
-                    <a class="pic"><img src="/images/user/default.jpg" width="150" height="150" class="c"> </a>
-                    <span><a>zuosanshao</a></span>
-                    <span>发表于<em>2013/06/24</em></span>
-                   <span>22人看过</span>
+                    <a class="pic"><img src="@post._2.pic" width="150" height="150" class="c"> </a>
+                    <span>创建者：<a href="@controllers.users.routes.Users.home(post._2.id.get)" target="_blank">@post._2.name</a></span>
+
 
                 <div class="follow">
                     <a class="follow-btn">+关注</a>
                 </div>
             </div>
-            <div class="poster-others">
+          <!--  <div class="poster-others">
                 <dl class="posts">
                     <dt>TA发表的贴子</dt>
                     <dd class="ofh"><a href="/topic/3585.html" target="_blank">器世界 精品茶具小编为你讲解喝功夫茶的品茗八法</a></dd>
@@ -44,7 +43,7 @@ title =  "食美特，不一样的生活"
                 </dl>
             </div>
 
-
+-->
 
 
         </div>
@@ -52,19 +51,19 @@ title =  "食美特，不一样的生活"
         <div class="post-main">
                <div class="post-title-bar">
                    <div class="post-title">
-                      <h3>器世界 手工柴烧侧把壶 原创设计 品质生活</h3>
+                      <h3>@post._1.title</h3>
                        <ul class="post-relate clearfix">
-                           <li>浏览：<span class="view-num"> 1000</span> </li>
+                           <li>浏览：<span class="view-num"> @post._1.viewNum</span> </li>
                            <li class="blank">|</li>
-                           <li>更新：<span class="update-time">2013-07-10</span></li>
+                           <li>更新：<span class="update-time">@post._1.addTime</span></li>
                        </ul>
                    </div>
 
                        <div class="like-common like-common-s">
-                           <a class="like" rel="followGoods" href="javascript:void(0)" data-proid="219" title="喜欢"><i>喜欢</i></a>
+                           <a class="like" rel="followPost" href="javascript:void(0)" data-pid="@post._1.id.get" title="喜欢"><i>喜欢</i></a>
                            <div class="like-num">
                                <dl class="J_scrollUp" style="top: 0px;">
-                                   <dd class="J_FavorNum" data-val="1">1</dd>
+                                   <dd class="J_FavorNum" data-val="@post._1.loveNum">@post._1.loveNum</dd>
                                    <dd>+1</dd>
                                </dl>
                            </div>
@@ -72,71 +71,55 @@ title =  "食美特，不一样的生活"
 
                </div>
 
-
+             @if(post._1.cid ==0){
             <ul class="menu clearfix">
-                <li class="bl1 bt1"><strong>工艺</strong><a href="####" title="橙皮辫子面的工艺" class="big">烘焙</a></li>
+                <li class="bl1 bt1"><strong>工艺</strong>
+                    @post._1.extraAttr1.getOrElse("")
+                </li>
                 <li class="bt1">
                     <strong>口味</strong>
-                    <a href="####" title="橙皮辫子面的口味" class="big">甜味</a>
+                    @post._1.extraAttr2.getOrElse("")
                 </li>
                 <li class="bt1">
                     <strong>难度</strong>
-                    <div class="processing_w"><span class="processing processing_nd9"></span><a href="####" title="橙皮辫子面的准备时间" class="small">60分钟</a></div>
+                    <div class="processing_w"><span class="processing processing_nd9"></span>
+                        @post._1.extraAttr3.getOrElse("")
+                    </div>
                 </li>
                 <li class="bl1" >
                     <strong >主料</strong>
-                    <a href="####" title="橙皮辫子面的口味" >甜味</a> <a href="####" title="橙皮辫子面的口味">甜味</a>
+                    @post._1.extraAttr4.getOrElse("")
                 </li>
                 <li>
                     <strong>辅料</strong>
-                    <a href="####" title="橙皮辫子面的口味">甜味</a> <a href="####" title="橙皮辫子面的口味">甜味</a>
+                    @post._1.extraAttr5.getOrElse("")
+
                 </li>
                 <li>
                     <strong>配料</strong>
-                    <a href="####" title="橙皮辫子面的口味" >甜味</a> <a href="####" title="橙皮辫子面的口味" >甜味</a>
+                    @post._1.extraAttr6.getOrElse("")
                 </li>
             </ul>
+             }
             <div class="post-content">
-                <span style="line-height: 22px;"><b style="line-height: 22px;"><font size="2"
-                                                                                     style="line-height: 20px;">一、食美特社区介绍</font></b></span>
 
-                <div style="line-height: 22px;"><span
-                        style="line-height: 25px; color: rgb(51, 51, 51); font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; font-size: 12px;">&nbsp; &nbsp; &nbsp; 我们致力于发现绿色安全、健康美味的食品，推荐美观实用、简约实惠的家居用品以及充满创意的好玩意。 我们严格把控商品的品质，用心创造一个值得信赖的购物分享社区。 &nbsp;</span>
-                </div>
-                <div style="line-height: 22px;"><span
-                        style="line-height: 25px; color: rgb(51, 51, 51); font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; font-size: 12px;">&nbsp; &nbsp;&nbsp;</span><span
-                        style="line-height: 25px; color: rgb(51, 51, 51); font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; font-size: 12px;">我们是8090后，我们希望通过我们的努力</span><span
-                        style="line-height: 25px; color: rgb(51, 51, 51); font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; font-size: 12px;">，为更多的消费者提供更有效、更有价值的购物决策建议和更节省的购物方式！</span>
-                </div>
-                <div style="line-height: 22px;"><span
-                        style="line-height: 25px; color: rgb(51, 51, 51); font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; font-size: 12px;">&nbsp; &nbsp; 我们是8090后，我们始终如一、做最真实的自己！</span>
-                </div>
-                <div style="line-height: 22px;"><span
-                        style="line-height: 25px; color: rgb(51, 51, 51); font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif;"><font
-                        size="2" style="line-height: 20px;"><b style="line-height: 20px;">二、食美特社区功能</b></font></span>
-                </div>
-                <div style="line-height: 22px;"><span
-                        style="line-height: 25px; color: rgb(51, 51, 51); font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; font-size: 12px;">1、注册登录</span>
-                </div>
-                <div style="line-height: 22px;"><span
-                        style="line-height: 25px; color: rgb(51, 51, 51); font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; font-size: 12px;">我们提供非常简单的注册登录方式，您可以通过qq、淘宝、微博账号快速登录，并且<b>不会向您的账号发送垃圾信息</b>，你也可以通过邮箱注册，只需要10秒钟即可以完成注册，并不需要额外的步骤。</span>
-                </div>
+                @Html(post._1.content)
 
             </div>
         </div>
         <!-- post right a  -->
         <div class="post-right">
             <div class="post-site">
-                <a><img width="180" height="180" src="/images/temp/site.jpg"></a>
-                <h3 class="site-title"><a> xxxx xxxxx 小镇</a></h3>
-                <div class="back-site"><a>返回小镇</a> </div>
+                <a><img width="180" height="180" src="@post._3.pic"></a>
+                <h3 class="site-title"><a href="@controllers.routes.Sites.site(post._3.id.get)"> @post._3.title</a></h3>
+                <div class="back-site"><a href="@controllers.routes.Sites.site(post._3.id.get)">返回小镇</a> </div>
                 <div class="follow clearfix">
                     <a class="follow-btn"> + 加入小镇</a>
                     <!-- <div class="followed-btn-big">已关注<span class="mr5 ml5">|</span><a rel="removefollow" data-followtype="5" data-usernick="duanyu200888" data-userid="3" href="javascript:;">取消</a></div>-->
                 </div>
             </div>
 
-                <div class="site-others">
+                <!--<div class="site-others">
                     <dl class="posts">
                         <dt>小镇动态</dt>
                         <dd class="ofh"><a href="/topic/3585.html" target="_blank">器世界 精品茶具小编为你讲解喝功夫茶的品茗八法</a></dd>
@@ -155,7 +138,7 @@ title =  "食美特，不一样的生活"
                         <dd><a href="/site/detail/327.html" target="_blank"><img src="http://img1.xiangqu.com/xiangqu/image/2F7/2F71A8CC340C6FC39774C2CAAEB4B9D7_180x180.jpg_50x10000.jpg" style="opacity: 1; ">想去官方站</a></dd>
                     </dl>
                 </div>
-
+-->
         </div>
     </div>
 

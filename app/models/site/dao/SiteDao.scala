@@ -6,6 +6,7 @@ import play.api.Play.current
 import models.site.{Post, Posts, Sites, Site}
 import java.sql.{Date, Timestamp}
 import models.Page
+import models.user.{User,Users}
 
 object SiteDao {
   lazy val database = Database.forDataSource(DB.getDataSource())
@@ -54,23 +55,38 @@ object SiteDao {
     if(!startDate.isEmpty) query = query.filter(_.addTime > new Timestamp(startDate.get.getTime) )
     if(!endDate.isEmpty) query = query.filter(_.addTime <  new Timestamp(endDate.get.getTime) )
     val totalRows=query.list().length
-    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val totalPages=(totalRows + pageSize - 1) / pageSize
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val msgs:List[Site]=  query.drop(startRow).take(pageSize).list()
-    Page[Site](msgs,currentPage,totalPages);
+    Page[Site](msgs,currentPage,totalPages)
   }
 
     /*  添加新帖子 */
-   def addPost(uid:Long,sid:Long,cid:Int,title:String,pic:String,content:String,tags:String,extraAttr1:String,extraAttr2:String,extraAttr3:String,extraAttr4:String,extraAttr5:String,extraAttr6:String) =  database.withSession {  implicit session:Session =>
-         Posts.autoInc2.insert(uid,sid,cid,title,pic,content,tags,extraAttr1,extraAttr2,extraAttr3,extraAttr4,extraAttr5,extraAttr6)
+   def addPost(uid:Long,sid:Long,cid:Int,title:String,pic:Option[String],content:String,tags:Option[String],status:Int,extraAttr1:Option[String],extraAttr2:Option[String],extraAttr3:Option[String],extraAttr4:Option[String],extraAttr5:Option[String],extraAttr6:Option[String]) =  database.withSession {  implicit session:Session =>
+         Posts.autoInc2.insert(uid,sid,cid,title,pic,content,tags,status,extraAttr1,extraAttr2,extraAttr3,extraAttr4,extraAttr5,extraAttr6)
     }
+     /* 修改 帖子 */
+  def modifyPost(pid:Long,cid:Int,title:String,pic:Option[String],content:String,tags:Option[String],status:Int,extraAttr1:Option[String],extraAttr2:Option[String],extraAttr3:Option[String],extraAttr4:Option[String],extraAttr5:Option[String],extraAttr6:Option[String]) =  database.withSession {  implicit session:Session =>
+       (for( c<- Posts if c.id === pid )yield c.cid~c.title~c.pic~c.content~c.tags~c.status~c.extraAttr1~c.extraAttr2~c.extraAttr3~c.extraAttr4~c.extraAttr5~c.extraAttr6).update((cid,title,pic.getOrElse(""),content,tags.getOrElse(""),status,extraAttr1.getOrElse(""),extraAttr2.getOrElse(""),extraAttr3.getOrElse(""),extraAttr4.getOrElse(""),extraAttr5.getOrElse(""),extraAttr6.getOrElse("")))
+     }
 
-  def findPostById(id:Long) = database.withSession {  implicit session:Session =>
-    (for(c<-Posts if c.id === id ) yield c).firstOption
+  def findPostById(pid:Long)  = database.withSession {  implicit session:Session =>
+    (for(c <- Posts if c.id === pid)yield c ).firstOption
+  }
+  def findPost(pid:Long):(Post,User,Site) = database.withSession {  implicit session:Session =>
+    (
+      for{
+        c<-Posts
+        u<-Users
+        s<-Sites
+        if c.id === pid
+        if c.uid === u.id
+        if c.sid === s.id
+      } yield (c,u,s)).first()
   }
 
-
-   def findPostsById(uid:Long,currentPage:Int,pageSize:Int):Page[Post] = database.withSession {  implicit session:Session =>
+   /* 根据用户查找 帖子 */
+   def findPostsByUid(uid:Long,currentPage:Int,pageSize:Int):Page[Post] = database.withSession {  implicit session:Session =>
        val totalRows = Query(Posts.filter(_.uid === uid ).length).first()
      val totalPages=(totalRows + pageSize - 1) / pageSize
      /*获取分页起始行*/
@@ -79,6 +95,21 @@ object SiteDao {
      val msgs:List[Post]=  q.list()
      Page[Post](msgs,currentPage,totalPages)
    }
+
+  /* 根据小镇 查找帖子 sort = 1 最新 sort:2 最热*/
+  def findPostsBySid(sid:Long,sortBy:Int,currentPage:Int,pageSize:Int):Page[Post] =  database.withSession {  implicit session:Session =>
+    val totalRows = Query(Posts.filter(_.sid === sid ).length).first()
+    val totalPages=(totalRows + pageSize - 1) / pageSize
+    /*获取分页起始行*/
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    var query=  for{
+      c<-Posts.filter(_.sid === sid )
+    }yield c
+  if(sortBy == 1) query = query.sortBy(_.addTime desc)
+  if(sortBy == 2) query.sortBy(_.viewNum desc)
+    val msgs:List[Post]=  query.drop(startRow).take(pageSize).list()
+    Page[Post](msgs,currentPage,totalPages)
+  }
 
   def findAllPosts(currentPage:Int,pageSize:Int):Page[Post] = database.withSession {  implicit session:Session =>
     val totalRows = Query(Posts.length).first()

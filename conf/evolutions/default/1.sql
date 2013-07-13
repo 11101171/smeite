@@ -1676,6 +1676,8 @@ CREATE TABLE `post` (
   `status`            tinyint  not null default  '0',
   `is_top`            tinyint  not null default  '0',
   `view_num`          int unsigned  not null default  '1',
+  `love_num`          int unsigned  not null default  '1',
+  `reply_num`          int unsigned  not null default  '1',
   `extra_attr1`             varchar(200) ,
   `extra_attr2`             varchar(200) ,
   `extra_attr3`             varchar(200) ,

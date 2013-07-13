@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],site:models.site.Site)
+@(user:Option[models.user.User],site:models.site.Site,page:models.Page[models.site.Post],sid:Long,s:Int)
 @views.html.template(
 user,
 nav="site",
@@ -87,7 +87,7 @@ title =  "食美特，不一样的生活"
         </div>
     </div>
     <!-- site tools 包括 编辑 上传图片 上传视频-->
-    <div class="site-tools clearfix">
+   <!-- <div class="site-tools clearfix">
         <div class="site-baobei">
             <a class="add add-baobei">
                 <ins class="ico-baobei"></ins>
@@ -112,17 +112,17 @@ title =  "食美特，不一样的生活"
                 <p>添加帖子</p>
             </a>
         </div>
-    </div>
+    </div>-->
        <!-- site 帖子 -->
     <div class="site-posts">
         <div class="hd ">
             <div class="site-filter clearfix">
                 <div class="filter">
-                    <h2> xxxx 小镇</h2>
-                    <a class="current"> 最新 </a>
-                    <a>最热</a>
+                    <h2>@site.title</h2>
+                    <a  href='@controllers.routes.Sites.site(sid,1,1)'  @if(s==1){class=" current"}><span>最新</span></a>
+                    <a   href='@controllers.routes.Sites.site(sid,2,1)'  @if(s==2){class=" current"}><span>最热</span></a>
                 </div>
-                <div class="edit"><a class="current"> + 发帖</a></div>
+                <div class="edit"><a class="current" href='@controllers.routes.Sites.editPost(0,site.id.get)'> + 发帖</a></div>
                 <i></i>
             </div>
 
@@ -130,176 +130,61 @@ title =  "食美特，不一样的生活"
         <div class="clear"></div>
         <div class="bd clearfix">
              <div class="post-list">
-                 <div class="post-item ">
+
+                 @for((item,i)<-page.items.view.zipWithIndex){
+                 <div class="post-item @if((i+1)%4==0){last} ">
                      <div class="pic" style="height:210px ">
-                         <a href="/baobei/1334" target="_blank">
-                             <img width="210px" alt="默默爱&amp;hearts;可爱家居 创意可立式 小鱼造型 不粘米饭勺 塑料饭勺" title="默默爱&amp;hearts;可爱家居 创意可立式 小鱼造型 不粘米饭勺 塑料饭勺" src="http://img04.taobaocdn.com/bao/uploaded/i4/T1I1bgXbtpXXamK8IT_012651.jpg">
+                         <a href="@controllers.routes.Sites.post(item.id.get)" target="_blank">
+                             <img width="210px" alt="@item.title" title="@item.title" src="@item.pic">
                          </a>
-                         <a href="/baobei/1334" class="goods_title">默默爱&amp;hearts;可爱家居 创意可立式 小鱼造型 不粘米饭勺 塑料饭勺</a>
 
                      </div>
-                     <div class="goods-wrap">
-                         <div class="price">
-                             <span>￥7.30</span>
+
+                         <div class="num">
+                             <div class="view-num">@item.viewNum</div>
+                             <div class="reply-num">@item.replyNum</div>
                              <div class="like-state">
-                                 <a rel="followGoods" href="javascript:void(0)" data-proid="1334">
+                                 <a rel="followGoods" href="javascript:void(0)" data-pid="@item.id.get">
                                      <i class="ico-likes" title="喜欢"></i>
                                  </a>
                                  <div class="like-num">
                                      <dl class="J_scrollUp" style="top: 0px;">
-                                         <dd class="J_FavorNum" data-val="1">1</dd>
+                                         <dd class="J_FavorNum" data-val="@item.loveNum">@item.loveNum</dd>
                                          <dd>+1</dd>
                                      </dl>
                                  </div>
                              </div>
                          </div>
-                         <div class="user-comment">
-                             <div class="comment clearfix">
-                                 <!-- 用户评论 -->
-                                 <div class="user-list">
+                        <div class="title">
+                            <a href="@controllers.routes.Sites.post(item.id.get)" class="ofh">@item.title</a>
+                        </div>
 
-                                     <div class="share-user">
-                                         <a class="fl" href="/user/29"><img class="avt32 fl" src="/images/user/1362399506590.jpg" alt="三少爷的贱" width="30" height="30"></a>
-                                         <div class="info">
-                                             <a class="go-to-comment" href="/baobei/1334#J_CommentTxa" style="display: none" target="_blank">评论</a>
-                                             <!-- <h3><a href="/user/29" target="_blank">三少爷的贱</a></h3>-->
-                                             <a href="/baobei/1334" target="_blank"><p>赶快和传统的饭勺Say byebye吧，鱼儿造型，很是可爱，张着小嘴巴，好像在吃饭的样子，安全卫生又可爱</p></a>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <!-- 用户评论 end -->
-                             </div>
-                         </div>
-                     </div>
                  </div>
-                 <div class="post-item ">
-                     <div class="pic" style="height:210px ">
-                         <a href="/baobei/1355" target="_blank">
-                             <img width="210px" alt="西米屋削苹果机削苹果器水果削皮机苹果削皮器创意厨房用具刀具" title="西米屋削苹果机削苹果器水果削皮机苹果削皮器创意厨房用具刀具" src="http://img04.taobaocdn.com/bao/uploaded/i4/T1Ls84XXlaXXcKi0MY_025804.jpg">
-                         </a>
-                         <a href="/baobei/1355" class="goods_title">西米屋削苹果机削苹果器水果削皮机苹果削皮器创意厨房用具刀具</a>
-
-                     </div>
-                     <div class="goods-wrap">
-                         <div class="price">
-                             <span>￥39.00</span>
-                             <div class="like-state">
-                                 <a rel="followGoods" href="javascript:void(0)" data-proid="1355">
-                                     <i class="ico-likes" title="喜欢"></i>
-                                 </a>
-                                 <div class="like-num">
-                                     <dl class="J_scrollUp" style="top: 0px;">
-                                         <dd class="J_FavorNum" data-val="1">1</dd>
-                                         <dd>+1</dd>
-                                     </dl>
-                                 </div>
-                             </div>
-                         </div>
-                         <div class="user-comment">
-                             <div class="comment clearfix">
-                                 <!-- 用户评论 -->
-                                 <div class="user-list">
-
-                                     <div class="share-user">
-                                         <a class="fl" href="/user/29"><img class="avt32 fl" src="/images/user/1362399506590.jpg" alt="三少爷的贱" width="30" height="30"></a>
-                                         <div class="info">
-                                             <a class="go-to-comment" href="/baobei/1355#J_CommentTxa" style="display: none" target="_blank">评论</a>
-                                             <!-- <h3><a href="/user/29" target="_blank">三少爷的贱</a></h3>-->
-                                             <a href="/baobei/1355" target="_blank"><p>每天吃苹果减肥又防癌，可是苹果皮怎么快速去掉呢？
-                                                 这款苹果自动削皮机，机身小巧，方便使用。只需把苹果放上去，顺时针转动就可以轻松去皮了。</p></a>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <!-- 用户评论 end -->
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="post-item ">
-                     <div class="pic" style="height:210px ">
-                         <a href="/baobei/1357" target="_blank">
-                             <img width="210px" alt="奶牛造型 创意欧式奶牛奶罐/调味杯/陶瓷咖啡调味杯/奶精罐" title="奶牛造型 创意欧式奶牛奶罐/调味杯/陶瓷咖啡调味杯/奶精罐" src="http://img02.taobaocdn.com/bao/uploaded/i2/T1Cx09XmdzXXX13Fbc_095544.jpg">
-                         </a>
-                         <a href="/baobei/1357" class="goods_title">奶牛造型 创意欧式奶牛奶罐/调味杯/陶瓷咖啡调味杯/奶精罐</a>
-
-                     </div>
-                     <div class="goods-wrap">
-                         <div class="price">
-                             <span>￥29.00</span>
-                             <div class="like-state">
-                                 <a rel="followGoods" href="javascript:void(0)" data-proid="1357">
-                                     <i class="ico-likes" title="喜欢"></i>
-                                 </a>
-                                 <div class="like-num">
-                                     <dl class="J_scrollUp" style="top: 0px;">
-                                         <dd class="J_FavorNum" data-val="1">1</dd>
-                                         <dd>+1</dd>
-                                     </dl>
-                                 </div>
-                             </div>
-                         </div>
-                         <div class="user-comment">
-                             <div class="comment clearfix">
-                                 <!-- 用户评论 -->
-                                 <div class="user-list">
-
-                                     <div class="share-user">
-                                         <a class="fl" href="/user/29"><img class="avt32 fl" src="/images/user/1362399506590.jpg" alt="三少爷的贱" width="30" height="30"></a>
-                                         <div class="info">
-                                             <a class="go-to-comment" href="/baobei/1357#J_CommentTxa" style="display: none" target="_blank">评论</a>
-                                             <!-- <h3><a href="/user/29" target="_blank">三少爷的贱</a></h3>-->
-                                             <a href="/baobei/1357" target="_blank"><p>哈哈超级萌~奶牛调味罐。采用高白瓷材质，可爱的奶牛造型，非常的有特色哦</p></a>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <!-- 用户评论 end -->
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="post-item last">
-                     <div class="pic" style="height:210px ">
-                         <a href="/baobei/1358" target="_blank">
-                             <img width="210px" alt="[纳川]正品卡通日本娃娃带盖公仔碗 情侣对碗 大口碗（1对）240g" title="[纳川]正品卡通日本娃娃带盖公仔碗 情侣对碗 大口碗（1对）240g" src="http://img01.taobaocdn.com/bao/uploaded/i1/T1T2myXdldXXctt8Ta_121901.jpg">
-                         </a>
-                         <a href="/baobei/1358" class="goods_title">[纳川]正品卡通日本娃娃带盖公仔碗 情侣对碗 大口碗（1对）240g</a>
-
-                     </div>
-                     <div class="goods-wrap">
-                         <div class="price">
-                             <span>￥18.00</span>
-                             <div class="like-state">
-                                 <a rel="followGoods" href="javascript:void(0)" data-proid="1358">
-                                     <i class="ico-likes" title="喜欢"></i>
-                                 </a>
-                                 <div class="like-num">
-                                     <dl class="J_scrollUp" style="top: 0px;">
-                                         <dd class="J_FavorNum" data-val="1">1</dd>
-                                         <dd>+1</dd>
-                                     </dl>
-                                 </div>
-                             </div>
-                         </div>
-                         <div class="user-comment">
-                             <div class="comment clearfix">
-                                 <!-- 用户评论 -->
-                                 <div class="user-list">
-
-                                     <div class="share-user">
-                                         <a class="fl" href="/user/29"><img class="avt32 fl" src="/images/user/1362399506590.jpg" alt="三少爷的贱" width="30" height="30"></a>
-                                         <div class="info">
-                                             <a class="go-to-comment" href="/baobei/1358#J_CommentTxa" style="display: none" target="_blank">评论</a>
-                                             <!-- <h3><a href="/user/29" target="_blank">三少爷的贱</a></h3>-->
-                                             <a href="/baobei/1358" target="_blank"><p>这么可爱的娃娃脸，看着心情就美滋滋的，妈妈们都不舍得用吧！我家宝宝特别喜欢相信你家宝贝也会喜欢的爱不释手</p></a>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <!-- 用户评论 end -->
-                             </div>
-                         </div>
-                     </div>
-                 </div>
+                   }
              </div>
+
+            <div class="tac mt20">
+                <div class="pagin inlineblock clearfix" id="J_Pagination">
+                    @if(page.nums.length>1){
+                    @page.prev.map { page =>
+                    <a class="prev" href="@controllers.routes.Sites.site(sid,s,page)">上一页</a>
+                    }
+                    @for(num <-page.nums){
+                    @if(num==page.currentPage){
+                    <span class="current">@num</span>
+                    }else {
+                    <a href="@controllers.routes.Sites.site(sid,s,num)">@num</a>
+                    }
+                    }
+                    @page.next.map { page =>
+                    <a class="next" href="@controllers.routes.Sites.site(sid,s,page)">下一页</a>
+
+                    }
+
+                    }
+                </div>
+            </div>
+
         </div>
     </div>
 
