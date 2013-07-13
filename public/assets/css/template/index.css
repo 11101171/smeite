@@ -280,8 +280,50 @@
 .brands h3.current{
     color: #e26;
 }
-.adv{
-   margin-bottom: 20px;
+
+.adverts { position: relative; width: 980px; height: 130px;  overflow: hidden;  margin-bottom: 20px;}
+.adverts .ui-switchable-nav { position: absolute; bottom: 5px; right: 5px; z-index: 99; list-style-type: none; }
+.adverts .ui-switchable-nav li {
+    float: left;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    margin-left: 5px;
+    background-color: #FCF2CF;
+    border: 1px solid #F47500;
+    color: #D94B01;
+    text-align: center;
+    cursor: pointer;
+}
+.adverts .ui-switchable-nav li.ui-switchable-active {
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    margin-top: -1px;
+    color: #FFF;
+    background-color: #FFB442;
+    font-weight: bold;
+}
+.adverts .ui-switchable-content-test li { height: 176px; width: 710px; overflow: hidden; }
+/* for countdown plugin */
+.adverts .ui-switchable-nav li,
+.adverts .ui-switchable-trigger-content {
+    position: relative;
+}
+.adverts .ui-switchable-trigger-mask {
+    position: absolute;
+    right: 0;
+    width: 18px;
+    height: 18px;
+    background-color: #FF9415;
+    visibility: hidden
+}
+.adverts .ui-switchable-active .ui-switchable-trigger-mask {
+    visibility: visible
+}
+
+.hidden {
+    display: none
 }
 
 

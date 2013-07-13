@@ -25,24 +25,24 @@ import java.util.Calendar
 
   /*首页*/
   def index=Users.UserAction{ user => implicit request =>
-    val  flashes =AdvertDao.findAdverts("index_flash");
-    val  hots = AdvertDao.findAdverts("index_hot");
+    val  flashes =AdvertDao.findAdverts("index_flash")
+    val  hots = AdvertDao.findAdverts("index_hot")
 
     val meishi =AdvertDao.findAdverts("index-meishi-right")
     val techan =AdvertDao.findAdverts("index-techan-right")
     val jujia =AdvertDao.findAdverts("index-jujia-right")
-    val haowanyi =AdvertDao.findAdverts("index-haowanyi-right")
+
 
     val meishiTags = AdvertDao.findAdvert("index-meishi-left")
     val techanTags = AdvertDao.findAdvert("index-techan-left")
     val jujiaTags  = AdvertDao.findAdvert("index-jujia-left")
-    val haowanyiTags  = AdvertDao.findAdvert("index-haowanyi-left")
+
 
     val meishiBrands =AdvertDao.findAdverts("index_pinpai_meishi");
     val teseBrands =AdvertDao.findAdverts("index_pinpai_tese");
 
-    val bottom = AdvertDao.findAdvert("index-bottom")
-    Ok(views.html.pages.index(user,flashes,hots,meishi,techan,jujia,haowanyi,meishiTags,techanTags,jujiaTags,haowanyiTags,meishiBrands,teseBrands,bottom))
+    val adverts = AdvertDao.findAdverts("index-bottom")
+    Ok(views.html.pages.index(user,flashes,hots,meishi,techan,jujia,meishiTags,techanTags,jujiaTags,meishiBrands,teseBrands,adverts))
   }
 
 

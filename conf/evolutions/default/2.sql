@@ -395,3 +395,7 @@ insert into advert(position_code,name)value("index-bottom","新-首页-底部-�
  insert into system_msg(id,title,content)value(7,"未定7","未定7todo");
  insert into system_msg(id,title,content)value(8,"未定8","未定8todo");
  insert into system_msg(id,title,content)value(9,"未定9","未定9todo");
+
+ #20130713
+
+ insert into advert(position_code,name)value("index-bottom","新-首页-底部-广告2");
