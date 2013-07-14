@@ -44,11 +44,16 @@ define(function (require,exports) {
             effect: 'fade'
         }).render();
 
+
+
         var advertsSlide = new Slide({
             element: '#J_adverts',
+            panels: '#J_adverts .ui-switchable-content li',
+            triggers:"#J_adverts .ui-switchable-trigger",
             effect: 'scrollx',
-            interval: 2000
-        })
+            easing: 'easeOutStrong',
+            interval: 6000
+        }).render()
 
         /* 这里需要调整todo  */
         SMEITER.userId.length ? ($("#J_legend").hide(), $("#J_welcome").html('<div class="welcome"><a class="xihuan" href="http://smeite.com/faxian/0" title="发现.喜欢"></a><a class="zhuti" href="http://smeite.com/themes" title="逛主题"></a><a class="pingpai" href="http://smeite.com/sites" title="享特色"></a><a class="fenxiang" href="http://smeite.com/cookbook" title="分享,收获"></a><a class="home" href="http://smeite.com/user/'+SMEITER.userId+'" title="我的小窝~"></a></div>')) : $(".thirdLogin a").click(function () {

@@ -36,6 +36,8 @@ case class Advert(
                    link:Option[String],
                    note:Option[String],
                    clickNum:Int,
+                   startTime:Option[Timestamp],
+                   endTime:Option[Timestamp],
                    addTime:Option[Timestamp]
                    )
 object Adverts extends Table[Advert]("advert") {
@@ -52,8 +54,10 @@ object Adverts extends Table[Advert]("advert") {
   def link = column[String]("link")
   def note=column[String]("note")
   def clickNum=column[Int]("click_num")
+  def startTime = column[Timestamp]("start_time")
+  def endTime = column[Timestamp]("end_time")
   def addTime = column[Timestamp]("add_time")
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ positionCode ~ name ~ thirdId.?   ~ title.? ~ content.? ~ pic.? ~ spic.? ~ width ~ height ~ link.? ~ note.?  ~ clickNum ~ addTime.? <>(Advert, Advert.unapply _)
+  def * = id.? ~ positionCode ~ name ~ thirdId.?   ~ title.? ~ content.? ~ pic.? ~ spic.? ~ width ~ height ~ link.? ~ note.?  ~ clickNum ~ startTime.? ~ endTime.? ~ addTime.? <>(Advert, Advert.unapply _)
 }
 

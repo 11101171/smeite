@@ -81,10 +81,10 @@ import java.util.Calendar
     val  flashes:List[models.advert.Advert] =AdvertDao.findAdverts("miss_flash")
     val meishiThemes:List[((Long,String,String,Int),List[String])]=AdvertDao.getThemes("miss_meishi_theme",4)
     val techanThemes:List[((Long,String,String,Int),List[String])]=AdvertDao.getThemes("miss_techan_theme",4)
-    val zibuThemes:List[((Long,String,String,Int),List[String])]=AdvertDao.getThemes("miss_zibu_theme",4)
+
     val jujiaThemes:List[((Long,String,String,Int),List[String])]=AdvertDao.getThemes("miss_jujia_theme",4)
-    val haowanyiThemes:List[((Long,String,String,Int),List[String])]=AdvertDao.getThemes("miss_haowanyi_theme",4)
-    Ok(views.html.pages.themes(user,flashes,meishiThemes,techanThemes,zibuThemes,jujiaThemes,haowanyiThemes))
+
+    Ok(views.html.pages.themes(user,flashes,meishiThemes,techanThemes,jujiaThemes))
   }
 
 
