@@ -13,6 +13,25 @@
  */
 define(function(require, exports) {
     var $ = jQuery = require("$");
+    var Slide = require("slide")
+    var Tabs = require("tabs")
 
+    var flash = new Slide({
+        element: '#J_flash',
+        panels: '#J_flash .scrollable .items .item',
+        triggers:"#J_flash .navi li",
+        activeTriggerClass:"active",
+        effect: 'fade',
+        easing: 'easeOutStrong',
+        interval: 2000
+    }).render();
 
+    var seasonTabs  = new Tabs({
+        element: '#J_seasonShicai',
+        triggers: '#J_seasonShicai .tabs li',
+        panels: '#J_seasonShicai .panel',
+        activeIndex: 0,
+        activeTriggerClass:"active",
+        effect: 'fade'
+    }).render();
 })

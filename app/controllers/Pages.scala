@@ -78,13 +78,11 @@ import java.util.Calendar
 
   /* 主题 */
   def themes =  Users.UserAction { user => implicit request =>
-    val  flashes:List[models.advert.Advert] =AdvertDao.findAdverts("miss_flash")
-    val meishiThemes:List[((Long,String,String,Int),List[String])]=AdvertDao.getThemes("miss_meishi_theme",4)
-    val techanThemes:List[((Long,String,String,Int),List[String])]=AdvertDao.getThemes("miss_techan_theme",4)
-
-    val jujiaThemes:List[((Long,String,String,Int),List[String])]=AdvertDao.getThemes("miss_jujia_theme",4)
-
-    Ok(views.html.pages.themes(user,flashes,meishiThemes,techanThemes,jujiaThemes))
+    val  flashes:List[models.advert.Advert] =AdvertDao.findAdverts("themes-flash")
+    val meishiThemes:List[((Long,String,String,Int),List[String])]=AdvertDao.getThemes("themes-meishi",4)
+    val shicaiThemes:List[((Long,String,String,Int),List[String])]=AdvertDao.getThemes("themes-shicai",4)
+    val jujiaThemes:List[((Long,String,String,Int),List[String])]=AdvertDao.getThemes("themes-jujia",4)
+    Ok(views.html.pages.themes(user,flashes,meishiThemes,shicaiThemes,jujiaThemes))
   }
 
 

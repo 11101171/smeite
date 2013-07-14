@@ -1,0 +1,281 @@
+/**
+ * Created by zuosanshao.
+ * Date: 12-9-18
+ * Time: 下午3:02
+ * 维护人员:zuosanshao@qq.com
+ */
+
+.main-box {
+    width: 950px;
+    margin: 20px auto 25px;
+    background: #fff;
+    padding: 15px;
+}
+
+.flash {
+    width: 700px;
+    height: 250px;
+    background-color: #fff;
+    overflow: hidden;
+    position: relative;
+    z-index: 99
+}
+
+.flash .scrollable {
+    width: 685px;
+    height: 250px;
+    background-color: #fff;
+    overflow: hidden;
+    position: relative;
+}
+
+.flash .scrollable .items {
+    width: 20000em;
+    position: absolute;
+    z-index: 1;
+}
+
+.flash .scrollable .items .item {
+    width: 685px;
+    height: 250px;
+    position: relative;
+    float: left;
+}
+
+.flash .scrollable .items .item a {
+    cursor: pointer;
+    color: #333;
+}
+
+.flash .navi {
+    z-index: 1;
+    position: absolute;
+    right: 20px;
+    bottom: 5px;
+    overflow:hidden; }
+
+.flash .navi li {
+    position: relative;
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+    float: right;
+    display: inline;
+    background-color: #ddd;
+    -moz-border-radius: 15px;
+    -khtml-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px
+}
+
+.flash .navi li.active  {
+   background: #e26;
+}
+
+.bulletin {
+     padding-left: 20px;
+     width:230px;
+     height:250px;
+     background-color: #f9f9f9;
+ }
+.bulletin .tag-wrap {
+    padding: 10px 0 0 18px
+}
+
+.bulletin .tag-wrap a {
+    display: inline-block;
+    height: 22px;
+    line-height: 22px;
+    border-radius: 12px;
+    border: 1px solid #d3d3d3;
+    padding: 0 10px;
+    margin: 5px 5px 5px 2px
+}
+
+.bulletin .tag-wrap a:hover {
+    background-color: #588C0E;
+    color: #fff
+}
+
+.bulletin .tag-wrap a:active {
+    color: #fff
+}
+
+.bulletin .tag-wrap .special {
+    color: #588C0E
+}
+
+
+
+.category {width:950px;background:#fff;padding:15px; margin: 0 auto 20px;position: relative}
+.category .group{overflow: hidden;}
+.category .hd{ margin-bottom:6px;overflow:hidden;padding: 0 10px;position: relative}
+.category .hd h2{ font-size:16px;height:28px;line-height:28px;float:left;color:#666;}
+.category .hd h2 a, .hd h2 a{color:#666;text-decoration:none}
+.category .hd h3{font-size: 12px;height:28px;line-height:28px;float:left;color:#e26;}
+.category .hd h3 a{ font-weight: normal}
+.category .hd h3 a:hover{ color:#e26}
+.category .hd h3 span{font-weight: normal}
+.category .hd .more{float:right;display:block;font-size:12px;font-weight:700;line-height:28px;}
+.category .hd .more a{color:#333;text-decoration:none;}
+.category .hd .more a.on{display:block;}
+.category .group{padding-left: 10px;overflow: hidden;}
+
+.category .group .item {
+    float: left;
+    *display: inline;
+    width: 210px;
+    margin-right: 30px;
+    padding: 0 0 10px 0;
+    background-color: #fff;
+    overflow: hidden
+}
+
+.category  .item  .pic {
+    display: block;
+    width: 210px;
+    height: 210px;
+    float: left;
+    overflow: hidden
+}
+
+.category  .item  a.pic:hover {
+    text-decoration: none
+}
+.category  .item  h3 {
+    padding-top: 15px;
+    font-size: 16px;
+    line-height: 1.1;
+    color: #666
+}
+
+.category  .item  h3 a, .category  .item  h3 a:hover {
+    text-decoration: none;
+    color: #666
+}
+
+.category  .item .num {
+    position: relative;
+    color: #000;
+    background-color: #fff;
+    margin: 10px auto;
+    width: 160px;
+    height: 24px;
+    line-height: 24px;
+    overflow: hidden;
+}
+.category  .item .num .view-num {
+    float: left;
+    padding-left: 25px;
+    background: url(images/post-view.png) no-repeat 0 center;
+    overflow: hidden;
+    width:30px;
+}
+.category  .item .num .reply-num {
+    float: left;
+    padding-left: 25px;
+    background: url(images/post-comment.png) no-repeat 0 center;
+    overflow: hidden;
+    width:30px;
+}
+.category  .item .num .like-state {
+    width: 50px;
+    float:left;
+}
+.category  .item .num a {
+    color: #000;
+    float: left;
+}
+.category  .item .num .like-state .like-num {
+    height: 24px;
+    overflow: hidden;
+    text-align: left;
+    padding-left: 5px;
+    position: relative;
+}
+.category  .item .num .like-state .like-num dl {
+    position: relative;
+}
+.category  .item .num .like-state .like-num dl dd {
+    width: 21px;
+    height: 24px;
+}
+.category  .item .num .like-state .like-num dl dd {
+    width: 21px;
+    height: 24px;
+}
+
+.category .last {
+    margin-right: 0 !important
+}
+
+
+ /* 应季食材 */
+.category .switch-content{overflow: hidden;width: 950px;height: 150px;}
+
+.category .switch-content .item {
+    float: left;
+    *display: inline;
+    width:150px;
+    margin-right:10px;
+    background-color: #fff;
+    overflow: hidden
+}
+
+.category  .switch-content .pic {
+    display: block;
+    width: 150px;
+    height: 150px;
+    float: left;
+    overflow: hidden
+}
+
+.category  .switch-content  a.pic:hover {
+    text-decoration: none
+}
+
+.category  .item  .pic .hover {
+    opacity: 1;
+    filter: alpha(opacity = 100)
+}
+
+.category .tabs {
+    z-index: 1;
+    position: absolute;
+    right: 0px;
+    bottom: 5px;
+    overflow:hidden; }
+
+.category .tabs li {
+    position: relative;
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+    float: right;
+    display: inline;
+    background-color: #ddd;
+    -moz-border-radius: 15px;
+    -khtml-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px
+}
+
+.category .tabs li.active  {
+    background: #e26;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

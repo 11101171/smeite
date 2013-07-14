@@ -159,59 +159,7 @@
  insert into advert(position_code,name)values("index_pinpai_tese","创意品牌18");
 
 /*广场*/
- insert into advert_position(position,name,code,advert_type)values("square","顶部flash","square_flash",0);
- insert into advert_position(position,name,code,advert_type)values("square","精彩活动","square_activity",0);
- insert into advert_position(position,name,code,advert_type)values("square","大家正在讨论的宝贝","square_goods",2);
- insert into advert_position(position,name,code,advert_type)values("square","大家喜欢的主题","square_theme",4);
- insert into advert_position(position,name,code,advert_type)values("square","达人秀","square_daren",3);
 
- insert into advert(position_code,name)values("square_flash","切换广告1");
- insert into advert(position_code,name)values("square_flash","切换广告2");
- insert into advert(position_code,name)values("square_flash","切换广告3");
- insert into advert(position_code,name)values("square_flash","切换广告4");
- insert into advert(position_code,name)values("square_flash","切换广告5");
- insert into advert(position_code,name)values("square_flash","切换广告6");
-
- insert into advert(position_code,name)values("square_activity","精彩活动1");
- insert into advert(position_code,name)values("square_activity","精彩活动2");
-
- insert into advert(position_code,name)values("square_goods","大家讨论的商品1");
- insert into advert(position_code,name)values("square_goods","大家讨论的商品2");
- insert into advert(position_code,name)values("square_goods","大家讨论的商品3");
- insert into advert(position_code,name)values("square_goods","大家讨论的商品4");
- insert into advert(position_code,name)values("square_goods","大家讨论的商品5");
- insert into advert(position_code,name)values("square_goods","大家讨论的商品6");
- insert into advert(position_code,name)values("square_goods","大家讨论的商品7");
- insert into advert(position_code,name)values("square_goods","大家讨论的商品8");
- insert into advert(position_code,name)values("square_goods","大家讨论的商品9");
- insert into advert(position_code,name)values("square_goods","大家讨论的商品10");
- insert into advert(position_code,name)values("square_goods","大家讨论的商品11");
- insert into advert(position_code,name)values("square_goods","大家讨论的商品12");
- insert into advert(position_code,name)values("square_goods","大家讨论的商品13");
- insert into advert(position_code,name)values("square_goods","大家讨论的商品14");
- insert into advert(position_code,name)values("square_goods","大家讨论的商品15");
-
- insert into advert(position_code,name)values("square_theme","大家喜欢的主题1");
- insert into advert(position_code,name)values("square_theme","大家喜欢的主题2");
- insert into advert(position_code,name)values("square_theme","大家喜欢的主题3");
- insert into advert(position_code,name)values("square_theme","大家喜欢的主题4");
- insert into advert(position_code,name)values("square_theme","大家喜欢的主题5");
- insert into advert(position_code,name)values("square_theme","大家喜欢的主题6");
- insert into advert(position_code,name)values("square_theme","大家喜欢的主题7");
- insert into advert(position_code,name)values("square_theme","大家喜欢的主题8");
- insert into advert(position_code,name)values("square_theme","大家喜欢的主题9");
- insert into advert(position_code,name)values("square_theme","大家喜欢的主题10");
- insert into advert(position_code,name)values("square_theme","大家喜欢的主题11");
- insert into advert(position_code,name)values("square_theme","大家喜欢的主题12");
- insert into advert(position_code,name)values("square_theme","大家喜欢的主题13");
- insert into advert(position_code,name)values("square_theme","大家喜欢的主题14");
- insert into advert(position_code,name)values("square_theme","大家喜欢的主题15");
-
- insert into advert(position_code,name)values("square_daren","达人秀1");
- insert into advert(position_code,name)values("square_daren","达人秀2");
- insert into advert(position_code,name)values("square_daren","达人秀3");
- insert into advert(position_code,name)values("square_daren","达人秀4");
- insert into advert(position_code,name)values("square_daren","达人秀5");
 
 
 /* forum 广告*/
@@ -290,7 +238,7 @@ insert into advert(position_code,name)value("index-haowanyi-right","新-首页-h
 
 insert into advert_position(position,name,code,advert_type)values("index","新-底部-图片","index-bottom",0) ;
 insert into advert(position_code,name)value("index-bottom","新-首页-底部-广告");
-
+insert into advert(position_code,name)value("index-bottom","新-首页-底部-广告2");
 
 /*5 月 4 */
  insert into advert_position(position,name,code,advert_type)values("checkIn","签到推荐","checkIn",2);
@@ -315,73 +263,48 @@ insert into advert(position_code,name)value("index-bottom","新-首页-底部-�
  insert into advert(position_code,name)value("hot_knowledge","精华知识4") ;
 
 
- #5月29日
- insert into advert_position(position,name,code,advert_type)values("miss","顶部切换广告","miss_flash",0);
- insert into advert(position_code,name)value("miss_flash","图片广告1") ;
- insert into advert(position_code,name)value("miss_flash","图片广告2") ;
- insert into advert(position_code,name)value("miss_flash","图片广告3") ;
- insert into advert(position_code,name)value("miss_flash","图片广告4") ;
- insert into advert(position_code,name)value("miss_flash","图片广告5") ;
+/* # themes 广告 */
 
-  insert into advert_position(position,name,code,advert_type)values("miss","美食主题","miss_meishi_theme",4);
- insert into advert(position_code,name)value("miss_meishi_theme","美食主题1") ;
- insert into advert(position_code,name)value("miss_meishi_theme","美食主题2") ;
- insert into advert(position_code,name)value("miss_meishi_theme","美食主题3") ;
- insert into advert(position_code,name)value("miss_meishi_theme","美食主题4") ;
- insert into advert(position_code,name)value("miss_meishi_theme","美食主题5") ;
- insert into advert(position_code,name)value("miss_meishi_theme","美食主题6") ;
- insert into advert(position_code,name)value("miss_meishi_theme","美食主题7") ;
- insert into advert(position_code,name)value("miss_meishi_theme","美食主题8") ;
+ insert into advert_position(position,name,code,advert_type)values("themes","顶部切换广告","themes-flash",0);
+ insert into advert(position_code,name)value("themes-flash","图片广告1") ;
+ insert into advert(position_code,name)value("themes-flash","图片广告2") ;
+ insert into advert(position_code,name)value("themes-flash","图片广告3") ;
+ insert into advert(position_code,name)value("themes-flash","图片广告4") ;
+ insert into advert(position_code,name)value("themes-flash","图片广告5") ;
 
- insert into advert_position(position,name,code,advert_type)values("miss","特产主题","miss_techan_theme",4);
- insert into advert(position_code,name)value("miss_techan_theme","特产主题1");
- insert into advert(position_code,name)value("miss_techan_theme","特产主题2");
- insert into advert(position_code,name)value("miss_techan_theme","特产主题3");
- insert into advert(position_code,name)value("miss_techan_theme","特产主题4");
- insert into advert(position_code,name)value("miss_techan_theme","特产主题5");
- insert into advert(position_code,name)value("miss_techan_theme","特产主题6");
- insert into advert(position_code,name)value("miss_techan_theme","特产主题7");
- insert into advert(position_code,name)value("miss_techan_theme","特产主题8");
+  insert into advert_position(position,name,code,advert_type)values("themes","美食主题","themes-meishi",4);
+ insert into advert(position_code,name)value("themes-meishi","美食主题1") ;
+ insert into advert(position_code,name)value("themes-meishi","美食主题2") ;
+ insert into advert(position_code,name)value("themes-meishi","美食主题3") ;
+ insert into advert(position_code,name)value("themes-meishi","美食主题4") ;
+ insert into advert(position_code,name)value("themes-meishi","美食主题5") ;
+ insert into advert(position_code,name)value("themes-meishi","美食主题6") ;
+ insert into advert(position_code,name)value("themes-meishi","美食主题7") ;
+ insert into advert(position_code,name)value("themes-meishi","美食主题8") ;
 
-  insert into advert_position(position,name,code,advert_type)values("miss","滋补主题","miss_zibu_theme",4);
- insert into advert(position_code,name)value("miss_zibu_theme","滋补主题1");
- insert into advert(position_code,name)value("miss_zibu_theme","滋补主题2");
- insert into advert(position_code,name)value("miss_zibu_theme","滋补主题3");
- insert into advert(position_code,name)value("miss_zibu_theme","滋补主题4");
- insert into advert(position_code,name)value("miss_zibu_theme","滋补主题5");
- insert into advert(position_code,name)value("miss_zibu_theme","滋补主题6");
- insert into advert(position_code,name)value("miss_zibu_theme","滋补主题7");
- insert into advert(position_code,name)value("miss_zibu_theme","滋补主题8");
+ insert into advert_position(position,name,code,advert_type)values("themes","特产主题","themes-shicai",4);
+ insert into advert(position_code,name)value("themes-shicai","特产主题1");
+ insert into advert(position_code,name)value("themes-shicai","特产主题2");
+ insert into advert(position_code,name)value("themes-shicai","特产主题3");
+ insert into advert(position_code,name)value("themes-shicai","特产主题4");
+ insert into advert(position_code,name)value("themes-shicai","特产主题5");
+ insert into advert(position_code,name)value("themes-shicai","特产主题6");
+ insert into advert(position_code,name)value("themes-shicai","特产主题7");
+ insert into advert(position_code,name)value("themes-shicai","特产主题8");
 
-  insert into advert_position(position,name,code,advert_type)values("miss","居家主题","miss_jujia_theme",4);
- insert into advert(position_code,name)value("miss_jujia_theme","居家主题1");
- insert into advert(position_code,name)value("miss_jujia_theme","居家主题2");
- insert into advert(position_code,name)value("miss_jujia_theme","居家主题3");
- insert into advert(position_code,name)value("miss_jujia_theme","居家主题4");
- insert into advert(position_code,name)value("miss_jujia_theme","居家主题5");
- insert into advert(position_code,name)value("miss_jujia_theme","居家主题6");
- insert into advert(position_code,name)value("miss_jujia_theme","居家主题7");
- insert into advert(position_code,name)value("miss_jujia_theme","居家主题8");
 
-   insert into advert_position(position,name,code,advert_type)values("miss","中国风主题","miss_china_theme",4);
- insert into advert(position_code,name)value("miss_china_theme","中国风主题1");
- insert into advert(position_code,name)value("miss_china_theme","中国风主题2");
- insert into advert(position_code,name)value("miss_china_theme","中国风主题3");
- insert into advert(position_code,name)value("miss_china_theme","中国风主题4");
- insert into advert(position_code,name)value("miss_china_theme","中国风主题5");
- insert into advert(position_code,name)value("miss_china_theme","中国风主题6");
- insert into advert(position_code,name)value("miss_china_theme","中国风主题7");
- insert into advert(position_code,name)value("miss_china_theme","中国风主题8");
 
-  insert into advert_position(position,name,code,advert_type)values("miss","好玩意主题","miss_haowanyi_theme",4);
- insert into advert(position_code,name)value("miss_haowanyi_theme","好玩意主题1");
- insert into advert(position_code,name)value("miss_haowanyi_theme","好玩意主题2");
- insert into advert(position_code,name)value("miss_haowanyi_theme","好玩意主题3");
- insert into advert(position_code,name)value("miss_haowanyi_theme","好玩意主题4");
- insert into advert(position_code,name)value("miss_haowanyi_theme","好玩意主题5");
- insert into advert(position_code,name)value("miss_haowanyi_theme","好玩意主题6");
- insert into advert(position_code,name)value("miss_haowanyi_theme","好玩意主题7");
- insert into advert(position_code,name)value("miss_haowanyi_theme","好玩意主题8");
+ insert into advert_position(position,name,code,advert_type)values("themes","居家主题","themes-jujia",4);
+ insert into advert(position_code,name)value("themes-jujia","居家主题1");
+ insert into advert(position_code,name)value("themes-jujia","居家主题2");
+ insert into advert(position_code,name)value("themes-jujia","居家主题3");
+ insert into advert(position_code,name)value("themes-jujia","居家主题4");
+ insert into advert(position_code,name)value("themes-jujia","居家主题5");
+ insert into advert(position_code,name)value("themes-jujia","居家主题6");
+ insert into advert(position_code,name)value("themes-jujia","居家主题7");
+ insert into advert(position_code,name)value("themes-jujia","居家主题8");
+
+
 
 
 
@@ -396,6 +319,4 @@ insert into advert(position_code,name)value("index-bottom","新-首页-底部-�
  insert into system_msg(id,title,content)value(8,"未定8","未定8todo");
  insert into system_msg(id,title,content)value(9,"未定9","未定9todo");
 
- #20130713
 
- insert into advert(position_code,name)value("index-bottom","新-首页-底部-广告2");

@@ -1868,5 +1868,5 @@ CREATE TABLE IF NOT EXISTS `reply_msg`(
 
 
 /* 2013月7月14日*/
-alter table advert add start_time timestamp;
-alter table advert add end_time   timestamp ;
+alter table advert add start_time timestamp default '2013-02-02 12:00:00';
+alter table advert add end_time   timestamp default '2013-02-02 12:00:00';
