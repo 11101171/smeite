@@ -69,12 +69,7 @@ import java.util.Calendar
     Ok(views.html.pages.faxian(user,page,cid,tagCode,tags,s))
   }
 
-  /* 主题街下的 主题分类 */
-  def gallery(cid:Int,s:Int,p:Int)= Users.UserAction { user => implicit request =>
-    val  flashes:List[models.advert.Advert] =AdvertDao.findAdverts("miss_flash")
-    val page = ThemeDao.findCateThemes(cid,s,p,24)
-    Ok(views.html.pages.gallery(user,flashes,page,cid,s))
-  }
+
 
   /* 主题 */
   def themes =  Users.UserAction { user => implicit request =>
@@ -85,7 +80,12 @@ import java.util.Calendar
     Ok(views.html.pages.themes(user,flashes,meishiThemes,shicaiThemes,jujiaThemes))
   }
 
-
+  /* 主题街下的 主题分类 */
+  def themeList(cid:Int,s:Int,p:Int)= Users.UserAction { user => implicit request =>
+    val  flashes:List[models.advert.Advert] =AdvertDao.findAdverts("miss_flash")
+    val page = ThemeDao.findCateThemes(cid,s,p,24)
+    Ok(views.html.pages.themeList(user,flashes,page,cid,s))
+  }
 
   /* 导航小镇  */
   def sites =  Users.UserAction { user => implicit request =>

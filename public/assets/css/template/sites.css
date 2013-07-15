@@ -3,6 +3,8 @@
  * Date: 12-9-18
  * Time: 下午3:02
  * 维护人员:zuosanshao@qq.com
+
+ *** for sites.scala.html  siteList.scala.html  postList.scala.html
  */
 
 .main-box {
@@ -127,10 +129,7 @@
 
 .filter-wrap h2 {
     float: left;
-    font-size: 18px;
-    border-left: 5px solid #5c6f09;
-    background-color: #588c0e;
-    border-right: 5px solid #5c6f09;
+    font-size:15px;
     height: 20px;
     line-height: 20px;
     padding: 0 7px;
@@ -168,23 +167,18 @@
     border-radius: 30px
 }
 
-.filter a:hover {
+.filter a:hover, .cate a:hover{
     text-decoration: none;
     color: #fff;
     background: #588C0E
 }
 
-.filter a.current {
+.filter a.current, .cate a.current {
     background: #588C0E;
     color: #fff
 }
 
-.filter-wrap #bdshare {
-    position: absolute;
-    right: 0;
-    top: -5px;
-    background-color: #fff
-}
+
 /* end */
 .category {width:950px;background:#fff;padding:15px; margin: 0 auto 20px;}
 .category .group{overflow: hidden;}

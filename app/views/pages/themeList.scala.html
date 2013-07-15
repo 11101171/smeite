@@ -55,8 +55,8 @@ title = "美食街,特色馆_食美特，爱美食爱生活"
         <div class="filter-wrap clearfix">
             <h2>@models.Cate(cid)</h2>
             <div class="theme-filter">
-                <a  href='@controllers.routes.Pages.gallery(cid,1,1)'  @if(s==1){class=" current"}><span>最新</span></a>
-                <a   href='@controllers.routes.Pages.gallery(cid,2,1)'  @if(s==2){class=" current"}><span>最热</span></a>
+                <a  href='@controllers.routes.Pages.themeList(cid,1,1)'  @if(s==1){class=" current"}><span>最新</span></a>
+                <a   href='@controllers.routes.Pages.themeList(cid,2,1)'  @if(s==2){class=" current"}><span>最热</span></a>
             </div>
             <i></i>
         </div>
@@ -94,17 +94,17 @@ title = "美食街,特色馆_食美特，爱美食爱生活"
         <div class="pagin inlineblock clearfix" id="J_Pagination">
             @if(page.nums.length>1){
             @page.prev.map { page =>
-            <a class="prev" href="@controllers.routes.Pages.gallery(cid,s,page)">上一页</a>
+            <a class="prev" href="@controllers.routes.Pages.themeList(cid,s,page)">上一页</a>
             }
             @for(num <-page.nums){
             @if(num==page.currentPage){
             <span class="current">@num</span>
             }else {
-            <a href="@controllers.routes.Pages.gallery(cid,s,num)">@num</a>
+            <a href="@controllers.routes.Pages.themeList(cid,s,num)">@num</a>
             }
             }
             @page.next.map { page =>
-            <a class="next" href="@controllers.routes.Pages.gallery(cid,s,page)">下一页</a>
+            <a class="next" href="@controllers.routes.Pages.themeList(cid,s,page)">下一页</a>
 
             }
 
