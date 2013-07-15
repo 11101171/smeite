@@ -3,6 +3,9 @@ package models.site
 import java.sql.Timestamp
 import scala.slick.driver.MySQLDriver.simple._
 
+/*
+* status 0 草稿  1 发布 2 优质
+* */
 case  class  Post(
                   id: Option[Long],
                   uid:Long,

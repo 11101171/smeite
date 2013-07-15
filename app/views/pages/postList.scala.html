@@ -1,4 +1,4 @@
-@(user:Option[models.user.User])
+@(user:Option[models.user.User],page:models.Page[models.site.Post],cid:Int,s:Int)
 @views.html.template(
 user,
 nav="site",

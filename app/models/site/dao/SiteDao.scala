@@ -61,6 +61,24 @@ object SiteDao {
     Page[Site](msgs,currentPage,totalPages)
   }
 
+  /* find sites for siteList.scala.html
+   *   cid  -1 all
+   *   sortBy 1 最新 sortBy 2
+    * */
+  def findSites(cid:Int,sortBy:Int,currentPage:Int,pageSize:Int):Page[Site] = database.withSession {  implicit session:Session =>
+      var query =for(c<-Sites.filter(_.status === 2))yield c
+     if(cid != -1) query = query.filter(_.cid === cid)
+    if(sortBy == 1) query = query.sortBy(_.addTime desc)
+    if(sortBy == 2) query = query.sortBy(_.memberNum desc)
+    val totalRows=query.list().length
+    val totalPages=(totalRows + pageSize - 1) / pageSize
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val sites:List[Site]=  query.drop(startRow).take(pageSize).list()
+    Page[Site](sites,currentPage,totalPages)
+  }
+
+
+
     /*  添加新帖子 */
    def addPost(uid:Long,sid:Long,cid:Int,title:String,pic:Option[String],content:String,tags:Option[String],status:Int,extraAttr1:Option[String],extraAttr2:Option[String],extraAttr3:Option[String],extraAttr4:Option[String],extraAttr5:Option[String],extraAttr6:Option[String]) =  database.withSession {  implicit session:Session =>
          Posts.autoInc2.insert(uid,sid,cid,title,pic,content,tags,status,extraAttr1,extraAttr2,extraAttr3,extraAttr4,extraAttr5,extraAttr6)
@@ -120,6 +138,21 @@ object SiteDao {
     Page[Post](msgs,currentPage,totalPages)
   }
 
+  /* find sites for siteList.scala.html
+*   cid  -1 all
+*   sortBy 1 最新 sortBy 2
+ * */
+  def findPosts(cid:Int,sortBy:Int,currentPage:Int,pageSize:Int):Page[Post] = database.withSession {  implicit session:Session =>
+    var query =for( c<- Posts.filter(_.status === 2) )yield c
+    if(cid != -1) query = query.filter(_.cid === cid)
+    if(sortBy == 1) query = query.sortBy(_.addTime desc)
+    if(sortBy == 1) query = query.sortBy(_.loveNum desc)
+    val totalRows=query.list().length
+    val totalPages=(totalRows + pageSize - 1) / pageSize
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val posts:List[Post]=  query.drop(startRow).take(pageSize).list()
+    Page[Post](posts,currentPage,totalPages)
+  }
 
 
 }

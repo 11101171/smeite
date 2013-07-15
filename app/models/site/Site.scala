@@ -11,6 +11,7 @@ import scala.slick.driver.MySQLDriver.simple._
  * Time: 上午11:19
  * ***********************
  * description: 小镇
+ * status 0 未审核  1 通过审核 2 优质
  */
 
 case class Site(

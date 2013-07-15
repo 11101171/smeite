@@ -1,4 +1,5 @@
 # --- First database schema
+# --- First database schema
 
 # --- !Ups
 
@@ -1652,7 +1653,7 @@ CREATE TABLE `site_baobei` (
    内容 content
    标签  tags
    额外标签  extra_tags
-   状态  status 0 草稿  1 发布
+   状态  status 0 草稿  1 发布 2 优质
    置顶  isTop
    浏览次数 view_num
    额外属性1 extra_attr1    工艺 口味  难度  主料  辅料  调料

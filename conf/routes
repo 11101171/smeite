@@ -13,8 +13,8 @@ GET     /worth                            controllers.Pages.worth
 GET     /presell                          controllers.Pages.presell
 GET     /cookbook                         controllers.Pages.cookbook
 GET     /sites                             controllers.Pages.sites
-GET     /site/list                          controllers.Pages.siteList
-GET     /post/list                        controllers.Pages.postList
+GET     /site/list                          controllers.Pages.siteList(cid:Int ?=-1,s:Int ?=1,p:Int ?=1)
+GET     /post/list                        controllers.Pages.postList(cid:Int ?=-1,s:Int ?=1,p:Int ?=1)
 
 
 #qq app

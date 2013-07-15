@@ -7,7 +7,7 @@ import models.theme.dao.ThemeDao
 import models.goods.dao.GoodsDao
 import models.Page
 import java.util.Calendar
-
+import models.site.dao.SiteDao
 
 
 /**
@@ -91,13 +91,18 @@ import java.util.Calendar
   def sites =  Users.UserAction { user => implicit request =>
       Ok(views.html.pages.sites(user))
   }
-  /* 发现小镇 推荐小镇 */
-  def siteList =  Users.UserAction { user => implicit request =>
-      Ok(views.html.pages.siteList(user))
+  /* 发现小镇 推荐小镇
+  * s:1 最新
+  * s:2 最热
+  * */
+  def siteList(cid:Int,s:Int,p:Int) =  Users.UserAction { user => implicit request =>
+    val page = SiteDao.findSites(cid,s,p,10)
+      Ok(views.html.pages.siteList(user,page,cid,s))
   }
   /* 发现帖子 推荐帖子 */
-  def postList =  Users.UserAction { user => implicit request =>
-    Ok(views.html.pages.postList(user))
+  def postList(cid:Int,s:Int,p:Int) =  Users.UserAction { user => implicit request =>
+    val page = SiteDao.findPosts(cid,s,p,10)
+    Ok(views.html.pages.postList(user,page,cid,s))
   }
  /* 导航小镇  发现精彩小镇 */
   def findSites = Users.UserAction { user => implicit request =>
