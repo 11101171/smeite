@@ -127,10 +127,14 @@
 
 .filter-wrap h2 {
     float: left;
-    font-size: 25px;
+    font-size: 18px;
+    border-left: 5px solid #5c6f09;
+    background-color: #588c0e;
+    border-right: 5px solid #5c6f09;
     height: 20px;
     line-height: 20px;
     padding: 0 7px;
+    color: #fff;
     display: inline;
 }
 
@@ -145,12 +149,12 @@
     background: url(images/site_dotted.png) repeat-x center
 }
 
-.theme-filter {
+.filter {
     float: left;
     padding-left: 15px
 }
 
-.theme-filter a {
+.filter a {
     float: left;
     margin: 0 10px 0 0;
     background: #ececec;
@@ -164,13 +168,13 @@
     border-radius: 30px
 }
 
-.theme-filter a:hover {
+.filter a:hover {
     text-decoration: none;
     color: #fff;
     background: #588C0E
 }
 
-.theme-filter a.current {
+.filter a.current {
     background: #588C0E;
     color: #fff
 }
@@ -194,164 +198,144 @@
 .category .hd .more{float:right;display:block;font-size:12px;font-weight:700;line-height:28px;}
 .category .hd .more a{color:#333;text-decoration:none;}
 .category .hd .more a.on{display:block;}
-.category .group{padding-left: 10px;overflow: hidden;}
+.category .group{overflow: hidden;}
 
 .category .group .item {
     float: left;
-    *display: inline;
-    width: 210px;
-    margin-right: 30px;
-    padding: 0 0 10px 0;
+    width: 430px;
+    height: 150px;
+    margin-right:26px;
+    padding:15px;
+    border: 1px solid #ddd;
     background-color: #fff;
     overflow: hidden
 }
 
-.category  .item  .pic {
+.group  .item  .pic {
     display: block;
-    width: 210px;
-    overflow: hidden
-}
-
-.category  .item  a.pic:hover {
-    text-decoration: none
-}
-
-.category  .item  .pic .b-img {
-    width: 210px;
-    height: 210px;
-    float: left
-}
-
-.category  .item  .pic .s-img {
-    width: 50px;
-    height: 50px;
+    width: 150px;
+    height:150px;
     float: left;
-    margin: 1px;
-    opacity: 0.8;
-    filter: alpha(opacity =0.8)
-    background: #ccc
-}
-.category  .item  .pic .hover {
-    opacity: 1;
-    filter: alpha(opacity = 100)
-}
-.category  .item  h3 {
-    padding-top: 15px;
-    font-size: 16px;
-    line-height: 1.1;
-    color: #666
+    overflow: hidden;
+    margin-right: 15px;
 }
 
-.category  .item  h3 a, .category  .item  h3 a:hover {
-    text-decoration: none;
-    color: #666
+.group .item .info{
+    width: 265px;
+    float: left;
 }
-
 .category  .item  .title {
     color: #333
 }
 
-.category  .item  .title a {
+.group  .item  .title a {
     text-decoration: none;
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
     color: #333 !important
 }
 
-
-.category  .item  .info .editor-link, .category  .item  .info .editor-link:hover {
-    color: #666
+.group .item .num{
+    color:#588c0e;
+    padding: 10px 3px;
+}
+.group .item .intro{
+    color: #777;
+    overflow: hidden;
+    padding-left: 3px;
+    height: 88px;
+    line-height: 1.7em;
 }
 
-.count-like, .count-cmt {
-    padding: 0 0 0 18px;
-    line-height: 18px;
-    font-size: 12px;
-    color: #BBB;
-    background: url(images/like-icon2.png) 1px -14px no-repeat
-}
 
-.category  .item  .info {
-    width: 210px;
-    line-height: 24px;
-    margin: 10px 0;
-    color: #999;
-    height: 72px;
+ /* 帖子 */
+.category .posts{overflow: hidden;}
+
+.category .posts .item {
+    float: left;
+    width: 430px;
+    height:430px;
+    margin-right:26px;
+    padding:15px;
+    border: 1px solid #ddd;
+    background-color: #fff;
     overflow: hidden
 }
 
-.category  .item  .follow {
-    height: 24px;
-    width: 53px;
-    border-radius: 2px;
-    text-align: center;
-    display: inline-block;
-    line-height: 24px;
-    color: #fff;
-    background-color:#86b835;
-    border: 0;
-}
-.category  .item  .followed {
-    height: 24px;
-    width: 53px;
-    border-radius: 2px;
-    text-align: center;
-    display: inline-block;
-    line-height: 24px;
-    color: #999;
-    background-color:#f3f3f3;
-    border: 0;
-}
-
-
-.category  .item  a.on {
-    height: 24px;
-    width: 53px;
-    border-radius: 2px;
-    text-align: center;
-    display: inline-block;
-    line-height: 24px;
-    background: #86b835;
-    border: 0;
-    color: #fff;
-    text-decoration: none
-}
-
-
-
-.category  .item  .followed-btn {
-    cursor: default;
-    height: 24px;
-    float: left;
-    line-height: 24px;
-    color: #999;
-    background: #f2f2f2;
-    border-radius: 3px;
+.posts  .item  .pic {
     display: block;
-    padding: 0 6px;
-    border: 0
+    width: 430px;
+    height:290px;
+    overflow: hidden;
+    margin-right: 15px;
 }
 
-.category  .item  .follow-likes {
+.posts  .item .num {
+    position: relative;
+    color: #000;
+    background-color: #fff;
+    margin: 10px auto;
+    width: 160px;
+    height: 24px;
+    line-height: 24px;
+    overflow: hidden;
+}
+.posts  .item .num .view-num {
+    float: left;
+    padding-left: 25px;
+    background: url(images/post-view.png) no-repeat 0 center;
+    overflow: hidden;
+    width:30px;
+}
+.posts  .item .num .reply-num {
+    float: left;
+    padding-left: 25px;
+    background: url(images/post-comment.png) no-repeat 0 center;
+    overflow: hidden;
+    width:30px;
+}
+.posts  .item .num .like-state {
+    width: 50px;
+    float:left;
+}
+.posts  .item .num a {
+    color: #000;
+    float: left;
+}
+.posts  .item .num .like-state .like-num {
+    height: 24px;
+    overflow: hidden;
+    text-align: left;
+    padding-left: 5px;
+    position: relative;
+}
+.posts  .item .num .like-state .like-num dl {
+    position: relative;
+}
+.posts  .item .num .like-state .like-num dl dd {
+    width: 21px;
+    height: 24px;
+}
+.posts  .item .num .like-state .like-num dl dd {
+    width: 21px;
+    height: 24px;
+}
+.posts h3{
+    text-align: center;
+    font-size: 18px;
+    font-weight: bolder;
     color: #666;
-    text-decoration: none
 }
 
-.category  .item :hover .follow-likes {
-    color: #86b835;
-    text-decoration: none
+.posts .intro{
+    line-height: 1.5em;
+    height: 35px;
 }
 
-.category  .item  .followed-btn a {
-    color: #666;
-    text-decoration: none
-}
-
-.category  .item  span.mete {
-    color: #999;
-    padding-top: 5px;
-    display: inline-block
-}
 .category .last {
     margin-right: 0 !important
 }
+
 
 

@@ -91,6 +91,14 @@ import java.util.Calendar
   def sites =  Users.UserAction { user => implicit request =>
       Ok(views.html.pages.sites(user))
   }
+  /* 发现小镇 推荐小镇 */
+  def siteList =  Users.UserAction { user => implicit request =>
+      Ok(views.html.pages.siteList(user))
+  }
+  /* 发现帖子 推荐帖子 */
+  def postList =  Users.UserAction { user => implicit request =>
+    Ok(views.html.pages.postList(user))
+  }
  /* 导航小镇  发现精彩小镇 */
   def findSites = Users.UserAction { user => implicit request =>
    Ok("todo")

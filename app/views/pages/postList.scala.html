@@ -1,0 +1,83 @@
+@(user:Option[models.user.User])
+@views.html.template(
+user,
+nav="site",
+title =  "食美特，爱美食爱生活"
+)(css="/assets/css/template/sites.css") {
+
+<div class="container clearfix" id="themes">
+
+    <div class="main-box clearfix">
+
+        <div class="flash fl ui-switchable" id="J_themeFlash">
+            <div class="scrollable">
+
+                <div class="items">
+
+
+
+
+                </div>
+
+
+            </div>
+            <ul class="navi clearfix">
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <!--  switchable  slide end-->
+        <div class="bulletin  fr clearfix">
+            <div class="bulletin-tips">
+                <h3 class="mt15 mb10">用快乐的心情</h3>
+                <h3 class="mb15">收录生活的正能量</h3>
+                <p class="edit mb10">{ 我是主编 }</p>
+                <p><a class="create-theme" href="/theme/edit"> 创作主题</a> </p>
+                <p class="tips"> 优质主题，赠送食豆10粒哦 </p>
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- 小站推荐-->
+    <div class="category clearfix">
+        <div class="hd clearfix">
+            <h2 class="fl"><a href="">小站</a></h2>
+            <a class="fr" href="">更多&gt;&gt;</a>
+        </div>
+        <div class="group clearfix">
+
+        </div>
+    </div>
+
+    <!-- 帖子推荐-->
+    <div class="category clearfix">
+        <div class="hd clearfix">
+            <h2 class="fl"><a href="">帖子</a></h2>
+            <a class="fr" href="">更多&gt;&gt;</a>
+        </div>
+        <div class="group clearfix">
+
+        </div>
+    </div>
+
+
+
+
+
+</div>
+
+        }{
+
+<script type="text/javascript">
+    seajs.use(['smeite/site/sites','smeite/site/favor'])
+</script>
+}

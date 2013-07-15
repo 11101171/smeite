@@ -13,6 +13,8 @@ GET     /worth                            controllers.Pages.worth
 GET     /presell                          controllers.Pages.presell
 GET     /cookbook                         controllers.Pages.cookbook
 GET     /sites                             controllers.Pages.sites
+GET     /sites/list                          controllers.Pages.siteList
+GET     /posts/list                        controllers.Pages.postList
 
 
 #qq app
