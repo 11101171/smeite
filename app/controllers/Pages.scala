@@ -31,19 +31,19 @@ import models.site.dao.SiteDao
     val meishi =AdvertDao.findAdverts("index-meishi-right")
     val shicai =AdvertDao.findAdverts("index-shicai-right")
     val jujia =AdvertDao.findAdverts("index-jujia-right")
-
+    val site = AdvertDao.findAdverts("index-site-right")
 
     val meishiTags = AdvertDao.findAdvert("index-meishi-left")
     val shicaiTags = AdvertDao.findAdvert("index-shicai-left")
     val jujiaTags  = AdvertDao.findAdvert("index-jujia-left")
-
+    val siteTags = AdvertDao.findAdvert("index-site-left")
 
     val meishiBrands =AdvertDao.findAdverts("index-pinpai-meishi")
     val jujiaBrands =AdvertDao.findAdverts("index-pinpai-jujia")
 
     val adverts = AdvertDao.findAdverts("index-bottom")
 
-    Ok(views.html.pages.index(user,flashes,hots,meishi,shicai,jujia,meishiTags,shicaiTags,jujiaTags,meishiBrands,jujiaBrands,adverts))
+    Ok(views.html.pages.index(user,flashes,hots,meishi,shicai,jujia,site,meishiTags,shicaiTags,jujiaTags,siteTags,meishiBrands,jujiaBrands,adverts))
   }
 
 

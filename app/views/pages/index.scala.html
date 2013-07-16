@@ -4,9 +4,13 @@ hots:List[models.advert.Advert],
 meishi:List[models.advert.Advert],
 shicai:List[models.advert.Advert],
 jujia:List[models.advert.Advert],
+site:List[models.advert.Advert],
+
 meishiTags:models.advert.Advert,
 shicaiTags:models.advert.Advert,
 jujiaTags:models.advert.Advert,
+siteTags:models.advert.Advert,
+
 meishiBrands:List[models.advert.Advert],
 teseBrands:List[models.advert.Advert],
 adverts:List[models.advert.Advert]
@@ -298,13 +302,14 @@ nav="index"
         <dl class="fourth last">
             @for((advert,i)<-jujia.view.zipWithIndex){
             @if(i>=7){
-
             <dd>
                 <a href="@advert.link" title="@advert.title" target="_blank">
                     <img src="@advert.pic" width="220" height="150" alt="@advert.title">
                 </a>
                 <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span></a></div>
+
             </dd>
+
 
             }
             }
@@ -328,51 +333,25 @@ nav="index"
                 <div class="title-desc"><a href="/faxian/3" target="_blank">&nbsp;•&nbsp;人杰地灵</a></div>
             </div>
             <div class="tag-wrap clearfix">
-                <a href="/theme/50" target="_blank" class="special">那些年我们一起喜欢的2货</a>      <a href="/theme/43" target="_blank">“居里夫人”成长记</a>           <a href="/theme/25" target="_blank">我爱我家</a><a href="/theme/27" target="_blank">乐活族</a><a href="/theme/47" target="_blank">一辈子的情怀</a> <a href="/theme/30" target="_blank" class="special">办公桌上的那一抹绿</a>   <a href="/miss?cid=3" target="_blank"><span class="tag-txt">更多</span><span class="ico-triangle" style="font-style: italic;"></span></a>
+                @Html(shicaiTags.content.getOrElse(""))
             </div>
             </dt>
 
         </dl>
 
-        <dl class="second">
-            <dd>
-                <a href="http://smeite.com/find/居家/置物架" title="置物架" target="_blank">
-                    <img src="/images/adv/20130327-jujia-2.jpg" width="150" height="150" alt="置物架">
-                </a>
-                <div class="desc"><a href="http://smeite.com/find/居家/置物架" title="置物架" target="_blank"> <span>置物架</span> </a> </div>
-            </dd>
-            <dd>
-                <a href="http://smeite.com/find/居家/密封罐" title="密封罐" target="_blank">
-                    <img src="/images/adv/20130327-jujia-3.jpg" width="150" height="150" alt="密封罐">
-                </a>
-                <div class="desc"><a href="http://smeite.com/find/居家/密封罐" title="密封罐" target="_blank"> <span>密封罐</span> </a> </div>
-            </dd>
-        </dl>
-        <dl class="third">
-            <dd>
-                <a href="http://smeite.com/find/居家/马克杯" title="马克杯" target="_blank">
-                    <img src="/images/adv/20130327-jujia-5.jpg" width="310" height="310" alt="马克杯">
-                </a>
-                <div class="desc"><a href="http://smeite.com/find/居家/马克杯" title="马克杯" target="_blank"> <span>马克杯</span> </a> </div>
-            </dd>
+        <dl class="sites">
+            @for((advert,i)<-site.view.zipWithIndex ){
+            <dd @if((i+1)%4==0){class="last"}>
+            <a href="@advert.link" title="@advert.title" target="_blank">
+                <img src="@advert.pic" width="220" height="150" alt="@advert.title">
+            </a>
+            <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span></a></div>
 
+            </dd>
+            }
 
         </dl>
-        <dl class="fourth last">
-            <dd>
-                <a href="http://smeite.com/find/居家/茶具" title="茶具" target="_blank">
-                    <img src="/images/adv/20130327-jujia-8.jpg" width="220" height="150" alt="茶具">
-                </a>
-                <div class="desc"><a href="http://smeite.com/find/居家/茶具" title="茶具" target="_blank"> <span>茶具</span></a></div>
-            </dd>
-            <dd>
-                <a href="http://smeite.com/find/居家/绿植" title="绿植" target="_blank">
-                    <img src="/images/adv/20130327-jujia-9.jpg" width="220" height="150" alt="绿植">
-                </a>
-                <div class="desc"><a href="http://smeite.com/find/居家/绿植" title="绿植" target="_blank"> <span>绿植</span></a></div>
-            </dd>
 
-        </dl>
 
     </div>
 

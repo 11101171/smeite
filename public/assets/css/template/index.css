@@ -213,6 +213,20 @@
     display: inline-block;
     vertical-align: middle
 }
+
+.category dl.sites{
+    width: 700px;
+    margin-right: 0!important;
+}
+.category dl.sites dd{
+    float: left;
+    width: 167px;
+    height: 167px;
+    margin-right: 10.5px;
+}
+.category dl.sites dd.last{
+    margin-right: 0 !important;
+}
 /*category floor end*/
 
 

@@ -7,12 +7,14 @@
 
 /*插入广告位置*/
  /* 首页 */
+ insert into advert_position(position,name,code,advert_type)values("index","顶部切换广告","index-flash",0);
  insert into advert(position_code,name)values("index-flash","切换广告1");
  insert into advert(position_code,name)values("index-flash","切换广告2");
  insert into advert(position_code,name)values("index-flash","切换广告3");
  insert into advert(position_code,name)values("index-flash","切换广告4");
  insert into advert(position_code,name)values("index-flash","切换广告5");
 
+ insert into advert_position(position,name,code,advert_type)values("index","最近好玩意","index-hot",1);
  insert into advert(position_code,name)values("index-hot","最近好玩意1");
  insert into advert(position_code,name)values("index-hot","最近好玩意2");
  insert into advert(position_code,name)values("index-hot","最近好玩意3");
@@ -62,12 +64,23 @@
  insert into advert(position_code,name)value("index-jujia-right","新-首页-居家-9")  ;
  insert into advert(position_code,name)value("index-jujia-right","新-首页-居家-10")  ;
 
-
+ insert into advert_position(position,name,code,advert_type)values("index","小镇-tags","index-site-left",1)   ;
+ insert into advert_position(position,name,code,advert_type)values("index","小镇","index-site-right",0);
+ insert into advert(position_code,name)value("index-site-left","首页-小镇-tags") ;
+ insert into advert(position_code,name)values("index-site-right","新-首页-小镇1");
+ insert into advert(position_code,name)values("index-site-right","新-首页-小镇2");
+ insert into advert(position_code,name)values("index-site-right","新-首页-小镇3");
+ insert into advert(position_code,name)values("index-site-right","新-首页-小镇4");
+ insert into advert(position_code,name)values("index-site-right","新-首页-小镇5");
+ insert into advert(position_code,name)values("index-site-right","新-首页-小镇6");
+ insert into advert(position_code,name)values("index-site-right","新-首页-小镇7");
+ insert into advert(position_code,name)values("index-site-right","新-首页-小镇8");
 
  insert into advert_position(position,name,code,advert_type)values("index","新-底部-图片","index-bottom",0) ;
  insert into advert(position_code,name)value("index-bottom","新-首页-底部-广告");
  insert into advert(position_code,name)value("index-bottom","新-首页-底部-广告2");
 
+ insert into advert_position(position,name,code,advert_type)values("index","美食品牌","index-pinpai-meishi",0);
  insert into advert(position_code,name)values("index-pinpai-meishi","美食品牌1");
  insert into advert(position_code,name)values("index-pinpai-meishi","美食品牌2");
  insert into advert(position_code,name)values("index-pinpai-meishi","美食品牌3");
@@ -87,6 +100,7 @@
  insert into advert(position_code,name)values("index-pinpai-meishi","美食品牌17");
  insert into advert(position_code,name)values("index-pinpai-meishi","美食品牌18");
 
+ insert into advert_position(position,name,code,advert_type)values("index","美食品牌","index-pinpai-jujia",0);
  insert into advert(position_code,name)values("index-pinpai-jujia","居家品牌1");
  insert into advert(position_code,name)values("index-pinpai-jujia","居家品牌2");
  insert into advert(position_code,name)values("index-pinpai-jujia","居家品牌3");
