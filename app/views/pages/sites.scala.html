@@ -1,4 +1,4 @@
-@(user:Option[models.user.User])
+@(user:Option[models.user.User],flashes:List[models.advert.Advert],sites:List[models.site.Site],posts:List[models.site.Post])
 @views.html.template(
 user,
 nav="site",
@@ -14,8 +14,13 @@ title =  "食美特，爱美食爱生活"
 
                 <div class="items">
 
-
-
+                    @for(flash <- flashes) {
+                    <div class="item">
+                        <a href="@flash.link" title="@flash.title" target="_blank">
+                            <img src="@flash.pic" alt="@flash.title" width="685" height="250">
+                        </a>
+                    </div>
+                    }
 
                 </div>
 
@@ -54,26 +59,19 @@ title =  "食美特，爱美食爱生活"
             <a class="fr" href="@controllers.routes.Pages.siteList(-1,1,1)">更多&gt;&gt;</a>
         </div>
         <div class="group clearfix">
-            <div class="item">
+            @for((site,i)<-sites.view.zipWithIndex ){
+            <div class="item @if((i+1)%2==0){last}">
                 <div class="pic">
-                    <a><img src="/images/temp/presell1.jpg" width="150" height="150" alt=""> </a>
+                    <a href="@controllers.routes.Sites.site(site.id.get)"><img src="@site.pic" width="150" height="150" alt="@site.title"> </a>
                 </div>
                 <dl  class="info">
-                    <dt class="title"><a>私房菜</a> </dt>
-                    <dt class="num"> 66 居民 </dt>
-                    <dt class="intro"> 私房菜私房菜私房菜私房菜私房菜私房菜私房菜私房菜私房菜私房菜私房菜私房菜私房菜私房菜 </dt>
+                    <dt class="title"><a href="@controllers.routes.Sites.site(site.id.get)">@site.title</a> </dt>
+                    <dt class="num"> @site.memberNum 居民 </dt>
+                    <dt class="intro"> @site.intro </dt>
                 </dl>
             </div>
-            <div class="item last">
-                <div class="pic">
-                    <a><img src="/images/temp/presell1.jpg" width="150" height="150" alt=""> </a>
-                </div>
-                <dl  class="info">
-                    <dt class="title"><a>私房菜</a> </dt>
-                    <dt class="num"> 66 居民 </dt>
-                    <dt class="intro"> 私房菜私房菜私房菜私房菜私房菜私房菜私房菜私房菜私房菜私房菜私房菜私房菜私房菜私房菜 </dt>
-                </dl>
-            </div>
+            }
+
 
 
         </div>
@@ -86,57 +84,36 @@ title =  "食美特，爱美食爱生活"
             <a class="fr" href="@controllers.routes.Pages.postList(-1,1,1)">更多&gt;&gt;</a>
         </div>
         <div class="posts clearfix">
-              <div class="item">
+            @for((post,i)<-posts.view.zipWithIndex ){
+              <div class="item @if((i+1)%2==0){last}">
                   <div class="pic">
-                      <a><img src="/images/temp/sites1.jpg" width="430"> </a>
+                      <a @controllers.routes.Sites.post(post.id.get)><img src="@post.pic" width="430"> </a>
                   </div>
 
                   <div class="num">
-                      <div class="view-num">1</div>
-                      <div class="reply-num">1</div>
+                      <div class="view-num">@post.viewNum</div>
+                      <div class="reply-num">@post.replyNum</div>
                       <div class="like-state">
-                          <a rel="followGoods" href="javascript:void(0)" data-pid="1">
+                          <a rel="followGoods" href="javascript:void(0)" data-pid="@post.id.get">
                               <i class="ico-likes" title="喜欢"></i>
                           </a>
                           <div class="like-num">
                               <dl class="J_scrollUp" style="top: 0px;">
-                                  <dd class="J_FavorNum" data-val="1">1</dd>
+                                  <dd class="J_FavorNum" data-val="@post.loveNum">@post.loveNum</dd>
                                   <dd>+1</dd>
                               </dl>
                           </div>
                       </div>
                   </div>
                       <h3 class=" ofh">
-                            红酒俏佳人
+                          <a href="@controllers.routes.Sites.post(post.id.get)">  @post.title </a>
                       </h3>
                   <div class="intro">
-                     首先附一张改变好的图片让大家感受一下大家已经看到了，此图我们已经成功的把“中国联通”修改为“想去logo”，非常的...
-                  </div>
-                  </div>
-            <div class="item last">
-                <div class="pic">
-                    <a><img src="/images/temp/sites1.jpg" width="430"> </a>
-                </div>
 
-                <div class="num">
-                    <div class="view-num">1</div>
-                    <div class="reply-num">1</div>
-                    <div class="like-state">
-                        <a rel="followGoods" href="javascript:void(0)" data-pid="1">
-                            <i class="ico-likes" title="喜欢"></i>
-                        </a>
-                        <div class="like-num">
-                            <dl class="J_scrollUp" style="top: 0px;">
-                                <dd class="J_FavorNum" data-val="1">1</dd>
-                                <dd>+1</dd>
-                            </dl>
-                        </div>
-                    </div>
-                </div>
-                <h3 class=" ofh">
-                    红酒俏佳人
-                </h3>
-            </div>
+                  </div>
+                  </div>
+            }
+
         </div>
     </div>
 

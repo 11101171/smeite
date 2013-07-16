@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],page:models.Page[models.site.Post],cid:Int,s:Int)
+@(user:Option[models.user.User],flashes:List[models.advert.Advert],page:models.Page[models.site.Post],cid:Int,s:Int)
 @views.html.template(
 user,
 nav="site",
@@ -13,10 +13,13 @@ title =  "食美特，爱美食爱生活"
             <div class="scrollable">
 
                 <div class="items">
-
-
-
-
+                    @for(flash <- flashes) {
+                    <div class="item">
+                        <a href="@flash.link" title="@flash.title" target="_blank">
+                            <img src="@flash.pic" alt="@flash.title" width="685" height="250">
+                        </a>
+                    </div>
+                    }
                 </div>
 
 
@@ -49,7 +52,7 @@ title =  "食美特，爱美食爱生活"
     <div class="filter-wrap clearfix">
         <div class="cate">
             <h2 @if(cid == -1){class="current"} ><a href="@controllers.routes.Pages.postList(-1,1,1)">所有</a></h2>
-            <h2 @if(cid == 0){class="current"} ><a href="@controllers.routes.Pages.postList(0,1,1)">菜谱</a></h2>
+            <h2 @if(cid == 0){class="current"} ><a href="@controllers.routes.Pages.postList(0,1,1)">私房菜</a></h2>
             <h2 @if(cid == 1){class="current"} ><a href="@controllers.routes.Pages.postList(1,1,1)">食材</a></h2>
             <h2 @if(cid == 2){class="current"} ><a href="@controllers.routes.Pages.postList(2,1,1)">其他</a></h2>
         </div>
@@ -67,7 +70,7 @@ title =  "食美特，爱美食爱生活"
             @for( (item,i) <- page.items.view.zipWithIndex ){
             <div class="item @if((i+1)%2 == 0){last} ">
                 <div class="pic">
-                    <a><img src="@item.pic" width="430"> </a>
+                    <a @controllers.routes.Sites.post(item.id.get)><img src="@item.pic" width="430"> </a>
                 </div>
 
                 <div class="num">
@@ -86,7 +89,7 @@ title =  "食美特，爱美食爱生活"
                     </div>
                 </div>
                 <h3 class=" ofh">
-                    @item.title
+                  <a href="@controllers.routes.Sites.post(item.id.get)" >  @item.title </a>
                 </h3>
                 <div class="intro">
 

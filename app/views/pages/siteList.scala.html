@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],page:models.Page[models.site.Site],cid:Int,s:Int)
+@(user:Option[models.user.User],flashes:List[models.advert.Advert],page:models.Page[models.site.Site],cid:Int,s:Int)
 @views.html.template(
 user,
 nav="site",
@@ -15,7 +15,13 @@ title =  "食美特，爱美食爱生活"
                 <div class="items">
 
 
-
+                    @for(flash <- flashes) {
+                    <div class="item">
+                        <a href="@flash.link" title="@flash.title" target="_blank">
+                            <img src="@flash.pic" alt="@flash.title" width="685" height="250">
+                        </a>
+                    </div>
+                    }
 
                 </div>
 
@@ -67,10 +73,10 @@ title =  "食美特，爱美食爱生活"
             @for((item,i) <- page.items.view.zipWithIndex){
             <div class="item @if((i+1)%2 ==0){last}">
                 <div class="pic">
-                    <a><img src="@item.pic" width="150" height="150" alt="@item.title"> </a>
+                    <a href="@controllers.routes.Sites.site(item.id.get)"><img src="@item.pic" width="150" height="150" alt="@item.title"> </a>
                 </div>
                 <dl  class="info">
-                    <dt class="title"><a>@item.title</a> </dt>
+                    <dt class="title"><a href="@controllers.routes.Sites.site(item.id.get)">@item.title</a> </dt>
                     <dt class="num"> @item.memberNum 居民 </dt>
                     <dt class="intro"> @item.intro </dt>
                 </dl>

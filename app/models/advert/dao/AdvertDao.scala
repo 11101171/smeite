@@ -7,6 +7,7 @@ import models.user.{Users, User}
 import models.theme.{ThemeGoodses, Themes, Theme}
 import models.advert._
 import models.forum.{Topic, Topics}
+import models.site.{Posts, Post, Sites, Site}
 
 /**
 * Created by zuosanshao.
@@ -102,6 +103,26 @@ object AdvertDao {
       if c.thirdId === t.id
       if t.uid === u.id
     }yield u.id~u.name~u.pic~t.id~t.title~t.replyNum~t.loveNum~t.hotIndex ).list()
+  }
+
+  def getSites(positionCode:String,num:Int):List[Site] = database.withSession {  implicit session:Session =>
+    ( for{
+     c <- Adverts
+     s <- Sites
+      if c.positionCode === positionCode
+      if c.thirdId === s.id
+    }yield s ).take(num).list()
+
+  }
+
+  def getPosts(positionCode:String,num:Int):List[Post] =  database.withSession {  implicit session:Session =>
+    ( for{
+      c <- Adverts
+      p <- Posts
+      if c.positionCode === positionCode
+      if c.thirdId === p.id
+    }yield p ).take(num).list()
+
   }
 
   def findPositions(position:String):List[AdvertPosition]= database.withSession {  implicit session:Session =>

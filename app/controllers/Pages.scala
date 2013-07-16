@@ -25,24 +25,25 @@ import models.site.dao.SiteDao
 
   /*首页*/
   def index=Users.UserAction{ user => implicit request =>
-    val  flashes =AdvertDao.findAdverts("index_flash")
-    val  hots = AdvertDao.findAdverts("index_hot")
+    val  flashes =AdvertDao.findAdverts("index-flash")
+    val  hots = AdvertDao.findAdverts("index-hot")
 
     val meishi =AdvertDao.findAdverts("index-meishi-right")
-    val techan =AdvertDao.findAdverts("index-techan-right")
+    val shicai =AdvertDao.findAdverts("index-shicai-right")
     val jujia =AdvertDao.findAdverts("index-jujia-right")
 
 
     val meishiTags = AdvertDao.findAdvert("index-meishi-left")
-    val techanTags = AdvertDao.findAdvert("index-techan-left")
+    val shicaiTags = AdvertDao.findAdvert("index-shicai-left")
     val jujiaTags  = AdvertDao.findAdvert("index-jujia-left")
 
 
-    val meishiBrands =AdvertDao.findAdverts("index_pinpai_meishi");
-    val teseBrands =AdvertDao.findAdverts("index_pinpai_tese");
+    val meishiBrands =AdvertDao.findAdverts("index-pinpai-meishi")
+    val jujiaBrands =AdvertDao.findAdverts("index-pinpai-jujia")
 
     val adverts = AdvertDao.findAdverts("index-bottom")
-    Ok(views.html.pages.index(user,flashes,hots,meishi,techan,jujia,meishiTags,techanTags,jujiaTags,meishiBrands,teseBrands,adverts))
+
+    Ok(views.html.pages.index(user,flashes,hots,meishi,shicai,jujia,meishiTags,shicaiTags,jujiaTags,meishiBrands,jujiaBrands,adverts))
   }
 
 
@@ -82,36 +83,41 @@ import models.site.dao.SiteDao
 
   /* 主题街下的 主题分类 */
   def themeList(cid:Int,s:Int,p:Int)= Users.UserAction { user => implicit request =>
-    val  flashes:List[models.advert.Advert] =AdvertDao.findAdverts("miss_flash")
+    val  flashes:List[models.advert.Advert] =AdvertDao.findAdverts("themes-flash")
     val page = ThemeDao.findCateThemes(cid,s,p,24)
     Ok(views.html.pages.themeList(user,flashes,page,cid,s))
   }
 
   /* 导航小镇  */
   def sites =  Users.UserAction { user => implicit request =>
-      Ok(views.html.pages.sites(user))
+    val flashes = AdvertDao.findAdverts("sites-flash")
+    val sites  = AdvertDao.getSites("sites-recom",6)
+    val posts = AdvertDao.getPosts("sites-post-recom",8)
+      Ok(views.html.pages.sites(user,flashes,sites,posts))
   }
   /* 发现小镇 推荐小镇
   * s:1 最新
   * s:2 最热
   * */
   def siteList(cid:Int,s:Int,p:Int) =  Users.UserAction { user => implicit request =>
+    val flashes = AdvertDao.findAdverts("sites-flash")
     val page = SiteDao.findSites(cid,s,p,10)
-      Ok(views.html.pages.siteList(user,page,cid,s))
+      Ok(views.html.pages.siteList(user,flashes,page,cid,s))
   }
   /* 发现帖子 推荐帖子 */
   def postList(cid:Int,s:Int,p:Int) =  Users.UserAction { user => implicit request =>
+    val flashes = AdvertDao.findAdverts("sites-flash")
     val page = SiteDao.findPosts(cid,s,p,10)
-    Ok(views.html.pages.postList(user,page,cid,s))
+    Ok(views.html.pages.postList(user,flashes,page,cid,s))
   }
- /* 导航小镇  发现精彩小镇 */
-  def findSites = Users.UserAction { user => implicit request =>
-   Ok("todo")
- }
+
 
   /* 食谱  */
   def cookbook =  Users.UserAction { user => implicit request =>
-    Ok(views.html.pages.cookbook(user))
+    val flashes = AdvertDao.findAdverts("sifangcai-flash")
+    val shicai = AdvertDao.getPosts("sifangcai-shicai",12)
+    val menu = AdvertDao.getPosts("sifangcai-menu",6)
+    Ok(views.html.pages.cookbook(user,flashes,shicai,menu))
   }
 
   /* 生鲜预售 */
