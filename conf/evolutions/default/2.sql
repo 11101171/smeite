@@ -154,7 +154,7 @@
 
 
 /* forum 广告*/
- insert into advert_position(position,name,code,advert_type)values("forum","精彩活动","forum_activity",0)
+ insert into advert_position(position,name,code,advert_type)values("forum","精彩活动","forum_activity",0) ;
  insert into advert(position_code,name)value("forum_activity","精彩活动") ;
  insert into advert_position(position,name,code,advert_type)values("forum","热门问答","hot_question",5);
  insert into advert(position_code,name)value("hot_question","热门问答1") ;

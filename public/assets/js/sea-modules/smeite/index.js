@@ -24,9 +24,9 @@ define(function (require,exports) {
             panels: '#J_indexFlash .scrollable .items .item',
             triggers:"#J_indexFlash .navi li",
            activeTriggerClass:"active",
-            effect: 'fade',
-            easing: 'easeOutStrong',
-            interval: 2000
+            effect: 'scrollx',
+            easing: 'easeInStrong',
+            interval: 6000
         }).render();
         /* 最近好玩意～*/
         $("#J_A-weixin").hover(function () {

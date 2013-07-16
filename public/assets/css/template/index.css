@@ -6,25 +6,91 @@
  * 维护：zuosanshao@qq.com
 */
 .main-box{width:950px;margin:20px auto 25px;background:#fff;padding:15px; }
-.flash {width:735px;height:270px;background-color:#fff;overflow:hidden;position:relative;z-index: 99}
-.flash .scrollable { width:720px;height:270px;background-color:#fff;overflow:hidden;position:relative; }
-.flash .scrollable .items { width:20000em;position:absolute;z-index:1; }
-.flash .scrollable .items .item { width:720px;height:270px;position:relative;float:left; }
-.flash .scrollable .items .item a{cursor: pointer;color:#333;}
 
-.flash .navi {
+/*.ui-switchable {
+    width: 735px;
+    height: 270px;
+    background-color: #fff;
+    overflow: hidden;
+    position: relative;
+    z-index: 99
+}
+
+.ui-switchable .ui-switchable-content {
+    width: 720px;
+    height: 270px;
+    background-color: #fff;
+    overflow: hidden;
+    position: relative;
+}
+
+.ui-switchable .ui-switchable-content .ui-switchable-panel {
+    width: 720px;
+    height: 270px;
+    position: relative;
+    float: left;
+}
+
+.ui-switchable .ui-switchable-content .ui-switchable-panel a {
+    cursor: pointer;
+    color: #333;
+}
+
+.ui-switchable .ui-switchable-nav {
     z-index: 1;
     position: absolute;
     left: 0;
     bottom: 0;
-    overflow:hidden; }
-.flash .navi li { position:relative;width:144px;height: 4px;float:left;display:inline;background: url(images/navi-bg.png) repeat-x 0 -8px}
-.flash .navi li.last{margin-right:0}
-.flash .navi li.active {
-    background-position: 0 0
+    overflow: hidden;
 }
 
+.ui-switchable .ui-switchable-nav .ui-switchable-trigger {
+    position: relative;
+    width: 144px;
+    height:25px;
+    line-height: 25px;
+    text-align: center;
+    float: left;
+    display: inline;
+    background-color: #fff;
+    opacity: .7;
+    filter: alpha(opacity = 70);
+}
 
+.ui-switchable .ui-switchable-nav li.last {
+    margin-right: 0;
+}
+
+.ui-switchable .ui-switchable-nav .ui-switchable-active {
+    opacity: .1;
+    filter: alpha(opacity = 10);
+    color: #fff;
+}*/
+.flash {width:735px;height:350px;background-color:#fff;overflow:hidden;position:relative;z-index: 99}
+.flash .scrollable { width:720px;height:270px;background-color:#fff;overflow:hidden;position:relative; }
+.flash .scrollable .items { position:absolute;z-index:1; }
+.flash .scrollable .items .item { width:720px;height:270px;position:relative;float:left; }
+.flash .scrollable .items .item a{cursor: pointer;color:#333;}
+
+.flash .navi { background-color:#fff;/*overflow:hidden;height:3px;position:relative;*/}
+.flash .navi { /*background:#fff url(../../images/ui/navi-wrap-bg.png) repeat-x top;*/overflow:hidden; }
+.flash .navi li { position:relative;width:130px;float:left;display:inline;padding-top:11px;margin-right:17px}
+.flash .navi li.last{margin-right:0}
+.flash .navi li .thumb { height:45px;overflow:hidden;cursor:pointer; }
+.flash .navi li .topicTitle { cursor:pointer;line-height:18px;height:18px;margin-top:5px;margin-left:5px;font-weight:normal;color:#666; _width:125px}
+.flash .navi li a{text-decoration:none;}
+.flash .navi li span {
+    position: absolute;
+    top: 9px;
+    width: 130px;
+    height: 2px;
+    overflow: hidden;
+    background: url(images/navi-bg.png) no-repeat 0 -7px
+}
+
+.flash .navi li.active span {
+    background-position: 0 0
+}
 /*kissy switchable slide end*/
 /*最近热门好玩意*/
 .bulletin{width:210px;background-color:#fff;}

@@ -6,7 +6,7 @@ define(function(require, exports) {
 
         var themesFlash = new Slide({
             element: '#J_themeFlash',
-            panels: '#J_themeFlash .scrollable .items .item',
+            panels: '#J_themeFlash  .items .item',
             triggers:"#J_themeFlash .navi li",
             activeTriggerClass:"active",
             effect: 'fade',
