@@ -23,8 +23,9 @@ seajs.config({
         'tabs': 'arale/switchable/0.9.15/tabs',
         'upload': 'arale/upload/1.0.0/upload',
         'zeroclipboard': 'gallery/zeroclipboard/1.1.6/zeroclipboard',
-        'imgAreaSelect':'smeite/module/imgAreaSelect',
         'detector':'arale/detector/1.2.0/detector',
+
+        'imgAreaSelect':'smeite/module/jquery.imgareaselect.min',
        'smeite':'smeite/smeite'
     },
 

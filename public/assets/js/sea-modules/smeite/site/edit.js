@@ -84,7 +84,7 @@ define(function(require, exports) {
                     //图片裁切
                     $("#faceUpload2 .face-submit").show();
                     $.smeite.photoarea = $('#photo').imgAreaSelect({ aspectRatio:'1:1', handles:true,
-                        fadeSpeed:200, onSelectChange:$.smeite.setting.setAvatar.preview, instance:true, persistent:true, minWidth:180, minHeight:180 });
+                        fadeSpeed:200, onSelectChange:$.smeite.setting.setAvatar.preview, instance:true, persistent:true, minWidth:200, minHeight:200 });
                     $.smeite.photoarea.setSelection(x1, y1, x2, y2, true);
                     $.smeite.photoarea.setOptions({ show:true });
                     $.smeite.photoarea.update();
@@ -140,7 +140,7 @@ define(function(require, exports) {
             //    $("body").append(html);
                 uploadOverlay = new Overlay({
                     template:html,
-                    width: 600,
+                    width:450,
                     zIndex: 9999,
                     align: {
                         selfXY: [ "50%", "50%" ],
@@ -154,7 +154,7 @@ define(function(require, exports) {
             }else{
                 uploadOverlay = new Overlay({
                     template:'#photoDialog',
-                    width: 600,
+                    width: 450,
                     zIndex: 9999,
                     align: {
                         selfXY: [ "50%", "50%" ],
@@ -187,7 +187,7 @@ define(function(require, exports) {
                         $("#faceUpload2")[0].reset();
                         $("#J_uploadImg").val(data.src)
                         $("#faceUpload2 .face-submit").hide();
-
+                        $.smeite.photoarea.cancelSelection();
 
                     }
                 });
@@ -198,7 +198,9 @@ define(function(require, exports) {
                 $("#faceUpload2")[0].reset();
                 $('#photo').attr("src","");
                 $("#faceUpload2 .face-submit").hide();
-
+                if($.smeite.photoarea!=null){
+                    $.smeite.photoarea.cancelSelection();
+                }
                 uploadOverlay.hide()
                 Mask.hide()
             });

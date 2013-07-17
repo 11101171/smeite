@@ -15,7 +15,9 @@ define(function(require, exports) {
     require("smeite/common/validator")($);
 	var DateSelector = require("smeite/common/dateSelect");
 	require("imgAreaSelect");
-
+    var Overlay = require("overlay")
+    var Mask = require("mask")
+    var Detector = require("detector")
 $.smeite.photoarea = null;
 $.smeite.rotate = null;
 $.smeite.setting = {
@@ -36,8 +38,8 @@ $.smeite.setting = {
 			$('#photo').attr("src","").attr("src",path);
 			$("#thumb-path").val(path);
 			var image = $('#photo')[0],imageTime;
-			if($.browser.msie){
-				if($.browser.version==6.0){
+            if(Detector.browser.ie){
+                if(Detector.browser.version < 7){
 					image.onreadystatechange = function(){ 
 						if(image.readyState=="complete" || image.readyState=="loaded"){ 
 							dosth();
@@ -80,14 +82,21 @@ $.smeite.setting = {
 					y2 = y1+180;
 				}
 				//图片裁切
-				$("#faceUpload2 .face-submit").show();
-				$.smeite.photoarea = $('#photo').imgAreaSelect({ aspectRatio:'1:1', handles:true,
-				fadeSpeed:200, onSelectChange:$.smeite.setting.setAvatar.preview, instance:true, persistent:true, minWidth:180, minHeight:180 });
-				$.smeite.photoarea.setSelection(x1, y1, x2, y2, true);
-				$.smeite.photoarea.setOptions({ show:true });
-				$.smeite.photoarea.update();
-				var selection = $.smeite.photoarea.getSelection(true);
-				$.smeite.setting.setAvatar.preview($('#photo')[0],selection);
+                $("#faceUpload2 .face-submit").show();
+                $.smeite.photoarea = $('#photo').imgAreaSelect({
+                    aspectRatio: '1:1',
+                    handles: true,
+                    fadeSpeed: 200,
+                    onSelectChange: $.smeite.setting.setAvatar.preview,
+                    instance: true,
+                    persistent: true,
+                    minWidth:200, minHeight: 200
+                });
+                $.smeite.photoarea.setSelection(x1, y1, x2, y2, true);
+                $.smeite.photoarea.setOptions({ show: true });
+                $.smeite.photoarea.update();
+                var selection = $.smeite.photoarea.getSelection(true);
+                $.smeite.setting.setAvatar.preview($('#photo')[0], selection);
 				
 			};
 		}
@@ -156,57 +165,74 @@ $(function(){
 				html += '<a class="close" href="javascript:;"></a>';
 				html += '</div>';
 				html += '</div>';
-				$("body").append(html);
-				$("#photoDialog").overlay({
-					top: 50,
-					fixed: false,
-					mask: {
-						color: '#000',
-						loadSpeed: 200,
-						opacity: 0.3
-					},
-					closeOnClick: false,
-					load: true			
-				});
-				$("#J_FilePath").change(function(){
-					$("#faceUpload").submit();
-					$('#photo').attr("src","/assets/img/ui/loading1.gif");
-				
-				});
-				$("#faceUpload2").submit(function(){
-					$this = $(this);
-					$("#faceUpload2 input[type=submit]")[0].disabled = "disabled";
-					$("#faceUpload2 input[type=submit]").removeClass("bbl-btn").addClass("disabled");
-					$("#J_Waiting").show();
-					$.post($this.attr("action"),$this.serializeArray(),function(data){
-						$("#J_Waiting").hide();
-						$("#faceUpload2 input[type=submit]")[0].disabled = "";
-						$("#faceUpload2 input[type=submit]").removeClass("disabled").addClass("bbl-btn");
-    					if(data.code=="100"){
-    						$("#faceUpload")[0].reset();
-    						$("#faceUpload2")[0].reset();
-    						$('#photo').attr("src","");
-    						$("#faceUpload2 .face-submit").hide();
-    						$.smeite.photoarea.cancelSelection();
-    						$("#photoDialog").overlay().close();
-    						$("#thePhoto").attr("src",data.src);
-    					}
-					});
-					return false;
-				});
-				$("#photoDialog .close").unbind("click").click(function(){
-					$("#faceUpload")[0].reset();
-    				$("#faceUpload2")[0].reset();
-    				$('#photo').attr("src","");
-    				$("#faceUpload2 .face-submit").hide();
-    				if($.smeite.photoarea!=null){
-    					$.smeite.photoarea.cancelSelection();
-    				}
-					$("#photoDialog").overlay().close();					
-				});
-			}else{
-				$("#photoDialog").data("overlay").load();
-			}
+			//	$("body").append(html);
+                uploadOverlay = new Overlay({
+                    template:html,
+                    width:450,
+                    zIndex: 9999,
+                    align: {
+                        selfXY: [ "50%", "50%" ],
+                        baseXY: [ "50%", "50%" ]
+                    }
+                });
+                uploadOverlay.show();
+                Mask.set({ backgroundColor:'#000', opacity:0.3 }).show();
+
+
+            }else{
+                uploadOverlay = new Overlay({
+                    template:'#photoDialog',
+                    width:450,
+                    zIndex: 9999,
+                    align: {
+                        selfXY: [ "50%", "50%" ],
+                        baseXY: [ "50%", "50%" ]
+                    }
+                });
+                uploadOverlay.show();
+                Mask.show()
+            }
+        $("#J_FilePath").change(function(){
+            $("#faceUpload").submit();
+            $('#photo').attr("src","/assets/img/ui/loading1.gif");
+        });
+        $("#faceUpload2").submit(function(){
+            $this = $(this);
+            $("#faceUpload2 input[type=submit]")[0].disabled = "disabled";
+            $("#faceUpload2 input[type=submit]").removeClass("bbl-btn").addClass("disabled");
+            $("#J_Waiting").show();
+            $.post($this.attr("action"),$this.serializeArray(),function(data){
+                $("#J_Waiting").hide();
+                $("#faceUpload2 input[type=submit]")[0].disabled = "";
+                $("#faceUpload2 input[type=submit]").removeClass("disabled").addClass("bbl-btn");
+                if(data.code=="100"){
+                    uploadOverlay.hide()
+                    Mask.hide()
+
+                    $("#J_uploadImgShow").attr("src",data.src)
+                    $(".site-logo").show()
+                    $("#faceUpload")[0].reset();
+                    $("#faceUpload2")[0].reset();
+                    $("#J_uploadImg").val(data.src)
+                    $("#faceUpload2 .face-submit").hide();
+                    $.smeite.photoarea.cancelSelection();
+
+                }
+            });
+            return false;
+        });
+        $("#photoDialog .close").unbind("click").click(function(){
+            $("#faceUpload")[0].reset();
+            $("#faceUpload2")[0].reset();
+            $('#photo').attr("src","");
+            $("#faceUpload2 .face-submit").hide();
+            if($.smeite.photoarea!=null){
+                $.smeite.photoarea.cancelSelection();
+            }
+            uploadOverlay.hide()
+            Mask.hide()
+        });
+
 	});
 });
 
