@@ -15,6 +15,8 @@ define(function(require, exports) {
     var $  = require("$");
     require("imgAreaSelect");
   var Uploader = require("upload")
+    var Overlay = require("overlay");
+    var Mask = require("mask");
     $.smeite.photoarea = null;
     $.smeite.rotate = null;
     $.smeite.setting = {
@@ -134,56 +136,71 @@ define(function(require, exports) {
                 html += '<a class="close" href="javascript:;"></a>';
                 html += '</div>';
                 html += '</div>';
-                $("body").append(html);
-                $("#photoDialog").overlay({
-                    top: 50,
-                    fixed: false,
-                    mask: {
-                        color: '#000',
-                        loadSpeed: 200,
-                        opacity: 0.3
-                    },
-                    closeOnClick: false,
-                    load: true
+            //    $("body").append(html);
+                uploadOverlay = new Overlay({
+                    template:html,
+                    width: 600,
+                    zIndex: 9999,
+                    align: {
+                        selfXY: [ "50%", "50%" ],
+                        baseXY: [ "50%", "50%" ]
+                    }
                 });
+                uploadOverlay.show();
+                Mask.set({ backgroundColor:'#000', opacity:0.3 }).show();
 
-                $("#J_FilePath").change(function(){
-                    $("#faceUpload").submit();
-                    $('#photo').attr("src","/assets/img/ui/loading1.gif");
-                });
-                $("#faceUpload2").submit(function(){
-                    $this = $(this);
-                    $("#faceUpload2 input[type=submit]")[0].disabled = "disabled";
-                    $("#faceUpload2 input[type=submit]").removeClass("bbl-btn").addClass("disabled");
-                    $("#J_Waiting").show();
-                    $.post($this.attr("action"),$this.serializeArray(),function(data){
-                        $("#J_Waiting").hide();
-                        $("#faceUpload2 input[type=submit]")[0].disabled = "";
-                        $("#faceUpload2 input[type=submit]").removeClass("disabled").addClass("bbl-btn");
-                        if(data.code=="100"){
-                            $("#J_uploadImgShow").attr("src",data.src)
-                            $(".site-logo").show()
-                            $("#faceUpload")[0].reset();
-                            $("#faceUpload2")[0].reset();
-                            $("#J_uploadImg").val(data.src)
-                            $("#faceUpload2 .face-submit").hide();
-                             $("#photoDialog").overlay().close();
 
-                        }
-                    });
-                    return false;
-                });
-                $("#photoDialog .close").unbind("click").click(function(){
-                    $("#faceUpload")[0].reset();
-                    $("#faceUpload2")[0].reset();
-                    $('#photo').attr("src","");
-                    $("#faceUpload2 .face-submit").hide();
-
-                    $("#photoDialog").overlay().close();
-                });
             }else{
-                $("#photoDialog").data("overlay").load();
+                uploadOverlay = new Overlay({
+                    template:'#photoDialog',
+                    width: 600,
+                    zIndex: 9999,
+                    align: {
+                        selfXY: [ "50%", "50%" ],
+                        baseXY: [ "50%", "50%" ]
+                    }
+                });
+                uploadOverlay.show();
+                Mask.show()
             }
+            $("#J_FilePath").change(function(){
+                $("#faceUpload").submit();
+                $('#photo').attr("src","/assets/img/ui/loading1.gif");
+            });
+            $("#faceUpload2").submit(function(){
+                $this = $(this);
+                $("#faceUpload2 input[type=submit]")[0].disabled = "disabled";
+                $("#faceUpload2 input[type=submit]").removeClass("bbl-btn").addClass("disabled");
+                $("#J_Waiting").show();
+                $.post($this.attr("action"),$this.serializeArray(),function(data){
+                    $("#J_Waiting").hide();
+                    $("#faceUpload2 input[type=submit]")[0].disabled = "";
+                    $("#faceUpload2 input[type=submit]").removeClass("disabled").addClass("bbl-btn");
+                    if(data.code=="100"){
+                        uploadOverlay.hide()
+                        Mask.hide()
+
+                        $("#J_uploadImgShow").attr("src",data.src)
+                        $(".site-logo").show()
+                        $("#faceUpload")[0].reset();
+                        $("#faceUpload2")[0].reset();
+                        $("#J_uploadImg").val(data.src)
+                        $("#faceUpload2 .face-submit").hide();
+
+
+                    }
+                });
+                return false;
+            });
+            $("#photoDialog .close").unbind("click").click(function(){
+                $("#faceUpload")[0].reset();
+                $("#faceUpload2")[0].reset();
+                $('#photo').attr("src","");
+                $("#faceUpload2 .face-submit").hide();
+
+                uploadOverlay.hide()
+                Mask.hide()
+            });
         });
 
           new Uploader({

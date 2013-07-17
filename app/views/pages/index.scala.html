@@ -376,7 +376,7 @@ nav="index"
             @for((advert,i)<-site.view.zipWithIndex ){
             <dd @if((i+1)%4==0){class="last"}>
             <a href="@advert.link" title="@advert.title" target="_blank">
-                <img src="@advert.pic" width="220" height="150" alt="@advert.title">
+                <img src="@advert.pic" width="167" height="167" alt="@advert.title">
             </a>
             <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span></a></div>
 

@@ -20,9 +20,9 @@ define(function(require, exports) {
     var $ = require("$");
     require("json");
   var Overlay = require("overlay");
-  var Mask = require("mask")
-    var Cookie = require("cookie")
-    var Dialog = require("dialog")
+  var Mask = require("mask");
+    var Cookie = require("cookie");
+    var Dialog = require("dialog") ;
     $.smeite = $.smeite || {
         version: "v1.0.0"
     };
