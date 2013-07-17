@@ -16,6 +16,8 @@ import models.msg.dao.SystemMsgDao
 
 case class SiteFilterFormData(uid:Option[Long],title:Option[String],cid:Option[Int],status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
 
+case class PostFilterFormData(uid:Option[Long],sid:Option[Long],title:Option[String],cid:Option[Int],status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
+
 case class SiteBatchFormData(action:Int,ids:Seq[Long])
 
 object Sites extends Controller {
@@ -26,10 +28,23 @@ object Sites extends Controller {
       "title"->optional(text),
       "cid"->optional(number),
       "status"->optional(number),
-      "startTime" -> optional(sqlDate("yyyy-MM-dd")),
-      "endTime"-> optional(sqlDate("yyyy-MM-dd")),
+      "startDate" -> optional(sqlDate("yyyy-MM-dd")),
+      "endDate"-> optional(sqlDate("yyyy-MM-dd")),
       "currentPage"->optional(number)
     )(SiteFilterFormData.apply)(SiteFilterFormData.unapply)
+  )
+
+  val postFilterForm =Form(
+    mapping(
+      "uid"->optional(longNumber),
+      "sid"->optional(longNumber),
+      "title"->optional(text),
+      "cid"->optional(number),
+      "status"->optional(number),
+      "startDate" -> optional(sqlDate("yyyy-MM-dd")),
+      "endDate"-> optional(sqlDate("yyyy-MM-dd")),
+      "currentPage"->optional(number)
+    )(PostFilterFormData.apply)(PostFilterFormData.unapply)
   )
 
   val batchForm =Form(

@@ -78,10 +78,10 @@ object Sites extends Controller {
 
   /* 小镇 帖子 编辑创建 */
   def editPost(pid:Long,sid:Long) = Users.UserAction { user => implicit request =>
-    if (pid==0) Ok(views.html.sites.editPost(user,postFormData.fill(PostFormData(None,sid,-1,"",None,"",None,0,None,None,None,None,None,None))))
+    if (pid==0) Ok(views.html.sites.editPost(user,postFormData.fill(PostFormData(None,sid,2,"",None,"",None,0,None,None,None,None,None,None))))
   else{
       val post = SiteDao.findPostById(pid)
-      if(post.isEmpty)Ok(views.html.sites.editPost(user,postFormData.fill(PostFormData(None,sid,-1,"",None,"",None,0,None,None,None,None,None,None))))
+      if(post.isEmpty)Ok(views.html.sites.editPost(user,postFormData.fill(PostFormData(None,sid,2,"",None,"",None,0,None,None,None,None,None,None))))
      else  Ok(views.html.sites.editPost(user,postFormData.fill(PostFormData(post.get.id,post.get.sid,post.get.cid,post.get.title,post.get.pic,post.get.content,post.get.tags,post.get.status,post.get.extraAttr1,post.get.extraAttr2,post.get.extraAttr3,post.get.extraAttr4,post.get.extraAttr5,post.get.extraAttr6))))
     }
   }

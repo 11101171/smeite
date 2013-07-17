@@ -1674,7 +1674,7 @@ CREATE TABLE `post` (
   `pic`                 varchar(250) not null ,
   `content`             text ,
   `tags`             varchar(200) ,
-  `status`            tinyint  not null default  '0',
+  `status`            tinyint  not null default  '1',
   `is_top`            tinyint  not null default  '0',
   `view_num`          int unsigned  not null default  '1',
   `love_num`          int unsigned  not null default  '1',
