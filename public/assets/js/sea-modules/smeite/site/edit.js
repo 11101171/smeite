@@ -17,6 +17,7 @@ define(function(require, exports) {
   var Uploader = require("upload")
     var Overlay = require("overlay");
     var Mask = require("mask");
+    var Detector = require("detector")
     $.smeite.photoarea = null;
     $.smeite.rotate = null;
     $.smeite.setting = {
@@ -37,8 +38,8 @@ define(function(require, exports) {
                 $('#photo').attr("src","").attr("src",path);
                 $("#thumb-path").val(path);
                 var image = $('#photo')[0],imageTime;
-                if($.browser.msie){
-                    if($.browser.version==6.0){
+                if(Detector.browser.ie){
+                    if(Detector.browser.version < 7){
                         image.onreadystatechange = function(){
                             if(image.readyState=="complete" || image.readyState=="loaded"){
                                 dosth();

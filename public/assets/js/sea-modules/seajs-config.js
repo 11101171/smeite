@@ -24,6 +24,7 @@ seajs.config({
         'upload': 'arale/upload/1.0.0/upload',
         'zeroclipboard': 'gallery/zeroclipboard/1.1.6/zeroclipboard',
         'imgAreaSelect':'smeite/module/imgAreaSelect',
+        'detector':'arale/detector/1.2.0/detector',
        'smeite':'smeite/smeite'
     },
 
