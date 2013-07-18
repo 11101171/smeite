@@ -103,35 +103,25 @@
 
             @page.prev.map { page =>
             <li class="prev">
-                <a href="controllers.admin.routes.Msgs.systemMsgs(page)">Prev</a>
-            </li>
-            }.getOrElse {
-            <li class="prev disabled">
-                <a>Prev</a>
+                <span  data-page="@page">Prev</span>
             </li>
             }
             @for(num <-page.nums){
             @if(num==page.currentPage){
-            <li class="active"><a href="@controllers.admin.routes.Msgs.systemMsgs(num)">@num</a></li>
+            <li class="active"><span  data-page="@num">@num</span></li>
             }else {
-
-            <li><a href="@controllers.admin.routes.Msgs.systemMsgs(num)">@num</a></li>
+            <li><span data-page="@num">@num</span></li>
             }
-
             }
-
             @page.next.map { page =>
             <li class="next">
-                <a href="@controllers.admin.routes.Msgs.systemMsgs(page)">Next</a>
-            </li>
-            }.getOrElse {
-            <li class="next disabled">
-                <a>Next</a>
+                <span href="#" data-page="@page" >Next</span>
             </li>
             }
 
         </ul>
     </div>
+
 
 
 

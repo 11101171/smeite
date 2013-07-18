@@ -6,6 +6,7 @@ import models.Page
 import models.site.dao.SiteDao
 import java.sql.{Date, Timestamp}
 import models.msg.dao.SystemMsgDao
+import models.site.Post
 
 /**
  * Created with IntelliJ IDEA.
@@ -96,8 +97,48 @@ object Sites extends Controller {
 
 
 
-  def postList(currentPage:Int)=Managers.AdminAction{ manager => implicit request =>
-    val page=SiteDao.findAllPosts(currentPage,50)
+  def postList(sid:Long,currentPage:Int)=Managers.AdminAction{ manager => implicit request =>
+    var page:Page[Post] = null
+  if(sid==0){
+    page=SiteDao.findAllPosts(currentPage,50)
+  }else{
+    page=SiteDao.findPostsBySid(sid,1,currentPage,50)
+  }
+
     Ok(views.html.admin.sites.postList(manager,page))
   }
+
+  def filterPosts = Managers.AdminAction{ manager => implicit request =>
+    postFilterForm.bindFromRequest.fold(
+      formWithErrors =>Ok("something wrong"),
+      post => {
+        val page=SiteDao.filterPosts(post.uid,post.sid,post.title,post.cid,post.status,post.startDate,post.endDate,post.currentPage.getOrElse(1),50)
+        Ok(views.html.admin.sites.filterPosts(manager,page,postFilterForm.fill(post)))
+      }
+    )
+  }
+
+  def batchPosts = Managers.AdminAction{ manager => implicit request =>
+    batchForm.bindFromRequest.fold(
+      formWithErrors =>Ok("something wrong"),
+      batch => {
+        if(batch.action == 0){
+          for(id<-batch.ids){
+            SiteDao.modifyPostStatus(id,0)
+          }
+        }else if (batch.action ==1){
+          for(id<-batch.ids){
+            SiteDao.modifyPostStatus(id,1)
+
+          }
+        }else if(batch.action==3){
+          for(id<-batch.ids){
+            SiteDao.deletePost(id)
+          }
+        }
+        Redirect(request.headers.get("REFERER").getOrElse("/admin/sites/PostList"))
+      }
+    )
+  }
+
 }

@@ -365,7 +365,10 @@ GET   /admin/msgs/replyMsgs              controllers.admin.Msgs.replyMsgs(p:Int 
 GET   /admin/sites/siteList               controllers.admin.Sites.siteList(p:Int ?=1)
 GET   /admin/sites/filterSites           controllers.admin.Sites.filterSites
 POST   /admin/sites/batchSites            controllers.admin.Sites.batchSites
-GET   /admin/sites/postList               controllers.admin.Sites.postList(p:Int ?=1)
+
+GET   /admin/sites/postList               controllers.admin.Sites.postList(sid:Long ?=0,p:Int ?=1)
+GET   /admin/sites/filterPosts           controllers.admin.Sites.filterPosts
+POST   /admin/sites/batchPosts            controllers.admin.Sites.batchPosts
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public/assets", file)

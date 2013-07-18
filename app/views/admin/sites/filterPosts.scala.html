@@ -1,4 +1,4 @@
-@(manager:models.admin.Manager,page:models.Page[models.site.Post])
+@(manager:models.admin.Manager,page:models.Page[models.site.Post],form: Form[controllers.admin.PostFilterFormData])))
 @views.html.admin.template(manager,"site") {
 
 
@@ -25,36 +25,35 @@
             </div>
             <div class="widget-content nopadding">
                 <form class=" form-horizontal" id="J_filterForm"  method="get" action="@controllers.admin.routes.Sites.filterPosts">
-                    <input type="hidden" name="currentPage" id="J_currentPage" value="1">
+                    <input type="hidden" name="currentPage" id="J_currentPage" value='@form("currentPage").value'>
 
 
                     <div class="control-group">
                         <label class="control-label">创建者ID</label>
                         <div class="controls">
-                            <input type="number"  name="uid" value=''  placeholder="uid" >
+                            <input type="number"  name="uid" value='@form("uid").value'  placeholder="uid" >
                         </div>
                     </div>
 
                     <div class="control-group">
                         <label class="control-label">小镇ID</label>
                         <div class="controls">
-                            <input type="number"  name="sid" value=''  placeholder="sid" >
+                            <input type="number"  name="sid" value='@form("sid").value'  placeholder="sid" >
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label">帖子名称</label>
                         <div class="controls">
-                            <input type="text"  name="title" value=''  placeholder="帖子名称" >
+                            <input type="text"  name="title" value='@form("title").value'  placeholder="帖子名称" >
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label">类型</label>
                         <div class="controls">
                             <select name="cid" id="cid">
-                                <option value="">所有类型</option>
+                                <option value=""  @if(form("cid").value.getOrElse("none")=="none"){ selected="true" } >所有分类</option>
                                 @for(cate<-models.site.PostCate.values.toList.sortBy(x=>x.id)){
-                                <option value="@cate.id">@cate</option>
-
+                                <option value="@cate.id" @if(form("cid").value.getOrElse("none")==cate.id.toString){ selected="true" }>@cate</option>
                                 }
                             </select>
                         </div>
@@ -63,16 +62,16 @@
                         <label class="control-label" >状态</label>
                         <div class="controls">
                             <div class="radio">
-                                <input type="radio" name="status" value=""> 所有
+                                <input type="radio"   name="status" value=""  @if(form("status").value.isEmpty){ checked="true" }> 所有
                             </div>
                             <div class="radio">
-                                <input type="radio"  name="status" value="0"> 未审核
+                                <input type="radio"   name="status" value="0" @if(form("status").value.getOrElse("none")=="0"){ checked="true" } > 未审核
                             </div>
                             <div class="radio">
-                                <input type="radio" name="status" value="1"> 审核通过
+                                <input type="radio"   name="status" value="1"  @if(form("status").value.getOrElse("none")=="1"){ checked="true" }> 审核通过
                             </div>
                             <div class="radio">
-                                <input type="radio" name="status" value="2"> 审核不通过
+                                <input type="radio"   name="status" value="2"  @if(form("status").value.getOrElse("none")=="2"){ checked="true" }>  审核不通过
                             </div>
 
                         </div>
@@ -81,13 +80,11 @@
                         <label class="control-label" >时间</label>
                         <div class="controls">
                             <div class="radio">
-                                开始时间： <input type="date" class="date"  format="yyyy-MM-dd"  name="startDate" value="">
+                                开始时间： <input type="date" class="date"  format="yyyy-MM-dd"  name="startDate" value='@form("startDate").value'>
                             </div>
                             <div class="radio">
-                                结束时间：    <input type="date" class="date" format="yyyy-MM-dd"   name="endDate" value="" >
+                                结束时间：    <input type="date" class="date" format="yyyy-MM-dd"   name="endDate" value='@form("endDate").value' >
                             </div>
-
-
                         </div>
                     </div>
                     <div class="control-group">
@@ -106,7 +103,7 @@
 
 <div class="row-fluid">
     <div class="well">
-        <form method="post" id="J_batchForm" action="@controllers.admin.routes.Sites.batchPosts">
+        <form method="post" id="J_batchForm" action="@controllers.admin.routes.Sites.batchSites">
             <input type="hidden" id="J_url" name="url" value="">
             <div class="controls">
                 <select id="J_select" name="action">
@@ -150,9 +147,9 @@
                     <td>@item.viewNum</td>
                     <td>@item.addTime</td>
                     <td>
-                        <a href="#"><i class="icon-edit"></i></a>
+                       <!-- <a href="#"><i class="icon-edit"></i></a>-->
                         <!--    <a href="#J_deleteModal"class="remove" data-id="@item.id" role="button" data-toggle="modal"><i class="icon-trash"></i></a>  -->
-                        <a href=""><i class="icon-th-list"></i></a>
+                        <a href='@controllers.admin.routes.Sites.postList(item.id.get,1)'><i class="icon-th-list"></i></a>
                     </td>
                 </tr>
                 }
@@ -166,27 +163,19 @@
 
             @page.prev.map { page =>
             <li class="prev">
-                <a href="controllers.admin.routes.Sites.postList(page)">Prev</a>
-            </li>
-            }.getOrElse {
-            <li class="prev disabled">
-                <a>Prev</a>
+                <span  data-page="@page">Prev</span>
             </li>
             }
             @for(num <-page.nums){
             @if(num==page.currentPage){
-            <li class="active"><a href="@controllers.admin.routes.Sites.postList(num)">@num</a></li>
+            <li class="active"><span  data-page="@num">@num</span></li>
             }else {
-            <li><a href="@controllers.admin.routes.Sites.postList(num)">@num</a></li>
+            <li><span data-page="@num">@num</span></li>
             }
             }
             @page.next.map { page =>
             <li class="next">
-                <a href="@controllers.admin.routes.Sites.postList(page)">Next</a>
-            </li>
-            }.getOrElse {
-            <li class="next disabled">
-                <a>Next</a>
+                <span href="#" data-page="@page" >Next</span>
             </li>
             }
 

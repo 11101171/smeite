@@ -87,6 +87,13 @@ object SiteDao {
   def modifyPost(pid:Long,cid:Int,title:String,pic:Option[String],content:String,tags:Option[String],status:Int,extraAttr1:Option[String],extraAttr2:Option[String],extraAttr3:Option[String],extraAttr4:Option[String],extraAttr5:Option[String],extraAttr6:Option[String]) =  database.withSession {  implicit session:Session =>
        (for( c<- Posts if c.id === pid )yield c.cid~c.title~c.pic~c.content~c.tags~c.status~c.extraAttr1~c.extraAttr2~c.extraAttr3~c.extraAttr4~c.extraAttr5~c.extraAttr6).update((cid,title,pic.getOrElse(""),content,tags.getOrElse(""),status,extraAttr1.getOrElse(""),extraAttr2.getOrElse(""),extraAttr3.getOrElse(""),extraAttr4.getOrElse(""),extraAttr5.getOrElse(""),extraAttr6.getOrElse("")))
      }
+  /* 修改帖子的状态 */
+  def modifyPostStatus(id:Long,status:Int)= database.withSession {  implicit session:Session =>
+    ( for( c <- Posts if c.id === id)yield c.status ).update(status)
+  }
+  def deletePost(id:Long) = database.withSession {  implicit session:Session =>
+    ( for(c<-Posts if c.id === id)yield c ).delete
+  }
 
   def findPostById(pid:Long)  = database.withSession {  implicit session:Session =>
     (for(c <- Posts if c.id === pid)yield c ).firstOption
@@ -147,6 +154,24 @@ object SiteDao {
     if(cid != -1) query = query.filter(_.cid === cid)
     if(sortBy == 1) query = query.sortBy(_.addTime desc)
     if(sortBy == 1) query = query.sortBy(_.loveNum desc)
+    val totalRows=query.list().length
+    val totalPages=(totalRows + pageSize - 1) / pageSize
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val posts:List[Post]=  query.drop(startRow).take(pageSize).list()
+    Page[Post](posts,currentPage,totalPages)
+  }
+
+  /* 筛选 sites */
+  def filterPosts(uid:Option[Long],sid:Option[Long],title:Option[String],cid:Option[Int],status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Int,pageSize:Int):Page[Post] =database.withSession {  implicit session:Session =>
+
+    var query =for(c<-Posts )yield c
+    if(!uid.isEmpty) query = query.filter(_.uid === uid)
+    if(!sid.isEmpty) query = query.filter(_.sid === sid)
+    if(!title.isEmpty) query = query.filter(_.title like "%"+title.get+"%")
+    if(!cid.isEmpty) query = query.filter(_.cid === cid)
+    if(!status.isEmpty) query = query.filter(_.status === status)
+    if(!startDate.isEmpty) query = query.filter(_.addTime > new Timestamp(startDate.get.getTime) )
+    if(!endDate.isEmpty) query = query.filter(_.addTime <  new Timestamp(endDate.get.getTime) )
     val totalRows=query.list().length
     val totalPages=(totalRows + pageSize - 1) / pageSize
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
