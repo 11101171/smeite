@@ -232,4 +232,15 @@ object SiteDao {
     (for( c <- SiteAlbumPics.filter(_.id === id) )yield c).delete
   }
 
+  /* **************************************** site video *********************************************** */
+
+  /* 添加 小镇 视频 */
+  def addSiteVideo(sid:Long,url:String)  = database.withSession{  implicit session:Session =>
+     SiteVideos.autoInc3.insert(sid,url)
+  }
+  /* 删除 小镇 视频 */
+  def deleteSiteVideo(id:Long)  = database.withSession{  implicit session:Session =>
+    (for( c <- SiteVideos.filter(_.id === id) )yield c).delete
+  }
+
 }

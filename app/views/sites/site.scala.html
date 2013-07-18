@@ -29,7 +29,7 @@ title =  "食美特，不一样的生活"
                <div class="follow">
                    <a class="follow-btn"> + 加入小镇</a>
                    <!-- <div class="followed-btn-big">已关注<span class="mr5 ml5">|</span><a rel="removefollow" data-followtype="5" data-usernick="duanyu200888" data-userid="3" href="javascript:;">取消</a></div>-->
-                   <span class="member-num">(1002居民)</span>
+                   <span class="member-num">(<em>@site.memberNum</em>居民)</span>
                </div>
 
                <div class="invite">
@@ -107,7 +107,7 @@ title =  "食美特，不一样的生活"
                     <a  href='@controllers.routes.Sites.site(sid,1,1)'  @if(s==1){class="current"}><span>最新</span></a>
                     <a   href='@controllers.routes.Sites.site(sid,2,1)'  @if(s==2){class="current"}><span>最热</span></a>
                 </div>
-              <!--  <div class="edit"><a class="current" href='@controllers.routes.Sites.editPost(0,site.id.get)'> + 发帖</a></div>-->
+                <div class="edit"><a class="current" href='@controllers.routes.Sites.editPost(0,site.id.get)'> + 发帖</a></div>
                 <i></i>
             </div>
 

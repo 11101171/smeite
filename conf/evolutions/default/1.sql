@@ -1702,10 +1702,12 @@ CREATE TABLE `post` (
      id                  表的ID
      uid                  用户的id
      pid                  帖子
+     reply_type          0 随意吐槽 1 提问求解  2 上传成果
      quote_reply          引用的内容
      content             回复的内容
      check_state        审核状态
      add_time           添加时间
+
 --
 */
 -- ------------------------------------------------------------
@@ -1713,7 +1715,8 @@ DROP TABLE IF EXISTS `post_reply`;
 CREATE TABLE IF NOT EXISTS `post_reply`(
   `id`                     int(10) NOT NULL AUTO_INCREMENT,
   `uid`                    int(10) NOT NULL ,
-  `pid`                 int(10) NOT NULL ,
+  `pid`                    int(10) NOT NULL ,
+  `reply_type`             tinyint NOT NULL DEFAULT '0',
   `quote_reply`             text,
   `content`                  text ,
   `check_state`          tinyint NOT NULL DEFAULT '0',

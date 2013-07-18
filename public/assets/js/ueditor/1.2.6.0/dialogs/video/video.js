@@ -36,7 +36,7 @@ var video = {};
             return false
         }
         url = url.replace(/<[^>]+>|\'|\"|>|</g, "");
-        editor.execCommand("insertvideo", {url: convert_url(url), width: 600, height: 400, align: align})
+        editor.execCommand("insertvideo", {url: convert_url(url), width:540, height: 400, align: align})
     }
 
     function convert_url(s) {
