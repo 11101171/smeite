@@ -1537,6 +1537,9 @@ alter table tag_goods add  tag_code int unsigned  not null default '0';
    分类  cid  0 生活  1 品牌站 2 其他
    状态  status 0 未审核  1 通过审核 2 优质
    成员数量    member_num
+   权限 permission  0 允许所有人发帖 1 只允许小镇居民发帖
+   通告 notice
+   修改时间   modify_time
    创建时间   add_time
 */
 DROP TABLE IF EXISTS `site`;
@@ -1545,12 +1548,15 @@ CREATE TABLE `site` (
   `uid`                 int(10) ,
   `title`                  varchar(64) not null,
   `pic`                 varchar(250) not null ,
-  `intro`             varchar(200) ,
-  `tags`             varchar(200) ,
+  `intro`             varchar(250) ,
+  `tags`             varchar(250) ,
   `cid`             tinyint  not null default  '0',
   `status`            tinyint  not null default  '0',
   `member_num`        smallint unsigned not null default  '1',
-  `add_time`           timestamp,
+  `permission`        tinyint  not null default  '0',
+  `notice`             varchar(250) ,
+  `modify_time`         timestamp default '2013-07-18 12:00:00',
+  `add_time`           timestamp default '2013-07-18 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
@@ -1558,7 +1564,7 @@ CREATE TABLE `site` (
    site_member         小镇成员
      sid               小镇
      uid               成员
-     member_duty        成员职务  0 普通居民 1 管理员  2 创办者
+     duty        成员职务  0 居民 1 镇长  2 村长
      add_time           加入时间
   */
 DROP TABLE IF EXISTS `site_member`;
@@ -1566,7 +1572,7 @@ CREATE TABLE `site_member` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `sid`                 int(10) ,
   `uid`                 int(10) ,
-  `member_duty`       tinyint  not null default  '0',
+  `duty`       tinyint  not null default  '0',
   `add_time`           timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;

@@ -36,18 +36,22 @@
  }
  .site-nav .site-info{
      padding: 10px 19px 10px 10px;
-     width: 530px;
+     width:490px;
      height: 180px;
  }
  .site-nav .site-info h3{
-     text-align: center;
+     text-align: left;
      font-family: 'MicroSoft Yahei';
-     font-size: 18px;
+     font-size: 16px;
      color: #333;
      line-height: 28px;
      padding-bottom: 5px;
  }
-
+.site-nav .site-info .intro{
+    height: 70px;
+    width: 490px;
+    overflow: hidden;
+}
 .site-nav .site-info .tags {
     margin-bottom: 5px;
     margin-top: 10px;
@@ -97,58 +101,37 @@
     border: 1px solid #ccc
 }
 
-.site-nav .manager{
-    float: right;
-    border-left: 1px dashed #EFEFEF;
-    padding:10px;
-    height:180px;
-    width: 190px;
-    overflow: hidden;
- }
-.manager .owner{
-    padding-left: 8px;
-
-}
-.manager .more,.recommend .more{
-    float: right;
-    color: #999;
-}
-.manager h3,.recommend h3{
-    font-weight: normal;
-    padding-bottom: 5px;
-
-}
-.manager .owner li {
+.site-info .join{
     float: left;
-    width: 45px;
-    height: 45px;
-    overflow: hidden;
-    margin-bottom: 6px;
-    margin-right: 10px;
 }
-.manager li.last{
-    margin-bottom: 0;
-}
-.manager .join{
-    float: left;
-    margin-top: 10px;
-}
-.manager .join .love-num{
-    text-align: center;
-    font-size: 16px;
-    font-weight: bolder;
-    margin-bottom: 10px;
-}
-.manager .join .follow ,.manager .join .invite {
+
+.site-info .join .follow, .site-info .join .invite {
     float: left;
     text-align: center;
     margin-bottom: 10px;
     margin-right: 15px;
 }
-.manager .join .follow-btn{
+.site-info .join .follow-btn{
     width: 80px;
     float: none;
 }
+
+.site-nav .notice{
+    float: right;
+    border-left: 1px dashed #EFEFEF;
+    padding:10px;
+    height:180px;
+    width:230px;
+    overflow: hidden;
+ }
+.site-nav .notice h3{
+    color: #E26;
+    font-size: 14px;
+    line-height: 30px;
+    padding-bottom: 4px;
+}
+
+
 
 /* site media start */
 .site-media{
@@ -236,8 +219,9 @@
 .site-tools{
     background-color: #eee;
     margin: 15px auto;
-    padding: 10px 20px;
+    padding: 10px 15px;
     height: 80px;
+    width: 950px;
 }
 
 .site-tools p{
@@ -247,14 +231,15 @@
     text-align: left;
 }
 .site-tools  a.add{
+    padding-left: 30px;
     display: block;
     height:80px;
     background: #fff;
 }
 .site-tools .site-baobei,.site-tools .site-pic,.site-tools .site-video,.site-tools .site-post{
     float: left;
-    width:200px;
-    margin-right: 20px;
+    width:230px;
+    margin-right:10px;
 }
 .site-tools .ico-baobei,.site-tools .ico-pic,.site-tools .ico-video,.site-tools .ico-post{
     margin: 5px 10px;

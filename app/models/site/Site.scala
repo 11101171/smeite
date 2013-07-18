@@ -24,6 +24,9 @@ case class Site(
                 tags:String,
                 status:Int,
                 memberNum:Int,
+                permission:Int,
+                notice:Option[String],
+                modifyTime:Option[Timestamp],
                 addTime:Option[Timestamp]
                 )
 
@@ -38,11 +41,14 @@ object Sites extends Table[Site]("site") {
   def tags    =column[String]("tags")
   def status = column[Int]("status")
   def memberNum = column[Int]("member_num")
+  def permission = column[Int]("permission")
+  def notice     =column[String]("notice")
+  def modifyTime=column[Timestamp]("modify_time")
   def addTime=column[Timestamp]("add_time")
 
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ uid ~ cid ~ title ~ pic ~ intro ~ tags ~ status ~ memberNum  ~addTime.? <>(Site, Site.unapply _)
-  def autoInc =  uid ~ cid ~ title ~ pic ~ intro ~ tags   returning id
+  def * = id.? ~ uid ~ cid ~ title ~ pic ~ intro ~ tags ~ status ~ memberNum ~ permission ~ notice.? ~ modifyTime.? ~addTime.? <>(Site, Site.unapply _)
+  def autoInc =  uid ~ cid ~ title ~ pic ~ intro ~ tags~ addTime   returning id
 
 
 

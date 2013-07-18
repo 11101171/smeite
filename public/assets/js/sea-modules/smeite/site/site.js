@@ -14,6 +14,11 @@
 define(function(require, exports) {
     var $  = require("$");
 
+    $(function(){
+        $(".site-tools .add").click(function(){
+
+        })
+    })
 
 
 });

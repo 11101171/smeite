@@ -122,6 +122,7 @@
                     <th>小镇类型</th>
                     <th>小镇logo</th>
                     <th>小镇简介</th>
+                    <th>小镇公告</th>
                     <th>小镇标签</th>
                     <th>小镇状态</th>
                     <th>时间</th>
@@ -138,6 +139,7 @@
                     <td>@models.site.SiteCate(item.cid)</td>
                     <td><img src="@item.pic" /></td>
                     <td>@item.intro</td>
+                    <td>@item.notice</td>
                     <td>@item.tags </td>
                     <td>@if(item.status==0){<span class="label label-warning">未审核</span>} @if(item.status ==1){<span class="label label-success">已审核</span>}</td>
                     <td>@item.addTime</td>
