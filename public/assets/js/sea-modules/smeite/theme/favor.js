@@ -11,7 +11,7 @@
  *
  */
 define(function(require, exports){
-	var $ = jQuery = require("$");
+	var $  = require("$");
     var judgeThemeFollowState=function(themeId,$elm){
         $.ajax({
             url:"/theme/checkThemeLoveState",
@@ -43,7 +43,7 @@ define(function(require, exports){
             }
             var $this = $(this);
             var themeId = $this.data("themeid");
-            var cmtHref ='/theme/'+ themeId +'/board#cmt';
+            var cmtHref ='/theme/'+ themeId +'#J_cmtForm';
             var cmtTarget = "";
             var $likeCount;
             //在主题频道页面

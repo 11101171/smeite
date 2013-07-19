@@ -1291,6 +1291,59 @@ define(function(require, exports) {
                     }
                 }
             });
+        },
+        //喜欢小镇成功
+        loveSiteCallback : function(o, commentType, desirableType){},
+        //喜欢小镇重复
+        repeatLoveSiteClk : function(o, commentType, desirableType){},
+        //喜欢小镇操作
+        loveSiteSubmit : function(o,sid){
+            var ajaxUrl = "/site/addFollow";
+            $.ajax({
+                url:  ajaxUrl,
+                type : "post",
+                contentType:"application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify({"sid": sid }),
+                success: function(data){
+
+                    switch(data.code){
+                        case "100":
+                            //console.log("no-repeate")
+
+                            $.smeite.favor.loveSiteCallback(o,data);
+                            break;
+                        case "101" ://错误
+                            $.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
+                            $.smeite.tip.show(o,data.msg);
+                            break;
+                        case "103" : //喜欢重复
+                            //console.log("repeate")
+                            $.smeite.favor.repeatLoveSiteClk(o,data);
+                            break;
+                        case "200" : //未登录
+                            $.smeite.dialog.login();
+                            break;
+                    }
+                }
+            });
+        },
+        /*取消喜欢的小镇*/
+        removeSiteCallback : function(o,sid){
+            var ajaxUrl = "/site/removeFollow";
+            $.ajax({
+                url:  ajaxUrl,
+                type : "post",
+                contentType:"application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify({"sid": sid }),
+                success: function(data){
+                    if(data.code=="100"){
+                        var html ="<a rel='siteFollow'class='follow-btn' href='javascript:;' data-sid='"+ sid +"'>+ 关注</a>"
+                        o.replaceWith(html)
+                    }
+                }
+            });
         }
     };
 

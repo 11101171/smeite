@@ -1,10 +1,15 @@
 package controllers
 
-import play.api.mvc.Controller
+import play.api.mvc.{Action, Controller}
 import controllers.users.Users
 import play.api.data.Form
 import play.api.data.Forms._
 import models.site.dao.SiteDao
+import models.user.User
+import play.api.cache.Cache
+import models.user.dao.UserDao
+import play.api.libs.json.Json
+import play.api.Play.current
 
 case class SiteFormData(sid:Option[Long],cid:Int,title:String,pic:String,intro:String,tags:String)
 case  class PostFormData(pid:Option[Long],sid:Long,cid:Int,title:String,pic:Option[String],content:String,tags:Option[String],status:Int, extraAttr1:Option[String], extraAttr2:Option[String], extraAttr3:Option[String], extraAttr4:Option[String], extraAttr5:Option[String], extraAttr6:Option[String])
@@ -74,6 +79,61 @@ object Sites extends Controller {
         Ok(views.html.sites.site(user, site.get,posts,id,s))
       }
   }
+
+
+  /*用户点击喜欢操作*/
+  def addFollow  = Action(parse.json) { implicit request =>
+    val user:Option[User] =request.session.get("user").map( u=> Cache.getOrElse[User](u){
+      UserDao.findById(u.toLong)
+    })
+    if(user.isEmpty)Ok(Json.obj("code" -> "200", "message" ->"你还没有登录" ))
+    else {
+      val sid = (request.body \ "sid").asOpt[Long]
+      if(sid.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
+      else{
+        val siteMember=SiteDao.checkSiteMember(sid.get,user.get.id.get);
+        if(!siteMember.isEmpty) Ok(Json.obj("code" -> "103", "message" ->"你已经喜欢了"))
+        else {
+          SiteDao.addSiteMember(sid.get,user.get.id.get,0);
+          Ok(Json.obj("code" -> "100", "message" ->"成功"))
+        }
+
+      }
+
+    }
+  }
+
+  def removeFollow = Action(parse.json) {implicit request =>
+    val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
+    if(user.isEmpty)Ok(Json.obj("code" -> "200", "message" ->"你还没有登录"))
+    else {
+      val sid = (request.body \ "sid").asOpt[Long]
+      if(sid.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
+      else{
+        SiteDao.deleteSiteMember(sid.get,user.get.id.get);
+        Ok(Json.obj("code" -> "100", "message" ->"成功"))
+      }
+
+
+    }
+  }
+
+  def checkSiteLoveState = Action(parse.json){  implicit request =>
+    val user:Option[User] =request.session.get("user").map(u=> UserDao.findById(u.toLong) )
+    if(user.isEmpty)  Ok(Json.obj("code" -> "300","message" -> "亲，你还没有登录呢" ))
+    else{
+      val sid=(request.body \ "sid").asOpt[Long];
+      if (sid.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
+      else{
+        val siteMember=SiteDao.checkSiteMember(sid.get,user.get.id.get);
+        if(!siteMember.isEmpty)  Ok(Json.obj("code" -> "100","message" -> "已关注" ))
+        else Ok(Json.obj("code" -> "101","message" -> "未关注" ))
+      }
+
+    }
+  }
+
+
 
 
   /* 小镇 帖子 编辑创建 */

@@ -113,7 +113,10 @@
 }
 .site-info .join .follow-btn{
     width: 80px;
-    float: none;
+    float: left;
+}
+.site-info .join .followed-btn{
+    float: left;
 }
 
 .site-nav .notice{
@@ -337,8 +340,48 @@
     float: right;
     padding-right: 15px;
 }
+/* site share*/
+.site-share {
+    background: #fff;
+    padding: 10px;
+    margin-top: 10px
+}
 
-/* site-post post list*/
+.site-share .site-tip {
+    float: left;
+    font-size: 14px;
+    line-height: 30px;
+    height: 30px;
+    margin-right: 10px;
+    color: #666
+}
+
+.site-share .share {
+    padding-top: 6px;
+    padding-right: 8px
+}
+
+
+.site-share .ifollow {
+    float: left;
+    padding: 0 15px;
+    height: 30px;
+    background: #86b835;
+    text-align: center;
+    color: #fff;
+    line-height: 30px;
+    font-weight: 400;
+    border-radius: 2px;
+    display: inline-block;
+    margin-right: 15px
+}
+
+.site-share .ifollow:hover {
+    text-decoration: none
+}
+
+
+/************************************** site-post post list********************************* */
 .site-post .bd{
     clear: both;
     margin: 0 auto 50px auto;
