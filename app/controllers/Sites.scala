@@ -10,6 +10,7 @@ import play.api.cache.Cache
 import models.user.dao.UserDao
 import play.api.libs.json.Json
 import play.api.Play.current
+import org.jsoup.Jsoup
 
 case class SiteFormData(sid:Option[Long],cid:Int,title:String,pic:String,intro:String,tags:String)
 case  class PostFormData(pid:Option[Long],sid:Long,cid:Int,title:String,pic:Option[String],content:String,tags:Option[String],status:Int, extraAttr1:Option[String], extraAttr2:Option[String], extraAttr3:Option[String], extraAttr4:Option[String], extraAttr5:Option[String], extraAttr6:Option[String])
@@ -76,7 +77,10 @@ object Sites extends Controller {
         Ok(" site is not existed  todo todo ")
       } else {
        val posts = SiteDao.findPostsBySid(id,s,p,20)
-        Ok(views.html.sites.site(user, site.get,posts,id,s))
+
+        val sitePic = SiteDao.findSitePic(id)
+        val siteVideo = SiteDao.findSiteVideo(id)
+        Ok(views.html.sites.site(user, site.get,posts,id,s,sitePic,siteVideo))
       }
   }
 
@@ -133,7 +137,7 @@ object Sites extends Controller {
     }
   }
 
-
+  /* ************************ front site post **************************************** */
 
 
   /* 小镇 帖子 编辑创建 */
@@ -150,6 +154,28 @@ object Sites extends Controller {
     postFormData.bindFromRequest.fold(
       formWithErrors => BadRequest(views.html.sites.editPost(user,formWithErrors)),
       post => {
+        /* 处理content 中的 img  flash ，goods */
+        val  doc =Jsoup.parseBodyFragment(post.content)
+        val images = doc.select("img")
+        val videos = doc.select("embed")
+        /* 保存 images */
+        val it = images.iterator()
+        while(it.hasNext){
+          val pic = it.next.attr("src")
+        if(SiteDao.checkSitePic(post.sid,pic).isEmpty){
+          SiteDao.addSitePic(post.sid,pic)
+        }
+
+        }
+        /* 保存视频 */
+        val vt = videos.iterator()
+        while(vt.hasNext){
+     //  println( " flash    " + vt.next.attr("src"))
+          val video = vt.next.attr("src")
+          if(SiteDao.checkSiteVideo(post.sid,video).isEmpty){
+            SiteDao.addSiteVideo(post.sid,video)
+          }
+        }
         var id:Long=0L
         if(post.pid.isEmpty){
         id = SiteDao.addPost(user.get.id.get,post.sid,post.cid,post.title,post.pic,post.content,post.tags,post.status,post.extraAttr1,post.extraAttr2,post.extraAttr3,post.extraAttr4,post.extraAttr5,post.extraAttr6)

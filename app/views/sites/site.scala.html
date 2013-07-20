@@ -1,4 +1,4 @@
-@(user:Option[models.user.User],site:models.site.Site,page:models.Page[models.site.Post],sid:Long,s:Int)
+@(user:Option[models.user.User],site:models.site.Site,page:models.Page[models.site.Post],sid:Long,s:Int,sitePic:Option[models.site.SiteAlbumPic],siteVideo:Option[models.site.SiteVideo])
 @views.html.template(
 user,
 nav="site",
@@ -59,22 +59,33 @@ title =  "食美特，不一样的生活"
             </a>
         </div>
         <div class="site-pic">
+            @if(sitePic.isEmpty){
             <a class="add add-pic">
                 <ins class="ico-pic"></ins>
                 <p>添加图片</p>
             </a>
+            }else{
+             <a>
+                 <img src="@sitePic.get.pic">
+             </a>
+            }
         </div>
         <div class="site-video">
+            @if(siteVideo.isEmpty){
             <a class="add add-video">
                 <ins class="ico-video"></ins>
                 <p>添加视频</p>
-            </a>
+            </a> }else{
+            <embed type="application/x-shockwave-flash" class="edui-faked-video" pluginspage="http://www.macromedia.com/go/getflashplayer" src="@siteVideo.get.url" width="358" height="258" wmode="transparent" play="true" loop="false" menu="false" allowscriptaccess="never" allowfullscreen="true">
+
+            }
+
         </div>
     </div>
     <!-- site tools 包括 编辑 上传图片 上传视频-->
     <div class="site-tools clearfix">
         <div class="site-baobei">
-            <a class="add add-baobei" href="javascript:void(0)" data-type="baobei">>
+            <a class="add add-baobei" href="javascript:void(0)" data-type="baobei">
                 <ins class="ico-baobei"></ins>
                 <p>添加宝贝</p>
             </a>
@@ -103,7 +114,7 @@ title =  "食美特，不一样的生活"
         <div class="hd ">
             <div class="site-filter clearfix">
                 <div class="filter">
-                    <h2>@site.title</h2>
+                   <!-- <h2>@site.title</h2>-->
                     <a  href='@controllers.routes.Sites.site(sid,1,1)'  @if(s==1){class="current"}><span>最新</span></a>
                     <a   href='@controllers.routes.Sites.site(sid,2,1)'  @if(s==2){class="current"}><span>最热</span></a>
                 </div>
@@ -174,29 +185,29 @@ title =  "食美特，不一样的生活"
     </div>
 
     <div class="site-share clearfix box-shadow">
-        <span class="site-tip">看完啦？别忘了关注一下~</span>
-        <a class="ifollow follow-theme" data-topicurl="amYRbi" href="javascript:;" title="关注">关注</a>
+        <span class="site-tip">看完啦？别忘了邀请朋友一起玩~</span>
+        <a class="ifollow follow-theme" data-topicurl="amYRbi" href="javascript:;" title="邀请好友">邀请好友</a>
 
 
         <div class="share fr">
             <span class="fl l20">叫上好友一起来：</span>
             <a class="s-sina"
-               href="javascript:void((function(){var title=encodeURIComponent('《 》－ 食美特，发现生活之美');var link=window.location.href;var pic='';window.open('http://service.t.sina.com.cn/share/share.php?appkey=1464940004&title='+title+'&pic='+pic+'&url='+link);})())"
+               href="javascript:void((function(){var title=encodeURIComponent('《@site.title 》－ 食美特，不一样的生活');var link=window.location.href;var pic='';window.open('http://service.t.sina.com.cn/share/share.php?appkey=1464940004&title='+title+'&pic='+pic+'&url='+link);})())"
                alt="分享到新浪微博"></a>
             <a class="s-qzone"
-               href="javascript:void((function(){var title=encodeURIComponent('《 》－ 食美特，发现生活之美');var link=window.location.href;window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+link);})())"
+               href="javascript:void((function(){var title=encodeURIComponent('《@site.title 》－ 食美特，不一样的生活');var link=window.location.href;window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+link);})())"
                alt="分享到QQ空间"></a>
             <a class="s-tencent"
-               href="javascript:void((function(){var title=encodeURIComponent('《 》－ 食美特，发现生活之美');var link=window.location.href;var pic='';window.open('http://v.t.qq.com/share/share.php?appkey=100344510&url='+link+'&title='+title+'&pic=&site='+link);})())"
+               href="javascript:void((function(){var title=encodeURIComponent('《@site.title 》－ 食美特，不一样的生活');var link=window.location.href;var pic='';window.open('http://v.t.qq.com/share/share.php?appkey=100344510&url='+link+'&title='+title+'&pic=&site='+link);})())"
                alt="分享到腾讯微博"></a>
             <a class="s-douban"
-               href="javascript:void((function(){var title=encodeURIComponent('《 》－ 食美特，发现生活之美');var link=window.location.href;window.open('http://www.douban.com/recommend/?url='+link+'&title='+title);})())"
+               href="javascript:void((function(){var title=encodeURIComponent('《@site.title 》－ 食美特，不一样的生活');var link=window.location.href;window.open('http://www.douban.com/recommend/?url='+link+'&title='+title);})())"
                alt="分享到豆瓣"></a>
             <a class="s-renren"
-               href="javascript:void((function(){var title=encodeURIComponent('《 》－ 食美特，发现生活之美');var link=window.location.href;window.open('http://share.renren.com/share/buttonshare.do?link='+link+'&title='+title);})())"
+               href="javascript:void((function(){var title=encodeURIComponent('《@site.title 》－ 食美特，不一样的生活');var link=window.location.href;window.open('http://share.renren.com/share/buttonshare.do?link='+link+'&title='+title);})())"
                alt="分享到人人网"></a>
             <a class="s-163"
-               href="javascript:void((function(){var title=encodeURIComponent('《 》－ 食美特，发现生活之美');var link=window.location.href;var pic='';window.open('http://t.163.com/article/user/checkLogin.do?link='+link+'&source=食美特&info='+title+link+'&images='+pic+'&togImg=true');})());"
+               href="javascript:void((function(){var title=encodeURIComponent('《@site.title 》－ 食美特，不一样的生活');var link=window.location.href;var pic='';window.open('http://t.163.com/article/user/checkLogin.do?link='+link+'&source=食美特&info='+title+link+'&images='+pic+'&togImg=true');})());"
                alt="分享到网易微博"></a>
         </div>
     </div>

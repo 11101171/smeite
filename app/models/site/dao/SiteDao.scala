@@ -232,6 +232,26 @@ object SiteDao {
     (for( c <- SiteAlbumPics.filter(_.id === id) )yield c).delete
   }
 
+  /* check site pic */
+  def checkSitePic(sid:Long,pic:String) = database.withSession{  implicit session:Session =>
+    ( for( c <- SiteAlbumPics.filter(_.sid === sid).filter(_.pic === pic) )yield c).firstOption
+  }
+
+  /* def site pic  */
+  def findSitePic(sid:Long) = database.withSession{  implicit session:Session =>
+    (for( c <- SiteAlbumPics.filter(_.sid === sid).sortBy(_.isTop desc) )yield c).firstOption
+  }
+
+  def findSitePics(sid:Long,currentPage:Int,pageSize:Int)= database.withSession{  implicit session:Session =>
+    val totalRows = Query(SiteAlbumPics.filter(_.sid === sid).length).first()
+    val totalPages=(totalRows + pageSize - 1) / pageSize
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val q=  for(c<-SiteAlbumPics.filter(_.sid === sid).sortBy(_.isTop desc) )yield c
+    val msgs:List[SiteAlbumPic]=  q.drop(startRow).take(pageSize).list()
+    Page[SiteAlbumPic](msgs,currentPage,totalPages)
+
+  }
+
   /* **************************************** site video *********************************************** */
 
   /* 添加 小镇 视频 */
@@ -241,6 +261,24 @@ object SiteDao {
   /* 删除 小镇 视频 */
   def deleteSiteVideo(id:Long)  = database.withSession{  implicit session:Session =>
     (for( c <- SiteVideos.filter(_.id === id) )yield c).delete
+  }
+
+  def checkSiteVideo(sid:Long,url:String)  = database.withSession{  implicit session:Session =>
+    ( for(c <- SiteVideos.filter(_.sid === sid).filter(_.url === url) ) yield c ).firstOption
+  }
+
+  def findSiteVideo(sid:Long) = database.withSession{  implicit session:Session =>
+    ( for(c <- SiteVideos.filter(_.sid === sid) ) yield c ).firstOption
+  }
+
+  def findSiteVideos(sid:Long,currentPage:Int,pageSize:Int)= database.withSession{  implicit session:Session =>
+    val totalRows = Query(SiteVideos.filter(_.sid === sid).length).first()
+    val totalPages=(totalRows + pageSize - 1) / pageSize
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val q=  for(c<-SiteVideos.filter(_.sid === sid).sortBy(_.isTop desc) )yield c
+    val msgs:List[SiteVideo]=  q.drop(startRow).take(pageSize).list()
+    Page[SiteVideo](msgs,currentPage,totalPages)
+
   }
 
 }
