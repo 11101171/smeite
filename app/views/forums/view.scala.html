@@ -171,9 +171,10 @@ description =  topic._2.intro
 
 
 }{
+
 <script type="text/javascript">
-    seajs.use(["app/init", "app/smeite.editor"], function(init){
-        var $ = jQuery;
+    seajs.use(['$','smeite/forum/forum','smeite/forum/favor','smeite/forum/topic','smeite/smeite.editor'],function($,forum,favor,topic,editor){
+
         var snstitle = $("#J_PostArtical").text();
         var snscontent = $("#J_Forumtitle").text();
 
@@ -210,9 +211,6 @@ description =  topic._2.intro
             }
 
         });
-
-   init.load("app/forum/forum,app/forum/forum.follow,app/forum/forum.view");
-
-    });
+    })
 </script>
 }

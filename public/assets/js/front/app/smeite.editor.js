@@ -1,5 +1,5 @@
 define(function (require, exports) {
-    var $ = jQuery = require("jquery");
+    var $ = jQuery = require("$");
     require("smeite");
     /*
      * Copyright 2011-2012, Guang.com
@@ -637,7 +637,7 @@ define(function (require, exports) {
                     if (!self.FaceWrapDom || self.FaceWrapDom.length == 0) {
                         var html = '<div class="faceWrap"><div class="faceWrapBorder clearfix">'
                         for (var i = 0; i < FACEJSON.length; i++) {
-                            html += '<a btntype="btnFaceAction" faceval="' + FACEJSON[i].val + '" style="background:#fff url(/assets/emotion/' + FACEJSON[i].val + ') 4px 4px no-repeat;" href="javascript:;" title="' + FACEJSON[i].key + '" unselectable="on">' + FACEJSON[i].key + '</a>'
+                            html += '<a btntype="btnFaceAction" faceval="' + FACEJSON[i].val + '" style="background:#fff url(/assets/img/emotion/' + FACEJSON[i].val + ') 4px 4px no-repeat;" href="javascript:;" title="' + FACEJSON[i].key + '" unselectable="on">' + FACEJSON[i].key + '</a>'
                         }
                         html += '</div></div>';
                         $('#' + self.config.toolbarId).append(html);
@@ -663,10 +663,10 @@ define(function (require, exports) {
             btnFaceAction:{
                 exec:function (self, $srcElement) {
                     if (self.isIE678) {
-                        self.insertHTML("<img unselectable='on' src='/assets/emotion/" + $srcElement.attr("faceval") + "' title='" + $srcElement.attr("title") + "' alt='" + $srcElement.attr("title") + "'/>");
+                        self.insertHTML("<img unselectable='on' src='/assets/img/emotion/" + $srcElement.attr("faceval") + "' title='" + $srcElement.attr("title") + "' alt='" + $srcElement.attr("title") + "'/>");
                     } else {
                         var imgDom = self.iframeDocument.createElement("img");
-                        imgDom.src = '/assets/emotion/' + $srcElement.attr("faceval");
+                        imgDom.src = '/assets/img/emotion/' + $srcElement.attr("faceval");
                         imgDom.setAttribute("unselectable", "on")
                         imgDom.setAttribute("title", $srcElement.attr("title"))
                         imgDom.setAttribute("alt", $srcElement.attr("title"))
@@ -1265,7 +1265,7 @@ define(function (require, exports) {
             if (!this.faceTagsData) {
                 data = this.faceTagsData = {};
                 for (var i = 0; i < FACEJSON.length; i++) {
-                    data[FACEJSON[i].key] = '<img src="/assets/emotion/' + FACEJSON[i].val + '" unselectable="on" title="' + FACEJSON[i].key + '" alt="' + FACEJSON[i].key + '">';
+                    data[FACEJSON[i].key] = '<img src="/assets/img/emotion/' + FACEJSON[i].val + '" unselectable="on" title="' + FACEJSON[i].key + '" alt="' + FACEJSON[i].key + '">';
                 }
             } else {
                 data = this.faceTagsData;

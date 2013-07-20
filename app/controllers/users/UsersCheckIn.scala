@@ -20,12 +20,11 @@ import models.advert.dao.AdvertDao
 case class RecommendGoods(
                       goodsId:Long,
                       numIid:Long,
-                      rate:Int,
+                      clickUrl:String,
                       pic:String,
                       title:String,
-                      price:String,
-                      jifenbao:String,
-                      jifenbaoValue:String
+                      price:String
+
                       )
 
 object UsersCheckIn extends Controller {
@@ -33,12 +32,10 @@ object UsersCheckIn extends Controller {
   implicit val recommendGoodsFormat = (
     (__ \ "goodsId").format[Long] and
       (__ \ "numIid").format[Long] and
-      (__ \ "rate").format[Int] and
+      (__ \ "clickUrl").format[String] and
       (__ \ "pic").format[String] and
       (__ \ "title").format[String] and
-      (__ \ "price").format[String] and
-      (__ \ "jifenbao").format[String] and
-      (__ \ "jifenbaoValue").format[String]
+      (__ \ "price").format[String]
     )(RecommendGoods.apply,unlift(RecommendGoods.unapply))
   /* 用户签到 */
   def checkIn = Users.UserAction{   user => implicit request =>
@@ -73,9 +70,8 @@ object UsersCheckIn extends Controller {
       var checkInDays=0
       /* todo 以后根据用户的喜好推荐 */
       val goods = AdvertDao.getGoods("checkIn").head
-      val jifenbao=(goods.promotionPrice.getOrElse("0").toDouble*goods.commissionRate.getOrElse(0)*70*0.0001).toInt
-      val jifenbaoValue = jifenbao/100.0
-      val recommendGoods = new RecommendGoods(goods.id.get,goods.numIid,70,goods.pic+"_160x160.jpg",goods.name,goods.promotionPrice.get,jifenbao.toString,jifenbaoValue.toString)
+
+      val recommendGoods = new RecommendGoods(goods.id.get,goods.numIid,goods.clickUrl,goods.pic+"_160x160.jpg",goods.name,goods.promotionPrice.get)
       /*
       * 首先判断checkIn 是否存在，不存在 在添加（用户第一次签到）
       *  如果存在

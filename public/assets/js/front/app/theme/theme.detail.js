@@ -276,7 +276,7 @@ var UserTheme = {
 		$this.data("val", $this.val());
 	},
 	photoDel : function($this, $clkObj, $picBtn){
-		$clkObj.css('backgroundImage', 'url("/assets/ui/placeholder.png")');
+		$clkObj.css('backgroundImage', 'url("/assets/img/ui/placeholder.png")');
 		$picBtn.data("src","");
 	},
 	style : {

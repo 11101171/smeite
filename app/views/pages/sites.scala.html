@@ -1,0 +1,131 @@
+@(user:Option[models.user.User],flashes:List[models.advert.Advert],sites:List[models.site.Site],posts:List[models.site.Post])
+@views.html.template(
+user,
+nav="site",
+title =  "食美特，爱美食爱生活"
+)(css="/assets/css/template/sites.css") {
+
+<div class="container clearfix" id="sites">
+
+    <div class="main-box clearfix">
+
+        <div class="flash fl ui-switchable" id="J_themeFlash">
+            <div class="scrollable">
+
+                <div class="items">
+
+                    @for(flash <- flashes) {
+                    <div class="item">
+                        <a href="@flash.link" title="@flash.title" target="_blank">
+                            <img src="@flash.pic" alt="@flash.title" width="685" height="250">
+                        </a>
+                    </div>
+                    }
+
+                </div>
+
+
+            </div>
+            <ul class="navi clearfix">
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <!--  switchable  slide end-->
+        <div class="bulletin  fr clearfix">
+            <div class="bulletin-tips">
+                <h3 class="mt15 mb10">阳光、蓝天……</h3>
+                <h3 class="mb15">用汗水浇灌生活的乐土</h3>
+                <p class="edit mb10">{ 我是镇长 }</p>
+                <p><a class="create-theme" href="/site/edit"> 申请小镇</a> </p>
+                <p class="tips"> 优质小镇，赠送食豆100粒哦 </p>
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- 小站推荐-->
+    <div class="category clearfix">
+        <div class="hd clearfix">
+            <h2 class="fl"><a href="@controllers.routes.Pages.siteList(-1,1,1)">小站推荐</a></h2>
+            <a class="fr" href="@controllers.routes.Pages.siteList(-1,1,1)">更多&gt;&gt;</a>
+        </div>
+        <div class="group clearfix">
+            @for((site,i)<-sites.view.zipWithIndex ){
+            <div class="item @if((i+1)%2==0){last}">
+                <div class="pic">
+                    <a href="@controllers.routes.Sites.site(site.id.get)"><img src="@site.pic" width="150" height="150" alt="@site.title"> </a>
+                </div>
+                <dl  class="info">
+                    <dt class="title"><a href="@controllers.routes.Sites.site(site.id.get)">@site.title</a> </dt>
+                    <dt class="num"> @site.memberNum 居民 </dt>
+                    <dt class="intro"> @site.intro </dt>
+                </dl>
+            </div>
+            }
+
+
+
+        </div>
+    </div>
+
+    <!-- 帖子推荐-->
+    <div class="category clearfix">
+        <div class="hd clearfix">
+            <h2 class="fl"><a href="@controllers.routes.Pages.postList(-1,1,1)">帖子推荐</a></h2>
+            <a class="fr" href="@controllers.routes.Pages.postList(-1,1,1)">更多&gt;&gt;</a>
+        </div>
+        <div class="posts clearfix">
+            @for((post,i)<-posts.view.zipWithIndex ){
+              <div class="item @if((i+1)%2==0){last}">
+                  <div class="pic">
+                      <a @controllers.routes.Sites.post(post.id.get)><img src="@post.pic" width="430"> </a>
+                  </div>
+
+                  <div class="num">
+                      <div class="view-num">@post.viewNum</div>
+                      <div class="reply-num">@post.replyNum</div>
+                      <div class="like-state">
+                          <a rel="followGoods" href="javascript:void(0)" data-pid="@post.id.get">
+                              <i class="ico-likes" title="喜欢"></i>
+                          </a>
+                          <div class="like-num">
+                              <dl class="J_scrollUp" style="top: 0px;">
+                                  <dd class="J_FavorNum" data-val="@post.loveNum">@post.loveNum</dd>
+                                  <dd>+1</dd>
+                              </dl>
+                          </div>
+                      </div>
+                  </div>
+                      <h3 class=" ofh">
+                          <a href="@controllers.routes.Sites.post(post.id.get)">  @post.title </a>
+                      </h3>
+                  <div class="intro">
+
+                  </div>
+                  </div>
+            }
+
+        </div>
+    </div>
+
+
+
+
+
+</div>
+
+        }{
+
+<script type="text/javascript">
+    seajs.use(['smeite/site/sites','smeite/site/favor'])
+</script>
+}

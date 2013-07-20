@@ -1,0 +1,121 @@
+@(user:Option[models.user.User],flashes:List[models.advert.Advert],page:models.Page[models.site.Site],cid:Int,s:Int)
+@views.html.template(
+user,
+nav="site",
+title =  "食美特，爱美食爱生活"
+)(css="/assets/css/template/sites.css") {
+
+<div class="container clearfix" id="sites">
+
+    <div class="main-box clearfix">
+
+        <div class="flash fl ui-switchable" id="J_themeFlash">
+            <div class="scrollable">
+
+                <div class="items">
+
+
+                    @for(flash <- flashes) {
+                    <div class="item">
+                        <a href="@flash.link" title="@flash.title" target="_blank">
+                            <img src="@flash.pic" alt="@flash.title" width="685" height="250">
+                        </a>
+                    </div>
+                    }
+
+                </div>
+
+
+            </div>
+            <ul class="navi clearfix">
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <!--  switchable  slide end-->
+        <div class="bulletin  fr clearfix">
+            <div class="bulletin-tips">
+                <h3 class="mt15 mb10">阳光、蓝天……</h3>
+                <h3 class="mb15">用汗水浇灌生活的乐土</h3>
+                <p class="edit mb10">{ 我是镇长 }</p>
+                <p><a class="create-theme" href="/site/edit"> 申请小镇</a> </p>
+                <p class="tips"> 优质小镇，赠送食豆100粒哦 </p>
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+    <div class="filter-wrap clearfix">
+        <div class="cate">
+            <h2 @if(cid == -1){class="current"} ><a href="@controllers.routes.Pages.siteList(-1,1,1)">所有</a></h2>
+            <h2 @if(cid == 0){class="current"} ><a href="@controllers.routes.Pages.siteList(0,1,1)">生活</a></h2>
+            <h2 @if(cid == 1){class="current"} ><a href="@controllers.routes.Pages.siteList(1,1,1)">品牌</a></h2>
+            <h2 @if(cid == 2){class="current"} ><a href="@controllers.routes.Pages.siteList(2,1,1)">其他</a></h2>
+        </div>
+
+        <div class="filter">
+            <a href="@controllers.routes.Pages.siteList(cid,1,1)" @if(s == 1){class="current"}><span>最新</span></a>
+            <a href="@controllers.routes.Pages.siteList(cid,2,1)" @if(s == 2){class="current"}><span>最热</span></a>
+        </div>
+        <i></i>
+    </div>
+    <!-- 小站推荐-->
+    <div class="category clearfix">
+
+        <div class="group clearfix">
+            @for((item,i) <- page.items.view.zipWithIndex){
+            <div class="item @if((i+1)%2 ==0){last}">
+                <div class="pic">
+                    <a href="@controllers.routes.Sites.site(item.id.get)"><img src="@item.pic" width="150" height="150" alt="@item.title"> </a>
+                </div>
+                <dl  class="info">
+                    <dt class="title"><a href="@controllers.routes.Sites.site(item.id.get)">@item.title</a> </dt>
+                    <dt class="num"> @item.memberNum 居民 </dt>
+                    <dt class="intro"> @item.intro </dt>
+                </dl>
+            </div>
+            }
+
+        </div>
+
+        <div class="tac mt20">
+            <div class="pagin inlineblock clearfix" id="J_Pagination">
+                @if(page.nums.length>1){
+                @page.prev.map { page =>
+                <a class="prev" href="@controllers.routes.Pages.siteList(cid,s,page)">上一页</a>
+                }
+                @for(num <-page.nums){
+                @if(num==page.currentPage){
+                <span class="current">@num</span>
+                }else {
+                <a href="@controllers.routes.Pages.siteList(cid,s,num)">@num</a>
+                }
+                }
+                @page.next.map { page =>
+                <a class="next" href="@controllers.routes.Pages.siteList(cid,s,page)">下一页</a>
+
+                }
+
+                }
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+}{
+
+<script type="text/javascript">
+    seajs.use(['smeite/site/sites','smeite/site/favor'])
+</script>
+}

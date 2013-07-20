@@ -8,11 +8,13 @@
 GET       /                             controllers.Pages.index
 GET       /faxian/:cate             controllers.Pages.faxian(cate:Int,tag:Int ?=0,s:Int ?=1,p:Int ?=1)
 GET      /themes                            controllers.Pages.themes
-GET      /themes/:cid                      controllers.Pages.gallery(cid:Int,s:Int ?=1,p:Int ?=1)
+GET      /themes/list/:cid                      controllers.Pages.themeList(cid:Int,s:Int ?=1,p:Int ?=1)
 GET     /worth                            controllers.Pages.worth
 GET     /presell                          controllers.Pages.presell
 GET     /cookbook                         controllers.Pages.cookbook
-GET     /site                             controllers.Pages.site
+GET     /sites                             controllers.Pages.sites
+GET     /site/list                          controllers.Pages.siteList(cid:Int ?=-1,s:Int ?=1,p:Int ?=1)
+GET     /post/list                        controllers.Pages.postList(cid:Int ?=-1,s:Int ?=1,p:Int ?=1)
 
 
 #qq app
@@ -149,10 +151,15 @@ POST    /theme/checkThemeLoveState            controllers.Themes.checkThemeLoveS
 #小镇页面
 GET    /site/edit                       controllers.Sites.editSite(id:Long ?=0)
 POST   /site/save                       controllers.Sites.saveSite
-GET    /site/$id<[0-9]+>                        controllers.Sites.site(id:Long)
+GET    /site/$id<[0-9]+>                controllers.Sites.site(id:Long,s:Int ?=1,p:Int ?=1)
+POST   /site/addFollow                  controllers.Sites.addFollow
+POST   /site/removeFollow                controllers.Sites.removeFollow
+POST   /site/checkSiteLoveState          controllers.Sites.checkSiteLoveState
 
-GET     /post/edit                           controllers.Sites.editPost(id:Long ?=0)
+
+GET     /post/edit                           controllers.Sites.editPost(pid:Long ?=0,sid:Long)
 GET     /post/$pid<[0-9]+>                    controllers.Sites.post(pid:Long)
+POST    /post/save                            controllers.Sites.savePost
 
 
 
@@ -198,6 +205,8 @@ POST   /uploadPic/select                  controllers.Upload.uploadImageSelectPi
 POST   /user/account/doUploadPic          controllers.Upload.doUploadUserPic
 POST   /site/doUploadPic                  controllers.Upload.doUploadSitePic
 POST  /site/uploadPic                     controllers.Upload.uploadSitePic
+POST  /uploadUEditorPic                   controllers.Upload.uploadUEditorPic
+POST  /getVideo                           controllers.Upload.getVideo
 
 #管理后台 管理员管理
 GET   /admin/login                controllers.admin.Managers.login
@@ -360,11 +369,15 @@ GET   /admin/msgs/replyMsgs              controllers.admin.Msgs.replyMsgs(p:Int 
 GET   /admin/sites/siteList               controllers.admin.Sites.siteList(p:Int ?=1)
 GET   /admin/sites/filterSites           controllers.admin.Sites.filterSites
 POST   /admin/sites/batchSites            controllers.admin.Sites.batchSites
-GET   /admin/sites/postList               controllers.admin.Sites.postList(p:Int ?=1)
+
+GET   /admin/sites/postList               controllers.admin.Sites.postList(sid:Long ?=0,p:Int ?=1)
+GET   /admin/sites/filterPosts           controllers.admin.Sites.filterPosts
+POST   /admin/sites/batchPosts            controllers.admin.Sites.batchPosts
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public/assets", file)
 GET     /images/*file               controllers.Assets.at(path="/public/images", file)
+GET     /admin/assets/*file         controllers.Assets.at(path="/public/admin", file)
 
 
 

@@ -3,7 +3,7 @@
 user,
 nav="site",
 title =  "食美特，不一样的生活"
-)(css="/assets/css/template/site.edit.css") {
+)(css="/assets/css/template/siteEdit.css") {
 
 <div class="container clearfix" id="site">
 
@@ -44,7 +44,7 @@ title =  "食美特，不一样的生活"
                     <div class="form-row clearfix">
                         <label>上传站牌：</label>
                         <div class="fm-item">
-                            <div class="site-logo" @if(form("pic").value !=""){ style="display:block" }>
+                            <div class="site-logo" @if(form("pic").value.getOrElse("") !=""){ style="display:block" }>
                                 <img id="J_uploadImgShow" src='@form("pic").value' />
                             </div>
 
@@ -74,7 +74,7 @@ title =  "食美特，不一样的生活"
                 <div class="about">
                     <h5>关于小镇申请：</h5>
                     <div class="bd">
-                        小镇大镇长正在对你的小镇进行审核，审核周期为一个工作日。审核结果会通过想去网的私信，或者你留下的联系方式通知到你。希望能够带给你惊喜，请耐心等待。
+                        大镇长正在对你的小镇进行审核，审核周期为一个工作日。审核结果会通过想去网的私信，或者你留下的联系方式通知到你。希望能够带给你惊喜，请耐心等待。
                     </div>
                 </div>
             </div>
@@ -86,13 +86,10 @@ title =  "食美特，不一样的生活"
 
         }{
 <script type="text/javascript">
-    seajs.use('app/init', function (init) {
-        var $ = jQuery;
+    seajs.use(['$','smeite/site/edit'],function($,edit){
         if(SMEITER.userId == ""){
             $.smeite.dialog.isLogin();
         }
-        init.load("app/site/site.edit");
-
-    });
+    })
 </script>
 }

@@ -1,7 +1,7 @@
 @(user:Option[models.user.User],baseForm:Form[controllers.users.BaseFormData],msg:String ="")
 @views.html.template(
 user
-)(css="/assets/css/template/user.setting.css") {
+)(css="/assets/css/template/userSetting.css") {
 <div class="container" id="account">
     <div class="setting clearfix">
         <div class="side-nav">
@@ -83,8 +83,7 @@ user
 }{
 <script type="text/javascript">
     var brithday = '@baseForm("year").value';
-    seajs.use("app/init",function(init){
-        init.load("app/user/user.baseSetting");
-    });
+
+    seajs.use("smeite/user/baseSetting");
 </script>
 }

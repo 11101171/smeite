@@ -118,7 +118,7 @@
 }
 
 
-/* sort  */
+/* sort for gallery page  */
 .filter-wrap {
     margin: 20px 0;
     padding: 0;
@@ -127,14 +127,10 @@
 
 .filter-wrap h2 {
     float: left;
-    font-size: 18px;
-    border-left: 5px solid #5c6f09;
-    background-color: #588c0e;
-    border-right: 5px solid #5c6f09;
+    font-size: 25px;
     height: 20px;
     line-height: 20px;
     padding: 0 7px;
-    color: #fff;
     display: inline;
 }
 
@@ -185,7 +181,7 @@
     top: -5px;
     background-color: #fff
 }
-
+/* end */
 .category {width:950px;background:#fff;padding:15px; margin: 0 auto 20px;}
 .category .group{overflow: hidden;}
 .category .hd{ margin-bottom:6px;overflow:hidden;padding: 0 10px}

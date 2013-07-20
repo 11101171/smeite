@@ -1,13 +1,19 @@
 package controllers
 
-import play.api.mvc.Controller
+import play.api.mvc.{Action, Controller}
 import controllers.users.Users
 import play.api.data.Form
 import play.api.data.Forms._
 import models.site.dao.SiteDao
+import models.user.User
+import play.api.cache.Cache
+import models.user.dao.UserDao
+import play.api.libs.json.Json
+import play.api.Play.current
+import org.jsoup.Jsoup
 
 case class SiteFormData(sid:Option[Long],cid:Int,title:String,pic:String,intro:String,tags:String)
-
+case  class PostFormData(pid:Option[Long],sid:Long,cid:Int,title:String,pic:Option[String],content:String,tags:Option[String],status:Int, extraAttr1:Option[String], extraAttr2:Option[String], extraAttr3:Option[String], extraAttr4:Option[String], extraAttr5:Option[String], extraAttr6:Option[String])
 object Sites extends Controller {
   val siteFormData =Form(
     mapping(
@@ -19,6 +25,25 @@ object Sites extends Controller {
       "tags" -> text
     )(SiteFormData.apply)(SiteFormData.unapply)
   )
+  val postFormData =Form(
+    mapping(
+      "pid"->optional(longNumber),
+      "sid"->longNumber,
+      "cid" ->number,
+      "title" -> nonEmptyText,
+      "pic" -> optional(text),
+      "content" -> nonEmptyText,
+      "tags" -> optional(text),
+      "status" ->number,
+      "extraAttr1" -> optional(text),
+      "extraAttr2" -> optional(text),
+      "extraAttr3" -> optional(text),
+      "extraAttr4" -> optional(text),
+      "extraAttr5" -> optional(text),
+      "extraAttr6" -> optional(text)
+    )(PostFormData.apply)(PostFormData.unapply)
+  )
+
   /* 小镇编辑创建 */
   def editSite(sid:Long) = Users.UserAction { user => implicit request =>
     if (sid==0) Ok(views.html.sites.editSite(user,siteFormData))
@@ -46,26 +71,129 @@ object Sites extends Controller {
   }
 
   /* 小镇  */
-  def site(id: Long) = Users.UserAction {
-    user => implicit request =>
+  def site(id: Long,s:Int,p:Int) = Users.UserAction {  user => implicit request =>
       val site = SiteDao.findSiteById(id)
       if (site.isEmpty) {
         Ok(" site is not existed  todo todo ")
       } else {
+       val posts = SiteDao.findPostsBySid(id,s,p,20)
 
-        Ok(views.html.sites.site(user, site.get))
+        val sitePic = SiteDao.findSitePic(id)
+        val siteVideo = SiteDao.findSiteVideo(id)
+        Ok(views.html.sites.site(user, site.get,posts,id,s,sitePic,siteVideo))
       }
   }
 
 
-  /* 小镇 帖子 编辑创建 */
-  def editPost(id:Long) = Users.UserAction { user => implicit request =>
-    Ok(views.html.sites.editPost(user))
+  /*用户点击喜欢操作*/
+  def addFollow  = Action(parse.json) { implicit request =>
+    val user:Option[User] =request.session.get("user").map( u=> Cache.getOrElse[User](u){
+      UserDao.findById(u.toLong)
+    })
+    if(user.isEmpty)Ok(Json.obj("code" -> "200", "message" ->"你还没有登录" ))
+    else {
+      val sid = (request.body \ "sid").asOpt[Long]
+      if(sid.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
+      else{
+        val siteMember=SiteDao.checkSiteMember(sid.get,user.get.id.get);
+        if(!siteMember.isEmpty) Ok(Json.obj("code" -> "103", "message" ->"你已经喜欢了"))
+        else {
+          SiteDao.addSiteMember(sid.get,user.get.id.get,0);
+          Ok(Json.obj("code" -> "100", "message" ->"成功"))
+        }
+
+      }
+
+    }
   }
+
+  def removeFollow = Action(parse.json) {implicit request =>
+    val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
+    if(user.isEmpty)Ok(Json.obj("code" -> "200", "message" ->"你还没有登录"))
+    else {
+      val sid = (request.body \ "sid").asOpt[Long]
+      if(sid.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
+      else{
+        SiteDao.deleteSiteMember(sid.get,user.get.id.get);
+        Ok(Json.obj("code" -> "100", "message" ->"成功"))
+      }
+
+
+    }
+  }
+
+  def checkSiteLoveState = Action(parse.json){  implicit request =>
+    val user:Option[User] =request.session.get("user").map(u=> UserDao.findById(u.toLong) )
+    if(user.isEmpty)  Ok(Json.obj("code" -> "300","message" -> "亲，你还没有登录呢" ))
+    else{
+      val sid=(request.body \ "sid").asOpt[Long];
+      if (sid.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
+      else{
+        val siteMember=SiteDao.checkSiteMember(sid.get,user.get.id.get);
+        if(!siteMember.isEmpty)  Ok(Json.obj("code" -> "100","message" -> "已关注" ))
+        else Ok(Json.obj("code" -> "101","message" -> "未关注" ))
+      }
+
+    }
+  }
+
+  /* ************************ front site post **************************************** */
+
+
+  /* 小镇 帖子 编辑创建 */
+  def editPost(pid:Long,sid:Long) = Users.UserAction { user => implicit request =>
+    if (pid==0) Ok(views.html.sites.editPost(user,postFormData.fill(PostFormData(None,sid,2,"",None,"",None,0,None,None,None,None,None,None))))
+  else{
+      val post = SiteDao.findPostById(pid)
+      if(post.isEmpty)Ok(views.html.sites.editPost(user,postFormData.fill(PostFormData(None,sid,2,"",None,"",None,0,None,None,None,None,None,None))))
+     else  Ok(views.html.sites.editPost(user,postFormData.fill(PostFormData(post.get.id,post.get.sid,post.get.cid,post.get.title,post.get.pic,post.get.content,post.get.tags,post.get.status,post.get.extraAttr1,post.get.extraAttr2,post.get.extraAttr3,post.get.extraAttr4,post.get.extraAttr5,post.get.extraAttr6))))
+    }
+  }
+  /* 小镇 帖子 保存帖子 */
+  def savePost = Users.UserAction {user => implicit request =>
+    postFormData.bindFromRequest.fold(
+      formWithErrors => BadRequest(views.html.sites.editPost(user,formWithErrors)),
+      post => {
+        /* 处理content 中的 img  flash ，goods */
+        val  doc =Jsoup.parseBodyFragment(post.content)
+        val images = doc.select("img")
+        val videos = doc.select("embed")
+        /* 保存 images */
+        val it = images.iterator()
+        while(it.hasNext){
+          val pic = it.next.attr("src")
+        if(SiteDao.checkSitePic(post.sid,pic).isEmpty){
+          SiteDao.addSitePic(post.sid,pic)
+        }
+
+        }
+        /* 保存视频 */
+        val vt = videos.iterator()
+        while(vt.hasNext){
+     //  println( " flash    " + vt.next.attr("src"))
+          val video = vt.next.attr("src")
+          if(SiteDao.checkSiteVideo(post.sid,video).isEmpty){
+            SiteDao.addSiteVideo(post.sid,video)
+          }
+        }
+        var id:Long=0L
+        if(post.pid.isEmpty){
+        id = SiteDao.addPost(user.get.id.get,post.sid,post.cid,post.title,post.pic,post.content,post.tags,post.status,post.extraAttr1,post.extraAttr2,post.extraAttr3,post.extraAttr4,post.extraAttr5,post.extraAttr6)
+        }else{
+          SiteDao.modifyPost(post.pid.get,post.cid,post.title,post.pic,post.content,post.tags,post.status,post.extraAttr1,post.extraAttr2,post.extraAttr3,post.extraAttr4,post.extraAttr5,post.extraAttr6)
+         id = post.pid.get
+        }
+
+        Redirect(controllers.routes.Sites.post(id))
+      }
+    )
+  }
+
   /* 小镇帖子 */
   def post(pid:Long)= Users.UserAction { user => implicit request =>
-    Ok(views.html.sites.post(user))
-  //  Ok(views.html.sites.menu(user))
+    val post = SiteDao.findPost(pid)
+      Ok(views.html.sites.post(user, post))
+
   }
 
 }

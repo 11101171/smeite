@@ -19,7 +19,7 @@
 
 /* tag header */
 .tag-header{
-    background: url("/assets/ui/fanji/header2.png") repeat-x 0 0 transparent;
+    background: url("/assets/img/ui/fanji/header2.png") repeat-x 0 0 transparent;
     height: 107px;
 }
 .tag-logo{
@@ -307,7 +307,7 @@
     height: 99px;
     cursor: pointer;
     margin-top: 5px;
-    background: url(/assets/ui/fanji/bg_app.png) no-repeat
+    background: url(/assets/img/ui/fanji/bg_app.png) no-repeat
 }
 
 li.item-1 a i {

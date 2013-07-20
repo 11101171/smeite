@@ -22,6 +22,9 @@ object SiteAlbums extends Table[SiteAlbum]("site_album") {
   def * = id.? ~ sid  ~ title ~ isTop ~ addTime.?  <>(SiteAlbum, SiteAlbum.unapply _)
   def autoInc  = id.? ~ sid  ~ title ~ isTop ~ addTime.?  <>(SiteAlbum, SiteAlbum.unapply _) returning id
 
+  def autoInc2 = sid ~ title ~ isTop returning id
+
+
 
 
 }

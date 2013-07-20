@@ -22,8 +22,8 @@ define(function(require, exports) {
     if(refererUrl.indexOf("taobao")>0 || refererUrl.indexOf("tmall")>0)referer ="taobao"
     if(refererUrl.indexOf("weibo")>0) referer="weibo"
     function addToFav(o){
-        var url = "http://smeite.com";
-        var title = "食美特，爱美食爱生活";
+        var url = "http://smeite.cn";
+        var title = "食美特，不一样的生活";
         if (window.sidebar) { // Mozilla Firefox Bookmark
             window.sidebar.addPanel(title, url,"");
         } else if( window.external&&document.all) { // IE Favorite
@@ -131,8 +131,8 @@ define(function(require, exports) {
                     +'<div class="guide_add" style="margin-right:174px;">'
                     +'<div class="favorites" id="J_Favorites"><a href="javascript:void(0);">加入收藏夹</a></div>'
                     +'<div class="weibo">'
-                    +'<a href="javascript:void((function(){var title=encodeURIComponent(\'推荐个不错的网站，能找到好多喜欢的东西。食美特：http://smeite.com\');var link=encodeURIComponent(window.location.href);var pic=\'http://smeite.com/assets/ui/smeite.jpg\';window.open(\'http://service.t.sina.com.cn/share/share.php?appkey=2610725727&title=\'+title+\'&pic=\'+pic);})())" alt="分享到新浪微博">分享到新浪微博</a>'
-                    +'<a style="margin-left:6px; width:130px" href="javascript:void((function(){var title=encodeURIComponent(\'推荐个不错的网站，能找到好多喜欢的东西。食美特：http://smeite.com\');var link=encodeURIComponent(window.location.href);var pic=\'http://smeite.com/assets/ui/smeite.jpg\';window.open(\'http://v.t.qq.com/share/share.php?appkey=db0de5e94b314972b3e7efd23fa7ce1e&title=\'+title+\'&pic=\'+pic+\'&site=\'+link);})())" alt="分享到腾讯微博"></a>'
+                    +'<a href="javascript:void((function(){var title=encodeURIComponent(\'推荐个不错的网站，能找到好多喜欢的东西。食美特：http://smeite.com\');var link=encodeURIComponent(window.location.href);var pic=\'http://smeite.com/assets/img/ui/smeite.jpg\';window.open(\'http://service.t.sina.com.cn/share/share.php?appkey=2610725727&title=\'+title+\'&pic=\'+pic);})())" alt="分享到新浪微博">分享到新浪微博</a>'
+                    +'<a style="margin-left:6px; width:130px" href="javascript:void((function(){var title=encodeURIComponent(\'推荐个不错的网站，能找到好多喜欢的东西。食美特：http://smeite.com\');var link=encodeURIComponent(window.location.href);var pic=\'http://smeite.com/assets/img/ui/smeite.jpg\';window.open(\'http://v.t.qq.com/share/share.php?appkey=db0de5e94b314972b3e7efd23fa7ce1e&title=\'+title+\'&pic=\'+pic+\'&site=\'+link);})())" alt="分享到腾讯微博"></a>'
                     +'<a style="margin-left:6px; width:118px" href="javascript:void((function(){var title=encodeURIComponent(\'推荐个不错的网站，能找到好多喜欢的东西。食美特：http://smeite.com\');var link=encodeURIComponent(window.location.href);window.open(\'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=\'+link);})())" alt="分享到QQ空间"></a>'
                     +'</div>'
                     +'</div>'
@@ -243,7 +243,7 @@ window.refresh=function(){
 }
 
     /* 顶部固定： 如果是find 页面 则 fix tag nav，否则 显示 #nav fixed */
-    var href = window.location.href;
+ //   var href = window.location.href;
   //  if(href.indexOf("/find")==-1){
    //     $(window).bind("scroll",function(){
     //        var docScrollTop = $(document).scrollTop();

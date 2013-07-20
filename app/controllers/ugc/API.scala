@@ -54,7 +54,8 @@ case class Product(
                   pic: String,
                   itemPics: List[String],
                   clickUrl:String,
-                 tags:List[String]
+                  tags:List[String],
+                  location:String
                   )
 
 /*
@@ -79,35 +80,20 @@ case class BuyRecord(
 object API extends Controller {
 
   /*json */
-  implicit  object ProductFormat extends Format[Product]{
-    def writes(o: Product): JsValue = JsObject(
-      List(
-        "id"->JsNumber(o.id.getOrElse[Long](0)),
-        "numIid"->JsNumber(o.numIid),
-        "nick" -> JsString(o.nick),
-        "name" -> JsString(o.name),
-        "proComment" -> JsString(o.proComment.getOrElse[String]("none")),
-        "price" -> JsString(o.price),
-        "pic" -> JsString(o.pic),
-        "itemPics" -> JsArray(o.itemPics.map(JsString(_))),
-        "clickUrl" -> JsString(o.clickUrl),
-        "tags" -> JsArray(o.tags.map(JsString(_)))
-      )
-    )
-    def reads(json: JsValue): JsResult[Product] = JsSuccess(Product(
-      (json \ "id").asOpt[Long],
-      (json \ "numIid").as[Long],
-      (json \ "nick").as[String],
-      (json \ "name").as[String],
-      (json \ "proComment").asOpt[String],
-      (json \ "price").as[String],
-      (json \ "pic").as[String],
-      (json \ "itemPics").as[List[String]],
-      (json \ "clickUrl").as[String],
-      (json \ "tags").as[List[String]]
-    )
-    )
-  }
+
+  implicit  val productFormat = (
+    (__ \ "id").format[Option[Long]] and
+      (__ \ "numIid").format[Long] and
+      (__ \ "nick").format[String] and
+      (__ \ "name").format[String] and
+      (__ \ "proComment").format[Option[String]] and
+      (__ \ "price").format[String] and
+      (__ \ "pic").format[String] and
+      (__ \ "itemPics").format[List[String]] and
+      (__ \ "clickUrl").format[String] and
+      (__ \ "tags").format[List[String]]   and
+       (__ \ "location").format[String]
+    )(Product.apply,unlift(Product.unapply))
 
   /*json */
   implicit val buyRecordFormat = (
@@ -157,13 +143,13 @@ object API extends Controller {
              val goods =GoodsDao.find(numIid)
 
              if(!goods.isEmpty){
-               val product=Product(goods.get.id,goods.get.numIid,goods.get.nick,goods.get.name,None,goods.get.price,goods.get.pic,Nil,goods.get.clickUrl,Nil)
+               val product=Product(goods.get.id,goods.get.numIid,goods.get.nick,goods.get.name,None,goods.get.price,goods.get.pic,Nil,goods.get.clickUrl,Nil,goods.get.location)
                Ok(Json.obj("code"->"105","product"->Json.toJson(product) ,"message"->"该商品已存在"))
              }
              else{
                val client=new DefaultTaobaoClient(url, appkey, secret);
                val  req=new ItemGetRequest();
-               req.setFields("num_iid,nick,title,price,pic_url,detail_url,item_img.url")
+               req.setFields("num_iid,nick,title,price,pic_url,detail_url,item_img.url,location")
                req.setNumIid(numIid);
                val respItem = client.execute(req ).getItem
                val itemImgs= for(i<-respItem.getItemImgs)yield(i.getUrl)
@@ -177,7 +163,8 @@ object API extends Controller {
                  respItem.getPicUrl,
                  itemImgs.toList,
                  respItem.getDetailUrl,
-                 Nil
+                 Nil,
+                 respItem.getLocation.getState+" "+respItem.getLocation.getCity
                )
                Ok(Json.obj("code"->"100","product"->Json.toJson(product)))
              }
@@ -209,7 +196,7 @@ object API extends Controller {
         images.append(img+"&")
       }
       /*保存goods*/
-      val goodsId= GoodsDao.addGoods(user.get.id.get,product.numIid,product.name,product.proComment.getOrElse("none"),product.price,mainPic,images.toString,product.nick,product.clickUrl,hwRate)
+      val goodsId= GoodsDao.addGoods(user.get.id.get,product.numIid,product.name,product.proComment.getOrElse("none"),product.price,mainPic,images.toString,product.nick,product.clickUrl,product.location,hwRate)
       /*保存tags 首先查看tags 是否存在，不存在则保存*/
       for(name<-product.tags){
         /*处理tag*/

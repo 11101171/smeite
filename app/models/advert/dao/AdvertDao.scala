@@ -7,6 +7,7 @@ import models.user.{Users, User}
 import models.theme.{ThemeGoodses, Themes, Theme}
 import models.advert._
 import models.forum.{Topic, Topics}
+import models.site.{Posts, Post, Sites, Site}
 
 /**
 * Created by zuosanshao.
@@ -21,20 +22,20 @@ object AdvertDao {
   lazy val database = Database.forDataSource(DB.getDataSource())
 
   def modifyAdvert(id:Long,title:String,pic:String, spic:String, link:String, note:String)= database.withSession {  implicit session:Session =>
-    (for(c<-Adverts if c.id === id)yield(c.title~c.pic~c.spic~c.link~c.note)).update((title,pic,spic,link,note))
+    (for(c<-Adverts if c.id === id)yield c.title~c.pic~c.spic~c.link~c.note ).update((title,pic,spic,link,note))
   }
 
   def modifyAdvert(id:Long,thirdId:Long)= database.withSession {  implicit session:Session =>
 
-    (for(c<-Adverts if c.id === id)yield(c.thirdId)).update(thirdId)
+    (for(c<-Adverts if c.id === id)yield c.thirdId ).update(thirdId)
   }
 
   def modifyAdvert(id:Long,title:String,content:String,link:String, note:String)= database.withSession {  implicit session:Session =>
-    (for(c<-Adverts if c.id === id)yield(c.title~c.content~c.link~c.note)).update((title,content,link,note))
+    (for(c<-Adverts if c.id === id)yield c.title~c.content~c.link~c.note ).update((title,content,link,note))
   }
 
   def findById(id:Long):Advert= database.withSession{   implicit session:Session =>
-    {for(c<-Adverts if c.id === id)yield(c)}.first
+    {for(c<-Adverts if c.id === id)yield c }.first
   }
 
 
@@ -50,21 +51,21 @@ object AdvertDao {
   /* 获取需要推广的商品*/
   def  getGoods(positionCode:String):List[Goods] = database.withSession {  implicit session:Session =>
     (for{
-      c<-Adverts;
-      p<-Goodses;
-      if c.positionCode === positionCode;
+      c<-Adverts
+      p<-Goodses
+      if c.positionCode === positionCode
       if c.thirdId === p.id
-    }yield(p) ).list()
+    }yield p ).list()
   }
 
   /* 获取需要推荐的用户*/
   def  getUsers(positionCode:String):List[User] = database.withSession {  implicit session:Session =>
     (for{
-      c<-Adverts;
-      u<-Users;
-      if c.positionCode === positionCode;
+      c<-Adverts
+      u<-Users
+      if c.positionCode === positionCode
       if c.thirdId === u.id
-    }yield(u) ).list()
+    }yield u ).list()
   }
   /* 获取主题*/
   def getThemes(positionCode:String):List[Theme] = database.withSession {  implicit session:Session =>
@@ -73,7 +74,7 @@ object AdvertDao {
       t<-Themes
       if c.positionCode === positionCode
       if c.thirdId === t.id
-    }yield(t) ).list()
+    }yield t ).list()
   }
   /* 获取主题 */
   def getThemes(positionCode:String,num:Int):List[((Long,String,String,Int),List[String])] = database.withSession {  implicit session:Session =>
@@ -101,7 +102,27 @@ object AdvertDao {
       if c.positionCode === positionCode;
       if c.thirdId === t.id
       if t.uid === u.id
-    }yield(u.id~u.name~u.pic~t.id~t.title~t.replyNum~t.loveNum~t.hotIndex) ).list()
+    }yield u.id~u.name~u.pic~t.id~t.title~t.replyNum~t.loveNum~t.hotIndex ).list()
+  }
+
+  def getSites(positionCode:String,num:Int):List[Site] = database.withSession {  implicit session:Session =>
+    ( for{
+     c <- Adverts
+     s <- Sites
+      if c.positionCode === positionCode
+      if c.thirdId === s.id
+    }yield s ).take(num).list()
+
+  }
+
+  def getPosts(positionCode:String,num:Int):List[Post] =  database.withSession {  implicit session:Session =>
+    ( for{
+      c <- Adverts
+      p <- Posts
+      if c.positionCode === positionCode
+      if c.thirdId === p.id
+    }yield p ).take(num).list()
+
   }
 
   def findPositions(position:String):List[AdvertPosition]= database.withSession {  implicit session:Session =>

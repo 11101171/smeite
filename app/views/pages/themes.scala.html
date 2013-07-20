@@ -3,9 +3,7 @@ user:Option[models.user.User],
 flashes:List[models.advert.Advert],
 meishiThemes:List[((Long,String,String,Int),List[String])],
 techanThemes:List[((Long,String,String,Int),List[String])],
-zibuThemes:List[((Long,String,String,Int),List[String])],
-jujiaThemes:List[((Long,String,String,Int),List[String])],
-haowanyiThemes:List[((Long,String,String,Int),List[String])]
+jujiaThemes:List[((Long,String,String,Int),List[String])]
 )
 @views.html.template(
 user,
@@ -17,7 +15,7 @@ title = " 美食街_食美特，爱美食爱生活"
 
 <div class="main-box clearfix">
 
-    <div class="flash fl">
+    <div class="flash fl" id="J_themeFlash">
         <div class="scrollable">
 
             <div class="items">
@@ -26,7 +24,7 @@ title = " 美食街_食美特，爱美食爱生活"
                 @for(flash <- flashes) {
                 <div class="item">
                     <a href="@flash.link" title="@flash.title" target="_blank">
-                        <img src="@flash.pic" alt="@flash.title" width="720" height="270">
+                        <img src="@flash.pic" alt="@flash.title" width="685" height="250">
                     </a>
                 </div>
                 }
@@ -43,12 +41,12 @@ title = " 美食街_食美特，爱美食爱生活"
             <li ></li>
         </ul>
     </div>
-    <!--kissy switchable  slide end-->
-    <div class="bulletin r5 fr clearfix">
+    <!--  switchable  slide end-->
+    <div class="bulletin  fr clearfix">
          <div class="bulletin-tips">
                <h3 class="mt15 mb10">用快乐的心情</h3>
                 <h3 class="mb15">收录生活的正能量</h3>
-               <p class="edit mb10">{ 我就是主编 }</p>
+               <p class="edit mb10">{ 我是主编 }</p>
                <p><a class="create-theme" href="@controllers.routes.Themes.edit(0)"> 创作主题</a> </p>
              <p class="tips"> 优质主题，赠送食豆10粒哦 </p>
          </div>
@@ -56,7 +54,7 @@ title = " 美食街_食美特，爱美食爱生活"
 
 
     </div>
-    <!--最近热门的好玩意儿 end-->
+
 
 </div>
 
@@ -64,8 +62,8 @@ title = " 美食街_食美特，爱美食爱生活"
     <!-- 美食主题推荐-->
      <div class="category clearfix">
     <div class="hd clearfix">
-        <h2 class="fl"><a href='@controllers.routes.Pages.gallery(0,1,1)'>美食</a></h2>
-        <a class="fr" href='@controllers.routes.Pages.gallery(0,1,1)'>更多&gt;&gt;</a>
+        <h2 class="fl"><a href='@controllers.routes.Pages.themeList(0,1,1)'>美食</a></h2>
+        <a class="fr" href='@controllers.routes.Pages.themeList(0,1,1)'>更多&gt;&gt;</a>
     </div>
     <div class="group clearfix">
         @for((((themeId,themeName,themeIntro,themeLoveNum),pics),i)<-meishiThemes.view.zipWithIndex){
@@ -96,11 +94,11 @@ title = " 美食街_食美特，爱美食爱生活"
     </div>
 </div>
 
-    <!-- 特产主题推荐-->
+    <!-- 食材主题推荐-->
     <div class="category clearfix">
         <div class="hd clearfix">
-            <h2 class="fl"><a href='@controllers.routes.Pages.gallery(1,1,1)'>特产</a></h2>
-            <a class="fr" href='@controllers.routes.Pages.gallery(1,1,1)'>更多&gt;&gt;</a>
+            <h2 class="fl"><a href='@controllers.routes.Pages.themeList(1,1,1)'>特产</a></h2>
+            <a class="fr" href='@controllers.routes.Pages.themeList(1,1,1)'>更多&gt;&gt;</a>
         </div>
         <div class="group clearfix">
             @for((((themeId,themeName,themeIntro,themeLoveNum),pics),i)<-techanThemes.view.zipWithIndex){
@@ -131,47 +129,11 @@ title = " 美食街_食美特，爱美食爱生活"
         </div>
     </div>
 
-
-    <!-- 滋补主题推荐-->
-    <div class="category clearfix">
-        <div class="hd clearfix">
-            <h2 class="fl"><a href='@controllers.routes.Pages.gallery(2,1,1)'>滋补</a></h2>
-            <a class="fr" href='@controllers.routes.Pages.gallery(2,1,1)'>更多&gt;&gt;</a>
-        </div>
-        <div class="group clearfix">
-            @for((((themeId,themeName,themeIntro,themeLoveNum),pics),i)<- zibuThemes.view.zipWithIndex){
-            <div class="item @if((i+1)%4==0){last}">
-                <a href="@controllers.routes.Themes.view(themeId)" title="@themeName" class="pic" target="_blank">
-                    @for((pic,i)<-pics.view.zipWithIndex){
-                    @if(i==0){
-                    <img class="b-img" width="210" height="210" src='@(pic+"_210x210.jpg")' alt="@themeName">
-                    }else{
-                    <img class="s-img" width="50" height="50" src='@(pic+"_60x60.jpg")' alt="@themeName">
-                    }
-                    }
-
-                </a>
-                <h3 class="ofh">
-                    <a href="@controllers.routes.Themes.view(themeId)" target="_blank">@themeName</a>
-                </h3>
-
-                <div class="info" >@themeIntro</div>
-                <a rel="followTheme" href="javascript:;" class="follow" data-type="0" data-themeid="@themeId">+ 关注</a>
-					<span class="mete pl15">
-
-                        <em class="J_LikeCount">@themeLoveNum</em> 人关注
-
-                    </span>
-            </div>
-            }
-        </div>
-    </div>
-
     <!-- 居家主题推荐-->
     <div class="category clearfix">
         <div class="hd clearfix">
-            <h2 class="fl"><a href='@controllers.routes.Pages.gallery(3,1,1)'>居家</a></h2>
-            <a class="fr" href='@controllers.routes.Pages.gallery(3,1,1)'>更多&gt;&gt;</a>
+            <h2 class="fl"><a href='@controllers.routes.Pages.themeList(3,1,1)'>居家</a></h2>
+            <a class="fr" href='@controllers.routes.Pages.themeList(3,1,1)'>更多&gt;&gt;</a>
         </div>
         <div class="group clearfix">
             @for((((themeId,themeName,themeIntro,themeLoveNum),pics),i)<- jujiaThemes.view.zipWithIndex){
@@ -202,49 +164,14 @@ title = " 美食街_食美特，爱美食爱生活"
         </div>
     </div>
 
-<!-- 好玩意主题推荐-->
-<div class="category clearfix">
-    <div class="hd clearfix">
-        <h2 class="fl"><a href='@controllers.routes.Pages.gallery(6,1,1)'>好玩意</a></h2>
-        <a class="fr" href='@controllers.routes.Pages.gallery(6,1,1)'>更多&gt;&gt;</a>
-    </div>
-    <div class="group clearfix">
-        @for((((themeId,themeName,themeIntro,themeLoveNum),pics),i)<-haowanyiThemes.view.zipWithIndex){
-        <div class="item @if((i+1)%4==0){last}">
-            <a href="@controllers.routes.Themes.view(themeId)" title="@themeName" class="pic" target="_blank">
-                @for((pic,i)<-pics.view.zipWithIndex){
-                @if(i==0){
-                <img class="b-img" width="210" height="210" src='@(pic+"_210x210.jpg")' alt="@themeName">
-                }else{
-                <img class="s-img" width="50" height="50" src='@(pic+"_60x60.jpg")' alt="@themeName">
-                }
-                }
-
-            </a>
-            <h3 class="ofh">
-                <a href="@controllers.routes.Themes.view(themeId)" target="_blank">@themeName</a>
-            </h3>
-
-            <div class="info" >@themeIntro</div>
-            <a rel="followTheme" href="javascript:;" class="follow" data-type="0" data-themeid="@themeId">+ 关注</a>
-					<span class="mete pl15">
-
-                        <em class="J_LikeCount">@themeLoveNum</em> 人关注
-
-                    </span>
-        </div>
-        }
-    </div>
-</div>
 
 
 </div>
 
 
 }{
+
 <script type="text/javascript">
-    seajs.use('app/init', function (init) {
-        init.load('app/themes,app/theme/theme.favor');
-    });
+    seajs.use(['smeite/theme/themes','smeite/theme/favor'])
 </script>
         }
