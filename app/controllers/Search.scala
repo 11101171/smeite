@@ -24,7 +24,7 @@ object Search extends Controller {
   def search(keyword: String, p: Int) = Users.UserAction { user => implicit request =>
 
         val page = TagDao.findTagGoodses(keyword, p, 54)
-        Ok(views.html.search.baobei(user, page, keyword))
+        Ok(views.html.search.result(user, page, keyword))
 
   }
 
