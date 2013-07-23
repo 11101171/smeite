@@ -21,9 +21,10 @@ define(function(require, exports) {
             element: '#J_siteFlash',
             panels: '#J_siteFlash  .items .item',
             triggers:"#J_siteFlash .navi li",
+            activeIndex:0,
             activeTriggerClass:"active",
             effect: 'fade',
-            easing: 'easeOutStrong',
+            easing: 'easeIn',
             interval: 6000
         }).render();
     })

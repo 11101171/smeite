@@ -15,11 +15,12 @@
 }
 
 .flash {
-    width: 700px;
+    width: 685px;
     height: 250px;
     background-color: #fff;
     overflow: hidden;
     position: relative;
+    margin-right: 15px;
 }
 
 .flash  .items .item {
