@@ -33,7 +33,7 @@ title = "网站地图_食美特，爱美食爱生活"
          <h3>所有标签</h3>
          <ul>
               @for(tag <- tags.items ){
-             <li><a class="ofh" href='@controllers.routes.Pages.search(tag.name,1)'>@tag.name</a></li>
+             <li><a class="ofh" href='@controllers.routes.Search.search(tag.name,1)'>@tag.name</a></li>
              }
          </ul>
          </div>
