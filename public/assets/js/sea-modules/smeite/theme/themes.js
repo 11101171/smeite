@@ -11,7 +11,7 @@ define(function(require, exports) {
             activeTriggerClass:"active",
             effect: 'fade',
             easing: 'easeOutStrong',
-            interval: 2000
+            interval: 6000
         }).render();
     })
 

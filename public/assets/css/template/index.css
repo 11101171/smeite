@@ -6,74 +6,16 @@
  * 维护：zuosanshao@qq.com
 */
 .main-box{width:950px;margin:20px auto 25px;background:#fff;padding:15px; }
+.flash {width:720px;height:350px;background-color:#fff;overflow:hidden;position:relative;margin-right: 15px}
+.flash  .items .item { width:720px;height:270px;position:relative; }
+.flash  .items .item a{cursor: pointer;color:#333;}
 
-/*.ui-switchable {
-    width: 735px;
-    height: 270px;
-    background-color: #fff;
-    overflow: hidden;
-    position: relative;
-    z-index: 99
-}
 
-.ui-switchable .ui-switchable-content {
-    width: 720px;
-    height: 270px;
-    background-color: #fff;
-    overflow: hidden;
-    position: relative;
-}
-
-.ui-switchable .ui-switchable-content .ui-switchable-panel {
-    width: 720px;
-    height: 270px;
-    position: relative;
-    float: left;
-}
-
-.ui-switchable .ui-switchable-content .ui-switchable-panel a {
-    cursor: pointer;
-    color: #333;
-}
-
-.ui-switchable .ui-switchable-nav {
-    z-index: 1;
+.flash .navi {
+    z-index: 99;
     position: absolute;
-    left: 0;
-    bottom: 0;
-    overflow: hidden;
-}
-
-.ui-switchable .ui-switchable-nav .ui-switchable-trigger {
-    position: relative;
-    width: 144px;
-    height:25px;
-    line-height: 25px;
-    text-align: center;
-    float: left;
-    display: inline;
-    background-color: #fff;
-    opacity: .7;
-    filter: alpha(opacity = 70);
-}
-
-.ui-switchable .ui-switchable-nav li.last {
-    margin-right: 0;
-}
-
-.ui-switchable .ui-switchable-nav .ui-switchable-active {
-    opacity: .1;
-    filter: alpha(opacity = 10);
-    color: #fff;
-}*/
-.flash {width:735px;height:350px;background-color:#fff;overflow:hidden;position:relative;z-index: 99}
-.flash .scrollable { width:720px;height:270px;background-color:#fff;overflow:hidden;position:relative; }
-.flash .scrollable .items { position:absolute;z-index:1; }
-.flash .scrollable .items .item { width:720px;height:270px;position:relative;float:left; }
-.flash .scrollable .items .item a{cursor: pointer;color:#333;}
-
-.flash .navi { background-color:#fff;/*overflow:hidden;height:3px;position:relative;*/}
-.flash .navi { /*background:#fff url(../../images/ui/navi-wrap-bg.png) repeat-x top;*/overflow:hidden; }
+    bottom: 0px;
+    overflow:hidden; }
 .flash .navi li { position:relative;width:130px;float:left;display:inline;padding-top:11px;margin-right:17px}
 .flash .navi li.last{margin-right:0}
 .flash .navi li .thumb { height:45px;overflow:hidden;cursor:pointer; }
