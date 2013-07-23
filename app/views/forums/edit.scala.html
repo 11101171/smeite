@@ -42,16 +42,13 @@ title = "发布主题_讨论吧_广场_食美特，爱美食爱生活"
 
 
 }{
-<script type="text/javascript">
 
-    seajs.use(["app/init", "app/smeite.editor"], function(init){
-        var $ = jQuery;
+<script type="text/javascript">
+    seajs.use(['$','smeite/forum/forum','smeite/smeite.editor'],function($,forum,editor){
         if(SMEITER.userId == ""){
             $.smeite.dialog.isLogin();
         }
         $.smeite.editor = $.smeite.Editor();
-        init.load("app/forum/forum");
-    });
-
+    })
 </script>
 }

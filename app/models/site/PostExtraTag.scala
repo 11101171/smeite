@@ -4,6 +4,11 @@ import java.sql.Timestamp
 
 import scala.slick.driver.MySQLDriver.simple._
 
+/*
+*
+* 为帖子添加额外的标签，便于查找到帖子
+* */
+
 case class PostExtraTag (
                           id: Option[Long],
                           pid:Long,

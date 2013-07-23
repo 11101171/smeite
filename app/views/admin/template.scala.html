@@ -6,17 +6,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="shortcut icon" type="image/png" href="/assets/favicon.png">
-    <link rel="stylesheet" href="/assets/admin/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/assets/admin/css/bootstrap-responsive.min.css" />
-    <link rel="stylesheet" href="/assets/admin/css/unicorn.main.css" />
-    <link rel="stylesheet" href="/assets/admin/css/unicorn.grey.css" class="skin-color" />
-    <link rel="stylesheet" type="text/css" href="/assets/admin/js/uploadify/uploadify.css" />
-    <script src="/assets/admin/js/jquery.min.js"></script>
-    <script src="/assets/admin/js/jquery.tools.min.js"></script>
-    <script src="/assets/admin/js/bootstrap.min.js"></script>
-    <script src="/assets/admin/js/jquery.admin.js"></script>
-    <script src="/assets/admin/js/uploadify/jquery.uploadify-3.1.js"></script>
-    <script src="/assets/admin/js/xheditor/xheditor-1.1.14-zh-cn.min.js"></script>
+    <link rel="stylesheet" href="/admin/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/admin/assets/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="/admin/assets/css/unicorn.main.css" />
+    <link rel="stylesheet" href="/admin/assets/css/unicorn.grey.css" class="skin-color" />
+    <link rel="stylesheet" type="text/css" href="/admin/assets/js/uploadify/uploadify.css" />
+    <script src="/admin/assets/js/jquery.min.js"></script>
+    <script src="/admin/assets/js/jquery.tools.min.js"></script>
+    <script src="/admin/assets/js/bootstrap.min.js"></script>
+    <script src="/admin/assets/js/jquery.admin.js"></script>
+    <script src="/admin/assets/js/uploadify/jquery.uploadify-3.1.js"></script>
+    <script src="/admin/assets/js/xheditor/xheditor-1.1.14-zh-cn.min.js"></script>
     <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21136607"></script>
 
     </head>
@@ -96,10 +96,14 @@
                     <a href="#"><i class="icon icon-th-list"></i> <span>频道管理</span></a>
                     <ul>
                         <li><a href='@controllers.admin.routes.Adverts.channel("index")'>首页频道管理</a></li>
-                        <li><a href='@controllers.admin.routes.Adverts.channel("tejia")'>天天特价管理</a></li>
-                        <li><a href='@controllers.admin.routes.Adverts.channel("checkIn")'>签到推荐管理</a></li>
+                        <li><a href='@controllers.admin.routes.Adverts.channel("freshLife")'>鲜生活频道管理</a></li>
+                        <li><a href='@controllers.admin.routes.Adverts.channel("tejia")'>今天值得买管理</a></li>
+                        <li><a href='@controllers.admin.routes.Adverts.channel("themes")'>主题频道管理</a></li>
+                        <li><a href='@controllers.admin.routes.Adverts.channel("sifangcai")'>私房菜频道管理</a></li>
+                        <li><a href='@controllers.admin.routes.Adverts.channel("sites")'>小镇频道管理</a></li>
                         <li><a href='@controllers.admin.routes.Adverts.channel("forum")'>讨论吧频道管理</a></li>
-                        <li><a href='@controllers.admin.routes.Adverts.channel("miss")'>主题频道管理</a></li>
+                        <li><a href='@controllers.admin.routes.Adverts.channel("checkIn")'>签到推荐管理</a></li>
+
                     </ul>
                 </li>
 
@@ -107,7 +111,7 @@
                     <a href="#"><i class="icon icon-th-list"></i> <span>小镇管理</span></a>
                     <ul>
                         <li><a href='@controllers.admin.routes.Sites.siteList(1)'>小镇管理</a></li>
-                        <li><a href='@controllers.admin.routes.Sites.postList(1)'>帖子管理</a></li>
+                        <li><a href='@controllers.admin.routes.Sites.postList(0,1)'>帖子管理</a></li>
 
                     </ul>
                 </li>

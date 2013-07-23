@@ -1,0 +1,319 @@
+/**
+ * Created by zuosanshao.
+ * Date: 12-9-18
+ * Time: 下午3:02
+ * 维护人员:zuosanshao@qq.com
+
+ *** for sites.scala.html  siteList.scala.html  postList.scala.html
+ */
+
+.main-box {
+    width: 950px;
+    margin: 20px auto 25px;
+    background: #fff;
+    padding: 15px;
+}
+
+.flash {
+    width: 700px;
+    height: 250px;
+    background-color: #fff;
+    overflow: hidden;
+    position: relative;
+}
+
+.flash  .items .item {
+    width: 685px;
+    height: 250px;
+    position: relative;
+}
+
+.flash  .items .item a {
+    cursor: pointer;
+    color: #333;
+}
+
+.flash .navi {
+    z-index: 99;
+    position: absolute;
+    right: 20px;
+    bottom: 5px;
+    overflow:hidden; }
+
+.flash .navi li {
+    position: relative;
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+    float: right;
+    display: inline;
+    background-color: #ddd;
+    -moz-border-radius: 15px;
+    -khtml-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px
+}
+
+.flash .navi li.active  {
+   background: #e26;
+}
+
+.bulletin {
+     padding-left: 20px;
+     width:230px;
+     height:250px;
+     background-color: #f9f9f9;
+ }
+.bulletin h3{
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+}
+.bulletin p{
+    padding: 10px 0;
+    text-align: center;
+}
+.bulletin .edit{
+    font-size: 20px;
+    color: #E26;
+    font-weight: bolder;
+}
+
+.bulletin .create-theme {
+    display: inline-block;
+    width:100px;
+    height: 30px;
+    border: 1px solid #7ab121;
+    background-color: #86b835;
+    border-radius: 3px;
+    text-align: center;
+    line-height:30px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.bulletin .create-theme:hover {
+    text-decoration: none;
+    background: #86b835 url(images/button.png) -5px -611px;
+}
+
+.bulletin .create-theme:active {
+    text-decoration: none;
+    background: #86b835 url(images/button.png) -5px -641px;
+}
+
+
+/* sort for gallery page  */
+.filter-wrap {
+    margin: 20px 0;
+    padding: 0;
+    position: relative;
+}
+
+.filter-wrap h2 {
+    float: left;
+    font-size:15px;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 7px;
+    color: #fff;
+    display: inline;
+}
+
+.filter-wrap i {
+    width: 980px;
+    height: 20px;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    background: url(images/site_dotted.png) repeat-x center
+}
+
+.filter {
+    float: left;
+    padding-left: 15px
+}
+
+.filter a {
+    float: left;
+    margin: 0 10px 0 0;
+    background: #ececec;
+    height: 20px;
+    padding: 0 10px;
+    line-height: 20px;
+    white-space: nowrap;
+    color: #808285;
+    -moz-border-radius: 30px;
+    -webkit-border-radius: 30px;
+    border-radius: 30px
+}
+
+.filter a:hover, .cate a:hover{
+    text-decoration: none;
+    color: #fff;
+    background: #588C0E
+}
+
+.filter a.current, .cate a.current {
+    background: #588C0E;
+    color: #fff
+}
+
+
+/* end */
+.category {width:950px;background:#fff;padding:15px; margin: 0 auto 20px;}
+.category .group{overflow: hidden;}
+.category .hd{ margin-bottom:6px;overflow:hidden;padding: 0 10px}
+.category .hd h2{ font-size:16px;height:28px;line-height:28px;float:left;color:#666;}
+.category .hd h2 a, .hd h2 a{color:#666;text-decoration:none}
+.category .hd h3{font-size: 12px;height:28px;line-height:28px;float:left;color:#e26;}
+.category .hd h3 a{ font-weight: normal}
+.category .hd h3 a:hover{ color:#e26}
+.category .hd h3 span{font-weight: normal}
+.category .hd .more{float:right;display:block;font-size:12px;font-weight:700;line-height:28px;}
+.category .hd .more a{color:#333;text-decoration:none;}
+.category .hd .more a.on{display:block;}
+.category .group{overflow: hidden;}
+
+.category .group .item {
+    float: left;
+    width: 430px;
+    height: 150px;
+    margin-right:26px;
+    padding:15px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    overflow: hidden
+}
+
+.group  .item  .pic {
+    display: block;
+    width: 150px;
+    height:150px;
+    float: left;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.group .item .info{
+    width: 265px;
+    float: left;
+}
+.category  .item  .title {
+    color: #333
+}
+
+.group  .item  .title a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+    color: #333 !important
+}
+
+.group .item .num{
+    color:#588c0e;
+    padding: 10px 3px;
+}
+.group .item .intro{
+    color: #777;
+    overflow: hidden;
+    padding-left: 3px;
+    height: 88px;
+    line-height: 1.7em;
+}
+
+
+ /* 帖子 */
+.category .posts{overflow: hidden;}
+
+.category .posts .item {
+    float: left;
+    width: 430px;
+    height:430px;
+    margin-right:26px;
+    padding:15px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    overflow: hidden
+}
+
+.posts  .item  .pic {
+    display: block;
+    width: 430px;
+    height:290px;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.posts  .item .num {
+    position: relative;
+    color: #000;
+    background-color: #fff;
+    margin: 10px auto;
+    width: 160px;
+    height: 24px;
+    line-height: 24px;
+    overflow: hidden;
+}
+.posts  .item .num .view-num {
+    float: left;
+    padding-left: 25px;
+    background: url(images/post-view.png) no-repeat 0 center;
+    overflow: hidden;
+    width:30px;
+}
+.posts  .item .num .reply-num {
+    float: left;
+    padding-left: 25px;
+    background: url(images/post-comment.png) no-repeat 0 center;
+    overflow: hidden;
+    width:30px;
+}
+.posts  .item .num .like-state {
+    width: 50px;
+    float:left;
+}
+.posts  .item .num a {
+    color: #000;
+    float: left;
+}
+.posts  .item .num .like-state .like-num {
+    height: 24px;
+    overflow: hidden;
+    text-align: left;
+    padding-left: 5px;
+    position: relative;
+}
+.posts  .item .num .like-state .like-num dl {
+    position: relative;
+}
+.posts  .item .num .like-state .like-num dl dd {
+    width: 21px;
+    height: 24px;
+}
+.posts  .item .num .like-state .like-num dl dd {
+    width: 21px;
+    height: 24px;
+}
+.posts h3{
+    text-align: center;
+    font-size: 18px;
+    font-weight: bolder;
+    color: #666;
+}
+
+.posts .intro{
+    line-height: 1.5em;
+    height: 35px;
+}
+
+.category .last {
+    margin-right: 0 !important
+}
+
+
+

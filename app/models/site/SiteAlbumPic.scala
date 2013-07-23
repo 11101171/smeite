@@ -4,10 +4,13 @@ import java.sql.Timestamp
 
 import scala.slick.driver.MySQLDriver.simple._
 
+
+/* aid  : Album id 小镇相册的ID */
+
 case class SiteAlbumPic (
                         id: Option[Long],
                         sid:Long,
-                        aid:Long,
+                        aid:Option[Long],
                         intro:Option[String],
                         pic:String,
                         isTop:Int,
@@ -23,8 +26,12 @@ object SiteAlbumPics extends Table[SiteAlbumPic]("site_album_pic") {
   def isTop = column[Int]("is_top")
   def addTime = column[Timestamp]("add_time")
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ sid ~ aid  ~ intro.?  ~ pic ~ isTop ~ addTime.?  <>(SiteAlbumPic, SiteAlbumPic.unapply _)
-  def autoInc  = id.? ~ sid ~ aid  ~ intro.?  ~ pic ~ isTop ~ addTime.?  <>(SiteAlbumPic, SiteAlbumPic.unapply _) returning id
+  def * = id.? ~ sid ~ aid.?  ~ intro.?  ~ pic ~ isTop ~ addTime.?  <>(SiteAlbumPic, SiteAlbumPic.unapply _)
+  def autoInc  = id.? ~ sid ~ aid.?  ~ intro.?  ~ pic ~ isTop ~ addTime.?  <>(SiteAlbumPic, SiteAlbumPic.unapply _) returning id
+
+  def autoInc2 = sid ~ aid.? ~ intro.? ~ pic ~ isTop returning id
+
+  def autoInc3 = sid ~ pic returning id
 
 
 

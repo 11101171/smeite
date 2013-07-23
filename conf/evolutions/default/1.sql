@@ -1,4 +1,5 @@
 # --- First database schema
+# --- First database schema
 
 # --- !Ups
 
@@ -935,7 +936,7 @@ CREATE TABLE IF NOT EXISTS `tag`(
 CREATE TABLE IF NOT EXISTS `tag_group`(
        `id`                     int(10) NOT NULL AUTO_INCREMENT,
       `name`                    varchar(32) not null default '',
-      `pic`                     varchar(128) not null default '/assets/ui/tag.jpg',
+      `pic`                     varchar(128) not null default '/assets/img/ui/tag.jpg',
       `intro`                   varchar(128) not null default '',
       `cid`                     smallint(10) NOT NULL,
       `hot_index`               smallint(10) NOT NULL default '0',
@@ -1536,6 +1537,9 @@ alter table tag_goods add  tag_code int unsigned  not null default '0';
    分类  cid  0 生活  1 品牌站 2 其他
    状态  status 0 未审核  1 通过审核 2 优质
    成员数量    member_num
+   权限 permission  0 允许所有人发帖 1 只允许小镇居民发帖
+   通告 notice
+   修改时间   modify_time
    创建时间   add_time
 */
 DROP TABLE IF EXISTS `site`;
@@ -1544,12 +1548,15 @@ CREATE TABLE `site` (
   `uid`                 int(10) ,
   `title`                  varchar(64) not null,
   `pic`                 varchar(250) not null ,
-  `intro`             varchar(200) ,
-  `tags`             varchar(200) ,
+  `intro`             varchar(250) ,
+  `tags`             varchar(250) ,
   `cid`             tinyint  not null default  '0',
   `status`            tinyint  not null default  '0',
   `member_num`        smallint unsigned not null default  '1',
-  `add_time`           timestamp,
+  `permission`        tinyint  not null default  '0',
+  `notice`             varchar(250) ,
+  `modify_time`         timestamp default '2013-07-18 12:00:00',
+  `add_time`           timestamp default '2013-07-18 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
@@ -1557,7 +1564,7 @@ CREATE TABLE `site` (
    site_member         小镇成员
      sid               小镇
      uid               成员
-     member_duty        成员职务  0 普通居民 1 管理员  2 创办者
+     duty        成员职务  0 居民 1 镇长  2 村长
      add_time           加入时间
   */
 DROP TABLE IF EXISTS `site_member`;
@@ -1565,7 +1572,7 @@ CREATE TABLE `site_member` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `sid`                 int(10) ,
   `uid`                 int(10) ,
-  `member_duty`       tinyint  not null default  '0',
+  `duty`       tinyint  not null default  '0',
   `add_time`           timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
@@ -1652,7 +1659,7 @@ CREATE TABLE `site_baobei` (
    内容 content
    标签  tags
    额外标签  extra_tags
-   状态  status 0 草稿  1 发布
+   状态  status 0 草稿  1 发布 2 优质
    置顶  isTop
    浏览次数 view_num
    额外属性1 extra_attr1    工艺 口味  难度  主料  辅料  调料
@@ -1673,9 +1680,11 @@ CREATE TABLE `post` (
   `pic`                 varchar(250) not null ,
   `content`             text ,
   `tags`             varchar(200) ,
-  `status`            tinyint  not null default  '0',
+  `status`            tinyint  not null default  '1',
   `is_top`            tinyint  not null default  '0',
   `view_num`          int unsigned  not null default  '1',
+  `love_num`          int unsigned  not null default  '1',
+  `reply_num`          int unsigned  not null default  '1',
   `extra_attr1`             varchar(200) ,
   `extra_attr2`             varchar(200) ,
   `extra_attr3`             varchar(200) ,
@@ -1693,10 +1702,12 @@ CREATE TABLE `post` (
      id                  表的ID
      uid                  用户的id
      pid                  帖子
+     reply_type          0 随意吐槽 1 提问求解  2 上传成果
      quote_reply          引用的内容
      content             回复的内容
      check_state        审核状态
      add_time           添加时间
+
 --
 */
 -- ------------------------------------------------------------
@@ -1704,7 +1715,8 @@ DROP TABLE IF EXISTS `post_reply`;
 CREATE TABLE IF NOT EXISTS `post_reply`(
   `id`                     int(10) NOT NULL AUTO_INCREMENT,
   `uid`                    int(10) NOT NULL ,
-  `pid`                 int(10) NOT NULL ,
+  `pid`                    int(10) NOT NULL ,
+  `reply_type`             tinyint NOT NULL DEFAULT '0',
   `quote_reply`             text,
   `content`                  text ,
   `check_state`          tinyint NOT NULL DEFAULT '0',
@@ -1863,3 +1875,8 @@ CREATE TABLE IF NOT EXISTS `reply_msg`(
   `add_time`                timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+/* 2013月7月14日*/
+alter table advert add start_time timestamp default '2013-02-02 12:00:00';
+alter table advert add end_time   timestamp default '2013-02-02 12:00:00';

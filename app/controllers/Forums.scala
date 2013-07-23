@@ -120,12 +120,12 @@ object Forums extends Controller {
     topicForm.bindFromRequest.fold(
       formWithErrors => BadRequest(views.html.forums.edit(user,formWithErrors)),
       fields =>{
-        var intro =Jsoup.clean(fields._5,Whitelist.none());
+        var intro =Jsoup.clean(fields._5,Whitelist.none())
         if(intro.length()>100) intro =intro.substring(0,100)+"..."
-       val  doc =Jsoup.parseBodyFragment(fields._5);
+       val  doc =Jsoup.parseBodyFragment(fields._5)
         val goodsImages =doc.body().getElementsByClass("img-goods")
        val uploadImages= doc.body().getElementsByClass("img-upload")
-       var pics ="";
+       var pics =""
         val it=uploadImages.iterator()
         while(it.hasNext){
           pics +=it.next().attr("src")+","

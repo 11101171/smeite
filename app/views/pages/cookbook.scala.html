@@ -1,12 +1,150 @@
-@(user:Option[models.user.User])
+@(user:Option[models.user.User],flashes:List[models.advert.Advert],shicai:List[models.site.Post],menu:List[models.site.Post])
 @views.html.template(
 user,
 nav="cookbook",
 title =  "食美特，不一样的生活"
-)(css="/assets/css/template/china.css") {
+)(css="/assets/css/template/cookbook.css") {
 
-<div class="container clearfix" id="china">
+<div class="container clearfix" id="cookbook">
 
+    <div class="main-box clearfix">
+
+        <div class="flash fl ui-switchable" id="J_flash">
+            <div class="scrollable">
+
+                <div class="items">
+
+                    @for(flash <- flashes) {
+                    <div class="item">
+                        <a href="@flash.link" title="@flash.title" target="_blank">
+                            <img src="@flash.pic" alt="@flash.title" width="685" height="250">
+                        </a>
+                    </div>
+                    }
+
+                </div>
+
+
+            </div>
+            <ul class="navi clearfix">
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <!--  switchable  slide end-->
+        <div class="bulletin  fr clearfix">
+            <div class="bulletin-tips">
+
+                <div class="tag-wrap clearfix">
+
+                    <a href="" target="_blank" class="special">早餐</a>
+                    <a href="" target="_blank">午餐</a>
+                    <a href="" target="_blank" class="special">晚餐</a>
+                    <a href="" target="_blank">下午茶</a>
+                    <a href="" target="_blank">孕妇</a>
+                    <a href="" target="_blank">产妇</a>
+                    <a href="" target="_blank" class="special">宝宝</a>
+                    <a href="" target="_blank">上班族</a>
+                    <a href="" target="_blank">美容</a>
+                    <a href="" target="_blank">减肥</a>
+                    <a href="" target="_blank">延缓衰老</a>
+                    <a href="" target="_blank">清热解毒</a>
+                    <a href="" target="_blank">肢寒畏冷</a>
+                    <a href="" target="_blank">益智补脑</a>
+                    <a href="" target="_blank">补虚养身</a>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- 美食主题推荐-->
+    <div class="category clearfix" id="J_seasonShicai">
+
+        <div class="hd clearfix">
+            <h2 class="fl"><a href="#">应季食材</a></h2>
+            <ul class="tabs">
+                <li class="active"></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="switch-content clearfix">
+
+         <div class="panel">
+             @for((item,i)<-shicai.drop(0).take(6).view.zipWithIndex ){
+             <div class="item @if((i+1)%2==0 ){last} ">
+                 <a href="@controllers.routes.Sites.post(item.id.get)" title="@item.title" class="pic" target="_blank">
+                     <img width="150" height="150" src="@item.pic" alt="@item.title">
+                 </a>
+             </div>
+             }
+
+         </div>
+
+
+         <div class="panel">
+             @for((item,i)<-shicai.drop(5).take(6).view.zipWithIndex ){
+             <div class="item @if((i+1)%2==0 ){last} ">
+                 <a href="@controllers.routes.Sites.post(item.id.get)" title="@item.title" class="pic" target="_blank">
+                     <img width="150" height="150" src="@item.pic" alt="@item.title">
+                 </a>
+             </div>
+             }
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 食材主题推荐-->
+    <div class="category clearfix">
+        <div class="hd clearfix">
+            <h2 class="fl"><a href="@controllers.routes.Pages.postList(0,1,1)">每周私房菜</a></h2>
+            <a class="fr" href="@controllers.routes.Pages.postList(0,1,1)">更多&gt;&gt;</a>
+        </div>
+        <div class="group clearfix">
+            @for((item,i)<-menu.view.zipWithIndex ){
+            <div class="item @if((i+1)%4==0){last} ">
+                <div class="pic">
+                    <a href="@controllers.routes.Sites.post(item.id.get)" title="@item.title"  target="_blank">
+                        <img class="b-img" width="210" height="210" src="@item.pic" alt="@item.title">
+                    </a>
+                    <strong><span>@item.tags </span> </strong>
+                 </div>
+
+                <div class="num">
+                    <div class="view-num">@item.viewNum</div>
+                    <div class="reply-num">@item.replyNum</div>
+                    <div class="like-state">
+                        <a rel="followGoods" href="javascript:void(0)" data-pid="@item.id.get">
+                            <i class="ico-likes" title="喜欢"></i>
+                        </a>
+                        <div class="like-num">
+                            <dl class="J_scrollUp" style="top: 0px;">
+                                <dd class="J_FavorNum" data-val="@item.loveNum">@item.loveNum</dd>
+                                <dd>+1</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="ofh">
+                    <a href="@controllers.routes.Sites.post(item.id.get)" target="_blank">@item.title</a>
+                </h3>
+            </div>
+              }
+
+
+        </div>
+    </div>
 
 
 
@@ -15,10 +153,6 @@ title =  "食美特，不一样的生活"
 
         }{
 <script type="text/javascript">
-    seajs.use('app/init', function (init) {
-        var $ = jQuery;
-
-      init.load('app/goods/goods.find,app/goods/goods.favor');
-    });
+    seajs.use('smeite/cookbook');
 </script>
 }

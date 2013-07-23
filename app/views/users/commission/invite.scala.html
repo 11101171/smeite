@@ -1,7 +1,7 @@
 @(user:Option[models.user.User],page:models.Page[models.user.User],totalInviters:Int,totalReward:Int)
 @views.html.template(
 user
-)(css="/assets/css/template/user.setting.css") {
+)(css="/assets/css/template/userSetting.css") {
 <div class="container" id="account">
     <div class="setting clearfix">
         <div class="side-nav">
@@ -122,10 +122,10 @@ user
             <!-- end -->
         </div>
     </div>
+    </div>
     }{
     <script type="text/javascript">
-       seajs.use("app/init", function (init) {
-            init.load("app/user/user.invitation");
-        });
+
+       seajs.use("smeite/user/invitation");
     </script>
     }

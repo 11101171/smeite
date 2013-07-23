@@ -1,7 +1,7 @@
 @(form: Form[(String,String,Long)],i:Long=0)
 @views.html.template(
 title =  "食美特，爱美食爱生活——用户注册"
-)(css="/assets/css/template/user.regLogin.css") {
+)(css="/assets/css/template/userRegLogin.css") {
 
     <div class="container" id="regLogin">
         <div class="setting clearfix">
@@ -71,8 +71,6 @@ title =  "食美特，爱美食爱生活——用户注册"
 
         }{
 <script type="text/javascript">
-    seajs.use('app/init', function (init) {
-        init.load('app/user/user.regLogin');
-    });
+    seajs.use("smeite/user/regLogin");
 </script>
 }

@@ -73,13 +73,13 @@ object UsersRegLogin extends Controller {
   /*用户overlay dialog email 登陆*/
   def dialogEmailLogin= Action{ implicit request =>
     loginForm.bindFromRequest.fold(
-      formWithErrors => Ok(Json.obj("code" -> "101", "message" -> "密码或者email错误……")),
+      formWithErrors => Ok(Json.obj("code" -> 101, "message" -> "密码或者email错误……")),
       user =>{
         val u=UserDao.authenticate(user._1,user._2).get;
         Cache.set(u.id.get.toString,u);
         /*记录登陆信息*/
         UserSQLDao.loginRecord(u.id.get,request.remoteAddress,1)
-        Ok(Json.obj( "code" -> "100", "message" ->"success")).withSession("user" -> u.id.get.toString) }
+        Ok(Json.obj( "code" -> 100, "message" ->"success")).withSession("user" -> u.id.get.toString) }
     )
   }
 

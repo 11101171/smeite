@@ -13,5 +13,6 @@ package models.site
 
 object PostCate extends Enumeration {
   val  SiFangCai = Value("私房菜")
+  val ShiCai  = Value("食材")
   val Others =Value("其他")
 }

@@ -64,7 +64,7 @@ object Goodses extends Table[Goods]("goods") {
   def collectTime=column[Timestamp]("collect_time")
   def clickUrl=column[String]("click_url")
   def * = id.? ~ numIid ~ hwRate ~ name ~ intro ~ price ~ pic ~ itemPics ~ nick ~ promotionPrice.? ~ content.? ~ loveNum ~ volume ~ status ~ isMember ~ location ~ commissionRate.? ~ uid ~ collectTime.? ~ clickUrl <>(Goods, Goods.unapply _)
-  def autoInc = uid ~ numIid  ~ name ~ intro ~ price ~ pic ~ itemPics ~ nick  ~ clickUrl ~ hwRate  returning id
+  def autoInc = uid ~ numIid  ~ name ~ intro ~ price ~ pic ~ itemPics ~ nick  ~ clickUrl ~ location ~ hwRate  returning id
 
 
 }

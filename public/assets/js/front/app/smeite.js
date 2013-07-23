@@ -630,8 +630,8 @@ define(function(require, exports) {
                html +='<div class="gift"> ';
                          //  这里是抽奖区域
                 html +='<div class="gift_area">';
-                html +='<div class="gift_bg show"><img src="/assets/ui/new_gift.png"> </div>';
-                html +='<div class="gift_roll hide"><img src="/assets/ui/new_gift_roll.gif"> </div>';
+                html +='<div class="gift_bg show"><img src="/assets/img/ui/new_gift.png"> </div>';
+                html +='<div class="gift_roll hide"><img src="/assets/img/ui/new_gift_roll.gif"> </div>';
                 html +='<div class="gift_left_value show" id="J_leftValue"> 0 </div>';
                 html +='<div class="gift_right_value show" id="J_rightValue"> 0 </div>';
                 html += '</div>';
@@ -1546,8 +1546,8 @@ define(function(require, exports) {
                 html +='<div class="checkIn" id="J_checkIn"> ';
                 //  这里是抽奖区域
                 html +='<div class="checkIn_area">';
-                html +='<div class="checkIn_bg hide"><img src="/assets/ui/new_gift.png"> </div>';
-                html +='<div class="checkIn_roll show"><img src="/assets/ui/new_gift_roll.gif"> </div>';
+                html +='<div class="checkIn_bg hide"><img src="/assets/img/ui/new_gift.png"> </div>';
+                html +='<div class="checkIn_roll show"><img src="/assets/img/ui/new_gift_roll.gif"> </div>';
                 html +='<div class="checkIn_left_value hide" id="J_leftValue"> 0 </div>';
                 html +='<div class="checkIn_right_value hide" id="J_rightValue"> 0 </div>';
                 html += '</div>';

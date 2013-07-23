@@ -2,7 +2,7 @@
 @import helper._
 @views.html.template(
 user
-)(css="/assets/css/template/user.setting.css") {
+)(css="/assets/css/template/userSetting.css") {
 <div class="container" id="account">
                  <div class="setting clearfix">
                  <div class="side-nav">
@@ -57,8 +57,7 @@ user
              </div>
         }{
 <script type="text/javascript">
-    seajs.use("app/init", function(init){
-        init.load("app/user/user.modifypwd");
-    });
+
+    seajs.use("smeite/user/modifyPasswd");
 </script>
 }
