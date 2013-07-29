@@ -62,7 +62,7 @@ define(function(require, exports) {
     });
 
 
-    $(".theme-item .ilike-del").die().click(function(){
+    $(".theme-item .ilike-del").off("click").click(function(){
         var $this = $(this),
             $themeItem = $this.parents(".theme-item"),
             dataType = $this.data("type"),

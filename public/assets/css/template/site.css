@@ -48,13 +48,13 @@
      padding-bottom: 5px;
  }
 .site-nav .site-info .intro{
-    height: 70px;
+    height: 80px;
     width: 490px;
     overflow: hidden;
 }
 .site-nav .site-info .tags {
     margin-bottom: 5px;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 .site-info .tags label{
     float: left;
