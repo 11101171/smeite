@@ -97,21 +97,12 @@ nav="index"
                 @Html(meishiTags.content.getOrElse(""))
             </div>
             </dt>
-            @for((advert,i)<-meishi.view.zipWithIndex){
-            @if(i==0){
-            <dd>
-                <a href="@advert.link" title="@advert.title" target="_blank">
-                    <img src="@advert.pic" width="240" height="150" alt="@advert.title">
-                </a>
-                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span> </a> </div>
-            </dd>
-            }
-            }
+
         </dl>
 
         <dl class="second">
             @for((advert,i)<-meishi.view.zipWithIndex){
-            @if(i>0 && i<4){
+            @if(i<2){
             <dd>
                 <a href="@advert.link" title="@advert.title" target="_blank">
                     <img src="@advert.pic" width="150" height="150" alt="@advert.title">
@@ -123,7 +114,7 @@ nav="index"
         </dl>
         <dl class="third">
             @for((advert,i)<-meishi.view.zipWithIndex){
-            @if(i==4){
+            @if(i==2){
             <dd>
                 <a href="@advert.link" title="@advert.title" target="_blank">
                     <img src="@advert.pic" width="310" height="310" alt="@advert.title">
@@ -131,20 +122,12 @@ nav="index"
                 <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span> </a> </div>
             </dd>
             }
-            @if(i>4 && i<7){
-            <dd @if(i==5){class="mr10"}>
-                <a href="@advert.link" title="@advert.title" target="_blank">
-                    <img src="@advert.pic" width="150" height="150" alt="@advert.title">
-                </a>
-                <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span> </a> </div>
-            </dd>
-            }
+
             }
         </dl>
-
         <dl class="fourth last">
             @for((advert,i)<-meishi.view.zipWithIndex){
-            @if(i>=7){
+            @if(i>2){
 
             <dd>
                 <a href="@advert.link" title="@advert.title" target="_blank">
@@ -330,42 +313,124 @@ nav="index"
 </div>
 <!-- 居家  end -->
 
-<!-- 小镇 start -->
-<div class="category-main clearfix">
-    <div class="category">
-        <dl class="first">
-            <dt>
-            <div class="title-wrap clearfix">
-                <h2 class="title clearfix"><a href="/sites" target="_blank">小镇</a></h2>
-                <div class="title-desc"><a href="/site/list" target="_blank">&nbsp;•&nbsp;每日推荐</a></div>
-            </div>
-            <div class="tag-wrap clearfix">
-                @Html(shicaiTags.content.getOrElse(""))
-            </div>
-            </dt>
-
-        </dl>
-
-        <dl class="sites">
-            @for((advert,i)<-site.view.zipWithIndex ){
-            <dd @if((i+1)%4==0){class="last"}>
-            <a href="@advert.link" title="@advert.title" target="_blank">
-                <img src="@advert.pic" width="167" height="167" alt="@advert.title">
-            </a>
-            <div class="desc"><a href="@advert.link" title="@advert.title" target="_blank"> <span>@advert.title</span></a></div>
-
-            </dd>
-            }
-
-        </dl>
+<!-- site and post start-->
+ <div class="category-main clearfix">
+     <div class="category">
+         <div class="colmain710">
+           <div class="hd">
+             <h2>  <a>小镇推荐</a> </h2>
+           </div>
+           <div class="bd">
+               <div class="site-list">
+                    <div class="site">
+                        <div class="pic">
+                            <a><img src="/images/temp/site.jpg" width="100" height="100" > </a>
+                        </div>
+                        <div class="info">
+                            <h2 class="name ofh"><a>小镇测试</a></h2>
+                            <p class="intro">这里是小镇简介这里是小镇简介这里是小镇简介这里是小镇简介这里是小镇简介这里是小镇简介这里是小镇简介这里是小镇简介</p>
+                            <div class="member">201居民</div>
+                        </div>
 
 
-    </div>
+                    </div>
+                   <div class="site">
+                       <div class="pic">
+                           <a><img src="/images/temp/site.jpg" width="100" height="100" > </a>
+                       </div>
+                       <div class="info">
+                           <h2 class="name ofh"><a>小镇测试</a></h2>
+                           <p class="intro">这里是小镇简介这里是小镇简介这里是小镇简介这里是小镇简介这里是小镇简介这里是小镇简介这里是小镇简介这里是小镇简介</p>
+                           <div class="member">201居民</div>
+                       </div>
 
 
+                   </div>
+                   <div class="site">
+                       <div class="pic">
+                           <a><img src="/images/temp/site.jpg" width="100" height="100" > </a>
+                       </div>
+                       <div class="info">
+                           <h2 class="name ofh"><a>小镇测试</a></h2>
+                           <p class="intro">这里是小镇简介这里是小镇简介这里是小镇简介这里是小镇简介这里是小镇简介这里是小镇简介这里是小镇简介这里是小镇简介</p>
+                           <div class="member">201居民</div>
+                       </div>
 
-</div>
-<!-- 小镇 end -->
+
+                   </div>
+                   <div class="site">
+                       <div class="pic">
+                           <a><img src="/images/temp/site.jpg" width="100" height="100" > </a>
+                       </div>
+                       <div class="info">
+                           <h2 class="name ofh"><a>小镇测试</a></h2>
+                           <p class="intro">这里是小镇简介这里是小镇简介这里是小镇简介这里是小镇简介这里是小镇简介这里是小镇简介这里是小镇简介这里是小镇简介</p>
+                           <div class="member">201居民</div>
+                       </div>
+
+
+                   </div>
+               </div>
+             </div>
+         </div>
+         <div class="colaside230">
+             <div class="hd">
+                 <h2>  <a>好贴推荐</a> </h2>
+             </div>
+             <div class="bd">
+                 <ul class="post-list">
+
+
+                         <li class="ofh">
+                             <a href="" target="_blank" title="【新手入门】欢迎您常来逛逛">
+
+                                 <em>【新手入门】欢迎您常来逛逛</em>
+                             </a>
+                         </li>
+
+                         <li class="ofh">
+                             <a href="" target="_blank" title="【新手入门】新居民的脚印">
+
+                                 <em>【新手入门】新居民的脚印</em>
+                             </a>
+                         </li>
+
+                         <li class="ofh">
+                             <a href="" target="_blank" title="【新手入门】购物送集分宝">
+
+                                 <em>【新手入门】购物送集分宝</em>
+                             </a>
+                         </li>
+
+                         <li class="ofh">
+                             <a href="" target="_blank" title="【新手入门】淘宝、天猫返利攻略">
+
+                                 <em>【新手入门】淘宝、天猫返利攻略</em>
+                             </a>
+                         </li>
+
+                         <li class="ofh">
+                             <a href="" target="_blank" title="【商务合作】活动赞助">
+
+                                 <em>【商务合作】活动赞助</em>
+                             </a>
+                         </li>
+
+                         <li class="ofh">
+                             <a href="" target="_blank" title="【商务合作】活动赞助">
+
+                                 <em>【商务合作】活动赞助</em>
+                             </a>
+                         </li>
+
+
+                 </ul>
+             </div>
+         </div>
+     </div>
+ </div>
+
+<!-- site and post end -->
 
 <!-- 底部广告-->
 <div class="adverts" id="J_adverts">
