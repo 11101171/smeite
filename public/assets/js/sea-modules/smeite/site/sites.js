@@ -13,7 +13,19 @@
  */
 define(function(require, exports) {
     var $  = require("$");
+    var Slide = require("slide")
 
+    $(function(){
 
+        var siteFlash = new Slide({
+            element: '#J_siteFlash',
+            panels: '#J_siteFlash  .items .item',
+            triggers:"#J_siteFlash .navi li",
+            activeTriggerClass:"active",
+            effect: 'fade',
+            easing: 'easeOutStrong',
+            interval: 6000
+        }).render();
+    })
 
 });

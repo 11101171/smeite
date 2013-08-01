@@ -23,33 +23,9 @@ nav="index"
 <!--main box start-->
 <div class="main-box clearfix">
 
-    <!--<div class="ui-switchable fl" id="J_indexFlash">
-        <div class="ui-switchable-content">
-               @for(flash <- flashes) {
-               <div class="ui-switchable-panel">
-                    <a href="@flash.link" title="@flash.title" target="_blank">
-                        <img src="@flash.pic" alt="@flash.title" width="720" height="270">
-                    </a>
-                </div>
-                      }
 
-
-
-        </div>
-        <ul class="ui-switchable-nav clearfix">
-            @for((item,i)<-flashes.view.zipWithIndex ){
-            <li class="ui-switchable-trigger @if(i==4){last}">
-            <a href="@item.link">@item.title</a>
-            </li>
-            }
-            <li class=""></li>
-            <li class=""></li>
-            <li class=""></li>
-            <li class="last"></li>
-        </ul>
-    </div>-->
     <div class="flash fl" id="J_indexFlash">
-        <div class="scrollable">
+
 
             <div class="items">
 
@@ -62,8 +38,6 @@ nav="index"
                 }
             </div>
 
-
-        </div>
         <ul class="navi clearfix">
             @for((flash,i)<-flashes.view.zipWithIndex){
             <li @if(i==0){class="active"} @if(i==4){class="last"}>
@@ -116,7 +90,7 @@ nav="index"
         <dl class="first">
             <dt>
             <div class="title-wrap clearfix">
-                <h2 class="title clearfix"><a href='@controllers.routes.Pages.faxian(1,0,1,1)' target="_blank">零食</a></h2>
+                <h2 class="title clearfix"><a href='@controllers.routes.Pages.faxian(1,0,1,1)' target="_blank">美食</a></h2>
                 <div class="title-desc"><a href='@controllers.routes.Pages.faxian(1,0,1,1)' target="_blank">&nbsp;•&nbsp;每日精选</a></div>
             </div>
             <div class="tag-wrap clearfix">

@@ -29,13 +29,13 @@
 
                 <div class="search" id="search">
                     <form action="/search" method="get">
-                        <input class="search-input-keyword" type="text" id="J_keyword" value="请输入您想要搜索的淘宝商品网址或者关键词" name="item">
+                        <input class="search-input-keyword" type="text" id="J_keyword" value="请输入您想要搜索关键词" name="item">
                         <button class="header-search-button" type="submit">搜索</button>
                     </form>
 
                 </div>
 
-            </div>
+                </div>
         </div>
 
 
@@ -47,7 +47,7 @@
             <ul class="channel clearfix">
                 <li class=' @("on".when(nav == "index")) '><a href="/">首页</a></li>
                 <li><span>-</span></li>
-                <li class='@("on".when(nav == "零食"))'><a href='@controllers.routes.Pages.faxian(0,0,1,1)'>零食</a></li>
+                <li class='@("on".when(nav == "美食"))'><a href='@controllers.routes.Pages.faxian(0,0,1,1)'>美食</a></li>
                 <li class='@("on".when(nav == "食材"))'><a href='@controllers.routes.Pages.faxian(1,0,1,1)'>食材</a></li>
                 <li  class='@("on".when(nav == "居家"))'><a href='@controllers.routes.Pages.faxian(2,0,1,1)'>居家</a></li>
 
