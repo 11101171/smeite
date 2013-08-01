@@ -46,8 +46,8 @@ object SiteDao {
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for(c<-Sites.sortBy(_.id desc).drop(startRow).take(pageSize)  )yield c
-    val msgs:List[Site]=  q.list()
-    Page[Site](msgs,currentPage,totalPages)
+    val sites:List[Site]=  q.list()
+    Page[Site](sites,currentPage,totalPages)
   }
 
   /* 筛选 sites */
@@ -81,6 +81,18 @@ object SiteDao {
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val sites:List[Site]=  query.drop(startRow).take(pageSize).list()
     Page[Site](sites,currentPage,totalPages)
+  }
+
+  /* find sites by uid */
+  def findSitesByUid(uid:Long,currentPage:Int,pageSize:Int):Page[Site] =  database.withSession {  implicit session:Session =>
+    val totalRows=Query(Sites.filter(_.uid === uid).length).first()
+    val totalPages=(totalRows + pageSize - 1) / pageSize
+    /*获取分页起始行*/
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val q=  for(c<-Sites.filter(_.uid === uid ).sortBy(_.id desc).drop(startRow).take(pageSize)  )yield c
+    val sites:List[Site]=  q.list()
+    Page[Site](sites,currentPage,totalPages)
+
   }
 
     /* ******************************* site post **************************************** */
@@ -209,6 +221,20 @@ object SiteDao {
   /* 修改居民的职位 */
    def modifySiteMemberDuty(sid:Long,uid:Long,duty:Int) = database.withSession{  implicit session:Session =>
     (for (c <- SiteMembers.filter(_.sid === sid).filter(_.uid === uid)) yield c.duty ).update(duty)
+  }
+
+  def findJoinedSites(uid:Long,currentPage:Int,pageSize:Int):Page[Site] = database.withSession{  implicit session:Session =>
+    val totalRows = Query(SiteMembers.filter( _.uid === uid ).length).first()
+    val totalPages=(totalRows + pageSize - 1) / pageSize
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val query = for{
+      c<-SiteMembers
+      s <- Sites
+      if c.sid === s.id
+      if c.uid === uid
+    }yield s
+    val sites:List[Site]=  query.drop(startRow).take(pageSize).list()
+    Page[Site](sites,currentPage,totalPages)
   }
 
   /* ****************************************** site album ****************************************** */

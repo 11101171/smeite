@@ -13,6 +13,7 @@ import models.theme.Theme
 import models.user.User
 import models.user.dao.{UserSQLDao, UserDao}
 import models.Page
+import models.site.dao.SiteDao
 
 
 /**
@@ -231,10 +232,17 @@ object Users extends Controller {
     }
   }
 
-  def site(id:Long,p:Int) = UserAction{ user => implicit request =>
+  def site(id:Long,t:String,p:Int) = UserAction{ user => implicit request =>
     val  author=UserDao.findById(id)
     val authorStatic=UserDao.findStatic(id)
-    Ok(views.html.users.site(user,author,authorStatic))
+    if(t=="my"){
+      val  page =SiteDao.findSitesByUid(author.id.get,p,12)
+      Ok(views.html.users.site(user,author,authorStatic,page,t))
+    } else {
+      val  page =SiteDao.findJoinedSites(author.id.get,p,12)
+      Ok(views.html.users.site(user,author,authorStatic,page,t))
+    }
+
   }
 
 

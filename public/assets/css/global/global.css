@@ -690,14 +690,7 @@ html, body { *overflow-x:hidden; }
 .container:after {
     clear: both;
 }
-.colmain715 {
-    float: left;
-    width: 715px;
-}
-.colaside230 {
-    float: right;
-    width: 230px;
-}
+
 .vline { margin:0 10px;color:#999;font-size:12px; }
 .vline5 { margin:0 5px;color:#ccc;font-size:12px; }
 .wbbw {
@@ -2544,7 +2537,7 @@ a:hover i.ico-likes {
 #nav{
     height: 40px;
     background-color: #fff;
-    border-bottom: 2px solid #666;
+    border-bottom: 2px solid #556c00;
     position: relative;
 
 }

@@ -15,11 +15,12 @@
 }
 
 .flash {
-    width: 700px;
+    width: 685px;
     height: 250px;
     background-color: #fff;
     overflow: hidden;
     position: relative;
+    margin-right: 15px;
 }
 
 .flash  .items .item {
@@ -233,8 +234,9 @@
 .category .posts .item {
     float: left;
     width: 430px;
-    height:430px;
+  /*  height:430px;*/
     margin-right:26px;
+    margin-bottom:26px;
     padding:15px;
     border: 1px solid #ddd;
     background-color: #fff;

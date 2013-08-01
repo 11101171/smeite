@@ -30,11 +30,7 @@
  insert into advert(position_code,name)value("index-meishi-right","新-首页-美食-3");
  insert into advert(position_code,name)value("index-meishi-right","新-首页-美食-4")  ;
  insert into advert(position_code,name)value("index-meishi-right","新-首页-美食-5") ;
- insert into advert(position_code,name)value("index-meishi-right","新-首页-美食-6");
- insert into advert(position_code,name)value("index-meishi-right","新-首页-美食-7") ;
- insert into advert(position_code,name)value("index-meishi-right","新-首页-美食-8");
- insert into advert(position_code,name)value("index-meishi-right","新-首页-美食-9")  ;
- insert into advert(position_code,name)value("index-meishi-right","新-首页-美食-10") ;
+
 
  insert into advert_position(position,name,code,advert_type)values("index","新-食材-tags","index-shicai-left",1)  ;
  insert into advert_position(position,name,code,advert_type)values("index","新-食材-图片","index-shicai-right",0) ;
@@ -44,11 +40,7 @@
  insert into advert(position_code,name)value("index-shicai-right","新-首页-食材-3");
  insert into advert(position_code,name)value("index-shicai-right","新-首页-食材-4");
  insert into advert(position_code,name)value("index-shicai-right","新-首页-食材-5");
- insert into advert(position_code,name)value("index-shicai-right","新-首页-食材-6");
- insert into advert(position_code,name)value("index-shicai-right","新-首页-食材-7");
- insert into advert(position_code,name)value("index-shicai-right","新-首页-食材-8");
- insert into advert(position_code,name)value("index-shicai-right","新-首页-食材-9");
- insert into advert(position_code,name)value("index-shicai-right","新-首页-食材-10");
+
 
  insert into advert_position(position,name,code,advert_type)values("index","新-居家-tags","index-jujia-left",1)   ;
  insert into advert_position(position,name,code,advert_type)values("index","新-居家-图片","index-jujia-right",0) ;
@@ -58,23 +50,21 @@
  insert into advert(position_code,name)value("index-jujia-right","新-首页-居家-3") ;
  insert into advert(position_code,name)value("index-jujia-right","新-首页-居家-4")  ;
  insert into advert(position_code,name)value("index-jujia-right","新-首页-居家-5")  ;
- insert into advert(position_code,name)value("index-jujia-right","新-首页-居家-6")  ;
- insert into advert(position_code,name)value("index-jujia-right","新-首页-居家-7") ;
- insert into advert(position_code,name)value("index-jujia-right","新-首页-居家-8") ;
- insert into advert(position_code,name)value("index-jujia-right","新-首页-居家-9")  ;
- insert into advert(position_code,name)value("index-jujia-right","新-首页-居家-10")  ;
 
- insert into advert_position(position,name,code,advert_type)values("index","小镇-tags","index-site-left",1)   ;
- insert into advert_position(position,name,code,advert_type)values("index","小镇","index-site-right",0);
- insert into advert(position_code,name)value("index-site-left","首页-小镇-tags") ;
- insert into advert(position_code,name)values("index-site-right","新-首页-小镇1");
- insert into advert(position_code,name)values("index-site-right","新-首页-小镇2");
- insert into advert(position_code,name)values("index-site-right","新-首页-小镇3");
- insert into advert(position_code,name)values("index-site-right","新-首页-小镇4");
- insert into advert(position_code,name)values("index-site-right","新-首页-小镇5");
- insert into advert(position_code,name)values("index-site-right","新-首页-小镇6");
- insert into advert(position_code,name)values("index-site-right","新-首页-小镇7");
- insert into advert(position_code,name)values("index-site-right","新-首页-小镇8");
+
+ insert into advert_position(position,name,code,advert_type)values("index","小镇推荐","index-site-recom",6)   ;
+ insert into advert_position(position,name,code,advert_type)values("index","好贴推荐","index-post-recom",7);
+ insert into advert(position_code,name)value("index-site-recom","新-首页-小镇1") ;
+ insert into advert(position_code,name)value("index-site-recom","新-首页-小镇2") ;
+ insert into advert(position_code,name)value("index-site-recom","新-首页-小镇3") ;
+ insert into advert(position_code,name)value("index-site-recom","新-首页-小镇4") ;
+ insert into advert(position_code,name)values("index-post-recom","新-首页-帖子1");
+ insert into advert(position_code,name)values("index-post-recom","新-首页-帖子2");
+ insert into advert(position_code,name)values("index-post-recom","新-首页-帖子3");
+ insert into advert(position_code,name)values("index-post-recom","新-首页-帖子4");
+ insert into advert(position_code,name)values("index-post-recom","新-首页-帖子5");
+ insert into advert(position_code,name)values("index-post-recom","新-首页-帖子6");
+
 
  insert into advert_position(position,name,code,advert_type)values("index","新-底部-图片","index-bottom",0) ;
  insert into advert(position_code,name)value("index-bottom","新-首页-底部-广告");
