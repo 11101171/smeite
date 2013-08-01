@@ -6,7 +6,12 @@
  * 维护：zuosanshao@qq.com
 */
 .main-box{width:950px;margin:20px auto 25px;background:#fff;padding:15px; }
-.flash {width:720px;height:350px;background-color:#fff;overflow:hidden;position:relative;margin-right: 15px}
+.flash  {width:720px;height:350px;background-color:#fff;overflow:hidden;position:relative;margin-right: 15px}
+.flash .items {
+    width:720px;
+    height:270px;
+    overflow: hidden;
+}
 .flash  .items .item { width:720px;height:270px;position:relative; }
 .flash  .items .item a{cursor: pointer;color:#333;}
 
