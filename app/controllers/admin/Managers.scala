@@ -6,7 +6,7 @@ import play.api.Play.current
 import play.api.data.Forms._
 import play.api.data.Form
 import models.admin.{Manager}
-import models.admin.dao.ManagerDao
+import models.admin.dao.{ManagerSQLDao, ManagerDao}
 import java.sql.Timestamp
 import models.theme.dao.ThemeDao
 import models.goods.dao.GoodsDao
@@ -57,8 +57,9 @@ object Managers extends Controller {
       loginForm.bindFromRequest.fold(
         formWithErrors => BadRequest(views.html.admin.login(formWithErrors)),
         manager => {
-          val m:Manager = ManagerDao.authenticate(manager._1, manager._2).get;
-          Cache.set(m.id.toString, m);
+          val m:Manager = ManagerDao.authenticate(manager._1, manager._2).get
+          Cache.set(m.id.toString, m)
+          ManagerSQLDao.loginRecord(m.id.get,request.remoteAddress,1)
           Redirect(controllers.admin.routes.Managers.index).withSession("manager" ->m.id.get.toString)
         }
       )

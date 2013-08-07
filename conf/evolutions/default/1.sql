@@ -1083,6 +1083,8 @@ CREATE TABLE IF NOT EXISTS `reply_msg`(
       `department`         varchar(16) not null default '',
       `phone`              varchar(30) not null default '',
       `login_time`         timestamp default '2012-5-12 14:18:00',
+      `login_num`           smallint(10) NOT NULL default '1',
+      `login_ip`            varchar(32) DEFAULT '0',
       `add_time`            timestamp default '2012-5-12 14:18:00',
       `role_id`        smallint  not null default '1',
       `role_name`      varchar(32) not null default '',
@@ -1880,3 +1882,11 @@ CREATE TABLE IF NOT EXISTS `reply_msg`(
 /* 2013月7月14日*/
 alter table advert add start_time timestamp default '2013-02-02 12:00:00';
 alter table advert add end_time   timestamp default '2013-02-02 12:00:00';
+
+/* 2013年8月7日
+    `login_num`           smallint(10) NOT NULL default '1',
+  `login_ip`            varchar(32) DEFAULT '0',
+ */
+alter table manager add login_num  smallint(10) not null default '1';
+alter table manager add login_ip  varchar(32) default '0';
+alter table manager add last_login_time timestamp default '2013-02-02 12:00:00';

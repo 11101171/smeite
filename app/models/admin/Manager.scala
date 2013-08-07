@@ -23,6 +23,9 @@ case class Manager (
                      department:String,
                      phone:String,
                      loginTime:Timestamp,
+                     loginNum:Int,
+                     loginIP: Option[String],
+                     lastLoginTime:Timestamp,
                      addTime:Timestamp,
                      roleId:Int,
                      roleName:String
@@ -37,12 +40,15 @@ object Managers extends Table[Manager]("manager") {
   def department = column[String]("department")
   def phone = column[String]("phone")
   def loginTime = column[Timestamp]("login_time")
+  def loginNum=column[Int]("login_num")
+  def loginIP = column[String]("login_ip")
+  def lastLoginTime = column[Timestamp]("last_login_time")
   def addTime = column[Timestamp]("add_time")
   def roleId=column[Int]("role_id")
   def roleName=column[String]("role_name")
 
   // Every table needs a * projection with the same type as the table's type parameter
-  def * = id.? ~ email ~ passwd ~ name ~ department ~ phone ~loginTime ~ addTime ~ roleId ~ roleName <>(Manager, Manager.unapply _)
+  def * = id.? ~ email ~ passwd ~ name ~ department ~ phone ~loginTime~ loginNum ~ loginIP.? ~ lastLoginTime ~ addTime ~ roleId ~ roleName <>(Manager, Manager.unapply _)
 
 
 }
