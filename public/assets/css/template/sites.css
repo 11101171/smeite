@@ -39,6 +39,7 @@
     position: absolute;
     right: 20px;
     bottom: 5px;
+    width: 100px;
     overflow:hidden; }
 
 .flash .navi li {
@@ -46,7 +47,7 @@
     width: 15px;
     height: 15px;
     margin-right: 5px;
-    float: right;
+    float: left;
     display: inline;
     background-color: #ddd;
     -moz-border-radius: 15px;
@@ -224,7 +225,7 @@
     overflow: hidden;
     padding-left: 3px;
     height: 88px;
-    line-height: 1.7em;
+    line-height: 1.5em;
 }
 
 

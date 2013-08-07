@@ -16,14 +16,14 @@ define(function(require, exports) {
     var Slide = require("slide")
     var Tabs = require("tabs")
 
-    var flash = new Slide({
+    var siteFlash = new Slide({
         element: '#J_flash',
-        panels: '#J_flash .scrollable .items .item',
+        panels: '#J_flash  .items .item',
         triggers:"#J_flash .navi li",
         activeTriggerClass:"active",
         effect: 'fade',
-        easing: 'easeOutStrong',
-        interval: 2000
+        easing: 'easeIn',
+        interval: 6000
     }).render();
 
     var seasonTabs  = new Tabs({

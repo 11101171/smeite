@@ -9,12 +9,9 @@ title =  "食美特，爱美食爱生活"
 
     <div class="main-box clearfix">
 
-        <div class="flash fl ui-switchable" id="J_themeFlash">
-            <div class="scrollable">
+        <div class="flash fl ui-switchable" id="J_flash">
 
                 <div class="items">
-
-
                     @for(flash <- flashes) {
                     <div class="item">
                         <a href="@flash.link" title="@flash.title" target="_blank">
@@ -22,17 +19,15 @@ title =  "食美特，爱美食爱生活"
                         </a>
                     </div>
                     }
-
                 </div>
 
-
-            </div>
             <ul class="navi clearfix">
                 <li class="active"></li>
                 <li></li>
                 <li></li>
                 <li></li>
                 <li></li>
+
             </ul>
         </div>
         <!--  switchable  slide end-->

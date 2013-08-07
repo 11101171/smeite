@@ -18,10 +18,9 @@ define(function(require, exports) {
     $(function(){
 
         var siteFlash = new Slide({
-            element: '#J_siteFlash',
-            panels: '#J_siteFlash  .items .item',
-            triggers:"#J_siteFlash .navi li",
-            activeIndex:0,
+            element: '#J_flash',
+            panels: '#J_flash  .items .item',
+            triggers:"#J_flash .navi li",
             activeTriggerClass:"active",
             effect: 'fade',
             easing: 'easeIn',

@@ -13,45 +13,31 @@
 }
 
 .flash {
-    width: 700px;
-    height: 250px;
-    background-color: #fff;
-    overflow: hidden;
-    position: relative;
-    z-index: 99
-}
-
-.flash .scrollable {
     width: 685px;
     height: 250px;
     background-color: #fff;
     overflow: hidden;
     position: relative;
+    margin-right: 15px;
 }
 
-.flash .scrollable .items {
-    width: 20000em;
-    position: absolute;
-    z-index: 1;
-}
-
-.flash .scrollable .items .item {
+.flash  .items .item {
     width: 685px;
     height: 250px;
     position: relative;
-    float: left;
 }
 
-.flash .scrollable .items .item a {
+.flash  .items .item a {
     cursor: pointer;
     color: #333;
 }
 
 .flash .navi {
-    z-index: 1;
+    z-index: 99;
     position: absolute;
     right: 20px;
     bottom: 5px;
+    width: 100px;
     overflow:hidden; }
 
 .flash .navi li {
@@ -59,7 +45,7 @@
     width: 15px;
     height: 15px;
     margin-right: 5px;
-    float: right;
+    float: left;
     display: inline;
     background-color: #ddd;
     -moz-border-radius: 15px;
@@ -69,7 +55,7 @@
 }
 
 .flash .navi li.active  {
-   background: #e26;
+    background: #e26;
 }
 
 .bulletin {
@@ -272,7 +258,7 @@
     width: 15px;
     height: 15px;
     margin-right: 5px;
-    float: right;
+    float: left;
     display: inline;
     background-color: #ddd;
     -moz-border-radius: 15px;
