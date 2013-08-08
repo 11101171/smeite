@@ -59,7 +59,7 @@ object Managers extends Controller {
         manager => {
           val m:Manager = ManagerDao.authenticate(manager._1, manager._2).get
           Cache.set(m.id.toString, m)
-          ManagerSQLDao.loginRecord(m.id.get,request.remoteAddress,1)
+          ManagerSQLDao.loginRecord(m.id.get,request.remoteAddress,1,new Timestamp(System.currentTimeMillis()),m.loginTime)
           Redirect(controllers.admin.routes.Managers.index).withSession("manager" ->m.id.get.toString)
         }
       )

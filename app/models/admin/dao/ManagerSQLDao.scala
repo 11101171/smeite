@@ -22,8 +22,8 @@ object ManagerSQLDao {
 
 
 
-  def loginRecord(mid:Long,ip:String,num:Int)=database.withSession {
-    sqlu"update manager set login_ip=$ip ,login_num = login_num+$num  where id =$mid".first
+  def loginRecord(mid:Long,ip:String,num:Int,loginTime:Timestamp,lastLoginTime:Timestamp)=database.withSession {
+    sqlu"update manager set login_ip=$ip ,login_num = login_num+$num ,login_time = $loginTime ,last_login_time =$lastLoginTime  where id =$mid".first
   }
 
 
