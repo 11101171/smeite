@@ -65,8 +65,11 @@ object ThemeDao {
     Themes.delete(id)
   }
 
-  def countTheme:Int = database.withSession {  implicit session:Session =>
-         Themes.count()
+  def countTheme = database.withSession {  implicit session:Session =>
+    Query(Themes.length).first()
+  }
+  def countTheme(time:Timestamp) = database.withSession {  implicit session:Session =>
+    Query(Themes.filter(_.modifyTime < time ).length).first()
   }
 
   def findById(id:Long):Option[Theme] =  database.withSession {  implicit session:Session =>
@@ -189,6 +192,14 @@ object ThemeDao {
     ThemeDiscusses.autoInc2.insert(themeId,uid,uname,content,checkState)
 
   }
+
+  def countDiscuss = database.withSession {  implicit session:Session =>
+    Query(ThemeDiscusses.length).first()
+  }
+  def countDiscuss(time:Timestamp) = database.withSession {  implicit session:Session =>
+    Query(ThemeDiscusses.filter(_.addTime < time ).length).first()
+  }
+
   /*删除*/
   def deleteDiscuss(id:Long)=database.withSession {  implicit session:Session =>
     ThemeSQLDao.updateReplyNum(id,-1)

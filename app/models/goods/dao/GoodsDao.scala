@@ -64,6 +64,9 @@ object GoodsDao {
   def countGoods:Int = database.withSession {  implicit session:Session =>
     Query(Goodses.length).first()
   }
+  def countGoods(time:Timestamp)= database.withSession {  implicit session:Session =>
+    Query(Goodses.filter(_.collectTime < time).length).first()
+  }
   /*分页查找*/
   /*分页显示*/
   def findAll(currentPage: Int, pageSize: Int): Page[Goods] = database.withSession {  implicit session:Session =>
@@ -83,6 +86,13 @@ object GoodsDao {
   }
   def addAssess(goodsId:Long,uid:Long,uname:String,content:String,checkState:Int)=database.withSession {  implicit session:Session =>
     GoodsAssesses.autoInc2.insert(goodsId,uid,uname,content,checkState);
+  }
+
+  def countAssess:Int = database.withSession {  implicit session:Session =>
+    Query(GoodsAssesses.length).first()
+  }
+  def countAssess(time:Timestamp)= database.withSession {  implicit session:Session =>
+    Query(GoodsAssesses.filter(_.addTime < time ).length).first()
   }
   /* delete */
   def deleteAssess(id:Long) = database.withSession {  implicit session:Session =>

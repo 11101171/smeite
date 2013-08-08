@@ -4,6 +4,7 @@ import scala.slick.driver.MySQLDriver.simple._
 import play.api.Play.current
 import models.msg.{AtMsg, AtMsgs}
 import models.Page
+import java.sql.Timestamp
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,6 +21,13 @@ object AtMsgDao {
 
   def deleteMsg(id:Long) = database.withSession {  implicit session:Session =>
     (for(c <- AtMsgs if c.id ===id)yield c).delete
+  }
+
+  def countAtMsg = database.withSession{implicit session:Session =>
+    Query(AtMsgs.length).first()
+  }
+  def countAtMsg(time:Timestamp)=database.withSession{implicit session:Session =>
+    Query(AtMsgs.filter(_.addTime < time ).length).first()
   }
 
   def findAll(currentPage:Int,pageSize:Int):Page[AtMsg]=database.withSession {  implicit session:Session =>

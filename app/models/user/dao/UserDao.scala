@@ -75,8 +75,11 @@ object UserDao {
     (for(c <- UserStatics if c.uid === uid )yield(c.fansNum~c.followNum~c.trendNum~c.loveBaobeiNum~c.loveThemeNum~c.loveTopicNum~c.postBaobeiNum~c.postThemeNum~c.postTopicNum)).update(fansNum,followNum,trendNum,loveBaobeiNum,loveThemeNum,loveTopicNum,postBaobeiNum,postThemeNum,postTopicNum)
   }
   /* count user */
-  def countUser:Int = database.withSession{  implicit session:Session =>
+  def countUser = database.withSession{  implicit session:Session =>
        Query(Users.length).first
+  }
+  def countUser(time:Timestamp) = database.withSession{  implicit session:Session =>
+    Query(Users.filter(_.modifyTime < time).length).first
   }
   def countUser(days:Int):Int = database.withSession{  implicit session:Session =>
     val now = new Timestamp(System.currentTimeMillis())

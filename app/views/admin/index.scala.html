@@ -1,4 +1,8 @@
-@(manager:models.admin.Manager,totalTaskNum:Int,tasks:List[models.admin.ManagerTask],totalThemes:Int,totalGoodses:Int,totalTopics:Int,totalUsers:Int)
+@(
+manager:models.admin.Manager,
+tasks:List[models.admin.ManagerTask],
+totalTaskNum:Int,
+numMap:Map
 @views.html.admin.template(manager,"home") {
 
     <div id="content-header">
@@ -38,45 +42,45 @@
                         <tbody>
                        <tr>
                           <td> 总数统计</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
+                           <td> @numMap("totalTheme")</td>
+                           <td> @numMap("totalThemeDiscuss")</td>
+                           <td> @numMap("totalGoods")</td>
+                           <td> @numMap("totalGoodsAssess")</td>
+                           <td> @numMap("totalTopic")</td>
+                           <td> @numMap("totalTopicReply")</td>
+                           <td> @numMap("totalSite")</td>
+                           <td> @numMap("totalPost")</td>
+                           <td> @numMap("totalPostReply")</td>
+                           <td> @numMap("totalAtMsg")</td>
+                           <td> @numMap("totalUser")</td>
                        </tr>
                        <tr>
                            <td> 今日新增统计</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
+                           <td> @numMap("todayTheme")</td>
+                           <td> @numMap("todayThemeDiscuss")</td>
+                           <td> @numMap("todayGoods")</td>
+                           <td> @numMap("todayGoodsAssess")</td>
+                           <td> @numMap("todayTopic")</td>
+                           <td> @numMap("todayTopicReply")</td>
+                           <td> @numMap("todaySite")</td>
+                           <td> @numMap("todayPost")</td>
+                           <td> @numMap("todayPostReply")</td>
+                           <td> @numMap("todayAtMsg")</td>
+                           <td> @numMap("todayUser")</td>
                        </tr>
                        <tr>
                            <td>距上次登录统计</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
-                           <td> 1</td>
+                           <td> @numMap("newTheme")</td>
+                           <td> @numMap("newThemeDiscuss")</td>
+                           <td> @numMap("newGoods")</td>
+                           <td> @numMap("newGoodsAssess")</td>
+                           <td> @numMap("newTopic")</td>
+                           <td> @numMap("newTopicReply")</td>
+                           <td> @numMap("newSite")</td>
+                           <td> @numMap("newPost")</td>
+                           <td> @numMap("newPostReply")</td>
+                           <td> @numMap("newAtMsg")</td>
+                           <td> @numMap("newUser")</td>
                        </tr>
 
                         </tbody>
@@ -86,51 +90,7 @@
         </div>
     </div>
 
-        <div class="row-fluid">
-            <div class="span12">
-                <div class="widget-box widget-plain">
-                    <div class="widget-content center">
-                        <dl class="stats-plain">
-                            <dt>总数统计</dt>
-                            <dd>
-                                <h4><span>主题: </span> @totalThemes</h4>
 
-                            </dd>
-                            <dd>
-                                <h4><span>宝贝: </span> @totalGoodses</h4>
-
-                            </dd>
-                            <dd>
-                                <h4><span>话题: </span> @totalTopics</h4>
-
-                            </dd>
-                            <dd>
-                                <h4><span>用户: </span> @totalUsers</h4>
-
-                            </dd>
-                        </dl>
-                        <ul class="stats-plain">
-                            <li>
-                                <h4>@totalThemes</h4>
-                                <span>主题</span>
-                            </li>
-                            <li>
-                                <h4>@totalGoodses</h4>
-                                <span>宝贝</span>
-                            </li>
-                            <li>
-                                <h4>@totalTopics</h4>
-                                <span>话题总数</span>
-                            </li>
-                            <li>
-                                <h4>@totalUsers</h4>
-                                <span>用户总数</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="row-fluid">
             <div class="span12 center" style="text-align: center;">
 

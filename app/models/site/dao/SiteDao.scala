@@ -34,6 +34,13 @@ object SiteDao {
     ( for(s<-Sites if s.id === id)yield s ).delete
   }
 
+  def countSite = database.withSession{implicit session:Session =>
+    Query(Sites.length).first()
+  }
+  def countSite(time:Timestamp)=database.withSession{implicit session:Session =>
+    Query(Sites.filter(_.addTime < time ).length).first()
+  }
+
   /* 查找 site by id */
   def findSiteById(sid:Long):Option[Site] = database.withSession {  implicit session:Session =>
     ( for(s<-Sites if s.id === sid)yield s ).firstOption
@@ -111,6 +118,12 @@ object SiteDao {
   }
   def deletePost(id:Long) = database.withSession {  implicit session:Session =>
     ( for(c<-Posts if c.id === id)yield c ).delete
+  }
+  def countPost = database.withSession{implicit session:Session =>
+    Query(Posts.length).first()
+  }
+  def countPost(time:Timestamp)=database.withSession{implicit session:Session =>
+    Query(Posts.filter(_.addTime < time ).length).first()
   }
 
   def findPostById(pid:Long)  = database.withSession {  implicit session:Session =>
@@ -197,6 +210,14 @@ object SiteDao {
     Page[Post](posts,currentPage,totalPages)
   }
 
+  /* ***************************************** site post reply   **************************************** */
+
+  def countReply = database.withSession{implicit session:Session =>
+    Query(PostReplies.length).first()
+  }
+  def countReply(time:Timestamp)=database.withSession{implicit session:Session =>
+    Query(PostReplies.filter(_.addTime < time ).length).first()
+  }
 
   /* *************************** site member *************************************** */
 
@@ -306,5 +327,7 @@ object SiteDao {
     Page[SiteVideo](msgs,currentPage,totalPages)
 
   }
+
+
 
 }

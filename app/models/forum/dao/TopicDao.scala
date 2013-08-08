@@ -52,8 +52,11 @@ object TopicDao {
   def modifyTopicBest(id:Long,isBest:Boolean)=database.withSession{implicit session:Session =>
     (for (c<-Topics if c.id === id)yield (c.isBest)).update(isBest)
   }
-  def countTopic:Int=database.withSession{implicit session:Session =>
+  def countTopic=database.withSession{implicit session:Session =>
     Query(Topics.length).first()
+  }
+  def countTopic(time:Timestamp)=database.withSession{implicit session:Session =>
+    Query(Topics.filter(_.addTime < time ).length).first()
   }
   /* 根据group 类型 ，分页显示*/
   def findTopics(groupId:Int,currentPage: Int, pageSize: Int): Page[Topic] = database.withSession {  implicit session:Session =>
@@ -154,6 +157,15 @@ object TopicDao {
     TopicReplies.insert(uid,uname,topicId,quoteReply,content,checkState)
 
   }
+
+  def countReply = database.withSession{implicit session:Session =>
+    Query(TopicReplies.length).first()
+  }
+  def countReply(time:Timestamp)=database.withSession{implicit session:Session =>
+    Query(TopicReplies.filter(_.addTime < time ).length).first()
+  }
+
+
   def deleteReply(id:Long)=database.withSession {  implicit session:Session =>
     (for(c<-TopicReplies if c.id === id)yield(c)).delete
   }

@@ -15,6 +15,10 @@ import models.user.dao.UserDao
 import utils.TaobaoConfig
 import play.api.libs.json.Json
 import models.Page
+import utils.Utils
+import models.site.dao.SiteDao
+import models.msg.dao.AtMsgDao
+
 /**
  * Created by zuosanshao.
  * User: zuosanshao
@@ -88,13 +92,90 @@ object Managers extends Controller {
 
   /*admin 首页*/
   def index = AdminAction { manager => implicit request =>
+
     val tasks = ManagerDao.findTasks(0,1,10)
-    val totalTaskNum = ManagerDao.countTask
-    val totalThemes = ThemeDao.countTheme
-    val totalGoodses = GoodsDao.countGoods
-    val totalTopics = TopicDao.countTopic
-    val totalUsers = UserDao.countUser
-      Ok(views.html.admin.index(manager,totalTaskNum,tasks,totalThemes,totalGoodses,totalTopics,totalUsers))
+     val totalTaskNum = ManagerDao.countTask
+    val totalTheme = ThemeDao.countTheme
+    val todayTheme = ThemeDao.countTheme(Utils.getStartOfDay(new Timestamp(System.currentTimeMillis())))
+    val newTheme = ThemeDao.countTheme(manager.lastLoginTime)
+
+    val totalThemeDiscuss = ThemeDao.countDiscuss
+    val todayThemeDiscuss = ThemeDao.countDiscuss(Utils.getStartOfDay(new Timestamp(System.currentTimeMillis())))
+    val newThemeDiscuss = ThemeDao.countDiscuss(manager.lastLoginTime)
+
+    val totalGoods = GoodsDao.countGoods
+    val todayGoods = GoodsDao.countGoods(Utils.getStartOfDay(new Timestamp(System.currentTimeMillis())))
+    val newGoods = GoodsDao.countGoods(manager.lastLoginTime)
+
+    val totalGoodsAssess = GoodsDao.countAssess
+    val todayGoodsAssess = GoodsDao.countAssess(Utils.getStartOfDay(new Timestamp(System.currentTimeMillis())))
+    val newGoodsAssess = GoodsDao.countAssess(manager.lastLoginTime)
+
+    val totalTopic = TopicDao.countTopic
+    val todayTopic = TopicDao.countTopic(Utils.getStartOfDay(new Timestamp(System.currentTimeMillis())))
+    val newTopic = TopicDao.countTopic(manager.lastLoginTime)
+
+    val totalTopicReply = TopicDao.countReply
+    val todayTopicReply = TopicDao.countReply(Utils.getStartOfDay(new Timestamp(System.currentTimeMillis())))
+    val newTopicReply = TopicDao.countReply(manager.lastLoginTime)
+
+    val totalSite = SiteDao.countSite
+    val todaySite = SiteDao.countSite(Utils.getStartOfDay(new Timestamp(System.currentTimeMillis())))
+    val newSite = SiteDao.countSite(manager.lastLoginTime)
+
+    val totalPost = SiteDao.countPost
+    val todayPost = SiteDao.countPost(Utils.getStartOfDay(new Timestamp(System.currentTimeMillis())))
+    val newPost = SiteDao.countPost(manager.lastLoginTime)
+
+    val totalPostReply = SiteDao.countReply
+    val todayPostReply = SiteDao.countReply(Utils.getStartOfDay(new Timestamp(System.currentTimeMillis())))
+    val newPostReply = SiteDao.countReply(manager.lastLoginTime)
+
+    val totalAtMsg = AtMsgDao.countAtMsg
+    val todayAtMsg = AtMsgDao.countAtMsg(Utils.getStartOfDay(new Timestamp(System.currentTimeMillis())))
+    val newAtMsg = AtMsgDao.countAtMsg(manager.lastLoginTime)
+
+
+    val totalUser = UserDao.countUser
+    val todayUser = UserDao.countUser(Utils.getStartOfDay(new Timestamp(System.currentTimeMillis())))
+    val newUser = UserDao.countUser(manager.lastLoginTime)
+    val numMap = Map(
+      "totalTheme"->totalTheme,
+      "todayTheme"->todayTheme,
+      "newTheme"->newTheme,
+      "totalThemeDiscuss"->totalThemeDiscuss,
+      "todayThemeDiscuss"->todayThemeDiscuss,
+      "newThemeDiscuss"->newThemeDiscuss,
+	  "totalGoods"->totalGoods,
+      "todayGoods"->todayGoods,
+      "newGoods"->newGoods,
+	  "totalGoodsAssess"->totalGoodsAssess,
+      "todayGoodsAssess"->todayGoodsAssess,
+      "newGoodsAssess"->newGoodsAssess,
+	  "totalTopic"->totalTopic,
+      "todayTopic"->todayTopic,
+      "newTopic"->newTopic,
+	  "totalTopicReply"->totalTopicReply,
+      "todayTopicReply"->todayTopicReply,
+      "newTopicReply"->newTopicReply,
+	  "totalSite"->totalSite,
+      "todaySite"->todaySite,
+      "newSite"->newSite,
+	  "totalPost"->totalPost,
+      "todayPost"->todayPost,
+      "newPost"->newPost,
+	  "totalPostReply"->totalPostReply,
+      "todayPostReply"->todayPostReply,
+      "newPostReply"->newPostReply,
+	  "totalAtMsg"->totalAtMsg,
+      "todayAtMsg"->todayAtMsg,
+      "newAtMsg"->newAtMsg,
+	  "totalUser"->totalUser,
+      "todayUser"->todayUser,
+      "newUser"->newUser,
+    )
+      Ok(views.html.admin.index(manager,tasks,totalTaskNum,numMap
+      ))
   }
 
   /*缓存管理*/
