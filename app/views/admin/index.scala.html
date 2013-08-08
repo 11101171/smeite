@@ -1,8 +1,4 @@
-@(
-manager:models.admin.Manager,
-tasks:List[models.admin.ManagerTask],
-totalTaskNum:Int,
-numMap:Map
+@(manager:models.admin.Manager,tasks:List[models.admin.ManagerTask],totalTaskNum:Int,numMap:Map[String,Int])
 @views.html.admin.template(manager,"home") {
 
     <div id="content-header">

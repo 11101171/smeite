@@ -65,7 +65,7 @@ object GoodsDao {
     Query(Goodses.length).first()
   }
   def countGoods(time:Timestamp)= database.withSession {  implicit session:Session =>
-    Query(Goodses.filter(_.collectTime < time).length).first()
+    Query(Goodses.filter(_.collectTime > time).length).first()
   }
   /*分页查找*/
   /*分页显示*/
@@ -92,7 +92,7 @@ object GoodsDao {
     Query(GoodsAssesses.length).first()
   }
   def countAssess(time:Timestamp)= database.withSession {  implicit session:Session =>
-    Query(GoodsAssesses.filter(_.addTime < time ).length).first()
+    Query(GoodsAssesses.filter(_.addTime > time ).length).first()
   }
   /* delete */
   def deleteAssess(id:Long) = database.withSession {  implicit session:Session =>

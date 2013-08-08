@@ -172,10 +172,9 @@ object Managers extends Controller {
       "newAtMsg"->newAtMsg,
 	  "totalUser"->totalUser,
       "todayUser"->todayUser,
-      "newUser"->newUser,
+      "newUser"->newUser
     )
-      Ok(views.html.admin.index(manager,tasks,totalTaskNum,numMap
-      ))
+      Ok(views.html.admin.index(manager,tasks,totalTaskNum,numMap))
   }
 
   /*缓存管理*/

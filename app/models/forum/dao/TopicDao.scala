@@ -56,7 +56,7 @@ object TopicDao {
     Query(Topics.length).first()
   }
   def countTopic(time:Timestamp)=database.withSession{implicit session:Session =>
-    Query(Topics.filter(_.addTime < time ).length).first()
+    Query(Topics.filter(_.addTime > time ).length).first()
   }
   /* 根据group 类型 ，分页显示*/
   def findTopics(groupId:Int,currentPage: Int, pageSize: Int): Page[Topic] = database.withSession {  implicit session:Session =>
@@ -162,7 +162,7 @@ object TopicDao {
     Query(TopicReplies.length).first()
   }
   def countReply(time:Timestamp)=database.withSession{implicit session:Session =>
-    Query(TopicReplies.filter(_.addTime < time ).length).first()
+    Query(TopicReplies.filter(_.addTime > time ).length).first()
   }
 
 

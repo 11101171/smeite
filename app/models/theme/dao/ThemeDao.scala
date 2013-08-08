@@ -69,7 +69,7 @@ object ThemeDao {
     Query(Themes.length).first()
   }
   def countTheme(time:Timestamp) = database.withSession {  implicit session:Session =>
-    Query(Themes.filter(_.modifyTime < time ).length).first()
+    Query(Themes.filter(_.modifyTime > time ).length).first()
   }
 
   def findById(id:Long):Option[Theme] =  database.withSession {  implicit session:Session =>
@@ -197,7 +197,7 @@ object ThemeDao {
     Query(ThemeDiscusses.length).first()
   }
   def countDiscuss(time:Timestamp) = database.withSession {  implicit session:Session =>
-    Query(ThemeDiscusses.filter(_.addTime < time ).length).first()
+    Query(ThemeDiscusses.filter(_.addTime > time ).length).first()
   }
 
   /*删除*/

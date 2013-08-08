@@ -79,7 +79,7 @@ object UserDao {
        Query(Users.length).first
   }
   def countUser(time:Timestamp) = database.withSession{  implicit session:Session =>
-    Query(Users.filter(_.modifyTime < time).length).first
+    Query(Users.filter(_.modifyTime > time).length).first
   }
   def countUser(days:Int):Int = database.withSession{  implicit session:Session =>
     val now = new Timestamp(System.currentTimeMillis())

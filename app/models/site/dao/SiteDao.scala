@@ -38,7 +38,7 @@ object SiteDao {
     Query(Sites.length).first()
   }
   def countSite(time:Timestamp)=database.withSession{implicit session:Session =>
-    Query(Sites.filter(_.addTime < time ).length).first()
+    Query(Sites.filter(_.addTime > time ).length).first()
   }
 
   /* 查找 site by id */
@@ -123,7 +123,7 @@ object SiteDao {
     Query(Posts.length).first()
   }
   def countPost(time:Timestamp)=database.withSession{implicit session:Session =>
-    Query(Posts.filter(_.addTime < time ).length).first()
+    Query(Posts.filter(_.addTime > time ).length).first()
   }
 
   def findPostById(pid:Long)  = database.withSession {  implicit session:Session =>
@@ -216,7 +216,7 @@ object SiteDao {
     Query(PostReplies.length).first()
   }
   def countReply(time:Timestamp)=database.withSession{implicit session:Session =>
-    Query(PostReplies.filter(_.addTime < time ).length).first()
+    Query(PostReplies.filter(_.addTime > time ).length).first()
   }
 
   /* *************************** site member *************************************** */

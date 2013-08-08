@@ -27,7 +27,7 @@ object AtMsgDao {
     Query(AtMsgs.length).first()
   }
   def countAtMsg(time:Timestamp)=database.withSession{implicit session:Session =>
-    Query(AtMsgs.filter(_.addTime < time ).length).first()
+    Query(AtMsgs.filter(_.addTime > time ).length).first()
   }
 
   def findAll(currentPage:Int,pageSize:Int):Page[AtMsg]=database.withSession {  implicit session:Session =>
