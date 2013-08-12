@@ -192,7 +192,11 @@ object Sites extends Controller {
   /* 小镇帖子 */
   def post(pid:Long)= Users.UserAction { user => implicit request =>
     val post = SiteDao.findPost(pid)
-      Ok(views.html.sites.post(user, post))
+     val userPosts = SiteDao.findPostsByUid(post._2.id.get,5)
+     val userSites =SiteDao.findJoinedSites(post._2.id.get,5)
+     val sitePosts = SiteDao.findPostsBySid(post._3.id.get,5)
+     val siteMembers = SiteDao.findSiteMembers(post._3.id.get,5)
+      Ok(views.html.sites.post(user, post,userPosts,userSites,sitePosts,siteMembers))
 
   }
 

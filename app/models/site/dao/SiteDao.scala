@@ -99,7 +99,6 @@ object SiteDao {
     val q=  for(c<-Sites.filter(_.uid === uid ).sortBy(_.id desc).drop(startRow).take(pageSize)  )yield c
     val sites:List[Site]=  q.list()
     Page[Site](sites,currentPage,totalPages)
-
   }
 
     /* ******************************* site post **************************************** */
@@ -151,6 +150,10 @@ object SiteDao {
      val msgs:List[Post]=  q.list()
      Page[Post](msgs,currentPage,totalPages)
    }
+  /* 无任何排序，查找用户发布的帖子  */
+  def findPostsByUid(uid:Long,size:Int):List[Post]  = database.withSession {  implicit session:Session =>
+    (for(c<-Posts.filter(_.uid === uid ).take(size)  )yield c).list()
+  }
 
   /* 根据小镇 查找帖子 sort = 1 最新 sort:2 最热*/
   def findPostsBySid(sid:Long,sortBy:Int,currentPage:Int,pageSize:Int):Page[Post] =  database.withSession {  implicit session:Session =>
@@ -165,6 +168,9 @@ object SiteDao {
   if(sortBy == 2) query.sortBy(_.viewNum desc)
     val msgs:List[Post]=  query.drop(startRow).take(pageSize).list()
     Page[Post](msgs,currentPage,totalPages)
+  }
+  def findPostsBySid(sid:Long,size:Int):List[Post] =  database.withSession {  implicit session:Session =>
+    (for(c<-Posts.filter(_.sid === sid ).sortBy(_.addTime desc).take(size)  )yield c).list()
   }
 
   def findAllPosts(currentPage:Int,pageSize:Int):Page[Post] = database.withSession {  implicit session:Session =>
@@ -243,7 +249,7 @@ object SiteDao {
    def modifySiteMemberDuty(sid:Long,uid:Long,duty:Int) = database.withSession{  implicit session:Session =>
     (for (c <- SiteMembers.filter(_.sid === sid).filter(_.uid === uid)) yield c.duty ).update(duty)
   }
-
+  /* 查找用户加入的小镇 */
   def findJoinedSites(uid:Long,currentPage:Int,pageSize:Int):Page[Site] = database.withSession{  implicit session:Session =>
     val totalRows = Query(SiteMembers.filter( _.uid === uid ).length).first()
     val totalPages=(totalRows + pageSize - 1) / pageSize
@@ -256,6 +262,40 @@ object SiteDao {
     }yield s
     val sites:List[Site]=  query.drop(startRow).take(pageSize).list()
     Page[Site](sites,currentPage,totalPages)
+  }
+
+  def  findJoinedSites(uid:Long,size:Int):List[Site] = database.withSession {  implicit session:Session =>
+    (for{
+      c<-SiteMembers
+      s<-Sites
+      if c.uid === uid
+      if c.sid === s.id
+    }yield s).take(size).list()
+  }
+
+  /* 查找小镇的居民*/
+  def findSiteMembers(sid:Long,currentPage:Int,pageSize:Int) = database.withSession {  implicit session:Session =>
+    val totalRows = Query(SiteMembers.filter( _.sid === sid ).length).first()
+    val totalPages=(totalRows + pageSize - 1) / pageSize
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+
+    val query = for{
+      c <- SiteMembers
+      u <- Users
+      if c.sid === sid
+      if c.uid === u.id
+    }yield u
+    val users:List[User] = query.drop(startRow).take(pageSize).list()
+    Page[User](users,currentPage,totalPages)
+  }
+  def findSiteMembers(sid:Long,size:Int) = database.withSession {  implicit session:Session =>
+    (for{
+      c <- SiteMembers
+      u <- Users
+      if c.sid === sid
+      if c.uid === u.id
+    }yield u).take(size).list()
+
   }
 
   /* ****************************************** site album ****************************************** */

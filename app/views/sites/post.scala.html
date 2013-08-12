@@ -1,4 +1,10 @@
-@(user:Option[models.user.User],post:(models.site.Post,models.user.User,models.site.Site))
+@(user:Option[models.user.User],
+post:(models.site.Post,models.user.User,models.site.Site),
+userPosts:List[models.site.Post],
+userSites:List[models.site.Site],
+sitePosts:List[models.site.Post],
+siteMembers:List[models.user.User]
+)
 @views.html.template(
 user,
 nav="site",
@@ -23,27 +29,21 @@ title =  "食美特，不一样的生活"
                     <a class="follow-btn">+关注</a>
                 </div>
             </div>
-          <!--  <div class="poster-others">
+            <div class="poster-others">
                 <dl class="posts">
                     <dt>TA发表的贴子</dt>
-                    <dd class="ofh"><a href="/topic/3585.html" target="_blank">器世界 精品茶具小编为你讲解喝功夫茶的品茗八法</a></dd>
-                    <dd class="ofh"><a href="/topic/3576.html" target="_blank">器世界 手工柴烧侧把壶  原创设计 品质生活</a></dd>
-                    <dd class="ofh"><a href="/topic/3574.html" target="_blank">器世界-人和家兴 手绘婴戏图茶壶   原创设计品质生活</a></dd>
-                    <dd class="ofh"><a href="/topic/3541.html" target="_blank">器世界 品茗器皿之——三才杯</a></dd>
-                    <dd class="ofh"><a href="/topic/3525.html" target="_blank">    名瓷 器世界 （中国文化报专访）</a></dd>
+                    @for(post <- userPosts){
+                    <dd class="ofh"><a href="@controllers.routes.Sites.post(post.id.get)"  title="@post.title">@post.title</a></dd>
+                     }
                 </dl>
                 <dl class="site">
                     <dt>TA加入的小镇</dt>
-                    <dd><a href="/site/detail/528.html" target="_blank"><img src="http://img1.xiangqu.com/xiangqu/image/B13/B13C56A6B4AEDF8E3E1FBDDA807B4A84_198x198.jpg_50x10000.jpg" style="opacity: 1; ">最爱晒单</a></dd>
-                    <dd><a href="/site/detail/359.html" target="_blank"><img src="http://img1.xiangqu.com/xiangqu/image/A3D/A3DA6597E52C2427483E0E87D155831D_198x198.jpg_50x10000.jpg" style="opacity: 1; ">想去限时购</a></dd>
-                    <dd><a href="/site/detail/212.html" target="_blank"><img src="http://img1.xiangqu.com/xiangqu/image/285/2855B1E79CC7451B2117133A7A213BB7_640x640.jpg_50x10000.jpg">想去专题</a></dd>
-                    <dd><a href="/site/detail/481.html" target="_blank"><img src="http://img1.xiangqu.com/xiangqu/image/E98/E98A2165D2DB94B25B9CD7B0C206C6FF_440x440.jpg_50x10000.jpg">新青年创造</a></dd>
-                    <dd><a href="/site/detail/327.html" target="_blank"><img src="http://img1.xiangqu.com/xiangqu/image/2F7/2F71A8CC340C6FC39774C2CAAEB4B9D7_180x180.jpg_50x10000.jpg" style="opacity: 1; ">想去官方站</a></dd>
-
+                    @for(site <- userSites){
+                    <dd><a href="@controllers.routes.Sites.site(site.id.get)" title="@site.title"><img src="@site.pic" width="30" height="30">@site.title</a></dd>
+                    }
                 </dl>
             </div>
 
--->
 
 
         </div>
@@ -114,31 +114,25 @@ title =  "食美特，不一样的生活"
                 <h3 class="site-title"><a href="@controllers.routes.Sites.site(post._3.id.get)"> @post._3.title</a></h3>
                 <div class="back-site"><a href="@controllers.routes.Sites.site(post._3.id.get)">返回小镇</a> </div>
                 <div class="follow clearfix">
-                    <a class="follow-btn"> + 加入小镇</a>
-                    <!-- <div class="followed-btn-big">已关注<span class="mr5 ml5">|</span><a rel="removefollow" data-followtype="5" data-usernick="duanyu200888" data-userid="3" href="javascript:;">取消</a></div>-->
+                    <a rel="followSite" href="javascript:;" class="follow-btn" data-title="@post._3.title" data-sid="@post._3.id"> + 加入小镇</a>
+
                 </div>
             </div>
 
-                <!--<div class="site-others">
+                <div class="site-others">
                     <dl class="posts">
                         <dt>小镇动态</dt>
-                        <dd class="ofh"><a href="/topic/3585.html" target="_blank">器世界 精品茶具小编为你讲解喝功夫茶的品茗八法</a></dd>
-                        <dd class="ofh"><a href="/topic/3576.html" target="_blank">器世界 手工柴烧侧把壶  原创设计 品质生活</a></dd>
-                        <dd class="ofh"><a href="/topic/3574.html" target="_blank">器世界-人和家兴 手绘婴戏图茶壶   原创设计品质生活</a></dd>
-                        <dd class="ofh"><a href="/topic/3541.html" target="_blank">器世界 品茗器皿之——三才杯</a></dd>
-                        <dd class="ofh"><a href="/topic/3525.html" target="_blank">    名瓷 器世界 （中国文化报专访）</a></dd>
-
+                        @for(post <- sitePosts){
+                        <dd class="ofh"><a href="@controllers.routes.Sites.post(post.id.get)"  title="@post.title">@post.title</a></dd>
+                       }
                     </dl>
                     <dl class="members">
                         <dt>小镇居民</dt>
-                        <dd><a href="/site/detail/528.html" target="_blank"><img src="http://img1.xiangqu.com/xiangqu/image/B13/B13C56A6B4AEDF8E3E1FBDDA807B4A84_198x198.jpg_50x10000.jpg" style="opacity: 1; ">最爱晒单</a></dd>
-                        <dd><a href="/site/detail/359.html" target="_blank"><img src="http://img1.xiangqu.com/xiangqu/image/A3D/A3DA6597E52C2427483E0E87D155831D_198x198.jpg_50x10000.jpg" style="opacity: 1; ">想去限时购</a></dd>
-                        <dd><a href="/site/detail/212.html" target="_blank"><img src="http://img1.xiangqu.com/xiangqu/image/285/2855B1E79CC7451B2117133A7A213BB7_640x640.jpg_50x10000.jpg">想去专题</a></dd>
-                        <dd><a href="/site/detail/481.html" target="_blank"><img src="http://img1.xiangqu.com/xiangqu/image/E98/E98A2165D2DB94B25B9CD7B0C206C6FF_440x440.jpg_50x10000.jpg">新青年创造</a></dd>
-                        <dd><a href="/site/detail/327.html" target="_blank"><img src="http://img1.xiangqu.com/xiangqu/image/2F7/2F71A8CC340C6FC39774C2CAAEB4B9D7_180x180.jpg_50x10000.jpg" style="opacity: 1; ">想去官方站</a></dd>
+                        @for(user <- siteMembers){
+                        <dd><a href="@controllers.users.routes.Users.home(user.id.get)" target="_blank" title="@user.name"><img src="@user.pic">@user.name</a></dd>
+                       }
                     </dl>
                 </div>
--->
         </div>
     </div>
 
@@ -149,6 +143,6 @@ title =  "食美特，不一样的生活"
 }{
 
 <script type="text/javascript">
-    seajs.use('smeite/site/post')
+    seajs.use['smeite/site/post','smeite/site/favor','smeite/user/favor']
 </script>
 }
