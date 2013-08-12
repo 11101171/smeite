@@ -92,13 +92,13 @@ object Sites extends Controller {
     })
     if(user.isEmpty)Ok(Json.obj("code" -> "200", "message" ->"你还没有登录" ))
     else {
-      val sid = (request.body \ "sid").asOpt[Long]
-      if(sid.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
+      val siteId = (request.body \ "siteId").asOpt[Long]
+      if(siteId.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
       else{
-        val siteMember=SiteDao.checkSiteMember(sid.get,user.get.id.get);
+        val siteMember=SiteDao.checkSiteMember(siteId.get,user.get.id.get)
         if(!siteMember.isEmpty) Ok(Json.obj("code" -> "103", "message" ->"你已经喜欢了"))
         else {
-          SiteDao.addSiteMember(sid.get,user.get.id.get,0);
+          SiteDao.addSiteMember(siteId.get,user.get.id.get,0)
           Ok(Json.obj("code" -> "100", "message" ->"成功"))
         }
 
@@ -111,10 +111,10 @@ object Sites extends Controller {
     val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
     if(user.isEmpty)Ok(Json.obj("code" -> "200", "message" ->"你还没有登录"))
     else {
-      val sid = (request.body \ "sid").asOpt[Long]
-      if(sid.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
+      val siteId = (request.body \ "siteId").asOpt[Long]
+      if(siteId.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
       else{
-        SiteDao.deleteSiteMember(sid.get,user.get.id.get);
+        SiteDao.deleteSiteMember(siteId.get,user.get.id.get)
         Ok(Json.obj("code" -> "100", "message" ->"成功"))
       }
 
@@ -126,10 +126,10 @@ object Sites extends Controller {
     val user:Option[User] =request.session.get("user").map(u=> UserDao.findById(u.toLong) )
     if(user.isEmpty)  Ok(Json.obj("code" -> "300","message" -> "亲，你还没有登录呢" ))
     else{
-      val sid=(request.body \ "sid").asOpt[Long];
-      if (sid.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
+      val siteId=(request.body \ "siteId").asOpt[Long];
+      if (siteId.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
       else{
-        val siteMember=SiteDao.checkSiteMember(sid.get,user.get.id.get);
+        val siteMember=SiteDao.checkSiteMember(siteId.get,user.get.id.get)
         if(!siteMember.isEmpty)  Ok(Json.obj("code" -> "100","message" -> "已关注" ))
         else Ok(Json.obj("code" -> "101","message" -> "未关注" ))
       }

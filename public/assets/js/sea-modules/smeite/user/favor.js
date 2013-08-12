@@ -12,13 +12,13 @@
  */
 define(function(require, exports) {
     var $ = require("$");
-	
+    var ConfirmBox = require("confirmbox")
 
 	//加关注
-	$("a[rel=follow]").on("click",function(){
+	$("a[rel=followUser]").on("click",function(){
 		if($.smeite.dialog.isLogin()){
-			if($(this).data("enable")=="false") return;
-			$(this).data("enable","false");
+			//if($(this).data("enable")=="false") return;
+			//$(this).data("enable","false");
 			$this = $(this);
             var userId = $this.data("userid")
 			$.ajax({
@@ -30,21 +30,21 @@ define(function(require, exports) {
 				success: function(data){
 					switch(data.code){
 						case("100"):
-							$this.data("enable","true");
+						//	$this.data("enable","true");
 							$.smeite.addFollowCallback(data,$this);
 						break;
 						case("104"):
-							$this.data("enable","true");
+						//	$this.data("enable","true");
 							$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error2";
 							$.smeite.tip.show($this,"参数错误");
 						break;
 						case("103"):
-							$this.data("enable","true");
+						//	$this.data("enable","true");
 							$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error2";
 							$.smeite.tip.show($this,"重复关注了你的朋友！");
 						break;
 						case("111"):
-							$this.data("enable","true");
+						//	$this.data("enable","true");
 							$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error2";
 							$.smeite.tip.show($this,"抱歉，你的关注已达上限。");
 						break;
@@ -65,14 +65,14 @@ define(function(require, exports) {
 		o.parents(".section").remove();
 	}
 
-	$("a[rel=removefans]").on("click",function(){
+	$(document).on("click","a[rel=removeFans]",function(){
 		if($.smeite.dialog.isLogin()){
-			if($(this).data("enable")=="false") return;
-			$(this).data("enable","false");
+		//	if($(this).data("enable")=="false") return;
+		//	$(this).data("enable","false");
 			$this = $(this);
             var userId = $this.data("userid")
 			var txt = "确定要移除粉丝“"+$this.data("usernick")+"”？";
-			var confirmCallback = function(){
+            ConfirmBox.confirm(txt, '亲，你确定不喜欢我了吗？', function() {
 				$.ajax({
 					url:"/user/removeFans",
                     type : "post",
@@ -82,11 +82,11 @@ define(function(require, exports) {
 					success: function(data){
 						switch(data.code){
 							case("100"):
-								$this.data("enable","true");
+							//	$this.data("enable","true");
 								$.smeite.removeFansCallback($this,data);
 							break;
 							case("104"):
-								$this.data("enable","true");
+							//	$this.data("enable","true");
 								$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error2";
 								$.smeite.tip.show($this,"参数出错");
 							break;
@@ -96,10 +96,8 @@ define(function(require, exports) {
 						}  
 					}
 				});
-			}
-            $.smeite.confirmUI(txt,confirmCallback,function(){
-				$this.data("enable","true");
-			});
+            });
+
 		}
 	})
 	
@@ -107,14 +105,14 @@ define(function(require, exports) {
 	$.smeite.removeFollowCallback = function(){
 		o.parents(".section").remove();
 	}
-	$("a[rel=removefollow]").on("click",function(){
+	$(document).on("click","a[rel=removeFollow]",function(){
 		if($.smeite.dialog.isLogin()){
-			if($(this).data("enable")=="false") return;
-			$(this).data("enable","false");
+		//	if($(this).data("enable")=="false") return;
+		//	$(this).data("enable","false");
 			var $this = $(this)
             var userId = $this.data("userid")
 			var txt = "确定不再关注“"+$this.data("usernick")+"”？";
-			var confirmCallback = function(){
+            ConfirmBox.confirm(txt, '亲，你要和我分手吗？', function() {
 				$.ajax({
 					url:"/user/removeFollow",
                     type : "post",
@@ -124,11 +122,11 @@ define(function(require, exports) {
 					success: function(data){
 						switch(data.code){
 							case("100"):
-								$this.data("enable","true");
+							//	$this.data("enable","true");
 								$.smeite.removeFollowCallback(data,$this);
 							break;
 							case("104"):
-								$this.data("enable","true");
+							//	$this.data("enable","true");
 								$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error2";
 								$.smeite.tip.show($this,"参数错误");
 							break;
@@ -138,10 +136,8 @@ define(function(require, exports) {
 						}  
 					}
 				});
-			};
-            $.smeite.confirmUI(txt,confirmCallback,function(){
-				$this.data("enable","true");
-			})
+
+            })
 		}
 	})
 	//data-followtype: 0边栏信息 1粉丝 2关注 3你可以能喜欢的人 4去其他人的关注列表和粉丝列表 5通用用户关注  6

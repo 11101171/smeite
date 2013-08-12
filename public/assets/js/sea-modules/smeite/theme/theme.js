@@ -19,7 +19,7 @@ var UserTheme = {
 	deleteUserTheme : function(){
 		var $del = $("#J_UserThemeDel"),
             dataType=$del.data("type"),
-            themeId =$del.data("themeid");
+            themeId =$del.data("id");
 		$.ajax({
 			url:"/theme/delete",
             type : "post",

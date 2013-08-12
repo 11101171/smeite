@@ -48,8 +48,8 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                                  }
                             </div>
                             <div class="follow">
-                                <a rel="follow" href="javascript:;" class="follow-btn" data-followtype="1" data-userid="@user.id.get" data-usernick="@user.name">加关注</a><br>
-                                <a rel="removefans" href="javascript:;" class="remove-fans" data-userid="@user.id.get" data-usernick="@user.name">移除粉丝</a>
+                                <a rel="followUser" href="javascript:;" class="follow-btn" data-followtype="1" data-userid="@user.id.get" data-usernick="@user.name">加关注</a><br>
+                                <a rel="removeFans" href="javascript:;" class="remove-fans" data-userid="@user.id.get" data-usernick="@user.name">移除粉丝</a>
                             </div>
                         </div>
 
@@ -101,8 +101,8 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                                 <div class="user-info">
                                     <a class="username g-daren" href="@controllers.users.routes.Users.home(user.id.get)" title="@user.name"><em class="ofh">@user.name</em> @if(user.status==3){ <i class="i-daren">达人</i>}</a>
 
-                                    <p>来自@models.user.ComeFrom(user.comeFrom)</p><a rel="follow" href="javascript:;" class="follow-btn"
-                                        data-usernick="@user.name"           data-followtype="5" data-userid="@user.id.get">加关注</a></div>
+                                    <p>来自@models.user.ComeFrom(user.comeFrom)</p>
+                                    <a rel="followUser" href="javascript:;" class="follow-btn" data-usernick="@user.name"           data-followtype="5" data-userid="@user.id.get">加关注</a></div>
                             </li>
                                 }
                         </ul>

@@ -18,7 +18,7 @@ description =  theme.intro.getOrElse("食美特，爱美食爱生活")
                 <a href="@controllers.routes.Themes.edit(theme.id.get)" rel="nofollow" class="bgr-btn">编辑</a>
             </div>
             <div class="fr">
-                <a class="del" id="J_UserThemeDel" data-type="my" data-themeid="@theme.id.get">删除主题</a>
+                <a class="del" id="J_UserThemeDel" data-type="0"  data-title="@theme.name" data-id="@theme.id.get">删除主题</a>
             </div>
         </div>
 
@@ -34,7 +34,7 @@ description =  theme.intro.getOrElse("食美特，爱美食爱生活")
                     @if(!user.isEmpty && user.get.id.get == author.id.get){
                     <a href="javascript:;" class="follow  mt5 mr10"  title="我的主题">我的主题</a>
                     }else{
-                    <a rel="followTheme" href="javascript:;" class="follow  mt5 mr10" data-type="1" data-themeid="@theme.id.get" title="关注">+ 关注</a>
+                    <a rel="followTheme" href="javascript:;" class="follow  mt5 mr10" data-type="1" data-title="@theme.name" data-id="@theme.id.get" title="关注">+ 关注</a>
                     }
 
                 </div>
@@ -143,7 +143,7 @@ description =  theme.intro.getOrElse("食美特，爱美食爱生活")
         <h3 class="title mb20">我喜欢这个主题</h3>
         <div class="theme-follow">
 
-            <a rel="followTheme" href="javascript:;" class="follow  mt5 mr10" data-type="1" data-themeid="@theme.id.get" title="关注">+ 关&nbsp;注</a>
+            <a rel="followTheme" href="javascript:;" class="follow  mt5 mr10" data-type="1" data-title="@theme.name" data-id="@theme.id.get" title="关注">+ 关&nbsp;注</a>
              @theme.loveNum人
         </div>
         <div class="share-link share32  clearfix" data-sharetxt="@theme.name ,@theme.intro" data-sharepic="@theme.pic" data-sharelink="@controllers.routes.Themes.view(theme.id.get)">

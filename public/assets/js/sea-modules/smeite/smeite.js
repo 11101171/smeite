@@ -23,7 +23,7 @@ define(function(require, exports) {
   var Mask = require("mask");
     var Cookie = require("cookie");
     var Dialog = require("dialog") ;
-    var ConfirmBox = require("confirmbox")
+
     $.smeite = $.smeite || {
         version: "v1.0.0"
     };
@@ -397,31 +397,7 @@ define(function(require, exports) {
             });
         }
     });
-    /* 确认框 */
-    $.smeite.confirmUI = function(txt,fun,cancelfun){
 
-        var html = "";
-        html += '<div id="J_confirmDialog" class="tip-dialog">';
-        html += '<div class="dialog-content">';
-        html += '<div class="hd"><h3>提示</h3></div>';
-        html += '<div class="bd clearfix">';
-        html += '<p class="pt10 tac">'+txt+'</p>';
-        html += '<div class="act-row"><p class="inlineblock"><a class="bbl-btn mr10" id="J_Confirm" href="javascript:;">确定</a><a class="bgr-btn" id="J_Cancel" href="javascript:;">取消</a></p></div>';
-        html += '</div>';
-        html += '<a class="close" href="javascript:;"></a>';
-        html += '</div>';
-        html += '</div>';
-
-        var confirmDialog = new ConfirmBox({
-            classPrefix: "g-dialog",
-            onConfirm: function() {
-                fun()
-            }
-        });
-
-
-
-    }
 
     /* 对话框：用户登陆 和 判断是否为新用户 */
     $.smeite.dialog = {
@@ -1235,7 +1211,7 @@ define(function(require, exports) {
                 data: JSON.stringify({"topicId": topicId }),
                 success: function(data){
                    if(data.code =="100"){
-                            var html ="<a rel='topicFollow'class='follow-btn' href='javascript:;' data-topicid='"+ topicId +"'>+ 关注</a>"
+                            var html ="<a rel='followTopic'class='follow-btn' href='javascript:;' data-topicid='"+ topicId +"'>+ 关注</a>"
                             o.replaceWith(html)
                     }
                 }

@@ -54,7 +54,7 @@ object Baobei extends Controller {
   }
 
   /*宝贝喜欢*/
-  def favor =Action(parse.json){  implicit request =>
+  def addFollow =Action(parse.json){  implicit request =>
     val user:Option[User] =request.session.get("user").map(u=> UserDao.findById(u.toLong) )
     if (user.isEmpty) Ok(Json.obj("code"->"400","message"->"你还没有登录"))
     else{
@@ -72,6 +72,20 @@ object Baobei extends Controller {
       }
     }
 
+  }
+  def removeFollow =Action(parse.json){  implicit request =>
+    val user:Option[User] =request.session.get("user").map(u=> UserDao.findById(u.toLong) )
+    if (user.isEmpty) Ok(Json.obj("code"->"400","message"->"你还没有登录"))
+    else{
+
+      val goodsId=(request.body \ "id").asOpt[Long]
+      if (goodsId.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
+      else {
+          UserDao.removeLoveGoods(user.get.id.get,goodsId.get)
+          Ok(Json.obj("code"->"100","message"->"喜欢成功了"))
+    }
+
+  }
   }
 
   /*获取用户的themes*/

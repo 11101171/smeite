@@ -174,18 +174,18 @@ object Managers extends Controller {
       "todayUser"->todayUser,
       "newUser"->newUser
     )
-      Ok(views.html.admin.index(manager,tasks,totalTaskNum,numMap))
+      Ok(views.html.admin.managers.index(manager,tasks,totalTaskNum,numMap))
   }
 
   /*缓存管理*/
   def cache = AdminAction{    manager => implicit request =>
-       Ok("缓存管理，主要是清理缓存 todo")
+      Ok(views.html.admin.managers.cache(manager))
   }
   /*更新商品管理*/
   def pullGoods = AdminAction{    manager => implicit request =>
     val timestamp= String.valueOf(System.currentTimeMillis)
     val sign=TaobaoConfig.getSign(timestamp)
-     Ok(views.html.admin.pullGoods(manager)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
+     Ok(views.html.admin.managers.pullGoods(manager)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
   }
    /* 每个页面显示40个 然后 淘宝客  在然后 更新商品管理 */
   def getNumIids(p:Int) =AdminAction{    manager => implicit request =>
@@ -219,7 +219,7 @@ object Managers extends Controller {
          UserDao.modifyUserStatic(i,fansNum,followNum,trendNum,loveBaobeiNum,loveThemeNum,loveTopicNum,postBaobeiNum,postThemeNum,postTopicNum)
        }
 
-    Ok(views.html.admin.updateUserStats(manager))
+    Ok(views.html.admin.managers.updateUserStats(manager))
   }
 
 

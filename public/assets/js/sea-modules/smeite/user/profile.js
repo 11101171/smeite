@@ -66,7 +66,7 @@ define(function(require, exports) {
         var $this = $(this),
             $themeItem = $this.parents(".theme-item"),
             dataType = $this.data("type"),
-            themeId = $this.data("themeid");
+            themeId = $this.data("id");
 
             var ajaxUrl="";
            if(dataType=="my"){

@@ -119,7 +119,8 @@ GET     /user/msg/at          controllers.users.UsersMsg.at
 
 
 GET       /baobei/offSell             controllers.Baobei.offSell
-POST       /baobei/favor                  controllers.Baobei.favor
+POST       /baobei/addFollow                  controllers.Baobei.addFollow
+POST       /baobei/removeFollow                controllers.Baobei.removeFollow
 GET       /baobei/getUserThemes          controllers.Baobei.getUserThemes
 POST       /baobei/createTheme            controllers.Baobei.createTheme
 POST      /baobei/addAssess               controllers.Baobei.addAssess

@@ -7,24 +7,25 @@
  * Includes:
  * Since: 13-6-22  上午10:22
  * ModifyTime :
- * ModifyContent:  for  site scala html
+ * ModifyContent:  for  site favor
  * http://www.smeite.com/
  *
  */
 define(function(require, exports){
     var $  = require("$");
-    var judgeSiteFollowState=function(sid,o){
+    var ConfirmBox = require("confirmbox")
+    var judgeSiteFollowState=function(siteId,o){
 
         $.ajax({
             url:"/site/checkSiteLoveState",
             type : "post",
             contentType:"application/json; charset=utf-8",
             dataType: "json",
-            data: JSON.stringify({"sid": sid }),
+            data: JSON.stringify({"siteId": siteId }),
             success: function(data){
                 if(data.code=="100"){
                //     o.removeClass("follow-btn").addClass("followed-btn").text("已关注");
-                    o.after("<div class='followed-btn'>已关注<span class='mr5 ml5'>|</span><a rel='removeFollowSite'data-title="+o.data("title")+"  data-sid='"+o.data("sid")+"' href='javascript:;'>取消</a></div>") ;
+                    o.after("<div class='followed-btn'>已加入<span class='mr5 ml5'>|</span><a rel='removeFollowSite'data-title="+o.data("title")+"  data-id='"+o.data("id")+"' href='javascript:;'>退出</a></div>") ;
                     o.remove();
                 }
             }
@@ -36,24 +37,24 @@ define(function(require, exports){
         /*先判断状态 */
         if(SMEITER.userId !=""){
             $("a[rel=followSite]").each(function(){
-                var id =$(this).data("sid")
+                var id =$(this).data("id")
                 judgeSiteFollowState(id,$(this))
             })
         }
 
         //加关注
-        $("a[rel=followSite]").on("click",function(){
+        $(document).on("click","a[rel=followSite]",function(){
             if($.smeite.dialog.isLogin()){
               //  if($(this).data("enable")=="false") return;
               //  $(this).data("enable","false");
                 $this = $(this);
-                var sid = $this.data("sid")
+                var siteId = $this.data("id")
                 $.ajax({
                     url:"/site/addFollow",
                     type : "post",
                     contentType:"application/json; charset=utf-8",
                     dataType: "json",
-                    data: JSON.stringify({"sid": sid }),
+                    data: JSON.stringify({"siteId": siteId }),
                     success: function(data){
                         switch(data.code){
                             case("100"):
@@ -66,12 +67,12 @@ define(function(require, exports){
                                 $.smeite.tip.show($this,"参数错误");
                                 break;
                             case("103"):
-                                $this.data("enable","true");
+                           //     $this.data("enable","true");
                                 $.smeite.tip.conf.tipClass = "tipmodal tipmodal-error2";
                                 $.smeite.repeatFollowCallback(data,$this);
                                 break;
                             case("111"):
-                                $this.data("enable","true");
+                            //    $this.data("enable","true");
                                 $.smeite.tip.conf.tipClass = "tipmodal tipmodal-error2";
                                 $.smeite.tip.show($this,"抱歉，你的关注已达上限。");
                                 break;
@@ -87,31 +88,31 @@ define(function(require, exports){
             }
         })
 
-
-        $("a[rel=removeFollowSite]").on("click",function(){
+        // 取消关注
+        $(document).on("click","a[rel=removeFollowSite]",function(){
 
             if($.smeite.dialog.isLogin()){
               //  if($(this).data("enable")=="false") return;
              //   $(this).data("enable","false");
                 var $this = $(this)
-                var sid = $this.data("sid")
+                var siteId = $this.data("id")
                 var txt = "确定不再关注“"+$this.data("title")+"”？";
-                alert("hello")
-            //    var confirmCallback = function(){
-                        $.ajax({
+                ConfirmBox.confirm(txt, '亲，你要和我分手吗？', function() {
+
+                    $.ajax({
                         url:"/site/removeFollow",
                         type : "post",
                         contentType:"application/json; charset=utf-8",
                         dataType: "json",
-                        data: JSON.stringify({"sid": sid }),
+                        data: JSON.stringify({"siteId": siteId }),
                         success: function(data){
                             switch(data.code){
                                 case("100"):
-                                    $this.data("enable","true");
+                               // $this.data("enable","true");
                                     $.smeite.removeFollowCallback(data,$this);
                                     break;
                                 case("104"):
-                                    $this.data("enable","true");
+                                 //   $this.data("enable","true");
                                     $.smeite.tip.conf.tipClass = "tipmodal tipmodal-error2";
                                     $.smeite.tip.show($this,"参数错误");
                                     break;
@@ -121,21 +122,19 @@ define(function(require, exports){
                             }
                         }
                     });
-             //   };
-               /* $.smeite.confirmUI(txt,confirmCallback,function(){
-                    $this.data("enable","true");
-                })*/
+                });
+
             }
         })
 
         $.smeite.addFollowCallback = function(data,o){
-               o.after("<div class='followed-btn'>已关注<span class='mr5 ml5'>|</span><a rel='removeFollowSite'data-title="+o.data("title")+"  data-sid='"+o.data("sid")+"' href='javascript:;'>取消</a></div>")
+               o.after("<div class='followed-btn'>已加入<span class='mr5 ml5'>|</span><a rel='removeFollowSite'data-title="+o.data("title")+"  data-id='"+o.data("id")+"' href='javascript:;'>退出</a></div>")
                o.remove();
 
 
         }
         $.smeite.removeFollowCallback = function(data,o){
-                o.parent().after("<a rel='followSite' href='javascript:;' class='follow-btn' data-title="+o.data("title")+"   data-sid="+o.data("sid")+">加关注</a>")
+                o.parent().after("<a rel='followSite' href='javascript:;' class='follow-btn' data-title="+o.data("title")+"   data-id="+o.data("id")+">+加入小镇</a>")
                 o.parent().remove();
 
 
@@ -149,7 +148,7 @@ define(function(require, exports){
             }
             var html = "";
             html += '<div id="cmtDialog" class="c-dialog" style="width:180px">';
-            html += '<p class="title clearfix"><a class="cmtclose fr" href="javascript:;">x</a>&gt;_&lt;已经关注了~</p>';
+            html += '<p class="title clearfix"><a class="cmtclose fr" href="javascript:;">x</a>&gt;_&lt;已经加入了~</p>';
             html += '</div>';
             $("body").append(html);
             var position = $.smeite.util.getPosition(o).topMid();
@@ -160,7 +159,7 @@ define(function(require, exports){
             }).fadeIn();
             o.data("timeout",setTimeout(function(){$("#cmtDialog").fadeOut()},3000));
 
-            $this.removeClass("follow-btn").addClass("followed-btn").text("已关注");
+            $this.removeClass("follow-btn").addClass("followed-btn").text("已加入");
         }
     })
 

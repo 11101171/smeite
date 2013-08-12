@@ -13,7 +13,7 @@ class PullGoodsActor  extends  Actor{
     println("schedule pull goods start")
     val timestamp= String.valueOf(System.currentTimeMillis)
     val sign=TaobaoConfig.getSign(timestamp)
-  //  Ok(views.html.admin.schedulePullGoods()).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
+  //  Ok(views.html.admin.manager.schedulePullGoods()).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
    // Ok("success")
   }
   def receive = {

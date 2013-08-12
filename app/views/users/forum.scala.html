@@ -88,7 +88,7 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
 
                                                     <p><span class="gc">@Utils.timestampFormat(item.addTime.get)</span></p>
                                                     @if(t=="love"){
-                                                    <div style="float: left" class='followed-btn'>已关注<span class='mr5 ml5'>|</span><a rel='removefollow' data-followtype='1' data-topictitle="@item.title" data-topicid="@item.id.get">取消</a></div>
+                                                    <div style="float: left" class='followed-btn'>已关注<span class='mr5 ml5'>|</span><a rel='removeFollowTopic' data-followtype='1' data-title="@item.title" data-id="@item.id.get">取消</a></div>
                                                     }
                                                     <!--</dd>-->
                                                 </div>

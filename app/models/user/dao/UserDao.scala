@@ -335,7 +335,7 @@ object UserDao {
     UserLoveGoodses.insert(uid,goodsId)
 
   }
-  def deleteLoveGoods(uid:Long,goodsId:Long) =database.withSession{  implicit session:Session =>
+  def removeLoveGoods(uid:Long,goodsId:Long) =database.withSession{  implicit session:Session =>
     UserSQLDao.updateLoveBaobeiNum(uid,-1)
     val goods =GoodsDao.findById(goodsId)
     /*保存用户动作*/

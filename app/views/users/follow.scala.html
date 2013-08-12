@@ -57,7 +57,7 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                     <div class="follow">
 
                         <div  class="followed-btn">已关注<span class="mr5 ml5">|</span>
-                            <a rel="removefollow"href="javascript:;" data-followtype="2" data-userid="@user.id.get" data-usernick="@user.name">取消</a>
+                            <a rel="removeFollow"href="javascript:;" data-followtype="2" data-userid="@user.id.get" data-usernick="@user.name">取消</a>
                         </div>
                     </div>
                 </div>
@@ -110,7 +110,7 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                         <div class="user-info">
                             <a class="username g-daren" href="@controllers.users.routes.Users.home(user.id.get)" title="@user.name"><em class="ofh">@user.name</em> @if(user.status==3){ <i class="i-daren">达人</i>}</a>
 
-                            <p>来自@models.user.ComeFrom(user.comeFrom)</p><a rel="follow" href="javascript:;" class="follow-btn"
+                            <p>来自@models.user.ComeFrom(user.comeFrom)</p><a rel="followUser" href="javascript:;" class="follow-btn"
                                                                             data-usernick="@user.name"           data-followtype="5" data-userid="@user.id.get">加关注</a></div>
                     </li>
                     }

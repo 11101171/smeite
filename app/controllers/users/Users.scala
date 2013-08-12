@@ -222,7 +222,7 @@ object Users extends Controller {
         val loveGoods = UserDao.checkLoveGoods(user.get.id.get,goodsId)
         if(loveGoods.isEmpty) Ok(Json.obj("code" -> "103", "message" -> "您喜欢的宝贝不存在"))
         else {
-          val result = UserDao.deleteLoveGoods(user.get.id.get,goodsId)
+          val result = UserDao.removeLoveGoods(user.get.id.get,goodsId)
           if (result>0)Ok(Json.obj( "code" -> "100", "message" ->"删除成功"))
           else Ok(Json.obj("code" -> "101", "message" ->"数据库请求删除失败"))
         }
