@@ -6,7 +6,7 @@ import models.Page
 import models.site.dao.SiteDao
 import java.sql.{Date, Timestamp}
 import models.msg.dao.SystemMsgDao
-import models.site.Post
+import models.site.{PostReply, Post}
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,6 +18,9 @@ import models.site.Post
 case class SiteFilterFormData(uid:Option[Long],title:Option[String],cid:Option[Int],status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
 
 case class PostFilterFormData(uid:Option[Long],sid:Option[Long],title:Option[String],cid:Option[Int],status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
+
+case class PostReplyFilterFormData(uid:Option[Long],pid:Option[Long],content:Option[String],cid:Option[Int],status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
+
 
 case class SiteBatchFormData(action:Int,ids:Seq[Long])
 
@@ -46,6 +49,19 @@ object Sites extends Controller {
       "endDate"-> optional(sqlDate("yyyy-MM-dd")),
       "currentPage"->optional(number)
     )(PostFilterFormData.apply)(PostFilterFormData.unapply)
+  )
+
+  val postReplyFilterForm =Form(
+    mapping(
+      "uid"->optional(longNumber),
+      "pid"->optional(longNumber),
+      "content"->optional(text),
+      "cid"->optional(number),
+      "status"->optional(number),
+      "startDate" -> optional(sqlDate("yyyy-MM-dd")),
+      "endDate"-> optional(sqlDate("yyyy-MM-dd")),
+      "currentPage"->optional(number)
+    )(PostReplyFilterFormData.apply)(PostReplyFilterFormData.unapply)
   )
 
   val batchForm =Form(
@@ -140,5 +156,53 @@ object Sites extends Controller {
       }
     )
   }
+
+  /***************** post reply *********************  */
+  def postReplies(pid:Long,currentPage:Int)=Managers.AdminAction{ manager => implicit request =>
+    var page:Page[PostReply] = null
+    if(pid==0){
+      page=SiteDao.findAllPostReplies(currentPage,50)
+    }else{
+      page=SiteDao.findPostRepliesByPid(pid,currentPage,50)
+    }
+
+    Ok(views.html.admin.sites.postReplies(manager,page))
+
+  }
+
+  def filterPostReplies = Managers.AdminAction{ manager => implicit request =>
+    postReplyFilterForm.bindFromRequest.fold(
+      formWithErrors =>Ok("something wrong"),
+      reply => {
+        val page=SiteDao.filterPostReplies(reply.uid,reply.pid,reply.content,reply.cid,reply.status,reply.startDate,reply.endDate,reply.currentPage.getOrElse(1),50)
+        Ok(views.html.admin.sites.filterPostReplies(manager,page,postReplyFilterForm.fill(reply)))
+      }
+    )
+  }
+
+  def batchPostReplies  = Managers.AdminAction{ manager => implicit request =>
+    batchForm.bindFromRequest.fold(
+      formWithErrors =>Ok("something wrong"),
+      batch => {
+        if(batch.action == 0){
+          for(id<-batch.ids){
+            SiteDao.modifyPostReplyStatus(id,0)
+          }
+        }else if (batch.action ==1){
+          for(id<-batch.ids){
+            SiteDao.modifyPostReplyStatus(id,1)
+
+          }
+        }else if(batch.action==3){
+          for(id<-batch.ids){
+            SiteDao.deletePostReply(id)
+          }
+        }
+        Redirect(request.headers.get("REFERER").getOrElse("/admin/sites/PostReplies"))
+      }
+    )
+  }
+
+
 
 }

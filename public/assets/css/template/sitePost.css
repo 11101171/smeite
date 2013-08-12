@@ -257,3 +257,42 @@
     height: 32px;
     margin: 0 5px 0 0;
 }
+
+/* post replies*/
+.post-right .post-replies{
+    padding: 10px 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #EEE;
+    border-top:2px;
+    background: #fff;
+}
+
+.post-replies .replies{
+    margin-bottom: 25px;
+}
+.post-replies dt{
+    font-size: 14px;
+    margin: 0 0 10px 0;
+}
+.post-replies .posts dd{
+    padding: 0 0 0 17px;
+    height: 26px;
+    line-height: 26px;
+    overflow: hidden;
+    background: url(images/scene-bg.png)  no-repeat center left;
+}
+
+.post-replies .pic{
+    float: left;
+    width: 40px;
+}
+.post-replies  img {
+    width: 40px;
+    height: 40px;
+}
+.post-replies .info{
+    width: 100px;
+    float: right;
+}
+

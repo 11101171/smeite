@@ -198,32 +198,7 @@
 </div>
 </div>
 
-<script type="text/javascript">
 
-
-    $(document).on("click",".remove",function(){
-        var tagId=$(this).data('id');
-        $("#J_deleteModal").modal('show');
-        $("#J_delete").click(function(){
-
-            $.ajax({
-                url:"/admin/tags/deleteTag?tid="+tagId,
-                type:'get',
-                dataType:'json',
-                success:function(data){
-                    if(data.code =='100'){
-
-                        $("#"+tagId).remove();
-                        $("#J_deleteModal").modal("hide")
-                    }else{
-                        alert(data.message)
-                    }
-                }
-            })
-
-        })
-    })
-</script>
 
 }
 

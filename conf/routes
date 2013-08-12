@@ -374,6 +374,10 @@ GET   /admin/sites/postList               controllers.admin.Sites.postList(sid:L
 GET   /admin/sites/filterPosts           controllers.admin.Sites.filterPosts
 POST   /admin/sites/batchPosts            controllers.admin.Sites.batchPosts
 
+GET   /admin/sites/postReplies            controllers.admin.Sites.postReplies(pid:Long ?=0,p:Int ?=1)
+GET   /admin/sites/filterPostReplies          controllers.admin.Sites.filterPostReplies
+POST  /admin/sites/batchPostReplies           controllers.admin.Sites.batchPostReplies
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public/assets", file)
 GET     /images/*file               controllers.Assets.at(path="/public/images", file)

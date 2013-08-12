@@ -38,45 +38,45 @@
                         <tbody>
                        <tr>
                           <td> 总数统计</td>
-                           <td> @numMap("totalTheme")</td>
-                           <td> @numMap("totalThemeDiscuss")</td>
-                           <td> @numMap("totalGoods")</td>
-                           <td> @numMap("totalGoodsAssess")</td>
-                           <td> @numMap("totalTopic")</td>
-                           <td> @numMap("totalTopicReply")</td>
-                           <td> @numMap("totalSite")</td>
-                           <td> @numMap("totalPost")</td>
-                           <td> @numMap("totalPostReply")</td>
-                           <td> @numMap("totalAtMsg")</td>
-                           <td> @numMap("totalUser")</td>
+                           <td><a href="@controllers.admin.routes.Themes.list(1)"> @numMap("totalTheme")</a></td>
+                           <td><a href="@controllers.admin.routes.Themes.discusses(1)"> @numMap("totalThemeDiscuss")</a></td>
+                           <td><a href="@controllers.admin.routes.Goods.list(1)"> @numMap("totalGoods")</a></td>
+                           <td><a href="@controllers.admin.routes.Goods.assess(1)"> @numMap("totalGoodsAssess")</a></td>
+                           <td><a href="@controllers.admin.routes.Forums.list(1)"> @numMap("totalTopic")</a></td>
+                           <td><a href="@controllers.admin.routes.Forums.replies(1)"> @numMap("totalTopicReply")</a></td>
+                           <td><a href='@controllers.admin.routes.Sites.siteList(1)'> @numMap("totalSite")</a></td>
+                           <td><a href='@controllers.admin.routes.Sites.postList(0,1)'> @numMap("totalPost")</a></td>
+                           <td><a href='@controllers.admin.routes.Sites.postReplies(0,1)'> @numMap("totalPostReply")</a></td>
+                           <td><a href='@controllers.admin.routes.Msgs.atMsgs(1)'> @numMap("totalAtMsg")</a></td>
+                           <td><a href="@controllers.admin.routes.Users.list(1)"> @numMap("totalUser")</a></td>
                        </tr>
                        <tr>
                            <td> 今日新增统计</td>
-                           <td> @numMap("todayTheme")</td>
-                           <td> @numMap("todayThemeDiscuss")</td>
-                           <td> @numMap("todayGoods")</td>
-                           <td> @numMap("todayGoodsAssess")</td>
-                           <td> @numMap("todayTopic")</td>
-                           <td> @numMap("todayTopicReply")</td>
-                           <td> @numMap("todaySite")</td>
-                           <td> @numMap("todayPost")</td>
-                           <td> @numMap("todayPostReply")</td>
-                           <td> @numMap("todayAtMsg")</td>
-                           <td> @numMap("todayUser")</td>
+                           <td><a href="@controllers.admin.routes.Themes.list(1)"> @numMap("todayTheme")</a></td>
+                           <td><a href="@controllers.admin.routes.Themes.discusses(1)"> @numMap("todayThemeDiscuss")</a></td>
+                           <td><a href="@controllers.admin.routes.Goods.list(1)"> @numMap("todayGoods")</a></td>
+                           <td><a href="@controllers.admin.routes.Goods.assess(1)"> @numMap("todayGoodsAssess")</a></td>
+                           <td><a href="@controllers.admin.routes.Forums.list(1)"> @numMap("todayTopic")</a></td>
+                           <td><a href="@controllers.admin.routes.Forums.replies(1)"> @numMap("todayTopicReply")</a></td>
+                           <td><a href='@controllers.admin.routes.Sites.siteList(1)'> @numMap("todaySite")</a></td>
+                           <td><a href='@controllers.admin.routes.Sites.postList(0,1)'> @numMap("todayPost")</a></td>
+                           <td><a href='@controllers.admin.routes.Sites.postReplies(0,1)'> @numMap("todayPostReply")</a></td>
+                           <td><a href='@controllers.admin.routes.Msgs.atMsgs(1)'> @numMap("todayAtMsg")</a></td>
+                           <td><a href="@controllers.admin.routes.Users.list(1)"> @numMap("todayUser")</a></td>
                        </tr>
                        <tr>
                            <td>距上次登录统计</td>
-                           <td> @numMap("newTheme")</td>
-                           <td> @numMap("newThemeDiscuss")</td>
-                           <td> @numMap("newGoods")</td>
-                           <td> @numMap("newGoodsAssess")</td>
-                           <td> @numMap("newTopic")</td>
-                           <td> @numMap("newTopicReply")</td>
-                           <td> @numMap("newSite")</td>
-                           <td> @numMap("newPost")</td>
-                           <td> @numMap("newPostReply")</td>
-                           <td> @numMap("newAtMsg")</td>
-                           <td> @numMap("newUser")</td>
+                           <td><a href="@controllers.admin.routes.Themes.list(1)"> @numMap("newTheme")</a></td>
+                           <td><a href="@controllers.admin.routes.Themes.discusses(1)"> @numMap("newThemeDiscuss")</a></td>
+                           <td><a href="@controllers.admin.routes.Goods.list(1)"> @numMap("newGoods")</a></td>
+                           <td><a href="@controllers.admin.routes.Goods.assess(1)"> @numMap("newGoodsAssess")</a></td>
+                           <td><a href="@controllers.admin.routes.Forums.list(1)"> @numMap("newTopic")</a></td>
+                           <td><a href="@controllers.admin.routes.Forums.replies(1)"> @numMap("newTopicReply")</a></td>
+                           <td><a href='@controllers.admin.routes.Sites.siteList(1)'> @numMap("newSite")</a></td>
+                           <td><a href='@controllers.admin.routes.Sites.postList(0,1)'> @numMap("newPost")</a></td>
+                           <td><a href='@controllers.admin.routes.Sites.postReplies(0,1)'> @numMap("newPostReply")</a></td>
+                           <td><a href='@controllers.admin.routes.Msgs.atMsgs(1)'> @numMap("newAtMsg")</a></td>
+                           <td><a href="@controllers.admin.routes.Users.list(1)"> @numMap("newUser")</a></td>
                        </tr>
 
                         </tbody>
@@ -112,7 +112,7 @@
                     <li>
                         <a href="@controllers.admin.routes.Managers.pushMsg">
                             <i class="icon-people"></i>
-                            推送消息
+                            站内信-消息管理
                         </a>
                     </li>
                     <li>

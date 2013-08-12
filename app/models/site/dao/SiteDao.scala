@@ -198,7 +198,7 @@ object SiteDao {
     Page[Post](posts,currentPage,totalPages)
   }
 
-  /* 筛选 sites */
+  /* 筛选 posts */
   def filterPosts(uid:Option[Long],sid:Option[Long],title:Option[String],cid:Option[Int],status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Int,pageSize:Int):Page[Post] =database.withSession {  implicit session:Session =>
 
     var query =for(c<-Posts )yield c
@@ -218,14 +218,64 @@ object SiteDao {
 
   /* ***************************************** site post reply   **************************************** */
 
+  def modifyPostReplyStatus(id:Long,status:Int)= database.withSession {  implicit session:Session =>
+    ( for( c <- PostReplies if c.id === id)yield c.status ).update(status)
+  }
+
+  def deletePostReply(id:Long)= database.withSession {  implicit session:Session =>
+    ( for(c <- PostReplies if c.id === id)yield c ).delete
+  }
+
   def countReply = database.withSession{implicit session:Session =>
     Query(PostReplies.length).first()
   }
   def countReply(time:Timestamp)=database.withSession{implicit session:Session =>
     Query(PostReplies.filter(_.addTime > time ).length).first()
   }
+  def findAllPostReplies(currentPage:Int,pageSize:Int) =  database.withSession {  implicit session:Session =>
+    val totalRows = Query(PostReplies.length).first()
+    val totalPages=(totalRows + pageSize - 1) / pageSize
+    /*获取分页起始行*/
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    var query=  for{
+      c<-PostReplies.sortBy(_.addTime desc)
+    }yield c
 
-  /* *************************** site member *************************************** */
+    val replies:List[PostReply]=  query.drop(startRow).take(pageSize).list()
+    Page[PostReply](replies,currentPage,totalPages)
+  }
+
+
+  def findPostRepliesByPid(pid:Long,currentPage:Int,pageSize:Int):Page[PostReply] =  database.withSession {  implicit session:Session =>
+    val totalRows = Query(PostReplies.filter(_.pid === pid ).length).first()
+    val totalPages=(totalRows + pageSize - 1) / pageSize
+    /*获取分页起始行*/
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val query=  for{
+      c<-PostReplies.filter(_.pid === pid ).sortBy(_.addTime desc)
+    }yield c
+
+    val replies:List[PostReply]=  query.drop(startRow).take(pageSize).list()
+    Page[PostReply](replies,currentPage,totalPages)
+  }
+
+  /* 筛选 post replies */
+  def filterPostReplies(uid:Option[Long],pid:Option[Long],content:Option[String],cid:Option[Int],status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Int,pageSize:Int):Page[PostReply] =database.withSession {  implicit session:Session =>
+
+    var query =for(c<-PostReplies )yield c
+    if(!uid.isEmpty) query = query.filter(_.uid === uid)
+    if(!pid.isEmpty) query = query.filter(_.pid === pid)
+    if(!content.isEmpty) query = query.filter(_.content like "%"+content.get+"%")
+    if(!cid.isEmpty) query = query.filter(_.cid === cid)
+    if(!status.isEmpty) query = query.filter(_.status === status)
+    if(!startDate.isEmpty) query = query.filter(_.addTime > new Timestamp(startDate.get.getTime) )
+    if(!endDate.isEmpty) query = query.filter(_.addTime <  new Timestamp(endDate.get.getTime) )
+    val totalRows=query.list().length
+    val totalPages=(totalRows + pageSize - 1) / pageSize
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val posts:List[PostReply]=  query.drop(startRow).take(pageSize).list()
+    Page[PostReply](posts,currentPage,totalPages)
+  }   /* *************************** site member *************************************** */
 
   /* 添加小镇居民 */
   def addSiteMember(sid:Long,uid:Long,duty:Int)  = database.withSession {  implicit session:Session =>
