@@ -1,7 +1,14 @@
-1 ��������smeite.com �������Ϣ������ �������ǡ��������ģ������ֲ�ȵ�
-2 ��8��10�� ���� ����ƻ�
-3 ���ơ��ḻС������
-4 վ����
-5 ��վ��̨��Ϣ���ѣ����� �����˶�����Ʒ������������
+﻿1 重新梳理smeite.com 的相关信息，比如 关于我们、帮助中心，引导手册等等
+2 在8月10日 申请 橙领计划
+3 完善、丰富小镇内容
+4 站内信
+5 网站后台信息提醒，比如 新增了多少商品、新增的评论
 
-8�·������ް�
+8月份任务艰巨啊
+
+
+8月12日
+
+1、修改site favor，目前，遇到新增的dom ，无法操作
+2、修改$.smeite.confirmUI ,为 arale conformbox,这里需要修改好几个地方
+3、修改goods topic user 等 favor，并上传smeite.favor

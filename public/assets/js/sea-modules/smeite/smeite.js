@@ -23,6 +23,7 @@ define(function(require, exports) {
   var Mask = require("mask");
     var Cookie = require("cookie");
     var Dialog = require("dialog") ;
+    var ConfirmBox = require("confirmbox")
     $.smeite = $.smeite || {
         version: "v1.0.0"
     };

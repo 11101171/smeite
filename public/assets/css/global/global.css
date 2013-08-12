@@ -758,7 +758,7 @@ input:-moz-placeholder { font-size:12px; }
 /* 新关注 */
 .follow-btn{float:left;width:53px;height:24px;background:#86B835;text-align:center;color:#fff;line-height:24px;font-weight:400;border-radius: 2px;display: inline-block;}
 .follow-btn:hover, .follow-btn:active{text-decoration:none;}
-.followed-btn{cursor:default;height:18px;float:right;line-height:18px;color:#666;border:1px solid #dedede;background-color:#f3f3f3;border-radius:3px;display:block;padding:0 6px;}
+.followed-btn{cursor:default;height:23px;float:right;line-height:23px;color:#666;border:1px solid #dedede;background-color:#f3f3f3;border-radius:3px;display:block;padding:0 6px;}
 .followed-btn span{color:#ccc;}
 .followed-btn a:hover{text-decoration:none;}
 .follow-btn-big{display:inline-block;width:53px;height:24px;border:1px solid #7ab121;background-color:#86b835;border-radius:3px;text-align:center;line-height:24px;color:#fff;}
