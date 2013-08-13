@@ -79,9 +79,9 @@ var UserTheme = {
 							goodsHtml += '<div class="goods">';
 							goodsHtml += 	'<div class="goods-pic" ><a href="/goods/' + data.product.id + '" target="_blank">';
 							goodsHtml += 		'<img src="' + data.product.pic + '" alt="' + data.product.name + '" /></a>';
-							goodsHtml += 		'<a class="ilike-del" href="javascript:;" data-proid="' + data.product.id + '" style="display: none; ">删除</a>';
-							goodsHtml += 		'<a class="ilike-m" href="javascript:;" data-type="0" data-proid="' + data.product.id + '" style="display:none;">喜欢</a>';
-							goodsHtml += 		'<a class="ilike-topic" href="javascript:;" data-proid="' + data.product.id + '" style="display:none;">加入主题</a>';
+							goodsHtml += 		'<a class="ilike-del" href="javascript:;" data-id="' + data.product.id + '" style="display: none; ">删除</a>';
+							goodsHtml += 		'<a class="ilike-m" href="javascript:;" data-type="0" data-id="' + data.product.id + '" style="display:none;">喜欢</a>';
+							goodsHtml += 		'<a class="ilike-topic" href="javascript:;" data-id="' + data.product.id + '" style="display:none;">加入主题</a>';
 							goodsHtml += 	'</div>';
 							goodsHtml +=	'<div class="comments-top">';
 							goodsHtml +=	'<span class="like-num"><em class="like-count">' + 0 + '</em></span>';

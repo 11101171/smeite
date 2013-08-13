@@ -26,7 +26,7 @@ title = "宝贝搜索结果_食美特，爱美食爱生活"
                         <a class="pic-link" href="@controllers.routes.Baobei.view(goodsId)" title="@goodsName" target="_blank">
                             <img src='@(goodsPic+"_210x210.jpg")' width="210" height="210" title="@goodsName" alt="@goodsName" />
                         </a>
-                        <a  class="ilike-m" href="javascript:;" data-proimgsrc="@goodsPic" data-prourl="@controllers.routes.Baobei.view(goodsId)" data-proname="@goodsName" data-type="0" data-proid="@goodsId">
+                        <a  class="ilike-m" href="javascript:;" data-proimgsrc="@goodsPic" data-prourl="@controllers.routes.Baobei.view(goodsId)" data-title="@goodsName" data-type="0" data-id="@goodsId">
                             <i></i>
                             <span class="ilikeCount" data-val="@goodsLoveNum">喜欢(@goodsLoveNum)</span>
                         </a>

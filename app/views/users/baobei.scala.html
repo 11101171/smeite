@@ -50,7 +50,7 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                             <div class="price">
                                 <span>￥@goods.price</span>
                                 <div class="like-state">
-                                    <a rel="followGoods" href="javascript:void(0)" data-proid="@goods.id.get">
+                                    <a rel="followGoods" href="javascript:void(0)" data-title="@goods.name" data-id="@goods.id.get">
                                         <i class="ico-likes"  title="喜欢"></i>
                                     </a>
                                     <div class="like-num">
@@ -95,7 +95,7 @@ title =  author.name+" 在食美特的个人主页，食美特，爱美食爱生
                                      <img src='@(goods.pic+"_210x210.jpg")' alt="@goods.name">
                                  </a>
                                &lt;!&ndash;  @if(!user.isEmpty && user.get.id==author.id){
-                                <a class="ilike-del" href="javascript:;" data-type="@t" data-proid="@goods.id.get">喜欢-1</a>
+                                <a class="ilike-del" href="javascript:;" data-type="0" data-id="@goods.id.get">喜欢-1</a>
                                 }&ndash;&gt;
                             </div>
                             <div class="goods-title ofh inlineblock">

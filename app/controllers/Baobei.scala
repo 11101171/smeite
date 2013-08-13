@@ -59,7 +59,7 @@ object Baobei extends Controller {
     if (user.isEmpty) Ok(Json.obj("code"->"400","message"->"你还没有登录"))
     else{
 
-      val goodsId=(request.body \ "id").asOpt[Long]
+      val goodsId=(request.body \ "goodsId").asOpt[Long]
       if (goodsId.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
       else {
         val userGoods=UserDao.checkLoveGoods(user.get.id.get,goodsId.get)
@@ -78,7 +78,7 @@ object Baobei extends Controller {
     if (user.isEmpty) Ok(Json.obj("code"->"400","message"->"你还没有登录"))
     else{
 
-      val goodsId=(request.body \ "id").asOpt[Long]
+      val goodsId=(request.body \ "goodsId").asOpt[Long]
       if (goodsId.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
       else {
           UserDao.removeLoveGoods(user.get.id.get,goodsId.get)

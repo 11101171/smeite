@@ -124,7 +124,7 @@ define(function(require, exports){
                                 $(this).removeClass("selected")
                             });
 
-                            var html ='<div class="cmt clearfix cmt-noworth" data-cmtid="" data-proid="">'
+                            var html ='<div class="cmt clearfix cmt-noworth" data-cmtid="" data-id="">'
                               + '<div class="user-pic">'
                                 + '  <a href="#">'
                                 + ' <img src="'+photo+'" alt="">'

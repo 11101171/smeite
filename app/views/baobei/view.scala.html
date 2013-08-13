@@ -23,7 +23,7 @@ description = goods.intro
                     </a>
 
                     <div class="like-common like-common-s" >
-                        <a  class="like" rel="followGoods" href="javascript:void(0)" data-proid="@goods.id.get" title="喜欢"><i>喜欢</i></a>
+                        <a  class="like" rel="followGoods" href="javascript:void(0)" data-id="@goods.id.get" title="喜欢"><i>喜欢</i></a>
                         <div class="like-num">
                             <dl class="J_scrollUp">
                                 <dd class="J_FavorNum" data-val="@goods.loveNum">@goods.loveNum</dd>
@@ -80,7 +80,7 @@ description = goods.intro
                          </dd>
                      <dd class="shareTips">
 
-                         <a rel="nofollow" class="info-wrong" href="javascript:;" id="J_JiuCuo" data-proid="488">信息有误？</a>
+                         <a rel="nofollow" class="info-wrong" href="javascript:;" id="J_JiuCuo" data-id="@goods.id.get">信息有误？</a>
                          <div class="share-link" data-sharetxt="@goods.name" data-sharepic="@goods.pic" data-sharelink="@controllers.routes.Baobei.view(goods.id.get)">
                              <label class="fl l20 gc">分享到：</label>
                              <a class="s-sina fl" href="javascript:;" data-type="s-sina" alt="分享到新浪微博"></a>

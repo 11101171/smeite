@@ -90,58 +90,7 @@ define(function(require, exports){
                     }
                 }
             });
-          /*  $.smeite.favor.repeatLoveThemeClk = function(o){
-                o.data("enable","enable");
-                if($("#cmtDialog")[0]){
-                    $("#cmtDialog").remove();
-                    clearTimeout(parseInt(o.data("timeout"),10));
-                }
-                var html = "";
-                html += '<div id="cmtDialog" class="c-dialog" style="width:180px">';
-                html += '<p class="title clearfix"><a class="cmtclose fr" href="javascript:;">x</a>&gt;_&lt;关注过了~</p>';
-                html += '<a class="sbl-btn speakmore" ' + cmtTarget + ' href="' + cmtHref + '">再说两句</a>'
-                html += '</div>';
-                //console.log("repeat:" + html);
-                $("body").append(html);
-                var position = $.smeite.util.getPosition(o).topMid();
-                var W = $("#cmtDialog").outerWidth(),
-                    H = $("#cmtDialog").outerHeight();
-                $("#cmtDialog").css({
-                    left: position.x - W/2 + "px",
-                    top: position.y - H + 80+ "px"
-                }).fadeIn();
-                o.data("timeout",setTimeout(function(){$("#cmtDialog").fadeOut()},3000));
 
-                o.removeClass("follow").addClass("followed").text("已关注");
-            }
-
-            $.smeite.favor.loveThemeCallback = function(o){
-                o.data("enable","enable");
-                //主题频道页中可同时喜欢多个主题
-                if($("#cmtDialog")[0]){
-                    $("#cmtDialog").remove();
-                    clearTimeout(parseInt(o.data("timeout"),10));
-                }
-                var html = "";
-                html += '<div id="cmtDialog" class="c-dialog">';
-                html += '<p class="title clearfix"><a class="cmtclose fr" href="javascript:;">x</a>关注了~</p>';
-                html += '<a class="sbl-btn speakmore" ' + cmtTarget + ' href="' + cmtHref + '">去说两句</a>'
-                html += '</div>';
-                //console.log("no-repeat:" + html);
-                $("body").append(html);
-                var position = $.smeite.util.getPosition(o).topMid();
-                var W = $("#cmtDialog").outerWidth(),
-                    H = $("#cmtDialog").outerHeight();
-                $("#cmtDialog").css({
-                    left: position.x - W/2 + "px",
-                    top: position.y - H +80 + "px"
-                }).fadeIn();
-                var newCount = parseInt($likeCount.text(),10) + 1;
-                $likeCount.text(newCount);
-                o.data("timeout",setTimeout(function(){$("#cmtDialog").fadeOut()},3000));
-                $this.removeClass("follow").addClass("followed").text("已关注");
-            }
-            $.smeite.favor.loveThemeSubmit($this, parseInt(themeId));*/
         });
 
        //  取消主题关注操作
