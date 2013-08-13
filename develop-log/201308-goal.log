@@ -12,3 +12,9 @@
 1、修改site favor，目前，遇到新增的dom ，无法操作                         完成
 2、修改$.smeite.confirmUI ,为 arale conformbox,这里需要修改好几个地方    完成
 3、修改goods topic user 等 favor，并上传smeite.favor                    完成
+
+8月13日
+1、添加post reply
+2、修改发帖权限 ,即加入小镇之后才能发帖
+3、增加theme 评价
+4、post 增加喜欢 favor

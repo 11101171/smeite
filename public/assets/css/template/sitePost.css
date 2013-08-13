@@ -460,3 +460,20 @@ a:hover.btn-postlike {
     height: 40px;
     margin-bottom: 10px;
 }
+.comment-list .post-quote {
+    margin-top: 8px
+}
+
+.comment-list .post-quote blockquote {
+    padding: 8px 10px;
+    margin: 0 0 8px 0;
+    background-color: #fafafa;
+    position: relative;
+    line-height: 24px
+}
+
+.comment-list .post-quote blockquote .close {
+    position: absolute;
+    right: 15px;
+    top: 10px
+}

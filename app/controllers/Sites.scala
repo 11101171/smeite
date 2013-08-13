@@ -63,7 +63,6 @@ object Sites extends Controller {
         }else{
           SiteDao.modifySite(site.sid.get,site.cid,site.title,site.pic,site.intro,site.tags)
         }
-
          Ok(views.html.sites.addSuccess(user))
       }
     )
@@ -198,6 +197,12 @@ object Sites extends Controller {
      val siteMembers = SiteDao.findSiteMembers(post._3.id.get,5)
       Ok(views.html.sites.post(user, post,userPosts,userSites,sitePosts,siteMembers))
 
+  }
+
+  /* 小镇回复 */
+  def addReply = Users.UserAction { user => implicit request =>
+
+    Ok("success")
   }
 
 }

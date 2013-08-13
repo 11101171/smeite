@@ -139,7 +139,7 @@
                     <td><a href="@controllers.routes.Sites.post(item.pid)"> @item.pid </a> </td>
                     <td>@models.site.PostReplyCate(item.cid)</td>
                     <td>@item.content</td>
-                    <td>@item.quoteReply</td>
+                    <td>@item.quoteContent</td>
                     <td>@if(item.status==0){<span class="label label-warning">未审核</span>} @if(item.status ==1){<span class="label label-success">已审核</span>}</td>
                     <td>@item.addTime</td>
                     <td>
