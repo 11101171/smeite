@@ -12,6 +12,9 @@
  *
  */
 /* post  content*/
+#J_Page {
+    background: url(images/site_bg_lines.png) repeat;
+}
 .processing{height:20px;width:140px;background:url(images/processing.gif) no-repeat;overflow:hidden;display:block;position:relative;top:7px;margin-left:5px;float:left;_display:inline;}
 .processing_nd0{background-position:0px 0px;}
 .processing_nd1{background-position:0px -20px;}
@@ -295,4 +298,165 @@
     width: 100px;
     float: right;
 }
+  /* post share */
+.post-main  .post-share {
+    border-top: 1px dashed #ccc;
+    padding: 10px 25px 0 25px;
+}
+.post-main .post-like-doing {
+    float: right;
+}
+.post-main .post-like-doing em {
+    line-height: 30px;
+    float: left;
+    margin-right: 10px;
+}
+.post-main a.btn-postlike {
+    float: left;
+    color: #d9b79f;
+    height: 23px;
+    line-height: 23px;
+    padding: 0 10px;
+    border: 1px solid #d9b69f;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    behavior: url(PIE.htc);
+}
+a:hover.btn-postlike {
+    background: #d9b79f;
+    color: #fff;
+    text-decoration: none
+}
+.post-main a.btn-postlike ins {
+    display: inline-block;
+    zoom: 1;
+    vertical-align: middle;
+    height: 12px;
+    padding: 0 0 0 17px;
+    overflow: hidden;
+    background: url(images/post-favor.png) no-repeat 0 0;
+}
 
+.post-main a:hover.btn-postlike ins {
+    background-position: -24px 0
+}
+
+.post-main a.btn-postliked {
+    background: #d9b79f;
+    color: #fff
+}
+
+.post-main a.btn-postliked ins,.post-main a:hover.btn-postliked ins {
+    background-position: -48px 0
+}
+/* comment */
+.good-comment{
+    margin-bottom: 30px;
+}
+.good-comment .top-arrow{
+    display: block;
+    height: 25px;
+    overflow: hidden;
+    background: 0;
+    border-bottom: 5px solid #231f20;
+}
+.good-comment .top-arrow em {
+    float: left;
+    margin: 0 0 0 270px;
+    display: inline;
+    height: 25px;
+    width: 18px;
+    overflow: hidden;
+    background: url(images/ico_common.png) no-repeat 0 -3583px;
+}
+.good-comment .good-comment-box {
+    border: 1px solid #efefef;
+    border-top: 0;
+    background: #fff;
+    padding-top: 20px;
+    text-align: left;
+}
+.good-comment .comment-title {
+    text-align: right;
+    color: #aaa;
+    padding: 0 20px;
+}
+.good-comment .comment-list {
+    background: 0;
+    margin: 0 20px 30px 20px;
+    padding-top: 15px;
+}
+.comment-list li {
+    padding-left: 60px;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+    zoom: 1;
+}
+.comment-list li .share-avt {
+    width: 38px;
+    height: 38px;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.comment-list li .arrow {
+    float: left;
+    position: absolute;
+    height: 14px;
+    overflow: hidden;
+    background: url(images/ico_common.png) no-repeat -272px -3632px;
+    width: 10px;
+    left: 51px;
+    top: 13px;
+    background-position: -289px -3632px;
+}
+.comment-list .share-user {
+    border: 1px solid #e5e5e5;
+    background: #fff;
+    padding: 15px 15px 5px 15px;
+    zoom: 1;
+}
+.comment-list .share-user h3 {
+    margin-bottom: 12px;
+    line-height: 16px;
+}
+.share-user h3 a {
+    font-size: 12px;
+    color: #000;
+}
+.share-user .user-title {
+    color: #aaa;
+    font-size: 12px;
+    display: inline;
+    margin-left: 10px;
+    word-wrap: break-word;
+}
+.comment-list .share-user p.content {
+    color: #444;
+    word-wrap: break-word;
+}
+.comment-list .share-user .pic {
+    background: 0;
+    padding: 10px 0;
+    width: 436px;
+    overflow: hidden;
+}
+.comment-list .share-user .pic img {
+    max-width: 436px;
+}
+.comment-list .item-doing {
+    text-align: right;
+    color: #d1d1d1;
+    padding: 5px 0;
+}
+.comment-list .item-doing .reply {
+    margin-right: 15px;
+}
+.comment-list .post textarea {
+    width: 410px;
+    height: 40px;
+    margin-bottom: 10px;
+}

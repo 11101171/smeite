@@ -106,6 +106,71 @@ title =  "食美特，不一样的生活"
                 @Html(post._1.content)
 
             </div>
+             <!--share -->
+            <div class="post-share clearfix">
+                <div class="share">
+                    <div class="share-link" data-sharetxt="@post._1.title" data-sharepic="@post._1.pic" data-sharelink="@controllers.routes.Sites.post(post._1.id.get)">
+                        <label class="fl l20 gc">分享到：</label>
+                        <a class="s-sina fl" href="javascript:;" data-type="s-sina" alt="分享到新浪微博"></a>
+                        <a class="s-qzone fl" href="javascript:;" data-type="s-qzone" alt="分享到QQ空间"></a>
+                        <a class="s-tencent fl" href="javascript:;" data-type="s-tencent" alt="分享到腾讯微博"></a>
+                        <a class="s-douban fl" href="javascript:;" data-type="s-douban" alt="分享到豆瓣"></a>
+                        <a class="s-renren fl" href="javascript:;"  data-type="s-renren" alt="分享到人人网"></a>
+
+                    </div>
+                </div>
+                <div class="post-like-doing">
+                    <em id="faverNum" value="0">0人喜欢</em>
+                    <a class="btn-postlike j-like" href="javascript:;"><ins></ins>喜欢</a>
+                </div>
+            </div>
+            <!-- comment -->
+             <div class="good-comment">
+                <span class="top-arrow">
+                    <em></em>
+                </span>
+                 <div class="good-comment-box">
+                     <div class="comment-title"><em id="comment_num" num="2">该分享有2条评论</em></div>
+                     <div class="comment-list">
+                         <ul id="J_commentList">
+                             <li >
+                                 <div class="share-avt">
+                                     <a class="fl" href="/user/42076 target=" _blank""=""><img class="avt32 fl" src="http://img1.xiangqu.com/xiangqu/image/9F5/9F50B171AD530BB705AC289A7A9024F6_332x334.jpg_32x10000.jpg" width="38" height="38"></a>
+                                 </div>
+                                 <span class="arrow"></span>
+                                 <div class="share-user">
+                                     <h3><a class="J_nick" href="/user/42076" target="_blank">smeite</a><p class="user-title"></p></h3>
+                                     <p class="content">好茶</p>
+                                     <div class="pic" style="" flag="1"><a href="javascript:;"><img bigimg="http://img1.xiangqu.com/xiangqu/image/836/836D2A5369A229EC5CE46C6FACC62CA0_640x360.jpg_450x10000.jpg" smallimg="http://img1.xiangqu.com/xiangqu/image/836/836D2A5369A229EC5CE46C6FACC62CA0_640x360.jpg_120x10000.jpg" src="http://img1.xiangqu.com/xiangqu/image/836/836D2A5369A229EC5CE46C6FACC62CA0_640x360.jpg_120x10000.jpg" style="opacity: 0.9;"></a></div>
+                                     <div class="item-doing"><a class="reply" value="" userid="" href="javascript:;" style="display: none;">回复</a>刚刚</div>
+                                 </div>
+                             </li>
+                         </ul>
+                         <ul>
+                             <li class="post-c">
+                                 <div class="share-avt"><a href="/user/42076" target="_blank"><img class="avt32 fl" value="42076" src="http://img1.xiangqu.com/xiangqu/image/9F5/9F50B171AD530BB705AC289A7A9024F6_332x334.jpg_64x10000.jpg" width="38" height="38" style="opacity: 1;"> </a></div>                                     <span class="arrow"></span>
+                                 <div class="share-user">
+
+                                     <div class="post">
+                                         <div><textarea id="J_commentText" name="" cols="" rows="" class="textarea-normal w-660" label="说两句吧" style="color: rgb(0, 0, 0);"></textarea></div>
+
+                                         <div id="upload_img_div" class="upload-img" style="display: none;">
+                                             <div class="img"><img id="upload_img" src="">
+                                                 <p class="del"><a href="javascript:;">删除</a></p></div>
+                                         </div>
+
+                                         <div class="btn-post clearfix">
+                                             <a class="btn btn-gray fr" href="javascript:;">发布</a>
+
+                                         </div>
+                                     </div>
+
+                                 </div></li>
+                         </ul>
+                     </div>
+                 </div>
+
+             </div>
         </div>
         <!-- post right a  -->
         <div class="post-right">

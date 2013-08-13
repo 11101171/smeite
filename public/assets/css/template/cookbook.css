@@ -4,7 +4,9 @@
  * Time: 下午3:02
  * 维护人员:zuosanshao@qq.com
  */
-
+#J_Page {
+    background: url(images/site_bg_lines.png) repeat;
+}
 .main-box {
     width: 950px;
     margin: 20px auto 25px;

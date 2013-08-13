@@ -12,7 +12,7 @@
  *
  */
 #J_Page {
-    background-color: #F9F9EF;
+    background: url(images/site_bg_lines.png) repeat;
 }
 /* site nav */
  .site-nav{
