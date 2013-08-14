@@ -83,7 +83,7 @@
     font-weight: bolder;
 }
 
-.bulletin .create-theme {
+.bulletin .create-site {
     display: inline-block;
     width:100px;
     height: 30px;
@@ -97,12 +97,12 @@
     font-weight: bold;
 }
 
-.bulletin .create-theme:hover {
+.bulletin .create-site:hover {
     text-decoration: none;
     background: #86b835 url(images/button.png) -5px -611px;
 }
 
-.bulletin .create-theme:active {
+.bulletin .create-site:active {
     text-decoration: none;
     background: #86b835 url(images/button.png) -5px -641px;
 }

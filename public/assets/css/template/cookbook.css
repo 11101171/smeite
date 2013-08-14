@@ -92,6 +92,51 @@
 .bulletin .tag-wrap .special {
     color: #588C0E
 }
+.bulletin p {
+    padding: 10px 0;
+    text-align: center;
+}
+/*.bulletin .create-cookbook {
+    display: inline-block;
+    width: 100px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 18px;
+    color: #fff;
+    background: #5ad;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px
+}
+
+.create-cookbook:hover {
+    color: #fff;
+    text-decoration: none
+}*/
+.bulletin .create-cookbook {
+    display: inline-block;
+    width:100px;
+    height: 30px;
+    border: 1px solid #7ab121;
+    background-color: #86b835;
+    border-radius: 3px;
+    text-align: center;
+    line-height:30px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.bulletin .create-cookbook:hover {
+    text-decoration: none;
+    background: #86b835 url(images/button.png) -5px -611px;
+}
+
+.bulletin .create-cookbook:active {
+    text-decoration: none;
+    background: #86b835 url(images/button.png) -5px -641px;
+}
+
 
 
 
