@@ -14,7 +14,7 @@
 define(function(require, exports) {
     var $  = require("$");
     var ConfirmBox = require("confirmbox")
-    var permissionState = false,followState = false;
+
    var isPermission=function(siteId,o){
 
        $.ajax({
@@ -42,7 +42,7 @@ define(function(require, exports) {
                }
            }
        });
-       alert(permissionState)
+
        return permissionState
    }
     var isFollowed=function(siteId){
