@@ -60,6 +60,10 @@
     width: 180px;
     margin-right: 12px
 }
+.fm-item .fm-radio{
+    height: 33px;
+    line-height: 33px;
+}
 .fm-item .uploadImg{position:relative;height:28px;/*padding-bottom:12px;border-bottom:1px dotted #ddd;*/}
 .fm-item .upload-cover{width:105px;}
 .fm-item .upload-btn{ position:absolute;top:0px;left:0px;filter:alpha(opacity=0);opacity:0;z-index:698;display:block;width:105px;height:28px; cursor:pointer;}

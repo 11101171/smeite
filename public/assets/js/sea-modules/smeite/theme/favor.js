@@ -44,16 +44,7 @@ define(function(require, exports){
             }
             var $this = $(this);
             var themeId = $this.data("id");
-            var cmtHref ='/theme/'+ themeId +'#J_cmtForm';
-            var cmtTarget = "";
-            var $likeCount;
-            //在主题频道页面
-            if(window.location.href.indexOf(themeId) == -1){
-                cmtTarget = 'target="_blank"';
-                $likeCount = $this.parent().find(".J_LikeCount:first");
-            }else{
-                $likeCount = $("#J_LikeCount");
-            }
+
             $.ajax({
                 url:"/theme/addFollow",
                 type : "post",

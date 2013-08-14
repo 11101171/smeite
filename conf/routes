@@ -156,6 +156,7 @@ GET    /site/$id<[0-9]+>                controllers.Sites.site(id:Long,s:Int ?=1
 POST   /site/addFollow                  controllers.Sites.addFollow
 POST   /site/removeFollow                controllers.Sites.removeFollow
 POST   /site/checkSiteLoveState          controllers.Sites.checkSiteLoveState
+POST   /site/checkSitePermission         controllers.Sites.checkSitePermission
 
 
 GET     /post/edit                           controllers.Sites.editPost(pid:Long ?=0,sid:Long)

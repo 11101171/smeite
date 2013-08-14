@@ -12,7 +12,7 @@ import play.api.libs.json.Json
 import play.api.Play.current
 import org.jsoup.Jsoup
 
-case class SiteFormData(sid:Option[Long],cid:Int,title:String,pic:String,intro:String,tags:String)
+case class SiteFormData(sid:Option[Long],cid:Int,title:String,permission:Int,pic:String,intro:String,tags:String)
 case  class PostFormData(pid:Option[Long],sid:Long,cid:Int,title:String,pic:Option[String],content:String,tags:Option[String],status:Int, extraAttr1:Option[String], extraAttr2:Option[String], extraAttr3:Option[String], extraAttr4:Option[String], extraAttr5:Option[String], extraAttr6:Option[String])
 object Sites extends Controller {
   val siteFormData =Form(
@@ -20,6 +20,7 @@ object Sites extends Controller {
       "sid"->optional(longNumber),
       "cid" ->number,
       "title" -> nonEmptyText,
+      "permission" ->number,
       "pic" -> nonEmptyText,
       "intro" -> nonEmptyText,
       "tags" -> text
@@ -50,7 +51,7 @@ object Sites extends Controller {
     else {
       val site =SiteDao.findSiteById(sid)
       if(site.isEmpty) Ok(views.html.sites.editSite(user,siteFormData))
-      else  Ok(views.html.sites.editSite(user,siteFormData.fill(SiteFormData(site.get.id,site.get.cid,site.get.title,site.get.pic,site.get.intro,site.get.tags))))
+      else  Ok(views.html.sites.editSite(user,siteFormData.fill(SiteFormData(site.get.id,site.get.cid,site.get.title,site.get.permission,site.get.pic,site.get.intro,site.get.tags))))
     }
 
   }
@@ -59,9 +60,9 @@ object Sites extends Controller {
       formWithErrors => BadRequest(views.html.sites.editSite(user,formWithErrors)),
       site => {
         if(site.sid.isEmpty){
-          SiteDao.addSite(user.get.id.get,site.cid,site.title,site.pic,site.intro,site.tags)
+          SiteDao.addSite(user.get.id.get,site.cid,site.title,site.permission,site.pic,site.intro,site.tags)
         }else{
-          SiteDao.modifySite(site.sid.get,site.cid,site.title,site.pic,site.intro,site.tags)
+          SiteDao.modifySite(site.sid.get,site.cid,site.title,site.permission,site.pic,site.intro,site.tags)
         }
          Ok(views.html.sites.addSuccess(user))
       }
@@ -131,6 +132,20 @@ object Sites extends Controller {
         val siteMember=SiteDao.checkSiteMember(siteId.get,user.get.id.get)
         if(!siteMember.isEmpty)  Ok(Json.obj("code" -> "100","message" -> "已关注" ))
         else Ok(Json.obj("code" -> "101","message" -> "未关注" ))
+      }
+
+    }
+  }
+  def checkSitePermission = Action(parse.json){  implicit request =>
+    val user:Option[User] =request.session.get("user").map(u=> UserDao.findById(u.toLong) )
+    if(user.isEmpty)  Ok(Json.obj("code" -> "300","message" -> "亲，你还没有登录呢" ))
+    else{
+      val siteId=(request.body \ "siteId").asOpt[Long];
+      if (siteId.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
+      else{
+        val permission=SiteDao.getSitePermission(siteId.get)
+        if(permission == 0)  Ok(Json.obj("code" -> "100","message" -> "所有用户" ))
+        else Ok(Json.obj("code" -> "103","message" -> "居民用户" ))
       }
 
     }

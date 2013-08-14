@@ -16,14 +16,14 @@ object SiteDao {
   lazy val database = Database.forDataSource(DB.getDataSource())
 
   /* add site */
-  def addSite(uid:Long,cid:Int,title:String,pic:String,intro:String,tags:String) = database.withSession {  implicit session:Session =>
-    val id  = Sites.autoInc.insert(uid,cid,title,pic,intro,tags,new Timestamp(System.currentTimeMillis()))
+  def addSite(uid:Long,cid:Int,title:String,permission:Int,pic:String,intro:String,tags:String) = database.withSession {  implicit session:Session =>
+    val id  = Sites.autoInc.insert(uid,cid,title,permission,pic,intro,tags,new Timestamp(System.currentTimeMillis()))
     addSiteMember(id,uid,1)
     id
   }
 
-  def modifySite(sid:Long,cid:Int,title:String,pic:String,intro:String,tags:String) = database.withSession {  implicit session:Session =>
-    (for(s <- Sites if s.id === sid )yield s.cid~s.title~s.pic~s.intro~s.tags).update((cid,title,pic,intro,tags))
+  def modifySite(sid:Long,cid:Int,title:String,permission:Int,pic:String,intro:String,tags:String) = database.withSession {  implicit session:Session =>
+    (for(s <- Sites if s.id === sid )yield s.cid~s.title~s.permission~s.pic~s.intro~s.tags).update((cid,title,permission,pic,intro,tags))
   }
 
   def modifySiteStatus(sid:Long,status:Int) = database.withSession {  implicit session:Session =>
@@ -99,6 +99,11 @@ object SiteDao {
     val q=  for(c<-Sites.filter(_.uid === uid ).sortBy(_.id desc).drop(startRow).take(pageSize)  )yield c
     val sites:List[Site]=  q.list()
     Page[Site](sites,currentPage,totalPages)
+  }
+
+  /* 用户小镇发帖 permission */
+  def getSitePermission(sid:Long):Int = database.withSession {  implicit session:Session =>
+    (for(c <- Sites.filter(_.id === sid) )yield c.permission).first()
   }
 
     /* ******************************* site post **************************************** */

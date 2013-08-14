@@ -14,7 +14,7 @@
 define(function(require, exports){
     var $  = require("$");
     var ConfirmBox = require("confirmbox")
-    var judgeSiteFollowState=function(siteId,o){
+    var judgeFollowSiteState=function(siteId,o){
 
         $.ajax({
             url:"/site/checkSiteLoveState",
@@ -38,7 +38,7 @@ define(function(require, exports){
         if(SMEITER.userId !=""){
             $("a[rel=followSite]").each(function(){
                 var id =$(this).data("id")
-                judgeSiteFollowState(id,$(this))
+                judgeFollowSiteState(id,$(this))
             })
         }
 
@@ -47,7 +47,7 @@ define(function(require, exports){
             if($.smeite.dialog.isLogin()){
               //  if($(this).data("enable")=="false") return;
               //  $(this).data("enable","false");
-                $this = $(this);
+              var  $this = $(this);
                 var siteId = $this.data("id")
                 $.ajax({
                     url:"/site/addFollow",

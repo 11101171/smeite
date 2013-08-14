@@ -117,7 +117,7 @@ title =  "食美特，不一样的生活"
                     <a  href='@controllers.routes.Sites.site(sid,1,1)'  @if(s==1){class="current"}><span>最新</span></a>
                     <a   href='@controllers.routes.Sites.site(sid,2,1)'  @if(s==2){class="current"}><span>最热</span></a>
                 </div>
-                <div class="edit"><a class="current" href='@controllers.routes.Sites.editPost(0,site.id.get)'> + 发帖</a></div>
+                <div class="edit"><a class="current" id="J_postEdit" data-siteid="@site.id.get" data-sitetitle="@site.title" href='javascript:void(0) '> + 发帖</a></div>
                 <i></i>
             </div>
 
@@ -185,7 +185,7 @@ title =  "食美特，不一样的生活"
 
     <div class="site-share clearfix box-shadow">
         <span class="site-tip">看完啦？别忘了邀请朋友一起玩~</span>
-        <a class="ifollow follow-theme" data-topicurl="amYRbi" href="javascript:;" title="邀请好友">邀请好友</a>
+        <a class="ifollow" data-url="@controllers.routes.Sites.site(site.id.get)" href="javascript:;" title="邀请好友">邀请好友</a>
 
 
         <div class="share fr">
