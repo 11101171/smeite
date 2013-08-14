@@ -139,11 +139,11 @@ object Baobei extends Controller {
     if (user.isEmpty) Ok(Json.obj("code"->"400","message"->"你还没有登录"))
     else {
       if (user.get.status==4)Ok(Json.obj("code"->"444","message"->"您被禁止登陆"))
-      val productId = (request.body \ "productId").asOpt[Long];
-      val content = (request.body \ "content").asOpt[String];
-      val tags = (request.body \ "tags").as[String];
-      val worth = (request.body \ "worth").as[Int];
-      val bought = (request.body \ "bought").as[Int];
+      val productId = (request.body \ "productId").asOpt[Long]
+      val content = (request.body \ "content").asOpt[String]
+      val tags = (request.body \ "tags").as[String]
+      val worth = (request.body \ "worth").as[Int]
+      val bought = (request.body \ "bought").as[Int]
       if (productId.isEmpty || content.isEmpty) Ok(Json.obj("code"->"104","message"->"评论内容不能为空"))
       else {
         /*处理tags 这里需要处理下tag goods  */

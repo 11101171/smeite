@@ -190,7 +190,7 @@ object Forums extends Controller {
     if(user.isEmpty)  Ok(Json.obj("code" -> "300","message" -> "亲，你还没有登录呢" ))
     else if(user.get.status ==4) Ok(Json.obj("code" -> "444","message" -> "亲，你被禁止了" ))
     else {
-      val topicId=(request.body \ "topicId").asOpt[Long];
+      val topicId=(request.body \ "topicId").asOpt[Long]
       if (topicId.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
       else {
       val follow =UserDao.checkLoveTopic(user.get.id.get,topicId.get);

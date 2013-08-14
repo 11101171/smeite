@@ -162,7 +162,8 @@ POST   /site/checkSitePermission         controllers.Sites.checkSitePermission
 GET     /post/edit                           controllers.Sites.editPost(pid:Long ?=0,sid:Long)
 GET     /post/$pid<[0-9]+>                    controllers.Sites.post(pid:Long)
 POST    /post/save                            controllers.Sites.savePost
-
+POST    /post/addComment                      controllers.Sites.addComment
+GET     /post/getComments                    controllers.Sites.getComments(pid:Long,p:Int ?=1)
 
 
 #info 信息页面 新年 公告，帮助中心

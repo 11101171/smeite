@@ -1,0 +1,276 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x016b5d45, pid=2568, tid=5576
+#
+# JRE version: 6.0_18-b07
+# Java VM: Java HotSpot(TM) Client VM (16.0-b13 mixed mode windows-x86 )
+# Problematic frame:
+# J  scala.reflect.internal.Types$Type.findMember(Lscala/reflect/internal/Names$Name;JJZ)Lscala/reflect/internal/Symbols$Symbol;
+#
+# If you would like to submit a bug report, please visit:
+#   http://java.sun.com/webapps/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x5747e000):  JavaThread "pool-51-thread-4" [_thread_in_Java, id=5576, stack(0x59330000,0x59430000)]
+
+siginfo: ExceptionCode=0xc0000005, reading address 0x2d7af17c
+
+Registers:
+EAX=0x2d7af178, EBX=0x42ba5d18, ECX=0x2d53f778, EDX=0x1c3079e8
+ESP=0x59428dc0, EBP=0x59428f08, ESI=0x1c0ff898, EDI=0x1c243620
+EIP=0x016b5d45, EFLAGS=0x00010206
+
+Top of Stack: (sp=0x59428dc0)
+0x59428dc0:   00000000 00000001 0b44fdb8 00000000
+0x59428dd0:   1c9ad510 0b44fd70 59428eb8 015660a4
+0x59428de0:   00000d4c 01745e58 59428e68 0168791c
+0x59428df0:   1c0ff7c8 fffffffd 1c3c94c8 1c0ff898
+0x59428e00:   0b41b110 00000000 59428e28 016f3f8c
+0x59428e10:   1c1024a0 00000000 04000010 00000400
+0x59428e20:   00000001 00000000 00000000 00000000
+0x59428e30:   00000000 00000000 1c0fff48 00000000 
+
+Instructions: (pc=0x016b5d45)
+0x016b5d35:   a2 46 e8 94 3b e9 ff 83 f8 00 0f 84 10 00 00 00
+0x016b5d45:   8b 70 04 81 7e 2c 80 40 98 46 0f 85 91 07 00 00 
+
+
+Stack: [0x59330000,0x59430000],  sp=0x59428dc0,  free space=3e3594288f4k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+J  scala.reflect.internal.Types$Type.findMember(Lscala/reflect/internal/Names$Name;JJZ)Lscala/reflect/internal/Symbols$Symbol;
+J  scala.tools.nsc.typechecker.Implicits$ImplicitSearch.isImpossibleSubType(Lscala/reflect/internal/Types$Type;Lscala/reflect/internal/Types$Type;)Z
+J  scala.tools.nsc.typechecker.Implicits$ImplicitSearch.loop$1(Lscala/reflect/internal/Types$Type;Lscala/reflect/internal/Types$Type;Z)Z
+J  scala.tools.nsc.typechecker.Implicits$ImplicitSearch$ImplicitComputation.survives(Lscala/tools/nsc/typechecker/Implicits$ImplicitInfo;)Z
+J  scala.tools.nsc.typechecker.Implicits$ImplicitSearch$ImplicitComputation$$anonfun$12$$anonfun$13.apply(Lscala/tools/nsc/typechecker/Implicits$ImplicitInfo;)Z
+J  scala.tools.nsc.typechecker.Implicits$ImplicitSearch$ImplicitComputation$$anonfun$12$$anonfun$13.apply(Ljava/lang/Object;)Ljava/lang/Object;
+J  scala.collection.TraversableLike$$anonfun$filter$1.apply(Ljava/lang/Object;)Ljava/lang/Object;
+J  scala.collection.immutable.List.foreach(Lscala/Function1;)V
+J  scala.collection.AbstractTraversable.filter(Lscala/Function1;)Ljava/lang/Object;
+J  scala.tools.nsc.typechecker.Implicits$ImplicitSearch$ImplicitComputation$$anonfun$12.apply(Ljava/lang/Object;)Ljava/lang/Object;
+J  scala.collection.TraversableLike$$anonfun$flatMap$1.apply(Ljava/lang/Object;)Ljava/lang/Object;
+J  scala.collection.immutable.List.foreach(Lscala/Function1;)V
+J  scala.collection.AbstractTraversable.flatMap(Lscala/Function1;Lscala/collection/generic/CanBuildFrom;)Ljava/lang/Object;
+J  scala.tools.nsc.typechecker.Implicits$ImplicitSearch$ImplicitComputation.<init>(Lscala/tools/nsc/typechecker/Implicits$ImplicitSearch;Lscala/collection/immutable/List;Z)V
+J  scala.tools.nsc.typechecker.Implicits$ImplicitSearch.searchImplicit(Lscala/collection/immutable/List;Z)Lscala/tools/nsc/typechecker/Implicits$SearchResult;
+J  scala.tools.nsc.typechecker.Implicits$ImplicitSearch.bestImplicit()Lscala/tools/nsc/typechecker/Implicits$SearchResult;
+J  scala.tools.nsc.typechecker.Implicits$class.inferImplicit(Lscala/tools/nsc/typechecker/Analyzer;Lscala/reflect/internal/Trees$Tree;Lscala/reflect/internal/Types$Type;ZZLscala/tools/nsc/typechecker/Contexts$Context;ZLscala/reflect/internal/util/Position;)Lscala/tools/nsc/typechecker/Implicits$SearchResult;
+J  scala.tools.nsc.Global$$anon$1.inferImplicit(Lscala/reflect/internal/Trees$Tree;Lscala/reflect/internal/Types$Type;ZZLscala/tools/nsc/typechecker/Contexts$Context;ZLscala/reflect/internal/util/Position;)Lscala/tools/nsc/typechecker/Implicits$SearchResult;
+J  scala.tools.nsc.Global$$anon$1.inferImplicit(Lscala/reflect/internal/Trees$Tree;Lscala/reflect/internal/Types$Type;ZZLscala/tools/nsc/typechecker/Contexts$Context;Z)Lscala/tools/nsc/typechecker/Implicits$SearchResult;
+J  scala.tools.nsc.typechecker.Typers$Typer.scala$tools$nsc$typechecker$Typers$Typer$$wrapImplicit$1(Lscala/reflect/internal/Types$Type;Lscala/reflect/internal/Trees$Tree;Lscala/reflect/internal/Types$Type;ZZ)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.inferView(Lscala/reflect/internal/Trees$Tree;Lscala/reflect/internal/Types$Type;Lscala/reflect/internal/Types$Type;ZZ)Lscala/reflect/internal/Trees$Tree;
+j  scala.tools.nsc.typechecker.Typers$Typer.adaptToMember(Lscala/reflect/internal/Trees$Tree;Lscala/reflect/internal/Types$Type;ZZ)Lscala/reflect/internal/Trees$Tree;+63
+j  scala.tools.nsc.typechecker.Typers$Typer$$anonfun$17.apply(Lscala/tools/nsc/typechecker/Typers$Typer;)Lscala/reflect/internal/Trees$Tree;+29
+j  scala.tools.nsc.typechecker.Typers$Typer$$anonfun$17.apply(Ljava/lang/Object;)Ljava/lang/Object;+5
+J  scala.tools.nsc.typechecker.Typers$Typer.silent(Lscala/Function1;ZLscala/reflect/internal/Trees$Tree;)Lscala/tools/nsc/typechecker/Typers$SilentResult;
+j  scala.tools.nsc.typechecker.Typers$Typer.adaptToMemberWithArgs(Lscala/reflect/internal/Trees$Tree;Lscala/reflect/internal/Trees$Tree;Lscala/reflect/internal/Names$Name;IZZ)Lscala/reflect/internal/Trees$Tree;+19
+J  scala.tools.nsc.typechecker.Typers$Typer.scala$tools$nsc$typechecker$Typers$Typer$$typedSelect$1(Lscala/reflect/internal/Trees$Tree;Lscala/reflect/internal/Trees$Tree;Lscala/reflect/internal/Names$Name;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typedSelectOrSuperCall$1(Lscala/reflect/internal/Trees$Select;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typed1(Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typed(Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer$$anonfun$87.apply(Ljava/lang/Object;)Ljava/lang/Object;
+J  scala.tools.nsc.typechecker.Typers$Typer.silent(Lscala/Function1;ZLscala/reflect/internal/Trees$Tree;)Lscala/tools/nsc/typechecker/Typers$SilentResult;
+J  scala.tools.nsc.typechecker.Typers$Typer.normalTypedApply$1(Lscala/reflect/internal/Trees$Tree;Lscala/reflect/internal/Trees$Tree;Lscala/collection/immutable/List;Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typedApply$1(Lscala/reflect/internal/Trees$Apply;Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typed1(Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typed(Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typedArg(Lscala/reflect/internal/Trees$Tree;IILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.loop$1(Lscala/collection/immutable/List;Lscala/collection/immutable/List;Lscala/collection/immutable/List;II)Lscala/collection/immutable/List;
+J  scala.tools.nsc.typechecker.Typers$Typer.loop$1(Lscala/collection/immutable/List;Lscala/collection/immutable/List;Lscala/collection/immutable/List;II)Lscala/collection/immutable/List;
+J  scala.tools.nsc.typechecker.Typers$Typer.handleMonomorphicCall$1(Lscala/reflect/internal/Trees$Tree;Lscala/collection/immutable/List;ILscala/reflect/internal/Trees$Tree;Lscala/collection/immutable/List;Lscala/collection/immutable/List;Lscala/reflect/internal/Types$MethodType;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.doTypedApply(Lscala/reflect/internal/Trees$Tree;Lscala/reflect/internal/Trees$Tree;Lscala/collection/immutable/List;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer$$anonfun$86.apply(Ljava/lang/Object;)Ljava/lang/Object;
+J  scala.tools.nsc.typechecker.Typers$Typer.silent(Lscala/Function1;ZLscala/reflect/internal/Trees$Tree;)Lscala/tools/nsc/typechecker/Typers$SilentResult;
+J  scala.tools.nsc.typechecker.Typers$Typer.tryTypedApply$1(Lscala/reflect/internal/Trees$Tree;Lscala/collection/immutable/List;Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.normalTypedApply$1(Lscala/reflect/internal/Trees$Tree;Lscala/reflect/internal/Trees$Tree;Lscala/collection/immutable/List;Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typedApply$1(Lscala/reflect/internal/Trees$Apply;Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typed1(Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typed(Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typedArg(Lscala/reflect/internal/Trees$Tree;IILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.scala$tools$nsc$typechecker$Typers$Typer$$typedArgToPoly$1(Lscala/reflect/internal/Trees$Tree;Lscala/reflect/internal/Types$Type;ILscala/reflect/internal/Trees$Tree;Lscala/collection/immutable/List;Lscala/collection/immutable/List;Lscala/collection/immutable/List;Lscala/runtime/ObjectRef;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer$$anonfun$64.apply(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+J  scala.reflect.internal.util.Collections$class.map2(Lscala/reflect/internal/util/Collections;Lscala/collection/immutable/List;Lscala/collection/immutable/List;Lscala/Function2;)Lscala/collection/immutable/List;
+J  scala.tools.nsc.typechecker.Typers$Typer.handlePolymorphicCall$1(Lscala/reflect/internal/Trees$Tree;Lscala/reflect/internal/Trees$Tree;Lscala/collection/immutable/List;ILscala/reflect/internal/Types$Type;Lscala/reflect/internal/Trees$Tree;Lscala/collection/immutable/List;Lscala/collection/immutable/List;Lscala/collection/immutable/List;Lscala/reflect/internal/Types$MethodType;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.doTypedApply(Lscala/reflect/internal/Trees$Tree;Lscala/reflect/internal/Trees$Tree;Lscala/collection/immutable/List;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.normalTypedApply$1(Lscala/reflect/internal/Trees$Tree;Lscala/reflect/internal/Trees$Tree;Lscala/collection/immutable/List;Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typedApply$1(Lscala/reflect/internal/Trees$Apply;Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typed1(Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typed(Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typedIf$1(Lscala/reflect/internal/Trees$If;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$If;
+J  scala.tools.nsc.typechecker.Typers$Typer.typed1(Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typed(Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typedBlock(Lscala/reflect/internal/Trees$Block;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Block;
+J  scala.tools.nsc.typechecker.Typers$Typer.typed1(Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typed(Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typed(Lscala/reflect/internal/Trees$Tree;Lscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+j  scala.tools.nsc.typechecker.Typers$Typer.scala$tools$nsc$typechecker$Typers$Typer$$typedFunction(Lscala/reflect/internal/Trees$Function;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;+413
+j  scala.tools.nsc.typechecker.Typers$Typer.typedFunction$1(Lscala/reflect/internal/Trees$Function;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;+99
+J  scala.tools.nsc.typechecker.Typers$Typer.typed1(Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typed(Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typedArg(Lscala/reflect/internal/Trees$Tree;IILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.loop$1(Lscala/collection/immutable/List;Lscala/collection/immutable/List;Lscala/collection/immutable/List;II)Lscala/collection/immutable/List;
+J  scala.tools.nsc.typechecker.Typers$Typer.handleMonomorphicCall$1(Lscala/reflect/internal/Trees$Tree;Lscala/collection/immutable/List;ILscala/reflect/internal/Trees$Tree;Lscala/collection/immutable/List;Lscala/collection/immutable/List;Lscala/reflect/internal/Types$MethodType;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.doTypedApply(Lscala/reflect/internal/Trees$Tree;Lscala/reflect/internal/Trees$Tree;Lscala/collection/immutable/List;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.normalTypedApply$1(Lscala/reflect/internal/Trees$Tree;Lscala/reflect/internal/Trees$Tree;Lscala/collection/immutable/List;Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typedApply$1(Lscala/reflect/internal/Trees$Apply;Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typed1(Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typed(Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.computeType(Lscala/reflect/internal/Trees$Tree;Lscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Types$Type;
+J  scala.tools.nsc.typechecker.Namers$Namer.assignTypeToTree(Lscala/reflect/internal/Trees$ValOrDefDef;Lscala/tools/nsc/typechecker/Typers$Typer;Lscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Types$Type;
+J  scala.tools.nsc.typechecker.Namers$Namer.methodSig(Lscala/reflect/internal/Trees$DefDef;Lscala/reflect/internal/Trees$Modifiers;Lscala/collection/immutable/List;Lscala/collection/immutable/List;Lscala/reflect/internal/Trees$Tree;Lscala/reflect/internal/Trees$Tree;)Lscala/reflect/internal/Types$Type;
+J  scala.tools.nsc.typechecker.Namers$Namer.getSig$1(Lscala/reflect/internal/Trees$Tree;Lscala/reflect/internal/Symbols$Symbol;)Lscala/reflect/internal/Types$Type;
+J  scala.tools.nsc.typechecker.Namers$Namer.typeSig(Lscala/reflect/internal/Trees$Tree;)Lscala/reflect/internal/Types$Type;
+J  scala.tools.nsc.typechecker.Namers$Namer$$anonfun$monoTypeCompleter$1$$anonfun$apply$1.apply$mcV$sp()V
+J  scala.tools.nsc.typechecker.Namers$Namer$$anonfun$monoTypeCompleter$1$$anonfun$apply$1.apply()Ljava/lang/Object;
+J  scala.tools.nsc.typechecker.Namers$Namer.scala$tools$nsc$typechecker$Namers$Namer$$logAndValidate(Lscala/reflect/internal/Symbols$Symbol;Lscala/Function0;)V
+J  scala.tools.nsc.typechecker.Namers$Namer$$anonfun$monoTypeCompleter$1.apply(Ljava/lang/Object;)Ljava/lang/Object;
+J  scala.tools.nsc.typechecker.Namers$$anon$1.completeImpl(Lscala/reflect/internal/Symbols$Symbol;)V
+J  scala.tools.nsc.typechecker.Namers$LockingTypeCompleter$class.complete(Lscala/tools/nsc/typechecker/Namers$LockingTypeCompleter;Lscala/reflect/internal/Symbols$Symbol;)V
+J  scala.tools.nsc.typechecker.Namers$$anon$1.complete(Lscala/reflect/internal/Symbols$Symbol;)V
+J  scala.reflect.internal.Symbols$Symbol.info()Lscala/reflect/internal/Types$Type;
+J  scala.tools.nsc.typechecker.Typers$Typer.typed1(Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typed(Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.scala$tools$nsc$typechecker$Typers$Typer$$typedStat$1(Lscala/reflect/internal/Trees$Tree;Lscala/reflect/internal/Symbols$Symbol;ZZ)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer$$anonfun$55.apply(Ljava/lang/Object;)Ljava/lang/Object;
+J  scala.collection.immutable.List.loop$1(Lscala/collection/mutable/ListBuffer;Lscala/collection/immutable/List;Lscala/collection/immutable/List;Lscala/Function1;)Lscala/collection/immutable/List;
+J  scala.tools.nsc.typechecker.Typers$Typer.typedStats(Lscala/collection/immutable/List;Lscala/reflect/internal/Symbols$Symbol;)Lscala/collection/immutable/List;
+j  scala.tools.nsc.typechecker.Typers$Typer.typedTemplate(Lscala/reflect/internal/Trees$Template;Lscala/collection/immutable/List;)Lscala/reflect/internal/Trees$Template;+777
+j  scala.tools.nsc.typechecker.Typers$Typer.typedModuleDef(Lscala/reflect/internal/Trees$ModuleDef;)Lscala/reflect/internal/Trees$Tree;+470
+J  scala.tools.nsc.typechecker.Typers$Typer.typed1(Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+J  scala.tools.nsc.typechecker.Typers$Typer.typed(Lscala/reflect/internal/Trees$Tree;ILscala/reflect/internal/Types$Type;)Lscala/reflect/internal/Trees$Tree;
+...<more frames>...
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x56921400 JavaThread "pool-51-thread-6" [_thread_blocked, id=2600, stack(0x59530000,0x59630000)]
+  0x566d1400 JavaThread "pool-51-thread-5" [_thread_blocked, id=4388, stack(0x59430000,0x59530000)]
+=>0x5747e000 JavaThread "pool-51-thread-4" [_thread_in_Java, id=5576, stack(0x59330000,0x59430000)]
+  0x57834c00 JavaThread "pool-51-thread-3" [_thread_blocked, id=3752, stack(0x59230000,0x59330000)]
+  0x5769ec00 JavaThread "pool-51-thread-2" [_thread_blocked, id=2808, stack(0x58730000,0x58830000)]
+  0x568c3000 JavaThread "pool-51-thread-1" [_thread_blocked, id=3068, stack(0x58530000,0x58630000)]
+  0x5666c400 JavaThread "Scala Presentation Compiler []" [_thread_blocked, id=1484, stack(0x59630000,0x59730000)]
+  0x555d0400 JavaThread "Thread-6" daemon [_thread_in_native, id=2876, stack(0x55c60000,0x55cb0000)]
+  0x56755c00 JavaThread "play-akka.actor.default-dispatcher-11" [_thread_blocked, id=4776, stack(0x58630000,0x58730000)]
+  0x574d5000 JavaThread "play-internal-execution-context-4" [_thread_blocked, id=3764, stack(0x59130000,0x59230000)]
+  0x5776b000 JavaThread "play-internal-execution-context-3" [_thread_blocked, id=2668, stack(0x59030000,0x59130000)]
+  0x5662d400 JavaThread "play-internal-execution-context-2" [_thread_blocked, id=5644, stack(0x58f30000,0x59030000)]
+  0x57430800 JavaThread "iteratee-execution-context-4" [_thread_blocked, id=5952, stack(0x58e30000,0x58f30000)]
+  0x55557800 JavaThread "iteratee-execution-context-3" [_thread_blocked, id=4144, stack(0x58d30000,0x58e30000)]
+  0x567df400 JavaThread "iteratee-execution-context-2" [_thread_blocked, id=5724, stack(0x58c30000,0x58d30000)]
+  0x5675b400 JavaThread "play-internal-execution-context-1" [_thread_blocked, id=5316, stack(0x58b30000,0x58c30000)]
+  0x5779b400 JavaThread "iteratee-execution-context-1" [_thread_blocked, id=4504, stack(0x58a30000,0x58b30000)]
+  0x55546400 JavaThread "Timer-0" [_thread_blocked, id=3080, stack(0x58930000,0x58a30000)]
+  0x56894400 JavaThread "play-scheduler-1" [_thread_in_Java, id=624, stack(0x58830000,0x58930000)]
+  0x5688f000 JavaThread "net.sf.ehcache.CacheManager@ba936a" daemon [_thread_blocked, id=5296, stack(0x58430000,0x58530000)]
+  0x567e0400 JavaThread "BoneCP-pool-watch-thread" daemon [_thread_blocked, id=4544, stack(0x57330000,0x57430000)]
+  0x56808400 JavaThread "BoneCP-max-alive-scheduler" daemon [_thread_blocked, id=320, stack(0x57230000,0x57330000)]
+  0x57844400 JavaThread "BoneCP-keep-alive-scheduler" daemon [_thread_blocked, id=4100, stack(0x57130000,0x57230000)]
+  0x5665c400 JavaThread "com.google.common.base.internal.Finalizer" daemon [_thread_blocked, id=2820, stack(0x57030000,0x57130000)]
+  0x577b2400 JavaThread "Abandoned connection cleanup thread" daemon [_thread_blocked, id=1076, stack(0x56f30000,0x57030000)]
+  0x56554400 JavaThread "New I/O server boss #9" [_thread_in_native, id=2512, stack(0x56e30000,0x56f30000)]
+  0x56528400 JavaThread "New I/O worker #8" [_thread_in_native, id=5888, stack(0x56d30000,0x56e30000)]
+  0x56579400 JavaThread "New I/O worker #7" [_thread_blocked, id=4476, stack(0x56c30000,0x56d30000)]
+  0x5656bc00 JavaThread "New I/O worker #6" [_thread_in_native, id=3812, stack(0x56b30000,0x56c30000)]
+  0x5656b400 JavaThread "New I/O worker #5" [_thread_in_native, id=284, stack(0x56a30000,0x56b30000)]
+  0x559d3000 JavaThread "New I/O worker #4" [_thread_in_native, id=2792, stack(0x56930000,0x56a30000)]
+  0x56558800 JavaThread "New I/O worker #3" [_thread_in_native, id=3220, stack(0x55fb0000,0x560b0000)]
+  0x559f6800 JavaThread "New I/O worker #2" [_thread_in_native, id=5824, stack(0x55eb0000,0x55fb0000)]
+  0x56530000 JavaThread "New I/O worker #1" [_thread_in_native, id=608, stack(0x55db0000,0x55eb0000)]
+  0x54eb4400 JavaThread "Low Memory Detector" daemon [_thread_blocked, id=4900, stack(0x553c0000,0x554c0000)]
+  0x54eaa400 JavaThread "CompilerThread0" daemon [_thread_blocked, id=3052, stack(0x55370000,0x553c0000)]
+  0x54ea8800 JavaThread "Attach Listener" daemon [_thread_blocked, id=6116, stack(0x55270000,0x55370000)]
+  0x54ec1800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=5096, stack(0x55170000,0x55270000)]
+  0x54e94000 JavaThread "Finalizer" daemon [_thread_blocked, id=4064, stack(0x55070000,0x55170000)]
+  0x54e92c00 JavaThread "Reference Handler" daemon [_thread_in_Java, id=404, stack(0x54f70000,0x55070000)]
+  0x00316c00 JavaThread "main" [_thread_in_native, id=3272, stack(0x009f0000,0x00af0000)]
+
+Other Threads:
+  0x54e90000 VMThread [stack: 0x54f20000,0x54f70000] [id=5524]
+  0x54ebec00 WatcherThread [stack: 0x554c0000,0x55510000] [id=3628]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap
+ def new generation   total 157440K, used 1185K [0x02ba0000, 0x0d670000, 0x180f0000)
+  eden space 139968K,   0% used [0x02ba0000, 0x02cc8598, 0x0b450000)
+  from space 17472K,   0% used [0x0c560000, 0x0c560000, 0x0d670000)
+  to   space 17472K,   0% used [0x0b450000, 0x0b450000, 0x0c560000)
+ tenured generation   total 349568K, used 82774K [0x180f0000, 0x2d650000, 0x42ba0000)
+   the space 349568K,  23% used [0x180f0000, 0x1d1c5958, 0x1d1c5a00, 0x2d650000)
+ compacting perm gen  total 81920K, used 81835K [0x42ba0000, 0x47ba0000, 0x52ba0000)
+   the space 81920K,  99% used [0x42ba0000, 0x47b8ad10, 0x47b8ae00, 0x47ba0000)
+No shared spaces configured.
+
+Dynamic libraries:
+0x00400000 - 0x00424000 	C:\WINDOWS\system32\java.exe
+0x7c920000 - 0x7c9b6000 	C:\WINDOWS\system32\ntdll.dll
+0x7c800000 - 0x7c91e000 	C:\WINDOWS\system32\kernel32.dll
+0x77da0000 - 0x77e49000 	C:\WINDOWS\system32\ADVAPI32.dll
+0x77e50000 - 0x77ee3000 	C:\WINDOWS\system32\RPCRT4.dll
+0x77fc0000 - 0x77fd1000 	C:\WINDOWS\system32\Secur32.dll
+0x7c340000 - 0x7c396000 	D:\Java\jre6\bin\msvcr71.dll
+0x6d800000 - 0x6da97000 	D:\Java\jre6\bin\client\jvm.dll
+0x77d10000 - 0x77da0000 	C:\WINDOWS\system32\USER32.dll
+0x77ef0000 - 0x77f39000 	C:\WINDOWS\system32\GDI32.dll
+0x76b10000 - 0x76b3a000 	C:\WINDOWS\system32\WINMM.dll
+0x76300000 - 0x7631d000 	C:\WINDOWS\system32\IMM32.DLL
+0x62c20000 - 0x62c29000 	C:\WINDOWS\system32\LPK.DLL
+0x73fa0000 - 0x7400b000 	C:\WINDOWS\system32\USP10.dll
+0x6d7b0000 - 0x6d7bc000 	D:\Java\jre6\bin\verify.dll
+0x6d330000 - 0x6d34f000 	D:\Java\jre6\bin\java.dll
+0x6d290000 - 0x6d298000 	D:\Java\jre6\bin\hpi.dll
+0x76bc0000 - 0x76bcb000 	C:\WINDOWS\system32\PSAPI.DLL
+0x6d7f0000 - 0x6d7ff000 	D:\Java\jre6\bin\zip.dll
+0x6d610000 - 0x6d623000 	D:\Java\jre6\bin\net.dll
+0x71a20000 - 0x71a37000 	C:\WINDOWS\system32\WS2_32.dll
+0x77be0000 - 0x77c38000 	C:\WINDOWS\system32\msvcrt.dll
+0x71a10000 - 0x71a18000 	C:\WINDOWS\system32\WS2HELP.dll
+0x6d630000 - 0x6d639000 	D:\Java\jre6\bin\nio.dll
+0x55b60000 - 0x55b68000 	C:\Documents and Settings\Administrator\Local Settings\Temp\jline_0_12_2.dll
+0x68000000 - 0x68036000 	C:\WINDOWS\system32\rsaenh.dll
+0x759d0000 - 0x75a7f000 	C:\WINDOWS\system32\USERENV.dll
+0x5fdd0000 - 0x5fe25000 	C:\WINDOWS\system32\netapi32.dll
+0x719c0000 - 0x719fe000 	C:\WINDOWS\System32\mswsock.dll
+0x76ef0000 - 0x76f17000 	C:\WINDOWS\system32\DNSAPI.dll
+0x76d30000 - 0x76d48000 	C:\WINDOWS\system32\iphlpapi.dll
+0x76f80000 - 0x76f88000 	C:\WINDOWS\System32\winrnr.dll
+0x76f30000 - 0x76f5c000 	C:\WINDOWS\system32\WLDAP32.dll
+0x64000000 - 0x64021000 	C:\Program Files\Bonjour\mdnsNSP.dll
+0x76f90000 - 0x76f96000 	C:\WINDOWS\system32\rasadhlp.dll
+0x67540000 - 0x67610000 	C:\smeite\target\native_libraries\32bits\jnotify.dll
+0x60fd0000 - 0x61025000 	C:\WINDOWS\system32\hnetcfg.dll
+0x71a00000 - 0x71a08000 	C:\WINDOWS\System32\wshtcpip.dll
+
+VM Arguments:
+jvm_args: -Xms512M -Xmx1024M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M -Dfile.encoding=UTF-8 -Dplay.version=2.1.1 -Dsbt.ivy.home=C:\play21\framework\..\repository -Dplay.home=C:\play21\framework\. -Dsbt.boot.properties=file:///C:/play21/framework/sbt/sbt.boot.properties 
+java_command: C:\play21\framework\sbt\sbt-launch.jar play
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=D:\Java\jdk1.6.0_18
+PATH=C:\Program Files\Common Files\NetSarang;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;D:\MySQL\MySQL Server 5.5\bin;C:\nodejs\;D:\Java\jdk1.6.0_18/bin;D:\Java\jdk1.6.0_18/jre/bin;C:\play21;D:\Program Files\Git;C:\Documents and Settings\Administrator\Application Data\npm
+USERNAME=Administrator
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=x86 Family 6 Model 58 Stepping 9, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows XP Build 2600 Service Pack 3
+
+CPU:total 4 (8 cores per cpu, 2 threads per core) family 6 model 58 stepping 9, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, ht
+
+Memory: 4k page, physical 2232220k(122464k free), swap 4173204k(2084500k free)
+
+vm_info: Java HotSpot(TM) Client VM (16.0-b13) for windows-x86 JRE (1.6.0_18-b07), built on Dec 17 2009 13:35:55 by "java_re" with MS VC++ 7.1 (VS2003)
+
+time: Wed Aug 14 15:45:46 2013
+elapsed time: 5254 seconds
+

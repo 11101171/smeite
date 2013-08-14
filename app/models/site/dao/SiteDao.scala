@@ -222,7 +222,9 @@ object SiteDao {
   }
 
   /* ***************************************** site post reply   **************************************** */
-
+ def addPostReply(uid:Long,pid:Long,cid:Int,quoteContent:Option[String],content:String)= database.withSession {  implicit session:Session =>
+    PostReplies.autoInc2.insert(uid,pid,cid,quoteContent,content)
+  }
   def modifyPostReplyStatus(id:Long,status:Int)= database.withSession {  implicit session:Session =>
     ( for( c <- PostReplies if c.id === id)yield c.status ).update(status)
   }
@@ -262,6 +264,23 @@ object SiteDao {
 
     val replies:List[PostReply]=  query.drop(startRow).take(pageSize).list()
     Page[PostReply](replies,currentPage,totalPages)
+  }
+
+  def findPostReplies(pid:Long,currentPage:Int,pageSize:Int):Page[(User,PostReply)] =  database.withSession {  implicit session:Session =>
+    val totalRows = Query(PostReplies.filter(_.pid === pid ).length).first()
+    val totalPages=(totalRows + pageSize - 1) / pageSize
+    /*获取分页起始行*/
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val query=  for{
+      c<-PostReplies
+      u<-Users
+      if c.pid === pid
+      if c.uid === u.id
+
+    }yield (u,c)
+
+    val replies:List[(User,PostReply)]=  query.drop(startRow).take(pageSize).list()
+    Page[(User,PostReply)](replies,currentPage,totalPages)
   }
 
   /* 筛选 post replies */

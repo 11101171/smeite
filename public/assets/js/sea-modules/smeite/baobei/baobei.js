@@ -114,7 +114,6 @@ define(function(require, exports){
                     dataType:"json",
                     data:JSON.stringify(d),
                     success:function (data) {
-
                     switch (data.code) {
                         case "100":
                             $("#J_CommentTxa").val("").height(80);
@@ -176,7 +175,7 @@ define(function(require, exports){
              $("#J_comment").html(data)
         }})
     /* 商品评论翻页*/
-    $("#goodsComments a.commentPage").on("click",function(){
+    $(document).on("click","a.commentPage",function(){
        var p =$(this).data("page");
        var goodsId = $(this).data("goodsid");
         $.ajax({

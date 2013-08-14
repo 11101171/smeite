@@ -1719,10 +1719,10 @@ CREATE TABLE IF NOT EXISTS `post_reply`(
   `uid`                    int(10) NOT NULL ,
   `pid`                    int(10) NOT NULL ,
   `cid`             tinyint NOT NULL DEFAULT '0',
-  `quote_reply`             text,
+  `quote_content`             text,
   `content`                  text ,
   `status`          tinyint NOT NULL DEFAULT '0',
-  `add_time`               timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
+  `add_time`               timestamp ,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

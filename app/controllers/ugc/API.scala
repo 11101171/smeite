@@ -1,28 +1,17 @@
 package controllers.ugc
 
 import com.taobao.api.DefaultTaobaoClient
-import com.taobao.api.request.{TaobaokeWidgetItemsConvertRequest, ItemGetRequest}
-import play.api.mvc.{Cookie, Action, Controller}
-import play.api.libs.json.JsObject._
-import play.api.libs.json.JsNumber._
-import play.api.libs.json.JsString._
-import play.api.libs.json.JsBoolean._
-import play.api.libs.json.JsSuccess._
-import play.api.libs.json._
+import com.taobao.api.request.ItemGetRequest
+import play.api.mvc.{ Action, Controller}
+
 import play.api.Play
 import controllers.users.Users
-import com.taobao.api.domain.ItemImg
 import scala.collection.JavaConversions._
 import models.goods.dao.GoodsDao
-import net.coobird.thumbnailator.{Thumbnails, Thumbnailator}
-import models.tag.{TagGoods}
+
 import models.tag.dao.TagDao
 import models.user._
-import play.api.libs.json.JsArray
-import play.api.libs.json.JsSuccess
-import play.api.libs.json.JsString
-import play.api.libs.json.JsNumber
-import play.api.libs.json.JsObject
+
 
 import play.api.libs.json._
 import play.api.libs.functional.syntax._
@@ -31,7 +20,6 @@ import models.goods.GoodsAssess
 import play.api.mvc.Cookie
 import dao. UserDao
 import utils.{TaobaoConfig, Utils}
-import play.api.cache.Cache
 import java.awt.image.BufferedImage
 import javax.imageio.ImageIO
 import java.net.URL

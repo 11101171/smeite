@@ -125,57 +125,43 @@ title =  "食美特，不一样的生活"
                 </div>
             </div>
             <!-- comment -->
-             <div class="good-comment">
+             <div class="comment">
                 <span class="top-arrow">
                     <em></em>
                 </span>
-                 <div class="good-comment-box">
-                     <div class="comment-title"><em id="comment_num" num="2">该分享有2条评论</em></div>
+                 <div class="comment-box">
+
                      <div class="comment-list">
                          <ul id="J_commentList">
-                             <li >
-                                 <div class="share-avt">
-                                     <a class="fl" href="/user/42076"target="_blank">
-                                         <img class="avt32 fl" src="http://img1.xiangqu.com/xiangqu/image/9F5/9F50B171AD530BB705AC289A7A9024F6_332x334.jpg_32x10000.jpg" width="38" height="38">
-                                     </a>
-                                 </div>
-                                 <span class="arrow"></span>
-                                 <div class="share-user">
-                                     <h3>
-                                         <a class="J_userNick" href="/user/42076" target="_blank">smeite</a>
-                                         <p class="user-title"></p>
-                                     </h3>
-                                     <p class="content J_commentCon">好茶</p>
-                                     <div class="pic" style="display: none">
 
-                                     </div>
-                                     <div class="item-doing">
-                                         <a class="reply J_postReply"  href="javascript:;">回复</a><span class="time">2013-08-13</span>
-                                     </div>
-                                 </div>
-                             </li>
                          </ul>
-                         <form action="/post/reply" method="post" id="J_postComment">
-                             <input type="hidden" name="pid" value="@post._1.id.get">
+                         <form  method="post" id="J_postComment" action="/post/addComment">
+                             <input type="hidden" name="pid" id="J_pid" value="@post._1.id.get">
+                             <input type="hidden" name="cid" id="J_cid" value="0">
                              <input type="hidden" name="quoteContent" id="J_quoteContent">
                          <ul>
-                             <li id="J_postQuote" class="post-quote">
-
-                             </li>
+                             <li id="J_postQuote" class="post-quote"></li>
                              <li class="post-c">
+                                 @if(user.isEmpty){
                                  <div class="share-avt">
-                                     <a href="/user/42076" target="_blank">
-                                     <img class="avt32 fl" value="42076" src="http://img1.xiangqu.com/xiangqu/image/9F5/9F50B171AD530BB705AC289A7A9024F6_332x334.jpg_64x10000.jpg" width="38" height="38" >
+                                     <a href="javascript:void(0)" target="_blank">
+                                     <img class="avt32 fl" value="" src="/images/user/default.jpg" width="38" height="38" >
                                  </a>
                                  </div>
+                                 }else{
+                                 <div class="share-avt">
+                                     <a href="@controllers.users.routes.Users.home(user.get.id.get)" target="_blank">
+                                         <img class="avt32 fl" title="@user.get.name" src="@user.get.pic" width="38" height="38" >
+                                     </a>
+                                 </div>
+                                 }
                                  <span class="arrow"></span>
                                  <div class="share-user">
-
                                      <div class="post">
-                                         <div><textarea id="J_commentText"   label="说两句吧" ></textarea></div>
+                                         <div><textarea id="J_commentContent"   label="说两句吧" ></textarea></div>
 
                                          <div class="btn-post clearfix">
-                                             <input type="submit" id="J_postCommentSubmit" class="bbl-btn  fr" value="发布">
+                                             <input type="button" id="J_postCommentSubmit" class="bbl-btn  fr" value="发布">
 
                                          </div>
                                      </div>

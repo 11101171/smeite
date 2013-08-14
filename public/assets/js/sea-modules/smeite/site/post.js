@@ -13,14 +13,23 @@
 
 define(function(require, exports) {
     var $  = require("$");
+
     $.smeite.postComment = {
         //评论与回复提交前校验
         submit : function($this){
             $this.attr('disabled',true);
-
             var $postComment = $("#J_postComment");
             var $textarea = $postComment.find("textarea");
-            $("#J_quoteContent").val($("#J_postQuote").html())
+          //  $("#J_quoteContent").val($("#J_postQuote").html())
+
+            var comment = {
+
+                "pid": parseInt($("#J_pid").val()),
+                "cid": parseInt($("#J_cid").val()),
+                "quoteContent": $("#J_postQuote").html(),
+                "content": $("#J_commentContent").val()
+            };
+
             if($.smeite.dialog.isLogin()){
                 if($.trim($textarea.val()) == ""){
                     $.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
@@ -32,8 +41,41 @@ define(function(require, exports) {
                     $this.attr('disabled',false);
                 }else{
                     $this.attr('disabled',false);
-                    $postComment.submit();
 
+                    $.ajax({
+                        url: $("#J_postComment").attr("action"),
+                        type : "POST",
+                        contentType:"application/json; charset=utf-8",
+                        dataType: "json",
+                        data: JSON.stringify(comment),
+                        beforeSend: function(){
+                            $this.disableBtn("bbl-btn");
+                        },
+                        success: function(data){
+                           if(data.code=="100"){
+                               $this.enableBtn("bbl-btn");
+
+                             var html ='<li>';
+                              html += '<div class="share-avt">';
+                              html +='<a class="fl" href="/user/'+SMEITER.userId+'"target="_blank">';
+                              html +='<img class="avt32 fl" src="'+SMEITER.userPhoto+'" width="38" height="38">';
+                              html +='</a>';
+                              html +="</div>";
+                              html +=' <span class="arrow"></span>';
+                              html +=' <div class="share-user">';
+                              html +='<h3> <a class="J_userNick" href="/user/'+SMEITER.userId+'" target="_blank">'+SMEITER.nick+'</a> <p class="user-title"></p></h3>';
+                              html +=' <p class="quote-content">'+comment.quoteContent+'</p>';
+                              html +=' <p class="content J_commentCon">'+comment.content +'</p>';
+                              html +='<div class="item-doing"> <a class="reply J_postReply"  href="javascript:;">回复</a><span class="time">刚刚</span> </div>';
+                              html +='</div>';
+                              html +='</li>';
+
+                            $("#J_commentList").append(html);
+
+                           }
+                        }
+                    });
+                   return false
                 }
             }
         },
@@ -46,7 +88,7 @@ define(function(require, exports) {
             var $postComment = $("#J_postComment");
 
             //点击回复
-            $(".J_postReply").click(function(){
+            $(document).on("click",".J_postReply",function(){
 
                 var $li = $(this).closest("li");
                 var userNick = $li.find(".J_userNick:first").html();
@@ -56,7 +98,7 @@ define(function(require, exports) {
                 quoteHtml += '<blockquote>';
                 quoteHtml += '<span class="info">回复 ' + userNick + ' <span class="time">' + time + '</span></span>';
                 quoteHtml += '<p>' + $.trim(commentCon) + '</p>';
-                quoteHtml +='<a class="close">X</a>';
+              // quoteHtml +='<a class="close">X</a>';
                 quoteHtml += '</blockquote>';
 
                 $postQuote.html(quoteHtml);
@@ -88,7 +130,32 @@ define(function(require, exports) {
 
 
     }
-    $.smeite.postComment.init();
+
+   $(function(){
+       $.ajax({
+           url: "/post/getComments",
+           type : "GET",
+           dataType:"html",
+           data:{pid:parseInt($("#J_pid").val())},
+           success: function(data){
+               $("#J_commentList").append(data);
+           }
+       });
+       $(document).on("click","a.commentPage",function(){
+           var p =$(this).data("page");
+           var pid = $(this).data("pid");
+           $.ajax({
+               url:"/post/getComments?pid="+pid+"&p="+p,
+               type:"get",
+               dataType:"html",
+               success:function (data) {
+                   $("#J_commentList").html(data)
+               }})
+       })
+
+       $.smeite.postComment.init();
+   })
+
 
 
 });

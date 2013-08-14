@@ -351,17 +351,17 @@ a:hover.btn-postlike {
     background-position: -48px 0
 }
 /* comment */
-.good-comment{
+.comment{
     margin-bottom: 30px;
 }
-.good-comment .top-arrow{
+.comment .top-arrow{
     display: block;
     height: 25px;
     overflow: hidden;
     background: 0;
     border-bottom: 5px solid #231f20;
 }
-.good-comment .top-arrow em {
+.comment .top-arrow em {
     float: left;
     margin: 0 0 0 270px;
     display: inline;
@@ -370,19 +370,19 @@ a:hover.btn-postlike {
     overflow: hidden;
     background: url(images/ico_common.png) no-repeat 0 -3583px;
 }
-.good-comment .good-comment-box {
+.comment .comment-box {
     border: 1px solid #efefef;
     border-top: 0;
     background: #fff;
     padding-top: 20px;
     text-align: left;
 }
-.good-comment .comment-title {
+.comment .comment-title {
     text-align: right;
     color: #aaa;
     padding: 0 20px;
 }
-.good-comment .comment-list {
+.comment .comment-list {
     background: 0;
     margin: 0 20px 30px 20px;
     padding-top: 15px;
@@ -436,6 +436,11 @@ a:hover.btn-postlike {
 }
 .comment-list .share-user p.content {
     color: #444;
+    word-wrap: break-word;
+}
+.comment-list .share-user p.quote-content {
+    color: #444;
+    background-color: #efefef;
     word-wrap: break-word;
 }
 .comment-list .share-user .pic {

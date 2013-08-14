@@ -32,7 +32,7 @@ object PostReplies extends Table[PostReply]("post_reply") {
   // Every table needs a * projection with the same type as the table's type parameter
   def * = id.? ~ uid  ~ pid ~ cid  ~ quoteContent.?  ~ content ~ status ~ addTime.?  <>(PostReply, PostReply.unapply _)
   def autoInc  = id.? ~ uid  ~ pid ~ cid  ~ quoteContent.?  ~ content ~ status ~ addTime.?  <>(PostReply, PostReply.unapply _) returning id
-
+  def autoInc2 = uid  ~ pid ~ cid  ~ quoteContent.?  ~ content  returning id
 
 
 }

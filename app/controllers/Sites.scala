@@ -5,15 +5,23 @@ import controllers.users.Users
 import play.api.data.Form
 import play.api.data.Forms._
 import models.site.dao.SiteDao
-import models.user.User
 import play.api.cache.Cache
 import models.user.dao.UserDao
-import play.api.libs.json.Json
+
+
 import play.api.Play.current
+
+import play.api.libs.json._
+import play.api.libs.functional.syntax._
+
+import models.user.User
+import java.sql.Timestamp
 import org.jsoup.Jsoup
 
 case class SiteFormData(sid:Option[Long],cid:Int,title:String,permission:Int,pic:String,intro:String,tags:String)
 case  class PostFormData(pid:Option[Long],sid:Long,cid:Int,title:String,pic:Option[String],content:String,tags:Option[String],status:Int, extraAttr1:Option[String], extraAttr2:Option[String], extraAttr3:Option[String], extraAttr4:Option[String], extraAttr5:Option[String], extraAttr6:Option[String])
+case class PostComment(pid:Long,cid:Int,quoteContent:Option[String],content:String)
+
 object Sites extends Controller {
   val siteFormData =Form(
     mapping(
@@ -44,6 +52,12 @@ object Sites extends Controller {
       "extraAttr6" -> optional(text)
     )(PostFormData.apply)(PostFormData.unapply)
   )
+  implicit  val replyFormat = (
+      (__ \ "pid").format[Long] and
+      (__ \ "cid").format[Int] and
+      (__ \ "quoteContent").format[Option[String]] and
+      (__ \ "content").format[String]
+    )(PostComment.apply,unlift(PostComment.unapply))
 
   /* 小镇编辑创建 */
   def editSite(sid:Long) = Users.UserAction { user => implicit request =>
@@ -215,9 +229,24 @@ object Sites extends Controller {
   }
 
   /* 小镇回复 */
-  def addReply = Users.UserAction { user => implicit request =>
+  def addComment =  Action(parse.json) {  implicit request =>
+    val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
+    if(user.isEmpty) Ok(Json.obj("code" -> "300", "message" -> "你还没有登录"))
 
-    Ok("success")
+  val comment =Json.fromJson[PostComment](request.body).get
+    if(comment.content ==""){
+      Ok(Json.obj("code" -> "104", "message" -> "内容不能为空"))
+    }else {
+      SiteDao.addPostReply(user.get.id.get,comment.pid,comment.cid,comment.quoteContent,comment.content)
+      Ok(Json.obj("code" -> "100", "message" -> "success"))
+    }
+
+  }
+
+  /* 获取 post 评论*/
+  def getComments(pid:Long,p:Int)=Action{    implicit  request =>
+    val page = SiteDao.findPostReplies(pid,p,10)
+    Ok(views.html.sites.getComments(page,pid))
   }
 
 }

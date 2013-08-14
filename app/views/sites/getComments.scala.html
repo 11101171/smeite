@@ -1,0 +1,42 @@
+@(page:models.Page[(models.user.User,models.site.PostReply)],pid:Long)
+
+@for((user,reply) <- page.items){
+<li>
+    <div class="share-avt">
+        <a class="fl" href="@controllers.users.routes.Users.home(user.id.get)"target="_blank">
+            <img class="avt32 fl" src="@user.pic" width="38" height="38">
+        </a>
+    </div>
+    <span class="arrow"></span>
+    <div class="share-user">
+        <h3>
+            <a class="J_userNick" href="@controllers.users.routes.Users.home(user.id.get)" target="_blank">@user.name</a>
+            <p class="user-title"></p>
+        </h3>
+        <p class="quote-content">@Html(reply.quoteContent.getOrElse(""))</p>
+        <p class="content J_commentCon">@Html(reply.content)</p>
+        <div class="pic" style="display: none">
+
+        </div>
+        <div class="item-doing">
+            <a class="reply J_postReply"  href="javascript:;">回复</a><span class="time">@reply.addTime</span>
+        </div>
+    </div>
+</li>
+
+        }
+<!--J_ShowResult end--->
+<div class="clearfix " style="height:30px;">
+    <div class="pagin inlineblock clearfix" id="goodsComments" >
+
+        @for(num <-page.nums){
+        @if(num==page.currentPage){
+        <span  class="current" >@page.currentPage</span>
+        }else {
+        @if(num!=0){
+        <a class="commentPage" href="javascript:void(0)" data-pid="@pid" data-page="@num">@num</a>
+       }
+        }
+        }
+    </div>
+</div>
