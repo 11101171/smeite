@@ -14,7 +14,7 @@
 define(function(require, exports) {
     var $  = require("$");
 
-    $.smeite.postComment = {
+   var PostComment = {
         //评论与回复提交前校验
         submit : function($this){
             $this.attr('disabled',true);
@@ -63,7 +63,7 @@ define(function(require, exports) {
                               html +="</div>";
                               html +=' <span class="arrow"></span>';
                               html +=' <div class="share-user">';
-                              html +='<h3> <a class="J_userNick" href="/user/'+SMEITER.userId+'" target="_blank">'+SMEITER.nick+'</a> <p class="user-title"></p></h3>';
+                              html +='<h3> <a class="J_userNick" href="/user/'+SMEITER.userId+'" target="_blank">'+SMEITER.nick+'</a></h3>';
                               html +=' <p class="quote-content">'+comment.quoteContent+'</p>';
                               html +=' <p class="content J_commentCon">'+comment.content +'</p>';
                               html +='<div class="item-doing"> <a class="reply J_postReply"  href="javascript:;">回复</a><span class="time">刚刚</span> </div>';
@@ -111,7 +111,7 @@ define(function(require, exports) {
 
             $("#J_postCommentSubmit").click(function(event){
                 event.preventDefault();
-                $.smeite.postComment.submit($(this));
+                PostComment.submit($(this));
             });
 
             $postComment.find("textarea").focus(function(){
@@ -122,7 +122,7 @@ define(function(require, exports) {
             $postComment.find("textarea").on("keyup",function(e){
                 var $this = $(this);
                 $.smeite.util.submitByEnter(e, function(){
-                    $.smeite.postComment.submit($("#J_postCommentSubmit"));
+                    PostComment.submit($("#J_postCommentSubmit"));
                 });
             });
 
@@ -153,7 +153,7 @@ define(function(require, exports) {
                }})
        })
 
-       $.smeite.postComment.init();
+       PostComment.init();
    })
 
 

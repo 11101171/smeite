@@ -159,38 +159,29 @@ object Themes extends Controller {
 
 
   }
-  /* 快速评价*/
- def quickReply =Action(parse.json){  implicit request =>
+  /* 评价 */
+ def addComment =Action(parse.json){  implicit request =>
          val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
          if(user.isEmpty)Ok(Json.obj("code" -> "200", "message" ->"亲，你还没有登录哦" ))
          else if(user.get.status==4)Ok(Json.obj("code" -> "444", "message" -> "亲，你违反了社区规定，目前禁止评论"))
          else {
            val themeId = (request.body \ "themeId").asOpt[Long]
            val  content =(request.body \ "content").asOpt[String]
+           val  quoteContent=(request.body \ "quoteContent").asOpt[String]
+           println( themeId + " " + content)
            if(content.isEmpty || themeId.isEmpty ){
            Ok(Json.obj("code" -> "101", "message" ->"亲，是不是没有输入内容？请重新提交试试"))
            }else{
-             ThemeDao.addDiscuss(themeId.get,user.get.id.get,user.get.name,content.getOrElse("none"),1)
+             ThemeDao.addDiscuss(themeId.get,user.get.id.get,user.get.name,quoteContent,content.getOrElse("none"),1)
              Ok(Json.obj("code" -> "100","status"->UserStatus(user.get.status).toString,"content"->content.get, "message" ->"亲，评论成功"))
            }
          }
 
  }
-  /*评价*/
-  def reply =Action(parse.json){  implicit request =>
-    val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
-    if(user.isEmpty)Ok(Json.obj("code" -> "200", "message" ->"亲，你还没有登录哦" ))
-    else if(user.get.status==4)Ok(Json.obj("code" -> "444", "message" -> "亲，你违反了社区规定，目前禁止评论"))
-    else{
-      val themeId = (request.body \ "themeId").asOpt[Long]
-      val  content =(request.body \ "content").asOpt[String]
-      if (content.isEmpty || themeId.isEmpty ){
-        Ok(Json.obj("code" -> "101", "message" ->"亲，是不是没有输入内容？请重新提交试试") )
-      } else{
-        ThemeDao.addDiscuss(themeId.get,user.get.id.get,user.get.name,content.getOrElse("none"),1)
-        Ok(Json.obj("code" -> "100","status"->UserStatus(user.get.status).toString,"content"->content.get, "message" ->"亲，评论成功"))
-      }
-    }
+  /*获得 所有评价*/
+  def getComments(themeId:Long,p:Int) = Users.UserAction { user => implicit request =>
+    val page = ThemeDao.findDiscusses(themeId,p,10)
+    Ok(views.html.themes.getComments(page,themeId))
   }
 
 

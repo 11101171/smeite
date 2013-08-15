@@ -115,29 +115,58 @@ description =  theme.intro.getOrElse("食美特，爱美食爱生活")
     <div class="discusses">
         <h3 class="title">我很想对这个主题说</h3>
         <div class="discusses-wrap clearfix">
-            <form id="J_cmtForm">
-            <textarea class="b-textarea" id="J_Content" name="commentContent" placeholder="你也可以顺便说点什么吧 O(∩_∩)O"></textarea>
-            <input type="button" class="bbl-btn" id="J_cmtSubmit" value="确定">
-                <div id="J_FaceBtn">
-                    <a class="faceBtn" href="javascript:;" unselectable="on" facebtn="faceBtn">表情</a>
-                </div>
-            </form>
-       </div>
 
-           <!-- <div class="cmt clearfix cmt-noworth" data-cmtid="1" data-id="23">
-                <div class="user-pic">
-                    <img src="/images/user/1363011053560.jpg" alt="怡然" width="50" height="50">
-                </div>
-                <div class="cmt-doc">
-                    <div class="cmt-info clearfix">
-                        <span class="fl t">怡然</span>
-                        <span class="fr gc">来自 腾讯QQ </span>
-                        <span class="fr gc mr5">2013-01-07 13:58:09.0 </span>
+
+            <div class="comment">
+
+                <div class="comment-box">
+
+                    <div class="comment-list">
+                        <ul id="J_commentList">
+
+                        </ul>
+                        <form  method="post" id="J_postComment" action="/theme/addComment">
+                            <input type="hidden" name="themeId" id="J_themeId" value="@theme.id.get">
+
+                            <input type="hidden" name="quoteContent" id="J_quoteContent">
+                            <ul>
+                                <li id="J_postQuote" class="post-quote"></li>
+                                <li class="post-c">
+                                    @if(user.isEmpty){
+                                    <div class="share-avt">
+                                        <a href="javascript:void(0)" target="_blank">
+                                            <img class="avt32 fl" value="" src="/images/user/default.jpg" width="38" height="38" >
+                                        </a>
+                                    </div>
+                                    }else{
+                                    <div class="share-avt">
+                                        <a href="@controllers.users.routes.Users.home(user.get.id.get)" target="_blank">
+                                            <img class="avt32 fl" title="@user.get.name" src="@user.get.pic" width="38" height="38" >
+                                        </a>
+                                    </div>
+                                    }
+                                    <span class="arrow"></span>
+                                    <div class="share-user">
+                                        <div class="post">
+                                            <div><textarea id="J_commentContent"   placeholder="顺便说两句吧^_^" ></textarea></div>
+
+                                            <div class="btn-post clearfix">
+                                                <input type="button" id="J_postCommentSubmit" class="bbl-btn  fr" value="发布">
+
+                                            </div>
+                                        </div>
+
+                                    </div></li>
+                            </ul>
+                        </form>
                     </div>
-                    <p class="cmt-content clearfix"><span>各种美味坚果都在里面了，并且包装精美，送亲人朋友都很合适哦！ </span> </p>
                 </div>
+
             </div>
--->
+
+      </div>
+
+
         </div>
     <div class="loves">
         <h3 class="title mb20">我喜欢这个主题</h3>
@@ -225,7 +254,7 @@ description =  theme.intro.getOrElse("食美特，爱美食爱生活")
 
 </div>
 
-<input id="J_ThemeId" type="hidden" value="@theme.id.get">
+
 
 }{
 

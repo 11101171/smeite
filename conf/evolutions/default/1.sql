@@ -1890,3 +1890,6 @@ alter table advert add end_time   timestamp default '2013-02-02 12:00:00';
 alter table manager add login_num  smallint(10) not null default '1';
 alter table manager add login_ip  varchar(32) default '0';
 alter table manager add last_login_time timestamp default '2013-02-02 12:00:00';
+
+/*2013年8月5日*/
+alter table theme_discuss add quote_content text;

@@ -139,8 +139,8 @@ POST     /theme/save                      controllers.Themes.save
 GET      /theme/$id<[0-9]+>               controllers.Themes.view(id:Long)
 POST      /theme/delete                    controllers.Themes.delete
 POST     /theme/editStyle                controllers.Themes.editStyle
-POST      /theme/quickReply               controllers.Themes.quickReply
-POST     /theme/reply                     controllers.Themes.reply
+POST      /theme/addComment               controllers.Themes.addComment
+GET     /theme/getComments                     controllers.Themes.getComments(themeId:Long,p:Int ?=1)
 POST      /theme/addFollow                     controllers.Themes.addFollow
 POST      /theme/removeFollow                  controllers.Themes.removeFollow
 POST     /theme/addGoods                      controllers.Themes.addGoods

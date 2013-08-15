@@ -424,8 +424,14 @@ a:hover.btn-postlike {
     line-height: 16px;
 }
 .share-user h3 a {
-    font-size: 12px;
+    font-size: 14px;
     color: #000;
+}
+.share-user h3 span{
+    margin-left: 15px;
+    color: #999;
+    font-size:12px;
+    font-weight: normal;
 }
 .share-user .user-title {
     color: #aaa;

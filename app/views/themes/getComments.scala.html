@@ -1,4 +1,4 @@
-@(page:models.Page[(models.user.User,models.site.PostReply)],pid:Long)
+@(page:models.Page[(models.user.User,models.theme.ThemeDiscuss)],themeId:Long)
 
 @for((user,reply) <- page.items){
 <li>
@@ -10,14 +10,11 @@
     <span class="arrow"></span>
     <div class="share-user">
         <h3>
-            <a class="J_userNick" href="@controllers.users.routes.Users.home(user.id.get)" target="_blank">@user.name  </a>
+            <a class="J_userNick" href="@controllers.users.routes.Users.home(user.id.get)" target="_blank">@user.name</a>
             <span>来自 @models.user.ComeFrom(user.comeFrom)</span>
         </h3>
         <p class="quote-content">@Html(reply.quoteContent.getOrElse(""))</p>
         <p class="content J_commentCon">@Html(reply.content)</p>
-        <div class="pic" style="display: none">
-
-        </div>
         <div class="item-doing">
             <span class="time">@utils.Utils.timestampFormat(reply.addTime.get)</span> <a class="reply J_postReply"  href="javascript:;">回复</a>
         </div>
@@ -25,8 +22,8 @@
 </li>
 
         }
-
-<div class="clearfix " style="height:30px;">
+@if(page.nums !=0){
+<div class="clearfix ">
     <div class="pagin inlineblock clearfix" id="goodsComments" >
 
         @for(num <-page.nums){
@@ -34,9 +31,10 @@
         <span  class="current" >@page.currentPage</span>
         }else {
         @if(num!=0){
-        <a class="commentPage" href="javascript:void(0)" data-pid="@pid" data-page="@num">@num</a>
+        <a class="commentPage" href="javascript:void(0)" data-themeid="@themeId" data-page="@num">@num</a>
        }
         }
         }
     </div>
 </div>
+        }

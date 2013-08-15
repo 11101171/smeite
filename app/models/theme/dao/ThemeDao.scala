@@ -187,9 +187,9 @@ object ThemeDao {
   }
 
   /*  theme discuss */
-  def addDiscuss(themeId:Long,uid:Long,uname:String,content:String,checkState:Int) =database.withSession {  implicit session:Session =>
+  def addDiscuss(themeId:Long,uid:Long,uname:String,quoteContent:Option[String],content:String,checkState:Int) =database.withSession {  implicit session:Session =>
     ThemeSQLDao.updateReplyNum(themeId,1)
-    ThemeDiscusses.autoInc2.insert(themeId,uid,uname,content,checkState)
+    ThemeDiscusses.autoInc2.insert(themeId,uid,uname,quoteContent,content,checkState)
 
   }
 

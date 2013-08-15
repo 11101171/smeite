@@ -498,95 +498,6 @@
     border-bottom: 1px dotted #ececec
 }
 
-.discusses .b-textarea {
-    width: 440px;
-    height: 60px;
-    padding: 5px;
-}
-
- .discusses .bbl-btn {
-    float: right;
-    margin-top: 10px
-}
-.discusses .cmt {
-    margin: 20px 0;
-
-}
-
-.discusses .cmt .bg-gray {
-    background: #fff
-}
-
-.discusses .cmt .user-pic {
-    float: left;
-    width: 50px;
-    height: 50px;
-    overflow: hidden
-}
-
-.discusses .cmt .user-pic img {
-    width: 50px;
-    height: 50px
-}
-
-.discusses .cmt .cmt-doc {
-    float: right;
-    width: 400px
-}
-
-.discusses .cmt-doc .cmt-info {
-    height: 18px;
-    line-height: 18px;
-    padding: 0 10px 10px 10px
-}
-
-.discusses .cmt-doc p {
-    line-height: 150%;
-    color: #666;
-    word-wrap: break-word
-}
-
-
-.discusses .cmt-doc p.cmt-content {
-    padding: 0 10px 10px 10px
-}
-
-.discusses .cmt-doc p.cmt-content span {
-    float: left;
-}
-
-.discusses .cmt-doc p.cmt-content a.btn {
-    float: right
-}
-
-.discusses .cmt-doc a {
-    cursor: pointer
-}
-
-.discusses .cmt-doc a.g-daren em {
-    margin-left: 0;
-    color: #333
-}
-
-.discusses .cmt-doc .open {
-    display: block
-}
-.discusses .cmt-doc .usefulBtn {
-    float: right;
-    *display: inline;
-    margin-right: 10px
-}
-
-.discusses .cmt-doc .usefulBtn.disableLnk {
-    color: #999;
-    cursor: default
-}
-
-.discusses .cmt-doc .usefulBtn.disableLnk:hover {
-    color: #999;
-    text-decoration: none;
-    cursor: default
-}
 
  /*  discusses */
 .theme-info .loves{
@@ -752,5 +663,125 @@
     background: #fff;
     padding: 0
 }
+
+/* comment */
+ .comment{
+     margin-bottom: 30px;
+ }
+
+ .comment .comment-box {
+     text-align: left;
+ }
+ .comment .comment-title {
+     text-align: right;
+     color: #aaa;
+     padding: 0 20px;
+ }
+ .comment .comment-list {
+     background: 0;
+     margin: 0 20px 30px 20px;
+     padding-top: 15px;
+ }
+ .comment-list li {
+     padding-left: 60px;
+     margin-bottom: 10px;
+     position: relative;
+     overflow: hidden;
+     zoom: 1;
+ }
+ .comment-list li .share-avt {
+     width: 38px;
+     height: 38px;
+     overflow: hidden;
+     position: absolute;
+     left: 0;
+     top: 0;
+ }
+ .comment-list li .arrow {
+     float: left;
+     position: absolute;
+     height: 14px;
+     overflow: hidden;
+     background: url(images/ico_common.png) no-repeat -272px -3632px;
+     width: 10px;
+     left: 51px;
+     top: 13px;
+     background-position: -289px -3632px;
+ }
+ .comment-list .share-user {
+     border: 1px solid #e5e5e5;
+     background: #fff;
+     padding: 15px 15px 5px 15px;
+     zoom: 1;
+ }
+ .comment-list .share-user h3 {
+     margin-bottom: 12px;
+     line-height: 16px;
+ }
+ .share-user h3 a {
+     font-size: 14px;
+     color: #000;
+ }
+ .share-user h3 span{
+     margin-left: 15px;
+     color: #999;
+     font-size:12px;
+     font-weight: normal;
+ }
+ .share-user .user-title {
+     color: #aaa;
+     font-size: 12px;
+     display: inline;
+     margin-left: 10px;
+     word-wrap: break-word;
+ }
+ .comment-list .share-user p.content {
+     color: #444;
+     word-wrap: break-word;
+ }
+ .comment-list .share-user p.quote-content {
+     color: #444;
+     background-color: #efefef;
+     word-wrap: break-word;
+ }
+ .comment-list .share-user .pic {
+     background: 0;
+     padding: 10px 0;
+     width: 436px;
+     overflow: hidden;
+ }
+ .comment-list .share-user .pic img {
+     max-width: 436px;
+ }
+ .comment-list .item-doing {
+     text-align: right;
+     color: #d1d1d1;
+     padding: 5px 0;
+ }
+ .comment-list .item-doing .reply {
+     margin-right: 15px;
+ }
+ .comment-list .post textarea {
+     width: 310px;
+     height: 60px;
+     margin-bottom: 10px;
+ }
+ .comment-list .post-quote {
+     margin-top: 8px
+ }
+
+ .comment-list .post-quote blockquote {
+     padding: 8px 10px;
+     margin: 0 0 8px 0;
+     background-color: #fafafa;
+     position: relative;
+     line-height: 24px
+ }
+
+ .comment-list .post-quote blockquote .close {
+     position: absolute;
+     right: 15px;
+     top: 10px
+ }
 
 

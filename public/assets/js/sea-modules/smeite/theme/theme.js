@@ -14,7 +14,7 @@
 define(function(require, exports) {
 	var $ = require("$");
 var UserTheme = {
-	themeId : $("#J_ThemeId").val(),
+	themeId : $("#J_themeId").val(),
 	//删除主题
 	deleteUserTheme : function(){
 		var $del = $("#J_UserThemeDel"),
@@ -262,40 +262,144 @@ var UserTheme = {
 		});
 	}
 }
+   var ThemeDiscuss = {
+        //评论与回复提交前校验
+        submit : function($this){
+            $this.attr('disabled',true);
+            var $postComment = $("#J_postComment");
+            var $textarea = $postComment.find("textarea");
+             $("#J_quoteContent").val($("#J_postQuote").html())
 
+            var comment = {
+                "themeId":parseInt($("#J_themeId").val()),
+                "quoteContent": $("#J_postQuote").html(),
+                "content": $("#J_commentContent").val()
+            };
+
+            if($.smeite.dialog.isLogin()){
+                if($.trim($textarea.val()) == ""){
+                    $.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
+                    $.smeite.tip.show($this,"亲，评论内容不能为空哦！");
+                    $this.attr('disabled',false);
+                }else if($.smeite.util.getStrLength($textarea.val()) >= 140){
+                    $.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
+                    $.smeite.tip.show($this,"内容小于140字！");
+                    $this.attr('disabled',false);
+                }else{
+                    $this.attr('disabled',false);
+                       alert(comment.themeId)
+                    $.ajax({
+                        url: $("#J_postComment").attr("action"),
+                        type : "POST",
+                        contentType:"application/json; charset=utf-8",
+                        dataType: "json",
+                        data: JSON.stringify(comment),
+                        beforeSend: function(){
+                            $this.disableBtn("bbl-btn");
+                        },
+                        success: function(data){
+                            if(data.code=="100"){
+                                $this.enableBtn("bbl-btn");
+
+                                var html ='<li>';
+                                html += '<div class="share-avt">';
+                                html +='<a class="fl" href="/user/'+SMEITER.userId+'"target="_blank">';
+                                html +='<img class="avt32 fl" src="'+SMEITER.userPhoto+'" width="38" height="38">';
+                                html +='</a>';
+                                html +="</div>";
+                                html +=' <span class="arrow"></span>';
+                                html +=' <div class="share-user">';
+                                html +='<h3> <a class="J_userNick" href="/user/'+SMEITER.userId+'" target="_blank">'+SMEITER.nick+'</a> <p class="user-title"></p></h3>';
+                                html +=' <p class="quote-content">'+comment.quoteContent+'</p>';
+                                html +=' <p class="content J_commentCon">'+comment.content +'</p>';
+                                html +='<div class="item-doing"> <a class="reply J_postReply"  href="javascript:;">回复</a><span class="time">刚刚</span> </div>';
+                                html +='</div>';
+                                html +='</li>';
+
+                                $("#J_commentList").append(html);
+
+                            }
+                        }
+                    });
+                    return false
+                }
+            }
+        },
+
+
+        //通用讨论组初始化
+        init : function(){
+            //评论与回复
+            var $postQuote = $("#J_postQuote");
+            var $postComment = $("#J_postComment");
+
+            //点击回复
+            $(document).on("click",".J_postReply",function(){
+
+                var $li = $(this).closest("li");
+                var userNick = $li.find(".J_userNick:first").html();
+                var commentCon = $li.find(".J_commentCon").html();
+                var time = $li.find(".time").html();
+                var quoteHtml = "";
+                quoteHtml += '<blockquote>';
+                quoteHtml += '<span class="info">回复 ' + userNick + ' <span class="time">' + time + '</span></span>';
+                quoteHtml += '<p>' + $.trim(commentCon) + '</p>';
+                // quoteHtml +='<a class="close">X</a>';
+                quoteHtml += '</blockquote>';
+
+                $postQuote.html(quoteHtml);
+                $("html, body").scrollTop($postComment.offset().top -50);
+                //删除引用回复
+                $postQuote.find(".close:first").unbind("click").click(function(){
+                    $postQuote.html("");
+                });
+            });
+
+            $("#J_postCommentSubmit").click(function(event){
+                event.preventDefault();
+                ThemeDiscuss.submit($(this));
+            });
+
+            $postComment.find("textarea").focus(function(){
+                $.smeite.dialog.isLogin();
+            });
+
+            //回车键提交评论
+            $postComment.find("textarea").on("keyup",function(e){
+                var $this = $(this);
+                $.smeite.util.submitByEnter(e, function(){
+                    ThemeDiscuss.submit($("#J_postCommentSubmit"));
+                });
+            });
+
+        }
+
+
+    }
 
     $(function(){
         UserTheme.init();
-
-
-
-        $("#J_Content").bind("keydown",function(event){
-            var keycode=event.which;
-            var self=$(this);
-            var inputVal=$.smeite.util.trim(self.val());
-            if(keycode=="13"){
-                if(inputVal==""){
-                    self.focus();
-                    return false;
-                }
-               /* ajax 提交*/
-
+        ThemeDiscuss.init()
+        $.ajax({
+            url: "/theme/getComments",
+            type : "GET",
+            dataType:"html",
+            data:{themeId:parseInt($("#J_themeId").val())},
+            success: function(data){
+                $("#J_commentList").append(data);
             }
         });
-        $("#J_cmtSubmit").bind("click",function(){
-            var self=$(this);
-            var input=$("#J_cmtContent");
-            var inputVal=input.val();
-            inputVal=$.smeite.util.trim(inputVal);
-
-            if(inputVal==""){
-                input.focus();
-                return false;
-            }
-
-            /* ajax submit */
-
-        });
+        $(document).on("click","a.commentPage",function(){
+            var p =$(this).data("page");
+            var themeId = $(this).data("themeid");
+            $.ajax({
+                url:"/theme/getComments?themeId="+themeId+"&p="+p,
+                type:"get",
+                dataType:"html",
+                success:function (data) {
+                    $("#J_commentList").html(data)
+                }})
+        })
 
 
 
