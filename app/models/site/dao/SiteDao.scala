@@ -225,6 +225,7 @@ object SiteDao {
 
   /* ***************************************** site post reply   **************************************** */
  def addPostReply(uid:Long,pid:Long,cid:Int,quoteContent:Option[String],content:String)= database.withSession {  implicit session:Session =>
+    SiteSQLDao.updatePostReplyNum(pid,1)
     PostReplies.autoInc2.insert(uid,pid,cid,quoteContent,content)
   }
   def modifyPostReplyStatus(id:Long,status:Int)= database.withSession {  implicit session:Session =>

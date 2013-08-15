@@ -19,6 +19,7 @@ import models.theme.dao.ThemeDao
 import models.forum.dao.TopicDao
 import java.util.Date
 import models.site.{Posts, Post}
+import models.site.dao.SiteSQLDao
 
 
 /*
@@ -894,12 +895,14 @@ object UserDao {
    }
   def addLovePost(uid:Long,pid:Long) =database.withSession {  implicit session:Session =>
     UserSQLDao.updateLovePostNum(uid,1)
+    SiteSQLDao.updatePostLoveNum(pid,1)
     UserLovePosts.autoInc.insert(uid,pid)
 
   }
   /*删除*/
   def removeLovePost(uid:Long,pid:Long)=database.withSession {  implicit session:Session =>
     UserSQLDao.updateLovePostNum(uid,-1)
+    SiteSQLDao.updatePostLoveNum(pid,-1)
     UserLovePosts.delete(uid,pid)
 
   }
