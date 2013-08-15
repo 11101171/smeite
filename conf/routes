@@ -380,6 +380,8 @@ POST   /admin/sites/batchSites            controllers.admin.Sites.batchSites
 GET   /admin/sites/postList               controllers.admin.Sites.postList(sid:Long ?=0,p:Int ?=1)
 GET   /admin/sites/filterPosts           controllers.admin.Sites.filterPosts
 POST   /admin/sites/batchPosts            controllers.admin.Sites.batchPosts
+GET    /admin/sites/post/$pid<[0-9]+>     controllers.admin.Sites.post(pid:Long)
+POST   /admin/sites/addPostExtraTags      controllers.admin.Sites.addPostExtraTags
 
 GET   /admin/sites/postReplies            controllers.admin.Sites.postReplies(pid:Long ?=0,p:Int ?=1)
 GET   /admin/sites/filterPostReplies          controllers.admin.Sites.filterPostReplies

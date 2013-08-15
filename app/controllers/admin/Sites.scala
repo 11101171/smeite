@@ -7,6 +7,8 @@ import models.site.dao.SiteDao
 import java.sql.{Date, Timestamp}
 import models.msg.dao.SystemMsgDao
 import models.site.{PostReply, Post}
+import play.api.libs.json.Json
+import models.tag.dao.TagDao
 
 /**
  * Created with IntelliJ IDEA.
@@ -157,6 +159,12 @@ object Sites extends Controller {
     )
   }
 
+  def post(pid:Long)=Managers.AdminAction{ manager => implicit request =>
+     val post = SiteDao.findPostById(pid)
+     val tags = SiteDao.findPostExtraTags(pid)
+    Ok(views.html.admin.sites.post(manager,post.get,tags))
+  }
+
   /***************** post reply *********************  */
   def postReplies(pid:Long,currentPage:Int)=Managers.AdminAction{ manager => implicit request =>
     var page:Page[PostReply] = null
@@ -203,6 +211,19 @@ object Sites extends Controller {
     )
   }
 
-
+  /* post extra tag */
+  def addPostExtraTags = Action(parse.json) {implicit request =>
+    val pid = (request.body \ "pid").asOpt[Long]
+    val tags = (request.body \ "tags").asOpt[String]
+    if(tags.isEmpty){
+      Ok(Json.obj("code"->"103","message"->"tags 为空"))
+    }else{
+      for (name <- tags.get.trim().split(" ")){
+          val postExtraTag = SiteDao.findPostExtraTag(pid.get,name)
+          if (postExtraTag.isEmpty) SiteDao.addPostExtraTag(pid.get,name)
+      }
+      Ok(Json.obj("code"->"100","message"->"success"))
+    }
+  }
 
 }

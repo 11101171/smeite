@@ -257,7 +257,7 @@ define(function(require, exports) {
     /*功能库*/
     $.fn.extend({
         //返回顶部
-        returntop: function(){
+        returnTop: function(){
             if(!this[0]){
                 return;
             }
@@ -1663,7 +1663,7 @@ define(function(require, exports) {
         });
 
         /* 返回顶部 */
-        $("#returnTop").returntop();
+        $("#returnTop").returnTop();
 
         $('.like-common .like').hover(function(){
             $(this).parent().children('.like-num').find('.J_scrollUp').animate({ top:"-24" }, 600)

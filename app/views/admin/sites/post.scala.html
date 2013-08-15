@@ -1,0 +1,109 @@
+@(manager:models.admin.Manager,post:models.site.Post,tags:List[String])
+@views.html.admin.template(manager,"site") {
+    <div id="content-header">
+        <h1>小镇管理</h1>
+    </div>
+    <div id="breadcrumb">
+        <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+        <a href="#" class="current">小镇管理</a>
+        <a href="#" class="current">帖子管理</a>
+    </div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="control-group">
+            <label class="control-label" >帖子pic:</label>
+            <div class="controls">
+                <img src="@post.pic">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" >名称:</label>
+            <div class="controls">
+                @post.title
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" >内容:</label>
+            <div class="controls">
+                @Html(post.content)
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" >自带标签 : </label>
+            <div class="controls">
+                @post.tags.getOrElse("")
+            </div>
+        </div>
+          <form method="post" id="J_tagsForm" action="@controllers.admin.routes.Sites.addPostExtraTags">
+              <input type="hidden" name="pid" id="J_pid" value="@post.id.get">
+              <div class="control-group">
+                  <label class="control-label" >自定义标签 </label>
+                  <div class="controls">
+                      <input rel="tagsInput" id="J_tags"  name="tags" value='@tags.mkString(" ")' />
+
+
+                  </div>
+              </div>
+              <div class="form-actions">
+                  <button type="button" id="J_tagsSubmit" class="btn btn-primary">保存</button>
+              </div>
+          </form>
+
+
+
+    </div>
+</div>
+
+      <script>
+          var tagsSubmit= function($this){
+              $this.attr('disabled',true);
+              var $tagsForm = $("#J_tagsForm");
+              var $textarea = $("#J_tags");
+              var tagsData = {
+                  "pid": parseInt($("#J_pid").val()),
+                  "tags": $("#J_tags").val()
+              };
+
+              if($.trim($textarea.val()) == ""){
+
+                  alert("亲，标签不能为空！");
+                  $this.attr('disabled',false);
+              }else{
+                  $this.attr('disabled',false);
+
+                  $.ajax({
+                      url: $("#J_tagsForm").attr("action"),
+                      type : "POST",
+                      contentType:"application/json; charset=utf-8",
+                      dataType: "json",
+                      data: JSON.stringify(tagsData),
+
+                      success: function(data){
+                          if(data.code=="100"){
+
+                              alert("发布成功")
+
+                          }
+                      }
+                  });
+                  return false
+              }
+          }
+          var $tagsForm = $("#J_tagsForm");
+          $("#J_tagsSubmit").click(function(event){
+              event.preventDefault();
+              tagsSubmit($(this));
+          });
+
+          //回车键提交评论
+          $tagsForm.find("textarea").on("keyup",function(e){
+              tagsSubmit($("#J_tagsSubmit"));
+          });
+
+
+      </script>
+
+        }
+
+

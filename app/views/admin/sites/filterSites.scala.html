@@ -143,9 +143,7 @@
                     <td>@if(item.status==0){<span class="label label-warning">未审核</span>} @if(item.status ==1){<span class="label label-success">已审核</span>}</td>
                     <td>@item.addTime</td>
                     <td>
-                        <a href="#"><i class="icon-edit"></i></a>
-                        <!--    <a href="#J_deleteModal"class="remove" data-id="@item.id" role="button" data-toggle="modal"><i class="icon-trash"></i></a>  -->
-                        <a href=""><i class="icon-th-list"></i></a>
+                        <a href='@controllers.admin.routes.Sites.postList(item.id.get,1)'><i class="icon-th-list"></i></a>
                     </td>
                 </tr>
                 }

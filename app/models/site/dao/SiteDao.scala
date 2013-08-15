@@ -445,6 +445,37 @@ object SiteDao {
 
   }
 
+  /* *****************************************  site post extra tag  ************************************************************ */
+  def addPostExtraTag(pid:Long,tagName:String)= database.withSession{  implicit session:Session =>
+         PostExtraTags.autoInc2.insert(pid,tagName)
+  }
+  def findPostExtraTag(pid:Long,tagName:String) =database.withSession{  implicit session:Session =>
+    ( for( c<- PostExtraTags.filter(_.pid ===pid).filter(_.tagName === tagName))yield c ).firstOption
+  }
+
+  def removePostExtraTag(pid:Long,tagName:String) =database.withSession{  implicit session:Session =>
+    ( for( c<- PostExtraTags.filter(_.pid ===pid).filter(_.tagName === tagName))yield c ).delete
+  }
+
+  def findTagPosts(tagName:String,currentPage:Int,pageSize:Int) =database.withSession{  implicit session:Session =>
+    val totalRows = Query(PostExtraTags.filter(_.tagName === tagName).length).first()
+    val totalPages=(totalRows + pageSize - 1) / pageSize
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val query = for{
+      c<-PostExtraTags
+      p<-Posts
+      if c.tagName === tagName
+      if c.pid === p.id
+    }yield p
+    val posts:List[Post]=  query.drop(startRow).take(pageSize).list()
+    Page[Post](posts,currentPage,totalPages)
+  }
+
+  def findPostExtraTags(pid:Long) =database.withSession{  implicit session:Session =>
+    (for( c<-PostExtraTags.filter(_.pid === pid) )yield c.tagName).list()
+  }
+
+
 
 
 }

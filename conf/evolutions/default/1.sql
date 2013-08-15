@@ -1731,11 +1731,8 @@ CREATE TABLE IF NOT EXISTS `post_reply`(
 /*
   -- 表的结构 `post_extra_tag 帖子标签`
      id                  表的ID
-	  pid                  帖子
+	   pid                  帖子
      tag_name            标签
-     tag_code            
-     group_id         标签组 id
-     check_state        审核状态
      add_time           添加时间
 --
 */
@@ -1745,9 +1742,6 @@ CREATE TABLE IF NOT EXISTS `post_extra_tag`(
   `id`                     int(10) NOT NULL AUTO_INCREMENT,
   `pid`                 int(10) NOT NULL ,
   `tag_name`             varchar(32),
-  `group_name`             varchar(32),
-  `group_id`              int(10) NOT NULL default '0' ,
-  `check_state`          tinyint NOT NULL DEFAULT '0',
   `add_time`               timestamp NOT NULL DEFAULT '2012-10-1 12:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1891,7 +1885,7 @@ alter table manager add login_num  smallint(10) not null default '1';
 alter table manager add login_ip  varchar(32) default '0';
 alter table manager add last_login_time timestamp default '2013-02-02 12:00:00';
 
-/*2013年8月5日*/
+/*2013年8月15日*/
 alter table theme_discuss add quote_content text;
 alter table topic_reply  change quote_reply quote_content text;
 alter table user_static add post_post_num smallint(10) unsigned not null default '0';

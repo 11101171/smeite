@@ -147,9 +147,8 @@
                     <td>@item.viewNum</td>
                     <td>@item.addTime</td>
                     <td>
-                       <!-- <a href="#"><i class="icon-edit"></i></a>-->
-                        <!--    <a href="#J_deleteModal"class="remove" data-id="@item.id" role="button" data-toggle="modal"><i class="icon-trash"></i></a>  -->
-                        <a href='@controllers.admin.routes.Sites.postList(item.id.get,1)'><i class="icon-th-list"></i></a>
+                        <a href="@controllers.admin.routes.Sites.post(item.id.get)"><i class="icon-edit"></i></a>
+
                     </td>
                 </tr>
                 }
