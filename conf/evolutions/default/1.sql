@@ -1894,3 +1894,5 @@ alter table manager add last_login_time timestamp default '2013-02-02 12:00:00';
 /*2013年8月5日*/
 alter table theme_discuss add quote_content text;
 alter table topic_reply  change quote_reply quote_content text;
+alter table user_static add post_post_num smallint(10) unsigned not null default '0';
+alter table user_static add love_post_num smallint(10) unsigned not null default '0';

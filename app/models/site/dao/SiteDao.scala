@@ -11,6 +11,7 @@ import models.site.Site
 import models.Page
 import models.user.User
 import models.site.Post
+import models.user.dao.UserSQLDao
 
 object SiteDao {
   lazy val database = Database.forDataSource(DB.getDataSource())
@@ -110,6 +111,7 @@ object SiteDao {
 
     /*  添加新帖子 */
    def addPost(uid:Long,sid:Long,cid:Int,title:String,pic:Option[String],content:String,tags:Option[String],status:Int,extraAttr1:Option[String],extraAttr2:Option[String],extraAttr3:Option[String],extraAttr4:Option[String],extraAttr5:Option[String],extraAttr6:Option[String]) =  database.withSession {  implicit session:Session =>
+      UserSQLDao.updatePostPostNum(uid,1)
          Posts.autoInc2.insert(uid,sid,cid,title,pic,content,tags,status,extraAttr1,extraAttr2,extraAttr3,extraAttr4,extraAttr5,extraAttr6)
     }
      /* 修改 帖子 */

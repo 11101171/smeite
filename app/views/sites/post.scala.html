@@ -60,7 +60,7 @@ title =  "食美特，不一样的生活"
                    </div>
 
                        <div class="like-common like-common-s">
-                           <a class="like" rel="followPost" href="javascript:void(0)" data-pid="@post._1.id.get" title="喜欢"><i>喜欢</i></a>
+                           <a class="like" rel="followPost" href="javascript:void(0)" data-id="@post._1.id.get" title="喜欢"><i>喜欢</i></a>
                            <div class="like-num">
                                <dl class="J_scrollUp" style="top: 0px;">
                                    <dd class="J_FavorNum" data-val="@post._1.loveNum">@post._1.loveNum</dd>
@@ -180,10 +180,7 @@ title =  "食美特，不一样的生活"
                 <a><img width="180" height="180" src="@post._3.pic"></a>
                 <h3 class="site-title"><a href="@controllers.routes.Sites.site(post._3.id.get)"> @post._3.title</a></h3>
                 <div class="back-site"><a href="@controllers.routes.Sites.site(post._3.id.get)">返回小镇</a> </div>
-                <div class="follow clearfix">
-                    <a rel="followSite" href="javascript:;" class="follow-btn" data-title="@post._3.title" data-id="@post._3.id"> + 加入小镇</a>
 
-                </div>
             </div>
             <div class="site-others">
                     <dl class="posts">
@@ -210,6 +207,6 @@ title =  "食美特，不一样的生活"
 }{
 
 <script type="text/javascript">
-    seajs.use(['smeite/site/post','smeite/site/favor','smeite/user/favor'])
+    seajs.use(['smeite/site/post','smeite/site/postFavor','smeite/user/favor'])
 </script>
 }

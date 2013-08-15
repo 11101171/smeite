@@ -18,6 +18,7 @@ import models.goods.dao.GoodsSQLDao
 import models.theme.dao.ThemeDao
 import models.forum.dao.TopicDao
 import java.util.Date
+import models.site.{Posts, Post}
 
 
 /*
@@ -442,7 +443,7 @@ object UserDao {
   /*删除*/
   def deleteLoveTopic(uid:Long,topicId:Long)=database.withSession {  implicit session:Session =>
     UserSQLDao.updateLoveTopicNum(uid,-1)
-    val topic =TopicDao.findById(topicId)
+    //val topic =TopicDao.findById(topicId)
     /*保存用户动作*/
    // addTrend(UserTrend(None,uid,"取消了喜欢的话题",topic.get.id.get,"/forum/view/"+topic.get.id.get,topic.get.title,None))
     UserLoveTopics.delete(uid,topicId)
@@ -886,6 +887,35 @@ object UserDao {
     Page[UserCreditRecord](list,currentPage,totalPages);
   }
 
+   /*************************** user love post ***************************/
+   /* user love topic */
+   def checkLovePost(uid:Long, pid:Long):Option[UserLovePost] =database.withSession {  implicit session:Session =>
+     (for(c<-UserLovePosts.filter(_.uid === uid).filter(_.pid ===pid) )yield c).firstOption
+   }
+  def addLovePost(uid:Long,pid:Long) =database.withSession {  implicit session:Session =>
+    UserSQLDao.updateLovePostNum(uid,1)
+    UserLovePosts.autoInc.insert(uid,pid)
+
+  }
+  /*删除*/
+  def removeLovePost(uid:Long,pid:Long)=database.withSession {  implicit session:Session =>
+    UserSQLDao.updateLovePostNum(uid,-1)
+    UserLovePosts.delete(uid,pid)
+
+  }
+  /* 查找用户喜欢的主题 */
+  def findLovePosts(uid:Long,currentPage: Int = 1, pageSize: Int = 10 ):Page[Post] =database.withSession{  implicit session:Session =>
+    val totalRows=Query(UserLovePosts.filter(_.uid === uid).length).first()
+    val totalPages=((totalRows + pageSize - 1) / pageSize);
+    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
+    val query = for{
+      ult <- UserLovePosts.filter(_.uid === uid).sortBy(_.addTime).drop(startRow).take(pageSize)
+      t <- Posts
+      if ult.pid === t.id
+    }yield(t)
+    val posts:List[Post]= query.list()
+    Page[Post](posts,currentPage,totalPages)
+  }
 
 
 }

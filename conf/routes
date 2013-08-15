@@ -153,10 +153,11 @@ POST    /theme/checkThemeLoveState            controllers.Themes.checkThemeLoveS
 GET    /site/edit                       controllers.Sites.editSite(id:Long ?=0)
 POST   /site/save                       controllers.Sites.saveSite
 GET    /site/$id<[0-9]+>                controllers.Sites.site(id:Long,s:Int ?=1,p:Int ?=1)
-POST   /site/addFollow                  controllers.Sites.addFollow
-POST   /site/removeFollow                controllers.Sites.removeFollow
+POST   /site/addFollow                  controllers.Sites.addSiteFollow
+POST   /site/removeFollow                controllers.Sites.removeSiteFollow
 POST   /site/checkSiteLoveState          controllers.Sites.checkSiteLoveState
 POST   /site/checkSitePermission         controllers.Sites.checkSitePermission
+
 
 
 GET     /post/edit                           controllers.Sites.editPost(pid:Long ?=0,sid:Long)
@@ -164,6 +165,9 @@ GET     /post/$pid<[0-9]+>                    controllers.Sites.post(pid:Long)
 POST    /post/save                            controllers.Sites.savePost
 POST    /post/addComment                      controllers.Sites.addComment
 GET     /post/getComments                    controllers.Sites.getComments(pid:Long,p:Int ?=1)
+POST   /post/addFollow                  controllers.Sites.addPostFollow
+POST   /post/removeFollow                controllers.Sites.removePostFollow
+POST   /post/checkSiteLoveState          controllers.Sites.checkPostLoveState
 
 
 #info 信息页面 新年 公告，帮助中心

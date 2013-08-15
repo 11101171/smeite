@@ -39,6 +39,13 @@ object UserSQLDao {
     sqlu"update user_static set love_topic_num =love_topic_num+$num where id =$uid".first
   }
 
+  def updatePostPostNum(uid:Long,num:Int)=database.withSession {
+    sqlu"update user_static set post_post_num =post_post_num+$num where id =$uid".first
+  }
+  def updateLovePostNum(uid:Long,num:Int)=database.withSession {
+    sqlu"update user_static set love_post_num =love_post_num+$num where id =$uid".first
+  }
+
   def updateFansNum(uid:Long,num:Int)=database.withSession {
     sqlu"update user_static set fans_num = fans_num+$num where id =$uid".first
   }
