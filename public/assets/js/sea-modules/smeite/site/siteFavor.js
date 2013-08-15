@@ -59,7 +59,7 @@ define(function(require, exports){
                         switch(data.code){
                             case("100"):
                              //   $this.data("enable","true");
-                                $.smeite.addFollowCallback(data,$this);
+                                $.smeite.addFollowSiteCallback(data,$this);
                                 break;
                             case("104"):
                             //    $this.data("enable","true");
@@ -69,7 +69,7 @@ define(function(require, exports){
                             case("103"):
                            //     $this.data("enable","true");
                                 $.smeite.tip.conf.tipClass = "tipmodal tipmodal-error2";
-                                $.smeite.repeatFollowCallback(data,$this);
+                                $.smeite.repeatFollowSiteCallback(data,$this);
                                 break;
                             case("111"):
                             //    $this.data("enable","true");
@@ -109,7 +109,7 @@ define(function(require, exports){
                             switch(data.code){
                                 case("100"):
                                // $this.data("enable","true");
-                                    $.smeite.removeFollowCallback(data,$this);
+                                    $.smeite.removeFollowSiteCallback(data,$this);
                                     break;
                                 case("104"):
                                  //   $this.data("enable","true");
@@ -127,19 +127,19 @@ define(function(require, exports){
             }
         })
 
-        $.smeite.addFollowCallback = function(data,o){
+        $.smeite.addFollowSiteCallback = function(data,o){
                o.after("<div class='followed-btn'>已加入<span class='mr5 ml5'>|</span><a rel='removeFollowSite'data-title="+o.data("title")+"  data-id='"+o.data("id")+"' href='javascript:;'>退出</a></div>")
                o.remove();
 
 
         }
-        $.smeite.removeFollowCallback = function(data,o){
+        $.smeite.removeFollowSiteCallback = function(data,o){
                 o.parent().after("<a rel='followSite' href='javascript:;' class='follow-btn' data-title="+o.data("title")+"   data-id="+o.data("id")+">+加入小镇</a>")
                 o.parent().remove();
 
 
         }
-        $.smeite.repeatFollowCallback = function(data,o){
+        $.smeite.repeatFollowSiteCallback = function(data,o){
          //  o.data("enable","enable");
             var $cmtDialog = $("#cmtDialog");
             if($cmtDialog[0]){

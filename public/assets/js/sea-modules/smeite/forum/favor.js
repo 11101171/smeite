@@ -54,7 +54,7 @@ define(function(require, exports) {
                          switch(data.code){
                              case("100"):
                                  //   $this.data("enable","true");
-                                 $.smeite.addFollowCallback(data,$this);
+                                 $.smeite.addFollowTopicCallback(data,$this);
                                  break;
                              case("104"):
                                  //    $this.data("enable","true");
@@ -64,7 +64,7 @@ define(function(require, exports) {
                              case("103"):
                                  //     $this.data("enable","true");
                                  $.smeite.tip.conf.tipClass = "tipmodal tipmodal-error2";
-                                 $.smeite.repeatFollowCallback(data,$this);
+                                 $.smeite.repeatFollowTopicCallback(data,$this);
                                  break;
                              case("111"):
                                  //    $this.data("enable","true");
@@ -104,7 +104,7 @@ define(function(require, exports) {
                              switch(data.code){
                                  case("100"):
                                      // $this.data("enable","true");
-                                     $.smeite.removeFollowCallback(data,$this);
+                                     $.smeite.removeFollowTopicCallback(data,$this);
                                      break;
                                  case("104"):
                                      //   $this.data("enable","true");
@@ -122,19 +122,19 @@ define(function(require, exports) {
              }
          })
 
-         $.smeite.addFollowCallback = function(data,o){
+         $.smeite.addFollowTopicCallback = function(data,o){
              o.after("<div class='followed-btn'>已关注<span class='mr5 ml5'>|</span><a rel='removeFollowTopic'data-title="+o.data("title")+"  data-id='"+o.data("id")+"' href='javascript:;'>取消</a></div>")
              o.remove();
 
 
          }
-         $.smeite.removeFollowCallback = function(data,o){
+         $.smeite.removeFollowTopicCallback = function(data,o){
              o.parent().after("<a rel='followTopic' href='javascript:;' class='follow-btn' data-title="+o.data("title")+"   data-id="+o.data("id")+">+关注</a>")
              o.parent().remove();
 
 
          }
-         $.smeite.repeatFollowCallback = function(data,o){
+         $.smeite.repeatFollowTopicCallback = function(data,o){
              //  o.data("enable","enable");
              var $cmtDialog = $("#cmtDialog");
              if($cmtDialog[0]){

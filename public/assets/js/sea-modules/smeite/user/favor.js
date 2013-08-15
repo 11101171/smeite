@@ -31,7 +31,7 @@ define(function(require, exports) {
 					switch(data.code){
 						case("100"):
 						//	$this.data("enable","true");
-							$.smeite.addFollowCallback(data,$this);
+							$.smeite.addFollowUserCallback(data,$this);
 						break;
 						case("104"):
 						//	$this.data("enable","true");
@@ -102,7 +102,7 @@ define(function(require, exports) {
 	})
 	
 	//取消关注
-	$.smeite.removeFollowCallback = function(){
+	$.smeite.removeFollowUserCallback = function(){
 		o.parents(".section").remove();
 	}
 	$(document).on("click","a[rel=removeFollow]",function(){
@@ -123,7 +123,7 @@ define(function(require, exports) {
 						switch(data.code){
 							case("100"):
 							//	$this.data("enable","true");
-								$.smeite.removeFollowCallback(data,$this);
+								$.smeite.removeFollowUserCallback(data,$this);
 							break;
 							case("104"):
 							//	$this.data("enable","true");
@@ -141,7 +141,7 @@ define(function(require, exports) {
 		}
 	})
 	//data-followtype: 0边栏信息 1粉丝 2关注 3你可以能喜欢的人 4去其他人的关注列表和粉丝列表 5通用用户关注  6
-	$.smeite.addFollowCallback = function(data,o){
+	$.smeite.addFollowUserCallback = function(data,o){
 		if(o.attr("data-followtype")=="0"){
 			if(data.isYouFollowed){
 				o.after("<div class='followed-btn-big'>互相关注<span class='mr5 ml5'>|</span><a rel='removefollow' data-followtype='0' data-usernick="+o.data("usernick")+" data-userid='"+o.data("userid")+"' href='javascript:;'>取消</a></div>")
@@ -171,7 +171,7 @@ define(function(require, exports) {
 			o.remove();
 		}
 	}
-	$.smeite.removeFollowCallback = function(data,o){
+	$.smeite.removeFollowUserCallback = function(data,o){
 		
 		if(o.attr("data-followtype")=="0"){
 			o.parent().after("<a rel='follow' href='javascript:;' class='follow-btn-big' data-followtype='0' data-usernick="+o.data("usernick")+" data-userid="+o.data("userid")+">加关注</a>")

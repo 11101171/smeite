@@ -32,7 +32,7 @@ define(function (require, exports) {
                     switch(data.code){
                         case("100"):
                             //   $this.data("enable","true");
-                            $.smeite.addFollowCallback(data,$this);
+                            $.smeite.addFollowGoodsCallback(data,$this);
                             break;
                         case("104"):
                             //    $this.data("enable","true");
@@ -42,7 +42,7 @@ define(function (require, exports) {
                         case("103"):
                             //     $this.data("enable","true");
                             $.smeite.tip.conf.tipClass = "tipmodal tipmodal-error2";
-                            $.smeite.repeatFollowCallback(data,$this);
+                            $.smeite.repeatFollowGoodsCallback(data,$this);
                             break;
                         case("111"):
                             //    $this.data("enable","true");
@@ -80,7 +80,7 @@ define(function (require, exports) {
                         success: function(data){
                             switch(data.code){
                                 case("100"):
-                                    $.smeite.removeFollowCallback(data,$this);
+                                    $.smeite.removeFollowGoodsCallback(data,$this);
                                     break;
                                 case("104"):
                                     $.smeite.tip.conf.tipClass = "tipmodal tipmodal-error2";
@@ -97,7 +97,7 @@ define(function (require, exports) {
             }
         })
 
-        $.smeite.addFollowCallback = function(data,o){
+        $.smeite.addFollowGoodsCallback = function(data,o){
 
             var $likeCount = o.next(".like-num").find(".J_FavorNum");
 
@@ -122,14 +122,14 @@ define(function (require, exports) {
             }, 3E3);
 
         }
-        $.smeite.removeFollowCallback = function(data,o){
+        $.smeite.removeFollowGoodsCallback = function(data,o){
             var $likeCount = o.next(".like-num").find(".J_FavorNum");
             var  loveNum = parseInt($likeCount.data("val")) - 1;
             $likeCount.text(loveNum);
             $likeCount.data("val", loveNum);
         }
 
-        $.smeite.repeatFollowCallback = function(data,o){
+        $.smeite.repeatFollowGoodsCallback = function(data,o){
             $("#cmtDialog")[0] && (clearTimeout(e), $("#cmtDialog").remove());
             var html='<div id="cmtDialog" class="c-dialog" style="width:150px;">' +
                 '<p class="title clearfix">' +

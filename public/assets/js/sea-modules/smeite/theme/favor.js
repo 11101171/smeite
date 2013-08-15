@@ -55,7 +55,7 @@ define(function(require, exports){
                     switch(data.code){
                         case("100"):
                             //   $this.data("enable","true");
-                            $.smeite.addFollowCallback(data,$this);
+                            $.smeite.addFollowThemeCallback(data,$this);
                             break;
                         case("104"):
                             //    $this.data("enable","true");
@@ -65,7 +65,7 @@ define(function(require, exports){
                         case("103"):
                             //     $this.data("enable","true");
                             $.smeite.tip.conf.tipClass = "tipmodal tipmodal-error2";
-                            $.smeite.repeatFollowCallback(data,$this);
+                            $.smeite.repeatFollowThemeCallback(data,$this);
                             break;
                         case("111"):
                             //    $this.data("enable","true");
@@ -105,7 +105,7 @@ define(function(require, exports){
                             switch(data.code){
                                 case("100"):
                                     // $this.data("enable","true");
-                                    $.smeite.removeFollowCallback(data,$this);
+                                    $.smeite.removeFollowThemeCallback(data,$this);
                                     break;
                                 case("104"):
                                     //   $this.data("enable","true");
@@ -123,7 +123,7 @@ define(function(require, exports){
             }
         })
 
-        $.smeite.addFollowCallback = function(data,o){
+        $.smeite.addFollowThemeCallback = function(data,o){
 
          var themeId = o.data("id");
          var cmtHref ='/theme/'+ themeId +'#J_cmtForm';
@@ -163,13 +163,13 @@ define(function(require, exports){
             o.removeClass("follow").addClass("followed").text("已关注");
 
         }
-        $.smeite.removeFollowCallback = function(data,o){
+        $.smeite.removeFollowThemeCallback = function(data,o){
             o.parent().after("<a rel='followTheme' href='javascript:;' class='follow-btn' data-title="+o.data("title")+"   data-id="+o.data("id")+">+关注</a>")
             o.parent().remove();
 
 
         }
-        $.smeite.repeatFollowCallback = function(data,o){
+        $.smeite.repeatFollowThemeCallback = function(data,o){
             //  o.data("enable","enable");
             var themeId = o.data("id");
             var cmtHref ='/theme/'+ themeId +'#J_cmtForm';
