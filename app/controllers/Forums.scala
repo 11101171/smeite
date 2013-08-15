@@ -158,18 +158,25 @@ object Forums extends Controller {
      } else Ok(views.html.forums.empty())
     
   }
-  def reply =  Users.UserAction { user => implicit request =>
-    replyForm.bindFromRequest.fold(
-      formWithErrors => Ok(Json.obj("code" -> "101", "message" -> "出差啦，请重试")),
-      fields =>{
 
-        TopicDao.addReply(TopicReply(None,user.get.id.get,user.get.name,fields._1,fields._3,fields._2,1,None))
-
-     //   Ok(Json.obj("code" -> "100", "message" ->"发布成功"))
-        Redirect(controllers.routes.Forums.view(fields._1))
-      }
-    )
+def addComment =Action(parse.json){  implicit request =>
+  val user:Option[User] =request.session.get("user").map(u=>UserDao.findById(u.toLong))
+  if(user.isEmpty)Ok(Json.obj("code" -> "200", "message" ->"亲，你还没有登录哦" ))
+  else if(user.get.status==4)Ok(Json.obj("code" -> "444", "message" -> "亲，你违反了社区规定，目前禁止评论"))
+  else {
+    val topicId = (request.body \ "topicId").asOpt[Long]
+    val  content =(request.body \ "content").asOpt[String]
+    val  quoteContent=(request.body \ "quoteContent").asOpt[String]
+    if(content.isEmpty || topicId.isEmpty ){
+      Ok(Json.obj("code" -> "101", "message" ->"亲，是不是没有输入内容？请重新提交试试"))
+    }else{
+      TopicDao.addReply(user.get.id.get,user.get.name,topicId.get,quoteContent,content.get,1)
+      Ok(Json.obj("code" -> "100", "message" ->"亲，评论成功"))
+    }
   }
+
+}
+
   def checkTopicLoveState = Action(parse.json){  implicit request =>
     val user:Option[User] =request.session.get("user").map(u=> UserDao.findById(u.toLong) )
     if(user.isEmpty)  Ok(Json.obj("code" -> "300","message" -> "亲，你还没有登录呢" ))

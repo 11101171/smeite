@@ -17,7 +17,7 @@ title = "发布主题_讨论吧_广场_食美特，爱美食爱生活"
             </div>
             }
             <ul>
-                <li><label>话题标题：</label><input id="J_ForumPostTitle" name="title" class="b-input" type="text" value='@form("title").value' placeholder="请输入话题标题"/></li>
+                <li><label>话题标题：</label><input id="J_postTitle" name="title" class="b-input" type="text" value='@form("title").value' placeholder="请输入话题标题"/></li>
                 <li><label>话题类型：</label>
                     <label class="no-float"><input type="radio" name="typeId" @(if(form("typeId").value.getOrElse("0") =="0") {"checked"}) value="0"/>普通</label>
                     <label class="no-float"><input type="radio" name="typeId" @(if(form("typeId").value.getOrElse("0") == "1") {"checked"}) value="1"/>问答</label>
@@ -26,12 +26,12 @@ title = "发布主题_讨论吧_广场_食美特，爱美食爱生活"
                 </li>
                 <li class="clearfix">
                     <label>话题内容：</label>
-                    <textarea id="J_ForumPostCon" name="content" class="b-textarea" placeholder="请输入话题内容">
+                    <textarea id="J_postContent" name="content" class="b-textarea" placeholder="请输入话题内容">
                         @form("content").value
                 </textarea>
                 </li>
                 <li class="oper clearfix">
-                    <input id="J_ForumPostEditBtn" type="submit" class="bbl-btn" value="发表"/>
+                    <input id="J_postEditBtn" type="submit" class="bbl-btn" value="发表"/>
                     <input type="button" class="bgr-btn" onclick="window.history.back(-1)"  value="取消并返回" />
 
                 </li>

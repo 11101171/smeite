@@ -1705,7 +1705,7 @@ CREATE TABLE `post` (
      uid                  用户的id
      pid                  帖子
      reply_type          0 随意吐槽 1 提问求解  2 上传成果
-     quote_reply          引用的内容
+     quote_content          引用的内容
      content             回复的内容
      check_state        审核状态
      add_time           添加时间
@@ -1893,3 +1893,4 @@ alter table manager add last_login_time timestamp default '2013-02-02 12:00:00';
 
 /*2013年8月5日*/
 alter table theme_discuss add quote_content text;
+alter table topic_reply  change quote_reply quote_content text;

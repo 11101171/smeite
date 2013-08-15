@@ -18,8 +18,8 @@ define(function(require, exports) {
         //评论与回复提交前校验
         submit : function($this){
             $this.attr('disabled',true);
-            var $postComment = $("#J_postComment");
-            var $textarea = $postComment.find("textarea");
+            var $postCommentForm = $("#J_postCommentForm");
+            var $textarea = $postCommentForm.find("textarea");
           //  $("#J_quoteContent").val($("#J_postQuote").html())
 
             var comment = {
@@ -43,7 +43,7 @@ define(function(require, exports) {
                     $this.attr('disabled',false);
 
                     $.ajax({
-                        url: $("#J_postComment").attr("action"),
+                        url: $("#J_postCommentForm").attr("action"),
                         type : "POST",
                         contentType:"application/json; charset=utf-8",
                         dataType: "json",
@@ -85,7 +85,7 @@ define(function(require, exports) {
         init : function(){
             //评论与回复
             var $postQuote = $("#J_postQuote");
-            var $postComment = $("#J_postComment");
+            var $postCommentForm = $("#J_postCommentForm");
 
             //点击回复
             $(document).on("click",".J_postReply",function(){
@@ -102,7 +102,7 @@ define(function(require, exports) {
                 quoteHtml += '</blockquote>';
 
                 $postQuote.html(quoteHtml);
-                $("html, body").scrollTop($postComment.offset().top -50);
+                $("html, body").scrollTop($postCommentForm.offset().top -50);
                 //删除引用回复
                 $postQuote.find(".close:first").unbind("click").click(function(){
                     $postQuote.html("");
@@ -114,12 +114,12 @@ define(function(require, exports) {
                 PostComment.submit($(this));
             });
 
-            $postComment.find("textarea").focus(function(){
+            $postCommentForm.find("textarea").focus(function(){
                 $.smeite.dialog.isLogin();
             });
 
             //回车键提交评论
-            $postComment.find("textarea").on("keyup",function(e){
+            $postCommentForm.find("textarea").on("keyup",function(e){
                 var $this = $(this);
                 $.smeite.util.submitByEnter(e, function(){
                     PostComment.submit($("#J_postCommentSubmit"));

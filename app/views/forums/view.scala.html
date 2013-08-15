@@ -40,7 +40,7 @@ description =  topic._2.intro
             <a rel="followTopic"  href="javascript:;" class="follow-btn"  data-title="@topic._2.title" data-id="@topic._2.id.get" title="@topic._2.title">+ 关注</a>
         </div>
         <div class="forum-con">
-            <ul class="forum-post " id="J_ForumPost">
+            <ul class="forum-post " id="J_forumPost">
                 <li class="first">
                     <a class="img" href="@controllers.users.routes.Users.home(topic._1.id.get)" target="_blank">
                         <img src="@topic._1.pic" width="80" height="80" alt="@topic._1.name"></a>
@@ -57,34 +57,34 @@ description =  topic._2.intro
                     <span class="post-floor">楼主</span>
 
                     <div class="oper clearfix">
-                        <div class="share-link">
+                        <div class="share-link" data-sharetxt="@topic._2.title" data-sharepic="" data-sharelink="@controllers.routes.Forums.view(topic._2.id.get)">
                             <label class="fl l20 gc">分享到：</label>
-                            <a class="s-sina" href="javascript:;" alt="分享到新浪微博"></a>
-                            <a class="s-qzone" href="javascript:;" alt="分享到QQ空间"></a>
-                            <a class="s-tencent" href="javascript:;" alt="分享到腾讯微博"></a>
-                            <a class="s-douban" href="javascript:;" alt="分享到豆瓣"></a>
-                         <a class="s-renren" href="javascript:;" alt="分享到人人网"></a>
-                         <a class="s-163" href="javascript:;" alt="分享到网易微博"></a>
+                            <a class="s-sina fl" href="javascript:;" data-type="s-sina" alt="分享到新浪微博"></a>
+                            <a class="s-qzone fl" href="javascript:;" data-type="s-qzone" alt="分享到QQ空间"></a>
+                            <a class="s-tencent fl" href="javascript:;" data-type="s-tencent" alt="分享到腾讯微博"></a>
+                            <a class="s-douban fl" href="javascript:;" data-type="s-douban" alt="分享到豆瓣"></a>
+                            <a class="s-renren fl" href="javascript:;"  data-type="s-renren" alt="分享到人人网"></a>
+
                         </div>
                     </div>
                 </li>
-                @for((uname,upic,replyId,replyUid,replyQuoteReply,replyContent,replyCheckState,replyAddTime) <- page.items){
+                @for((uname,upic,replyId,replyUid,replyQuoteContent,replyContent,replyCheckState,replyAddTime) <- page.items){
                 @if(replyCheckState==1 || (!user.isEmpty && user.get.id.get==replyUid)){
                 <li data-cmtid="@replyId">
                     <a class="img" href="@controllers.users.routes.Users.home(replyUid)" target="_blank" title="@uname"><img src="@upic" width="80" height="80"></a>
             		<span class="info"><a class="J_UserNick" href="@controllers.users.routes.Users.home(replyUid)" target="_blank" title="@uname">@uname</a>/ <span class="time">@replyAddTime </span> </span>
 
                     <div class="post">
-                        @if(!replyQuoteReply.isEmpty && replyQuoteReply.get.trim !=""){
+                        @if(!replyQuoteContent.isEmpty && replyQuoteContent.get.trim !=""){
                         <div class="post-reply">
-                              @Html(replyQuoteReply.get)
+                              @Html(replyQuoteContent.get)
                         </div>
                         }
                         <div class="J_PostCon wordbreak">@Html(replyContent)</div>
                     </div>
 
                     <p class="oper" data-cmtid="@replyId">
-                        <a class="J_PostCmtReply">回复</a>
+                        <a class="J_postReply">回复</a>
                     </p>
 
                 </li>
@@ -116,22 +116,19 @@ description =  topic._2.intro
                  }
             </div>
             </div>
+
             <div class="forum-editor clearfix">
-                <form class="form-cmt" id="J_PostCmtArea" action="/forum/reply" method="post">
+                <form class="form-cmt" id="J_postCommentForm" action="/forum/addComment" method="post">
                     <input type="hidden" name="topicId" id="J_topicId" value="@topic._2.id.get" >
-                    <input type="hidden" name="replyContent" id="J_replyContent" value="">
+                    <input type="hidden" name="quoteContent" id="J_quoteContent" value="">
                     <ul class="pos-r clearfix">
                         @if(!user.isEmpty){
                         <li class="g-daren">@user.get.name</li>
                        }
-                        <li id="J_PostCmtSegment" class="post-reply">
-                        </li>
-                        <li class="clearfix mb10"><textarea class="b-textarea" id="J_ForumPostCon" name="content" placeholder="说两句~~"></textarea>
-
-
-                        </li>
+                        <li id="J_postQuote" class="post-reply"></li>
+                        <li class="clearfix mb10"><textarea class="b-textarea" id="J_commentContent" name="content" placeholder="说两句~~"></textarea></li>
                         <li class="clearfix">
-                            <input type="submit" class="bbl-btn" id="J_CmtPublishBtn" value="发表">
+                            <input type="button" class="bbl-btn" id="J_postCommentSubmit" value="发表">
                         </li>
                     </ul>
                 </form>
@@ -175,42 +172,15 @@ description =  topic._2.intro
 <script type="text/javascript">
     seajs.use(['$','smeite/forum/forum','smeite/forum/favor','smeite/forum/topic','smeite/smeite.editor'],function($,forum,favor,topic,editor){
 
-        var snstitle = $("#J_PostArtical").text();
-        var snscontent = $("#J_Forumtitle").text();
-
         $.smeite.editor = $.smeite.Editor({
-            formId:"J_PostCmtArea",
+            formId:"J_postCommentForm",
+            textareaID:"J_commentContent",
             btnImg:{visible:false} ,
             btnBaobei:{visible:false}
         });
 
 
-        $(".share-link a").click(function(){
-            var title=snstitle+snscontent,
-                    link=encodeURIComponent(window.location.href),
-                    cls = $(this).attr("class");
-            title = encodeURIComponent(title);
-            switch (cls){
-                case "s-sina":
-                    window.open('http://service.t.sina.com.cn/share/share.php?appkey=1464940004&title='+title+'&pic=&url='+link);
-                    break;
-                case "s-tencent":
-                    window.open('http://v.t.qq.com/share/share.php?appkey=100344510&url='+link+'&title='+title+'&pic=&site='+link);
-                    break;
-                case "s-douban":
-                    window.open('http://www.douban.com/recommend/?url='+link+'&title='+title);
-                    break;
-                case "s-qzone":
-                    window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+link);
-                    break;
-                case "s-renren":
-                    window.open('http://share.renren.com/share/buttonshare.do?link='+link+'&title='+title);
-                    break;
-                case "s-163":
-                    window.open('http://t.163.com/article/user/checkLogin.do?link='+link+'&source=&info='+title+'&images=');
-            }
 
-        });
     })
 </script>
 }

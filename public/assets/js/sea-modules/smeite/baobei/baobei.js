@@ -188,5 +188,5 @@ define(function(require, exports){
     })
 
 
-
+    $(".btn-share").shareToThird()
 });

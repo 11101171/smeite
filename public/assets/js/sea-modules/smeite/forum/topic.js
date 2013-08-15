@@ -66,7 +66,7 @@ define(function(require, exports) {
       })
 
 
-		$("#J_ForumPost").show();
+		$("#J_forumPost").show();
 
 
 

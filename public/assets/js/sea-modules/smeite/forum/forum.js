@@ -1,35 +1,13 @@
 define(function(require, exports) {
 	var $  = require("$");
 
-/*
- * 讨论组交互js，含品牌、主题、场景
- */
-
-//(function($) {
 	//讨论组组件
 	$.smeite.forum = {
-		forumO : $("#J_Forum"),
-		//讨论组id
-		forumIdO : $("#J_ForumId"),
-		//讨论组话题
-		forumTopicIdO : $("#J_ForumTopicId"),
-		loverSubmitEnable : true,
-		//编辑帖子通过表单校验可提交
-		postEditEnable : false,
-		
-		//通用计数
-		count : function(limitNum, $wordCount){
-			var limitNum = 35;
-			var $countNum = $wordCount.find(".J_CountNum:first");
-			var $countTxt = $wordCount.find(".J_CountTxt:first");
-			$.smeite.wordCount.conf.errorClk = function(newLen){
-				$countNum.text('trimming...  ' + (limitNum - newLen));
-			}
-			$.smeite.wordCount.init($countTxt, $countNum, limitNum, 20);
-		},
+
 	//评论与回复提交前校验
-		postCommentSubmit : function($this){
+		commentSubmit : function($this){
 			$this.attr('disabled',true);
+
 			if($.smeite.editor){
 				if($.smeite.editor.html2text($.smeite.editor.iframeDocument.body.innerHTML)==""){
 					$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
@@ -43,11 +21,16 @@ define(function(require, exports) {
 					$this.attr('disabled',false);
 					return;
 				}
-				$("#J_ForumPostCon").val($.smeite.editor.iframeDocument.body.innerHTML);
+				$("#J_commentContent").val($.smeite.editor.iframeDocument.body.innerHTML);
 			}
-			var $postCmtArea = $("#J_PostCmtArea");
-			var $textarea = $postCmtArea.find("textarea");
-           $("#J_replyContent").val($("#J_PostCmtSegment").html())
+            var comment = {
+                "topicId":parseInt($("#J_topicId").val()),
+                "quoteContent": $("#J_postQuote").html(),
+                "content": $("#J_commentContent").val()
+            };
+			var $postCommentForm = $("#J_postCommentForm");
+			var $textarea = $postCommentForm.find("textarea");
+           $("#J_quoteContent").val($("#J_postQuote").html())
 			if($.smeite.dialog.isLogin()){
 				if($.trim($textarea.val()) == ""){
 					$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
@@ -59,15 +42,47 @@ define(function(require, exports) {
 					$this.attr('disabled',false);
 				}else{
 				$this.attr('disabled',false);
-				$postCmtArea.submit();
+
+                    $.ajax({
+                        url: $("#J_postCommentForm").attr("action"),
+                        type : "POST",
+                        contentType:"application/json; charset=utf-8",
+                        dataType: "json",
+                        data: JSON.stringify(comment),
+                        beforeSend: function(){
+                            $this.disableBtn("bbl-btn");
+                        },
+                        success: function(data){
+                            if(data.code=="100"){
+                                $this.enableBtn("bbl-btn");
+
+                                var html ='<li>';
+                                html +='<a class="img" href="/user/'+SMEITER.userId+'" target="_blank"><img src="'+SMEITER.userPhoto+'" width="80" height="80"></a>';
+                                html +='<span class="info"><a class="J_UserNick" href="/user/'+SMEITER.userId+'" target="_blank">'+SMEITER.nick +'</a>/ <span class="time">刚刚</span> </span>';
+                                html +=' <div class="post">';
+                                if($.trim(comment.quoteContent)!=''){
+                                    html +='<div class="post-reply">'+comment.quoteContent+'</div>';
+                                }
+
+                                html +=' <div class="J_PostCon wordbreak">'+comment.content+'</div>';
+                                html +='</div>';
+                                html +='<p class="oper"><a class="J_postReply">回复</a></p>';
+                                html +='</li>';
+
+                                $("#J_forumPost").append(html);
+
+                            }
+                        }
+                    });
+                    return false
 
 				}
 			}
 		},
 
 		//帖子创建与编辑
-		postEditSubmit : function($this){
-			var title = $.trim($("#J_ForumPostTitle").val());
+		editSubmit : function($this){
+			var title = $.trim($("#J_postTitle").val());
 			if($.smeite.editor){
 				if($.trim($.smeite.editor.html2text($.smeite.editor.iframeDocument.body.innerHTML))==""){
 					$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
@@ -82,9 +97,9 @@ define(function(require, exports) {
 					return;
 				}
 
-				$("#J_ForumPostCon").val($.smeite.editor.iframeDocument.body.innerHTML);
+				$("#J_commentContent").val($.smeite.editor.iframeDocument.body.innerHTML);
 			}
-			var content = $("#J_ForumPostCon").val();
+			var content = $("#J_commentContent").val();
 			if(title == "" || $.trim(content) == ""){
 				$.smeite.tip.conf.tipClass = "tipmodal tipmodal-error";
 				$.smeite.tip.show($this,"标题和内容不能为空哦！");
@@ -98,23 +113,12 @@ define(function(require, exports) {
 			}
 		},
 
-
-
 		//通用讨论组初始化
 		init : function(){
 			//评论与回复
-			var $postCmtSegment = $("#J_PostCmtSegment");
-			var $postCmtArea = $("#J_PostCmtArea");
-			//评论
-			$("#J_PostCmt").click(function(){
-				$("html, body").scrollTop($postCmtArea.offset().top - 50);
-				if($.smeite.editor){
-					$.smeite.editor.iframe.contentWindow.focus();
-				}else{
-					$postCmtArea.find("textarea").focus();
-				}
-			});
-			
+			var $postCmtSegment = $("#J_postQuote");
+			var $postCommentForm = $("#J_postCommentForm");
+
 			//评论格式化
 			if($(".J_PostCon")[0]){
 				$(".J_PostCon").each(function(){
@@ -123,7 +127,7 @@ define(function(require, exports) {
 			}
 			
 			//回复
-			$(".J_PostCmtReply").click(function(){
+            $(document).on("click",".J_postReply",function(){
 
                 var $li = $(this).closest("li");
                 var userNick = $li.find(".J_UserNick:first").html();
@@ -137,7 +141,7 @@ define(function(require, exports) {
                 //console.log(segmentHtml);
                 $postCmtSegment.html(segmentHtml);
 
-                $("html, body").scrollTop($postCmtArea.offset().top -50);
+                $("html, body").scrollTop($postCommentForm.offset().top -50);
 
                 //删除回应
                 $postCmtSegment.find(".close:first").unbind("click").click(function(){
@@ -145,48 +149,43 @@ define(function(require, exports) {
                 });
 			});
 			
-			$("#J_CmtPublishBtn").click(function(event){
+			$("#J_postCommentSubmit").click(function(event){
 				event.preventDefault();
-				$.smeite.forum.postCommentSubmit($(this));
+				$.smeite.forum.commentSubmit($(this));
 			});
 			
-			$postCmtArea.find("textarea").focus(function(){
+			$postCommentForm.find("textarea").focus(function(){
 				$.smeite.dialog.isLogin();
 			});
 			
 			//回车键提交评论
-			$postCmtArea.find("textarea").on("keyup",function(e){
+			$postCommentForm.find("textarea").on("keyup",function(e){
 				var $this = $(this);
 				$.smeite.util.submitByEnter(e, function(){
-					$.smeite.forum.postCommentSubmit($("#J_CmtPublishBtn"));
+					$.smeite.forum.commentSubmit($("#J_postCommentSubmit"));
 				});
 			});
 
 
 			//话题创建与编辑
-			if($("#J_ForumPostEditBtn")[0]){
-				$("#J_ForumPostTitle").focus(function(){
+			if($("#J_postEditBtn")[0]){
+				$("#J_postTitle").focus(function(){
 					$.smeite.dialog.isLogin();
 				});
-				$("#J_ForumPostCon").focus(function(){
+				$("#J_commentContent").focus(function(){
 					$.smeite.dialog.isLogin();
 				});
-				$("#J_ForumPostEditBtn").click(function(event){
+				$("#J_postEditBtn").click(function(event){
 					event.preventDefault();
 					if($.smeite.dialog.isLogin()){
-						$.smeite.forum.postEditSubmit($(this));
+						$.smeite.forum.editSubmit($(this));
 					}
 				});
 			}
 			
 
 
-			
-			//评论精确定位
-		/*	if($("#J_ForumCmtId")[0] && $("#J_ForumCmtId").val() != ""){
-				var $cmtLi = $("#J_ForumPost").find("li[data-cmtid=" + $("#J_ForumCmtId").val() + "]");
 
-			}*/
 			
 
 			
@@ -201,8 +200,8 @@ define(function(require, exports) {
 	$.smeite.forum.init();
 
 
-	
 
+    $(".btn-share").shareToThird()
 
 
 

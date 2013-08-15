@@ -206,14 +206,14 @@
 		})
 		return html;
 	}
-	$("#J_ForumPost .J_PostCon").each(function(){
+	$("#J_forumPost .J_PostCon").each(function(){
 		var $this = $(this);
 		var html = $this.html();
 		$this.data("content",html)
 		html = decodeFace(html);
 		$this.html(html);
 	})
-	$("#J_ForumPost .post-quoteContent").each(function(){
+	$("#J_forumPost .post-quoteContent").each(function(){
 		var $this = $(this);
 		var html = $this.html();
 		html = decodeFace(html);

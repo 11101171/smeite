@@ -42,7 +42,7 @@ GET    /forum/edit                controllers.Forums.edit(id:Long ?=0L)
 GET    /forum/view/:id               controllers.Forums.view(id:Long,p:Int ?=1)
 POST   /forum/save                   controllers.Forums.save
 GET    /forum                        controllers.Forums.forum(p:Int ?=1)
-POST   /forum/reply                  controllers.Forums.reply
+POST   /forum/addComment                  controllers.Forums.addComment
 POST    /forum/addFollow             controllers.Forums.addFollow
 POST    /forum/removeFollow          controllers.Forums.removeFollow
 POST    /forum/checkTopicLoveState   controllers.Forums.checkTopicLoveState

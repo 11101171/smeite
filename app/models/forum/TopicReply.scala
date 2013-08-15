@@ -23,7 +23,7 @@ case class TopicReply (
                         uid: Long,
                         uname: String,
                         topicId: Long,
-                        quoteReply: Option[String],
+                        quoteContent: Option[String],
                         content: String,
                         checkState:Int,
                         addTime:Option[Timestamp]
@@ -33,18 +33,16 @@ object TopicReplies extends Table[TopicReply]("topic_reply") {
   def uid = column[Long]("uid")
   def uname = column[String]("uname")
   def topicId = column[Long]("topic_id")
-  def quoteReply = column[String]("quote_reply")
+  def quoteContent = column[String]("quote_content")
   def content = column[String]("content")
   def checkState = column[Int]("check_state")
   def addTime=column[Timestamp]("add_time")
-  def * = id.? ~ uid ~ uname ~ topicId ~ quoteReply.? ~ content ~ checkState ~ addTime.? <>(TopicReply, TopicReply.unapply _)
-  def autoInc = id.? ~ uid ~ uname ~ topicId ~ quoteReply.? ~ content ~ checkState ~ addTime.? <>(TopicReply, TopicReply.unapply _) returning id
+  def * = id.? ~ uid ~ uname ~ topicId ~ quoteContent.? ~ content ~ checkState ~ addTime.? <>(TopicReply, TopicReply.unapply _)
+  def autoInc = id.? ~ uid ~ uname ~ topicId ~ quoteContent.? ~ content ~ checkState ~ addTime.? <>(TopicReply, TopicReply.unapply _) returning id
 
-  def autoInc2 = uid ~ uname ~ topicId ~ quoteReply.? ~ content ~ checkState returning id
+  def autoInc2 = uid ~ uname ~ topicId ~ quoteContent.? ~ content ~ checkState returning id
 
-  def insert(uid:Long, uname:String, topicId:Long, quoteReply:Option[String], content:String,checkState:Int)(implicit  session:Session)={
-    TopicReplies.autoInc2.insert(uid,uname,topicId,quoteReply,content,checkState)
-  }
+
 }
 
 

@@ -152,9 +152,9 @@ object TopicDao {
     TopicReplies.autoInc.insert(reply)
 
   }
-  def addReply(uid:Long,uname:String,topicId:Long,quoteReply:Option[String],content:String,checkState:Int) =database.withSession {  implicit session:Session =>
+  def addReply(uid:Long,uname:String,topicId:Long,quoteContent:Option[String],content:String,checkState:Int) =database.withSession {  implicit session:Session =>
     TopicSQLDao.updateReplyNum(topicId)
-    TopicReplies.insert(uid,uname,topicId,quoteReply,content,checkState)
+    TopicReplies.autoInc2.insert(uid,uname,topicId,quoteContent,content,checkState)
 
   }
 
@@ -198,7 +198,7 @@ object TopicDao {
       u<-Users
      if c.uid === u.id
      if c.topicId===topicId
-     } yield(u.name,u.pic,c.id,c.uid,c.quoteReply.?,c.content,c.checkState,c.addTime)
+     } yield(u.name,u.pic,c.id,c.uid,c.quoteContent.?,c.content,c.checkState,c.addTime)
     val replies:List[(String,String,Long,Long,Option[String],String,Int,Timestamp)]=  q.sortBy(_._8 desc).drop(startRow).take(pageSize).list()
     Page[(String,String,Long,Long,Option[String],String,Int,Timestamp)](replies,currentPage,totalPages);
 

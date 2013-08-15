@@ -168,12 +168,11 @@ object Themes extends Controller {
            val themeId = (request.body \ "themeId").asOpt[Long]
            val  content =(request.body \ "content").asOpt[String]
            val  quoteContent=(request.body \ "quoteContent").asOpt[String]
-           println( themeId + " " + content)
            if(content.isEmpty || themeId.isEmpty ){
            Ok(Json.obj("code" -> "101", "message" ->"亲，是不是没有输入内容？请重新提交试试"))
            }else{
              ThemeDao.addDiscuss(themeId.get,user.get.id.get,user.get.name,quoteContent,content.getOrElse("none"),1)
-             Ok(Json.obj("code" -> "100","status"->UserStatus(user.get.status).toString,"content"->content.get, "message" ->"亲，评论成功"))
+             Ok(Json.obj("code" -> "100", "message" ->"亲，评论成功"))
            }
          }
 
