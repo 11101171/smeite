@@ -307,7 +307,6 @@ object Sites extends Controller {
       else{
      val viewNum=  Cache.getOrElse[Int]("pid_"+pid.get){  1 }
         Cache.set("pid_"+pid.get,viewNum+1)
-        println("viewNum"+viewNum +" : " + Cache.get("pid_"+pid.get) )
         if(viewNum>100){
           Cache.remove("pid_"+pid.get)
           SiteSQLDao.updatePostViewNum(pid.get,viewNum)
