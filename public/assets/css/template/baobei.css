@@ -71,11 +71,11 @@
 .side .arrow-left{
     position: absolute;
     top: 120px;
-    left: -12px;
+    left: -10px;
     width: 12px;
     height: 17px;
     overflow: hidden;
-    background: url(images/ico_common.png) no-repeat -152px -5144px;
+    background: url(images/left-arrow.png) no-repeat 0 0;
 }
 
  /* user info */

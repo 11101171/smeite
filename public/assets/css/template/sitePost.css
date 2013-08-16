@@ -368,7 +368,7 @@ a:hover.btn-postlike {
     height: 25px;
     width: 18px;
     overflow: hidden;
-    background: url(images/ico_common.png) no-repeat 0 -3583px;
+    background: url(images/dotted-arrow.png) no-repeat 0 0;
 }
 .comment .comment-box {
     border: 1px solid #efefef;
@@ -407,11 +407,10 @@ a:hover.btn-postlike {
     position: absolute;
     height: 14px;
     overflow: hidden;
-    background: url(images/ico_common.png) no-repeat -272px -3632px;
+    background: url(images/left-arrow.png) no-repeat 0 0;
     width: 10px;
     left: 51px;
     top: 13px;
-    background-position: -289px -3632px;
 }
 .comment-list .share-user {
     border: 1px solid #e5e5e5;
