@@ -12,11 +12,9 @@
  *
  */
 define(function(require, exports) {
-    var $ = jQuery = require("$");
+    var $ = require("$");
 
-    $("#J_help").find("dt").toggle(function(){
-        $(this).next("dd").show()
-    },function(){
-        $(this).next("dd").hide()
+    $("#J_help").find("dt").click(function(){
+        $(this).next("dd").toggle()
     })
 })
