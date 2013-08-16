@@ -276,3 +276,10 @@
  insert into system_msg(id,title,content)value(9,"未定9","未定9todo");
 
 
+ /* 20130816  友情链接*/
+ insert into advert_position(position,name,code,advert_type)values("friends","合作伙伴","friends-partners",1)   ;
+ insert into advert_position(position,name,code,advert_type)values("friends","友情链接","friends-links",1) ;
+ insert into advert(position_code,name)value("friends-partners","合作伙伴") ;
+ insert into advert(position_code,name)value("friends-links","友情链接") ;
+
+

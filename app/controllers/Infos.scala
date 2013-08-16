@@ -4,6 +4,7 @@ import play.api.mvc.{Action, Controller}
 import controllers.users.Users
 import play.api.libs.json.Json
 import models.tag.dao.TagDao
+import models.advert.dao.AdvertDao
 
 /**
  * Created by zuosanshao.
@@ -46,9 +47,10 @@ object Infos extends Controller {
       Ok(views.html.infos.help.siteMap(user,tags))
   }
   /* 友情链接*/
-  def friends = Users.UserAction {
-    user => implicit request =>
-      Ok(views.html.infos.help.friends(user))
+  def friends = Users.UserAction { user => implicit request =>
+    val partners = AdvertDao.findAdvert("friends-partners")
+    val links =AdvertDao.findAdvert("friends-links")
+      Ok(views.html.infos.help.friends(user,partners,links))
   }
 
  /* 商品信息 纠错提醒 todo */

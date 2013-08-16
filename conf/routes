@@ -216,6 +216,7 @@ POST  /site/uploadPic                     controllers.Upload.uploadSitePic
 POST  /uploadUEditorPic                   controllers.Upload.uploadUEditorPic
 POST  /getVideo                           controllers.Upload.getVideo
 
+
 #管理后台 管理员管理
 GET   /admin/login                controllers.admin.Managers.login
 POST  /admin/emailLogin          controllers.admin.Managers.emailLogin

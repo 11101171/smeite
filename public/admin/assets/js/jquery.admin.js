@@ -12,9 +12,7 @@
 /* menu slide  */
 $(function(){
 
-    $('.submenu > a').click(function(e){
-
-        e.preventDefault();
+    $('.submenu > a').click(function(){
         var submenu = $(this).siblings('ul');
         var li = $(this).parents('li');
         var submenus = $('#sidebar li.submenu ul');

@@ -43,7 +43,7 @@ object Global extends GlobalSettings {
      }
 
   }
-//  When an exception occurs in your application, the onError operation will be called
+/*//  When an exception occurs in your application, the onError operation will be called
  override def onError(request: RequestHeader, ex: Throwable) = {
     InternalServerError(
       views.html.common.global.error()
@@ -63,7 +63,7 @@ object Global extends GlobalSettings {
     //  views.html.common.global.badRequest()
       views.html.common.global.error()
     )
-  }
+  }*/
 
 
 }

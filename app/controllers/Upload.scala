@@ -141,7 +141,7 @@ object Upload extends Controller{
     )
   }
 
-  /*上传图片，用户截取图片  todo adjust path    */
+  /*上传图片，用户截取图片    */
   def uploadSitePic=Action(parse.multipartFormData) { request =>
     request.body.file("fileData").map { picture =>
 
@@ -185,4 +185,8 @@ def  getVideo = Users.UserAction {   user => implicit request =>
 
     Ok(Json.obj("code"->"100","src"->"sss"))
   }
+
+
+
+
 }
