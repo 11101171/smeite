@@ -4,7 +4,7 @@ import play.api.mvc.{Action, Controller}
 import controllers.users.Users
 import play.api.data.Form
 import play.api.data.Forms._
-import models.site.dao.SiteDao
+import models.site.dao.{SiteSQLDao, SiteDao}
 import play.api.cache.Cache
 import models.user.dao.UserDao
 
@@ -131,7 +131,6 @@ object Sites extends Controller {
         SiteDao.deleteSiteMember(siteId.get,user.get.id.get)
         Ok(Json.obj("code" -> "100", "message" ->"成功"))
       }
-
 
     }
   }
@@ -290,7 +289,7 @@ object Sites extends Controller {
     val user:Option[User] =request.session.get("user").map(u=> UserDao.findById(u.toLong) )
     if(user.isEmpty)  Ok(Json.obj("code" -> "300","message" -> "亲，你还没有登录呢" ))
     else{
-      val siteId=(request.body \ "siteId").asOpt[Long];
+      val siteId=(request.body \ "siteId").asOpt[Long]
       if (siteId.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
       else{
         val siteMember=SiteDao.checkSiteMember(siteId.get,user.get.id.get)
@@ -299,6 +298,23 @@ object Sites extends Controller {
       }
 
     }
+  }
+
+  /* ajax 浏览次数*/
+  def addViewNum = Action(parse.json){  implicit request =>
+      val pid = (request.body \ "pid").asOpt[Long]
+      if(pid.isEmpty)Ok(Json.obj("code"->"104","message"->"param id is empty"))
+      else{
+     val viewNum=  Cache.getOrElse[Int]("pid_"+pid.get){  1 }
+        Cache.set("pid_"+pid.get,viewNum+1)
+        println("viewNum"+viewNum +" : " + Cache.get("pid_"+pid.get) )
+        if(viewNum>100){
+          Cache.remove("pid_"+pid.get)
+          SiteSQLDao.updatePostViewNum(pid.get,viewNum)
+        }
+        Ok(Json.obj("code" -> "101","message" -> "未关注" ))
+      }
+
   }
 
 }

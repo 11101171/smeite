@@ -154,6 +154,17 @@ define(function(require, exports) {
        })
 
        PostComment.init();
+       var pid =parseInt($("#J_pid").val())
+       $.ajax({
+           url: "/post/addViewNum",
+           type : "POST",
+           contentType:"application/json; charset=utf-8",
+           dataType: "json",
+           data: JSON.stringify({"pid": pid }),
+           success: function(data){
+
+           }
+       });
    })
 
 

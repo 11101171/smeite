@@ -168,6 +168,7 @@ GET     /post/getComments                    controllers.Sites.getComments(pid:L
 POST   /post/addFollow                  controllers.Sites.addPostFollow
 POST   /post/removeFollow                controllers.Sites.removePostFollow
 POST   /post/checkSiteLoveState          controllers.Sites.checkPostLoveState
+POST   /post/addViewNum                  controllers.Sites.addViewNum
 
 
 #info 信息页面 新年 公告，帮助中心
