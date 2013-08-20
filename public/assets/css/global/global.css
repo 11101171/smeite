@@ -2734,7 +2734,7 @@ a:hover i.ico-likes {
 .share-dropdown li a:hover { color:#55aadd;text-decoration:none; }
 /*登录 注册 end*/
 /*分享宝贝*/
-#nav .shareIt { margin:8px 0 0 0;position:relative; }
+#nav .shareIt { margin:8px 0 0 0;position:relative;width:98px; }
 /*
 #nav a.btn-sg { display:block;height:24px;overflow:hidden;background:#fff;line-height:24px; text-align:center;position:relative;padding:0 26px 0 0;border:none;color:#333;text-decoration:none; width:61px}
 */
