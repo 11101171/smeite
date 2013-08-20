@@ -311,7 +311,6 @@ GET  /admin/goods/deleteShop          controllers.admin.Goods.deleteShop(id:Long
 GET  /admin/goods/filterGoodses       controllers.admin.Goods.filterGoodses
 POST /admin/goods/batchGoodses       controllers.admin.Goods.batchGoodses
 POST /admin/goods/batchAssesses       controllers.admin.Goods.batchAssesses
-POST /admin/goods/collectGoodses      controllers.admin.Goods.collectGoodses
 
 #管理后台 用户管理
 GET  /admin/users/list            controllers.admin.Users.list(p:Int ?=1)

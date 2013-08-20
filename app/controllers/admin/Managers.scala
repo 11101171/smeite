@@ -5,7 +5,7 @@ import play.api.cache.Cache
 import play.api.Play.current
 import play.api.data.Forms._
 import play.api.data.Form
-import models.admin.{Manager}
+import models.admin.Manager
 import models.admin.dao.{ManagerSQLDao, ManagerDao}
 import java.sql.Timestamp
 import models.theme.dao.ThemeDao
@@ -19,8 +19,9 @@ import utils.Utils
 import models.site.dao.SiteDao
 import models.msg.dao.AtMsgDao
 import play.api.Play
-import com.taobao.api.DefaultTaobaoClient
+import com.taobao.api.{ApiException, DefaultTaobaoClient}
 import com.taobao.api.request.ItemGetRequest
+import com.taobao.api.domain.Item
 
 /**
  * Created by zuosanshao.
@@ -192,17 +193,30 @@ object Managers extends Controller {
   }
   /*更新商品管理*/
   def updateGoods = AdminAction{    manager => implicit request =>
+    val page = GoodsDao.findAll(1,200)
+    val list:List[String] =Nil
+   for(goods<-page.items){
+     val item = getProductInfo(goods.numIid)
+      list.+:(item)
+   }
 
-
-    Ok(Json.obj("code" -> "100", "message" ->"亲，评论成功"))
+  //  Ok(Json.obj("code" -> "100", "message" ->"亲，评论成功"))
+    Ok(list.toString)
   }
   /* 获取商品信息*/
   def getProductInfo(numIid:Long)={
     val client=new DefaultTaobaoClient(url, appkey, secret)
     val  req=new ItemGetRequest()
-    req.setFields("num_iid,list_time,dellist_time")
+    req.setFields("num_iid,list_time,dellist_time,approve_status")
     req.setNumIid(numIid)
-    client.execute(req ).getItem
+    try{
+      val item=client.execute(req).getItem
+         "numIid:"+item.getNumIid +"list_time:"+item.getListTime+"dellist_time:"+item.getDelistTime+"approve_status"+item.getApproveStatus
+    } catch{
+      case ex:ApiException =>  "numIid:"+ 0 +"list_time:"+ 0 +"dellist_time:"+ 0 +"approve_status"+0
+
+    }
+
   }
 
   /*推送消息、信息管理*/
