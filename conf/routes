@@ -224,9 +224,9 @@ GET   /admin/logout              controllers.admin.Managers.logout
 GET   /admin/myAccount            controllers.admin.Managers.myAccount
 GET   /admin/modify               controllers.admin.Managers.modify
 GET   /admin/index                controllers.admin.Managers.index
+
 GET   /admin/manager/cache        controllers.admin.Managers.cache
-GET   /admin/manager/pullGoods         controllers.admin.Managers.pullGoods
-GET   /admin/manager/getNumIids        controllers.admin.Managers.getNumIids(p:Int)
+GET   /admin/manager/updateGoods         controllers.admin.Managers.updateGoods
 GET   /admin/manager/pushMsg           controllers.admin.Managers.pushMsg
 GET   /admin/manager/check           controllers.admin.Managers.check
 GET   /admin/manager/updateUserStats   controllers.admin.Managers.updateUserStats

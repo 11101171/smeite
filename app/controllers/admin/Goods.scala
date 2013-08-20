@@ -22,16 +22,7 @@ case class GoodsBatchFormData(action:Int,ids:Seq[Long],url:Option[String])
 case  class GoodsFilterFormData(goodsId:Option[Long],status:Option[Int],isMember:Option[Boolean],idOrder:Option[String],collectTimeOrder:Option[String],loveNumOrder:Option[String],currentPage:Option[Int])
 case  class GoodsCollectFormData(title:String,numIid:Long,price:String,volume:Int,promotionPrice:Option[String])
 case  class AssessFilterFormData(checkState:Option[Int],currentPage:Option[Int])
-case class TaobaokeItem(
- title:String,
- picUrl:String,
- numIid:Long,
- volume:Int,
- price:String,
- promotionPrice:String,
- commissionRate:String,
-clickUrl:String
-                         )
+
 
 object Goods extends Controller {
 
@@ -83,32 +74,8 @@ object Goods extends Controller {
     )(GoodsCollectFormData.apply)(GoodsCollectFormData.unapply)
   )
 
-  /*json */
-  implicit  object TaobaokeItemFormat extends Format[TaobaokeItem]{
-    def writes(o:TaobaokeItem): JsValue = JsObject(
-      List(
-        "title" -> JsString(o.title),
-        "picUrl" -> JsString(o.picUrl),
-        "numIid"->JsNumber(o.numIid),
-        "volume" -> JsNumber(o.volume),
-        "price" -> JsString(o.price),
-        "promotionPrice" ->JsString(o.promotionPrice),
-        "commissionRate" -> JsString(o.commissionRate),
-        "clickUrl" -> JsString(o.clickUrl)
-      )
-    )
-    def reads(json: JsValue): JsResult[TaobaokeItem] = JsSuccess(TaobaokeItem(
-      (json \ "title").as[String],
-      (json \ "pic_url").as[String],
-      (json \ "num_iid").as[Long],
-      (json \ "volume").as[Int],
-      (json \ "price").as[String],
-      (json \ "promotion_price").as[String],
-      (json \ "commission_rate").as[String],
-      (json \ "click_url").as[String]
-    )
-    )
-  }
+
+
 
   /*宝贝管理*/
   def list(p:Int) = Managers.AdminAction{ manager => implicit request =>
@@ -252,23 +219,6 @@ object Goods extends Controller {
       }
     )
   }
-
-  /* ajax update collection 淘宝客 */
-
-  def collectGoodses = Action(parse.json) {  implicit request =>
-  val items =Json.fromJson[Array[TaobaokeItem]](request.body).get
-  for(item <- items){
-   // println(item.commissionRate.toFloat.toInt)
-    val image:BufferedImage = ImageIO.read(new URL(item.picUrl))
-    val height = image.getHeight
-    val width = image.getWidth
-    val hwRate:Float = height.toFloat/width
- //   println("height: "+height + ",width "+ width+" : " + hwRate)
-    GoodsDao.updateTaobaoke(item.numIid,item.title,item.picUrl,item.volume,item.price,item.promotionPrice,item.commissionRate.toFloat.toInt,hwRate,item.clickUrl)
-  }
-     Ok(Json.obj("code"->"100","msg"->items.length))
-  }
-
 
 
 

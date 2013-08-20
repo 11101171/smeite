@@ -39,13 +39,10 @@ case class EditorGoods(
                            name:String,
                            intro:String,
                            price:String,
-                           promotionPrice:String,
                            pic:String,
                            loveNum:Int,
                            volume:Int,
-                           location:String,
-                           jifenbao:String,
-                           jifenbaoValue:String
+                           location:String
                            )
 
 object Forums extends Controller {
@@ -80,13 +77,10 @@ object Forums extends Controller {
       (__ \ "name").format[String] and
       (__ \ "intro").format[String] and
       (__ \ "price").format[String] and
-      (__ \ "promotionPrice").format[String] and
       (__ \ "pic").format[String] and
       (__ \ "loveNum").format[Int] and
       (__ \ "volume").format[Int] and
-      (__ \ "location").format[String] and
-      (__ \ "jifenbao").format[String] and
-      (__ \ "jifenbaoValue").format[String]
+      (__ \ "location").format[String]
     )(EditorGoods.apply,unlift(EditorGoods.unapply))
 
   /*讨论吧 */
@@ -236,10 +230,9 @@ def addComment =Action(parse.json){  implicit request =>
     if(goods.isEmpty){
       Ok(Json.obj("code"->104,"msg" -> "宝贝不存在" ))
     }else {
-      val jifenbao=(goods.get.promotionPrice.getOrElse("0").toDouble*goods.get.commissionRate.getOrElse(0)*70*0.0001).toInt
-      val jifenbaoValue = jifenbao/100.0
 
-      val baobei = EditorGoods(goods.get.id.get,goods.get.numIid,goods.get.name,goods.get.intro,goods.get.price,goods.get.promotionPrice.getOrElse(goods.get.price),goods.get.pic,goods.get.loveNum,goods.get.volume,goods.get.location,jifenbao.toString,jifenbaoValue.toString)
+
+      val baobei = EditorGoods(goods.get.id.get,goods.get.numIid,goods.get.name,goods.get.intro,goods.get.price,goods.get.pic,goods.get.loveNum,goods.get.volume,goods.get.location)
       Ok(Json.obj("code"->100,"baobei"->Json.toJson(baobei),"msg"->"success" ))
     }
 

@@ -127,7 +127,7 @@ object API extends Controller {
            if(idStr.isEmpty)Ok(Json.obj("code"->"104","message"->"不能获取商品的ID"))
              // 下面可能需要判断id.get.toLong 是否为long 的问题
            else {
-             val numIid=idStr.get.toLong;
+             val numIid=idStr.get.toLong
              val goods =GoodsDao.find(numIid)
 
              if(!goods.isEmpty){
@@ -135,8 +135,8 @@ object API extends Controller {
                Ok(Json.obj("code"->"105","product"->Json.toJson(product) ,"message"->"该商品已存在"))
              }
              else{
-               val client=new DefaultTaobaoClient(url, appkey, secret);
-               val  req=new ItemGetRequest();
+               val client=new DefaultTaobaoClient(url, appkey, secret)
+               val  req=new ItemGetRequest()
                req.setFields("num_iid,nick,title,price,pic_url,detail_url,item_img.url,location")
                req.setNumIid(numIid);
                val respItem = client.execute(req ).getItem

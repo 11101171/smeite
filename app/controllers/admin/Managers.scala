@@ -18,6 +18,9 @@ import models.Page
 import utils.Utils
 import models.site.dao.SiteDao
 import models.msg.dao.AtMsgDao
+import play.api.Play
+import com.taobao.api.DefaultTaobaoClient
+import com.taobao.api.request.ItemGetRequest
 
 /**
  * Created by zuosanshao.
@@ -28,6 +31,12 @@ import models.msg.dao.AtMsgDao
  */
 
 object Managers extends Controller {
+
+  private def url:String = Play.maybeApplication.flatMap(_.configuration.getString("application.taobao_url")).getOrElse("http://gw.api.taobao.com/router/rest")
+  private def appkey = Play.maybeApplication.flatMap(_.configuration.getString("application.taobao_appkey")).getOrElse("21136607")
+  private def secret = Play.maybeApplication.flatMap(_.configuration.getString("application.taobao_secret")).getOrElse("b43392b7a08581a8916d2f9fa67003db")
+
+
   val loginForm = Form(
     tuple(
       "email" -> email,
@@ -182,16 +191,18 @@ object Managers extends Controller {
       Ok(views.html.admin.managers.cache(manager))
   }
   /*更新商品管理*/
-  def pullGoods = AdminAction{    manager => implicit request =>
-    val timestamp= String.valueOf(System.currentTimeMillis)
-    val sign=TaobaoConfig.getSign(timestamp)
-     Ok(views.html.admin.managers.pullGoods(manager)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
-  }
-   /* 每个页面显示40个 然后 淘宝客  在然后 更新商品管理 */
-  def getNumIids(p:Int) =AdminAction{    manager => implicit request =>
-    val page:Page[Long] = GoodsDao.getNumiids(p,40)
-      Ok(Json.obj("code"->"100","totalPages"->page.totalPages,"nums"->page.items.mkString(",")))
+  def updateGoods = AdminAction{    manager => implicit request =>
 
+
+    Ok(Json.obj("code" -> "100", "message" ->"亲，评论成功"))
+  }
+  /* 获取商品信息*/
+  def getProductInfo(numIid:Long)={
+    val client=new DefaultTaobaoClient(url, appkey, secret)
+    val  req=new ItemGetRequest()
+    req.setFields("num_iid,list_time,dellist_time")
+    req.setNumIid(numIid)
+    client.execute(req ).getItem
   }
 
   /*推送消息、信息管理*/
