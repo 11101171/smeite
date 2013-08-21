@@ -58,7 +58,6 @@ POST   /ajaxCheckIn                      controllers.users.UsersCheckIn.ajaxChec
 
 #user 用户页面
 GET    /user/$id<[0-9]+>                          controllers.users.Users.home(id:Long)
-GET    /user/$id<[0-9]+>/credits                    controllers.users.Users.credits(id:Long,s:Int ?=0,p:Int ?=1)
 GET    /user/$id<[0-9]+>/baobei                   controllers.users.Users.baobei(id:Long,t:String ?="share",p:Int ?=1)
 GET    /user/$id<[0-9]+>/theme                   controllers.users.Users.theme(id:Long,t:String ?="my",p:Int ?=1)
 GET    /user/$id<[0-9]+>/forum                   controllers.users.Users.forum(id:Long,t:String ?="my",p:Int ?=1)
@@ -182,7 +181,7 @@ GET   /cooperation                                     controllers.Infos.coopera
 GET   /sitemap                                         controllers.Infos.siteMap
 GET   /jifenbao                                         controllers.Infos.jifenbao
 GET   /shiDou                                         controllers.Infos.shiDou
-GET   /rebate                                         controllers.Infos.rebate
+GET   /credit                                         controllers.Infos.credit
 GET   /aboutCheckIn                                   controllers.Infos.aboutCheckIn
 
 GET   /jiucuo                                          controllers.Infos.jiucuo
@@ -332,18 +331,15 @@ GET  /admin/users/editInvitePrize       controllers.admin.Users.editInvitePrize(
 POST  /admin/users/saveInvitePrize      controllers.admin.Users.saveInvitePrize
 GET  /admin/users/filterInvitePrize    controllers.admin.Users.filterInvitePrize
 
-GET  /admin/users/taobaokeIncomes         controllers.admin.Users.taobaokeIncomes(p:Int ?=1)
-GET  /admin/users/filterTaobaokeIncomes   controllers.admin.Users.filterTaobaokeIncomes
-GET  /admin/users/getIncomes              controllers.admin.Users.getIncomes
-
-GET  /admin/users/orders               controllers.admin.Users.orders(p:Int ?=1)
-GET  /admin/users/filterOrders          controllers.admin.Users.filterOrders
 
 
-GET  /admin/users/rebates             controllers.admin.Users.rebates(p:Int ?=1)
-GET  /admin/users/filterRebates       controllers.admin.Users.filterRebates
-GET  /admin/users/editRebate       controllers.admin.Users.editRebate(id:Long)
-POST  /admin/users/saveRebate      controllers.admin.Users.saveRebate
+
+
+
+GET  /admin/users/exchangeCredits            controllers.admin.Users.exchangeCredits(p:Int ?=1)
+GET  /admin/users/filterExchangeCredits       controllers.admin.Users.filterExchangeCredits
+GET  /admin/users/editExchangeCredit       controllers.admin.Users.editExchangeCredit(id:Long)
+POST  /admin/users/saveExchangeCredit      controllers.admin.Users.saveExchangeCredit
 
 #管理后台  任务管理
 GET   /admin/tasks/edit           controllers.admin.Tasks.edit(id:Long)

@@ -47,7 +47,6 @@ object Users extends Controller {
     val authorStatic=UserDao.findStatic(id)
     val goodses =UserDao.findShareGoodses(id,1,9)
     val  page =UserDao.findPostThemes(author.id.get,1,9)
-  //  val orders=UserDao.recommendUserOrders(10)
     Ok(views.html.users.home(user,author,goodses,page,authorStatic) )
   }
 
@@ -193,14 +192,7 @@ object Users extends Controller {
     Ok(views.html.users.appraisal(user,author,page,userLoveGoods,authorStatic))
   }
 
-  /*用户的集分宝 动态*/
-  def credits(id:Long,s:Int,p:Int) = UserAction{ user => implicit request =>
-    val  author=UserDao.findById(id)
-    val authorStatic=UserDao.findStatic(id)
-    val page = UserDao.findUserOrdersByTime(id,s,p,10)
-    val orders=UserDao.recommendUserOrders(10)
-    Ok(views.html.users.credits(user,author,authorStatic,page,orders,s))
-  }
+
 
 
   /*删除主题 *100 删除成功 * 101 请求失败 * 103 主题不存在 104 你还没有登录 105   * */

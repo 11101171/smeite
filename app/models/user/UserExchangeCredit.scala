@@ -10,17 +10,13 @@ import models.Page._
  * Email:zuosanshao@qq.com
 *  Since:13-4-14下午6:01
  * ModifyTime :
- * ModifyContent:用户通过购物返利
+ * ModifyContent: 用户发放积分
  * http://www.smeite.com/
- *  rebate_type : 0 新人见面礼    1 购物返利
  */
-case class UserRebate(
+case class UserExchangeCredit(
                      id: Option[Long],
                      uid: Long,
                      num:Int,
-                     rebateType:Int,
-                     userOrderId:Option[Long],
-                     tradeId:Option[Long],
                      handleStatus:Int,
                      handleResult:Int,
                      note:Option[String],
@@ -28,20 +24,16 @@ case class UserRebate(
                      handleTime:Option[Timestamp]
                     )
 
-object UserRebates extends Table[UserRebate]("user_rebate") {
+object UserExchangeCredits extends Table[UserExchangeCredit]("user_exchange_credit") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc) // This is the primary key column
   def uid = column[Long]("uid")
   def num = column[Int]("num")
-  def rebateType = column[Int]("rebate_type")
-  def userOrderId = column[Long]("user_order_id")
-  def tradeId = column[Long]("trade_id")
   def handleStatus = column[Int]("handle_status")
   def handleResult = column[Int]("handle_result")
   def note = column[String]("note")
   def withdrawTime = column[Timestamp]("withdraw_time")
   def handleTime = column[Timestamp]("handle_time")
-  def * = id.? ~ uid ~ num ~ rebateType ~ userOrderId.? ~ tradeId.? ~ handleStatus ~ handleResult ~ note.? ~ withdrawTime.? ~  handleTime.? <> (UserRebate, UserRebate.unapply _)
-  def autoInc = id.? ~ uid ~ num ~ rebateType  ~ userOrderId.? ~ tradeId.? ~ handleStatus ~ handleResult ~ note.? ~ withdrawTime.? ~  handleTime.? <> (UserRebate, UserRebate.unapply _) returning id
-  def  autoInc2 = uid ~ num ~ rebateType ~ withdrawTime   returning id
-  def autoInc3 = uid ~ num ~ rebateType ~ userOrderId ~ tradeId ~ withdrawTime returning id
+  def * = id.? ~ uid ~ num  ~ handleStatus ~ handleResult ~ note.? ~ withdrawTime.? ~  handleTime.? <> (UserExchangeCredit, UserExchangeCredit.unapply _)
+  def autoInc = id.? ~ uid ~ num  ~ handleStatus ~ handleResult ~ note.? ~ withdrawTime.? ~  handleTime.? <> (UserExchangeCredit, UserExchangeCredit.unapply _) returning id
+  def  autoInc2 = uid ~ num  ~ withdrawTime   returning id
 }
