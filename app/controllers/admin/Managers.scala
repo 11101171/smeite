@@ -196,7 +196,7 @@ object Managers extends Controller {
   }
   /*更新商品管理*/
   def updateGoods = AdminAction{    manager => implicit request =>
-    var currentPage = 1
+  /*  var currentPage = 1
     val pageSize = 200
     val totalPages = (GoodsDao.countGoods + pageSize - 1) / pageSize
    while(currentPage<=totalPages){
@@ -206,9 +206,8 @@ object Managers extends Controller {
      }
  currentPage+1
   }
-
-  Ok(Json.obj("code" -> "100", "message" ->"亲，评论成功"))
-
+  Ok(Json.obj("code" -> "100", "message" ->"亲，评论成功"))*/
+    Ok(Json.obj("code" -> "104", "message" ->"更新无法实现"))
   }
   /* 获取商品信息*/
   def getProductInfo(numIid:Long)={

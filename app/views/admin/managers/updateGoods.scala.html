@@ -46,6 +46,8 @@
                     success:function(data){
                         if(data.code =='100'){
                               $('#J_batchAction').removeClass("btn-warning").addClass("btn-info").html("批量更新完成")
+                        }else{
+                            $('#J_batchAction').removeClass("btn-warning").addClass("btn-info").html("批量更新无法完成，无淘宝api相关权限")
                         }
                     }
                 })
