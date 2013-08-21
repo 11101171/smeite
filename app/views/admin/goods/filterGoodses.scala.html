@@ -143,7 +143,7 @@
                 <button class="btn btn-info" id="J_batchAction" data-toggle="modal" data-target="#J_batchModal">
                     批量处理
                 </button>    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="#J_collectModal" class="btn btn-info  collect"><i class="icon-refresh icon-white"></i> 手动采集</a>
+
             </div>
             <table class="table table-bordered table-striped with-check">
                 <thead>
@@ -175,7 +175,7 @@
 
                     <td>
                         <a href="@controllers.admin.routes.Goods.edit(item.id.get)"><i class="icon-edit"></i></a>
-                        <!--   <a href="#J_collectModal" class="btn btn-info btn-mini collect"><i class="icon-refresh icon-white"></i> 采集</a> -->
+
                         <a href="#J_deleteModal"  class="remove" data-id="@item.id.get" role="button" data-toggle="modal"><i  class="icon-trash"></i></a>
                         <!-- <a href=""><i class="icon-th-list"></i></a> -->
                     </td>
@@ -241,63 +241,7 @@
 
         })
     })
-/*  采集 */
-    $(document).on("click",".collect",function(){
-        $("#J_collectModal").modal('show');
-        $("#J_collect").click(function(){
-            var str="";
-            // 'input[name="test"]:checked'
-            $("input.checkbox:checked").each(function(){
-                str+=$(this).data('numiid')+",";
 
-            })
-            //   alert(" num_iids : " +str)
-
-            TOP.api('rest','post',{
-                method:'taobao.taobaoke.widget.items.convert',
-                num_iids:str,
-                outer_code:'',
-                fields:'title,num_iid,volume,price,promotion_price,commission_rate,click_url'
-            },function(resp){
-                if(resp.error_response){
-                    alert('taobao.taobaoke.widget.items.convert接口获取商信息品失败!'+resp.error_response.msg);
-                    return false;
-                } else {
-                    var total=resp.total_results;
-                    if (total > 0) {
-                        var respItem=resp.taobaoke_items.taobaoke_item;
-                        if (respItem.length > 0) {
-                            //   alert("length"+respItem.length)
-                            //    alert(" repsItem : " + JSON.stringify(respItem) )
-                            //  for(var i =0;i<respItem.length;i++){
-                            //       alert(respItem[i].volume +"   "+respItem[i].price+"promotion price "+respItem[i].promotion_price)
-                            //    }
-
-                            $.ajax({
-                                type:"POST",
-                                url:"/admin/goods/collectGoodses",
-                                data:JSON.stringify(respItem),
-                                contentType:"application/json; charset=utf-8",
-                                dataType: "json",
-                                success:function(data){
-                                    if(data.code=="100"){
-                                        window.location.reload();
-                                    }
-                                }
-                            })
-
-
-                        }
-                    }
-                }
-
-            })
-
-
-
-
-        })
-    })
 </script>
 
 }
