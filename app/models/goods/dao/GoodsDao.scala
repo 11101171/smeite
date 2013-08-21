@@ -38,7 +38,9 @@ object GoodsDao {
   def modifyStatus(goodsId:Long,status:Int) = database.withSession {  implicit session:Session =>
     (for (c<-Goodses if c.id === goodsId)yield c.status ).update(status)
   }
-
+  def modifyStatusByNumIid(numIid:Long,status:Int) = database.withSession {  implicit session:Session =>
+    (for (c<-Goodses if c.numIid === numIid)yield c.status ).update(status)
+  }
   def modifyClickUrl(goodsId:Long,clickUrl:String)= database.withSession {  implicit session:Session =>
     (for (c<-Goodses if c.id === goodsId)yield c.clickUrl ).update(clickUrl)
   }
@@ -152,17 +154,6 @@ object GoodsDao {
     Page[Goods](goodses,currentPage,totalPages);
   }
   
-  /* 小编推荐（会员） 的商品 */
-  def  findMemberGoods(currentPage:Int,pageSize:Int):Page[Goods] = database.withSession {  implicit session:Session =>
-	val totalRows =Query(Goodses.filter(_.isMember===true).length).first
-    val totalPages=((totalRows + pageSize - 1) / pageSize);
-    val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
-
-    val query =for(c<-Goodses if c.isMember === true)yield c
-    //println("q select sql "+query.selectStatement)
-    val list:List[Goods] = query.drop(startRow).take(pageSize).list()
-    Page(list,currentPage,totalPages)
-  }
 
   /* 显示用户可能喜欢的商品 */
   /*
@@ -175,7 +166,7 @@ object GoodsDao {
     val totalPages=((totalRows + pageSize - 1) / pageSize);
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
-    val q=  for(c<-Goodses.filter(_.isMember===true).sortBy(_.collectTime desc).drop(startRow).take(pageSize)  ) yield(c)
+    val q=  for(c<-Goodses.filter(_.isMember===true).filter(_.status === 1).sortBy(_.collectTime desc).drop(startRow).take(pageSize)  ) yield(c)
     //println(" q sql "+q.selectStatement)
     val goodses:List[Goods]=  q.list()
     Page[Goods](goodses,currentPage,totalPages);

@@ -191,13 +191,13 @@ object Baobei extends Controller {
     val goods=GoodsDao.findById(id)
     if (goods.isEmpty)Ok(views.html.baobei.nofound())
     else{
-      if(goods.get.status==0){
-        Ok(views.html.baobei.nofound())
-      }else{
+    //  if(goods.get.status==0){
+    //    Ok(views.html.baobei.nofound())
+   //   }else{
         val firstShareUser=UserDao.findFirstShareUser(id)
         val tags = TagDao.findGoodsTags(goods.get.id.get)
         Ok(views.html.baobei.view(user,goods.get,firstShareUser,tags))
-      }
+   //   }
 
     }
   }

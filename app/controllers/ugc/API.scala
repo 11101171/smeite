@@ -46,23 +46,8 @@ case class Product(
                   location:String
                   )
 
-/*
-* 用户购买记录
-* */
-case class BuyRecord(
-                    uid:String,
-                    goodsId:String,
-                    numIid:String,
-                    rate:String,
-                    nick:String,
-                    title:String,
-                    location:String,
-                    pic:String,
-                    price:String,
-                    promotionPrice:String,
-                    commissionRate:String,
-                    volume:Int
-                      )
+
+
 
 
 object API extends Controller {
@@ -83,21 +68,7 @@ object API extends Controller {
        (__ \ "location").format[String]
     )(Product.apply,unlift(Product.unapply))
 
-  /*json */
-  implicit val buyRecordFormat = (
-    (__ \ "uid").format[String] and
-      (__ \ "goodsId").format[String] and
-      (__ \ "numIid").format[String] and
-      (__ \ "rate").format[String] and
-      (__ \ "nick").format[String] and
-      (__ \ "title").format[String] and
-      (__ \ "location").format[String] and
-      (__ \ "pic").format[String] and
-      (__ \ "price").format[String] and
-      (__ \ "promotionPrice").format[String] and
-      (__ \ "commissionRate").format[String] and
-      (__ \ "volume").format[Int]
-    )(BuyRecord.apply,unlift(BuyRecord.unapply))
+
 
 
 
@@ -230,22 +201,5 @@ object API extends Controller {
       val sign=TaobaoConfig.getSign(timestamp)
       Ok(views.html.ugc.api.gotoTaobao(numIid,uid,goodsId,70)).withCookies(Cookie("timestamp",timestamp,httpOnly=false),Cookie("sign", sign,httpOnly=false))
   }
-  /*
-  * uid:Long,goodsId:Long,numIid:Long,nick:String,title:String,location:String,pic:String,price:String,withdrawRate:Int,credits:Int
-  * */
-  def ajaxRecord = Action(parse.json) {  implicit request =>
-  val record =Json.fromJson[BuyRecord](request.body).get
-      val uid = record.uid.toLong
-      val numIid=record.numIid.toLong
-      val goodsId=record.goodsId.toLong
-      val rate = record.rate.toInt
-      val price =if(record.promotionPrice!="")record.promotionPrice else record.price
-      val withdrawRate= (rate*0.01*record.commissionRate.toFloat).toInt
-      val credits = (price.toFloat*withdrawRate*0.01).toInt
-      UserDao.addUserOrder(uid,goodsId,numIid,record.nick,record.title,record.location,record.pic,price,withdrawRate,credits,record.volume.toString)
-
-  Ok(Json.obj("code"->"100","message"->"success"))
-  }
-
 
 }

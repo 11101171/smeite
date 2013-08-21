@@ -200,7 +200,7 @@ GET     /ugc/api/findProduct                       controllers.ugc.API.findProdu
 POST    /ugc/api/saveProduct                       controllers.ugc.API.saveProduct
 GET     /ugc/api/gotoTaobao/$numIid<[0-9]+>        controllers.ugc.API.gotoTaobao(numIid:Long,goodsId:Long ?=0)
 POST    /ugc/api/updateProduct                     controllers.ugc.API.updateProduct
-POST    /ugc/api/ajaxRecord                        controllers.ugc.API.ajaxRecord
+
 
 
 
@@ -226,6 +226,7 @@ GET   /admin/modify               controllers.admin.Managers.modify
 GET   /admin/index                controllers.admin.Managers.index
 
 GET   /admin/manager/cache        controllers.admin.Managers.cache
+GET   /admin/manager/gotoUpdateGoods   controllers.admin.Managers.gotoUpdateGoods
 GET   /admin/manager/updateGoods         controllers.admin.Managers.updateGoods
 GET   /admin/manager/pushMsg           controllers.admin.Managers.pushMsg
 GET   /admin/manager/check           controllers.admin.Managers.check

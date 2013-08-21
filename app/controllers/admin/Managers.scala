@@ -191,18 +191,24 @@ object Managers extends Controller {
   def cache = AdminAction{    manager => implicit request =>
       Ok(views.html.admin.managers.cache(manager))
   }
+  def gotoUpdateGoods = AdminAction{    manager => implicit request =>
+           Ok(views.html.admin.managers.updateGoods(manager))
+  }
   /*更新商品管理*/
   def updateGoods = AdminAction{    manager => implicit request =>
-    val page = GoodsDao.findAll(1,200)
-    var numIids ="";
-   for(goods<-page.items){
-     val item = getProductInfo(goods.numIid)
-     println("xxxxxxxxxxxxxxxxxxxxxxxxx " +item)
-      numIids+=item
-   }
+    var currentPage = 1
+    val pageSize = 200
+    val totalPages = (GoodsDao.countGoods + pageSize - 1) / pageSize
+   while(currentPage<=totalPages){
+     val page = GoodsDao.getNumiids(currentPage,pageSize)
+     for(numIid<-page.items){
+       getProductInfo(numIid)
+     }
+ currentPage+1
+  }
 
-  //  Ok(Json.obj("code" -> "100", "message" ->"亲，评论成功"))
-    Ok(numIids +"  ")
+  Ok(Json.obj("code" -> "100", "message" ->"亲，评论成功"))
+
   }
   /* 获取商品信息*/
   def getProductInfo(numIid:Long)={
@@ -210,18 +216,11 @@ object Managers extends Controller {
     val  req=new ItemGetRequest()
     req.setFields("num_iid,list_time,dellist_time,approve_status")
     req.setNumIid(numIid)
-
       val getRequest=client.execute(req)
-    //  println(getRequest.getBody)
       if(getRequest.isSuccess){
-      //  "numIid:"+getRequest.getItem.getNumIid +"list_time:"+getRequest.getItem.getListTime+"dellist_time:"+getRequest.getItem.getDelistTime+"approve_status"+getRequest.getItem.getApproveStatus
-       if(getRequest.getItem.getDelistTime !=null){
-         numIid
-       }else{
-         0l
+       if(getRequest.getItem.getDelistTime ==null){
+         GoodsDao.modifyStatusByNumIid(numIid,0)
        }
-      }else{
-       numIid
       }
 
   }

@@ -93,7 +93,7 @@ object TagDao {
     val totalPages=((totalRows + pageSize - 1) / pageSize);
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
      val q = for{
-      (((t,g),a),u)<-TagGoodses.filter(_.tagName === tagName).filter(_.checkState===1).drop(startRow).take(pageSize) innerJoin Goodses on (_.goodsId ===_.id)  leftJoin  GoodsAssesses  on (_._2.id ===_.goodsId) leftJoin Users on (_._2.uid === _.id)
+      (((t,g),a),u)<-TagGoodses.filter(_.tagName === tagName).filter(_.checkState===1).drop(startRow).take(pageSize) innerJoin Goodses.filter(_.status === 1) on (_.goodsId ===_.id)  leftJoin  GoodsAssesses  on (_._2.id ===_.goodsId) leftJoin Users on (_._2.uid === _.id)
     }yield(t.sortNum,g.id,g.name,g.pic,g.loveNum,g.price,g.promotionPrice.?,g.intro,u.id.?,u.name.?,u.pic.?,a.content.?)
 
     val list:List[((Int,Long,String,String,Int,String,Option[String],String),List[(Option[Long],Option[String],Option[String],Option[String])])] = q.list.groupBy(x=>(x._1,x._2,x._3,x._4,x._5,x._6,x._7,x._8)).map(x=>(x._1,x._2.map(y=>(y._9,y._10,y._11,y._12)))).toList.sortBy(_._1)
@@ -108,7 +108,7 @@ object TagDao {
     //println(" totalRows  " + totalRows + " totalPages  " + totalPages  + " startRow " +startRow )
 
     val q = for{
-      (((t,g),a),u)<-TagGoodses.filter(_.cid === cid).filter(_.checkState===1).sortBy(_.sortNum desc).drop(startRow).take(pageSize) innerJoin Goodses on (_.goodsId ===_.id) leftJoin  GoodsAssesses  on (_._2.id ===_.goodsId) leftJoin Users on (_._2.uid === _.id)
+      (((t,g),a),u)<-TagGoodses.filter(_.cid === cid).filter(_.checkState===1).sortBy(_.sortNum desc).drop(startRow).take(pageSize) innerJoin Goodses.filter(_.status === 1 ) on (_.goodsId ===_.id) leftJoin  GoodsAssesses  on (_._2.id ===_.goodsId) leftJoin Users on (_._2.uid === _.id)
     }yield(t.sortNum,g.id,g.name,g.pic,g.loveNum,g.price,g.promotionPrice.?,g.intro,u.id.?,u.name.?,u.pic.?,a.content.?)
    //  println(" sq  " +q.list().length)
 	 for( x <- q.list()){
@@ -135,6 +135,7 @@ object TagDao {
       if t.tagCode === tagCode
       if t.goodsId === g.id
       if g.uid === u.id
+      if g.status ===1
     }yield(u,g,t.sortNum)
     if(s == 1) q = q.sortBy(x=>x._2.isMember.desc)
     if(s == 2) q = q.sortBy(x=>x._2.collectTime.desc)
@@ -157,6 +158,7 @@ object TagDao {
       g <- Goodses
       if t.tagName === tagName
       if t.goodsId === g.id
+      if g.status===1
     }yield(g,t.sortNum)
     if(s == 1) q = q.sortBy(x=>x._1.isMember.desc)
     if(s == 2) q = q.sortBy(x=>x._1.collectTime.desc)
@@ -181,6 +183,7 @@ object TagDao {
       if  t.cid === cid
       if  t.goodsId === g.id
       if g.uid === u.id
+      if g.status ===1
     }yield(u,g,t.sortNum)
 
     if(s == 1) q = q.sortBy(x=>x._2.isMember.desc)
@@ -198,7 +201,7 @@ object TagDao {
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
 
     val q =for {
-      ((g,a),u)<- Goodses.sortBy(x=>(x.collectTime desc)).drop(startRow).take(pageSize) leftJoin  GoodsAssesses.where(_.checkState===1)  on (_.id ===_.goodsId) leftJoin Users on (_._2.uid === _.id)
+      ((g,a),u)<- Goodses.filter(_.status ===1).sortBy(x=>(x.collectTime desc)).drop(startRow).take(pageSize) leftJoin  GoodsAssesses.where(_.checkState===1)  on (_.id ===_.goodsId) leftJoin Users on (_._2.uid === _.id)
     } yield(g.id,g.name,g.pic,g.loveNum,g.price,g.promotionPrice.?,g.intro,u.id.?,u.name.?,u.pic.?,a.content.?)
     val list:List[((Long,String,String,Int,String,Option[String],String),List[(Option[Long],Option[String],Option[String],Option[String])])] = q.list.groupBy(x=>(x._1,x._2,x._3,x._4,x._5,x._6,x._7)).map(x=>(x._1,x._2.map(y=>(y._8,y._9,y._10,y._11)))).toList
     Page(list,currentPage,totalPages)
