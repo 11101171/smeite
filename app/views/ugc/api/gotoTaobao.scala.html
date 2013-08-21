@@ -44,7 +44,7 @@
         'pic':'',
         'price':'',
         'promotionPrice':'',
-        'commissionRate':'',
+
         'volume':''
     }
     TOP.api('rest','post',{
@@ -68,7 +68,7 @@
                     ajaxData.pic=respItem[0].pic_url;
                     ajaxData.price=respItem[0].price;
                     ajaxData.promotionPrice=respItem[0].promotion_price;
-                    ajaxData.commissionRate=respItem[0].commission_rate;
+
                     ajaxData.volume=respItem[0].volume;
                   $("#J_clickUrl").attr("href",sellUrl)
 
