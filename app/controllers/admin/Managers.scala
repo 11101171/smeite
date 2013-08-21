@@ -194,14 +194,15 @@ object Managers extends Controller {
   /*更新商品管理*/
   def updateGoods = AdminAction{    manager => implicit request =>
     val page = GoodsDao.findAll(1,200)
-    val list:List[String] =Nil
+    var numIids ="";
    for(goods<-page.items){
      val item = getProductInfo(goods.numIid)
-      list.+:(item)
+     println("xxxxxxxxxxxxxxxxxxxxxxxxx " +item)
+      numIids+=item
    }
 
   //  Ok(Json.obj("code" -> "100", "message" ->"亲，评论成功"))
-    Ok(list.toString)
+    Ok(numIids +"  ")
   }
   /* 获取商品信息*/
   def getProductInfo(numIid:Long)={
@@ -209,13 +210,19 @@ object Managers extends Controller {
     val  req=new ItemGetRequest()
     req.setFields("num_iid,list_time,dellist_time,approve_status")
     req.setNumIid(numIid)
-    try{
-      val item=client.execute(req).getItem
-         "numIid:"+item.getNumIid +"list_time:"+item.getListTime+"dellist_time:"+item.getDelistTime+"approve_status"+item.getApproveStatus
-    } catch{
-      case ex:ApiException =>  "numIid:"+ 0 +"list_time:"+ 0 +"dellist_time:"+ 0 +"approve_status"+0
 
-    }
+      val getRequest=client.execute(req)
+    //  println(getRequest.getBody)
+      if(getRequest.isSuccess){
+      //  "numIid:"+getRequest.getItem.getNumIid +"list_time:"+getRequest.getItem.getListTime+"dellist_time:"+getRequest.getItem.getDelistTime+"approve_status"+getRequest.getItem.getApproveStatus
+       if(getRequest.getItem.getDelistTime !=null){
+         numIid
+       }else{
+         0l
+       }
+      }else{
+       numIid
+      }
 
   }
 
