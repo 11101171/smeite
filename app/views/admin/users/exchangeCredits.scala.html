@@ -1,4 +1,4 @@
-@(manager: models.admin.Manager, page: models.Page[models.user.UserRebate])
+@(manager: models.admin.Manager, page: models.Page[models.user.UserExchangeCredit])
 @views.html.admin.template(manager, "user") {
 
     <div id="content-header">
@@ -20,7 +20,7 @@
                         <h5>用户返利筛选</h5>
                     </div>
                     <div class="widget-content nopadding">
-                        <form class=" form-horizontal" id="J_filterForm" method="get" action="@controllers.admin.routes.Users.filterRebates">
+                        <form class=" form-horizontal" id="J_filterForm" method="get" action="@controllers.admin.routes.Users.filterExchangeCredits">
                             <input type="hidden" name="currentPage" id="J_currentPage" value="1">
                             <div class="error-row">
                                 <p class="error"></p>
@@ -79,7 +79,7 @@
                             <tr>
 
                                 <th>用户Id</th>
-                                <th>类型</th>
+
                                 <th>返利数量</th>
                                 <th>提交时间</th>
                                 <th>处理状态</th>
@@ -92,15 +92,7 @@
                             <tr id="@item.id.get">
 
                                 <td><a  href="@controllers.users.routes.Users.home(item.uid)"  target="_blank"> @item.uid</a> </td>
-                                <td>
-                                    @if(item.rebateType == 0){
-                                    <span class="label label-info">新人见面礼</span>
-                                    }
-                                    @if(item.rebateType == 1){
-                                    <span class="label label-success">购物返利</span>
-                                    }
 
-                                </td>
                                 <td>@item.num</td>
                                 <td>@item.withdrawTime</td>
                                 <td>
@@ -118,7 +110,7 @@
 
                                 <td>
 
-                                    <a href="@controllers.admin.routes.Users.editRebate(item.id.get)"><i class="icon-edit"></i></a>
+                                    <a href="@controllers.admin.routes.Users.editExchangeCredit(item.id.get)"><i class="icon-edit"></i></a>
 
                                 </td>
                             </tr>
@@ -131,21 +123,21 @@
                 <ul>
                     @page.prev.map{ page =>
                         <li class="prev">
-                            <a href="@controllers.admin.routes.Users.rebates(page)">Prev</a>
+                            <a href="@controllers.admin.routes.Users.exchangeCredits(page)">Prev</a>
                         </li>
                     }
                     @for(num <- page.nums) {
                         @if(num == page.currentPage) {
-                            <li class="active"><a href="@controllers.admin.routes.Users.rebates(num)">@num</a></li>
+                            <li class="active"><a href="@controllers.admin.routes.Users.exchangeCredits(num)">@num</a></li>
                         } else {
 
-                            <li><a href="@controllers.admin.routes.Users.rebates(num)">@num</a></li>
+                            <li><a href="@controllers.admin.routes.Users.exchangeCredits(num)">@num</a></li>
                         }
 
                     }
                     @page.next.map { page =>
                         <li class="next">
-                            <a href="@controllers.admin.routes.Users.rebates(page)">Next</a>
+                            <a href="@controllers.admin.routes.Users.exchangeCredits(page)">Next</a>
                         </li>
                     }
                 </ul>

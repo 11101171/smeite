@@ -68,8 +68,8 @@ object Infos extends Controller {
   }
 
   /* 返现教程todo */
-  def rebate = Users.UserAction { user => implicit request =>
-    Ok(views.html.infos.help.rebate(user))
+  def credit = Users.UserAction { user => implicit request =>
+    Ok(views.html.infos.help.credit(user))
   }
   /* 签到介绍 todo */
   def aboutCheckIn = Users.UserAction { user => implicit request =>

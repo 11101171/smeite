@@ -23,8 +23,5 @@ object ShiDouSetting {
   val postHotBaobei:Int = 5
   /*创建优质话题 10*/
   val postHotTopic:Int = 10
-  /* 成功返利 获得 食豆*/
-  val rebateShiDou1 = 1
-  val rebateShiDou5 = 5
-  val rebateShiDou10 = 10
+
 }

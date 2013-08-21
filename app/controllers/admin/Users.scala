@@ -8,17 +8,14 @@ import models.Page
 import play.api.libs.json.Json
 import models.user.dao.{UserSQLDao, UserDao}
 import models.tag.dao.TagDao
-import models.report.dao.TaobaokeIncomeDao
+
 import java.util.Date
 import play.api.Play
-import com.taobao.api.DefaultTaobaoClient
-import com.taobao.api.request.{TaobaokeReportGetRequest, TaobaokeWidgetItemsConvertRequest, ItemGetRequest}
-import com.taobao.api.response.TaobaokeReportGetResponse
-import com.taobao.api.domain.{TaobaokeReportMember, TaobaokeReport}
+
 import scala.collection.JavaConverters._
-import models.report.TaobaokeIncome
+
 import java.sql.Timestamp
-import models.user.{UserCreditRecord, UserOrder,ShiDouSetting,UserRebate}
+import models.user.{ShiDouSetting,UserExchangeCredit}
 
 
 case class UserBatchFormData(action:Int,ids:Seq[Long],url:Option[String])
@@ -29,13 +26,9 @@ case class ExchangeShiDouFormData(id:Long,uid:Long,name:String,alipay:String,num
 case class FilterInvitePrizeFormData(status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
 case class InvitePrizeFormData(id:Long,uid:Long,name:String,alipay:String,num:Int,handleStatus:Int,handleResult:Int,note:Option[String])
 
-case class FilterUserOrderFormData(status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
 
-case class GetTaobaokeIncomeFormData(day:String)
-case class FilterTaobaokeIncomeFormData(outerCode:Option[String],day:Option[String],currentPage:Option[Int])
-
-case class FilterUserRebateFormData(uid:Option[Long],status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
-case class UserRebateFormData(id:Long,uid:Long,name:String,alipay:String,num:Int,handleStatus:Int,handleResult:Int,note:Option[String])
+case class FilterUserExchangeCreditFormData(uid:Option[Long],status:Option[Int],startDate:Option[Date],endDate:Option[Date],currentPage:Option[Int])
+case class UserExchangeCreditFormData(id:Long,uid:Long,name:String,alipay:String,num:Int,handleStatus:Int,handleResult:Int,note:Option[String])
 
 object Users  extends Controller {
   val batchForm =Form(
@@ -102,36 +95,19 @@ object Users  extends Controller {
     )(InvitePrizeFormData.apply)(InvitePrizeFormData.unapply)
   )
 
-  val getTaobaokeIncomeForm = Form(
-     "day"->nonEmptyText
-  )
-  val filterTaobaokeIncomeForm =Form(
-    mapping(
-      "outerCode"->optional(text),
-      "day"->optional(text),
-      "currentPage"->optional(number)
-    )(FilterTaobaokeIncomeFormData.apply)(FilterTaobaokeIncomeFormData.unapply)
-  )
 
-  val filterUserOrderForm =Form(
-    mapping(
-      "status"->optional(number),
-      "startDate"->optional(date("yyyy-MM-dd")),
-      "endDate"->optional(date("yyyy-MM-dd")),
-      "currentPage"->optional(number)
-    )(FilterUserOrderFormData.apply)(FilterUserOrderFormData.unapply)
-  )
 
-  val filterUserRebateForm =Form(
+
+  val filterUserExchangeCreditForm =Form(
     mapping(
       "uid"->optional(longNumber()),
       "status"->optional(number),
       "startDate"->optional(date("yyyy-MM-dd")),
       "endDate"->optional(date("yyyy-MM-dd")),
       "currentPage"->optional(number)
-    )(FilterUserRebateFormData.apply)(FilterUserRebateFormData.unapply)
+    )(FilterUserExchangeCreditFormData.apply)(FilterUserExchangeCreditFormData.unapply)
   )
-  val userRebateForm = Form(
+  val userExchangeCreditForm = Form(
     mapping(
       "id"->longNumber,
       "uid"->longNumber,
@@ -141,7 +117,7 @@ object Users  extends Controller {
       "handleStatus"->number,
       "handleResult"->number,
       "note"->optional(text)
-    )(UserRebateFormData.apply)(UserRebateFormData.unapply)
+    )(UserExchangeCreditFormData.apply)(UserExchangeCreditFormData.unapply)
   )
 
   /*用户管理*/
@@ -301,71 +277,38 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
   }
 
 
-  /*下面是 User orders */
-  def orders(p:Int) = Managers.AdminAction{ manager => implicit request =>
-         val page = UserDao.findUserOrders(p,50)
-    Ok(views.html.admin.users.orders(manager,page))
+
+
+
+
+  /* 下面 是 user exchange credit */
+  def  exchangeCredits(p:Int) = Managers.AdminAction{ manager => implicit request =>
+    val page = UserDao.findUserExchangeCredits(p,50)
+    Ok(views.html.admin.users.exchangeCredits(manager,page))
   }
 
-  def filterOrders = Managers.AdminAction{ manager => implicit request =>
-    filterUserOrderForm.bindFromRequest.fold(
+  def filterExchangeCredits  = Managers.AdminAction{ manager => implicit request =>
+    filterUserExchangeCreditForm.bindFromRequest.fold(
       formWithErrors =>Ok("something wrong" +formWithErrors.errors.toString),
       data => {
-        val page=UserDao.filterUserOrders(data.status,data.startDate,data.endDate,data.currentPage.getOrElse(1),50);
-        Ok(views.html.admin.users.filterUserOrders(manager,page,filterUserOrderForm.fill(data)))
+        val page=UserDao.filterUserExchangeCredits(data.uid,data.status,data.startDate,data.endDate,data.currentPage.getOrElse(1),50);
+        Ok(views.html.admin.users.filterUserExchangeCredits(manager,page,filterUserExchangeCreditForm.fill(data)))
       }
     )
   }
-
-
-
-
-
-  /* 下面 是 user rebate */
-  def  rebates(p:Int) = Managers.AdminAction{ manager => implicit request =>
-    val page = UserDao.findUserRebates(p,50)
-    Ok(views.html.admin.users.rebates(manager,page))
+  def editExchangeCredit(id:Long) = Managers.AdminAction{ manager => implicit request =>
+    val (user,ui) = UserDao.findUserExchangeCredit(id)
+    Ok(views.html.admin.users.editUserExchangeCredit(manager,userExchangeCreditForm.fill(UserExchangeCreditFormData(ui.id.get,user.id.get,user.name,user.alipay.getOrElse("none"),ui.num,ui.handleStatus,ui.handleResult,ui.note))))
   }
 
-  def filterRebates  = Managers.AdminAction{ manager => implicit request =>
-    filterUserRebateForm.bindFromRequest.fold(
-      formWithErrors =>Ok("something wrong" +formWithErrors.errors.toString),
+  def saveExchangeCredit  = Managers.AdminAction{ manager => implicit request =>
+    userExchangeCreditForm.bindFromRequest.fold(
+      formWithErrors =>BadRequest(views.html.admin.users.editUserExchangeCredit(manager,formWithErrors,"出错了")),
       data => {
-        val page=UserDao.filterUserRebates(data.uid,data.status,data.startDate,data.endDate,data.currentPage.getOrElse(1),50);
-        Ok(views.html.admin.users.filterUserRebates(manager,page,filterUserRebateForm.fill(data)))
-      }
-    )
-  }
-  def editRebate(id:Long) = Managers.AdminAction{ manager => implicit request =>
-    val (user,ui) = UserDao.findUserRebate(id)
-    Ok(views.html.admin.users.editUserRebate(manager,userRebateForm.fill(UserRebateFormData(ui.id.get,user.id.get,user.name,user.alipay.getOrElse("none"),ui.num,ui.handleStatus,ui.handleResult,ui.note))))
-  }
-
-  def saveRebate  = Managers.AdminAction{ manager => implicit request =>
-    userRebateForm.bindFromRequest.fold(
-      formWithErrors =>BadRequest(views.html.admin.users.editUserRebate(manager,formWithErrors,"出错了")),
-      data => {
-        UserDao.modifyUserRebate(data.id,data.handleStatus,data.handleResult,data.note.getOrElse(""))
+        UserDao.modifyUserExchangeCredit(data.id,data.handleStatus,data.handleResult,data.note.getOrElse(""))
         /* 如果处理成功 则修改user withdraw credits 数量 */
         if(data.handleStatus == 1) UserDao.modifyWithdrawCredits(data.uid,data.num)
-        Ok(views.html.admin.users.editUserRebate(manager,userRebateForm.fill(data),"修改成功"))
-      }
-    )
-  }
-
-    /*  下面是taobaoke 报表*/
-    /* taobaoke  */
-  def taobaokeIncomes(p:Int) = Managers.AdminAction{ manager => implicit request =>
-      val page = TaobaokeIncomeDao.findTaobaokeIncomes(p,50)
-   Ok(views.html.admin.users.taobaokeIncomes(manager,page))
-  }
-
-  def filterTaobaokeIncomes = Managers.AdminAction{ manager => implicit request =>
-    filterTaobaokeIncomeForm.bindFromRequest.fold(
-      formWithErrors =>Ok("something wrong"),
-      data => {
-        val page=TaobaokeIncomeDao.filterTaobaokeIncomes(data.day,data.outerCode,data.currentPage.getOrElse(1),50);
-        Ok(views.html.admin.users.filterTaobaokeIncomes(manager,page,filterTaobaokeIncomeForm.fill(data)))
+        Ok(views.html.admin.users.editUserExchangeCredit(manager,userExchangeCreditForm.fill(data),"修改成功"))
       }
     )
   }
@@ -373,82 +316,7 @@ def filterExchangeShiDou = Managers.AdminAction{ manager => implicit request =>
 
 
 
-  /* 查询淘宝客，获取收入 */
-  def getIncomes = Managers.AdminAction{ manager => implicit request =>
-    getTaobaokeIncomeForm.bindFromRequest.fold(
-      formWithErrors =>Ok("something wrong"),
-      data => {
-         incomes(data)
-        Redirect(controllers.admin.routes.Users.taobaokeIncomes(1))
-      }
-    )
-  }
-  /*
-  *  首先判断 report
-  * */
-  private def incomes(day:String) = {
-    val url:String = "http://gw.api.taobao.com/router/rest"
-    val appkey = "21136607"
-    val secret = "b43392b7a08581a8916d2f9fa67003db"
-    val client =new DefaultTaobaoClient(url, appkey, secret);
-    val  req:TaobaokeReportGetRequest = new TaobaokeReportGetRequest();
-    req.setFields("num_iid,trade_id,outer_code,real_pay_fee,commission_rate,commission,pay_price,item_num,create_time,pay_time");
-    req.setDate(day);
-    req.setPageSize(100l);
-    var p:Long =1l
-    var flag:Boolean=true
-    while(flag){
-      //println("go into while" + p)
-      req.setPageNo(p);
-      val report:TaobaokeReport = client.execute(req).getTaobaokeReport;
-       if(report != null){
-         if(report.getTaobaokeReportMembers !=null){
-         for(item <- report.getTaobaokeReportMembers.asScala){
-           handleTaobaokeIncome(item,day)
-         }
-         }else {
-           flag=false
-         }
-         p+=1;
-       }
-      }
-  }
-  /* -1 表示 淘宝客返回的outer——code 为 null*/
-  private def handleTaobaokeIncome(item:TaobaokeReportMember,day:String)={
-         /* 处理 user order 与 淘宝客report 的关系
-         * 1. 判断outer_code 是否为null
-         * 2、根据user_id 和 num_iid 查找 user_order , 如果不为空，判断 list大小，如果list.length=1,直接使用userOrder ,如果list.length >1 则判断userOrder createTime 与 taobaoke的create time 最近的那个 获得userOrder
-         *
-         * */
 
-    if(item.getOuterCode != null){
-      val uid = item.getOuterCode.toLong
-      val list:List[UserOrder]=UserDao.findUserOrder(uid,item.getNumIid)
-      /* 获取 user order*/
-      var order:UserOrder= null;
-      if(!list.isEmpty){
-      order=  if(list.length == 1) {list.head } else { list.sortBy(x=>(x.createTime.get.getTime-item.getCreateTime.getTime).abs).head }
 
-      }
-      val userCommission = if(order !=null ){ (item.getCommission.toFloat*order.withdrawRate).toInt }else { (item.getCommission.toFloat*70/100).toInt }
-      val userOrderId:Long = if(order != null){ order.id.get }else{ 0 }
-      UserDao.modifyUserOrder(order.id.get,1,new Timestamp(item.getCreateTime.getTime))
 
-      /* 查看 user rebate 是否添加，如果没有，则添加*/
-      val rebate = UserDao.findUserRebateByTradeId(item.getTradeId)
-      if(rebate.isEmpty){
-        /* 赠送额外的 食豆 和 食豆记录,目前所有用户都获得额外的1个食豆*/
-        UserDao.modifyShiDou(uid,ShiDouSetting.rebateShiDou1)
-        UserDao.addUserCreditRecord(UserCreditRecord(None,uid,1,ShiDouSetting.rebateShiDou1,"购物成功后获赠",new Timestamp(System.currentTimeMillis())))
-        UserDao.addUserRebate(uid,userCommission,1,userOrderId,item.getTradeId)
-      }
-
-    }
-       val income = TaobaokeIncomeDao.findTaobaokeIncome(item.getTradeId)
-     if(income.isEmpty){
-       val outerCode = if(item.getOuterCode == null){ "-1"} else item.getOuterCode
-        TaobaokeIncomeDao.addTaobaokeIncome(TaobaokeIncome(None,item.getNumIid,item.getTradeId,outerCode,item.getRealPayFee,item.getCommissionRate,item.getCommission,item.getPayPrice,item.getItemNum,day,new Timestamp(item.getCreateTime.getTime),new Timestamp(item.getPayTime.getTime)))
-     }
-
-  }
 }

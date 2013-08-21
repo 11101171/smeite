@@ -1289,44 +1289,9 @@ CREATE TABLE `user_order` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-/* 用户提现表
-* withdraw_type 0 购物返利 1食豆兑换 2 邀请有奖
-* relative_id      宝贝ID   邀请用户Id
-*/
-DROP TABLE IF EXISTS `user_withdraw`;
-DROP TABLE IF EXISTS `user_rebate`;
-CREATE TABLE `user_rebate` (
-  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
-  `uid`                 int(10) ,
-  `num`                 smallint(10) ,
-  `rebate_type`             tinyint(4) not null default '0',
-  `user_order_id`           int(10) ,
-  `trade_id`            bigint (10) ,
-  `handle_result`      varchar(128) default '',
-  `handle_status`          tinyint not null default '0',
-  `note`    varchar(200)  default '',
-  `handle_time`          timestamp,
-  `withdraw_time`          timestamp,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-/* 淘宝客报表记录*/
-DROP TABLE IF EXISTS `taobaoke_income`;
-CREATE TABLE `taobaoke_income` (
-  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
-  `num_iid`          bigint(10) ,
-  `trade_id`           bigint(10) NOT NULL ,
-  `outer_code`          varchar(32) default '0' ,
-  `real_pay_fee`       varchar(16) ,
-  `commission_rate`    varchar(16) ,
-  `commission`         varchar(16) ,
-  `pay_price`           varchar(16) ,
-  `item_num`            int(10) ,
-  `day`          varchar(16) not null,
-  `create_time`         timestamp,
-  `pay_time`             timestamp,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+
 
 /*4月22日*/
 /*用户邀请有奖*/
@@ -1454,7 +1419,7 @@ CREATE TABLE `user_credit_record` (
 /*
 20130521
  */
-alter table user_rebate drop column rebate_type;
+
 
 alter table user add column modify_time timestamp  default '2013-5-21 22:00:00';
 
@@ -1465,9 +1430,8 @@ alter table  user_invite_prize change num num smallint(10);
 alter table user add column alipay varchar(128);
 alter table user_profile change alipay qq varchar(64);
 
-#20130523 rebate_type :1 购物返利 0 新人见面礼
-alter table user_rebate add column rebate_type tinyint(4) default '1';
-alter table user_rebate change column  handle_result handle_result tinyint(4) default '0';
+#20130523
+
 alter table user_invite_prize change column  handle_result handle_result tinyint(4) default '0';
 alter table user_exchange_shiDou change column  handle_result  handle_result tinyint(4) default '0';
 
@@ -1890,3 +1854,20 @@ alter table theme_discuss add quote_content text;
 alter table topic_reply  change quote_reply quote_content text;
 alter table user_static add post_post_num smallint(10) unsigned not null default '0';
 alter table user_static add love_post_num smallint(10) unsigned not null default '0';
+
+/*2013-08-21*/
+/* 用户 积分提现申请 */
+
+DROP TABLE IF EXISTS `user_rebate`
+DROP TABLE IF EXISTS `user_exchange_credit`
+CREATE TABLE `user_exchange_credit` (
+  `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
+  `uid`                 int(10) ,
+  `num`                 smallint(10) ,
+  `handle_result`      varchar(128) default '',
+  `handle_status`          tinyint not null default '0',
+  `note`    varchar(200)  default '',
+  `handle_time`          timestamp,
+  `withdraw_time`          timestamp,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;

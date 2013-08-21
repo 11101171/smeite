@@ -1,4 +1,4 @@
-@(manager:models.admin.Manager,form:Form[controllers.admin.UserRebateFormData],msg:String="")
+@(manager:models.admin.Manager,form:Form[controllers.admin.UserExchangeCreditFormData],msg:String="")
 @views.html.admin.template(manager,"user") {
 <div class="header">
 
@@ -27,7 +27,7 @@
                     <h5>处理用户返利</h5>
                 </div>
                 <div class="widget-content nopadding">
-                    <form class=" form-horizontal" id="myForm"  method="post" action="@controllers.admin.routes.Users.saveRebate">
+                    <form class=" form-horizontal" id="myForm"  method="post" action="@controllers.admin.routes.Users.saveExchangeCredit">
 
                         <input type="hidden" name="id" value='@form("id").value'>
                         <input type="hidden" name="uid" value='@form("uid").value'>
