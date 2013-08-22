@@ -85,13 +85,13 @@ GET   /user/account/payment            controllers.users.UsersAccount.payment
 POST  /user/account/modifyPayment      controllers.users.UsersAccount.modifyPayment
 POST  /user/giveUpGift                 controllers.users.UsersAccount.giveUpGift
 POST  /user/giveGift                   controllers.users.UsersAccount.giveGift
-#user 用户返利
-GET   /user/account/myCredits          controllers.users.UsersCommission.myCredits(p:Int ?=1)
-GET   /user/account/myShiDou          controllers.users.UsersCommission.myShiDou(p:Int ?=1)
-GET   /user/account/myAward           controllers.users.UsersCommission.myAward
-GET   /user/account/invite           controllers.users.UsersCommission.invite(p:Int ?=1)
-POST   /user/account/exchangeShiDou   controllers.users.UsersCommission.exchangeShiDou
-GET  /user/account/getInvitePrizes    controllers.users.UsersCommission.getInvitePrizes(uid:Long,inviteeId:Long)
+#user 用户集分宝
+GET   /user/account/myCredits          controllers.users.UsersAccount.myCredits(p:Int ?=1)
+GET   /user/account/myShiDou          controllers.users.UsersAccount.myShiDou(p:Int ?=1)
+GET   /user/account/myAward           controllers.users.UsersAccount.myAward
+GET   /user/account/invite           controllers.users.UsersAccount.invite(p:Int ?=1)
+POST   /user/account/exchangeShiDou   controllers.users.UsersAccount.exchangeShiDou
+GET  /user/account/getInvitePrizes    controllers.users.UsersAccount.getInvitePrizes(uid:Long,inviteeId:Long)
 #user 用户登录注册
 GET   /user/login                    controllers.users.UsersRegLogin.login
 GET   /user/logout                   controllers.users.UsersRegLogin.logout

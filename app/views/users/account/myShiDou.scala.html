@@ -8,10 +8,10 @@ user
             <h2>帐号设置</h2>
             <ul>
 
-                <li> <a  href="@controllers.users.routes.UsersCommission.myCredits(1)">我的集分宝</a> </li>
-                <li> <a class="on"  href="@controllers.users.routes.UsersCommission.myShiDou(1)">我的食豆</a>  </li>
-                <li> <a  href="@controllers.users.routes.UsersCommission.myAward">我的奖品</a>  </li>
-                <li> <a  href="@controllers.users.routes.UsersCommission.invite(1)">邀请有奖</a> </li>
+                <li> <a  href="@controllers.users.routes.UsersAccount.myCredits(1)">我的集分宝</a> </li>
+                <li> <a class="on"  href="@controllers.users.routes.UsersAccount.myShiDou(1)">我的食豆</a>  </li>
+                <li> <a  href="@controllers.users.routes.UsersAccount.myAward">我的奖品</a>  </li>
+                <li> <a  href="@controllers.users.routes.UsersAccount.invite(1)">邀请有奖</a> </li>
             </ul>
         </div>
         <div class="main-content">
@@ -26,7 +26,7 @@ user
                 }
 
                 <div class="set-password mb20 clearfix">
-                    <form id="J_exchangeShiDou" method="post" class="set-form" action="@controllers.users.routes.UsersCommission.exchangeShiDou">
+                    <form id="J_exchangeShiDou" method="post" class="set-form" action="@controllers.users.routes.UsersAccount.exchangeShiDou">
 
                         @exchangeForm.errors.map { error =>
                         <div class="error-row">

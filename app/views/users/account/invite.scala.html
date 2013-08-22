@@ -8,10 +8,10 @@ user
             <h2>帐号设置</h2>
             <ul>
 
-                <li><a href="@controllers.users.routes.UsersCommission.myCredits(1)">我的集分宝</a></li>
-                <li><a href="@controllers.users.routes.UsersCommission.myShiDou(1)">我的食豆</a></li>
-                <li><a href="@controllers.users.routes.UsersCommission.myAward">我的奖品</a></li>
-                <li><a class="on" href="@controllers.users.routes.UsersCommission.invite(1)">邀请有奖</a></li>
+                <li><a href="@controllers.users.routes.UsersAccount.myCredits(1)">我的集分宝</a></li>
+                <li><a href="@controllers.users.routes.UsersAccount.myShiDou(1)">我的食豆</a></li>
+                <li><a href="@controllers.users.routes.UsersAccount.myAward">我的奖品</a></li>
+                <li><a class="on" href="@controllers.users.routes.UsersAccount.invite(1)">邀请有奖</a></li>
             </ul>
         </div>
         <!--side nav end-->
@@ -102,17 +102,17 @@ user
                     <div class="pagin fr pagination" id="J_Pagination">
                         @if(page.nums.length>1){
                         @page.prev.map { page =>
-                        <a class="prev" href="@controllers.users.routes.UsersCommission.invite(page)">上一页</a>
+                        <a class="prev" href="@controllers.users.routes.UsersAccount.invite(page)">上一页</a>
                         }
                         @for(num <-page.nums){
                         @if(num==page.currentPage){
                         <span class="current">@num</span>
                         }else {
-                        <a href="@controllers.users.routes.UsersCommission.invite(num)">@num</a>
+                        <a href="@controllers.users.routes.UsersAccount.invite(num)">@num</a>
                         }
                         }
                         @page.next.map { page =>
-                        <a class="next" href="@controllers.users.routes.UsersCommission.invite(page)">下一页</a>
+                        <a class="next" href="@controllers.users.routes.UsersAccount.invite(page)">下一页</a>
                         }
                         }
                     </div>

@@ -4,16 +4,16 @@ package controllers.users
 import play.api.mvc.{Action, Controller}
 import play.api.data._
 import play.api.data.Forms._
-import play.api.cache.Cache
-import java.io.File
-import net.coobird.thumbnailator.Thumbnails
-import java.net.URL
-import play.api.libs.json.Json
+import play.api.libs.functional.syntax._
+import play.api.libs.json._
+
 import models.user.{UserCreditRecord, User}
-import models.user.dao.{UserSQLDao, UserDao}
-import play.api.Play.current
-import utils.Utils
+import models.user.dao.UserDao
 import java.sql.Timestamp
+import models.user.UserCreditRecord
+import models.user.User
+
+
 
 
 /**
@@ -35,6 +35,7 @@ case  class BaseFormData(
                               qq:Option[String],
                               intro:Option[String]
                               )
+case class InvitePrize(num:Int,handleStatus:Int,handleResult:String)
 object UsersAccount  extends Controller {
 
   val passwdForm = Form(
@@ -76,6 +77,14 @@ object UsersAccount  extends Controller {
     "weixin" ->optional(text)
   )
   )
+  val exchangeForm = Form (
+    "shiDou" ->number(min=1000)
+  )
+  implicit val userInvitePrizeFormat = (
+    (__ \ "num").format[Int] and
+      (__ \ "handleStatus").format[Int] and
+      (__ \ "handleResult").format[String]
+    )(InvitePrize.apply,unlift(InvitePrize.unapply))
 
 
   /* user account 用户账户 基本信息 */
@@ -203,5 +212,74 @@ object UsersAccount  extends Controller {
      Ok(Json.obj("code" -> "100","message" -> "成功" ))
    }
  }
+
+
+  /*我的集分宝*/
+  def myCredits(p:Int)= Users.UserAction {user => implicit request =>
+    if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)
+    else {
+      val prizes = UserDao.findUserInvitePrizes(user.get.id.get,p,20)
+      Ok(views.html.users.account.myCredits(user,prizes))
+    }
+  }
+  /*我的食豆*/
+  def myShiDou(p:Int) = Users.UserAction {user => implicit request =>
+    if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)
+    else {
+      var page = UserDao.findUserExchangeShiDous(user.get.id.get,p,20)
+      Ok(views.html.users.account.myShiDou(user,exchangeForm,page) )
+    }
+  }
+  /* 食豆申请 */
+  def exchangeShiDou = Users.UserAction {user => implicit request =>
+    if(user.isEmpty)   Redirect(controllers.users.routes.UsersRegLogin.login)
+    else {
+      var page = UserDao.findUserExchangeShiDous(user.get.id.get,1,20)
+      exchangeForm.bindFromRequest.fold(
+        formWithErrors => {
+          BadRequest(views.html.users.account.myShiDou(user,formWithErrors,page))
+        } ,
+        fields =>{
+          if((user.get.shiDou - user.get.withdrawShiDou)< fields){
+            Redirect(controllers.users.routes.UsersAccount.myShiDou(1))
+            ///   Ok(views.html.users.account.myShiDou(user,exchangeForm.fill(fields),page,"您申请兑换的食豆数量大于您目前的余额"))
+          }
+          UserDao.addUserExchangeShiDou(user.get.id.get,fields)
+          //  Ok(views.html.users.account.myShiDou(user,exchangeForm.fill(fields),page,"兑换申请成功，我们将尽快处理，并把处理结果通知您，谢谢您对我们的信任和支持。"))
+          Redirect(controllers.users.routes.UsersAccount.myShiDou(1))
+        }
+      )
+    }
+  }
+  /* user account 用户账户 我的奖品 */
+  def myAward = Users.UserAction {    user => implicit request =>
+    if(user.isEmpty)  Redirect(controllers.users.routes.UsersRegLogin.login)
+    else  Ok(views.html.users.account.myAward(user))
+
+  }
+
+  /*邀请有奖*/
+  /* user account 用户账户 邀请好友 */
+  def invite(currentPage:Int) = Users.UserAction {  user => implicit request =>
+    if(user.isEmpty)  Redirect(controllers.users.routes.UsersRegLogin.login)
+    else {
+      val totalInviters = UserDao.getInviterNum(user.get.id.get)
+      val totalReward = UserDao.getInviteReward(user.get.id.get)
+      val page =UserDao.getInviters(user.get.id.get,currentPage,20)
+      Ok(views.html.users.account.invite(user,page,totalInviters,totalReward))
+    }
+  }
+
+  /* 获得 邀请有奖 */
+  def  getInvitePrizes(uid:Long,inviteeId:Long)  = Users.UserAction {  user => implicit request =>
+    if(user.isEmpty)  Redirect(controllers.users.routes.UsersRegLogin.login)
+    else {
+      val prizes = UserDao.findUserInvitePrizes(uid,inviteeId).map(x=>InvitePrize(x.num,x.handleStatus,models.user.HandleResult(x.handleResult).toString))
+      Ok(Json.obj("code"->"100","size"->prizes.length,"prizes"->Json.toJson(prizes)))
+
+    }
+  }
+
+
 
 }
