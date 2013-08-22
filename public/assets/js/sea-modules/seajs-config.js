@@ -25,6 +25,8 @@ seajs.config({
         'zeroclipboard': 'gallery/zeroclipboard/1.1.6/zeroclipboard',
         'detector':'arale/detector/1.2.0/detector',
 
+
+
         'imgAreaSelect':'smeite/module/jquery.imgareaselect.min',
        'smeite':'smeite/smeite'
     },

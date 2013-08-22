@@ -13,7 +13,7 @@
 
 define(function(require, exports){
 	var $ = require("$");
-	window.ZeroClipboard = require("zeroclipboard");
+	 var ZeroClipboard = require("zeroclipboard");
 
     $(function(){
         /* 复制 */

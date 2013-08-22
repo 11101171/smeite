@@ -872,7 +872,7 @@ define(function(require, exports) {
                 html += '</div>';
             //    $("body").append(html);
           var  goodsExistOverlay = new Overlay({
-                template:'#J_goodsExistDialog',
+                template:html,
                 width: 600,
                 zIndex: 9999,
                 align: {
@@ -966,7 +966,7 @@ define(function(require, exports) {
 
        //     if(!$("#J_goodsPubDialog")[0]){
                 var html = "";
-                html += '<div id="J_goodsPubDialog" class=" ugc-dialog">';
+                html += '<div id="J_goodsPubDialog" class="ugc-dialog">';
                 html += '<div class="dialog-content">';
                 html += '<div class="hd"><h3>嗯~ 就是它吧</h3></div>';
                 html += '<div class="bd clearfix">';
@@ -1008,7 +1008,8 @@ define(function(require, exports) {
                 html += '</div>';
              //   $("body").append(html);
             var  goodsPubOverlay = new Overlay({
-                template:'#J_goodsPubDialog',
+                classPrefix: "ugc-dialog",
+                template:html,
                 width: 600,
                 zIndex: 9999,
                 align: {
