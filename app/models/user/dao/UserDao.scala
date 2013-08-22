@@ -502,15 +502,7 @@ object UserDao {
     val list:List[Goods] =q.list()
     Page[Goods](list,currentPage,totalPages)
   }
-  /* 查找第一个分享的用户*/
-  def findFirstShareUser(goodsId:Long):User =database.withSession {  implicit session:Session =>
-  (for{
-    c<- UserShareGoodses.filter(_.goodsId === goodsId).sortBy(_.id asc)
-    u<- Users
-    if c.uid === u.id
-  }yield(u)).first()
 
-  }
 
   /* user trend */
   def addTrend(userTrend:UserTrend)=database.withSession {  implicit session:Session =>

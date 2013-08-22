@@ -99,7 +99,7 @@ object API extends Controller {
              // 下面可能需要判断id.get.toLong 是否为long 的问题
            else {
              val numIid=idStr.get.toLong
-             val goods =GoodsDao.find(numIid)
+             val goods =GoodsDao.findByNumIid(numIid)
 
              if(!goods.isEmpty){
                val product=Product(goods.get.id,goods.get.numIid,goods.get.nick,goods.get.name,None,goods.get.price,goods.get.pic,Nil,goods.get.clickUrl,Nil,goods.get.location)

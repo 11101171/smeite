@@ -188,18 +188,10 @@ object Baobei extends Controller {
 
 
   def view(id:Long) = Users.UserAction {user => implicit request =>
-    val goods=GoodsDao.findById(id)
-    if (goods.isEmpty)Ok(views.html.baobei.nofound())
-    else{
-    //  if(goods.get.status==0){
-    //    Ok(views.html.baobei.nofound())
-   //   }else{
-        val firstShareUser=UserDao.findFirstShareUser(id)
-        val tags = TagDao.findGoodsTags(goods.get.id.get)
-        Ok(views.html.baobei.view(user,goods.get,firstShareUser,tags))
-   //   }
+        val goods=GoodsDao.find(id)
+        val tags = TagDao.findGoodsTags(goods._1.id.get)
+        Ok(views.html.baobei.view(user,goods,tags))
 
-    }
   }
 
 

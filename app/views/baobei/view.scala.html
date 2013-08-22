@@ -1,8 +1,8 @@
-@(user:Option[models.user.User],goods:models.goods.Goods,firstShareUser:models.user.User,tags:List[models.tag.TagGoods])
+@(user:Option[models.user.User],goods:(models.goods.Goods,models.user.User),tags:List[models.tag.TagGoods])
 @views.html.template(
 user,
-title =goods.name+"_食美特，爱美食爱生活",
-description = goods.intro
+title = goods._1.name+"_食美特，爱美食爱生活",
+description = goods._1.intro
 
 )(css="/assets/css/template/baobei.css") {
 
@@ -15,23 +15,23 @@ description = goods.intro
             <!-- pic show-->
                 <div class="pic-box">
 
-                    <a class="pic-link"  href='' data-itemid="@goods.numIid" target="_blank"  >
+                    <a class="pic-link"   href='' data-itemid="@goods._1.numIid" target="_blank"  >
 
-                        @for(img<-goods.itemPics.split("&")){
-                        <img  src='@(img+"_460x460.jpg")' alt="@goods.name" width="460" />
+                        @for(img<-goods._1.itemPics.split("&")){
+                        <img  src='@(img+"_460x460.jpg")' alt="@goods._1.name" width="460" />
                         }
                     </a>
 
                     <div class="like-common like-common-s" >
-                        <a  class="like" rel="followGoods" href="javascript:void(0)" data-id="@goods.id.get" title="喜欢"><i>喜欢</i></a>
+                        <a  class="like" rel="followGoods" href="javascript:void(0)" data-id="@goods._1.id.get" title="喜欢"><i>喜欢</i></a>
                         <div class="like-num">
                             <dl class="J_scrollUp">
-                                <dd class="J_FavorNum" data-val="@goods.loveNum">@goods.loveNum</dd>
+                                <dd class="J_FavorNum" data-val="@goods._1.loveNum">@goods._1.loveNum</dd>
                                 <dd>+1</dd>
                             </dl>
                         </div>
                     </div>
-                    <a class="bbl-btn pic-more" href='' data-itemid="@goods.numIid" >查看更多图片&gt;&gt;</a>
+                    <a class="bbl-btn pic-more"  href='' data-itemid="@goods._1.numIid" >查看更多图片&gt;&gt;</a>
                 </div>
 
 
@@ -45,17 +45,17 @@ description = goods.intro
 
             <div class="buy-info">
                 <span class="arrow-left"></span>
-            <h3 class="title"> @goods.name</h3>
+            <h3 class="title"> @goods._1.name</h3>
 
                  <div class="user-recommend clearfix">
                      <div class="pic fl">
-                         <a target="_blank" href="@controllers.users.routes.Users.home(firstShareUser.id.get)">
-                             <img width="60" height="60" src="@firstShareUser.pic" alt="@firstShareUser.name" class="fl">
+                         <a target="_blank" href="@controllers.users.routes.Users.home(goods._2.id.get)">
+                             <img width="60" height="60" src="@goods._2.pic" alt="@goods._2.name" class="fl">
                          </a>
                      </div>
                      <div class="intro fl">
-                         @if(goods.intro!=""){
-                         @goods.intro
+                         @if(goods._1.intro!=""){
+                         @goods._1.intro
                          <span class="intro-quot"></span>
                          }
                      </div>
@@ -72,16 +72,16 @@ description = goods.intro
 
                          <dd class="go-to-buy">
                              <div class="price">
-                                 <span class="price-promotion"> ¥@goods.price</span>
+                                 <span class="price-promotion"> ¥@goods._1.price</span>
                              </div>
 
-                       <a class="buy-btn"  href='' data-itemid="@goods.numIid"  target="_blank" rel="nofollow">去看看 &gt;&gt; </a>
+                       <a class="buy-btn"   href='' data-itemid="@goods._1.numIid" target="_blank" rel="nofollow">去看看 &gt;&gt; </a>
 
                          </dd>
                      <dd class="shareTips">
 
-                         <a rel="nofollow" class="info-wrong" href="javascript:;" id="J_JiuCuo" data-id="@goods.id.get">信息有误？</a>
-                         <div class="share-link" data-sharetxt="@goods.name" data-sharepic="@goods.pic" data-sharelink="@controllers.routes.Baobei.view(goods.id.get)">
+                         <a rel="nofollow" class="info-wrong" href="javascript:;" id="J_JiuCuo" data-id="@goods._1.id.get">信息有误？</a>
+                         <div class="share-link" data-sharetxt="@goods._1.name" data-sharepic="@goods._1.pic" data-sharelink="@controllers.routes.Baobei.view(goods._1.id.get)">
                              <label class="fl l20 gc">分享到：</label>
                              <a class="s-sina fl" href="javascript:;" data-type="s-sina" alt="分享到新浪微博"></a>
                              <a class="s-qzone fl" href="javascript:;" data-type="s-qzone" alt="分享到QQ空间"></a>
@@ -99,7 +99,7 @@ description = goods.intro
                <div class="comment-list">
                         <div class="comment-publish clearfix">
                             <div class="pub-box clearfix">
-                                <input type="hidden" id="J_productId" name="goodsId" value="@goods.id.get">
+                                <input type="hidden" id="J_productId" name="goodsId" value="@goods._1.id.get">
                                 <div class="user-pic">
                                     @if(user.isEmpty){
                                     <img src="/images/user/default.jpg" alt="食美特" width="80" height="80" />
@@ -187,7 +187,6 @@ description = goods.intro
         win.alimamatk_onload.push(o);
     })(window,document);
 </script>
-
 
 <script type="text/javascript">
     seajs.use(['smeite/baobei/baobei','smeite/baobei/favor'])

@@ -1,4 +1,4 @@
-# --- First database schema
+﻿# --- First database schema
 # --- First database schema
 
 # --- !Ups
@@ -1858,8 +1858,9 @@ alter table user_static add love_post_num smallint(10) unsigned not null default
 /*2013-08-21*/
 /* 用户 积分提现申请 */
 
-DROP TABLE IF EXISTS `user_rebate`
-DROP TABLE IF EXISTS `user_exchange_credit`
+
+DROP TABLE IF EXISTS `user_rebate`;
+DROP TABLE IF EXISTS `user_exchange_credit`;
 CREATE TABLE `user_exchange_credit` (
   `id`                  int(10) NOT NULL  AUTO_INCREMENT ,
   `uid`                 int(10) ,

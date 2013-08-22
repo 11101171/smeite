@@ -57,11 +57,19 @@ object GoodsDao {
 
 
   def findById(id:Long):Option[Goods]=database.withSession {  implicit session:Session =>
-    (for(c<-Goodses if c.id===id)yield(c)).firstOption
+    (for(c<-Goodses if c.id===id)yield c ).firstOption
   }
   /*根据num_iid 查找*/
-  def find(numIid:Long):Option[Goods] = database.withSession {  implicit session:Session =>
-    (for(c<-Goodses if c.numIid===numIid)yield(c)).firstOption
+  def findByNumIid(numIid:Long):Option[Goods] = database.withSession {  implicit session:Session =>
+    (for(c<-Goodses if c.numIid === numIid)yield c ).firstOption
+  }
+  def find(id:Long) = database.withSession {  implicit session:Session =>
+    ( for {
+      c<-Goodses
+      u<-Users
+      if c.id=== id
+      if c.uid === u.id
+    } yield (c,u) ).first
   }
   def countGoods:Int = database.withSession {  implicit session:Session =>
     Query(Goodses.length).first()
@@ -73,7 +81,7 @@ object GoodsDao {
   /*分页显示*/
   def findAll(currentPage: Int, pageSize: Int): Page[Goods] = database.withSession {  implicit session:Session =>
     val totalRows=Query(Goodses.length).first()
-    val totalPages=((totalRows + pageSize - 1) / pageSize)
+    val totalPages=(totalRows + pageSize - 1) / pageSize
     /*获取分页起始行*/
     val startRow= if (currentPage < 1 || currentPage > totalPages ) { 0 } else {(currentPage - 1) * pageSize }
     val q=  for(c<-Goodses.sortBy(_.id desc).drop(startRow).take(pageSize)  ) yield(c)
