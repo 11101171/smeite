@@ -834,6 +834,7 @@ define(function(require, exports) {
                 "itemPics":[],
                 "clickUrl":jsonObj.clickUrl,
                 "tags": null,
+                "foodSecurity":jsonObj.foodSecurity,
                 "location":jsonObj.location
             };
             //判断商品图片
@@ -959,6 +960,7 @@ define(function(require, exports) {
                 "itemPics":[],
                 "clickUrl":jsonObj.clickUrl,
                 "tags": null,
+                "foodSecurity":jsonObj.foodSecurity,
                 "location":jsonObj.location
             };
 

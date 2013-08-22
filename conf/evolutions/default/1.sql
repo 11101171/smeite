@@ -1872,3 +1872,7 @@ CREATE TABLE `user_exchange_credit` (
   `withdraw_time`          timestamp,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+/* 2013 - 08 - 22 */
+update goods set commission_rate =null;
+alter table goods change commission_rate food_security text;

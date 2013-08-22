@@ -51,7 +51,7 @@
         method:'taobao.taobaoke.widget.items.convert',
         num_iids:'@numIid',
         outer_code:'@uid',
-        fields:'click_url,nick,title,item_location,pic_url,price,promotion_price,commission_rate,volume'
+        fields:'click_url,nick,title,item_location,pic_url,price,promotion_price,volume'
     },function(resp){
         if(resp.error_response){
             alert('taobao.taobaoke.widget.items.convert接口获取商信息品失败!'+resp.error_response.msg);

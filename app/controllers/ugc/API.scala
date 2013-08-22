@@ -31,6 +31,7 @@ import java.net.URL
  * Time: 上午10:22
  * ***********************
  * description:使用淘宝的API 获取淘宝的商品 并保存在数据库中
+ * food_security     配料表|食品添加剂|保质期|生产许可号|产品标准号|储藏方法|生产商|生产日期
  */
 case class Product(
                   id:Option[Long],
@@ -43,6 +44,7 @@ case class Product(
                   itemPics: List[String],
                   clickUrl:String,
                   tags:List[String],
+                  foodSecurity:Option[String],
                   location:String
                   )
 
@@ -65,6 +67,7 @@ object API extends Controller {
       (__ \ "itemPics").format[List[String]] and
       (__ \ "clickUrl").format[String] and
       (__ \ "tags").format[List[String]]   and
+      (__ \ "foodSecurity").format[Option[String]] and
        (__ \ "location").format[String]
     )(Product.apply,unlift(Product.unapply))
 
@@ -102,7 +105,7 @@ object API extends Controller {
              val goods =GoodsDao.findByNumIid(numIid)
 
              if(!goods.isEmpty){
-               val product=Product(goods.get.id,goods.get.numIid,goods.get.nick,goods.get.name,None,goods.get.price,goods.get.pic,Nil,goods.get.clickUrl,Nil,goods.get.location)
+               val product=Product(goods.get.id,goods.get.numIid,goods.get.nick,goods.get.name,None,goods.get.price,goods.get.pic,Nil,goods.get.clickUrl,Nil,goods.get.foodSecurity,goods.get.location)
                Ok(Json.obj("code"->"105","product"->Json.toJson(product) ,"message"->"该商品已存在"))
              }
              else{
@@ -112,6 +115,7 @@ object API extends Controller {
                req.setNumIid(numIid);
                val respItem = client.execute(req ).getItem
                val itemImgs= for(i<-respItem.getItemImgs)yield(i.getUrl)
+               val security = if(respItem.getFoodSecurity !=null) { Some(respItem.getFoodSecurity.getMix+"|"+respItem.getFoodSecurity.getFoodAdditive+"|"+respItem.getFoodSecurity.getPeriod+"|"+respItem.getFoodSecurity.getPrdLicenseNo+"|"+respItem.getFoodSecurity.getDesignCode+"|"+respItem.getFoodSecurity.getPlanStorage+"|"+respItem.getFoodSecurity.getFactory + " "+respItem.getFoodSecurity.getContact+"|"+respItem.getFoodSecurity.getProductDateEnd)}else{ None }
              val product = Product(
                  None,
                respItem.getNumIid,
@@ -123,6 +127,7 @@ object API extends Controller {
                  itemImgs.toList,
                  respItem.getDetailUrl,
                  Nil,
+                 security,
                  respItem.getLocation.getState+" "+respItem.getLocation.getCity
                )
                Ok(Json.obj("code"->"100","product"->Json.toJson(product)))
@@ -155,7 +160,7 @@ object API extends Controller {
         images.append(img+"&")
       }
       /*保存goods*/
-      val goodsId= GoodsDao.addGoods(user.get.id.get,product.numIid,product.name,product.proComment.getOrElse("none"),product.price,mainPic,images.toString,product.nick,product.clickUrl,product.location,hwRate)
+      val goodsId= GoodsDao.addGoods(user.get.id.get,product.numIid,product.name,product.proComment.getOrElse("none"),product.price,mainPic,images.toString,product.nick,product.clickUrl,product.foodSecurity,product.location,hwRate)
       /*保存tags 首先查看tags 是否存在，不存在则保存*/
       for(name<-product.tags){
         /*处理tag*/

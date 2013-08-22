@@ -36,7 +36,7 @@ case class Goods(
                   status: Int,
                   isMember: Boolean,
                   location:String,
-                  commissionRate: Option[Int],
+                  foodSecurity: Option[String],
                   uid:Long,
                   collectTime:Option[Timestamp],
                   clickUrl:String
@@ -59,12 +59,12 @@ object Goodses extends Table[Goods]("goods") {
   def status = column[Int]("status")
   def isMember = column[Boolean]("is_member")
   def location     = column[String]("location")
-  def commissionRate = column[Int]("commission_rate")
+  def foodSecurity = column[String]("food_security")
   def uid = column[Long]("uid")
   def collectTime=column[Timestamp]("collect_time")
   def clickUrl=column[String]("click_url")
-  def * = id.? ~ numIid ~ hwRate ~ name ~ intro ~ price ~ pic ~ itemPics ~ nick ~ promotionPrice.? ~ content.? ~ loveNum ~ volume ~ status ~ isMember ~ location ~ commissionRate.? ~ uid ~ collectTime.? ~ clickUrl <>(Goods, Goods.unapply _)
-  def autoInc = uid ~ numIid  ~ name ~ intro ~ price ~ pic ~ itemPics ~ nick  ~ clickUrl ~ location ~ hwRate  returning id
+  def * = id.? ~ numIid ~ hwRate ~ name ~ intro ~ price ~ pic ~ itemPics ~ nick ~ promotionPrice.? ~ content.? ~ loveNum ~ volume ~ status ~ isMember ~ location ~  foodSecurity.? ~ uid ~ collectTime.? ~ clickUrl <>(Goods, Goods.unapply _)
+  def autoInc = uid ~ numIid  ~ name ~ intro ~ price ~ pic ~ itemPics ~ nick  ~ clickUrl ~ foodSecurity.? ~ location ~ hwRate  returning id
 
 
 }
