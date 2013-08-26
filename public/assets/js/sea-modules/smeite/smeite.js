@@ -23,7 +23,6 @@ define(function(require, exports) {
   var Mask = require("mask");
     var Cookie = require("cookie");
     var Dialog = require("dialog") ;
-
     $.smeite = $.smeite || {
         version: "v1.0.0"
     };
@@ -574,7 +573,7 @@ define(function(require, exports) {
 
                 var prize=0;
                 $("#J_start").click(function(){
-                    $this = $(this);
+                  var $this = $(this);
                     $this.html("抽奖中……")
                     $(".show").hide()
                     $(".hide").show()
@@ -792,32 +791,38 @@ define(function(require, exports) {
         },
         //分享宝贝成功弹出层
         pubSuccess: function(){
-            if(!$("#J_pubSuccessDialog")[0]){
+          if(!$("#J_pubSuccessDialog")[0]){
                 var html = "";
-                html += '<div id="J_pubSuccessDialog">';
+                html += '<div id="J_pubSuccessDialog" class="g-dialog">';
                 html += '<div class="dialog-content">';
                 html += '<div class="bd clearfix">';
                 html += '<p class="success-text"><span class="correct">宝贝发布成功！</span></p>';
-                html += '<p class="clearfix"><a class="bbl-btn goCheck" href="/user/baobei">前往查看宝贝</a>';
+                html += '<p class="clearfix"><a class="bbl-btn goCheck" href="/user/'+SMEITER.userId+'/baobei">前往查看宝贝</a>';
                 html += '<a class="bgr-btn closeD ml10" href="javascript:;">关闭</a></p>';
+               html += '<a class="close" href="javascript:;"></a>';
                 html += '</div>';
                 html += '</div>';
                 html += '</div>';
-                $("body").append(html);
-                var pubSuccessDialog = new Dialog({
-                    classPrefix: "g-dialog",
-                    effect: 'fade',
-                    content: html
-                }).show();
-            }else{
-                var  pubSuccessDialog = new Dialog({
-                    classPrefix: "g-dialog",
-                    effect: 'fade',
-                    content: '#J_pubSuccessDialog'
-                }).show();
-            }
+               pubSuccessDialog= new Dialog({
+                   template:html,
+                   classPrefix: "g-dialog",
+                   zIndex: 9999,
+                   align: {
+                       selfXY: [ "50%", "50%" ],
+                       baseXY: [ "50%", "50%" ]
+                   }
+               }).show()
+           }else{
+               pubSuccessDialog.show()
+           }
 
 
+            $(document).on("click","#J_pubSuccessDialog .closeD",function(){
+                pubSuccessDialog.hide()
+            })
+            $(document).on("click","#J_pubSuccessDialog .close",function(){
+                pubSuccessDialog.hide()
+            })
         },
         //生成同步分享按钮
 
@@ -839,9 +844,9 @@ define(function(require, exports) {
             };
             //判断商品图片
             var mainPic = jsonObj.pic+"_80x80.jpg"
-   //         if(!$("#J_goodsExistDialog")[0]){
+          if(!$("#J_goodsExistDialog")[0]){
                 var html = "";
-                html += '<div id="J_goodsExistDialog" class=" ugc-dialog">';
+                html += '<div id="J_goodsExistDialog" class="g-dialog">';
                 html += '<div class="dialog-content">';
                 html += '<div class="hd"><h3>食美特上已经有这个宝贝啦</h3></div>';
                 html += '<div class="bd clearfix">';
@@ -871,7 +876,8 @@ define(function(require, exports) {
                 html += '</div>';
                 html += '</div>';
             //    $("body").append(html);
-          var  goodsExistOverlay = new Overlay({
+          goodsExistOverlay = new Overlay({
+              classPrefix: "g-dialog",
                 template:html,
                 width: 600,
                 zIndex: 9999,
@@ -882,13 +888,28 @@ define(function(require, exports) {
             });
             goodsExistOverlay.show();
             Mask.show() ;
+        }else{
+              goodsExistOverlay = new Overlay({
+                  classPrefix: "g-dialog",
+                  template:"#J_goodsExistDialog",
+                  width: 600,
+                  zIndex: 9999,
+                  align: {
+                      selfXY: [ "50%", "50%" ],
+                      baseXY: [ "50%", "50%" ]
+                  }
+              });
+              goodsExistOverlay.show();
+              Mask.show() ;
+          }
             $("#J_goodsExistDialog .close").bind("click",function(){
                 goodsExistOverlay.hide()
                 Mask.hide()
+                $("#J_goodsExistForm")[0].reset();
 
             });
                 $("#J_goodsSave").unbind().bind("click",function(){
-                    $this = $(this);
+                var    $this = $(this);
                     if($this.hasClass("disabled")){
                         return false;
                     }
@@ -917,8 +938,11 @@ define(function(require, exports) {
                         },
                         success: function(data){
                             if(data.code=="100"){
-                                goodsExistDialog.hide()
-                        //        $("#J_goodsExistDialog").empty().remove();
+                                goodsExistOverlay.hide()
+                                Mask.hide()
+                                $("#J_goodsExistForm")[0].reset();
+                                $this.enableBtn("bbl-btn")
+                                $(".goods-act").find(".errc").html("").hide()
                                 if(window.location.href.indexOf("/share")!=-1){
                                     $.smeite.tip.conf.tipClass = "tipmodal tipmodal-ok";
                                     $.smeite.tip.show($this,"宝贝发布成功！");
@@ -964,9 +988,9 @@ define(function(require, exports) {
                 "location":jsonObj.location
             };
 
-       //     if(!$("#J_goodsPubDialog")[0]){
+       if(!$("#J_goodsPubDialog")[0]){
                 var html = "";
-                html += '<div id="J_goodsPubDialog" class="ugc-dialog">';
+                html += '<div id="J_goodsPubDialog" class="g-dialog">';
                 html += '<div class="dialog-content">';
                 html += '<div class="hd"><h3>嗯~ 就是它吧</h3></div>';
                 html += '<div class="bd clearfix">';
@@ -1007,8 +1031,8 @@ define(function(require, exports) {
                 html += '</div>';
                 html += '</div>';
              //   $("body").append(html);
-            var  goodsPubOverlay = new Overlay({
-                classPrefix: "ugc-dialog",
+             goodsPubOverlay = new Overlay({
+                classPrefix: "g-dialog",
                 template:html,
                 width: 600,
                 zIndex: 9999,
@@ -1019,10 +1043,24 @@ define(function(require, exports) {
         });
             goodsPubOverlay.show();
             Mask.show() ;
+        }else{
+           goodsPubOverlay = new Overlay({
+               classPrefix: "g-dialog",
+               template:"#J_goodsPubDialog",
+               width: 600,
+               zIndex: 9999,
+               align: {
+                   selfXY: [ "50%", "50%" ],
+                   baseXY: [ "50%", "50%" ]
+               }
+       })
+           goodsPubOverlay.show();
+           Mask.show() ;
+       }
             $("#J_goodsPubDialog .close").bind("click",function(){
                 goodsPubOverlay.hide()
                 Mask.hide()
-
+                $("#J_goodsPubForm")[0].reset();
             });
                 //宝贝图片
                 var photoArr = jsonObj.itemPics,
@@ -1053,7 +1091,7 @@ define(function(require, exports) {
                 //宝贝发布
                 $("#J_goodsPub").unbind().bind("click",function(){
 
-                    $this = $(this);
+                  var  $this = $(this);
                     if($this.hasClass("disabled")){
                         return false;
                     }
@@ -1094,7 +1132,13 @@ define(function(require, exports) {
                         },
                         success: function(data){
                             if(data.code=="100"){
-                                goodsPubDialog.hide()
+                                goodsPubOverlay.hide()
+                                Mask.hide()
+                                $this.enableBtn("bbl-btn")
+                                $(".goods-act").find(".errc").html(" ").hide()
+                                $("#J_goodsPubForm")[0].reset();
+                                $("#J_goodsPubDialog").find("li").removeClass("selected");
+
                                 if(window.location.href.indexOf("/share")!=-1){
                                     $.smeite.tip.conf.tipClass = "tipmodal tipmodal-ok";
                                     $.smeite.tip.show($this,"宝贝发布成功！");
@@ -1852,7 +1896,7 @@ define(function(require, exports) {
             }
 
             if(!$("#followDialog")[0]){
-                var html = '<div id="followDialog" class="g-dialog">';
+                var html = '<div id="J_followDialog" class="g-dialog">';
                 html +=	'<div class="dialog-content">';
                 html +=	'<div class="hd"><h3></h3></div>';
                 html +=	'<div class="bd clearfix '+bdClass+'">';
@@ -1870,26 +1914,43 @@ define(function(require, exports) {
                     $("#loginDialog").empty().remove();
                     $("#exposeMask").empty().remove();
                 }
-                $("#followDialog").overlay({
-                    top: 'center',
-                    mask: {
-                        color: '#000',
-                        loadSpeed: 200,
-                        opacity: 0.3
-                    },
-                    closeOnClick: false,
-                    load: true
-                });
-                $("#followDialog").overlay().getClosers().bind("click",function(){
-                    if($("input[name=noMore]")[0].checked){
-                        Cookie.set("noMoreTip","n");
-                    }
-                    if(refresh){
-                        window.location.reload();
+                followOverlay = new Overlay({
+                    classPrefix: "g-dialog",
+                    template:html,
+                    width: 600,
+                    zIndex: 9999,
+                    align: {
+                        selfXY: [ "50%", "50%" ],
+                        baseXY: [ "50%", "50%" ]
                     }
                 });
+                followOverlay.show();
+                Mask.show() ;
+            }else{
+                followOverlay = new Overlay({
+                    classPrefix: "g-dialog",
+                    template:"#J_followDialog",
+                    width: 600,
+                    zIndex: 9999,
+                    align: {
+                        selfXY: [ "50%", "50%" ],
+                        baseXY: [ "50%", "50%" ]
+                    }
+                });
+                followOverlay.show();
+                Mask.show() ;
             }
-        }
+            $(document).on("click","#J_followDialog",function(){
+                if($("input[name=noMore]")[0].checked){
+                    Cookie.set("noMoreTip","n");
+                }
+                if(refresh){
+                    window.location.reload();
+                }
+            })
+
+            }
+
         /*异步授权登陆后*/
         window.refresh=function(){
             window.location.reload();

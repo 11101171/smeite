@@ -995,6 +995,10 @@ input:-moz-placeholder { font-size:12px; }
 .g-dialog .close { position:absolute;top:12px;right:16px;width:16px;height:16px;background:url(images/close.png) no-repeat;color:#999;font:11px "Comic Sans MS"; }
 .g-dialog .close:hover { color:#55aadd;text-decoration:none;background-position:0 -16px; }
 .g-dialog .bd { padding:20px; }
+.g-dialog .success-text{
+    margin-bottom: 15px;
+    text-align: center;
+}
 #loginDialog .bd { padding:20px 0; }
 #loginDialog .bd .bd-l { float:left;width:330px;padding:10px 0 0 0;border-right:1px dotted #cdcdcd; }
 #loginDialog .bd .bd-r { float:right;width:251px;padding:10px 0 0 0; }
@@ -1331,12 +1335,12 @@ input:-moz-placeholder { font-size:12px; }
 .icon-paipai0 { background-position:0 -139px; }
 /* 分享的宝贝发布 */
 #J_goodsPubDialog { width:517px; }
-.ugc-dialog .form-row { margin:0 0 15px 0; }
-.ugc-dialog .form-row label { width:60px;font-size:12px;color:#333; }
+#J_goodsPubDialog .form-row { margin:0 0 15px 0; }
+#J_goodsPubDialog .form-row label { width:60px;font-size:12px;color:#333; }
 #J_goodsPubDialog .base-input { width:405px; }
 #J_goodsPubDialog .base-txa { width:405px;height:55px; }
 #J_goodsPubDialog .goodsNm { width:415px;line-height:18px;padding:6px 0;font-size:14px;display:inline-block;zoom:1;overflow:hidden; }
-.ugc-dialog .goods-act { margin-top:15px;padding:15px 0 0 60px;border-top:1px dotted #d1d1d1; }
+#J_goodsPubDialog .goods-act { margin-top:15px;padding:15px 0 0 60px;border-top:1px dotted #d1d1d1; }
 #J_goodsPubDialog .goods-gallery { float:left;width:415px;overflow:hidden; }
 #J_goodsPubDialog .goods-gallery .gallery-bd { position:relative;width:415px;height:205px;overflow:hidden; }
 #J_goodsPubDialog .goods-gallery .items { position:absolute;width:420px;height:2000em; }
@@ -1384,14 +1388,14 @@ input:-moz-placeholder { font-size:12px; }
 
 
 /* 关注弹层 */
-#followDialog { width:480px; }
-#followDialog .bd { height:170px;background-image:url(images/follow-smeite.png);background-repeat:no-repeat; }
-#followDialog .sinaBd { background-position:0 0; }
-#followDialog .qzoneBd { background-position:0 -210px; }
-#followDialog .tencentBd { background-position:0 -420px; }
-#followDialog i { position:absolute;top:3px;left:10px;width:53px;height:43px;background:url(images/follow-smeite.png) 0 -630px no-repeat; }
-#followDialog label { position:absolute;top:13px;right:36px; }
-#followDialog .btnFrame { margin:105px auto 0;*margin:125px auto 0;width:65px; }
+#J_followDialog { width:480px; }
+#J_followDialog .bd { height:170px;background-image:url(images/follow-smeite.png);background-repeat:no-repeat; }
+#J_followDialog .sinaBd { background-position:0 0; }
+#J_followDialog .qzoneBd { background-position:0 -210px; }
+#J_followDialog .tencentBd { background-position:0 -420px; }
+#J_followDialog i { position:absolute;top:3px;left:10px;width:53px;height:43px;background:url(images/follow-smeite.png) 0 -630px no-repeat; }
+#J_followDialog label { position:absolute;top:13px;right:36px; }
+#J_followDialog .btnFrame { margin:105px auto 0;*margin:125px auto 0;width:65px; }
 
 /* guide */
 .guide{ display:none;position:fixed;bottom:-90px;width:100%;z-index:100;height:90px;background:rgba(47,42,30,0.8);filter:progid:DXImageTransform.Microsoft.gradient(enabled='true',startColorstr='#cc2f2a1e',endColorstr='#cc2f2a1e');}
