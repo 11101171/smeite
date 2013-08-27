@@ -143,12 +143,11 @@
 .buy-box .go-to-buy{
     height: 35px;
     background: url(images/bg_go_to_buy.png) repeat 0 0;
-    margin-bottom: 15px;
 }
 
- .buy-box  dd  a:hover{
+/* .buy-box  dd  a:hover{
     text-decoration: underline;
-}
+}*/
  .buy-box .price{
     float: left;
     height: 35px;
@@ -197,7 +196,6 @@
 }
 
 .buy-box .shareTips {
-     border-top: 1px dashed #ddd;
     padding-top: 15px;
     height: 16px;
     line-height: 16px;
@@ -205,6 +203,22 @@
 
 .buy-box .info-wrong {
     float: right;
+}
+.buy-box .food-security{
+    padding: 15px;
+    background: #f9f9f9;
+    border: 1px dashed #ddd;
+}
+.buy-box .food-security li{
+    line-height: 18px;
+    color: #555;
+    padding: 2px 0;
+}
+.buy-box .food-security li a{
+    color: #ff7f00;
+}
+.buy-box .food-security li a:hover{
+    color: #E67300;
 }
 
 /* comment */

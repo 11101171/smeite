@@ -46,7 +46,7 @@ description = goods._1.intro
             <div class="buy-info">
                 <span class="arrow-left"></span>
             <h3 class="title"> @goods._1.name</h3>
-
+                @if(goods._1.intro!=""){
                  <div class="user-recommend clearfix">
                      <div class="pic fl">
                          <a target="_blank" href="@controllers.users.routes.Users.home(goods._2.id.get)">
@@ -54,14 +54,14 @@ description = goods._1.intro
                          </a>
                      </div>
                      <div class="intro fl">
-                         @if(goods._1.intro!=""){
                          @goods._1.intro
                          <span class="intro-quot"></span>
-                         }
                      </div>
                  </div>
+                }
 
                  <dl class="buy-box  clearfix">
+                     @if(tags.size !=0){
                          <dd class="tags clearfix">
                              <span class="label">标签：</span>
                                  @for(tag <-tags){
@@ -69,15 +69,31 @@ description = goods._1.intro
                                  }
 
                          </dd>
-
+                         }
                          <dd class="go-to-buy">
-                             <div class="price">
-                                 <span class="price-promotion"> ¥@goods._1.price</span>
-                             </div>
-
-                       <a class="buy-btn"   href='' data-itemid="@goods._1.numIid" target="_blank" rel="nofollow">去看看 &gt;&gt; </a>
-
+                             <div class="price"> <span class="price-promotion"> ¥@goods._1.price</span></div>
+                             <a class="buy-btn"   href='' data-itemid="@goods._1.numIid" target="_blank" rel="nofollow">去看看 &gt;&gt; </a>
                          </dd>
+                     @if(!goods._1.foodSecurity.isEmpty){
+                     <dd class="food-security">
+                         <ul>
+                             @for((title,i)<- goods._1.foodSecurity.get.split("#").zipWithIndex ){
+                             @if(i<2){
+                             <li>
+
+                                 <span>@title.split("：").head：</span>
+                                 @for( material <-title.split("：").last.split(" ")  ){
+                                 <a target="_blank" href="@controllers.routes.Search.search(material)">@material</a>
+                                 }
+
+                             </li>
+                             }else{
+                             <li>@title</li>
+                             }
+                             }
+                         </ul>
+                     </dd>
+                     }
                      <dd class="shareTips">
 
                          <a rel="nofollow" class="info-wrong" href="javascript:;" id="J_JiuCuo" data-id="@goods._1.id.get">信息有误？</a>
