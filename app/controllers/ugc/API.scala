@@ -115,8 +115,17 @@ object API extends Controller {
                req.setNumIid(numIid)
                val respItem = client.execute(req ).getItem
                val itemImgs= for(i<-respItem.getItemImgs)yield i.getUrl
-
-               val security = if(respItem.getFoodSecurity !=null) { Some(respItem.getFoodSecurity.getMix+"|"+respItem.getFoodSecurity.getFoodAdditive+"|"+respItem.getFoodSecurity.getPeriod+"|"+respItem.getFoodSecurity.getPrdLicenseNo+"|"+respItem.getFoodSecurity.getDesignCode+"|"+respItem.getFoodSecurity.getPlanStorage+"|"+respItem.getFoodSecurity.getFactory + " "+respItem.getFoodSecurity.getContact+"|"+respItem.getFoodSecurity.getProductDateEnd)}else{ None }
+               val security = if(respItem.getFoodSecurity !=null) {
+                 Some(
+                    "配料表："+respItem.getFoodSecurity.getMix.replaceAll("(,|，|、)"," ")+"|"+
+                      "食品添加剂："+respItem.getFoodSecurity.getFoodAdditive.replaceAll("(,|，|、)"," ")+"|"+
+                      "保质期："+respItem.getFoodSecurity.getPeriod+"|"+
+                      "生产许可号："+ respItem.getFoodSecurity.getPrdLicenseNo+"|"+
+                      "产品标准号："+ respItem.getFoodSecurity.getDesignCode+"|"+
+                      "储藏方法："+ respItem.getFoodSecurity.getPlanStorage+"|"+
+                      "生产商："+ respItem.getFoodSecurity.getFactory + " "+respItem.getFoodSecurity.getContact+"|"+
+                      "生产日期："+ respItem.getFoodSecurity.getProductDateEnd
+                 )}else{ None }
              val product = Product(
                  None,
                respItem.getNumIid,

@@ -36,12 +36,13 @@ object Test extends Controller {
      println(trend.actionId + " : " + trend.actionContent + " : " + trend.addTime.get)
     }*/
  //   val result = UserDao.findById(1)
-    val result = UserDao.findByEmail("smeite@qq.com")
-    val user =Cache.getAs[Option[User]]("user_1")
+//    val result = UserDao.findByEmail("smeite@qq.com")
+//    val user =Cache.getAs[Option[User]]("user_1")
 
-    val result2 = UserDao.findById(1)
+ //   val result2 = UserDao.findById(1)
+      val foodSecurity= "伟大的，中国人、我爱你们,还有美国人".replaceAll("(,|，|、)"," ")
 
-    Ok("insert result is "+result.get.name +"  :  " )
+    Ok("insert result is " +foodSecurity )
 
 
   }
