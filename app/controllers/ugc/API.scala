@@ -111,10 +111,11 @@ object API extends Controller {
              else{
                val client=new DefaultTaobaoClient(url, appkey, secret)
                val  req=new ItemGetRequest()
-               req.setFields("num_iid,nick,title,price,pic_url,detail_url,item_img.url,location")
-               req.setNumIid(numIid);
+               req.setFields("num_iid,nick,title,price,pic_url,detail_url,item_img.url,location,food_security")
+               req.setNumIid(numIid)
                val respItem = client.execute(req ).getItem
-               val itemImgs= for(i<-respItem.getItemImgs)yield(i.getUrl)
+               val itemImgs= for(i<-respItem.getItemImgs)yield i.getUrl
+
                val security = if(respItem.getFoodSecurity !=null) { Some(respItem.getFoodSecurity.getMix+"|"+respItem.getFoodSecurity.getFoodAdditive+"|"+respItem.getFoodSecurity.getPeriod+"|"+respItem.getFoodSecurity.getPrdLicenseNo+"|"+respItem.getFoodSecurity.getDesignCode+"|"+respItem.getFoodSecurity.getPlanStorage+"|"+respItem.getFoodSecurity.getFactory + " "+respItem.getFoodSecurity.getContact+"|"+respItem.getFoodSecurity.getProductDateEnd)}else{ None }
              val product = Product(
                  None,

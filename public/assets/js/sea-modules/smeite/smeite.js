@@ -853,10 +853,10 @@ define(function(require, exports) {
                 html += '<form id="J_goodsExistForm" action="/ugc/api/updateProduct" method="POST">';
                 html += '<div class="clearfix">';
                 html += '<div class="goods-avatar">';
-                html += '<a href="/goods/'+ jsonObj.id + '" target="_blank" title="' + jsonObj.name + '"><img src="' + mainPic + '" alt="' + jsonObj.name + '" /></a>';
+                html += '<a  href="/goods/'+ jsonObj.id + '" target="_blank" title="' + jsonObj.name + '"><img src="' + mainPic + '" alt="' + jsonObj.name + '" /></a>';
                 html += '</div>';
                 html += '<div class="goods-info">';
-                html += '<p class="goodsNm"><a href="/goods/' + jsonObj.id + '" target="_blank" title="' + jsonObj.name + '">' + jsonObj.name + '</a></p>';
+                html += '<p class="goodsNm"><a  href="/goods/' + jsonObj.id + '" target="_blank" title="' + jsonObj.name + '">' + jsonObj.name + '</a></p>';
                 html += '<p class="pb5">评论一下：</p>';
                 html += '<p><textarea class="base-txa" name="proComment" placeholder="喜欢它什么呢？"></textarea></p>';
                 html += '<p class="pt10 pb5">宝贝标签：</p>';
@@ -905,7 +905,8 @@ define(function(require, exports) {
             $("#J_goodsExistDialog .close").bind("click",function(){
                 goodsExistOverlay.hide()
                 Mask.hide()
-                $("#J_goodsExistForm")[0].reset();
+                $("#J_goodsExistDialog").empty().remove()
+
 
             });
                 $("#J_goodsSave").unbind().bind("click",function(){
@@ -940,9 +941,7 @@ define(function(require, exports) {
                             if(data.code=="100"){
                                 goodsExistOverlay.hide()
                                 Mask.hide()
-                                $("#J_goodsExistForm")[0].reset();
-                                $this.enableBtn("bbl-btn")
-                                $(".goods-act").find(".errc").html("").hide()
+                                $("#J_goodsExistDialog").empty().remove()
                                 if(window.location.href.indexOf("/share")!=-1){
                                     $.smeite.tip.conf.tipClass = "tipmodal tipmodal-ok";
                                     $.smeite.tip.show($this,"宝贝发布成功！");
@@ -996,7 +995,7 @@ define(function(require, exports) {
                 html += '<div class="bd clearfix">';
                 html += '<form id="J_goodsPubForm" action="/ugc/api/saveProduct" method="POST">';
                 html += '<div class="form-row"><label>宝贝名称：</label>';
-                html += '<span class="goodsNm">' + jsonObj.name + '</span>';
+                html += '<span class="goodsNm ">' + jsonObj.name + '</span>';
                 html += '</div>';
                 html += '<div class="form-row"><label>介绍一下：</label>';
                 html += '<textarea class="base-txa" name="proComment" placeholder="喜欢它什么呢？"></textarea>';
@@ -1027,7 +1026,7 @@ define(function(require, exports) {
                 html += '</div>';
                 html += '</form>';
                 html += '</div>';
-        //        html += '<a class="close" href="javascript:;"></a>';
+                html += '<a class="close" href="javascript:;"></a>';
                 html += '</div>';
                 html += '</div>';
              //   $("body").append(html);
@@ -1060,7 +1059,8 @@ define(function(require, exports) {
             $("#J_goodsPubDialog .close").bind("click",function(){
                 goodsPubOverlay.hide()
                 Mask.hide()
-                $("#J_goodsPubForm")[0].reset();
+                $("#J_goodsPubDialog").empty().remove()
+
             });
                 //宝贝图片
                 var photoArr = jsonObj.itemPics,
@@ -1132,12 +1132,10 @@ define(function(require, exports) {
                         },
                         success: function(data){
                             if(data.code=="100"){
+
                                 goodsPubOverlay.hide()
                                 Mask.hide()
-                                $this.enableBtn("bbl-btn")
-                                $(".goods-act").find(".errc").html(" ").hide()
-                                $("#J_goodsPubForm")[0].reset();
-                                $("#J_goodsPubDialog").find("li").removeClass("selected");
+                                $("#J_goodsPubDialog").empty().remove()
 
                                 if(window.location.href.indexOf("/share")!=-1){
                                     $.smeite.tip.conf.tipClass = "tipmodal tipmodal-ok";
