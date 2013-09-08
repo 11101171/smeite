@@ -5,8 +5,8 @@
  * Time: 下午8:50
  * 维护：zuosanshao@qq.com
 */
-.main-box{width:950px;margin:20px auto 25px;background:#fff;padding:15px; }
-.flash  {width:720px;height:350px;background-color:#fff;overflow:hidden;position:relative;margin-right: 15px}
+.main-box{width:950px;margin:20px auto 15px;background:#fff;padding:15px; }
+.flash  {width:720px;background-color:#fff;overflow:hidden;position:relative;margin-right: 15px}
 .flash .items {
     width:720px;
     height:270px;
@@ -15,8 +15,31 @@
 .flash  .items .item { width:720px;height:270px;position:relative; }
 .flash  .items .item a{cursor: pointer;color:#333;}
 
+.flash .ui-switchable-nav { position: absolute; bottom: 5px; right: 5px; z-index: 99; list-style-type: none; }
+.flash .ui-switchable-nav li {
+    float: left;
+    height:20px;
+    width: 20px;
+    border-radius:20px;
+    -moz-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    background: #fff;
+    display: inline-block;
+    overflow: hidden;
+    cursor: pointer;
+    margin-right: 5px;
+    box-shadow: 1px 1px 0 rgba(0,0,0,0.5);
+    text-align: center;
+    line-height: 20px;
+    color: #556c00;
+}
+.flash .ui-switchable-nav li.ui-switchable-active {
+    background: #ee2266;
+    color: #fff;
+}
 
-.flash .navi {
+/*.flash .navi {
     z-index: 99;
     position: absolute;
     bottom: 0px;
@@ -37,7 +60,7 @@
 
 .flash .navi li.active span {
     background-position: 0 0
-}
+}*/
 /*kissy switchable slide end*/
 /*最近热门好玩意*/
 .bulletin{width:210px;background-color:#fff;}
@@ -125,7 +148,7 @@
 .top .green{ background:url(images/index_top_green.jpg)}
 .top .org{ background:url(images/index_top_org.jpg)}
 .top .red{ background:url(images/index_top_red.jpg)}
-.top.blue p,.top .green p,.top .org p, .top .red p {
+.top .blue p,.top .green p,.top .org p, .top .red p {
     margin: 20px 10px 0 10px;
     width: 65%;
     float: right;
@@ -134,11 +157,8 @@
 .top .blue p a, .top .green p a, .top .org p a, .top .red p a {
     display: block;
     color: #606060;
-    font-family: SimSun;
     line-height: 1.5;
 }
-.g_blue p,.g_green p,.g_org p,.g_red p{ margin:20px 10px 0 10px; width:65%; float:right; display:inline}
-.g_blue p a,.g_green p a,.g_org p a,.g_red p a{ display:block; color:#606060;font-family:SimSun; line-height:1.5}
 
 .category-main{width:950px;margin:0 auto 25px;background:#fff;padding:15px 15px 5px 15px;+padding:15px;_padding:15px 15px 5px 15px;}
 .category {width:950px;float:left;}
@@ -237,6 +257,9 @@
     height: 22px;
     line-height: 22px;
     border-radius: 12px;
+    -moz-border-radius: 12px;
+    -khtml-border-radius:12px;
+    -webkit-border-radius: 12px;
     border: 1px solid #d3d3d3;
     padding: 0 10px;
     margin: 5px 5px 5px 2px
@@ -440,26 +463,43 @@ height: 20px;
     background-color: #FFB442;
     font-weight: bold;
 }
-.adverts .ui-switchable-content-test li { height: 176px; width: 710px; overflow: hidden; }
-/* for countdown plugin */
-.adverts .ui-switchable-nav li,
-.adverts .ui-switchable-trigger-content {
-    position: relative;
-}
-.adverts .ui-switchable-trigger-mask {
-    position: absolute;
-    right: 0;
-    width: 18px;
-    height: 18px;
-    background-color: #FF9415;
-    visibility: hidden
-}
-.adverts .ui-switchable-active .ui-switchable-trigger-mask {
-    visibility: visible
-}
 
 .hidden {
     display: none
+}
+/* sites */
+.sites{
+    height: 470px;
+    border: 1px solid #dddddd;
+    margin-bottom: 20px;
+    width: 978px;
+    background: #fff;
+}
+
+.sites .left{
+    float: left;
+    width: 403px;
+    _width: 403px;
+}
+.sites .left dd{
+    width:403px ;
+    text-align: center;
+}
+.sites .middle{
+    width: 336px;
+    _width: 336px;
+    background: #e6f0d9;
+    border-left: 1px solid #c6e0a4;
+    float: left;
+    height: 470px;
+}
+.sites .right{
+    width: 237px;
+    _width: 237px;
+    background: #e5eef5;
+    border-left: 1px solid #b7cfe2;
+    float: left;
+    height: 470px;
 }
 
 

@@ -22,8 +22,8 @@ define(function (require,exports) {
        var indexFlash = new Slide({
             element: '#J_indexFlash',
             panels: '#J_indexFlash  .items .item',
-            triggers:"#J_indexFlash .navi li",
-           activeTriggerClass:"active",
+        //    triggers:"#J_indexFlash .navi li",
+         //  activeTriggerClass:"active",
             effect: 'scrollx',
             easing: 'easeInStrong',
             interval: 6000
