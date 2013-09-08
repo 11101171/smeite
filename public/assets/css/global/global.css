@@ -29,6 +29,12 @@ a:hover{ text-decoration: none;}
 .red {color: #E26;}
 .red:link, .red:visited { color: #E26}
 .red:hover, .red:active { background: #E26; color: white;}
+.orange {color: #ff7d00;}
+.orange:link, .red:visited { color: #ff7d00}
+.orange:hover, .red:active { background: #ff7d00; color: white;}
+.blue {color: #00b8f5;}
+.blue:link, .red:visited { color: #00b8f5}
+.blue:hover, .red:active { background: #00b8f5; color: white;}
 sup { vertical-align: text-top}
 sub {vertical-align: text-bottom}
 legend{color: #000}

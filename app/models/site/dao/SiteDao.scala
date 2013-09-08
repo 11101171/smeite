@@ -194,7 +194,7 @@ object SiteDao {
 *   sortBy 1 最新 sortBy 2
  * */
   def findPosts(cid:Int,sortBy:Int,currentPage:Int,pageSize:Int):Page[Post] = database.withSession {  implicit session:Session =>
-    var query =for( c<- Posts.filter(_.status === 2) )yield c
+    var query =for( c<- Posts.filter(_.status === 1) )yield c
     if(cid != -1) query = query.filter(_.cid === cid)
     if(sortBy == 1) query = query.sortBy(_.addTime desc)
     if(sortBy == 1) query = query.sortBy(_.loveNum desc)
