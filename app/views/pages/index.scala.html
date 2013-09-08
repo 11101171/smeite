@@ -87,13 +87,44 @@ nav="index"
 
 <!-- 零食 start-->
 
+<div class="category-top clearfix">
+  <div class="top">
+      <dl class="col155">
+         <dd class="mb10"><a> <img src="http://image.haier.com/bbs/forum/fine_food/201306/P020130822540093152499.jpg" width="155" height="90"></a> </dd>
+          <dd><a> <img src="http://image.haier.com/bbs/forum/fine_food/201306/P020130822541080307762.jpg" width="155" height="90"></a>  </dd>
+      </dl>
+      <dl class="col310">
+          <dd><img src="http://image.haier.com/bbs/forum/fine_food/201306/P020130822541589421945.jpg" width="310" height="190"> </dd>
+      </dl>
+      <dl class="col320">
+          <dd class="green mb10">
+              <p>
+
+                  <a href="http://bbs.haier.com/forum/food/93759.shtml" title="七夕爬峨眉观云海看日处" target="_blank">七夕爬峨眉观云海看日处</a>
+
+                  <a href="http://bbs.haier.com/forum/food/93696.shtml" title="电视剧选词需谨慎" target="_blank">电视剧选词需谨慎</a>
+
+                  <a href="http://bbs.haier.com/forum/food/93735.shtml" title="测试【你是哪种上班族】" target="_blank">测试【你是哪种上班族】</a>
+
+              </p>
+          </dd>
+          <dd><img src="http://image.haier.com/bbs/forum/fine_food/201306/P020130822544610763567.jpg" width="155" height="90" class="mr10"> </dd>
+          <dd><img src="http://image.haier.com/bbs/forum/fine_food/201306/P020130822545167261914.jpg" width="155" height="90"> </dd>
+      </dl>
+      <dl class="col155 last">
+          <dd class="mb10"><a> <img src="http://image.haier.com/bbs/forum/fine_food/201306/P020130822544383790930.jpg" width="155" height="90"></a> </dd>
+          <dd><a> <img src="http://image.haier.com/bbs/forum/fine_food/201306/P020130822545371293859.jpg" width="155" height="90"></a>  </dd>
+      </dl>
+  </div>
+</div>
+
 <div class="category-main clearfix">
     <div class="category">
         <dl class="first">
             <dt>
             <div class="title-wrap clearfix">
-                <h2 class="title clearfix"><a href='@controllers.routes.Pages.faxian(1,0,1,1)' target="_blank">美食</a></h2>
-                <div class="title-desc"><a href='@controllers.routes.Pages.faxian(1,0,1,1)' target="_blank">&nbsp;•&nbsp;每日精选</a></div>
+                <h2 class="title clearfix"><a href='@controllers.routes.Pages.faxian(0,0,1,1)' target="_blank">美食</a></h2>
+                <div class="title-desc"><a href='@controllers.routes.Pages.faxian(0,0,1,1)' target="_blank">&nbsp;•&nbsp;每日精选</a></div>
             </div>
             <div class="tag-wrap clearfix">
                 @Html(meishiTags.content.getOrElse(""))
@@ -157,8 +188,8 @@ nav="index"
         <dl class="first">
             <dt>
             <div class="title-wrap clearfix">
-                <h2 class="title clearfix"><a href='@controllers.routes.Pages.faxian(2,0,1,1)' target="_blank">食材</a></h2>
-                <div class="title-desc"><a href='@controllers.routes.Pages.faxian(2,0,1,1)' target="_blank">&nbsp;•&nbsp;每日精选</a></div>
+                <h2 class="title clearfix"><a href='@controllers.routes.Pages.faxian(1,0,1,1)' target="_blank">食材</a></h2>
+                <div class="title-desc"><a href='@controllers.routes.Pages.faxian(1,0,1,1)' target="_blank">&nbsp;•&nbsp;每日精选</a></div>
             </div>
             <div class="tag-wrap clearfix">
                 @Html(shicaiTags.content.getOrElse(""))

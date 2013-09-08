@@ -89,6 +89,56 @@
 /*brand */
 
 /*floor end*/
+.category-top{
+    width: 970px;
+    padding: 5px;
+    margin: 0;
+    background: #fff;
+}
+.top dl{
+    float: left;
+    margin-right: 10px;
+}
+.top dl.last{
+    margin-right: 0;
+}
+.top dl.col310{
+    width: 310px;
+}
+.top dl.col320{
+    width: 320px;
+}
+.top dl.col155{
+    width: 155px;
+}
+.top dl dd{
+    float: left;
+}
+.top .mr10{
+    margin-right: 10px;
+ }
+.top .mb10{
+    margin-bottom: 10px;
+}
+.top .blue,.top .green,.top .org,.top .red{width:320px; height:90px; background-repeat:no-repeat; line-height:normal}
+.top .blue{ background:url(images/index_top_blue.jpg) }
+.top .green{ background:url(images/index_top_green.jpg)}
+.top .org{ background:url(images/index_top_org.jpg)}
+.top .red{ background:url(images/index_top_red.jpg)}
+.top.blue p,.top .green p,.top .org p, .top .red p {
+    margin: 20px 10px 0 10px;
+    width: 65%;
+    float: right;
+    display: inline;
+}
+.top .blue p a, .top .green p a, .top .org p a, .top .red p a {
+    display: block;
+    color: #606060;
+    font-family: SimSun;
+    line-height: 1.5;
+}
+.g_blue p,.g_green p,.g_org p,.g_red p{ margin:20px 10px 0 10px; width:65%; float:right; display:inline}
+.g_blue p a,.g_green p a,.g_org p a,.g_red p a{ display:block; color:#606060;font-family:SimSun; line-height:1.5}
 
 .category-main{width:950px;margin:0 auto 25px;background:#fff;padding:15px 15px 5px 15px;+padding:15px;_padding:15px 15px 5px 15px;}
 .category {width:950px;float:left;}
@@ -411,7 +461,6 @@ height: 20px;
 .hidden {
     display: none
 }
-
 
 
 
