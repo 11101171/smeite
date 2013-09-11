@@ -35,7 +35,7 @@ object Upload extends Controller{
 
   def ajaxImage=Action(parse.multipartFormData) { request =>
     request.body.file("fileData").map { picture =>
-      val filename =System.currentTimeMillis()+(picture.filename.substring(picture.filename.lastIndexOf(".")))
+      val filename =System.currentTimeMillis()+ picture.filename.substring(picture.filename.lastIndexOf("."))
       if(Utils.isImage(filename)){
         picture.ref.moveTo(new File("/opt/static/images/adv/"+filename),true)
         val src ="/images/adv/"+filename
@@ -53,7 +53,7 @@ object Upload extends Controller{
   /* upload img for  editor*/
   def uploadEditorPic =Action(parse.multipartFormData)  {   request =>
     request.body.file("filedata").map { picture =>
-     val filename =System.currentTimeMillis()+(picture.filename.substring(picture.filename.lastIndexOf(".")))
+     val filename =System.currentTimeMillis()+ picture.filename.substring(picture.filename.lastIndexOf("."))
       if(Utils.isImage(filename)){
         picture.ref.moveTo(new File("/opt/static/images/editor/"+filename),true)
         val picSrc ="/images/editor/"+filename
@@ -72,10 +72,26 @@ object Upload extends Controller{
   /* upload img for  editor*/
   def uploadUEditorPic =Action(parse.multipartFormData)  {   request =>
     request.body.file("fileData").map { picture =>
-      val filename =System.currentTimeMillis()+(picture.filename.substring(picture.filename.lastIndexOf(".")))
+      val filename =System.currentTimeMillis()+ picture.filename.substring(picture.filename.lastIndexOf("."))
       if(Utils.isImage(filename)){
         picture.ref.moveTo(new File("/opt/static/images/temp/"+filename),true)
         val picSrc ="/images/temp/"+filename
+        Ok(Json.obj("url"->picSrc,"title"->"食美特","state"->"SUCCESS"))
+
+      }else{
+        Ok(Json.obj("code"->"104","filelink"->"亲，服务器欧巴桑了，请重试"))
+      }
+
+    }.getOrElse {
+      Ok(Json.obj("code"->"104","filelink"->"亲，服务器欧巴桑了，请重试"))
+    }
+  }
+  def uploadUEditorAdminPic =Action(parse.multipartFormData)  {   request =>
+    request.body.file("fileData").map { picture =>
+      val filename =System.currentTimeMillis()+ picture.filename.substring(picture.filename.lastIndexOf("."))
+      if(Utils.isImage(filename)){
+        picture.ref.moveTo(new File("/opt/static/images/adv/"+filename),true)
+        val picSrc ="/images/adv/"+filename
         Ok(Json.obj("url"->picSrc,"title"->"食美特","state"->"SUCCESS"))
 
       }else{
@@ -90,7 +106,7 @@ object Upload extends Controller{
   def uploadThemeStylePic = Action(parse.multipartFormData) { request =>
     val picType=request.body.asFormUrlEncoded.get("picType").get.head
     request.body.file("pic").map { picture =>
-      val filename =System.currentTimeMillis()+(picture.filename.substring(picture.filename.lastIndexOf(".")))
+      val filename =System.currentTimeMillis()+ picture.filename.substring(picture.filename.lastIndexOf("."))
       if(Utils.isImage(filename)){
         picture.ref.moveTo(new File("/opt/static/images/theme/"+filename),true)
         val picSrc ="/images/theme/"+filename
@@ -108,7 +124,7 @@ object Upload extends Controller{
   def uploadImageSelectPic =Action(parse.multipartFormData)  {   request =>
     request.body.file("filedata").map { picture =>
 
-      val filename =System.currentTimeMillis()+(picture.filename.substring(picture.filename.lastIndexOf(".")))
+      val filename =System.currentTimeMillis()+ picture.filename.substring(picture.filename.lastIndexOf("."))
       if(Utils.isImage(filename)){
    picture.ref.moveTo(new File("/opt/static/images/temp/"+filename),true)
      Thumbnails.of(new File("/opt/static/images/temp/"+filename)).size(300,300).toFile(new File("/opt/static/images/temp/"+filename))
@@ -145,7 +161,7 @@ object Upload extends Controller{
   def uploadSitePic=Action(parse.multipartFormData) { request =>
     request.body.file("fileData").map { picture =>
 
-      val filename =System.currentTimeMillis()+(picture.filename.substring(picture.filename.lastIndexOf(".")))
+      val filename =System.currentTimeMillis()+ picture.filename.substring(picture.filename.lastIndexOf("."))
 
       if(Utils.isImage(filename)){
         picture.ref.moveTo(new File("/opt/static/images/temp/"+filename),true)

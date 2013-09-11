@@ -10,8 +10,7 @@ meishiTags:models.advert.Advert,
 shicaiTags:models.advert.Advert,
 jujiaTags:models.advert.Advert,
 
-sites:List[models.site.Site],
-posts:List[models.site.Post],
+
 
 meishiBrands:List[models.advert.Advert],
 teseBrands:List[models.advert.Advert],
@@ -40,20 +39,7 @@ nav="index"
                 }
             </div>
 
-      <!--  <ul class="navi clearfix">
-            @for((flash,i)<-flashes.view.zipWithIndex){
-            <li @if(i==0){class="active"} @if(i==4){class="last"}>
-            <span></span>
-            <a href="@flash.link" title="@flash.link" target="_blank">
-                <div class="thumb">
-                    <img src="@flash.spic" alt="@flash.title" width="130" height="45">
-                </div>
-                <h3 class="topicTitle ofh">@flash.title</h3>
-            </a>
-            </li>
-            }
 
-        </ul>-->
 
     </div>
     <!-- switchable  slide end-->
@@ -492,55 +478,7 @@ nav="index"
 
   </div>
 <!--  new site and post end -->
-<!-- site and post start-->
-<!--
- <div class="category-main clearfix">
-     <div class="category">
-         <div class="colmain710">
-           <div class="hd">
-             <h2>  <a>小镇推荐</a> </h2>
 
-           </div>
-           <div class="bd">
-               <div class="site-list">
-                   @for(site <- sites){
-                    <div class="site">
-                        <div class="pic">
-                            <a href="@controllers.routes.Sites.site(site.id.get)" title="@site.title" target="_blank"><img src="@site.pic" alt="@site.intro" width="100" height="100" > </a>
-                        </div>
-                        <div class="info">
-                            <h2 class="name ofh"><a href="@controllers.routes.Sites.site(site.id.get)" target="_blank">@site.title</a></h2>
-                            <p class="intro">@site.intro</p>
-                            <div class="member">@site.memberNum居民</div>
-                        </div>
-                    </div>
-                   }
-
-               </div>
-             </div>
-         </div>
-         <div class="colaside230">
-             <div class="hd">
-                 <h2>  <a>好贴推荐</a> </h2>
-             </div>
-             <div class="bd">
-                 <ul class="post-list">
-                         @for(post <- posts){
-                         <li class="ofh">
-                             <a href="@controllers.routes.Sites.post(post.id.get)" target="_blank" title="@post">
-                                 <em>@post.title</em>
-                             </a>
-                         </li>
-                           }
-
-                 </ul>
-             </div>
-         </div>
-     </div>
- </div>
--->
-
-<!-- site and post end -->
 
 <!-- 底部广告-->
 <div class="adverts" id="J_adverts">

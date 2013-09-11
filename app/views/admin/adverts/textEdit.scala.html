@@ -52,7 +52,7 @@
             <div class="control-group">
                 <label class="control-label">广告内容</label>
                 <div class="controls">
-                    <textarea style="width:800px;height:500px;"   class="input-xlarge" id="xheditor" name="content"> @Html(form("content").value.getOrElse("todo"))</textarea>
+                    <textarea style="width:800px;height:500px;"   class="input-xlarge" id="J_ueditor" name="content"> @Html(form("content").value.getOrElse("todo"))</textarea>
                 </div>
             </div>
 
@@ -79,16 +79,15 @@
 
 
 </div>
+        <script>
+            UE.getEditor('J_ueditor')
+        </script>
+
 
        <script type="text/javascript">
             $(function(){
 
-            $('#xheditor').xheditor({
-                tools:'Fontface,FontSize,Bold,Link,Unlink,|,Source,Preview'
 
-                    }
-
-            );
 
                 $("#picUpload").uploadify({
                     'fileObjName' : 'fileData',
