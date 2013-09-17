@@ -12,9 +12,16 @@ jujiaTags:models.advert.Advert,
 
 
 
+
 meishiBrands:List[models.advert.Advert],
 teseBrands:List[models.advert.Advert],
-adverts:List[models.advert.Advert]
+adverts:List[models.advert.Advert],
+
+meishiPosts:models.advert.Advert,
+shicaiPosts:models.advert.Advert,
+jujiaPosts:models.advert.Advert,
+sitePosts:models.advert.Advert,
+site:models.advert.Advert
 )
 @views.html.template(
 user,
@@ -74,34 +81,9 @@ nav="index"
 <!-- 美食 start-->
  <!-- 绿色 -->
 <div class="category-top clearfix">
-  <div class="top">
-      <dl class="col155">
-         <dd class="mb10"><a> <img src="http://image.haier.com/bbs/forum/fine_food/201306/P020130822540093152499.jpg" width="155" height="90"></a> </dd>
-          <dd><a> <img src="http://image.haier.com/bbs/forum/fine_food/201306/P020130822541080307762.jpg" width="155" height="90"></a>  </dd>
-      </dl>
-      <dl class="col310">
-          <dd><img src="http://image.haier.com/bbs/forum/fine_food/201306/P020130822541589421945.jpg" width="310" height="190"> </dd>
-      </dl>
-      <dl class="col320">
-          <dd class="green mb10">
-              <p>
 
-                  <a href="http://bbs.haier.com/forum/food/93759.shtml" title="七夕爬峨眉观云海看日处" target="_blank">七夕爬峨眉观云海看日处</a>
+  @Html(meishiPosts.content.getOrElse(""))
 
-                  <a href="http://bbs.haier.com/forum/food/93696.shtml" title="电视剧选词需谨慎" target="_blank">电视剧选词需谨慎</a>
-
-                  <a href="http://bbs.haier.com/forum/food/93735.shtml" title="测试【你是哪种上班族】" target="_blank">测试【你是哪种上班族】</a>
-
-              </p>
-          </dd>
-          <dd><img src="http://image.haier.com/bbs/forum/fine_food/201306/P020130822544610763567.jpg" width="155" height="90" class="mr10"> </dd>
-          <dd><img src="http://image.haier.com/bbs/forum/fine_food/201306/P020130822545167261914.jpg" width="155" height="90"> </dd>
-      </dl>
-      <dl class="col155 last">
-          <dd class="mb10"><a> <img src="http://image.haier.com/bbs/forum/fine_food/201306/P020130822544383790930.jpg" width="155" height="90"></a> </dd>
-          <dd><a> <img src="http://image.haier.com/bbs/forum/fine_food/201306/P020130822545371293859.jpg" width="155" height="90"></a>  </dd>
-      </dl>
-  </div>
 </div>
 
 <div class="category-main clearfix">
@@ -169,35 +151,10 @@ nav="index"
 
 <!-- 食材 start-->
 <div class="category-top clearfix">
-    <div class="top">
-        <dl class="col155">
-            <dd class="mb10"><a> <img src="http://image.haier.com/bbs/forum/mother/201306/P020130822545739544404.jpg" width="155" height="90"></a> </dd>
-            <dd><a> <img src="http://image.haier.com/bbs/forum/mother/201306/P020130823564701618224.jpg" width="155" height="90"></a>  </dd>
-        </dl>
-        <dl class="col155">
-            <dd class="mb10"><a> <img src="http://image.haier.com/bbs/forum/mother/201306/P020130822545954740604.jpg" width="155" height="90"></a> </dd>
-            <dd><a> <img src="http://image.haier.com/bbs/forum/mother/201306/P020130822547162748910.jpg" width="155" height="90"></a>  </dd>
-        </dl>
-        <dl class="col320">
-        <dd class="org mb10">
-            <p>
 
-                <a href="http://bbs.haier.com/forum/food/93759.shtml" title="七夕爬峨眉观云海看日处" target="_blank">七夕爬峨眉观云海看日处</a>
+        @Html(shicaiPosts.content.getOrElse(""))
 
-                <a href="http://bbs.haier.com/forum/food/93696.shtml" title="电视剧选词需谨慎" target="_blank">电视剧选词需谨慎</a>
 
-                <a href="http://bbs.haier.com/forum/food/93735.shtml" title="测试【你是哪种上班族】" target="_blank">测试【你是哪种上班族】</a>
-
-            </p>
-        </dd>
-        <dd><img src="http://image.haier.com/bbs/forum/mother/201306/P020130823576440791216.jpg" width="155" height="90" class="mr10"> </dd>
-        <dd><img src="http://image.haier.com/bbs/forum/mother/201306/P020130822547553334842.jpg" width="155" height="90"> </dd>
-    </dl>
-        <dl class="col310 last">
-            <dd><img src="http://image.haier.com/bbs/forum/mother/201306/P020130823567716841343.jpg" width="310" height="190"> </dd>
-        </dl>
-
-    </div>
 </div>
 
 <div class="category-main clearfix">
@@ -265,37 +222,10 @@ nav="index"
 
 <!-- 居家 start-->
 <div class="category-top clearfix">
-    <div class="top">
-        <dl class="col310">
-            <dd><img src="http://image.haier.com/bbs/forum/employee/201306/P020130628461241884404.jpg" width="310" height="190"> </dd>
-        </dl>
-        <dl class="col155">
-            <dd class="mb10"><a> <img src="http://image.haier.com/bbs/forum/employee/201306/P020130625752466043219.jpg" width="155" height="90"></a> </dd>
-            <dd><a> <img src="http://image.haier.com/bbs/forum/employee/201306/P020130625753140340113.jpg" width="155" height="90"></a>  </dd>
-        </dl>
-        <dl class="col320">
-            <dd class="red mb10">
-                <p>
 
-                    <a href="http://bbs.haier.com/forum/food/93759.shtml" title="七夕爬峨眉观云海看日处" target="_blank">七夕爬峨眉观云海看日处</a>
-
-                    <a href="http://bbs.haier.com/forum/food/93696.shtml" title="电视剧选词需谨慎" target="_blank">电视剧选词需谨慎</a>
-
-                    <a href="http://bbs.haier.com/forum/food/93735.shtml" title="测试【你是哪种上班族】" target="_blank">测试【你是哪种上班族】</a>
-
-                </p>
-            </dd>
-            <dd><img src="http://image.haier.com/bbs/forum/employee/201306/P020130625754298231712.jpg" width="155" height="90" class="mr10"> </dd>
-            <dd><img src="http://image.haier.com/bbs/forum/employee/201306/P020130626716783645497.jpg" width="155" height="90"> </dd>
-        </dl>
-        <dl class="col155 last">
-            <dd class="mb10"><a> <img src="http://image.haier.com/bbs/forum/employee/201306/P020130625753968354264.jpg" width="155" height="90"></a> </dd>
-            <dd><a> <img src="http://image.haier.com/bbs/forum/employee/201306/P020130625753459981098.jpg" width="155" height="90"></a>  </dd>
-        </dl>
+        @Html(jujiaPosts.content.getOrElse(""))
 
 
-
-    </div>
 </div>
 <div class="category-main clearfix">
     <div class="category">
@@ -362,120 +292,13 @@ nav="index"
 
 <!-- new site and post start -->
 <div class="category-top clearfix">
-    <div class="top">
-        <dl class="col320">
-            <dd class="blue mb10">
-                <p>
 
-                    <a href="http://bbs.haier.com/forum/food/93759.shtml" title="七夕爬峨眉观云海看日处" target="_blank">七夕爬峨眉观云海看日处</a>
+    @Html(sitePosts.content.getOrElse(""))
 
-                    <a href="http://bbs.haier.com/forum/food/93696.shtml" title="电视剧选词需谨慎" target="_blank">电视剧选词需谨慎</a>
-
-                    <a href="http://bbs.haier.com/forum/food/93735.shtml" title="测试【你是哪种上班族】" target="_blank">测试【你是哪种上班族】</a>
-
-                </p>
-            </dd>
-            <dd><img src="http://image.haier.com/bbs/forum/it/201306/P020130628456917452153.jpg" width="155" height="90" class="mr10"> </dd>
-            <dd><img src="http://image.haier.com/bbs/forum/it/201306/P020130903418278350370.png" width="155" height="90"> </dd>
-        </dl>
-        <dl class="col155">
-            <dd class="mb10"><a> <img src="http://image.haier.com/bbs/forum/it/201306/P020130628458450987564.jpg" width="155" height="90"></a> </dd>
-            <dd><a> <img src="http://image.haier.com/bbs/forum/it/201306/P020130628458235570316.jpg" width="155" height="90"></a>  </dd>
-        </dl>
-        <dl class="col310">
-            <dd><img src="http://image.haier.com/bbs/forum/it/201306/P020130705618886219148.jpg" width="310" height="190"> </dd>
-        </dl>
-
-        <dl class="col155 last">
-            <dd class="mb10"><a> <img src="http://image.haier.com/bbs/forum/it/201306/P020130628457631384736.jpg" width="155" height="90"></a> </dd>
-            <dd><a> <img src="http://image.haier.com/bbs/forum/it/201306/P020130628457280359211.jpg" width="155" height="90"></a>  </dd>
-        </dl>
-    </div>
 </div>
 
   <div class="sites">
-      <div class="left">
-          <dl>
-           <dd class="mt15 mb15">
-               <a href="http://bbs.haier.com/forum/knowledge/95291.shtml">  <img src="http://bbs.haier.com/data/attachment/attached/image/20130830/20130830090701_62489.png" width="380" height="220"></a>
-              <span> 您还记得小时候的玩伴吗</span>
-           </dd>
-           <dd>
-               <a href="http://bbs.haier.com/forum/knowledge/96042.shtml"> <img src="http://bbs.haier.com/data/attachment/attached/image/20130906/20130906173033_91391.png" width="380" height="220"></a>
-                <span> 你还记得您的初恋吗</span>
-           </dd>
-          </dl>
-      </div>
-      <div class="middle">
-          <div class="mt15 ml20 mr20 clearfix">
-              <div class="fl mr5 w32"><a  href="http://bbs.haier.com/activity.php?mod=hdcontent&amp;tid=95586" title="【有奖活动】你把知识还给老师了吗？" target="_blank"><img width="90" height="90" src="http://bbs.haier.com/data/attachment/userfiles/201309021657152148.jpg"></a></div>
-              <div class="fl w65">
-                  <h4><a  href="http://bbs.haier.com/activity.php?mod=hdcontent&amp;tid=95586" title="【有奖活动】你把知识还给老师了吗？" target="_blank">【有奖活动】你把知识还给老师了吗？</a></h4>
-                  <span class="mt5">一起来考考大家，看看有没有把知识还给老师！</span>
-              </div>
-          </div>
-          <div class="clear"></div>
-          <div class="mt15 ml20 mr20 clearfix">
-              <div class="fl mr5 w32"><a  href="http://bbs.haier.com/activity.php?mod=hdcontent&amp;tid=93598" title="奇思妙想，双桶洗衣机外观设计大比拼" target="_blank"><img width="90" height="90" src="http://bbs.haier.com/data/attachment/userfile/images/20130819095515.png"></a></div>
-              <div class="fl w65">
-                  <h4><a  href="http://bbs.haier.com/activity.php?mod=hdcontent&amp;tid=93598" title="奇思妙想，双桶洗衣机外观设计大比拼" target="_blank">奇思妙想，双桶洗衣机外观设计大比拼</a></h4>
-                  <span class=" mt5">洗涤桶盖、脱水桶盖、控制盘外观设计大比拼 </span>
-              </div>
-          </div>
-          <div class="clear"></div>
-          <div class="mt15 ml20 mr20 clearfix">
-              <div class="fl mr5 w32"><a  href="http://bbs.haier.com/forum/knowledge/94938.shtml" title="【有奖调研】我为冰箱起个名儿~" target="_blank"><img width="90" height="90" src="http://bbs.haier.com/data/attachment/attached/image/20130828/20130828110037_10984.jpg"></a></div>
-              <div class="fl w65">
-                  <h4><a href="http://bbs.haier.com/forum/knowledge/94938.shtml" title="【有奖调研】我为冰箱起个名儿~" target="_blank">【有奖调研】我为冰箱起个名儿~</a></h4>
-                  <span class="mt5">上冻下藏冰箱取名时间到啦！</span>
-              </div>
-          </div>
-          <div class="clear"></div>
-          <ul class="mt20 ml15">
-              <li class="ofh"><a href="http://bbs.haier.com/forum/food/95739.shtml" title="来帮我家的洗衣机看看哇~" target="_blank">【我是生活控】来帮我家的洗衣机看看哇~</a></li>
-              <li class="ofh"><a href="http://bbs.haier.com/forum/cloud/95007.shtml" title="海尔电视陪你缅怀童年逝去的经典" target="_blank">【云端生活】海尔电视陪你缅怀童年逝去的经典</a></li>
-              <li class="ofh"><a href="http://bbs.haier.com/forum/food/93845.shtml" title="求助！大家注意过洗衣机里边的垃圾吗？" target="_blank">【我是生活控】求助！大家注意过洗衣机里边的垃圾吗？</a></li>
-              <li class="ofh"><a href="http://bbs.haier.com/forum/knowledge/95313.shtml" title="您在一年内有购买空调的打算吗？" target="_blank">【家电学堂】您在一年内有购买空调的打算吗？</a></li>
-              <li class="ofh"><a href="http://bbs.haier.com/forum/food/93845.shtml" title="求助！大家注意过洗衣机里边的垃圾吗？" target="_blank">【我是生活控】求助！大家注意过洗衣机里边的垃圾吗？</a></li>
-
-          </ul>
-      </div>
-      <div class="right">
-          <div>
-              <h6 class=" mt10 ml20">有奖活动</h6>
-              <ul>
-                  <li class="ofh"><a href="http://bbs.haier.com/forum/knowledge/96041.shtml" title="【有奖调研】好事成双，对开门冰箱邀你来调研" target="_blank">【有奖调研】好事成双，对开门冰箱邀你来调研</a></li>
-                  <li  class="ofh"><a href="http://bbs.haier.com/forum/knowledge/95018.shtml" title="【有奖调研】超级！积木！抽屉！冰箱邀你调研啦！！" target="_blank">【有奖调研】超级！积木！抽屉！冰箱邀你调研啦！！</a></li>
-                  <li  class="ofh"><a href="http://bbs.haier.com/forum/knowledge/95188.shtml" title="【有奖话题】一起说说“聒噪”的油烟机" target="_blank">【有奖话题】一起说说“聒噪”的油烟机</a></li>
-                  <li class="ofh"><a href="http://bbs.haier.com/forum/knowledge/96041.shtml" title="【有奖调研】好事成双，对开门冰箱邀你来调研" target="_blank">【有奖调研】好事成双，对开门冰箱邀你来调研</a></li>
-                  <li  class="ofh"><a href="http://bbs.haier.com/forum/knowledge/95018.shtml" title="【有奖调研】超级！积木！抽屉！冰箱邀你调研啦！！" target="_blank">【有奖调研】超级！积木！抽屉！冰箱邀你调研啦！！</a></li>
-                  <li  class="ofh"><a href="http://bbs.haier.com/forum/knowledge/95188.shtml" title="【有奖话题】一起说说“聒噪”的油烟机" target="_blank">【有奖话题】一起说说“聒噪”的油烟机</a></li>
-
-              </ul>
-          </div>
-          <div class="clear"></div>
-          <div class="line mt15 ml15 mr15"></div>
-          <div>
-              <h6 class="mt5 ml20">获奖公布</h6>
-              <ul>
-                  <li  class="ofh"><a href="http://bbs.haier.com/thread-88827-1-1.html" title="【获奖名单】海友们一起来畅想未来冰箱" target="_blank">【获奖名单】海友们一起来畅想未来冰箱</a></li>
-                  <li  class="ofh"><a href="http://bbs.haier.com/thread-91294-1-1.html" title="【获奖名单】一起来说说家用空气净化器" target="_blank">【获奖名单】一起来说说家用空气净化器</a></li>
-                  <li  class="ofh"><a href="http://bbs.haier.com/thread-93733-1-1.html" title=" 【获奖名单】空调制冷不满意点搜集" target="_blank"> 【获奖名单】空调制冷不满意点搜集</a></li>
-                  <li  class="ofh"><a href="http://bbs.haier.com/thread-88827-1-1.html" title="【获奖名单】海友们一起来畅想未来冰箱" target="_blank">【获奖名单】海友们一起来畅想未来冰箱</a></li>
-                  <li  class="ofh"><a href="http://bbs.haier.com/thread-91294-1-1.html" title="【获奖名单】一起来说说家用空气净化器" target="_blank">【获奖名单】一起来说说家用空气净化器</a></li>
-                  <li  class="ofh"><a href="http://bbs.haier.com/thread-93733-1-1.html" title=" 【获奖名单】空调制冷不满意点搜集" target="_blank"> 【获奖名单】空调制冷不满意点搜集</a></li>
-
-              </ul>
-          </div>
-          <div class="clear"></div>
-          <div class="line mt15 ml15 mr15"></div>
-          <div class="pl15 pt10">
-             <img src="http://localhost/images/adv/20130327-jujia-8.jpg" width="210" height="90">
-          </div>
-
-
-      </div>
-
+      @Html(site.content.getOrElse(""))
   </div>
 <!--  new site and post end -->
 

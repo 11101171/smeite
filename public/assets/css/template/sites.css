@@ -6,9 +6,9 @@
 
  *** for sites.scala.html  siteList.scala.html  postList.scala.html
  */
-#J_Page {
+/*#J_Page {
     background: url(images/site_bg_lines.png) repeat;
-}
+}*/
 .main-box {
     width: 950px;
     margin: 20px auto 25px;

@@ -213,7 +213,7 @@ POST   /user/account/doUploadPic          controllers.Upload.doUploadUserPic
 POST   /site/doUploadPic                  controllers.Upload.doUploadSitePic
 POST  /site/uploadPic                     controllers.Upload.uploadSitePic
 POST  /uploadUEditorPic                   controllers.Upload.uploadUEditorPic
-POST  /uploadUEditorAdminPic                   controllers.Upload.uploadUEditorAdminPic
+POST  /uploadRedactorPic               controllers.Upload.uploadRedactorPic
 POST  /getVideo                           controllers.Upload.getVideo
 
 

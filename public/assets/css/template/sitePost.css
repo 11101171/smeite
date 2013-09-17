@@ -12,9 +12,9 @@
  *
  */
 /* post  content*/
-#J_Page {
+/*#J_Page {
     background: url(images/site_bg_lines.png) repeat;
-}
+}*/
 .processing{height:20px;width:140px;background:url(images/processing.gif) no-repeat;overflow:hidden;display:block;position:relative;top:7px;margin-left:5px;float:left;_display:inline;}
 .processing_nd0{background-position:0px 0px;}
 .processing_nd1{background-position:0px -20px;}

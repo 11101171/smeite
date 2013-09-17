@@ -39,7 +39,7 @@
             <div class="control-group">
                 <label class="control-label" >内容</label>
                 <div class="controls">
-                    <textarea style="width:300px;height:200px;"   class="input-xlarge" id="xheditor" name="content"> @Html(form("content").value.getOrElse("none"))</textarea>
+                    <textarea style="width:300px;height:200px;"   class="input-xlarge" id="J_editor" name="content"> @Html(form("content").value.getOrElse("none"))</textarea>
                 </div>
             </div>
 
@@ -61,11 +61,12 @@
 </div>
 
 <script type="text/javascript">
-    $(function(){
-        $('#xheditor').xheditor({tools:'Fontface,FontSize,Bold,Link,Unlink,|,Source,Preview' });
-
-
-    })
+    $(document).ready(
+            function()
+            {
+                $('#J_editor').redactor({ imageUpload: '/uploadRedactorPic' });
+            }
+    );
 </script>
 
 

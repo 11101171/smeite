@@ -78,7 +78,7 @@
 <div class="control-group">
     <label class="control-label" for="isMember">推荐理由</label>
     <div class="controls">
-       <textarea name="intro" style="width:300px;height:300px;"   class="input-xlarge">@form("intro").value</textarea>
+       <textarea name="intro"  id="J_editor" style="width:300px;height:300px;"   class="input-xlarge">@form("intro").value</textarea>
     </div>
 </div>
 
@@ -103,11 +103,12 @@
 
 
 <script type="text/javascript">
-            $(function(){
-
-    $('#xheditor').xheditor({tools:'Fontface,FontSize,Bold,Link,Unlink,|,Source,Preview' });
-
-    })
+    $(document).ready(
+            function()
+            {
+                $('#J_editor').redactor({ imageUpload: '/uploadRedactorPic' });
+            }
+    );
        </script>
 
         }

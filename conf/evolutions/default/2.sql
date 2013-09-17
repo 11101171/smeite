@@ -283,3 +283,22 @@
  insert into advert(position_code,name)value("friends-links","友情链接") ;
 
 
+ /*20130916 首页 */
+ insert into advert_position(position,name,code,advert_type)values("index","新-首页-美食-帖子","index-meishi-posts",1)   ;
+ insert into advert(position_code,name)value("index-meishi-posts","新-首页-美食-posts") ;
+
+  insert into advert_position(position,name,code,advert_type)values("index","新-首页-食材-帖子","index-shicai-posts",1)   ;
+ insert into advert(position_code,name)value("index-shicai-posts","新-首页-食材-posts") ;
+
+ insert into advert_position(position,name,code,advert_type)values("index","新-首页-居家-帖子","index-jujia-posts",1)   ;
+ insert into advert(position_code,name)value("index-jujia-posts","新-首页-居家-posts") ;
+
+ insert into advert_position(position,name,code,advert_type)values("index","新-首页-小镇-帖子","index-site-posts",1)   ;
+ insert into advert(position_code,name)value("index-site-posts","新-首页-小镇-posts") ;
+
+ insert into advert_position(position,name,code,advert_type)values("index","新-首页-小镇","index-site",1)   ;
+ insert into advert(position_code,name)value("index-site","新-首页-小镇") ;
+
+
+
+

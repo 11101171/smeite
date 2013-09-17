@@ -86,20 +86,21 @@ object Upload extends Controller{
       Ok(Json.obj("code"->"104","filelink"->"亲，服务器欧巴桑了，请重试"))
     }
   }
-  def uploadUEditorAdminPic =Action(parse.multipartFormData)  {   request =>
-    request.body.file("fileData").map { picture =>
+
+  def uploadRedactorPic =Action(parse.multipartFormData)  {   request =>
+    request.body.file("file").map { picture =>
       val filename =System.currentTimeMillis()+ picture.filename.substring(picture.filename.lastIndexOf("."))
       if(Utils.isImage(filename)){
         picture.ref.moveTo(new File("/opt/static/images/adv/"+filename),true)
         val picSrc ="/images/adv/"+filename
-        Ok(Json.obj("url"->picSrc,"title"->"食美特","state"->"SUCCESS"))
+        Ok(Json.obj("filelink"->picSrc))
 
       }else{
-        Ok(Json.obj("code"->"104","filelink"->"亲，服务器欧巴桑了，请重试"))
+        Ok(Json.obj("err"->"104","msg"->"亲，服务器欧巴桑了，请重试"))
       }
 
     }.getOrElse {
-      Ok(Json.obj("code"->"104","filelink"->"亲，服务器欧巴桑了，请重试"))
+      Ok(Json.obj("err"->"104","msg"->"亲，服务器欧巴桑了，请重试"))
     }
   }
   /*upload picture for theme style background image*/
