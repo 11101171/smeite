@@ -21,9 +21,9 @@ title =  "发现喜欢_食美特，爱美食爱生活"
     <section class="filter-wrap clearfix">
         <h2>@models.Cate(cid)</h2>
         <div class="goods-filter">
-            <a type="list_default"   href='@controllers.routes.Pages.faxian(cid,tagCode,1,1)' @if(s==1){ class="current" } ><span>推荐</span></a>
-            <a type="list_new_most" href='@controllers.routes.Pages.faxian(cid,tagCode,2,1)'  @if(s==2){class=" current"}><span>最新</span></a>
-            <a type="list_hot_most"  href='@controllers.routes.Pages.faxian(cid,tagCode,3,1)'  @if(s==3){class=" current"}><span>最热</span></a>
+            <a  href="@controllers.routes.Pages.faxian(cid,tagCode,1,1)" @if(s==1){ class="current" } ><span>推荐</span></a>
+            <a  href="@controllers.routes.Pages.faxian(cid,tagCode,2,1)"  @if(s==2){class=" current"}><span>最新</span></a>
+            <a  href="@controllers.routes.Pages.faxian(cid,tagCode,3,1)"  @if(s==3){class=" current"}><span>最热</span></a>
         </div>
         <i></i>
     </section>

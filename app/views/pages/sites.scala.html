@@ -86,7 +86,7 @@ title =  "食美特，爱美食爱生活"
             @for((post,i)<-posts.view.zipWithIndex ){
               <div class="item @if((i+1)%2==0){last}">
                   <div class="pic">
-                      <a @controllers.routes.Sites.post(post.id.get)><img src="@post.pic" width="430"> </a>
+                      <a href=" @controllers.routes.Sites.post(post.id.get)"><img src="@post.pic" width="430"> </a>
                   </div>
 
                   <div class="num">
